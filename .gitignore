@@ -1,0 +1,13 @@
+# The restricted CAS-derived dataset. Withheld under a limited data use
+# agreement (see EXCLUDED.md); ignored here so that dropping it in to run the
+# Figure 1 scripts cannot commit it by accident.
+Figure_1b_Kasie/
+*.parquet
+
+__pycache__/
+*.pyc
+.DS_Store
+.ipynb_checkpoints/
+
+# Vector sidecars the generators write beside each PNG; the PNG is the embedded artwork.
+*.svg
