@@ -1,0 +1,66 @@
+[
+ {
+  "mixture": "MeOH/H2O",
+  "carried_mu": 1.6,
+  "carried_rho": 0.87,
+  "kind": "aqueous-measured",
+  "mass_pct": 44.08300616937746,
+  "eta_20C": 1.8203359506449803,
+  "rho_20C": 0.9271422882781828,
+  "source": "CRC 97th ed. 'Concentrative Properties of Aqueous Solutions', pp. 5-118 ff., Methanol block, 20 C",
+  "mu_within_bound": true,
+  "rho_within_bound": true
+ },
+ {
+  "mixture": "EtOH/H2O",
+  "carried_mu": 2.4,
+  "carried_rho": 0.89,
+  "kind": "aqueous-measured",
+  "mass_pct": 44.05162738496072,
+  "eta_20C": 2.8498193041526374,
+  "rho_20C": 0.9267915824915824,
+  "source": "CRC 97th ed. 'Concentrative Properties of Aqueous Solutions', pp. 5-118 ff., Ethanol block, 20 C",
+  "mu_within_bound": true,
+  "rho_within_bound": true
+ },
+ {
+  "mixture": "DMSO/THF",
+  "carried_mu": 1.55,
+  "carried_rho": 1.06,
+  "kind": "organic-bracket",
+  "bracket": [
+   0.456,
+   1.987
+  ],
+  "source": "pure-component viscosities, both page-anchored; monotone mixing ASSUMED (valid for organic-organic pairs without strong hetero-association, not for aqueous-organic)",
+  "mu_within_bound": true
+ },
+ {
+  "mixture": "AcOH/HCOOH",
+  "carried_mu": 1.28,
+  "carried_rho": 1.13,
+  "kind": "organic-bracket",
+  "bracket": [
+   1.056,
+   1.607
+  ],
+  "source": "pure-component viscosities, both page-anchored; monotone mixing ASSUMED (valid for organic-organic pairs without strong hetero-association, not for aqueous-organic)",
+  "mu_within_bound": true
+ },
+ {
+  "mixture": "DMF/H2O",
+  "carried_mu": 1.0,
+  "carried_rho": 0.96,
+  "kind": "aqueous-unsourced",
+  "source": "NONE LOCATED -- aqueous-organic, so a pure-component bracket is not valid upward; carried as a declared estimate",
+  "mu_within_bound": null
+ },
+ {
+  "mixture": "tAmOH/H2O",
+  "carried_mu": 2.8,
+  "carried_rho": 0.85,
+  "kind": "aqueous-unsourced",
+  "source": "NONE LOCATED -- aqueous-organic, so a pure-component bracket is not valid upward; carried as a declared estimate",
+  "mu_within_bound": null
+ }
+]

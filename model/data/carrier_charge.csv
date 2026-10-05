@@ -1,0 +1,67 @@
+# Carrier charge z for the migration term, TAKEN FROM THE EXEMPLAR PAPER for each row and
+# cited on that row. Migration acts only on a charged carrier, so z decides which of the 50 rows
+# move; a wrong z does not fail loudly, it shifts a ceiling by up to 2x in silence.
+#
+# The precursor AS THE SOURCE WRITES IT decides the charge. Where the source's own conditions
+# settle it -- Ni(tet a)(ClO4)2 is explicitly a dication, Co(salen)/Cu(acac)2/[Cp*RhCl2]2 are
+# neutral by ligand charge, thiophenol and biphenyl-2-carboxylic acid are run with NO base --
+# confidence is high. Where the source leaves the working species open, it stays medium and says
+# what specifically is unresolved.
+#
+# KEYED BY CARRIER SPECIES, applied to reactions_50.csv's own rows. An earlier hand-ordered
+# version was misaligned by rows in three places and would have given a neutral biaryl amide the
+# charge of bromide; the species-agreement assertion caught it before it reached a solve.
+#
+# CONVENTION: z of the species whose flux carries the current TO the electrode. A neutral carrier
+# gets z = 0 and its NP solve must then reproduce Fick exactly -- the built-in correctness check.
+reaction,carrier_species,carrier_type,z_carrier,confidence,source,basis
+Ni-catalyzed aryl amination (ArBr + amine),Ni(bpy) complex,catalyst,0,medium,Kawamata/Baran JACS 2019 Table 4 fn a p 6399; Courtois/Perichon Tetrahedron 1997 Exp p 11574,"Kawamata writes Ni(bpy)3Br2, i.e. [Ni(bpy)3]2+ 2Br-, but the ELECTROACTIVE species in the ArX cycle is the reduced Ni(0)/Ni(I) formed in situ. Carried NEUTRAL as the working species; z = +2 would apply only if the resting tris-bipy dication carried the current"
+Electrochemical amination of ArX with NH3,Ni(bpy) complex,catalyst,0,medium,Kawamata/Baran JACS 2019 Table 4 fn a p 6399; Courtois/Perichon Tetrahedron 1997 Exp p 11574,"Kawamata writes Ni(bpy)3Br2, i.e. [Ni(bpy)3]2+ 2Br-, but the ELECTROACTIVE species in the ArX cycle is the reduced Ni(0)/Ni(I) formed in situ. Carried NEUTRAL as the working species; z = +2 would apply only if the resting tris-bipy dication carried the current"
+Shono oxidation (N-acyliminium capture),N-Boc-pyrrolidine,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Oxidative benzimidazole annulation (C-H/N-H),N-aryl amidine,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Mn-catalyzed alkene diazidation,Mn(azide) complex,catalyst,0,medium,"Fu/Lin Science 2017, Fig 3 fn p 577",source writes MnBr2.4H2O 5 mol% with NaN3 5 equiv; the Mn(II)/Mn(III)-azide working species is written neutral. Anionic azido-manganates are possible at 5 equiv N3-
+Br-mediated Hofmann rearrangement,bromide,mediator,-1,high,reactions_50 conc_provenance (exemplar-verified),bromide anion
+Arene C-H pyridination,anisole,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Amidyl-radical C-H amination (phenanthridinone),biaryl amide,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Co-catalyzed aza-Wacker cyclization,Co(salen),catalyst,0,high,Cai/H.-C. Xu Nat Commun 2021 Table 1 fn p 3; Gnaim/Baran Nature 2022 Fig 2 p 688,salen is a dianionic tetradentate ligand and Co(salen) as written is the NEUTRAL Co(II) complex
+Ritter-type C(sp3)-H amination,"1,3-dimethyladamantane",substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Co-H alkene reduction (e-HAT),CoBr2(glyme)/bpy,catalyst,0,high,"Gnaim/Baran Nature 2022, Fig 3 p 689",source writes CoBr2(glyme) 10 mol%: a neutral Co(II) dibromide adduct
+Kolbe homocoupling of 10-undecenoate,hexanoate anion,substrate,-1,high,reactions_50 conc_provenance (exemplar-verified),carboxylate under Me4NOH
+Ni-XEC C(sp2)-C(sp3) (ArBr + RBr),Ni(dtbbpy) complex,catalyst,0,medium,"Kelly/Stahl/Schreier OPRD 2026, Table 1, Fig 4a","source writes Ni(dtbbpy)2Br2; as for Ni(bpy), the working species is the reduced Ni. NEUTRAL as the working species"
+Doubly decarboxylative Csp3-Csp3,"N-Cbz-proline (limiting monoacid, via RAE)",substrate,0,high,Zhang/Baran Nature 2022 (SI),the source consumes the acid as its REDOX-ACTIVE ESTER (neutral); the free carboxylate is not the electroactive species
+BDD phenol-arene cross-coupling,4-methylguaiacol,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Decarboxylative Minisci alkylation,"1,4-dicyanobenzene (limiting)",substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Cathodic Giese (R-I + alkene),2-iodopropane (electroactive),substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Rh-catalyzed electrooxidative C-H alkenylation,[Cp*RhCl2]2 complex,catalyst,0,high,"Qiu/Ackermann Angew 2018, Table 1 fn a p 5828",source writes [Cp*RhCl2]2 2.5 mol%: a neutral chloride-bridged dimer
+Cu-catalyzed benzylic cyanation,Cu(acac)2/BOX complex,catalyst,0,high,"Cai/H.-C. Xu Nat Catal 2022, Fig 2b fn pp 944-5",source writes Cu(acac)2 + BOX; acac is monoanionic so Cu(acac)2 is the NEUTRAL Cu(II) complex
+Cathodic Ni aryl-aryl homocoupling,Ni(bpy) complex,catalyst,0,high,Kawamata/Baran JACS 2019 Table 4 fn a p 6399; Courtois/Perichon Tetrahedron 1997 Exp p 11574,"the exemplar's OWN precursor is NiBr2bpy, a NEUTRAL complex -- Courtois/Perichon call it 'the catalytic precursor NiBr2bpy' and note it is 'poorly soluble' in ethanol, which is neutral-complex behaviour. The [Ni(bpy)3]2+ speciation quoted here until 2026-08-30 belongs to a DIFFERENT exemplar (Kawamata's Ni(bpy)3Br2, row 0), and z = +2 was the live alternative only because of that mis-attribution. Confirmed neutral."
+Anodic dehydrogenative 2-naphthol coupling,2-naphthol,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Acrylonitrile hydrodimerization (ADN),acrylonitrile,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Birch reduction of naphthalene,naphthalene (repr.; scale-up runs TBS-cresol),substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Nitroarene -> aniline,3-nitrobenzotrifluoride,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Rapid-alternating-polarity imide reduction,N-methylphthalimide,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Diazo difunctionalization (thiol + alcohol),thiophenol (anodic),substrate,0,high,"Yang/Lei, Nat. Commun. 2023, 14, 1476, DOI 10.1038/s41467-023-37032-8 (conditions in reactions_50 conc_provenance)","source uses Et4NBF4 in MeCN with NO added base, so the thiol is present as the NEUTRAL RSH"
+Cathodic aryl chloride dehalogenation,4-chloroanisole,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Benzaldehyde -> benzyl alcohol,benzaldehyde,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+"ACT-mediated alcohol oxidation (flow, hectogram)",ACT (4-AcNH-TEMPO),mediator,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Anodic methoxylation of 4-tBu-toluene (Lysmeral),4-tBu-toluene,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Shono alpha-methoxylation of amides,DMF-amide substrate,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Cl-mediated ethylene epoxidation,chloride,mediator,-1,high,reactions_50 conc_provenance (exemplar-verified),chloride anion; also the supporting anion
+Alkaline lignin -> vanillin (pilot),carbonate (ex-cell oxidizer carrier),substrate,-2,high,reactions_50 conc_provenance (exemplar-verified),"carbonate dianion in 1 M Na2CO3, a binary electrolyte"
+Thioether -> sulfone (kilo-scale),Ar-S-Me thioether,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+NHPI-mediated allylic C-H -> enone,Cl4NHPI,mediator,-1,high,"Horn/Baran Nature 2016, Fig 2 p 533","the exemplar states the mechanism outright, so this is not an inference: 'deprotonation of Cl4NHPI by pyridine, followed by anodic oxidation, leads to the tetra-chlorophthalimido N-oxyl radical species' (Horn/Baran, Nature 2016, 533, 77-81, p. 81, Fig. 5 discussion). The species that reaches the anode is therefore the DEPROTONATED anion, and the neutral N-OH is regenerated only afterwards, by hydrogen-atom abstraction from the substrate. The paper's own cyclic voltammetry corroborates it under the reaction's own base conditions: 'In the case of NHPI, a reversible redox couple is observed at 0.78 V versus Ag/AgCl in the presence of excess pyridine, whereas Cl4NHPI shows a redox couple at 0.87 V versus Ag/AgCl under identical conditions' (p. 78). A REVERSIBLE couple is the point: oxidising the neutral N-OH would carry a coupled proton loss and show as a chemically irreversible wave, whereas the anion oxidises to the N-oxyl radical with no accompanying bond change. Stoichiometry agrees -- pyridine at 2.0 equiv against a mediator at 0.2 equiv is a tenfold excess. Note the base screen does NOT run on basicity (pyridine 51 pct, 2,6-lutidine 10 pct, collidine 13 pct, Et3N 0 pct, DBU 0 pct), so pyridine was not chosen for being the strongest base; that ordering bears on which base survives the anode, not on whether the mediator is deprotonated, which the CV settles directly."
+"Alkenesulfonate from cinnamic acid, SO2 and alcohol",cinnamate (decarboxylative),substrate,-1,high,reactions_50 conc_provenance (exemplar-verified),cinnamate carboxylate
+HMF -> FDCA (biomass),ACT (4-AcNH-TEMPO),mediator,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Radical-cation Diels-Alder (catalytic in e-),trans-anethole,substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+BQ-mediated Wacker-Tsuji oxidation,H2Q (diffusing reduced form of BQ),mediator,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Non-Kolbe decarboxylative alpha-methoxylation,N-Piv-alpha-amino acid,substrate,0,high,"Walecka-Kurczyk RSC Adv 2022, Table 1 p 2109; procedure p 2110","the TRANSPORTED species is the neutral acid, and the model carries its concentration, so the two are now consistent. The procedure charges 'a-amino acid 1 (0.4 mmol, 1 equiv.), MeOH (4 mL), and Et3N (4.2 uL, 0.03 mmol, 0.075 equiv.)' -- acid 0.1 M against Et3N 0.0075 M -- so the base is SUB-STOICHIOMETRIC and the carboxylate is capped at 0.0023-0.0075 M across six orders of magnitude in the proton-transfer equilibrium constant (data/acid_base_speciation.py, gate G-SPECIATE). The bulk is therefore 92.5% neutral acid. Proton transfer between a carboxylic acid and a tertiary amine is essentially diffusion-limited, so the pre-equilibrium re-equilibrates far faster than diffusion across a 100-300 um film: this is a fast CE case in which the limiting current is set by the TOTAL acid, transported almost entirely as the neutral form. Population-weighted z = -0.075, carried as 0. Until 2026-08-30 this row paired z = -1, the charge of the 7.5% minority carboxylate, with 0.1 M, the concentration of the 92.5% majority acid -- the one combination that is not self-consistent."
+Co-H alkene isomerization (catalytic),Co(salen),catalyst,0,high,Cai/H.-C. Xu Nat Commun 2021 Table 1 fn p 3; Gnaim/Baran Nature 2022 Fig 2 p 688,salen is a dianionic tetradentate ligand and Co(salen) as written is the NEUTRAL Co(II) complex
+Anodic oxazoline/oxazole cyclization,aryl ketone (N(PMP)3-mediated),substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Cathodic aryl-halide radical 5-exo cyclization,Ni(tet a) complex,catalyst,2,high,"Ozaki/Ohmori Tet Lett 1994, p 726 + Table 1","the source writes Ni(tet a)(ClO4)2 and calls it ""the current-carrying CATALYST"": a macrocyclic Ni(II) DICATION with two perchlorate counter-ions"
+Dehydrogenative lactonization (C-H/O-H),biphenyl-2-carboxylic acid,substrate,0,high,"Zhang/K. Xu/Zeng OL 2018, Scheme 1 fn a p 253",source uses Bu4NBF4 in MeCN/MeOH with NO added base: the FREE ACID
+Anodic benzylic fluorination,ethylbenzene (benzylic C-H),substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+Br- oxidation / electrophilic bromination,bromide,mediator,-1,high,reactions_50 conc_provenance (exemplar-verified),bromide anion
+Sulfonylation of alkenes with sulfinates,Na benzenesulfinate,substrate,-1,high,reactions_50 conc_provenance (exemplar-verified),benzenesulfinate anion
+Aryl thiocyanation (NH4SCN),thiocyanate,mediator,-1,high,reactions_50 conc_provenance (exemplar-verified),thiocyanate anion
+Anodic C-H phosphonylation of azoles,triethyl phosphite (arene-limited basis),substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier
+N-N azo/pyrazole formation (N-H/N-H),"2,2-dimethylmalonic dianilide",substrate,0,high,reactions_50 conc_provenance (exemplar-verified),neutral organic carrier

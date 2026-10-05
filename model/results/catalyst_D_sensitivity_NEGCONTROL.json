@@ -1,0 +1,14 @@
+{
+  "n_catalyst": 11,
+  "n_clear": 2,
+  "threshold": 25.0,
+  "second_best_i_lim": 25.25,
+  "f_crit": 0.9900990099009901,
+  "r_crit_from_4p5A": 4.545,
+  "r_crit_sqrt_from_4p5A": 4.590450000000001,
+  "r_expected_deciding_A": 3.3983065871162856,
+  "deciding_row": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
+  "conditional": true,
+  "r_ferrocene_A": 2.4659221713478106,
+  "anchor": "ferrocene in MeCN, D = 2.4e-5 cm2/s, 25 C"
+}

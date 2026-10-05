@@ -1,0 +1,29 @@
+{
+  "max_mAcm2": 3330.0,
+  "max_note_repeats": 30,
+  "min_mAcm2": 0.32,
+  "n_both": 73,
+  "n_current_only": 9580,
+  "n_current_with_area": 0,
+  "n_distinct_notes": 182,
+  "n_distinct_values": 38,
+  "n_records": 25941,
+  "n_stating_current_mA": 9653,
+  "n_stating_j": 657,
+  "n_with_notes": 20659,
+  "per_form": {
+    "A/cm2": 28,
+    "A/dm2": 7,
+    "mA cm-2": 112,
+    "mA/cm2": 510,
+    "mA/dm2": 0,
+    "uA/cm2": 0
+  },
+  "share_below_25_by_record_pct": 81,
+  "share_below_25_by_value_pct": 68,
+  "share_current_only_pct": 37,
+  "share_stating_current_pct": 37,
+  "share_stating_j_pct": 2.5,
+  "threshold_mAcm2": 25.0,
+  "verdict": "PASS"
+}

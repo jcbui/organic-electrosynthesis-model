@@ -1,0 +1,90 @@
+{
+ "pinned_interpreter": "/opt/anaconda3/bin/python3.12",
+ "generators": [
+  {
+   "script": "figs/make_figs_sec34.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/combined_figure.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_fig_trle.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_fig_carrier.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_fig_specs.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_fig_failure_modes.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": true
+  },
+  {
+   "script": "figs/make_fig6_final.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": true
+  },
+  {
+   "script": "figs/make_figs.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_figFG.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_figH_ecprime.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_figK.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "../Figure1/fig_composite.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": true
+  }
+ ],
+ "failures": []
+}

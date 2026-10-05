@@ -1,0 +1,193 @@
+{
+  "note": "G-DSENS: every declared-default supporting-ion diffusivity perturbed together; written by data/sensitivity_unsourced_D.py",
+  "n_slots": 24,
+  "n_pairs": 21,
+  "pairs": [
+    [
+      "AcO-",
+      "MeOH"
+    ],
+    [
+      "B(OH)4-",
+      "aq"
+    ],
+    [
+      "BF4-",
+      "MeOH"
+    ],
+    [
+      "BF4-",
+      "THF"
+    ],
+    [
+      "BF4-",
+      "acetone"
+    ],
+    [
+      "Br-",
+      "THF"
+    ],
+    [
+      "ClO4-",
+      "AcOH"
+    ],
+    [
+      "Et3NH+",
+      "MeOH"
+    ],
+    [
+      "Et3NH+",
+      "THF"
+    ],
+    [
+      "F(HF)n-",
+      "MeCN"
+    ],
+    [
+      "H+",
+      "MeCN"
+    ],
+    [
+      "HSO4-",
+      "MeOH"
+    ],
+    [
+      "Li+",
+      "AcOH"
+    ],
+    [
+      "Li+",
+      "THF"
+    ],
+    [
+      "MTES+",
+      "HFIP"
+    ],
+    [
+      "OH-",
+      "HFIP"
+    ],
+    [
+      "OTs-",
+      "MeOH"
+    ],
+    [
+      "OTs-",
+      "aq"
+    ],
+    [
+      "PF6-",
+      "HFIP"
+    ],
+    [
+      "RCO2-",
+      "MeCN"
+    ],
+    [
+      "TsO-",
+      "MeOH"
+    ]
+  ],
+  "factors": {
+    "div3": 0.3333333333333333,
+    "mul3": 3.0
+  },
+  "max_rel_change": {
+    "div3": 0.0,
+    "mul3": 0.0
+  },
+  "counts": {
+    "base": {
+      "natural": [
+        11,
+        8
+      ],
+      "stirred": [
+        13,
+        10
+      ],
+      "flow": [
+        16,
+        12
+      ],
+      "anec": [
+        28,
+        22
+      ],
+      "micro": [
+        35,
+        33
+      ],
+      "rde": [
+        35,
+        33
+      ],
+      "rce": [
+        35,
+        33
+      ]
+    },
+    "div3": {
+      "natural": [
+        11,
+        8
+      ],
+      "stirred": [
+        13,
+        10
+      ],
+      "flow": [
+        16,
+        12
+      ],
+      "anec": [
+        28,
+        22
+      ],
+      "micro": [
+        35,
+        33
+      ],
+      "rde": [
+        35,
+        33
+      ],
+      "rce": [
+        35,
+        33
+      ]
+    },
+    "mul3": {
+      "natural": [
+        11,
+        8
+      ],
+      "stirred": [
+        13,
+        10
+      ],
+      "flow": [
+        16,
+        12
+      ],
+      "anec": [
+        28,
+        22
+      ],
+      "micro": [
+        35,
+        33
+      ],
+      "rde": [
+        35,
+        33
+      ],
+      "rce": [
+        35,
+        33
+      ]
+    }
+  },
+  "counts_identical": true,
+  "verdict": "PASS"
+}

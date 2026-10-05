@@ -1,0 +1,10 @@
+{
+ "checked": 5,
+ "failures": [
+  "SI states 26 where the model gives 39.45  [boils at 26, MeCN at 78, DMF at 79 and aqueous NaOH at 250]",
+  "SI states 78 where the model gives 117.36  [boils at 26, MeCN at 78, DMF at 79 and aqueous NaOH at 250]",
+  "SI states 79 where the model gives 118.75  [boils at 26, MeCN at 78, DMF at 79 and aqueous NaOH at 250]",
+  "SI states 250 where the model gives 375.28  [boils at 26, MeCN at 78, DMF at 79 and aqueous NaOH at 250]",
+  "SI states 79 where the model gives 118.75  [consistent with the 79 mA cm\u22122 passive ceiling]"
+ ]
+}

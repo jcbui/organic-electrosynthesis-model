@@ -1,0 +1,802 @@
+[
+ {
+  "row": "0",
+  "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
+  "pdf": "ja9b01886.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.005,
+   "substrate": 0.05,
+   "electrolyte": 0.2
+  },
+  "spread": 68,
+  "quotes": {
+   "carrier": "is of Compound 36 aReaction conditions: 10 mol % Ni(bpy)3Br2, nBu4N\u00b7Br (0.2 M), DBU (2.0 equiv), DMA (0.025\u22120.05 M), (+)RVC/(\u2212)Ni, 4 mA, r.t. in undivided cell. Journal of the American Chemi",
+   "electrolyte": "itions: 10 mol % Ni(bpy)3Br2, nBu4N\u00b7Br (0.2 M), DBU (2.0 equiv), DMA (0.025\u22120.05 M), (+)RVC/(\u2212)Ni, 4 mA, r.t. in undivided cell. Journal of the American Chemical Society Article DOI: 10.1021",
+   "substrate": "Br (0.2 M), DBU (2.0 equiv), DMA (0.025\u22120.05 M), (+)RVC/(\u2212)Ni, 4 mA, r.t. in undivided cell. Journal of the American Chemical Society Article DOI: 10.1021/jacs.9b01886 J. Am. Chem. Soc. 2019"
+  }
+ },
+ {
+  "row": "1",
+  "reaction": "Electrochemical amination of ArX with NH3",
+  "pdf": "Angew Chem Int Ed - 2025 - Liu - Electrochemical Amination of Aryl Halides with NH3.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.0052,
+   "substrate": 0.104,
+   "electrolyte": 0.21
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "eaction conditions: undivided cell, 1a (0.5 mmol), Catalyst (0.025 mmol, 5 mol%), Ligand (0.025 mmol, 5 mol%), DBU (3.0 mmol, 6.0 equiv.), TBAB (1.0 mmol, 2.0 equiv.) in DMSO: THF = 5: 1 (4.",
+   "electrolyte": "eaction conditions: undivided cell, 1a (0.5 mmol), Catalyst (0.025 mmol, 5 mol%), Ligand (0.025 mmol, 5 mol%), DBU (3.0 mmol, 6.0 equiv.), TBAB (1.0 mmol, 2.0 equiv.) in DMSO: THF = 5: 1 (4.",
+   "substrate": "eaction conditions: undivided cell, 1a (0.5 mmol), Catalyst (0.025 mmol, 5 mol%), Ligand (0.025 mmol, 5 mol%), DBU (3.0 mmol, 6.0 equiv.), TBAB (1.0 mmol, 2.0 equiv.) in DMSO: THF = 5: 1 (4."
+  }
+ },
+ {
+  "row": "2",
+  "reaction": "Shono oxidation (N-acyliminium capture)",
+  "pdf": "ja00848a020.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 1.56,
+   "substrate": 1.56,
+   "electrolyte": 0.156
+  },
+  "spread": 25,
+  "quotes": {
+   "carrier": "xidation of 12. Anodic oxidation of 12 (13.42 mmol) in methanol (8.61 ml) containing 4 8 (1.34 mmol) was carried out for 1.5 hr. The ratio of products 12a and 12b was calculated by the NMR m",
+   "substrate": "xidation of 12. Anodic oxidation of 12 (13.42 mmol) in methanol (8.61 ml) containing 4 8 (1.34 mmol) was carried out for 1.5 hr. The ratio of products 12a and 12b was calculated by the NMR m",
+   "electrolyte": "idation of 12 (13.42 mmol) in methanol (8.61 ml) containing 4 8 (1.34 mmol) was carried out for 1.5 hr. The ratio of products 12a and 12b was calculated by the NMR method as described above."
+  }
+ },
+ {
+  "row": "3",
+  "reaction": "Oxidative benzimidazole annulation (C-H/N-H)",
+  "pdf": "ChemSusChem - 2021 - Zhao - Electrochemical Synthesis of Benzimidazoles via Dehydrogenative Cyclization of Amidines.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.033,
+   "substrate": 0.033,
+   "electrolyte": 0.033
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": " c(1)=0.05 m 52 5 I=15 mA 50 6 Et4NPF6 (2.0 equiv.) 55 7 Et4NPF6 (3.0 equiv.) 65 [a] Reaction conditions: RVC anode (1 cm\u00d71 cm\u00d71.2 cm), Pt cathode (1 cm\u00d71 cm), 1 (0.3 mmol), solvent (9 mL). ",
+   "electrolyte": " c(1)=0.05 m 52 5 I=15 mA 50 6 Et4NPF6 (2.0 equiv.) 55 7 Et4NPF6 (3.0 equiv.) 65 [a] Reaction conditions: RVC anode (1 cm\u00d71 cm\u00d71.2 cm), Pt cathode (1 cm\u00d71 cm), 1 (0.3 mmol), solvent (9 mL). ",
+   "substrate": " c(1)=0.05 m 52 5 I=15 mA 50 6 Et4NPF6 (2.0 equiv.) 55 7 Et4NPF6 (3.0 equiv.) 65 [a] Reaction conditions: RVC anode (1 cm\u00d71 cm\u00d71.2 cm), Pt cathode (1 cm\u00d71 cm), 1 (0.3 mmol), solvent (9 mL). "
+  }
+ },
+ {
+  "row": "4",
+  "reaction": "Mn-catalyzed alkene diazidation",
+  "pdf": "science.aan6206.pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 0.0026,
+   "substrate": 0.051,
+   "electrolyte": 0.1
+  },
+  "spread": 35,
+  "quotes": {
+   "carrier": "r2\u00b74H2O, 1.0 mmol NaN3, 400 ml of HOAc, 3.5 ml of LiClO4 solution in MeCN (0.1 M, 1.75 equiv LiClO4), RVC as the anode, Pt as the cathode, under N2, at 22 \u00b1 1\u00b0C, in a one-compartment cell, a",
+   "electrolyte": "OAc, 3.5 ml of LiClO4 solution in MeCN (0.1 M, 1.75 equiv LiClO4), RVC as the anode, Pt as the cathode, under N2, at 22 \u00b1 1\u00b0C, in a one-compartment cell, at 2.3 V cell potential, for 2 to 6 "
+  }
+ },
+ {
+  "row": "5",
+  "reaction": "Br-mediated Hofmann rearrangement",
+  "pdf": "op3c00332.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.08,
+   "substrate": 0.4,
+   "electrolyte": 0.08
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "loaded with 2-phenylacetamide (20.67 g, 152.9 mmol), NaBr (3.146 g, 0.2 equiv), MeOH (61.5 mL, 10 equiv), and MeCN (ca. 300 mL). The mixture was stirred for 5 min and then diluted with addit",
+   "electrolyte": "loaded with 2-phenylacetamide (20.67 g, 152.9 mmol), NaBr (3.146 g, 0.2 equiv), MeOH (61.5 mL, 10 equiv), and MeCN (ca. 300 mL). The mixture was stirred for 5 min and then diluted with addit",
+   "substrate": "loaded with 2-phenylacetamide (20.67 g, 152.9 mmol), NaBr (3.146 g, 0.2 equiv), MeOH (61.5 mL, 10 equiv), and MeCN (ca. 300 mL). The mixture was stirred for 5 min and then diluted with addit"
+  }
+ },
+ {
+  "row": "6",
+  "reaction": "Arene C-H pyridination",
+  "pdf": "ja402083e.pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 0.02,
+   "substrate": 0.02,
+   "electrolyte": 0.3
+  },
+  "spread": 0,
+  "quotes": {
+   "electrolyte": "cal oxidation of 1 was carried out in a 0.3 M solution of Bu4NBF4 in CH3CN/pyridine (100/5) in an H-type divided cell equipped with an anode consisting of fine fibers made from carbon felt a"
+  }
+ },
+ {
+  "row": "7",
+  "reaction": "Amidyl-radical C-H amination (phenanthridinone)",
+  "pdf": "ol8b00981.pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 0.04,
+   "substrate": 0.04,
+   "electrolyte": 0.04
+  },
+  "spread": 0,
+  "quotes": {}
+ },
+ {
+  "row": "8",
+  "reaction": "Co-catalyzed aza-Wacker cyclization",
+  "pdf": "s41467-021-24125-5.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.0033,
+   "substrate": 0.033,
+   "electrolyte": 0.033
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "nation. Reaction conditions: substrate (0.2 mmol), MeCN (5 mL), MeOH (1 mL), 1.5\u20137.0 h (2.8\u201313.0 F mol\u22121). All yields are isolated yields. aReaction with 15 mol% of [Co]-1. bReaction with 1.",
+   "electrolyte": "nation. Reaction conditions: substrate (0.2 mmol), MeCN (5 mL), MeOH (1 mL), 1.5\u20137.0 h (2.8\u201313.0 F mol\u22121). All yields are isolated yields. aReaction with 15 mol% of [Co]-1. bReaction with 1.",
+   "substrate": "nation. Reaction conditions: substrate (0.2 mmol), MeCN (5 mL), MeOH (1 mL), 1.5\u20137.0 h (2.8\u201313.0 F mol\u22121). All yields are isolated yields. aReaction with 15 mol% of [Co]-1. bReaction with 1."
+  }
+ },
+ {
+  "row": "9",
+  "reaction": "Ritter-type C(sp3)-H amination",
+  "pdf": "s41467-022-31813-3.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.167,
+   "substrate": 0.167,
+   "electrolyte": 0.1
+  },
+  "spread": 15,
+  "quotes": {
+   "electrolyte": "7 M, 4 eq.), nBu4NBF4 (98 mg, 0.3 mmol, 0.1 M), CH3CN (3 mL). Air has little effect on this reaction. The assembled electrodes were placed into the solution. The silica gel plug was sealed w",
+   "carrier": "u4NBF4 (98 mg, 0.3 mmol, 0.1 M), CH3CN (3 mL). Air has little effect on this reaction. The assembled electrodes were placed into the solution. The silica gel plug was sealed with film. The m",
+   "substrate": "u4NBF4 (98 mg, 0.3 mmol, 0.1 M), CH3CN (3 mL). Air has little effect on this reaction. The assembled electrodes were placed into the solution. The silica gel plug was sealed with film. The m"
+  }
+ },
+ {
+  "row": "10",
+  "reaction": "Co-H alkene reduction (e-HAT)",
+  "pdf": "s41586-022-04595-3 (1).pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.008,
+   "substrate": 0.08,
+   "electrolyte": 0.24
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": ".) Co(salen)-2, HFIP (2 equiv.) TBABF4 (0.08 M), acetone Me Ar Me CO2Et (vi) Deallylation COOBn CbzHN O O O Co(salen)-1, HFIP (2 equiv), TBABF4 (0.08 M), acetone Zn(+)/Ni(\u2013), 5 mA, 3 F mol\u20131",
+   "electrolyte": ".) Co(salen)-2, HFIP (2 equiv.) TBABF4 (0.08 M), acetone Me Ar Me CO2Et (vi) Deallylation COOBn CbzHN O O O Co(salen)-1, HFIP (2 equiv), TBABF4 (0.08 M), acetone Zn(+)/Ni(\u2013), 5 mA, 3 F mol\u20131",
+   "substrate": ".) Co(salen)-2, HFIP (2 equiv.) TBABF4 (0.08 M), acetone Me Ar Me CO2Et (vi) Deallylation COOBn CbzHN O O O Co(salen)-1, HFIP (2 equiv), TBABF4 (0.08 M), acetone Zn(+)/Ni(\u2013), 5 mA, 3 F mol\u20131"
+  }
+ },
+ {
+  "row": "11",
+  "reaction": "Kolbe homocoupling of 10-undecenoate",
+  "pdf": "science.adf4762 (1).pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 1.0,
+   "substrate": 1.0,
+   "electrolyte": 0.15
+  },
+  "spread": 0,
+  "quotes": {}
+ },
+ {
+  "row": "12",
+  "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
+  "pdf": "acs.oprd.6c00110.pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 0.015,
+   "substrate": 0.3,
+   "electrolyte": 0.48
+  },
+  "spread": 605,
+  "quotes": {
+   "electrolyte": "rs for a 100 mmol scale electrolysis at 0.5 M 2 and current density of 12 mA cm\u22122. The standard cell electrolysis ran for 5.5 h, and immediately upon conclusion of the reaction, no solids we",
+   "substrate": " and determined that a concentration of 0.3 M 2 was sufficient to Table 3. Screening Concentration of 2 to Eliminate Precipitation of 6 in 4 cm2 Reactora [2] Mass 2 J Reaction Time (h) Charg"
+  }
+ },
+ {
+  "row": "13",
+  "reaction": "Doubly decarboxylative Csp3-Csp3",
+  "pdf": "s41586-022-04691-4 (1).pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 0.029,
+   "substrate": 0.029,
+   "electrolyte": 0.171
+  },
+  "spread": 0,
+  "quotes": {}
+ },
+ {
+  "row": "14",
+  "reaction": "BDD phenol-arene cross-coupling",
+  "pdf": "ja211005g.pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 0.15,
+   "substrate": 0.15,
+   "electrolyte": 0.091
+  },
+  "spread": 0,
+  "quotes": {}
+ },
+ {
+  "row": "15",
+  "reaction": "Decarboxylative Minisci alkylation",
+  "pdf": "science.aba3823.pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 0.08,
+   "substrate": 0.08,
+   "electrolyte": 0.48
+  },
+  "spread": 0,
+  "quotes": {}
+ },
+ {
+  "row": "16",
+  "reaction": "Cathodic Giese (R-I + alkene)",
+  "pdf": "d0sc01694b.pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 0.095,
+   "substrate": 0.079,
+   "electrolyte": null
+  },
+  "spread": 0,
+  "quotes": {}
+ },
+ {
+  "row": "17",
+  "reaction": "Rh-catalyzed electrooxidative C-H alkenylation",
+  "pdf": "Angew Chem Int Ed - 2018 - Qiu - Electrooxidative Rhodium\u2010Catalyzed C H C H Activation  Electricity as Oxidant for (1).pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.0031,
+   "substrate": 0.125,
+   "electrolyte": 0.25
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "tant current=4.0 mA, 1a (1.0 mmol), 2a (0.5 mmol), catalyst (2.5 mol%), additive (1.0 equiv), solvent (4.0 mL), under air, 5\u201318 h. [b] Yield of isolated product. [c] At 608C. [d] With [Cp*Rh",
+   "electrolyte": "tant current=4.0 mA, 1a (1.0 mmol), 2a (0.5 mmol), catalyst (2.5 mol%), additive (1.0 equiv), solvent (4.0 mL), under air, 5\u201318 h. [b] Yield of isolated product. [c] At 608C. [d] With [Cp*Rh",
+   "substrate": "tant current=4.0 mA, 1a (1.0 mmol), 2a (0.5 mmol), catalyst (2.5 mol%), additive (1.0 equiv), solvent (4.0 mL), under air, 5\u201318 h. [b] Yield of isolated product. [c] At 608C. [d] With [Cp*Rh"
+  }
+ },
+ {
+  "row": "18",
+  "reaction": "Cu-catalyzed benzylic cyanation",
+  "pdf": "Photoelectrochemical_asymmetric_catalysis_enables_.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.0038,
+   "substrate": 0.038,
+   "electrolyte": 0.077
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": " conditions are as follows: alkylarene (0.2 mmol), MeCN (5 ml), TFE (0.15 ml) and H2O (0.06 ml). The yield represents purified product. aH2O (0.16 ml). bAQDS (8 mol%). cHCO2H (1 equiv.). dH",
+   "electrolyte": " conditions are as follows: alkylarene (0.2 mmol), MeCN (5 ml), TFE (0.15 ml) and H2O (0.06 ml). The yield represents purified product. aH2O (0.16 ml). bAQDS (8 mol%). cHCO2H (1 equiv.). dH",
+   "substrate": " conditions are as follows: alkylarene (0.2 mmol), MeCN (5 ml), TFE (0.15 ml) and H2O (0.06 ml). The yield represents purified product. aH2O (0.16 ml). bAQDS (8 mol%). cHCO2H (1 equiv.). dH"
+  }
+ },
+ {
+  "row": "19",
+  "reaction": "Cathodic Ni aryl-aryl homocoupling",
+  "pdf": "1-s2.0-S0040402097007448-main.pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 0.03,
+   "substrate": 0.3,
+   "electrolyte": 0.04
+  },
+  "spread": 5292,
+  "quotes": {
+   "carrier": "owing procedure. In DMF (10 ml) + EtOH (40 ml) or in EtOH (25 ml) + MeOH (25ml) were added Bu4NBF4 (1 mmol.) or NaBr (2 mmol.), the aryl halide (15 retool.) and NiBr2bpy (1.5 mmol.). A con",
+   "substrate": "6 Ext)erimental conditions : Solvent : 50 mL, PhBr 15 mmol., NiBr2bpy 1.5 mmol., supporting electrolyte: NaBr 4.10 -2 mol.L l except tb), I = 0.3 A, nickel grid cathode, iron anode except ",
+   "electrolyte": "owing procedure. In DMF (10 ml) + EtOH (40 ml) or in EtOH (25 ml) + MeOH (25ml) were added Bu4NBF4 (1 mmol.) or NaBr (2 mmol.), the aryl halide (15 retool.) and NiBr2bpy (1.5 mmol.). A con"
+  }
+ },
+ {
+  "row": "20",
+  "reaction": "Anodic dehydrogenative 2-naphthol coupling",
+  "pdf": "c39940002535.pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 1.0,
+   "substrate": 1.0,
+   "electrolyte": 0.2
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "mical 47:53 6 1' In the presence of 5 mmol 2-naphthol and 5 mmol (-)-sparteine in each reaction. h 0.5 mmol of 4-acetylamino-TEMPO in 5 ml of 0.2 mol 1-1 NaCIO1-MeCN. c 5 mmol of oxoa",
+   "substrate": "mical 47:53 6 1' In the presence of 5 mmol 2-naphthol and 5 mmol (-)-sparteine in each reaction. h 0.5 mmol of 4-acetylamino-TEMPO in 5 ml of 0.2 mol 1-1 NaCIO1-MeCN. c 5 mmol of oxoa"
+  }
+ },
+ {
+  "row": "21",
+  "reaction": "Acrylonitrile hydrodimerization (ADN)",
+  "pdf": "Baizer_1964_J._Electrochem._Soc._111_215.pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 6.85,
+   "substrate": 6.85,
+   "electrolyte": null
+  },
+  "spread": 0,
+  "quotes": {}
+ },
+ {
+  "row": "22",
+  "reaction": "Birch reduction of naphthalene",
+  "pdf": "science.aav5606 (1).pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 0.141,
+   "substrate": 0.141,
+   "electrolyte": 3.0
+  },
+  "spread": 0,
+  "quotes": {}
+ },
+ {
+  "row": "23",
+  "reaction": "Nitroarene -> aniline",
+  "pdf": "op3c00067.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.4,
+   "substrate": 0.4,
+   "electrolyte": 2.0
+  },
+  "spread": 10,
+  "quotes": {
+   "carrier": "ents were filled with 1:3 H2O/MeOH (2 \u00d7 6 mL) and 2 M H2SO4(aq). The molarity of H2SO4(aq) equals the concentration of the acid added to H2O/MeOH solution. The 3-nitrobenzotri- fluoride deri",
+   "substrate": "ents were filled with 1:3 H2O/MeOH (2 \u00d7 6 mL) and 2 M H2SO4(aq). The molarity of H2SO4(aq) equals the concentration of the acid added to H2O/MeOH solution. The 3-nitrobenzotri- fluoride deri",
+   "electrolyte": "filled with 1:3 H2O/MeOH (2 \u00d7 6 mL) and 2 M H2SO4(aq). The molarity of H2SO4(aq) equals the concentration of the acid added to H2O/MeOH solution. The 3-nitrobenzotri- fluoride derivative (1a"
+  }
+ },
+ {
+  "row": "24",
+  "reaction": "Rapid-alternating-polarity imide reduction",
+  "pdf": "ja2c02102.pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 0.0333,
+   "substrate": 0.0333,
+   "electrolyte": 0.0833
+  },
+  "spread": 0,
+  "quotes": {}
+ },
+ {
+  "row": "25",
+  "reaction": "Diazo difunctionalization (thiol + alcohol)",
+  "pdf": "s41467-023-37032-8.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.077,
+   "substrate": 0.077,
+   "electrolyte": 0.077
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "52 8 20 mA, 2.5 h 63 9 5 mA, 10 h 54 10 1.5 mmol 2 65 11 0.1 mL 3 61 12 rt 57 13 under air 60 14 no electric current 0 Standard conditions: 1 (0.5 mmol), 2 (2.0 mmol), 3 (0.5 mL), Et4NBF4 (0",
+   "electrolyte": "52 8 20 mA, 2.5 h 63 9 5 mA, 10 h 54 10 1.5 mmol 2 65 11 0.1 mL 3 61 12 rt 57 13 under air 60 14 no electric current 0 Standard conditions: 1 (0.5 mmol), 2 (2.0 mmol), 3 (0.5 mL), Et4NBF4 (0",
+   "substrate": "52 8 20 mA, 2.5 h 63 9 5 mA, 10 h 54 10 1.5 mmol 2 65 11 0.1 mL 3 61 12 rt 57 13 under air 60 14 no electric current 0 Standard conditions: 1 (0.5 mmol), 2 (2.0 mmol), 3 (0.5 mL), Et4NBF4 (0"
+  }
+ },
+ {
+  "row": "26",
+  "reaction": "Cathodic aryl chloride dehalogenation",
+  "pdf": "Chemistry A European J - 2019 - Ke - Hydrodehalogenation of Aryl Halides through Direct Electrolysis (1).pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.043,
+   "substrate": 0.043,
+   "electrolyte": 0.043
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "BF4 \u2013 n.d. [a] Reaction conditions: 1a (0.3 mmol), amine (0.6 mmol, 2.0 equiv), elec- trolyte (0.3 mmol, 1.0 equiv), CH3CN (7.0 mL), room temperature, N2, 3.3 h (4.1 F). [b] Isolated yields.",
+   "electrolyte": "BF4 \u2013 n.d. [a] Reaction conditions: 1a (0.3 mmol), amine (0.6 mmol, 2.0 equiv), elec- trolyte (0.3 mmol, 1.0 equiv), CH3CN (7.0 mL), room temperature, N2, 3.3 h (4.1 F). [b] Isolated yields.",
+   "substrate": "BF4 \u2013 n.d. [a] Reaction conditions: 1a (0.3 mmol), amine (0.6 mmol, 2.0 equiv), elec- trolyte (0.3 mmol, 1.0 equiv), CH3CN (7.0 mL), room temperature, N2, 3.3 h (4.1 F). [b] Isolated yields."
+  }
+ },
+ {
+  "row": "27",
+  "reaction": "Benzaldehyde -> benzyl alcohol",
+  "pdf": "sc8b02637.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.02,
+   "substrate": 0.02,
+   "electrolyte": null
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "0 to 180 mM. A minimum concentration of 20 mM was chosen as a lower limit to be consistent with previously published work using aqueous electrolytes. The maximum concen- tration of 180 mM wa",
+   "substrate": "0 to 180 mM. A minimum concentration of 20 mM was chosen as a lower limit to be consistent with previously published work using aqueous electrolytes. The maximum concen- tration of 180 mM wa"
+  }
+ },
+ {
+  "row": "28",
+  "reaction": "ACT-mediated alcohol oxidation (flow, hectogram)",
+  "pdf": "op1c00036.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.025,
+   "substrate": 0.5,
+   "electrolyte": 1.0
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "erization Time-Dependence Experiment. A 0.5 M solution of LEV-CH2OH was prepared with 1.95 equiv of sodium bicarbonate, 0.05 equiv of sodium carbonate, and 5 mol % ACT, consistent with secti",
+   "electrolyte": "erization Time-Dependence Experiment. A 0.5 M solution of LEV-CH2OH was prepared with 1.95 equiv of sodium bicarbonate, 0.05 equiv of sodium carbonate, and 5 mol % ACT, consistent with secti",
+   "substrate": "erization Time-Dependence Experiment. A 0.5 M solution of LEV-CH2OH was prepared with 1.95 equiv of sodium bicarbonate, 0.05 equiv of sodium carbonate, and 5 mol % ACT, consistent with secti"
+  }
+ },
+ {
+  "row": "29",
+  "reaction": "Anodic methoxylation of 4-tBu-toluene (Lysmeral)",
+  "pdf": "5507922.pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 0.81,
+   "substrate": 0.81,
+   "electrolyte": null
+  },
+  "spread": 0,
+  "quotes": {}
+ },
+ {
+  "row": "30",
+  "reaction": "Shono alpha-methoxylation of amides",
+  "pdf": "ja00848a020.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 1.56,
+   "substrate": 1.56,
+   "electrolyte": 0.156
+  },
+  "spread": 25,
+  "quotes": {
+   "carrier": "xidation of 12. Anodic oxidation of 12 (13.42 mmol) in methanol (8.61 ml) containing 4 8 (1.34 mmol) was carried out for 1.5 hr. The ratio of products 12a and 12b was calculated by the NMR m",
+   "substrate": "xidation of 12. Anodic oxidation of 12 (13.42 mmol) in methanol (8.61 ml) containing 4 8 (1.34 mmol) was carried out for 1.5 hr. The ratio of products 12a and 12b was calculated by the NMR m",
+   "electrolyte": "idation of 12 (13.42 mmol) in methanol (8.61 ml) containing 4 8 (1.34 mmol) was carried out for 1.5 hr. The ratio of products 12a and 12b was calculated by the NMR method as described above."
+  }
+ },
+ {
+  "row": "31",
+  "reaction": "Cl-mediated ethylene epoxidation",
+  "pdf": "science.aaz8459 (1).pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 1.0,
+   "substrate": 0.00352,
+   "electrolyte": 1.0
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "ea was tested in a flow-cell setup with 1.0 M potassium chloride (KCl) electrolyte, in which ethylene was continuously sparged into the anolyte, with platinum (Pt) foil as the working electr",
+   "electrolyte": "ea was tested in a flow-cell setup with 1.0 M potassium chloride (KCl) electrolyte, in which ethylene was continuously sparged into the anolyte, with platinum (Pt) foil as the working electr"
+  }
+ },
+ {
+  "row": "32",
+  "reaction": "Alkaline lignin -> vanillin (pilot)",
+  "pdf": "sc4c02898.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 1.0,
+   "substrate": 1.0,
+   "electrolyte": 1.0
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": " sodium carbonate feed concentration of 1 M, and a circulation flow rate of 14.5 L/ min. Data from steady-state operating conditions (defined as a sample taken after more than 3 h from the l",
+   "electrolyte": " sodium carbonate feed concentration of 1 M, and a circulation flow rate of 14.5 L/ min. Data from steady-state operating conditions (defined as a sample taken after more than 3 h from the l",
+   "substrate": " sodium carbonate feed concentration of 1 M, and a circulation flow rate of 14.5 L/ min. Data from steady-state operating conditions (defined as a sample taken after more than 3 h from the l"
+  }
+ },
+ {
+  "row": "33",
+  "reaction": "Thioether -> sulfone (kilo-scale)",
+  "pdf": "op2c00111.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.47,
+   "substrate": 0.47,
+   "electrolyte": 0.085
+  },
+  "spread": 22,
+  "quotes": {
+   "electrolyte": "ichiometry relative to substrate (i.e., 0.18 equiv instead of 1 equiv) as well as increasing substrate concentration (from 0.1 to 0.47 M). By keeping the solvent composition constant, this i",
+   "carrier": " substrate (i.e., 0.18 equiv instead of 1 equiv) as well as increasing substrate concentration (from 0.1 to 0.47 M). By keeping the solvent composition constant, this increase in substrate c",
+   "substrate": " substrate (i.e., 0.18 equiv instead of 1 equiv) as well as increasing substrate concentration (from 0.1 to 0.47 M). By keeping the solvent composition constant, this increase in substrate c"
+  }
+ },
+ {
+  "row": "34",
+  "reaction": "NHPI-mediated allylic C-H -> enone",
+  "pdf": "nature17431.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.033,
+   "substrate": 0.167,
+   "electrolyte": 0.1
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "lO4 (0.3 mmol), acetone (3 ml). *MeCN (3 ml) replaced acetone as solvent. \u2020Terpenoid substrate (0.25 mmol), Cl4NHPI (0.1 mmol), pyridine (1.0 mmol), LiClO4 (0.3 mmol), CH2Cl2 (1.5 ml) and",
+   "electrolyte": "lO4 (0.3 mmol), acetone (3 ml). *MeCN (3 ml) replaced acetone as solvent. \u2020Terpenoid substrate (0.25 mmol), Cl4NHPI (0.1 mmol), pyridine (1.0 mmol), LiClO4 (0.3 mmol), CH2Cl2 (1.5 ml) and",
+   "substrate": "lO4 (0.3 mmol), acetone (3 ml). *MeCN (3 ml) replaced acetone as solvent. \u2020Terpenoid substrate (0.25 mmol), Cl4NHPI (0.1 mmol), pyridine (1.0 mmol), LiClO4 (0.3 mmol), CH2Cl2 (1.5 ml) and"
+  }
+ },
+ {
+  "row": "35",
+  "reaction": "Alkenesulfonate from cinnamic acid, SO2 and alcohol",
+  "pdf": "ChemSusChem - 2025 - Chien - Electrochemical Three\u2010Component Synthesis of Vinyl Sulfonamides via Decarboxylative.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.1,
+   "substrate": 0.1,
+   "electrolyte": 0.1
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "e Commons License electrodes, nBu4NPF6 (0.1 M) as supporting electrolyte, 1,8- diazabicyclo [5.4.0]undec-7-ene (DBU) as base, a current density of 15 mA/cm2, and an applied charge of 3.5 F, ",
+   "electrolyte": "e Commons License electrodes, nBu4NPF6 (0.1 M) as supporting electrolyte, 1,8- diazabicyclo [5.4.0]undec-7-ene (DBU) as base, a current density of 15 mA/cm2, and an applied charge of 3.5 F, ",
+   "substrate": "e Commons License electrodes, nBu4NPF6 (0.1 M) as supporting electrolyte, 1,8- diazabicyclo [5.4.0]undec-7-ene (DBU) as base, a current density of 15 mA/cm2, and an applied charge of 3.5 F, "
+  }
+ },
+ {
+  "row": "36",
+  "reaction": "HMF -> FDCA (biomass)",
+  "pdf": "sc9b00203.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.04,
+   "substrate": 0.1,
+   "electrolyte": 0.5
+  },
+  "spread": 63,
+  "quotes": {
+   "electrolyte": "tial HMF Oxidation at 1.6 V vs RHE in a 0.5 M Sodium Borate (pH 10) Solution Containing 100 mM HMF and 40 mM ACT at 1447 C Passed (Stoich. Charge) 1.6 V vs RHE HMF conversion (%) 99.8 HMFCA ",
+   "substrate": "dium Borate (pH 10) Solution Containing 100 mM HMF and 40 mM ACT at 1447 C Passed (Stoich. Charge) 1.6 V vs RHE HMF conversion (%) 99.8 HMFCA yield (%) 0.21 DFF yield (%) 0.00 FFCA yield (%)",
+   "carrier": " 10) Solution Containing 100 mM HMF and 40 mM ACT at 1447 C Passed (Stoich. Charge) 1.6 V vs RHE HMF conversion (%) 99.8 HMFCA yield (%) 0.21 DFF yield (%) 0.00 FFCA yield (%) 0.28 FDCA yiel"
+  }
+ },
+ {
+  "row": "37",
+  "reaction": "Radical-cation Diels-Alder (catalytic in e-)",
+  "pdf": "c6sc02117d.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.08,
+   "substrate": 0.08,
+   "electrolyte": 1.0
+  },
+  "spread": 58,
+  "quotes": {
+   "electrolyte": "LiPF6 MeNO2 0 9 1.0 M LiClO4 MeCN 26 10 1.0 M LiClO4 MeOH 0 a All reactions were carried out on a 1.60 mmol scale of anethol (1) with 2 equiv. of isoprene (2) in 20 mL of electrolyte solutio",
+   "carrier": "0 a All reactions were carried out on a 1.60 mmol scale of anethol (1) with 2 equiv. of isoprene (2) in 20 mL of electrolyte solution at room temperature. b Yields were determined by NMR usi",
+   "substrate": "0 a All reactions were carried out on a 1.60 mmol scale of anethol (1) with 2 equiv. of isoprene (2) in 20 mL of electrolyte solution at room temperature. b Yields were determined by NMR usi"
+  }
+ },
+ {
+  "row": "38",
+  "reaction": "BQ-mediated Wacker-Tsuji oxidation",
+  "pdf": "miller-wayner-2011-electrode-mediated-wacker-oxidation-of-cyclic-and-internal-olefins.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.0235,
+   "substrate": 0.118,
+   "electrolyte": 0.1
+  },
+  "spread": 112,
+  "quotes": {
+   "carrier": "m(I1) acetate (0.1 mmol), benzoquinone (2 mmol), and perchloric acid (0.015-0.36 M) were dissolved in acetonitrite/water (7 : 1 v/v, 85 mL containing 0.1 M TBAP) in the anode compart- men",
+   "substrate": "lved in acetonitrite/water (7 : 1 v/v, 85 mL containing 0.1 M TBAP) in the anode compart- ment. Benzoquinone (3 mmol) and perchloric acid (0.015-0.36 M) were dissolved in 85 mL of the sol",
+   "electrolyte": "ite/water (7 : 1 v/v, 85 mL containing 0.1 M TBAP) in the anode compart- ment. Benzoquinone (3 mmol) and perchloric acid (0.015-0.36 M) were dissolved in 85 mL of the solvent/electrolyte,"
+  }
+ },
+ {
+  "row": "39",
+  "reaction": "Non-Kolbe decarboxylative alpha-methoxylation",
+  "pdf": "d1ra08124a.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.1,
+   "substrate": 0.1,
+   "electrolyte": null
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "current mode on a 0.4 mmol scale, using 0.1 M N-Piv-a-alanine 1a in MeOH in the presence of 0.075 equiv. of base. In contrast to our previous method, electro- chemical decarboxylative a-meth",
+   "substrate": "current mode on a 0.4 mmol scale, using 0.1 M N-Piv-a-alanine 1a in MeOH in the presence of 0.075 equiv. of base. In contrast to our previous method, electro- chemical decarboxylative a-meth"
+  }
+ },
+ {
+  "row": "40",
+  "reaction": "Co-H alkene isomerization (catalytic)",
+  "pdf": "s41586-022-04595-3 (1).pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.0048,
+   "substrate": 0.08,
+   "electrolyte": 0.1
+  },
+  "spread": 271,
+  "quotes": {
+   "electrolyte": "on COOBn CbzHN O O O Co(salen)-1, HFIP (2 equiv), TBABF4 (0.08 M), acetone Zn(+)/Ni(\u2013), 5 mA, 3 F mol\u20131 75% COOBn CbzHN OH BocN Me Co(salen)-2 (2 mol%), HFIP (10 equiv.) TBABF4 (0.08 M), ac",
+   "substrate": ")-2 (2 mol%), HFIP (10 equiv.) TBABF4 (0.08 M), acetone Zn(+)/Ni(\u2013), 5 mA, 5 F mol\u20131 60% E:Z = 7:1 BocN Me 68, Ar = anisole (v) Ring-openning isomerization CoBr2(glyme) (10 mol%), 6,6\u2032-Me-",
+   "carrier": "ng-openning isomerization CoBr2(glyme) (10 mol%), 6,6\u2032-Me-bpy (15 mol%) HFIP (14 equiv.), Et3NHBF4 (3 equiv.), THF (0.08 M) CoBr2(glyme) (10 mol%), 6,6\u2032-Me-bpy (15 mol%) HFIP (9 equiv.), E"
+  }
+ },
+ {
+  "row": "41",
+  "reaction": "Anodic oxazoline/oxazole cyclization",
+  "pdf": "ol2c02252.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.05,
+   "substrate": 0.05,
+   "electrolyte": 0.3
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "vided cell <5 aReaction conditions: 1a (0.4 mmol), cat. 1 (0.04 mmol), TFAA (0.2 mL), Ac2O (0.1 mL), LiClO4 (0.3 M) as electrolyte in MeCN (8 mL) [anode], and LiClO4 (0.3 M) as electrolyte i",
+   "electrolyte": "vided cell <5 aReaction conditions: 1a (0.4 mmol), cat. 1 (0.04 mmol), TFAA (0.2 mL), Ac2O (0.1 mL), LiClO4 (0.3 M) as electrolyte in MeCN (8 mL) [anode], and LiClO4 (0.3 M) as electrolyte i",
+   "substrate": "vided cell <5 aReaction conditions: 1a (0.4 mmol), cat. 1 (0.04 mmol), TFAA (0.2 mL), Ac2O (0.1 mL), LiClO4 (0.3 M) as electrolyte in MeCN (8 mL) [anode], and LiClO4 (0.3 M) as electrolyte i"
+  }
+ },
+ {
+  "row": "42",
+  "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
+  "pdf": "1-s2.0-S0040403900758011-main.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.01,
+   "substrate": 0.05,
+   "electrolyte": 0.1
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "cal cyclization was performed in DMF (20 ml) containing a supporting electrolyte (EtNC104; 0.1 M), a vinyl or aryl halide (1 mmol), Ni(tet a)(Cl04)2 (0.2 equiv. based on the halide) a",
+   "electrolyte": "cal cyclization was performed in DMF (20 ml) containing a supporting electrolyte (EtNC104; 0.1 M), a vinyl or aryl halide (1 mmol), Ni(tet a)(Cl04)2 (0.2 equiv. based on the halide) a",
+   "substrate": "cal cyclization was performed in DMF (20 ml) containing a supporting electrolyte (EtNC104; 0.1 M), a vinyl or aryl halide (1 mmol), Ni(tet a)(Cl04)2 (0.2 equiv. based on the halide) a"
+  }
+ },
+ {
+  "row": "43",
+  "reaction": "Dehydrogenative lactonization (C-H/O-H)",
+  "pdf": "ol7b03617.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.0625,
+   "substrate": 0.0625,
+   "electrolyte": 0.25
+  },
+  "spread": 31,
+  "quotes": {
+   "carrier": "de (1.5 \u00d7 1.5 cm2, J = 13.3 mA/cm2), 1 (0.5 mmol), CH3CN (7 mL), MeOH (1 mL), n-Bu4NBF4 (2 mmol) at room temperature for 1.5\u22122.5 h. bn- Bu4NClO4 was employed as the electrolyte. cJ = 9 mA/cm",
+   "substrate": "de (1.5 \u00d7 1.5 cm2, J = 13.3 mA/cm2), 1 (0.5 mmol), CH3CN (7 mL), MeOH (1 mL), n-Bu4NBF4 (2 mmol) at room temperature for 1.5\u22122.5 h. bn- Bu4NClO4 was employed as the electrolyte. cJ = 9 mA/cm",
+   "electrolyte": "cm2), 1 (0.5 mmol), CH3CN (7 mL), MeOH (1 mL), n-Bu4NBF4 (2 mmol) at room temperature for 1.5\u22122.5 h. bn- Bu4NClO4 was employed as the electrolyte. cJ = 9 mA/cm2. dThe ratio of regiomers (rr)"
+  }
+ },
+ {
+  "row": "44",
+  "reaction": "Anodic benzylic fluorination",
+  "pdf": "1-s2.0-S1388248102003818-main.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.1,
+   "substrate": 0.1,
+   "electrolyte": 1.0
+  },
+  "spread": 94,
+  "quotes": {
+   "carrier": "ic benzylic fluorination of 1, 3, 5a\u20135f(1 mmol) was carried out with platinum plate electrodes \u00f02 \u0002 2 cm2\u00de in MeCN (10 ml) containing 1 M Et4NF- 4HF using an undivided cell at room temperatu",
+   "substrate": "ic benzylic fluorination of 1, 3, 5a\u20135f(1 mmol) was carried out with platinum plate electrodes \u00f02 \u0002 2 cm2\u00de in MeCN (10 ml) containing 1 M Et4NF- 4HF using an undivided cell at room temperatu",
+   "electrolyte": " \u00f02 \u0002 2 cm2\u00de in MeCN (10 ml) containing 1 M Et4NF- 4HF using an undivided cell at room temperature. Constant current was applied. The conversion of start- ing materials was monitored by TLC."
+  }
+ },
+ {
+  "row": "45",
+  "reaction": "Br- oxidation / electrophilic bromination",
+  "pdf": "s41467-025-57329-0.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.152,
+   "substrate": 0.121,
+   "electrolyte": 0.152
+  },
+  "spread": 277,
+  "quotes": {
+   "carrier": " M in deionized water, 12.5 mL), CH3CN (12.5 mL) in each chamber, 1 (0.5 mmol), constant voltage (1.1-1.3 V vs. SCE) at room temperature for 4-8 h. Isolated yields are shown. bReaction condi",
+   "electrolyte": " M in deionized water, 12.5 mL), CH3CN (12.5 mL) in each chamber, 1 (0.5 mmol), constant voltage (1.1-1.3 V vs. SCE) at room temperature for 4-8 h. Isolated yields are shown. bReaction condi",
+   "substrate": " mm \u00d7 30 mm \u00d7 5 mm) cathode. Substrate (4 mmol), solvent (0.5 M NaBr in deionized water (10 mL): CH3CN: CH3OH: CH2Cl2 = 10:10:10:3), flow cell, two- electrode system and constant voltage (4-"
+  }
+ },
+ {
+  "row": "46",
+  "reaction": "Sulfonylation of alkenes with sulfinates",
+  "pdf": "ao9b02442.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.0625,
+   "substrate": 0.0625,
+   "electrolyte": 0.0625
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "10 TsOH 2.5 0 aReaction conditions: 1a (0.5 mmol), 2a (2.0 equiv), MeOH (8 mL), electrolyte (0.5 mmol), additive (0.5 mmol), 4 \u00c5 MS (200 mg), undivided cell, room temperature, and nitrogen a",
+   "electrolyte": "10 TsOH 2.5 0 aReaction conditions: 1a (0.5 mmol), 2a (2.0 equiv), MeOH (8 mL), electrolyte (0.5 mmol), additive (0.5 mmol), 4 \u00c5 MS (200 mg), undivided cell, room temperature, and nitrogen a",
+   "substrate": "10 TsOH 2.5 0 aReaction conditions: 1a (0.5 mmol), 2a (2.0 equiv), MeOH (8 mL), electrolyte (0.5 mmol), additive (0.5 mmol), 4 \u00c5 MS (200 mg), undivided cell, room temperature, and nitrogen a"
+  }
+ },
+ {
+  "row": "47",
+  "reaction": "Aryl thiocyanation (NH4SCN)",
+  "pdf": "1-s2.0-S0013468610007140-main.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.1,
+   "substrate": 0.25,
+   "electrolyte": 0.1
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "d 0.1 M LiClO4) in each compartment was 20 ml and the ratio between substrate (5 mmol) and NH4SCN (2 mmol) was 5:2. After passing the desired Coulombs, the solution mixture was treated as be",
+   "electrolyte": "d 0.1 M LiClO4) in each compartment was 20 ml and the ratio between substrate (5 mmol) and NH4SCN (2 mmol) was 5:2. After passing the desired Coulombs, the solution mixture was treated as be",
+   "substrate": "d 0.1 M LiClO4) in each compartment was 20 ml and the ratio between substrate (5 mmol) and NH4SCN (2 mmol) was 5:2. After passing the desired Coulombs, the solution mixture was treated as be"
+  }
+ },
+ {
+  "row": "48",
+  "reaction": "Anodic C-H phosphonylation of azoles",
+  "pdf": "s41467-021-26960-y.pdf",
+  "status": "ANCHORED",
+  "targets": {
+   "carrier": 0.05,
+   "substrate": 0.05,
+   "electrolyte": 0.1
+  },
+  "spread": 0,
+  "quotes": {
+   "carrier": "he solution containing arene substrate (0.05 M, 1 equiv), P(OEt)3 (5 equiv), HBF4\u2022Et2O (2 equiv) and H2O (2 equiv) in dry MeCN was pushed using a syringe pump to pass through the flow electr",
+   "electrolyte": "he solution containing arene substrate (0.05 M, 1 equiv), P(OEt)3 (5 equiv), HBF4\u2022Et2O (2 equiv) and H2O (2 equiv) in dry MeCN was pushed using a syringe pump to pass through the flow electr",
+   "substrate": "he solution containing arene substrate (0.05 M, 1 equiv), P(OEt)3 (5 equiv), HBF4\u2022Et2O (2 equiv) and H2O (2 equiv) in dry MeCN was pushed using a syringe pump to pass through the flow electr"
+  }
+ },
+ {
+  "row": "49",
+  "reaction": "N-N azo/pyrazole formation (N-H/N-H)",
+  "pdf": "Angew Chem Int Ed - 2016 - Gieshoff - Access to Pyrazolidin\u20103 5\u2010diones through Anodic N N Bond Formation.pdf",
+  "status": "HAND-VERIFIED",
+  "targets": {
+   "carrier": 0.04,
+   "substrate": 0.04,
+   "electrolyte": 0.01
+  },
+  "spread": 0,
+  "quotes": {
+   "electrolyte": ". Interestingly, a low concentration of 0.01m of the supporting electrolyte was beneficial and led to a slight increase in yield (Table 2). These low concentrations of supporting electrolyte"
+  }
+ }
+]

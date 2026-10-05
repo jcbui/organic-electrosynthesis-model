@@ -1,0 +1,302 @@
+[
+ {
+  "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
+  "exemplar": "Kawamata/Baran JACS 2019",
+  "verdict": "CONFIRMED",
+  "match": "Alkyl Sulfonylhydrazide-Enabled, Chemoselective Ni-catal |  2025 | 10.26434/chemrxiv-2025-4sf42"
+ },
+ {
+  "reaction": "Electrochemical amination of ArX with NH3",
+  "exemplar": "Liu/Qiu Angew 2025",
+  "verdict": "NOT CONFIRMED",
+  "match": ""
+ },
+ {
+  "reaction": "Shono oxidation (N-acyliminium capture)",
+  "exemplar": "Shono JACS 1975; Deprez/Merck OL 2021",
+  "verdict": "CONFIRMED",
+  "match": "Oxidation by Electrochemical Methods | Comprehensive Organic  1991 | 10.1016/b978-0-08-052349-1.00213-4"
+ },
+ {
+  "reaction": "Oxidative benzimidazole annulation (C-H/N-H)",
+  "exemplar": "Zhao/H.-C. Xu ChemSusChem 2021",
+  "verdict": "CONFIRMED",
+  "match": "Synthesis of 1,2,4-Triazoles via the Electrochemical Oxi | Chinese Journal of Org 2021 | 10.6023/cjoc202011029"
+ },
+ {
+  "reaction": "Mn-catalyzed alkene diazidation",
+  "exemplar": "Fu/Lin Science 2017",
+  "verdict": "WEAK",
+  "match": "Aminoxyl-Catalyzed Electrochemical Diazidation of Alkene |  2018 | 10.26434/chemrxiv.7413602.v1"
+ },
+ {
+  "reaction": "Br-mediated Hofmann rearrangement",
+  "exemplar": "Malviya/Cantillo OPRD 2023 (multigram)",
+  "verdict": "CONFIRMED",
+  "match": "Multigram Electrochemical Hofmann Rearrangement Using a  | Organic Process Resear 2023 | 10.1021/acs.oprd.3c00332"
+ },
+ {
+  "reaction": "Arene C-H pyridination",
+  "exemplar": "Morofuji/Yoshida JACS 2013",
+  "verdict": "CONFIRMED",
+  "match": "ChemInform Abstract: Electrochemical C\u2014H Amination: Synt | ChemInform 2013 | 10.1002/chin.201337047"
+ },
+ {
+  "reaction": "Amidyl-radical C-H amination (phenanthridinone)",
+  "exemplar": "Zhang/K. Xu/Zeng OL 2018",
+  "verdict": "CONFIRMED",
+  "match": "Electrochemical Formation of <i>N</i>-Acyloxy Amidyl Rad | Organic Letters 2018 | 10.1021/acs.orglett.8b00981"
+ },
+ {
+  "reaction": "Co-catalyzed aza-Wacker cyclization",
+  "exemplar": "Cai/H.-C. Xu Nat Commun 2021 (Co-salen)",
+  "verdict": "NOT CONFIRMED",
+  "match": ""
+ },
+ {
+  "reaction": "Ritter-type C(sp3)-H amination",
+  "exemplar": "Zhang/Ye Nat Commun 2022",
+  "verdict": "CONFIRMED",
+  "match": "Ritter-type amination of C(sp3)-H bonds enabled by elect | Nature Communications 2022 | 10.1038/s41467-022-31813-3"
+ },
+ {
+  "reaction": "Co-H alkene reduction (e-HAT)",
+  "exemplar": "Gnaim/Baran Nature 2022 (e-HAT)",
+  "verdict": "WEAK",
+  "match": "MetalLigand Cooperativity in Titanium-Catalyzed Anti-Mar |  None | 10.1021/acscatal.0c00491.s003"
+ },
+ {
+  "reaction": "Kolbe homocoupling of 10-undecenoate",
+  "exemplar": "Hioki/Baran Science 2023 (rAP; acetone)",
+  "verdict": "CONFIRMED",
+  "match": "Overcoming the limitations of Kolbe coupling with wavefo | Science 2023 | 10.1126/science.adf4762"
+ },
+ {
+  "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
+  "exemplar": "Kelly/Stahl/Schreier OPRD 2026 (kg, flow, BMS)",
+  "verdict": "WEAK",
+  "match": "Ni-Catalyzed Electrochemical C(sp2)\u2212C(sp3) Cross-Couplin |  2020 | 10.26434/chemrxiv.11813505.v2"
+ },
+ {
+  "reaction": "Doubly decarboxylative Csp3-Csp3",
+  "exemplar": "Zhang/Baran Nature 2022",
+  "verdict": "CONFIRMED",
+  "match": "Ni-electrocatalytic Csp3\u2013Csp3 doubly decarboxylative cou | Nature 2022 | 10.1038/s41586-022-04691-4"
+ },
+ {
+  "reaction": "BDD phenol-arene cross-coupling",
+  "exemplar": "Kirste/Waldvogel JACS 2012",
+  "verdict": "CONFIRMED",
+  "match": "ChemInform Abstract: Anodic Phenol\u2014Arene Cross\u2010Coupling  | ChemInform 2010 | 10.1002/chin.201021090"
+ },
+ {
+  "reaction": "Decarboxylative Minisci alkylation",
+  "exemplar": "Mo/Jensen Science 2020",
+  "verdict": "WEAK",
+  "match": "General Electrochemical Minisci Alkylation of N-Heteroar |  2022 | 10.21203/rs.3.rs-1229384/v1"
+ },
+ {
+  "reaction": "Cathodic Giese (R-I + alkene)",
+  "exemplar": "Li/Wilden Chem Sci 2020",
+  "verdict": "NOT CONFIRMED",
+  "match": ""
+ },
+ {
+  "reaction": "Rh-catalyzed electrooxidative C-H alkenylation",
+  "exemplar": "Qiu/Ackermann Angew 2018",
+  "verdict": "CONFIRMED",
+  "match": "Electrooxidative Rhodium\u2010Catalyzed\u2009C\u2212H/C\u2212H Activation: E | Angewandte Chemie 2018 | 10.1002/ange.201803342"
+ },
+ {
+  "reaction": "Cu-catalyzed benzylic cyanation",
+  "exemplar": "Cai/H.-C. Xu Nat Catal 2022 (PEC)",
+  "verdict": "WEAK",
+  "match": "Cu-catalyzed enantioselective cyanation of benzylic C\u2013H  | Science Bulletin 2016 | 10.1007/s11434-016-1206-8"
+ },
+ {
+  "reaction": "Cathodic Ni aryl-aryl homocoupling",
+  "exemplar": "Courtois/Perichon Tetrahedron 1997",
+  "verdict": "WEAK",
+  "match": "Cobalt\u2010Catalyzed Electrochemical Vinylation of Aryl Hali | ChemInform 2003 | 10.1002/chin.200334015"
+ },
+ {
+  "reaction": "Anodic dehydrogenative 2-naphthol coupling",
+  "exemplar": "Osa/Bobbitt Chem Commun 1994",
+  "verdict": "WEAK",
+  "match": "Insights into the Mechanism of Anodic NN Bond Formation  |  None | 10.1021/jacs.7b07488.s003"
+ },
+ {
+  "reaction": "Acrylonitrile hydrodimerization (ADN)",
+  "exemplar": "Baizer JES 1964 (Monsanto)",
+  "verdict": "WEAK",
+  "match": "Hydrodimerization of Acrylonitrile | Journal of The Electro 1967 | 10.1149/1.2426774"
+ },
+ {
+  "reaction": "Birch reduction of naphthalene",
+  "exemplar": "Peters/Baran Science 2019",
+  "verdict": "WEAK",
+  "match": "Chemical and Electrochemical Reduction of Polyarene Mang |  None | 10.1021/ja0527370.s013"
+ },
+ {
+  "reaction": "Nitroarene -> aniline",
+  "exemplar": "Kisukuri/Waldvogel OPRD 2024",
+  "verdict": "CONFIRMED",
+  "match": "Redox mediators facilitate selective electrocatalytic ni | Chem 2022 | 10.1016/j.chempr.2022.06.022"
+ },
+ {
+  "reaction": "Rapid-alternating-polarity imide reduction",
+  "exemplar": "Hayashi/Baran JACS 2022 (rAP)",
+  "verdict": "CONFIRMED",
+  "match": "Chemoselective (Hetero)Arene Electroreduction Enabled by | Journal of the America 2022 | 10.1021/jacs.2c02102"
+ },
+ {
+  "reaction": "Diazo difunctionalization (thiol + alcohol)",
+  "exemplar": "Yang/Lei Nat Commun 2023 (diazo difunctionalization)",
+  "verdict": "CONFIRMED",
+  "match": "Electrochemical oxidative difunctionalization of diazo c | Nature Communications 2023 | 10.1038/s41467-023-37032-8"
+ },
+ {
+  "reaction": "Cathodic aryl chloride dehalogenation",
+  "exemplar": "Ke/Chi Chem Eur J 2019",
+  "verdict": "NOT CONFIRMED",
+  "match": ""
+ },
+ {
+  "reaction": "Benzaldehyde -> benzyl alcohol",
+  "exemplar": "Lopez-Ruiz ACS SCE 2018 (ECH)",
+  "verdict": "NOT CONFIRMED",
+  "match": ""
+ },
+ {
+  "reaction": "ACT-mediated alcohol oxidation (flow, hectogram)",
+  "exemplar": "Zhong/Stahl OPRD 2021 (levetiracetam)",
+  "verdict": "CONFIRMED",
+  "match": "Synergistic enhancement of electrochemical alcohol oxida | Nature Communications 2025 | 10.1038/s41467-024-55616-w"
+ },
+ {
+  "reaction": "Anodic methoxylation of 4-tBu-toluene (Lysmeral)",
+  "exemplar": "BASF capillary-gap, >10 kt/yr (US 5,507,922)",
+  "verdict": "NOT CONFIRMED",
+  "match": ""
+ },
+ {
+  "reaction": "Shono alpha-methoxylation of amides",
+  "exemplar": "Shono JACS 1975 (carbamate protocol, by analogy)",
+  "verdict": "CONFIRMED",
+  "match": "Electroorganic chemistry. 71. Anodic .alpha.-methoxylati | The Journal of Organic 1983 | 10.1021/jo00156a060"
+ },
+ {
+  "reaction": "Cl-mediated ethylene epoxidation",
+  "exemplar": "Leow/Sargent Science 2020",
+  "verdict": "CONFIRMED",
+  "match": "Chloride-mediated selective electrosynthesis of ethylene | Science 2020 | 10.1126/science.aaz8459"
+ },
+ {
+  "reaction": "Alkaline lignin -> vanillin (pilot)",
+  "exemplar": "R\u00fccker/Waldvogel ACS SCE 2024 (pilot, ex-cell)",
+  "verdict": "CONFIRMED",
+  "match": "Pilot Scale Electrolysis of Peroxodicarbonate as an Oxid | ACS Sustainable Chemis 2024 | 10.1021/acssuschemeng.4c02898"
+ },
+ {
+  "reaction": "Thioether -> sulfone (kilo-scale)",
+  "exemplar": "Bottecchia/Strotman OPRD 2022",
+  "verdict": "CONFIRMED",
+  "match": "Kilo-Scale Electrochemical Oxidation of a Thioether to a | Organic Process Resear 2022 | 10.1021/acs.oprd.2c00111"
+ },
+ {
+  "reaction": "NHPI-mediated allylic C-H -> enone",
+  "exemplar": "Horn/Baran Nature 2016",
+  "verdict": "CONFIRMED",
+  "match": "Scalable and sustainable electrochemical allylic C\u2013H oxi | Nature 2016 | 10.1038/nature17431"
+ },
+ {
+  "reaction": "Alkenesulfonate from cinnamic acid, SO2 and alcohol",
+  "exemplar": "Chien/Manolikakes ChemSusChem 2025",
+  "verdict": "CONFIRMED",
+  "match": "Electrochemical Three\u2010component Synthesis of Alkenesulfo | ChemSusChem 2025 | 10.1002/cssc.202500186"
+ },
+ {
+  "reaction": "HMF -> FDCA (biomass)",
+  "exemplar": "Cardiel/Choi ACS SCE 2019",
+  "verdict": "NOT CONFIRMED",
+  "match": ""
+ },
+ {
+  "reaction": "Radical-cation Diels-Alder (catalytic in e-)",
+  "exemplar": "Okada/Chiba Chem Sci 2016",
+  "verdict": "CONFIRMED",
+  "match": "Radical Cation Diels-Alder By Electrocatalyst | ECS Meeting Abstracts 2017 | 10.1149/ma2017-01/36/1701"
+ },
+ {
+  "reaction": "BQ-mediated Wacker-Tsuji oxidation",
+  "exemplar": "Miller/Wayner Can J Chem 1992",
+  "verdict": "CONFIRMED",
+  "match": "ChemInform Abstract: Electrode\u2010Mediated Wacker Oxidation | ChemInform 1993 | 10.1002/chin.199314098"
+ },
+ {
+  "reaction": "Non-Kolbe decarboxylative alpha-methoxylation",
+  "exemplar": "Walecka-Kurczyk RSC Adv 2022",
+  "verdict": "WEAK",
+  "match": "Electrochemical Decarboxylative Elimination of Carboxyli | Organic Letters 2023 | 10.1021/acs.orglett.3c02997"
+ },
+ {
+  "reaction": "Co-H alkene isomerization (catalytic)",
+  "exemplar": "Gnaim/Baran Nature 2022 (e-HAT isomerization)",
+  "verdict": "WEAK",
+  "match": "Catalytic, contra-Thermodynamic Alkene Isomerization |  2021 | 10.26434/chemrxiv-2021-kwf6m"
+ },
+ {
+  "reaction": "Anodic oxazoline/oxazole cyclization",
+  "exemplar": "Bao OL 2022",
+  "verdict": "WEAK",
+  "match": "Davidson Oxazole Cyclization | Comprehensive Organic  2010 | 10.1002/9780470638859.conrr182"
+ },
+ {
+  "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
+  "exemplar": "Ozaki/Ohmori Tet Lett 1994",
+  "verdict": "CONFIRMED",
+  "match": "Cyclization of vinyl and aryl radicals generated by a ni | Tetrahedron Letters 1994 | 10.1016/s0040-4039(00)75801-1"
+ },
+ {
+  "reaction": "Dehydrogenative lactonization (C-H/O-H)",
+  "exemplar": "Zhang/K. Xu/Zeng OL 2018",
+  "verdict": "CONFIRMED",
+  "match": "Scalable Electrochemical Dehydrogenative Lactonization o | Organic Letters 2017 | 10.1021/acs.orglett.7b03617"
+ },
+ {
+  "reaction": "Anodic benzylic fluorination",
+  "exemplar": "Tajima/Fuchigami Electrochem Commun 2002",
+  "verdict": "CONFIRMED",
+  "match": "Anodic benzylic fluorination of toluene, ethylbenzene, a | Electrochemistry Commu 2002 | 10.1016/s1388-2481(02)00381-8"
+ },
+ {
+  "reaction": "Br- oxidation / electrophilic bromination",
+  "exemplar": "Zhang/Su Nat Commun 2025 (scalable arene bromination)",
+  "verdict": "CONFIRMED",
+  "match": "Electrochemical electrophilic bromination/spirocyclizati | Green Chemistry 2023 | 10.1039/d3gc00728f"
+ },
+ {
+  "reaction": "Sulfonylation of alkenes with sulfinates",
+  "exemplar": "Mei/Han ACS Omega 2019",
+  "verdict": "WEAK",
+  "match": "Catalyst- and solvent-free hydrosulfonylation of alkenes | Tetrahedron 2025 | 10.1016/j.tet.2025.134632"
+ },
+ {
+  "reaction": "Aryl thiocyanation (NH4SCN)",
+  "exemplar": "Gitkis/Becker Electrochim Acta 2010",
+  "verdict": "CONFIRMED",
+  "match": "A selective one-pot electrochemical thiocyanation of met | Journal of Electroanal 2006 | 10.1016/j.jelechem.2005.12.011"
+ },
+ {
+  "reaction": "Anodic C-H phosphonylation of azoles",
+  "exemplar": "Long/H.-C. Xu Nat Commun 2021 (flow)",
+  "verdict": "NOT CONFIRMED",
+  "match": ""
+ },
+ {
+  "reaction": "N-N azo/pyrazole formation (N-H/N-H)",
+  "exemplar": "Gieshoff/Waldvogel Angew 2016",
+  "verdict": "CONFIRMED",
+  "match": "Electrochemical Formation of 3,5-Diimido-1,2-dithiolanes | Organic Letters 2018 | 10.1021/acs.orglett.8b02904"
+ }
+]

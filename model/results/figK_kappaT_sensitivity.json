@@ -1,0 +1,364 @@
+{
+  "note": "25 C kappa is a conservative LOWER bound on the ceiling; Walden/Arrhenius (Ea=15 kJ/mol) is an UPPER bound because it neglects the ion-pairing penalty from falling dielectric constant. True ceiling lies between.",
+  "source_of_truth": "SOLVENTS and REACTORS imported from figs/thermal_model.py; kappa values are the registry values of data/electrolytes.csv as of the 2026-08-02 sourcing pass (MeCN 1.89, aq. NaOH 17.80 S/m).",
+  "T_amb_C": 25.0,
+  "h_ext_Wm2K": 13.0,
+  "Ea_upper_J_per_mol": 15000.0,
+  "water_anchor": {
+    "eta_25_cP": 0.89,
+    "eta_100_cP": 0.282,
+    "walden_ratio": 3.1560283687943267,
+    "arrhenius_ratio_Ea15": 3.3745226960908097,
+    "agreement_pct": 6.9230786851245165
+  },
+  "solvents": {
+    "THF": {
+      "electrolyte": "3.0 M LiBr/THF",
+      "kappa_25C_S_per_m": 0.3,
+      "kappa_provenance_state": "assumption",
+      "T_boil_C": 66.0,
+      "kappa_factor_at_Tboil": 2.0782800329062976,
+      "kappa_at_Tboil_S_per_m": 0.6234840098718892
+    },
+    "MeCN": {
+      "electrolyte": "0.25 M Bu4NBF4/MeCN",
+      "kappa_25C_S_per_m": 1.995,
+      "kappa_provenance_state": "measured",
+      "T_boil_C": 81.6,
+      "kappa_factor_at_Tboil": 2.6260313385579916,
+      "kappa_at_Tboil_S_per_m": 5.238932520423194
+    },
+    "DMF": {
+      "electrolyte": "0.2 M NaI/DMF",
+      "kappa_25C_S_per_m": 0.877,
+      "kappa_provenance_state": "derived",
+      "T_boil_C": 152.8,
+      "kappa_factor_at_Tboil": 6.144722943251546,
+      "kappa_at_Tboil_S_per_m": 5.388922021231606
+    },
+    "aq. NaOH": {
+      "electrolyte": "1 M NaOH aq",
+      "kappa_25C_S_per_m": 17.45,
+      "kappa_provenance_state": "measured",
+      "T_boil_C": 99.974,
+      "kappa_factor_at_Tboil": 3.373385966535076,
+      "kappa_at_Tboil_S_per_m": 58.86558511603707
+    }
+  },
+  "brackets": {
+    "unstirred batch": {
+      "THF": {
+        "electrolyte": "3.0 M LiBr/THF",
+        "i_design": 8.19865,
+        "i_boil_25C": 26.299765291313342,
+        "i_boil_kappaT": 37.69898775252867,
+        "factor": 1.4334343799250722,
+        "margin_25C": 3.2078165663021765,
+        "margin_kappaT": 4.598194550630734,
+        "verdict_changes": false
+      },
+      "MeCN": {
+        "electrolyte": "0.25 M Bu4NBF4/MeCN",
+        "i_design": 8.19865,
+        "i_boil_25C": 78.24195092654732,
+        "i_boil_kappaT": 124.03520872069696,
+        "factor": 1.5852775557340057,
+        "margin_25C": 9.543272481023987,
+        "margin_kappaT": 15.128735672421307,
+        "verdict_changes": false
+      },
+      "DMF": {
+        "electrolyte": "0.2 M NaI/DMF",
+        "i_design": 8.19865,
+        "i_boil_25C": 79.16821567634489,
+        "i_boil_kappaT": 191.53052967970166,
+        "factor": 2.4192856696772838,
+        "margin_25C": 9.656250196842759,
+        "margin_kappaT": 23.361227724040134,
+        "verdict_changes": false
+      },
+      "aq. NaOH": {
+        "electrolyte": "1 M NaOH aq",
+        "i_design": 8.19865,
+        "i_boil_25C": 250.1856019913514,
+        "i_boil_kappaT": 419.8125005213139,
+        "factor": 1.6780042383727032,
+        "margin_25C": 30.515463154464623,
+        "margin_kappaT": 51.2050765090977,
+        "verdict_changes": false
+      }
+    },
+    "stirred batch": {
+      "THF": {
+        "electrolyte": "3.0 M LiBr/THF",
+        "i_design": 9.3465,
+        "i_boil_25C": 27.74215664007963,
+        "i_boil_kappaT": 39.7756440977441,
+        "factor": 1.4337617876571087,
+        "margin_25C": 2.9681866623955093,
+        "margin_kappaT": 4.255672615176173,
+        "verdict_changes": false
+      },
+      "MeCN": {
+        "electrolyte": "0.25 M Bu4NBF4/MeCN",
+        "i_design": 9.3465,
+        "i_boil_25C": 82.59613200442327,
+        "i_boil_kappaT": 131.0586071637875,
+        "factor": 1.5867402502186052,
+        "margin_25C": 8.837118921994678,
+        "margin_kappaT": 14.022212289497405,
+        "verdict_changes": false
+      },
+      "DMF": {
+        "electrolyte": "0.2 M NaI/DMF",
+        "i_design": 9.3465,
+        "i_boil_25C": 83.52252087360223,
+        "i_boil_kappaT": 202.27473649985745,
+        "factor": 2.421798748219865,
+        "margin_25C": 8.936235047729335,
+        "margin_kappaT": 21.64176285238939,
+        "verdict_changes": false
+      },
+      "aq. NaOH": {
+        "electrolyte": "1 M NaOH aq",
+        "i_design": 9.3465,
+        "i_boil_25C": 264.8137198082992,
+        "i_boil_kappaT": 446.03413343228203,
+        "factor": 1.6843316643683333,
+        "margin_25C": 28.33292888335732,
+        "margin_kappaT": 47.72204926253485,
+        "verdict_changes": false
+      }
+    },
+    "recirculating flow": {
+      "THF": {
+        "electrolyte": "3.0 M LiBr/THF",
+        "i_design": 16.82425,
+        "i_boil_25C": 27.87705962209458,
+        "i_boil_kappaT": 39.96987560297742,
+        "factor": 1.433790942976583,
+        "margin_25C": 1.6569570484327434,
+        "margin_kappaT": 2.3757300089440787,
+        "verdict_changes": false
+      },
+      "MeCN": {
+        "electrolyte": "0.25 M Bu4NBF4/MeCN",
+        "i_design": 16.82425,
+        "i_boil_25C": 83.00341154803846,
+        "i_boil_kappaT": 131.71565315250518,
+        "factor": 1.5868703550368455,
+        "margin_25C": 4.933557902910291,
+        "margin_kappaT": 7.828916780986088,
+        "verdict_changes": false
+      },
+      "DMF": {
+        "electrolyte": "0.2 M NaI/DMF",
+        "i_design": 16.82425,
+        "i_boil_25C": 83.92976711634432,
+        "i_boil_kappaT": 203.27975312655812,
+        "factor": 2.422022127676937,
+        "margin_25C": 4.9886186377606325,
+        "margin_kappaT": 12.082544727197833,
+        "verdict_changes": false
+      },
+      "aq. NaOH": {
+        "electrolyte": "1 M NaOH aq",
+        "i_design": 16.82425,
+        "i_boil_25C": 266.1825836686656,
+        "i_boil_kappaT": 448.4900033761151,
+        "factor": 1.6848961235359379,
+        "margin_25C": 15.821364023279825,
+        "margin_kappaT": 26.657354911875128,
+        "verdict_changes": false
+      }
+    },
+    "microfluidic 25 um": {
+      "THF": {
+        "electrolyte": "3.0 M LiBr/THF",
+        "i_design": 110.6582,
+        "i_boil_25C": 394.5628486047984,
+        "i_boil_kappaT": 457.66666867969394,
+        "factor": 1.1599335069128658,
+        "margin_25C": 3.565599735083332,
+        "margin_kappaT": 4.135858604962795,
+        "verdict_changes": false
+      },
+      "MeCN": {
+        "electrolyte": "0.25 M Bu4NBF4/MeCN",
+        "i_design": 110.6582,
+        "i_boil_25C": 679.982097362242,
+        "i_boil_kappaT": 722.5344462650845,
+        "factor": 1.0625786312138361,
+        "margin_25C": 6.1448866632770285,
+        "margin_kappaT": 6.529425259629061,
+        "verdict_changes": false
+      },
+      "DMF": {
+        "electrolyte": "0.2 M NaI/DMF",
+        "i_design": 110.6582,
+        "i_boil_25C": 1116.0467236798877,
+        "i_boil_kappaT": 1427.2928174157275,
+        "factor": 1.2788826732178227,
+        "margin_25C": 10.085531155213873,
+        "margin_kappaT": 12.898211044601554,
+        "verdict_changes": false
+      },
+      "aq. NaOH": {
+        "electrolyte": "1 M NaOH aq",
+        "i_design": 110.6582,
+        "i_boil_25C": 947.7765077655397,
+        "i_boil_kappaT": 958.8741928406356,
+        "factor": 1.011709179309856,
+        "margin_25C": 8.564900818606661,
+        "margin_kappaT": 8.665188778062861,
+        "verdict_changes": false
+      }
+    },
+    "RDE 1600 rpm": {
+      "THF": {
+        "electrolyte": "3.0 M LiBr/THF",
+        "i_design": 108.47145,
+        "i_boil_25C": 27.87705962209458,
+        "i_boil_kappaT": 39.96987560297742,
+        "factor": 1.433790942976583,
+        "margin_25C": 0.25699905018412295,
+        "margin_kappaT": 0.3684829105075798,
+        "verdict_changes": false
+      },
+      "MeCN": {
+        "electrolyte": "0.25 M Bu4NBF4/MeCN",
+        "i_design": 108.47145,
+        "i_boil_25C": 83.00341154803846,
+        "i_boil_kappaT": 131.71565315250518,
+        "factor": 1.5868703550368455,
+        "margin_25C": 0.7652097537927118,
+        "margin_kappaT": 1.2142886736786977,
+        "verdict_changes": true
+      },
+      "DMF": {
+        "electrolyte": "0.2 M NaI/DMF",
+        "i_design": 108.47145,
+        "i_boil_25C": 83.92976711634432,
+        "i_boil_kappaT": 203.27975312655812,
+        "factor": 2.422022127676937,
+        "margin_25C": 0.7737498403159939,
+        "margin_kappaT": 1.874039234531834,
+        "verdict_changes": true
+      },
+      "aq. NaOH": {
+        "electrolyte": "1 M NaOH aq",
+        "i_design": 108.47145,
+        "i_boil_25C": 266.1825836686656,
+        "i_boil_kappaT": 448.4900033761151,
+        "factor": 1.6848961235359379,
+        "margin_25C": 2.4539414165539926,
+        "margin_kappaT": 4.134636380136111,
+        "verdict_changes": false
+      }
+    },
+    "rotating cyl. 3000 rpm": {
+      "THF": {
+        "electrolyte": "3.0 M LiBr/THF",
+        "i_design": 121.66925,
+        "i_boil_25C": 25.29229996708548,
+        "i_boil_kappaT": 36.28618736036933,
+        "factor": 1.4346732961253392,
+        "margin_25C": 0.20787750370028155,
+        "margin_kappaT": 0.29823630342399027,
+        "verdict_changes": false
+      },
+      "MeCN": {
+        "electrolyte": "0.25 M Bu4NBF4/MeCN",
+        "i_design": 121.66925,
+        "i_boil_25C": 75.45156864827138,
+        "i_boil_kappaT": 120.0033705824106,
+        "factor": 1.59046886277241,
+        "margin_25C": 0.6201367120145096,
+        "margin_kappaT": 0.9863081311211386,
+        "verdict_changes": false
+      },
+      "DMF": {
+        "electrolyte": "0.2 M NaI/DMF",
+        "i_design": 121.66925,
+        "i_boil_25C": 76.16601603223616,
+        "i_boil_kappaT": 184.93801048661163,
+        "factor": 2.428090900912282,
+        "margin_25C": 0.6260087576132519,
+        "margin_kappaT": 1.5200061682521395,
+        "verdict_changes": true
+      },
+      "aq. NaOH": {
+        "electrolyte": "1 M NaOH aq",
+        "i_design": 121.66925,
+        "i_boil_25C": 243.49246542311312,
+        "i_boil_kappaT": 413.8696121661167,
+        "factor": 1.6997224593662144,
+        "margin_25C": 2.001265442362085,
+        "margin_kappaT": 3.401595819536298,
+        "verdict_changes": false
+      }
+    },
+    "zero-gap PEM stack": {
+      "THF": {
+        "electrolyte": "3.0 M LiBr/THF",
+        "i_design": 1000.0,
+        "i_boil_25C": 65.57764067256981,
+        "i_boil_kappaT": 75.28868772877391,
+        "factor": 1.1480847276084771,
+        "margin_25C": 0.06557764067256981,
+        "margin_kappaT": 0.07528868772877391,
+        "verdict_changes": false
+      },
+      "MeCN": {
+        "electrolyte": "0.25 M Bu4NBF4/MeCN",
+        "i_design": 1000.0,
+        "i_boil_25C": 109.29065238613245,
+        "i_boil_kappaT": 115.16830931866055,
+        "factor": 1.053780051671408,
+        "margin_25C": 0.10929065238613245,
+        "margin_kappaT": 0.11516830931866055,
+        "verdict_changes": false
+      },
+      "DMF": {
+        "electrolyte": "0.2 M NaI/DMF",
+        "i_design": 1000.0,
+        "i_boil_25C": 179.57788915247352,
+        "i_boil_kappaT": 222.21239158834592,
+        "factor": 1.2374150995820699,
+        "margin_25C": 0.17957788915247352,
+        "margin_kappaT": 0.22221239158834594,
+        "verdict_changes": false
+      },
+      "aq. NaOH": {
+        "electrolyte": "1 M NaOH aq",
+        "i_design": 1000.0,
+        "i_boil_25C": 148.7984837869649,
+        "i_boil_kappaT": 150.23260963974118,
+        "factor": 1.0096380407667964,
+        "margin_25C": 0.14879848378696492,
+        "margin_kappaT": 0.1502326096397412,
+        "verdict_changes": false
+      }
+    }
+  },
+  "factor_range": {
+    "min": 1.0096380407667964,
+    "max": 2.428090900912282,
+    "n_pairs": 28
+  },
+  "n_verdict_flips": 3,
+  "verdict_flips": [
+    {
+      "reactor": "RDE 1600 rpm",
+      "solvent": "MeCN"
+    },
+    {
+      "reactor": "RDE 1600 rpm",
+      "solvent": "DMF"
+    },
+    {
+      "reactor": "rotating cyl. 3000 rpm",
+      "solvent": "DMF"
+    }
+  ]
+}

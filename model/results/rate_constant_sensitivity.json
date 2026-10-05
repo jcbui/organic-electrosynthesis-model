@@ -1,0 +1,487 @@
+{
+  "note": "G-KSENS: each mediated k x10 and /10, one row at a time, re-solving the mediated matrix; count deltas on the published 350-cell matrix. Written by data/sensitivity_rate_constants.py",
+  "rows": [
+    {
+      "reaction": "Br-mediated Hofmann rearrangement",
+      "factor": 0.1,
+      "max_rel_change": 0.5399440057854441,
+      "cells_crossing_25": 0,
+      "cross_25": {},
+      "cross_50": {},
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      }
+    },
+    {
+      "reaction": "Br-mediated Hofmann rearrangement",
+      "factor": 10.0,
+      "max_rel_change": 0.043560947470178545,
+      "cells_crossing_25": 0,
+      "cross_25": {},
+      "cross_50": {},
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      }
+    },
+    {
+      "reaction": "ACT-mediated alcohol oxidation (flow, hectogram)",
+      "factor": 0.1,
+      "max_rel_change": 0.6511898748624935,
+      "cells_crossing_25": 0,
+      "cross_25": {},
+      "cross_50": {},
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      }
+    },
+    {
+      "reaction": "ACT-mediated alcohol oxidation (flow, hectogram)",
+      "factor": 10.0,
+      "max_rel_change": 1.847785882131141,
+      "cells_crossing_25": 7,
+      "cross_25": {
+        "natural": 1,
+        "stirred": 1,
+        "flow": 1,
+        "anec": 1,
+        "micro": 1,
+        "rde": 1,
+        "rce": 1
+      },
+      "cross_50": {
+        "anec": 1,
+        "micro": 1,
+        "rde": 1,
+        "rce": 1
+      },
+      "count_delta_25": {
+        "natural": 1,
+        "stirred": 1,
+        "flow": 1,
+        "anec": 1,
+        "micro": 1,
+        "rde": 1,
+        "rce": 1
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 1,
+        "micro": 1,
+        "rde": 1,
+        "rce": 1
+      }
+    },
+    {
+      "reaction": "Cl-mediated ethylene epoxidation",
+      "factor": 0.1,
+      "max_rel_change": 0.002376943637121658,
+      "cells_crossing_25": 0,
+      "cross_25": {},
+      "cross_50": {},
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      }
+    },
+    {
+      "reaction": "Cl-mediated ethylene epoxidation",
+      "factor": 10.0,
+      "max_rel_change": 0.00297700428148898,
+      "cells_crossing_25": 0,
+      "cross_25": {},
+      "cross_50": {},
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      }
+    },
+    {
+      "reaction": "NHPI-mediated allylic C-H -> enone",
+      "factor": 0.1,
+      "max_rel_change": 0.33277253466454976,
+      "cells_crossing_25": 0,
+      "cross_25": {},
+      "cross_50": {},
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      }
+    },
+    {
+      "reaction": "NHPI-mediated allylic C-H -> enone",
+      "factor": 10.0,
+      "max_rel_change": 1.617186745177733,
+      "cells_crossing_25": 0,
+      "cross_25": {},
+      "cross_50": {
+        "rde": 1
+      },
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 1,
+        "rce": 0
+      }
+    },
+    {
+      "reaction": "HMF -> FDCA (biomass)",
+      "factor": 0.1,
+      "max_rel_change": 0.6350044955346446,
+      "cells_crossing_25": 2,
+      "cross_25": {
+        "micro": -1,
+        "rde": -1
+      },
+      "cross_50": {},
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": -1,
+        "rde": -1,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      }
+    },
+    {
+      "reaction": "HMF -> FDCA (biomass)",
+      "factor": 10.0,
+      "max_rel_change": 1.7195736480254709,
+      "cells_crossing_25": 2,
+      "cross_25": {
+        "flow": 1,
+        "anec": 1
+      },
+      "cross_50": {
+        "anec": 1,
+        "micro": 1,
+        "rde": 1,
+        "rce": 1
+      },
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 1,
+        "anec": 1,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 1,
+        "micro": 1,
+        "rde": 1,
+        "rce": 1
+      }
+    },
+    {
+      "reaction": "BQ-mediated Wacker-Tsuji oxidation",
+      "factor": 0.1,
+      "max_rel_change": 0.4693810400267687,
+      "cells_crossing_25": 1,
+      "cross_25": {
+        "flow": -1
+      },
+      "cross_50": {
+        "anec": -1
+      },
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": -1,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": -1,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      }
+    },
+    {
+      "reaction": "BQ-mediated Wacker-Tsuji oxidation",
+      "factor": 10.0,
+      "max_rel_change": 0.9469279615870314,
+      "cells_crossing_25": 0,
+      "cross_25": {},
+      "cross_50": {},
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      }
+    },
+    {
+      "reaction": "Br- oxidation / electrophilic bromination",
+      "factor": 0.1,
+      "max_rel_change": 0.07036733773858775,
+      "cells_crossing_25": 0,
+      "cross_25": {},
+      "cross_50": {},
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      }
+    },
+    {
+      "reaction": "Br- oxidation / electrophilic bromination",
+      "factor": 10.0,
+      "max_rel_change": 0.0031136711554526895,
+      "cells_crossing_25": 0,
+      "cross_25": {},
+      "cross_50": {},
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      }
+    },
+    {
+      "reaction": "Aryl thiocyanation (NH4SCN)",
+      "factor": 0.1,
+      "max_rel_change": 0.2437293030276575,
+      "cells_crossing_25": 0,
+      "cross_25": {},
+      "cross_50": {},
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      }
+    },
+    {
+      "reaction": "Aryl thiocyanation (NH4SCN)",
+      "factor": 10.0,
+      "max_rel_change": 0.27056161311375576,
+      "cells_crossing_25": 0,
+      "cross_25": {},
+      "cross_50": {},
+      "count_delta_25": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      },
+      "count_delta_50": {
+        "natural": 0,
+        "stirred": 0,
+        "flow": 0,
+        "anec": 0,
+        "micro": 0,
+        "rde": 0,
+        "rce": 0
+      }
+    }
+  ],
+  "summary": {
+    "n_rows": 8,
+    "rows_crossing_25": [
+      "ACT-mediated alcohol oxidation (flow, hectogram)",
+      "BQ-mediated Wacker-Tsuji oxidation",
+      "HMF -> FDCA (biomass)"
+    ],
+    "rows_crossing_50": [
+      "ACT-mediated alcohol oxidation (flow, hectogram)",
+      "BQ-mediated Wacker-Tsuji oxidation",
+      "HMF -> FDCA (biomass)",
+      "NHPI-mediated allylic C-H -> enone"
+    ],
+    "max_count_delta_25": 1,
+    "max_count_delta_50": 1,
+    "ordering_preserved": true,
+    "ordering_changes": [],
+    "base_counts_25": {
+      "natural": 12,
+      "stirred": 14,
+      "flow": 17,
+      "anec": 30,
+      "micro": 36,
+      "rde": 36,
+      "rce": 36
+    },
+    "base_counts_50": {
+      "natural": 9,
+      "stirred": 11,
+      "flow": 13,
+      "anec": 23,
+      "micro": 33,
+      "rde": 32,
+      "rce": 33
+    }
+  }
+}

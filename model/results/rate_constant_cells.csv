@@ -1,0 +1,169 @@
+reaction,factor,reactor,delta_um,i_ec_mAcm2
+"ACT-mediated alcohol oxidation (flow, hectogram)",base,ANEC flow cell,36.2,18.0408
+"ACT-mediated alcohol oxidation (flow, hectogram)",base,Microfluidic cell (25 um gap),12.5,20.1083
+"ACT-mediated alcohol oxidation (flow, hectogram)",base,RDE 1600 rpm,10.2538,21.4177
+"ACT-mediated alcohol oxidation (flow, hectogram)",base,Recirculating flow cell,106.9,16.4115
+"ACT-mediated alcohol oxidation (flow, hectogram)",base,Rotating cylinder 3000 rpm,9.27073,22.318
+"ACT-mediated alcohol oxidation (flow, hectogram)",base,Stirred batch,200,14.53
+"ACT-mediated alcohol oxidation (flow, hectogram)",base,Unstirred batch,228,14.0145
+Aryl thiocyanation (NH4SCN),base,ANEC flow cell,36.2,44.2334
+Aryl thiocyanation (NH4SCN),base,Microfluidic cell (25 um gap),12.5,103.579
+Aryl thiocyanation (NH4SCN),base,RDE 1600 rpm,11.6897,108.804
+Aryl thiocyanation (NH4SCN),base,Recirculating flow cell,106.9,16.5387
+Aryl thiocyanation (NH4SCN),base,Rotating cylinder 3000 rpm,11.0935,113.083
+Aryl thiocyanation (NH4SCN),base,Stirred batch,200,9.08142
+Aryl thiocyanation (NH4SCN),base,Unstirred batch,228,7.99668
+BQ-mediated Wacker-Tsuji oxidation,base,ANEC flow cell,36.2,53.0404
+BQ-mediated Wacker-Tsuji oxidation,base,Microfluidic cell (25 um gap),12.5,84.298
+BQ-mediated Wacker-Tsuji oxidation,base,RDE 1600 rpm,13.7868,79.6793
+BQ-mediated Wacker-Tsuji oxidation,base,Recirculating flow cell,106.9,28.6731
+BQ-mediated Wacker-Tsuji oxidation,base,Rotating cylinder 3000 rpm,11.858,87.0351
+BQ-mediated Wacker-Tsuji oxidation,base,Stirred batch,200,16.8321
+BQ-mediated Wacker-Tsuji oxidation,base,Unstirred batch,228,14.9007
+Br- oxidation / electrophilic bromination,base,ANEC flow cell,36.2,210.165
+Br- oxidation / electrophilic bromination,base,Microfluidic cell (25 um gap),12.5,606.709
+Br- oxidation / electrophilic bromination,base,RDE 1600 rpm,15.7625,482.321
+Br- oxidation / electrophilic bromination,base,Recirculating flow cell,106.9,71.1293
+Br- oxidation / electrophilic bromination,base,Rotating cylinder 3000 rpm,14.8457,511.881
+Br- oxidation / electrophilic bromination,base,Stirred batch,200,38.0135
+Br- oxidation / electrophilic bromination,base,Unstirred batch,228,33.3446
+Br-mediated Hofmann rearrangement,base,ANEC flow cell,36.2,868.113
+Br-mediated Hofmann rearrangement,base,Microfluidic cell (25 um gap),12.5,2409.78
+Br-mediated Hofmann rearrangement,base,RDE 1600 rpm,15.3015,2011.67
+Br-mediated Hofmann rearrangement,base,Recirculating flow cell,106.9,293.93
+Br-mediated Hofmann rearrangement,base,Rotating cylinder 3000 rpm,12.805,2359.53
+Br-mediated Hofmann rearrangement,base,Stirred batch,200,157.09
+Br-mediated Hofmann rearrangement,base,Unstirred batch,228,137.796
+Cl-mediated ethylene epoxidation,base,ANEC flow cell,36.2,1090.07
+Cl-mediated ethylene epoxidation,base,Microfluidic cell (25 um gap),12.5,3149.34
+Cl-mediated ethylene epoxidation,base,RDE 1600 rpm,15.4537,2547.4
+Cl-mediated ethylene epoxidation,base,Recirculating flow cell,106.9,369.371
+Cl-mediated ethylene epoxidation,base,Rotating cylinder 3000 rpm,14.3673,2740.03
+Cl-mediated ethylene epoxidation,base,Stirred batch,200,197.43
+Cl-mediated ethylene epoxidation,base,Unstirred batch,228,173.185
+HMF -> FDCA (biomass),base,ANEC flow cell,36.2,20.0744
+HMF -> FDCA (biomass),base,Microfluidic cell (25 um gap),12.5,25.642
+HMF -> FDCA (biomass),base,RDE 1600 rpm,10.2538,28.5317
+HMF -> FDCA (biomass),base,Recirculating flow cell,106.9,17.507
+HMF -> FDCA (biomass),base,Rotating cylinder 3000 rpm,9.27073,30.3901
+HMF -> FDCA (biomass),base,Stirred batch,200,14.8037
+HMF -> FDCA (biomass),base,Unstirred batch,228,14.1019
+NHPI-mediated allylic C-H -> enone,base,ANEC flow cell,36.2,18.77
+NHPI-mediated allylic C-H -> enone,base,Microfluidic cell (25 um gap),12.5,53.5228
+NHPI-mediated allylic C-H -> enone,base,RDE 1600 rpm,13.5947,49.2457
+NHPI-mediated allylic C-H -> enone,base,Recirculating flow cell,106.9,7.17261
+NHPI-mediated allylic C-H -> enone,base,Rotating cylinder 3000 rpm,10.9215,61.2371
+NHPI-mediated allylic C-H -> enone,base,Stirred batch,200,4.93186
+NHPI-mediated allylic C-H -> enone,base,Unstirred batch,228,4.69038
+Br-mediated Hofmann rearrangement,div10,ANEC flow cell,36.2,820.981
+Br-mediated Hofmann rearrangement,div10,Microfluidic cell (25 um gap),12.5,1108.63
+Br-mediated Hofmann rearrangement,div10,RDE 1600 rpm,15.3015,1179.18
+Br-mediated Hofmann rearrangement,div10,Recirculating flow cell,106.9,293.939
+Br-mediated Hofmann rearrangement,div10,Rotating cylinder 3000 rpm,12.805,1118.9
+Br-mediated Hofmann rearrangement,div10,Stirred batch,200,157.129
+Br-mediated Hofmann rearrangement,div10,Unstirred batch,228,137.826
+Br-mediated Hofmann rearrangement,mul10,ANEC flow cell,36.2,868.036
+Br-mediated Hofmann rearrangement,mul10,Microfluidic cell (25 um gap),12.5,2514.75
+Br-mediated Hofmann rearrangement,mul10,RDE 1600 rpm,15.3015,2054.28
+Br-mediated Hofmann rearrangement,mul10,Recirculating flow cell,106.9,293.894
+Br-mediated Hofmann rearrangement,mul10,Rotating cylinder 3000 rpm,12.805,2454.87
+Br-mediated Hofmann rearrangement,mul10,Stirred batch,200,157.08
+Br-mediated Hofmann rearrangement,mul10,Unstirred batch,228,137.789
+"ACT-mediated alcohol oxidation (flow, hectogram)",div10,ANEC flow cell,36.2,6.51903
+"ACT-mediated alcohol oxidation (flow, hectogram)",div10,Microfluidic cell (25 um gap),12.5,12.4785
+"ACT-mediated alcohol oxidation (flow, hectogram)",div10,RDE 1600 rpm,10.2538,14.8175
+"ACT-mediated alcohol oxidation (flow, hectogram)",div10,Recirculating flow cell,106.9,5.72449
+"ACT-mediated alcohol oxidation (flow, hectogram)",div10,Rotating cylinder 3000 rpm,9.27073,16.2232
+"ACT-mediated alcohol oxidation (flow, hectogram)",div10,Stirred batch,200,5.49965
+"ACT-mediated alcohol oxidation (flow, hectogram)",div10,Unstirred batch,228,5.43529
+"ACT-mediated alcohol oxidation (flow, hectogram)",mul10,ANEC flow cell,36.2,51.3763
+"ACT-mediated alcohol oxidation (flow, hectogram)",mul10,Microfluidic cell (25 um gap),12.5,56.7775
+"ACT-mediated alcohol oxidation (flow, hectogram)",mul10,RDE 1600 rpm,10.2538,57.3605
+"ACT-mediated alcohol oxidation (flow, hectogram)",mul10,Recirculating flow cell,106.9,38.6418
+"ACT-mediated alcohol oxidation (flow, hectogram)",mul10,Rotating cylinder 3000 rpm,9.27073,57.6294
+"ACT-mediated alcohol oxidation (flow, hectogram)",mul10,Stirred batch,200,27.8301
+"ACT-mediated alcohol oxidation (flow, hectogram)",mul10,Unstirred batch,228,25.4978
+Cl-mediated ethylene epoxidation,div10,ANEC flow cell,36.2,1087.48
+Cl-mediated ethylene epoxidation,div10,Microfluidic cell (25 um gap),12.5,3149.34
+Cl-mediated ethylene epoxidation,div10,RDE 1600 rpm,15.4537,2547.4
+Cl-mediated ethylene epoxidation,div10,Recirculating flow cell,106.9,369.096
+Cl-mediated ethylene epoxidation,div10,Rotating cylinder 3000 rpm,14.3673,2740.03
+Cl-mediated ethylene epoxidation,div10,Stirred batch,200,197.407
+Cl-mediated ethylene epoxidation,div10,Unstirred batch,228,173.173
+Cl-mediated ethylene epoxidation,mul10,ANEC flow cell,36.2,1090.77
+Cl-mediated ethylene epoxidation,mul10,Microfluidic cell (25 um gap),12.5,3157.24
+Cl-mediated ethylene epoxidation,mul10,RDE 1600 rpm,15.4537,2554.38
+Cl-mediated ethylene epoxidation,mul10,Recirculating flow cell,106.9,369.374
+Cl-mediated ethylene epoxidation,mul10,Rotating cylinder 3000 rpm,14.3673,2747.35
+Cl-mediated ethylene epoxidation,mul10,Stirred batch,200,197.053
+Cl-mediated ethylene epoxidation,mul10,Unstirred batch,228,172.669
+NHPI-mediated allylic C-H -> enone,div10,ANEC flow cell,36.2,18.4773
+NHPI-mediated allylic C-H -> enone,div10,Microfluidic cell (25 um gap),12.5,53.4354
+NHPI-mediated allylic C-H -> enone,div10,RDE 1600 rpm,13.5947,49.1338
+NHPI-mediated allylic C-H -> enone,div10,Recirculating flow cell,106.9,6.34093
+NHPI-mediated allylic C-H -> enone,div10,Rotating cylinder 3000 rpm,10.9215,61.1564
+NHPI-mediated allylic C-H -> enone,div10,Stirred batch,200,3.51561
+NHPI-mediated allylic C-H -> enone,div10,Unstirred batch,228,3.12955
+NHPI-mediated allylic C-H -> enone,mul10,ANEC flow cell,36.2,21.5486
+NHPI-mediated allylic C-H -> enone,mul10,Microfluidic cell (25 um gap),12.5,54.5239
+NHPI-mediated allylic C-H -> enone,mul10,RDE 1600 rpm,13.5947,50.3275
+NHPI-mediated allylic C-H -> enone,mul10,Recirculating flow cell,106.9,13.4532
+NHPI-mediated allylic C-H -> enone,mul10,Rotating cylinder 3000 rpm,10.9215,62.1019
+NHPI-mediated allylic C-H -> enone,mul10,Stirred batch,200,12.4632
+NHPI-mediated allylic C-H -> enone,mul10,Unstirred batch,228,12.2756
+HMF -> FDCA (biomass),div10,ANEC flow cell,36.2,8.47849
+HMF -> FDCA (biomass),div10,Microfluidic cell (25 um gap),12.5,19.1633
+HMF -> FDCA (biomass),div10,RDE 1600 rpm,10.2538,23.0514
+HMF -> FDCA (biomass),div10,Recirculating flow cell,106.9,6.38999
+HMF -> FDCA (biomass),div10,Rotating cylinder 3000 rpm,9.27073,25.3625
+HMF -> FDCA (biomass),div10,Stirred batch,200,6.00713
+HMF -> FDCA (biomass),div10,Unstirred batch,228,5.90736
+HMF -> FDCA (biomass),mul10,ANEC flow cell,36.2,54.5939
+HMF -> FDCA (biomass),mul10,Microfluidic cell (25 um gap),12.5,62.9877
+HMF -> FDCA (biomass),mul10,RDE 1600 rpm,10.2538,64.149
+HMF -> FDCA (biomass),mul10,Recirculating flow cell,106.9,37.2079
+HMF -> FDCA (biomass),mul10,Rotating cylinder 3000 rpm,9.27073,64.834
+HMF -> FDCA (biomass),mul10,Stirred batch,200,24.8219
+HMF -> FDCA (biomass),mul10,Unstirred batch,228,22.3998
+BQ-mediated Wacker-Tsuji oxidation,div10,ANEC flow cell,36.2,28.1442
+BQ-mediated Wacker-Tsuji oxidation,div10,Microfluidic cell (25 um gap),12.5,67.0085
+BQ-mediated Wacker-Tsuji oxidation,div10,RDE 1600 rpm,13.7868,61.1874
+BQ-mediated Wacker-Tsuji oxidation,div10,Recirculating flow cell,106.9,17.2313
+BQ-mediated Wacker-Tsuji oxidation,div10,Rotating cylinder 3000 rpm,11.858,70.4158
+BQ-mediated Wacker-Tsuji oxidation,div10,Stirred batch,200,12.8712
+BQ-mediated Wacker-Tsuji oxidation,div10,Unstirred batch,228,11.9079
+BQ-mediated Wacker-Tsuji oxidation,mul10,ANEC flow cell,36.2,85.973
+BQ-mediated Wacker-Tsuji oxidation,mul10,Microfluidic cell (25 um gap),12.5,161.802
+BQ-mediated Wacker-Tsuji oxidation,mul10,RDE 1600 rpm,13.7868,155.13
+BQ-mediated Wacker-Tsuji oxidation,mul10,Recirculating flow cell,106.9,32.2826
+BQ-mediated Wacker-Tsuji oxidation,mul10,Rotating cylinder 3000 rpm,11.858,165.348
+BQ-mediated Wacker-Tsuji oxidation,mul10,Stirred batch,200,17.3569
+BQ-mediated Wacker-Tsuji oxidation,mul10,Unstirred batch,228,15.2286
+Br- oxidation / electrophilic bromination,div10,ANEC flow cell,36.2,209.166
+Br- oxidation / electrophilic bromination,div10,Microfluidic cell (25 um gap),12.5,564.016
+Br- oxidation / electrophilic bromination,div10,RDE 1600 rpm,15.7625,458.327
+Br- oxidation / electrophilic bromination,div10,Recirculating flow cell,106.9,71.1729
+Br- oxidation / electrophilic bromination,div10,Rotating cylinder 3000 rpm,14.8457,483.772
+Br- oxidation / electrophilic bromination,div10,Stirred batch,200,38.0262
+Br- oxidation / electrophilic bromination,div10,Unstirred batch,228,33.3543
+Br- oxidation / electrophilic bromination,mul10,ANEC flow cell,36.2,210.044
+Br- oxidation / electrophilic bromination,mul10,Microfluidic cell (25 um gap),12.5,608.598
+Br- oxidation / electrophilic bromination,mul10,RDE 1600 rpm,15.7625,482.554
+Br- oxidation / electrophilic bromination,mul10,Recirculating flow cell,106.9,71.1153
+Br- oxidation / electrophilic bromination,mul10,Rotating cylinder 3000 rpm,14.8457,512.373
+Br- oxidation / electrophilic bromination,mul10,Stirred batch,200,38.0095
+Br- oxidation / electrophilic bromination,mul10,Unstirred batch,228,33.3415
+Aryl thiocyanation (NH4SCN),div10,ANEC flow cell,36.2,34.9424
+Aryl thiocyanation (NH4SCN),div10,Microfluidic cell (25 um gap),12.5,78.3341
+Aryl thiocyanation (NH4SCN),div10,RDE 1600 rpm,11.6897,82.9089
+Aryl thiocyanation (NH4SCN),div10,Recirculating flow cell,106.9,14.8345
+Aryl thiocyanation (NH4SCN),div10,Rotating cylinder 3000 rpm,11.0935,86.6873
+Aryl thiocyanation (NH4SCN),div10,Stirred batch,200,8.51656
+Aryl thiocyanation (NH4SCN),div10,Unstirred batch,228,7.55157
+Aryl thiocyanation (NH4SCN),mul10,ANEC flow cell,36.2,49.0058
+Aryl thiocyanation (NH4SCN),mul10,Microfluidic cell (25 um gap),12.5,129.609
+Aryl thiocyanation (NH4SCN),mul10,RDE 1600 rpm,11.6897,137.359
+Aryl thiocyanation (NH4SCN),mul10,Recirculating flow cell,106.9,17.2174
+Aryl thiocyanation (NH4SCN),mul10,Rotating cylinder 3000 rpm,11.0935,143.678
+Aryl thiocyanation (NH4SCN),mul10,Stirred batch,200,9.28602
+Aryl thiocyanation (NH4SCN),mul10,Unstirred batch,228,8.15614

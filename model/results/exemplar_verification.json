@@ -1,0 +1,252 @@
+[
+ {
+  "exemplar": "Kawamata/Baran JACS 2019",
+  "verdict": "UNRESOLVED",
+  "match": ""
+ },
+ {
+  "exemplar": "Liu/Qiu Angew 2025",
+  "verdict": "RESOLVED",
+  "match": "Electrochemical Amination of Aryl Halides with NH\n         | Angewandte Chemie 2025 | 10.1002/ange.202504459"
+ },
+ {
+  "exemplar": "Shono JACS 1975",
+  "verdict": "RESOLVED",
+  "match": "Electroorganic chemistry. XX. Anodic oxidation of carbamat | Journal of the American Ch 1975 | 10.1021/ja00848a020"
+ },
+ {
+  "exemplar": "Deprez/Merck OL 2021",
+  "verdict": "WEAK",
+  "match": "Selective Electrochemical Oxidation of Functionalized Pyrr | Organic Letters 2021 | 10.1021/acs.orglett.1c03338"
+ },
+ {
+  "exemplar": "Zhao/H.-C. Xu ChemSusChem 2021",
+  "verdict": "WEAK",
+  "match": "Electrochemical Synthesis of Benzimidazoles via Dehydrogen | ChemSusChem 2021 | 10.1002/cssc.202100254"
+ },
+ {
+  "exemplar": "Fu/Lin Science 2017",
+  "verdict": "RESOLVED",
+  "match": "Metal-catalyzed electrochemical diazidation of alkenes | Science 2017 | 10.1126/science.aan6206"
+ },
+ {
+  "exemplar": "Malviya/Cantillo OPRD 2023 (multigram)",
+  "verdict": "RESOLVED",
+  "match": "Multigram Electrochemical Hofmann Rearrangement Using a Sp | Organic Process Research & 2023 | 10.1021/acs.oprd.3c00332"
+ },
+ {
+  "exemplar": "Morofuji/Yoshida JACS 2013",
+  "verdict": "RESOLVED",
+  "match": "Electrochemical C\u2013H Amination: Synthesis of Aromatic Prima | Journal of the American Ch 2013 | 10.1021/ja402083e"
+ },
+ {
+  "exemplar": "Zhang/K. Xu/Zeng OL 2018",
+  "verdict": "WEAK",
+  "match": "Electrochemical Formation of <i>N</i>-Acyloxy Amidyl Radic | Organic Letters 2018 | 10.1021/acs.orglett.8b00981"
+ },
+ {
+  "exemplar": "Cai/H.-C. Xu Nat Commun 2021 (Co-salen)",
+  "verdict": "WEAK",
+  "match": "Tailored cobalt-salen complexes enable electrocatalytic in | Nature Communications 2021 | 10.1038/s41467-021-24125-5"
+ },
+ {
+  "exemplar": "Zhang/Ye Nat Commun 2022",
+  "verdict": "RESOLVED",
+  "match": "Continuous resin refilling and hydrogen bond synergistical | Nature Communications 2022 | 10.1038/s41467-022-34866-6"
+ },
+ {
+  "exemplar": "Gnaim/Baran Nature 2022 (e-HAT)",
+  "verdict": "RESOLVED",
+  "match": "Electrochemically driven desaturation of carbonyl compound | Nature Chemistry 2021 | 10.1038/s41557-021-00640-2"
+ },
+ {
+  "exemplar": "Hioki/Baran Science 2023 (rAP; acetone)",
+  "verdict": "RESOLVED",
+  "match": "Overcoming the limitations of Kolbe coupling with waveform | Science 2023 | 10.1126/science.adf4762"
+ },
+ {
+  "exemplar": "Kelly/Stahl/Schreier OPRD 2026 (kg, flow, BMS)",
+  "verdict": "RESOLVED",
+  "match": "Development of Kilogram-Scale Electrochemical Ni-Catalyzed | Organic Process Research & 2026 | 10.1021/acs.oprd.6c00110"
+ },
+ {
+  "exemplar": "Zhang/Baran Nature 2022",
+  "verdict": "RESOLVED",
+  "match": "Ni-electrocatalytic Csp3\u2013Csp3 doubly decarboxylative coupl | Nature 2022 | 10.1038/s41586-022-04691-4"
+ },
+ {
+  "exemplar": "Kirste/Waldvogel JACS 2012",
+  "verdict": "RESOLVED",
+  "match": "Efficient Anodic and Direct Phenol-Arene C,C Cross-Couplin | Journal of the American Ch 2012 | 10.1021/ja211005g"
+ },
+ {
+  "exemplar": "Mo/Jensen Science 2020",
+  "verdict": "RESOLVED",
+  "match": "Microfluidic electrochemistry for single-electron transfer | Science 2020 | 10.1126/science.aba3823"
+ },
+ {
+  "exemplar": "Li/Wilden Chem Sci 2020",
+  "verdict": "RESOLVED",
+  "match": "Electrochemical radical reactions of alkyl iodides: a high | Chemical Science 2020 | 10.1039/d0sc01694b"
+ },
+ {
+  "exemplar": "Qiu/Ackermann Angew 2018",
+  "verdict": "RESOLVED",
+  "match": "Iridium\u2010Catalyzed Electrooxidative C\u2212H Activation by Chemo | Angewandte Chemie 2018 | 10.1002/ange.201809611"
+ },
+ {
+  "exemplar": "Cai/H.-C. Xu Nat Catal 2022 (PEC)",
+  "verdict": "WEAK",
+  "match": "Photoelectrochemical asymmetric catalysis enables site- an | Nature Catalysis 2022 | 10.1038/s41929-022-00855-7"
+ },
+ {
+  "exemplar": "Courtois/Perichon Tetrahedron 1997",
+  "verdict": "WEAK",
+  "match": "Allylation of Carbonyl Compounds in the Presence of Cataly | Tetrahedron 1997 | 10.1016/s0040-4020(97)00280-9"
+ },
+ {
+  "exemplar": "Osa/Bobbitt Chem Commun 1994",
+  "verdict": "DOI-PINNED",
+  "match": "Enantioselective, electrocatalytic oxidative coupling of n | J. Chem. Soc., Chem. Commu 1994 | 10.1039/c39940002535"
+ },
+ {
+  "exemplar": "Baizer JES 1964 (Monsanto)",
+  "verdict": "RESOLVED",
+  "match": "Electrolytic Reductive Coupling | Journal of The Electrochem 1964 | 10.1149/1.2426086"
+ },
+ {
+  "exemplar": "Peters/Baran Science 2019",
+  "verdict": "RESOLVED",
+  "match": "Scalable and safe synthetic organic electroreduction inspi | Science 2019 | 10.1126/science.aav5606"
+ },
+ {
+  "exemplar": "Kisukuri/Waldvogel OPRD 2024",
+  "verdict": "RESOLVED",
+  "match": "Scalable Electrochemical Reduction of Nitrobenzotrifluorid | Organic Process Research & 2023 | 10.1021/acs.oprd.3c00067"
+ },
+ {
+  "exemplar": "Hayashi/Baran JACS 2022 (rAP)",
+  "verdict": "RESOLVED",
+  "match": "Chemoselective (Hetero)Arene Electroreduction Enabled by R | Journal of the American Ch 2022 | 10.1021/jacs.2c02102"
+ },
+ {
+  "exemplar": "Yang/Lei Nat Commun 2023 (diazo difunctionalization)",
+  "verdict": "RESOLVED",
+  "match": "Photocatalytic CO2 reduction with aminoanthraquinone organ | Nature Communications 2023 | 10.1038/s41467-023-36784-7"
+ },
+ {
+  "exemplar": "Ke/Chi Chem Eur J 2019",
+  "verdict": "DOI-PINNED",
+  "match": "Hydrodehalogenation of Aryl Halides through Direct Electro | Chemistry \u2013 A European Jou 2019 | 10.1002/chem.201901082"
+ },
+ {
+  "exemplar": "Lopez-Ruiz ACS SCE 2018 (ECH)",
+  "verdict": "RESOLVED",
+  "match": "Kinetic Investigation of the Sustainable Electrocatalytic  | ACS Sustainable Chemistry  2018 | 10.1021/acssuschemeng.8b02637"
+ },
+ {
+  "exemplar": "Zhong/Stahl OPRD 2021 (levetiracetam)",
+  "verdict": "RESOLVED",
+  "match": "Scalable Flow Electrochemical Alcohol Oxidation: Maintaini | Organic Process Research & 2021 | 10.1021/acs.oprd.1c00036"
+ },
+ {
+  "exemplar": "BASF capillary-gap, >10 kt/yr (US 5,507,922)",
+  "verdict": "WEAK",
+  "match": "Bridging the gap : Capillary suspensions prepared with pro |  None | 10.18174/656303"
+ },
+ {
+  "exemplar": "Shono JACS 1975 (carbamate protocol, by analogy)",
+  "verdict": "RESOLVED",
+  "match": "Electroorganic chemistry. XX. Anodic oxidation of carbamat | Journal of the American Ch 1975 | 10.1021/ja00848a020"
+ },
+ {
+  "exemplar": "Leow/Sargent Science 2020",
+  "verdict": "RESOLVED",
+  "match": "Chloride-mediated selective electrosynthesis of ethylene a | Science 2020 | 10.1126/science.aaz8459"
+ },
+ {
+  "exemplar": "R\u00fccker/Waldvogel ACS SCE 2024 (pilot, ex-cell)",
+  "verdict": "RESOLVED",
+  "match": "Pilot Scale Electrolysis of Peroxodicarbonate as an Oxidiz | ACS Sustainable Chemistry  2024 | 10.1021/acssuschemeng.4c02898"
+ },
+ {
+  "exemplar": "Bottecchia/Strotman OPRD 2022",
+  "verdict": "RESOLVED",
+  "match": "Kilo-Scale Electrochemical Oxidation of a Thioether to a S | Organic Process Research & 2022 | 10.1021/acs.oprd.2c00111"
+ },
+ {
+  "exemplar": "Horn/Baran Nature 2016",
+  "verdict": "RESOLVED",
+  "match": "Scalable and sustainable electrochemical allylic C\u2013H oxida | Nature 2016 | 10.1038/nature17431"
+ },
+ {
+  "exemplar": "Chien/Manolikakes ChemSusChem 2025",
+  "verdict": "RESOLVED",
+  "match": "Electrochemical Three\u2010Component Synthesis of Vinyl Sulfona | ChemSusChem 2025 | 10.1002/cssc.202501920"
+ },
+ {
+  "exemplar": "Cardiel/Choi ACS SCE 2019",
+  "verdict": "RESOLVED",
+  "match": "Stabilities, Regeneration Pathways, and Electrocatalytic P | ACS Sustainable Chemistry  2019 | 10.1021/acssuschemeng.9b00203"
+ },
+ {
+  "exemplar": "Okada/Chiba Chem Sci 2016",
+  "verdict": "RESOLVED",
+  "match": "Aromatic \u201cRedox Tag\u201d-assisted Diels\u2013Alder reactions by ele | Chemical Science 2016 | 10.1039/c6sc02117d"
+ },
+ {
+  "exemplar": "Miller/Wayner Can J Chem 1992",
+  "verdict": "RESOLVED",
+  "match": "Electrode-mediated Wacker oxidation of cyclic and internal | Canadian Journal of Chemis 1992 | 10.1139/v92-314"
+ },
+ {
+  "exemplar": "Walecka-Kurczyk RSC Adv 2022",
+  "verdict": "WEAK",
+  "match": "Non-Kolbe electrolysis of\n                    <i>N</i>\n    | RSC Advances 2022 | 10.1039/d1ra08124a"
+ },
+ {
+  "exemplar": "Gnaim/Baran Nature 2022 (e-HAT isomerization)",
+  "verdict": "RESOLVED",
+  "match": "Electrochemically driven desaturation of carbonyl compound | Nature Chemistry 2021 | 10.1038/s41557-021-00640-2"
+ },
+ {
+  "exemplar": "Bao OL 2022",
+  "verdict": "RESOLVED",
+  "match": "Electrochemical Synthesis of Polysubstituted Oxazoles from | Organic Letters 2022 | 10.1021/acs.orglett.2c02252"
+ },
+ {
+  "exemplar": "Ozaki/Ohmori Tet Lett 1994",
+  "verdict": "RESOLVED",
+  "match": "Cyclization of vinyl and aryl radicals generated by a nick | Tetrahedron Letters 1994 | 10.1016/s0040-4039(00)75801-1"
+ },
+ {
+  "exemplar": "Tajima/Fuchigami Electrochem Commun 2002",
+  "verdict": "RESOLVED",
+  "match": "Anodic benzylic fluorination of toluene, ethylbenzene, and | Electrochemistry Communica 2002 | 10.1016/s1388-2481(02)00381-8"
+ },
+ {
+  "exemplar": "Zhang/Su Nat Commun 2025 (scalable arene bromination)",
+  "verdict": "RESOLVED",
+  "match": "Topological exciton-polaritons with negative coupling | Nature Communications 2025 | 10.1038/s41467-025-68025-4"
+ },
+ {
+  "exemplar": "Mei/Han ACS Omega 2019",
+  "verdict": "RESOLVED",
+  "match": "Electrochemical Alkoxysulfonylation\nDifunctionalization of | ACS Omega 2019 | 10.1021/acsomega.9b02442"
+ },
+ {
+  "exemplar": "Gitkis/Becker Electrochim Acta 2010",
+  "verdict": "RESOLVED",
+  "match": "Anodic thiocyanation of mono- and disubstituted aromatic c | Electrochimica Acta 2010 | 10.1016/j.electacta.2010.05.035"
+ },
+ {
+  "exemplar": "Long/H.-C. Xu Nat Commun 2021 (flow)",
+  "verdict": "WEAK",
+  "match": "The slow self-arresting nature of low-frequency earthquake | Nature Communications 2021 | 10.1038/s41467-021-25823-w"
+ },
+ {
+  "exemplar": "Gieshoff/Waldvogel Angew 2016",
+  "verdict": "RESOLVED",
+  "match": "Zugang zu Pyrazolidin\u20103,5\u2010dionen durch anodischen N\u2010N\u2010Bind | Angewandte Chemie 2016 | 10.1002/ange.201603899"
+ }
+]

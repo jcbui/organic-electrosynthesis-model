@@ -1,0 +1,608 @@
+{
+  "n_checked": 40,
+  "ok": [
+    {
+      "citation": "Aminabhavi & Gopalakrishna, J. Chem. Eng. Data 1995, 40, 856-861 (rho and eta at 298.15 K over the full composition range: DMF+H2O, DMSO+H2O, DMA+H2O, MeCN+H2O, THF+H2O)",
+      "resolved_authors": "Aminabhavi Gopalakrishna",
+      "title": "Density, Viscosity, Refractive Index, and Speed of Sound in Aqueous Mixtures of N,N-Dimethylformamide, Dimethyl Sulfoxide, N,N-Dimethylacetamide, Acetonitrile, Ethylene Glycol, Diethylene Glycol, 1,4-Dioxane, Tetrahydrofuran, 2-Methoxyethanol, and 2-Ethoxyethanol at 298.15 K",
+      "journal": "Journal of Chemical &amp; Engineering Data",
+      "year": "1995",
+      "volume": "40",
+      "doi": "10.1021/je00020a026",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "MeCN/H2O 9:1 v/v: mu (25 C)",
+        "MeCN/H2O 9:1 v/v: rho",
+        "H2O/MeCN 2:1 v/v: mu (25 C)",
+        "H2O/MeCN 2:1 v/v: rho"
+      ]
+    },
+    {
+      "citation": "Ansari & Singh, Res. J. Chem. Sci. 2022, 12(1), 67-69, Table-1 p. 68 -- measured densities and viscosities of acetonitrile-water at 25 C, 10-70 wt%% AN plus pure AN. Open access (www.isca.in). Its pure-component values, rho = 0.7767 g cm-3 and eta = 0.346 cP, reproduce the CRC 97th ed. MeCN entries carried here (0.776, 0.343) to 0.3%% and 0.9%%, which is the quality check on a low-impact source",
+      "resolved_authors": "(verified from local PDF)",
+      "title": "Retrieved 2026-08-22 from isca.in. Masthead confirms Res. J. Chem. Sci. Vol. 12(1), 67-69, February 2022, 'Viscosities and Densities of Acetonitrile-water systems at 25 C', Mahzbeen Ansari and Shatrughan Prasad Singh. All four values the registry attributes to Table-1 p. 68 are present in the text: 0.973, 0.9588, 0.910, 0.9380. The paper's own neat-MeCN values (0.7767 g cm-3, 0.346 cP) agree with solvents.csv (0.776, 0.343).",
+      "journal": "",
+      "year": "",
+      "volume": "",
+      "doi": "",
+      "issues": [
+        "crossref-index-gap"
+      ],
+      "how": "local-pdf",
+      "params": [
+        "MeCN/H2O 9:1 v/v: mu (25 C)",
+        "MeCN/H2O 9:1 v/v: rho",
+        "H2O/MeCN 2:1 v/v: mu (25 C)",
+        "H2O/MeCN 2:1 v/v: rho"
+      ]
+    },
+    {
+      "citation": "Bhat, Mohan & Susha, Indian J. Chem. 1996, 35A, 825-831 (cross-validation)",
+      "resolved_authors": "(verified from local PDF)",
+      "title": "Retrieved 2026-08-22 from the NIScPR open repository. Masthead confirms Indian J. Chem. Vol. 35A, October 1996, pp. 825-831, 'Solvation behaviour of HClO4, NaClO4 and KClO4 species under varying conditions', J Ishwara Bhat, T P Mohan & C B Susha, Mangalore University. Table I p. 827 (not 826 -- see below) gives NaClO4 in the DMF column as 80/76/80/78 at 293 K across the four conductance models (mean 78.5) and 89/86/89/88 at 303 K (mean 88.0); interpolating to 298 K gives 83.25, reproducing the 83.3 the registry cross-validates against. NOTE: the registry's locator says p. 826; the table prints on p. 827 in the repository scan. The value is right, the page is off by one.",
+      "journal": "",
+      "year": "",
+      "volume": "",
+      "doi": "",
+      "issues": [
+        "crossref-index-gap"
+      ],
+      "how": "local-pdf",
+      "params": [
+        "0.2 M NaI/DMF"
+      ]
+    },
+    {
+      "citation": "Bird, M. J. J. Am. Chem. Soc. 2021, 143, 9332-9337, p. 9334 (DOI 10.1021/jacs.1c04652)",
+      "resolved_authors": "Till Oh MacMillan Bird",
+      "title": "The Application of Pulse Radiolysis to the Study of Ni(I) Intermediates in Ni-Catalyzed Cross-Coupling Reactions",
+      "journal": "Journal of the American Chemical Society",
+      "year": "2021",
+      "volume": "143",
+      "doi": "10.1021/jacs.1c04652",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "k, Ni(I)-bipyridine + aryl bromide (4 catalyst rows)"
+      ]
+    },
+    {
+      "citation": "Chilton, Drew & Jebens, Ind. Eng. Chem. 1944, 36, 510-516",
+      "resolved_authors": "Chilton Drew Jebens",
+      "title": "Heat Transfer Coefficients in Agitated Vessels",
+      "journal": "Industrial &amp; Engineering Chemistry",
+      "year": "1944",
+      "volume": "36",
+      "doi": "10.1021/ie50414a006",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "h_int (stirred electrolyte)"
+      ]
+    },
+    {
+      "citation": "Cunningham, Vidulich & Kay, J. Chem. Eng. Data 1967, 12, 336-337 (rho, eta and eps for MeCN-H2O at 25 C)",
+      "resolved_authors": "Cunningham Vidulich Kay",
+      "title": "Several properties of acetonitrile-water, acetonitrile-methanol, and ethylene carbonate-water systems",
+      "journal": "Journal of Chemical &amp; Engineering Data",
+      "year": "1967",
+      "volume": "12",
+      "doi": "10.1021/je60034a013",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "MeCN/H2O 9:1 v/v: mu (25 C)",
+        "MeCN/H2O 9:1 v/v: rho",
+        "H2O/MeCN 2:1 v/v: mu (25 C)",
+        "H2O/MeCN 2:1 v/v: rho"
+      ]
+    },
+    {
+      "citation": "Dorn, Kareth, Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502",
+      "resolved_authors": "Dorn Kareth Weidner Petermann",
+      "title": "Electrical Conductivity of Lithium, Sodium, Potassium, and Quaternary Ammonium Salts in Water, Acetonitrile, Methanol, and Ethanol over a Wide Concentration Range",
+      "journal": "Journal of Chemical &amp; Engineering Data",
+      "year": "2024",
+      "volume": "69",
+      "doi": "10.1021/acs.jced.3c00691",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "0.25 M Bu4NBF4/MeCN"
+      ]
+    },
+    {
+      "citation": "Doyle, A. G. J. Am. Chem. Soc. 2022, 144, 5575-5582, Fig. 6 p. 5579 (DOI 10.1021/jacs.2c00462)",
+      "resolved_authors": "Ting Williams Doyle",
+      "title": "Oxidative Addition of Aryl Halides to a Ni(I)-Bipyridine Complex",
+      "journal": "Journal of the American Chemical Society",
+      "year": "2022",
+      "volume": "144",
+      "doi": "10.1021/jacs.2c00462",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "k, Ni(I)-bipyridine + aryl bromide (4 catalyst rows)"
+      ]
+    },
+    {
+      "citation": "Eisenberg, Tobias & Wilke, J. Electrochem. Soc. 1954, 101, 306-320",
+      "resolved_authors": "Eisenberg Tobias Wilke",
+      "title": "Ionic Mass Transfer and Concentration Polarization at Rotating Electrodes",
+      "journal": "Journal of The Electrochemical Society",
+      "year": "1954",
+      "volume": "101",
+      "doi": "10.1149/1.2781252",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "Inter-electrode gap (rotating cylinder)"
+      ]
+    },
+    {
+      "citation": "Eisenberg, Tobias & Wilke, J. Electrochem. Soc. 1954, 101, 306-320, DOI 10.1149/1.2781252",
+      "resolved_authors": "Eisenberg Tobias Wilke",
+      "title": "Ionic Mass Transfer and Concentration Polarization at Rotating Electrodes",
+      "journal": "Journal of The Electrochemical Society",
+      "year": "1954",
+      "volume": "101",
+      "doi": "10.1149/1.2781252",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "Eisenberg RCE: Sh = 0.0791 Re^0.70 Sc^0.356"
+      ]
+    },
+    {
+      "citation": "Ferretti, Cohen, Deng, Diwan, Frederick & Lehnherr, Org. Process Res. Dev. 2025, 29, 322-332",
+      "resolved_authors": "Ferretti Cohen Deng Diwan Frederick Lehnherr",
+      "title": "Adoption of Electrochemistry within the Pharmaceutical Industry: Insights from an Industry-Wide Survey",
+      "journal": "Organic Process Research &amp; Development",
+      "year": "2025",
+      "volume": "29",
+      "doi": "10.1021/acs.oprd.4c00353",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "Thresholds 25 / 50 mA cm-2"
+      ]
+    },
+    {
+      "citation": "Gong, Fang, Gu, Li & Yan, Energy Environ. Sci. 2015, 8, 3515-3530; method: Casteel & Amis, J. Chem. Eng. Data 1972, 17, 55",
+      "resolved_authors": "Gong Fang Gu Li Yan",
+      "title": "Nonaqueous redox-flow batteries: organic solvents, supporting electrolytes, and redox pairs",
+      "journal": "Energy &amp; Environmental Science",
+      "year": "2015",
+      "volume": "8",
+      "doi": "10.1039/c5ee02341f",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "0.25 M Bu4NBF4/MeCN"
+      ]
+    },
+    {
+      "citation": "Holland, P. L. J. Am. Chem. Soc. 2024, 146, 2685-2700 (DOI 10.1021/jacs.3c12329)",
+      "resolved_authors": "Wilson Holland",
+      "title": "Mechanism of Alkene Hydrofunctionalization by Oxidative Cobalt(salen) Catalyzed Hydrogen Atom Transfer",
+      "journal": "Journal of the American Chemical Society",
+      "year": "2024",
+      "volume": "146",
+      "doi": "10.1021/jacs.3c12329",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "k, cobalt hydride + alkene (2 catalyst rows)"
+      ]
+    },
+    {
+      "citation": "Huber et al., 'New international formulation for the viscosity of H2O' (IAPWS 2008), J. Phys. Chem. Ref. Data 2009, 38, 101-125",
+      "resolved_authors": "Huber Perkins Laesecke Friend Sengers Assael Metaxa Vogel Mare\u0161 Miyagawa",
+      "title": "New International Formulation for the Viscosity of H2O",
+      "journal": "Journal of Physical and Chemical Reference Data",
+      "year": "2009",
+      "volume": "38",
+      "doi": "10.1063/1.3088050",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "H2O: mu (25 C)"
+      ]
+    },
+    {
+      "citation": "Kawamata, Y. et al. J. Am. Chem. Soc. 2019, 141, 6392-6402, Fig. 2B p. 6394 (DOI 10.1021/jacs.9b01886)",
+      "resolved_authors": "Kawamata Vantourout Hickey Bai Chen Hou Qiao Barman Edwards Garrido-Castro deGruyter Nakamura Knouse Qin Clay Bao Li Starr Garcia-Irizarry Sach White Neurock Minteer Baran",
+      "title": "Electrochemically\nDriven, Ni-Catalyzed Aryl Amination:\nScope, Mechanism, and Applications",
+      "journal": "Journal of the American Chemical Society",
+      "year": "2019",
+      "volume": "141",
+      "doi": "10.1021/jacs.9b01886",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "k, Ni(I)-bipyridine + aryl bromide (4 catalyst rows)"
+      ]
+    },
+    {
+      "citation": "Kinart, Molecules 2024, 29, 1371 (solvent properties only; not the conductivity)",
+      "resolved_authors": "Kinart",
+      "title": "Conductometric and Thermodynamic Studies of Selected Imidazolium Chloride Ionic Liquids in N,N-Dimethylformamide at Temperatures from 278.15 to 313.15 K",
+      "journal": "Molecules",
+      "year": "2024",
+      "volume": "29",
+      "doi": "10.3390/molecules29061371",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "0.2 M NaI/DMF"
+      ]
+    },
+    {
+      "citation": "Krumgalz, J. Chem. Soc. Faraday Trans. 1 1983, 79, 571-587",
+      "resolved_authors": "Krumgalz",
+      "title": "Separation of limiting equivalent conductances into ionic contributions in non-aqueous solutions by indirect methods",
+      "journal": "Journal of the Chemical Society, Faraday Transactions 1: Physical Chemistry in Condensed Phases",
+      "year": "1983",
+      "volume": "79",
+      "doi": "10.1039/f19837900571",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "HFIP: mu (25 C)",
+        "SCN- (MeCN)",
+        "Br- (MeOH)"
+      ]
+    },
+    {
+      "citation": "Liu, J.-Y. et al. Nat. Commun. 2021, 12, 3745, Supplementary Fig. 2 (DOI 10.1038/s41467-021-24125-5)",
+      "resolved_authors": "Cai Wu Liu Chen Song Xu",
+      "title": "Tailored cobalt-salen complexes enable electrocatalytic intramolecular allylic C\u2013H functionalizations",
+      "journal": "Nature Communications",
+      "year": "2021",
+      "volume": "12",
+      "doi": "10.1038/s41467-021-24125-5",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "k, Co(salen) aza-Wacker step (1 catalyst row)"
+      ]
+    },
+    {
+      "citation": "Minteer, S. D. J. Am. Chem. Soc. 2023, 145, 17665-17677, p. 17674 (DOI 10.1021/jacs.3c03815)",
+      "resolved_authors": "Boucher Pendergast Wu Nguyen Jadhav Lin White Minteer",
+      "title": "Unraveling Hydrogen Atom Transfer Mechanisms with Voltammetry: Oxidative Formation and Reactivity of Cobalt Hydride",
+      "journal": "Journal of the American Chemical Society",
+      "year": "2023",
+      "volume": "145",
+      "doi": "10.1021/jacs.3c03815",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "k, cobalt hydride + alkene (2 catalyst rows)"
+      ]
+    },
+    {
+      "citation": "Mo, Lu, Rughoobur, Patil, Gershenfeld, Akinwande, Buchwald & Jensen, Science 2020, 368, 1352-1357, DOI 10.1126/science.aba3823, Supporting Information",
+      "resolved_authors": "Mo Lu Rughoobur Patil Gershenfeld Akinwande Buchwald Jensen",
+      "title": "Microfluidic electrochemistry for single-electron transfer redox-neutral reactions",
+      "journal": "Science",
+      "year": "2020",
+      "volume": "368",
+      "doi": "10.1126/science.aba3823",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "Microfluidic cell operating point (Mo 2020)"
+      ]
+    },
+    {
+      "citation": "Mo, Rughoobur, Nambiar, Zhang, Jensen et al., Science 2020, 368, 1352-1357",
+      "resolved_authors": "Mo Lu Rughoobur Patil Gershenfeld Akinwande Buchwald Jensen",
+      "title": "Microfluidic electrochemistry for single-electron transfer redox-neutral reactions",
+      "journal": "Science",
+      "year": "2020",
+      "volume": "368",
+      "doi": "10.1126/science.aba3823",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "Inter-electrode gap (microfluidic 25 um)"
+      ]
+    },
+    {
+      "citation": "Pickett & Ong, 'The influence of hydrodynamic and mass transfer entrance effects on the operation of a parallel plate electrolytic cell', Electrochim. Acta 1974, 19, 875-882, DOI 10.1016/0013-4686(74)85036-X; restated in Walsh & Ponce de Leon, Electrochim. Acta 2018, 280, 121-148",
+      "resolved_authors": "Pickett Ong",
+      "title": "The influence of hydrodynamic and mass transfer entrance effects on the operation of a parallel plate electrolytic cell",
+      "journal": "Electrochimica Acta",
+      "year": "1974",
+      "volume": "19",
+      "doi": "10.1016/0013-4686(74)85036-x",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "Leveque: Sh = 1.85 (Re Sc dh/L)^(1/3)"
+      ]
+    },
+    {
+      "citation": "Prohaska et al., 'Standard atomic weights of the elements 2021 (IUPAC Technical Report)', Pure Appl. Chem. 2022, 94, 573-600",
+      "resolved_authors": "Prohaska Irrgeher Benefield B\u00f6hlke Chesson Coplen Ding Dunn Gr\u00f6ning Holden Meijer Moossen Possolo Takahashi Vogl Walczyk Wang Wieser Yoneda Zhu Meija",
+      "title": "Standard atomic weights of the elements 2021 (IUPAC Technical Report)",
+      "journal": "Pure and Applied Chemistry",
+      "year": "2022",
+      "volume": "94",
+      "doi": "10.1515/pac-2019-0603",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "MeCN: M",
+        "MeOH: M",
+        "DMF: M",
+        "DMA: M",
+        "THF: M",
+        "H2O: M",
+        "HFIP: M",
+        "acetone: M",
+        "MeNO2: M"
+      ]
+    },
+    {
+      "citation": "Sander, 'Compilation of Henry's law constants (version 5) for water as solvent', Atmos. Chem. Phys. 2023, 23, 10901-12440, DOI 10.5194/acp-23-10901-2023",
+      "resolved_authors": "Sander",
+      "title": "Compilation of Henry's law constants (version 5.0.0) for water as solvent",
+      "journal": "Atmospheric Chemistry and Physics",
+      "year": "2023",
+      "volume": "23",
+      "doi": "10.5194/acp-23-10901-2023",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "Propylene C_sat (aq, 1 atm)"
+      ]
+    },
+    {
+      "citation": "Shinkle, Pomaville, Sleightholme, Thompson & Monroe, J. Power Sources 2014, 248, 1299-1305, DOI 10.1016/j.jpowsour.2013.10.034",
+      "resolved_authors": "Shinkle Pomaville Sleightholme Thompson Monroe",
+      "title": "Solvents and supporting electrolytes for vanadium acetylacetonate flow batteries",
+      "journal": "Journal of Power Sources",
+      "year": "2014",
+      "volume": "248",
+      "doi": "10.1016/j.jpowsour.2013.10.034",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "0.1 M Bu4NBF4/DMF"
+      ]
+    },
+    {
+      "citation": "Wagner & Pruss, 'The IAPWS formulation 1995 for the thermodynamic properties of ordinary water substance', J. Phys. Chem. Ref. Data 2002, 31, 387-535",
+      "resolved_authors": "Wagner Pru\u00df",
+      "title": "The IAPWS Formulation 1995 for the Thermodynamic Properties of Ordinary Water Substance for General and Scientific Use",
+      "journal": "Journal of Physical and Chemical Reference Data",
+      "year": "2002",
+      "volume": "31",
+      "doi": "10.1063/1.1461829",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "H2O: rho"
+      ]
+    },
+    {
+      "citation": "Watkins, Schiffer, Lai, Musgrave III, Atwater, Goddard III, Agapie, Peters & Gregoire, 'Hydrodynamics Change Tafel Slopes in Electrochemical CO2 Reduction on Copper', ACS Energy Lett. 2023, 8, 2185-2192, DOI 10.1021/acsenergylett.3c00442, Supporting Information",
+      "resolved_authors": "Watkins Schiffer Lai Musgrave Atwater Goddard Agapie Peters Gregoire",
+      "title": "Hydrodynamics Change Tafel Slopes in Electrochemical CO\n                    <sub>2</sub>\n                    Reduction on Copper",
+      "journal": "ACS Energy Letters",
+      "year": "2023",
+      "volume": "8",
+      "doi": "10.1021/acsenergylett.3c00442",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "delta (recirculating flow cell)"
+      ]
+    },
+    {
+      "citation": "Watkins, Schiffer, Lai, Musgrave III, Atwater, Goddard III, Agapie, Peters & Gregoire, ACS Energy Lett. 2023, 8, 2185-2192, DOI 10.1021/acsenergylett.3c00442, Supporting Information",
+      "resolved_authors": "Watkins Schiffer Lai Musgrave Atwater Goddard Agapie Peters Gregoire",
+      "title": "Hydrodynamics Change Tafel Slopes in Electrochemical CO\n                    <sub>2</sub>\n                    Reduction on Copper",
+      "journal": "ACS Energy Letters",
+      "year": "2023",
+      "volume": "8",
+      "doi": "10.1021/acsenergylett.3c00442",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "delta (ANEC flow cell)"
+      ]
+    },
+    {
+      "citation": "Wilke & Chang, AIChE J. 1955, 1, 264-270",
+      "resolved_authors": "Wilke Chang",
+      "title": "Correlation of diffusion coefficients in dilute solutions",
+      "journal": "AIChE Journal",
+      "year": "1955",
+      "volume": "1",
+      "doi": "10.1002/aic.690010222",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "MeCN: phi (assoc.)",
+        "MeOH: phi (assoc.)",
+        "DMF: phi (assoc.)",
+        "DMA: phi (assoc.)",
+        "THF: phi (assoc.)",
+        "H2O: phi (assoc.)",
+        "HFIP: phi (assoc.)",
+        "acetone: phi (assoc.)",
+        "MeNO2: phi (assoc.)",
+        "Wilke-Chang: D = 7.4e-8 (phi M)^0.5 T / (mu V^0.6)",
+        "Propylene (aq)"
+      ]
+    },
+    {
+      "citation": "Wilke & Chang, AIChE J. 1955, 1, 264-270 -- applied to the named surrogate structures; the ethylene row carries the measured Cussler value instead (its own row above)",
+      "resolved_authors": "Wilke Chang",
+      "title": "Correlation of diffusion coefficients in dilute solutions",
+      "journal": "AIChE Journal",
+      "year": "1955",
+      "volume": "1",
+      "doi": "10.1002/aic.690010222",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "8 mediated-spec substrate D values"
+      ]
+    },
+    {
+      "citation": "Williams, Corbin, Zeng, Lazouski, Yang & Manthiram, Sustainable Energy Fuels 2019, 3, 1225-1232, DOI 10.1039/C9SE00024K",
+      "resolved_authors": "Williams Corbin Zeng Lazouski Yang Manthiram",
+      "title": "Protecting effect of mass transport during electrochemical reduction of oxygenated carbon dioxide feedstocks",
+      "journal": "Sustainable Energy &amp; Fuels",
+      "year": "2019",
+      "volume": "3",
+      "doi": "10.1039/c9se00024k",
+      "issues": [],
+      "how": "doi",
+      "params": [
+        "delta (stirred batch)"
+      ]
+    },
+    {
+      "citation": "Wode & Seidel, Ber. Bunsenges. Phys. Chem. 1994, 98, 927-934 (precision MeCN-H2O viscosities)",
+      "resolved_authors": "Wode Seidel",
+      "title": "Precise viscosity measurements of binary liquid mixtures of acetonitrile\u2010water and 1,3\u2010dimethyl\u20102\u2010imidazolidinone\u2010water",
+      "journal": "Berichte der Bunsengesellschaft f\u00fcr physikalische Chemie",
+      "year": "1994",
+      "volume": "98",
+      "doi": "10.1002/bbpc.19940980706",
+      "issues": [],
+      "how": "search",
+      "params": [
+        "MeCN/H2O 9:1 v/v: mu (25 C)",
+        "MeCN/H2O 9:1 v/v: rho",
+        "H2O/MeCN 2:1 v/v: mu (25 C)",
+        "H2O/MeCN 2:1 v/v: rho"
+      ]
+    }
+  ],
+  "chimera_suspects": [],
+  "unresolved": [
+    {
+      "citation": "Gopal & Jha, Indian J. Chem. 1977, 15A, 80-83 (lambda0, state A)",
+      "params": [
+        "0.2 M NaI/DMF"
+      ],
+      "doi": "10.1093/chromsci/15.5.15a",
+      "title": "Advertising Recaps"
+    },
+    {
+      "citation": "Kalugin, Lukinova & Novikov, Kharkiv Univ. Bull. Chem. Ser. 2019, 33(56), 23-33, DOI 10.26565/2220-637X-2019-33-02 (open access)",
+      "params": [
+        "Br- (MeCN)",
+        "Bu4N+/Q+ (organic)",
+        "BF4-/generic A- (organic)"
+      ],
+      "doi": "10.26565/2220-637x-2019-33-02",
+      "title": "Electrical conductivity, ion-molecular and interionic interactions in solutions of some tetraalkylammonium salts in acetonitrile: the influence of the ion and temperature"
+    },
+    {
+      "citation": "Leveque entrance solution (Pickett & Ong, Electrochim. Acta 1974, 19, 875-882) with the half-gap floor delta <= h/2 stated in Table S1; inputs from the row above",
+      "params": [
+        "delta (microfluidic cell)"
+      ],
+      "doi": "10.47688/rba_archives_pn-012359",
+      "title": "Adelaide Project - 1963-June 1967 - 15th floor observation deck looking west from entrance - 5 June 1967"
+    },
+    {
+      "citation": "Newman & Thomas-Alyea, Electrochemical Systems, 3rd ed., Ch. 11 (dilute-solution theory) and Ch. 12 (concentrated-solution theory)",
+      "params": [
+        "Transport theory level"
+      ],
+      "doi": "10.1021/jacs.5c00259.s001",
+      "title": "Electrochemical Benzylic CH Carboxylation"
+    },
+    {
+      "citation": "Peters et al., Science 2019 (Supplementary Materials)",
+      "params": [
+        "3.0 M LiBr/THF"
+      ],
+      "doi": "10.5194/amt-2019-33-rc1",
+      "title": "comments to Peters et al. 2019"
+    },
+    {
+      "citation": "Sigma-Aldrich product specification, 1,1,1,3,3,3-hexafluoro-2-propanol, CAS 920-66-1",
+      "params": [
+        "HFIP: rho"
+      ],
+      "doi": "10.1021/acs.orglett.6b01460.s001",
+      "title": "Hexafluoro-2-propanol-Promoted Intermolecular FriedelCrafts Acylation Reaction"
+    },
+    {
+      "citation": "the balanced half-reaction of each exemplar, as reported",
+      "params": [
+        "n_carrier (electrons per carrier turnover)"
+      ],
+      "doi": "10.7717/peerj-cs.3131/table-7",
+      "title": "Table 7: Performance of each balanced approach compared with proposed DBSTLink balanced approach."
+    },
+    {
+      "citation": "the median over the solved 50-reaction transport matrix, per architecture (Stage 0 for the direct and catalyst-carried entries, the EC-prime solver for the mediated ones",
+      "params": [
+        "Transport ceiling, used as the thermal operating point (six architectures)"
+      ],
+      "doi": "10.1021/jacs.3c14687.s001",
+      "title": "Catalyst Selection over an Electrochemical Reductive Coupling Reaction toward Direct Electrosynthesis of Oxime from NOx and Aldehyde"
+    }
+  ],
+  "non_journal": [
+    "-- (declared upper-bound coefficient; no page-anchored source for Ea itself). The water anchor that licenses it is measured: CRC Handbook of Chemistry and Physics, 97th ed. (W. M. Haynes, ed.), CRC Press, 2016",
+    "-- (no page-anchored source)",
+    "-- (no table located for this pair)",
+    "-- (not page-verified)",
+    "BIPM, The International System of Units (SI Brochure), 9th ed., 2019",
+    "Bard & Faulkner, Electrochemical Methods: Fundamentals and Applications, 2nd ed., Wiley, 2001",
+    "CRC Handbook of Chemistry and Physics, 97th ed. (W. M. Haynes, ed.), CRC Press, 2016",
+    "CRC Handbook of Chemistry and Physics, 97th ed., 2016 (Haynes), 'Concentrative Properties of Aqueous Solutions: Density, Refractive Index, Freezing Point Depression, and Viscosity'",
+    "Churchill & Chu, Int. J. Heat Mass Transfer 1975, 18, 1323-1329; restated as Incropera, DeWitt, Bergman & Lavine, Fundamentals of Heat and Mass Transfer, 6th ed., Wiley, 2007, Eq. 9.26-9.27, with air properties from Incropera, DeWitt, Bergman & Lavine, Fundamentals of Heat and Mass Transfer, 6th ed., Wiley, 2007, Table A.4",
+    "Cussler, Diffusion: Mass Transfer in Fluid Systems, 3rd ed., Cambridge Univ. Press, 2009",
+    "Declared BY ARGUMENT, not measurement: an aprotic medium supports no Grotthuss shuttle, so the aqueous value is reduced to roughly a third",
+    "Declared BY ARGUMENT: set between the aprotic 3.0e-9 and a slower carboxylic-acid medium. It is a SPECTATOR in this spec (s = 0), so its D cancels and nothing reported depends on it",
+    "Declared LUMP, placed deliberately between Cl2(aq) 1.38e-9 and HOCl 1.4e-9. No single measurement can cover a lumped species, so none is claimed; the lump is the modelling choice",
+    "Declared TRANSFER of a page-anchored aqueous value: CRC 97th ed., Sect. 5, p. 5-75 gives NH4+ lambda0 = 73.5 S cm2 mol-1 and D = 1.957e-5 cm2 s-1. The aqueous number is measured; what is assumed is its reuse in MeCN, and that is the weak step -- the Walden route was tested for DMF in this pass and fails by about 70 per cent",
+    "Declared bracket: pure-component viscosities of DMSO and THF, both page-anchored in this registry",
+    "Declared bracket: pure-component viscosities of acetic and formic acid, CRC 97th ed. Sect. 6 'Viscosity of Liquids'",
+    "Declared class default: no lambda0 for these ion/solvent pairs (tosylate, BF4-, PF6-, HSO4-, carboxylates, Li+ and Br- in THF, and the like, in methanol, THF, acetone, HFIP, acetic acid and acetonitrile; tosylate and borate in water) in Krumgalz 1983 Table 4 or CRC 97th ed. pp. 5-75/5-76, so the acetonitrile values of the two rows above are reused. A supporting ion carries no flux, so under local electroneutrality its diffusivity shapes the potential profile but does not enter the limiting current; the default is therefore a choice that costs nothing reported, and the sensitivity beside it states the measured size of that nothing.",
+    "Declared constant of the EC-prime base case -- a round order-of-magnitude value for a TEMPO-like organic mediator. No lambda0 and no measurement for the modelled couple could be page-anchored, and none is claimed; it is a base case for the regime map, not a property of any specific mediator",
+    "Declared constant of the EC-prime base case -- the generic small-organic-solute value already used across the solver species lists, adopted without a measurement for any specific substrate",
+    "Declared modelling choice; no literature k is claimed for these four rows",
+    "Declared numerical setting; verified against the analytic limits of \u00a7S5.6",
+    "Declared operating point. The height is an operator choice like a rotation speed and is declared as one. The density driving force is not: Wilke, Eisenberg & Tobias define it through a specific densification coefficient, rho_0 - rho_i = alpha rho_i (C_0 - C_i), so at the limiting current it is fixed by the bulk concentration of whichever species the surface depletes, and their own experiments span 0.01-0.74 M CuSO4 on cathodes 6-76 mm high. The fifty rows deplete 3.5 mM to 13.7 M and the densification coefficients of these organic solutions are not available, so one value is declared for all fifty and what it costs is stated here rather than hidden inside the derived film.",
+    "Declared per row from the exemplar's own written species (each row's source is the exemplar cited beside it in Table S2); the value is printed in Table S2, column z, with medium-confidence rows marked *",
+    "Declared rule; the mediated rows' eight page-anchored substrate diffusivities span 6.9e-10 to 1.9e-9 m2 s-1",
+    "Dorn, Kareth, Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502, Supporting Information (je3c00691_si_001.pdf); cross-checked against CRC Handbook of Chemistry and Physics, 97th ed., 'Electrical Conductivity of Aqueous Solutions', p. 5-71",
+    "Incropera, DeWitt, Bergman & Lavine, Fundamentals of Heat and Mass Transfer, 6th ed., Wiley, 2007",
+    "NIST Chemistry WebBook, SRD 69, Condensed-Phase Thermochemistry -- N,N-dimethylformamide, CAS 68-12-2",
+    "NIST Chemistry WebBook, SRD 69, Condensed-Phase Thermochemistry -- acetonitrile, CAS 75-05-8",
+    "NIST Chemistry WebBook, SRD 69, Condensed-Phase Thermochemistry -- tetrahydrofuran, CAS 109-99-9 (primary reference Costas & Patterson 1985)",
+    "Reid, Prausnitz & Poling, The Properties of Gases and Liquids, 4th ed., McGraw-Hill, 1987 (the edition held and verified; the 5th ed. of Poling, Prausnitz & O'Connell, 2001, carries the same increments under a different table number)",
+    "Table S2 per-row citations",
+    "Table S6 per-row citations (verified against the primary sources)",
+    "Wilke, Eisenberg & Tobias, 'Correlation of limiting currents under free convection conditions', J. Electrochem. Soc. 1953, 100, 513-523 (plane vertical cathodes in quiescent solution, cathode heights 0.25-3.0 in., i_lim 0.4-108 mA cm-2 -- the archetype and the current range match this work exactly). Derivation, reproducible from this table: the paper's Eq. XVII, delta' = 1.48 x (Sc Gr)^(-1/4) with Sc Gr = g x^3 (drho/rho)/(nu D), evaluated at x = 20 mm and drho/rho = 3.16e-03 -- the geometric centres of the declared ranges on the operating-point row that follows -- over each of the fifty rows' own nu and D, gives a median of 228 um. INDEPENDENT MEASURED CORROBORATION: Amatore, Szunerits, Thouin & Warkocz, J. Electroanal. Chem. 2001, 500, 62-70, DOI 10.1016/S0022-0728(00)00378-8, determine delta = (230 +/- 10) um for the one-electron oxidation of 10 mM Fe(CN)6(4-) in aqueous 1 M KCl at a millimetric electrode in quiescent solution, from the steady-state limiting current at long times. The derived value sits inside that interval.",
+    "declared architecture (bath-jacketed glass)",
+    "declared basis: the value of row 'sigma (unstirred 100 mL beaker)'",
+    "declared chip geometry, now bracketed by the exemplar's own drawings: Mo et al., Science 2020, 368, 1352-1357, Supplementary Materials Appendix A, Fig. S20A p. 58 (the aluminium holder for the small-scale cell, 3.00 x 3.00 inch, 'Unit: inch'), with the glassy carbon plates given as 50 x 50 x 3 mm on p. 3",
+    "declared illustration",
+    "declared model simplification",
+    "declared modelling choice",
+    "declared modelling convention",
+    "declared operating point",
+    "declared solver setting",
+    "declared stack geometry",
+    "elementary geometry of the declared vessel (wetted wall + base of a right cylinder)",
+    "elementary geometry of the declared vessel; see row 'Vessel external area'",
+    "rows 'H_EXT' and 'Vessel external area' of this registry",
+    "rows 'H_EXT' and the four sigma rows of this registry",
+    "rows 'h natural convection (air)' and 'h radiation (linearized)' of this registry"
+  ]
+}

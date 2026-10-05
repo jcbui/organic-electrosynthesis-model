@@ -1,0 +1,20 @@
+[
+ {
+  "reaction": "Ni-mediated anodic difluoromethylenation of enol carbamates",
+  "exemplar": "Vasquez/Oyelaran/Brindisi, JACS 2024, 146, 20331",
+  "verdict": "NOT CONFIRMED",
+  "match": ""
+ },
+ {
+  "reaction": "Cathodic ring-opening telomerization of azetidinyl sulfonamides",
+  "exemplar": "Halvorsen/Ntembe, Nat Commun 2023, 14, 7788",
+  "verdict": "NOT CONFIRMED",
+  "match": ""
+ },
+ {
+  "reaction": "Paired electrolytic dearomative silyl-amination of quinolines",
+  "exemplar": "Rasmussen/Adeyemi/Falk, Chem Eur J 2022, 28, e202201847",
+  "verdict": "NOT CONFIRMED",
+  "match": ""
+ }
+]

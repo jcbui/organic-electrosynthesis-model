@@ -1,0 +1,1674 @@
+{
+ "total": 277,
+ "covered": 250,
+ "fraction": 0.9025270758122743,
+ "min_coverage": 0.885,
+ "by_doc": {
+  "SI": [
+   {
+    "value": "0.0127",
+    "kind": "W/cm2",
+    "covered": false,
+    "context": "2 K\u22121 for a 100 mL beaker in still air, rising only to 0.0127 W cm\u22122 K\u22121 when the liquid is stirred. It"
+   },
+   {
+    "value": "0.01275",
+    "kind": "W/cm2",
+    "covered": false,
+    "context": " external area'Stirring raises U' only from 0.01146 to 0.01275 W cm-2 K-1, i.e. 11 pct, because h_ext an"
+   },
+   {
+    "value": "0.528",
+    "kind": "W/cm2",
+    "covered": false,
+    "context": "ipation is 12.08 W cm-2 while the passive path removes 0.528 W cm-2 at T = Tb, so evaporation would ha"
+   },
+   {
+    "value": "11.55",
+    "kind": "W/cm2",
+    "covered": false,
+    "context": "8 W cm-2 at T = Tb, so evaporation would have to carry 11.55 W cm-2, which is 96 pct of the total heat"
+   },
+   {
+    "value": "12.08",
+    "kind": "W/cm2",
+    "covered": false,
+    "context": " transport ceiling of 121.7 mA cm-2 the dissipation is 12.08 W cm-2 while the passive path removes 0.5"
+   },
+   {
+    "value": "110.7",
+    "kind": "mA/cm2",
+    "covered": false,
+    "context": "ed against this cell's own median transport ceiling of 110.7 mA cm-2, every electrolyte clears at every"
+   },
+   {
+    "value": "1118.1",
+    "kind": "mA/cm2",
+    "covered": false,
+    "context": "nstirred batch, and 947.3 / 1024.6 / 1105.4 / 1113.0 / 1118.1 mA cm-2 in the microfluidic 25 um, which i"
+   },
+   {
+    "value": "1427",
+    "kind": "mA/cm2",
+    "covered": false,
+    "context": "e in the table (79 \u2192 192 mA cm\u22122 in the beaker, 1116 \u2192 1427 mA cm\u22122 in the microfluidic). Ion pairing "
+   },
+   {
+    "value": "196",
+    "kind": "mA/cm2",
+    "covered": false,
+    "context": "is carrier-limited either way (the Fick bound alone is 196 mA cm\u22122 at this film), and the binding con"
+   },
+   {
+    "value": "25.64",
+    "kind": "mA/cm2",
+    "covered": false,
+    "context": "DCA (biomass) in the Microfluidic cell (25 um gap), at 25.64 mA cm-2 (2.6 pct away).D_med, mediator (EC"
+   },
+   {
+    "value": "392",
+    "kind": "mA/cm2",
+    "covered": false,
+    "context": "d, since D_salt/(1 \u2212 t\u2212) = 2 D\u2212 identically: 2 \u00d7 196 = 392 mA cm\u22122 at \u03b4 = 200 \u03bcm, the factor of 2 for"
+   },
+   {
+    "value": "49.9",
+    "kind": "mA/cm2",
+    "covered": false,
+    "context": "cross that band the ANEC column gives a median of 39.7-49.9 mA cm-2 about 44.2, 30-33 of 50 clearing 2"
+   },
+   {
+    "value": "65.6",
+    "kind": "mA/cm2",
+    "covered": false,
+    "context": "S cm-1 the ceilings are 26.3/27.7/27.9/394.6/27.9/25.3/65.6 mA cm-2 against transport ceilings of 8.2/"
+   },
+   {
+    "value": "84.2",
+    "kind": "mA/cm2",
+    "covered": false,
+    "context": "thylformamide ceiling runs 74.9 / 79.2 / 83.5 / 83.9 / 84.2 mA cm-2 at h_int = 50 / 100 / 800 / 2000 /"
+   },
+   {
+    "value": "111.342",
+    "kind": "mS/cm",
+    "covered": false,
+    "context": "e 1 Reference Solution A (1 demal KCl, 7.11352 mass %, 111.342 mS cm\u22121 at 25 \u00b0C) to within +0.3 to +1.2%."
+   },
+   {
+    "value": "14.78",
+    "kind": "mS/cm",
+    "covered": false,
+    "context": "is the rotating disc, which reverses if kappa rises to 14.78 mS cm-1, i.e. 1.69x the carried 8.77, insi"
+   },
+   {
+    "value": "49.5",
+    "kind": "mS/cm",
+    "covered": false,
+    "context": "\u201335.6 mS cm\u22121, all below the rotating-disc reversal at 49.5 mS cm\u22121. None of those continuations is ph"
+   },
+   {
+    "value": "1.69",
+    "kind": "ratio",
+    "covered": false,
+    "context": ", which reverses if kappa rises to 14.78 mS cm-1, i.e. 1.69x the carried 8.77, inside this row'"
+   },
+   {
+    "value": "14.51",
+    "kind": "ratio",
+    "covered": false,
+    "context": "t every point in that range (THF 2.19-7.37x, MeCN 3.51-14.51x, DMF 6.09-21.36x, aq. NaOH 4.72-22"
+   },
+   {
+    "value": "2.74",
+    "kind": "ratio",
+    "covered": false,
+    "context": "de passive ceiling runs 63 / 79 / 136 / 172 mA cm-2, a 2.74x span. The batch verdict does not t"
+   },
+   {
+    "value": "21.36",
+    "kind": "ratio",
+    "covered": false,
+    "context": "that range (THF 2.19-7.37x, MeCN 3.51-14.51x, DMF 6.09-21.36x, aq. NaOH 4.72-22.05x), and the br"
+   },
+   {
+    "value": "31.5",
+    "kind": "ratio",
+    "covered": false,
+    "context": "by k = 10^4; the largest amplification in the class is 31.5x and 45 of the 77 cells sit at thei"
+   },
+   {
+    "value": "34.5",
+    "kind": "ratio",
+    "covered": false,
+    "context": "wn transport ceiling of 8.2 mA cm-2 goes from 34.8x to 34.5x. The aqueous reference clears ever"
+   },
+   {
+    "value": "4.93",
+    "kind": "ratio",
+    "covered": false,
+    "context": "d batch 9.54x, stirred batch 8.84x, recirculating flow 4.93x, microfluidic 25 um 6.14x, RDE 160"
+   },
+   {
+    "value": "8.84",
+    "kind": "ratio",
+    "covered": false,
+    "context": "d design current: unstirred batch 9.54x, stirred batch 8.84x, recirculating flow 4.93x, microfl"
+   },
+   {
+    "value": "9.54",
+    "kind": "ratio",
+    "covered": false,
+    "context": "rather than a declared design current: unstirred batch 9.54x, stirred batch 8.84x, recirculatin"
+   },
+   {
+    "value": "0.0115",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "cooling envelope: the construction of \u00a7S6.1 gives U\u2032 = 0.0115 W cm\u22122 K\u22121 for a 100 mL beaker in still a"
+   },
+   {
+    "value": "0.0129",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": " supplies unaided is set almost entirely by its own \u03c3: 0.0129 W cm\u22122 K\u22121 for the centimetre-gap cells a"
+   },
+   {
+    "value": "0.02",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "9.96 and U\u2032 = 0.0115 W cm\u22122 K\u22121. This is 43% below the 0.02 W cm\u22122 K\u22121 still-air value often assumed,"
+   },
+   {
+    "value": "0.043",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": " alone putting out 0.71 W cm\u22122 at 1000 mA cm\u22122 against 0.043 W cm\u22122 of passive rejection. The binding "
+   },
+   {
+    "value": "0.08",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "ection' claim flips at only 1.297x (U'_req crosses the 0.08 W cm-2 K-1 forced-air ceiling at kappa = "
+   },
+   {
+    "value": "0.099",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": " rests on it: S6.2 places the zero-gap cooling duty of 0.099 W cm-2 K-1 inside liquid-loop territory, "
+   },
+   {
+    "value": "0.1",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "SI sentence quoting stirred-liquid heat rejection near 0.1 W cm-2 K-1 is scoped to this row.U' liqui"
+   },
+   {
+    "value": "0.18",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "of two, rather than an unanchored guess.U' stirred bath0.18W cm-2 K-1assumption\u2014declared architectur"
+   },
+   {
+    "value": "0.30",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "corresponding coefficient for that cooling class, U\u2032 = 0.30 W cm\u22122 K\u22121, is not taken from that litera"
+   },
+   {
+    "value": "0.42",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "hem. Eng. 2024, 6, 1384772, which in fact reports 0.32\u20130.42 W cm\u22122 into the anodic fluid at 2 A cm\u22122 "
+   },
+   {
+    "value": "0.49",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": " = 4.36\u20138.23, D_h = 1\u20133 mm), which brackets it at 0.09\u20130.49 W cm\u22122 K\u22121 (Table S7i). Passive rejection"
+   },
+   {
+    "value": "0.71",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "ble on \u03ba at all, its activation term alone putting out 0.71 W cm\u22122 at 1000 mA cm\u22122 against 0.043 W cm"
+   },
+   {
+    "value": "0.84",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "1.9 V against a 1.48 V thermoneutral voltage generates 0.84 W cm\u22122, and at 3 A cm\u22122 and 2.1 V, 1.9 W "
+   },
+   {
+    "value": "1",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "e [0.8, 12.5] the derivable interval is 2.0e-3 to 3.1e-1 W cm-2 K-1, so the plotted band is a subs"
+   },
+   {
+    "value": "1.0",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": " is shading only.Cooling band: liquid cold plate2e-1 - 1.0W cm-2 K-1assumption\u2014Incropera, DeWitt, B"
+   },
+   {
+    "value": "1.098",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "gives E_cell = 12.98 V, of which 10.50 V is ohmic, q = 1.098 W cm-2, and a passive steady state of 120"
+   },
+   {
+    "value": "1.10",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "s a 5 mm gap gives 12.98 V, of which 10.50 V is ohmic, 1.10 W cm\u22122 of heat and a passive steady state"
+   },
+   {
+    "value": "1.9",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "tage generates 0.84 W cm\u22122, and at 3 A cm\u22122 and 2.1 V, 1.9 W cm\u22122. The corresponding coefficient for"
+   },
+   {
+    "value": "10",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": " K. That figure is stated conservatively: a range of 1\u201310 W cm\u22122 is sometimes quoted on a citation "
+   },
+   {
+    "value": "2",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "erm restored.Cooling band: natural convection8e-4 - 2e-2W cm-2 K-1assumption\u2014rows 'H_EXT' and the"
+   },
+   {
+    "value": "2.3",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": " reports. The overpotential heat at 100 mA cm\u22122 is q = 2.3 W cm\u22122. A 100 mL batch of DMF under 10 cm"
+   },
+   {
+    "value": "2.5",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "ectures of PEM electrolyzer stacks reject of order 0.3\u20132.5 W cm\u22122 across in-cell gradients of 14\u201327 "
+   },
+   {
+    "value": "2.6",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "t does not produce it). The derivable interval is 0.13-2.6 W cm-2 K-1 for sigma of about 1-2, agains"
+   },
+   {
+    "value": "5.4",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": "lter at Re = 3e3-3e4, Pr = 6 and D_h = 2 mm gives 0.86-5.4 W cm-2 K-1 turbulent. 0.30 is the mid-lam"
+   },
+   {
+    "value": "0",
+    "kind": "count of N",
+    "covered": true,
+    "context": "e \u226525 mA cm\u22122 count in an unstirred cell spans 9.00\u201318.0 of 50 about a central 12.0, and the stir"
+   },
+   {
+    "value": "11",
+    "kind": "count of N",
+    "covered": true,
+    "context": "t 9.3, 13-14 of 50 clearing 25 mA cm-2 about 14 and 11-11 of 50 clearing 50 about 11; the architec"
+   },
+   {
+    "value": "12",
+    "kind": "count of N",
+    "covered": true,
+    "context": "m and 6.11 at 300 um, the top of the typed band, while 12 of 50 clear 25 mA cm-2 and 9 of 50 clear"
+   },
+   {
+    "value": "14",
+    "kind": "count of N",
+    "covered": true,
+    "context": "s through to a median of 9.0-9.7 mA cm-2 about 9.3, 13-14 of 50 clearing 25 mA cm-2 about 14 and 1"
+   },
+   {
+    "value": "19",
+    "kind": "count of N",
+    "covered": true,
+    "context": " also deliberately oversamples carrier-borne current \u2014 19 of 50 entries (38%) are mediated or mole"
+   },
+   {
+    "value": "20",
+    "kind": "count of N",
+    "covered": true,
+    "context": "umn gives a median of 15.6-18.3 mA cm-2 about 16.8, 18-20 of 50 clearing 25 mA cm-2 about 18 and 1"
+   },
+   {
+    "value": "25",
+    "kind": "count of N",
+    "covered": true,
+    "context": " 44.2, 30-33 of 50 clearing 25 mA cm-2 about 31 and 20-25 of 50 clearing 50 about 24; the architec"
+   },
+   {
+    "value": "3",
+    "kind": "count of N",
+    "covered": true,
+    "context": "nside it \u2014 and is extrapolated in Reynolds, where only 3 of 50 lie inside. Eisenberg is retained "
+   },
+   {
+    "value": "33",
+    "kind": "count of N",
+    "covered": true,
+    "context": "umn gives a median of 39.7-49.9 mA cm-2 about 44.2, 30-33 of 50 clearing 25 mA cm-2 about 31 and 2"
+   },
+   {
+    "value": "34",
+    "kind": "count of N",
+    "covered": true,
+    "context": "edian of 111 mA cm-2, 36 of 50 clearing 25 mA cm-2 and 34 of 50 clearing 50 at both ends. What the"
+   },
+   {
+    "value": "35",
+    "kind": "count of N",
+    "covered": true,
+    "context": "A cm\u22122 (-30%), the count clearing 25 mA cm\u22122 goes 36 \u2192 35 of 50 and the count clearing 50 goes 34 "
+   },
+   {
+    "value": "36",
+    "kind": "count of N",
+    "covered": true,
+    "context": "etween 10\u201312, 12\u201314, 16\u201318, 29\u201331, 33\u201336, 33\u201336 and 33\u201336 of 50, and the architecture ordering uns"
+   },
+   {
+    "value": "42",
+    "kind": "count of N",
+    "covered": true,
+    "context": " the 48 (reaction, reactor) entries change at 1e-4 and 42 of 48 at 1e-6. The changes are negligibl"
+   },
+   {
+    "value": "44",
+    "kind": "count of N",
+    "covered": true,
+    "context": " rows here run Sc = 176\u201319006 with a median of 445, so 44 of 50 sit below the fitted floor and onl"
+   },
+   {
+    "value": "49",
+    "kind": "count of N",
+    "covered": true,
+    "context": "whereas the 50 reactions here span Sc = 176\u201319,006, so 49 of 50 rows sit outside the calibrated wi"
+   },
+   {
+    "value": "50",
+    "kind": "count of N",
+    "covered": true,
+    "context": "chmidt, while the second spans the Schmidt range \u2014 all 50 of 50 rows lie inside it \u2014 and is extrap"
+   },
+   {
+    "value": "9",
+    "kind": "count of N",
+    "covered": true,
+    "context": "of the typed band, while 12 of 50 clear 25 mA cm-2 and 9 of 50 clear 50 mA cm-2 at either film, s"
+   },
+   {
+    "value": "12",
+    "kind": "count/50",
+    "covered": true,
+    "context": "learing an industrially relevant 25 mA cm\u22122 rises from 12/50 to 36/50. Second, the benefit is m"
+   },
+   {
+    "value": "15",
+    "kind": "count/50",
+    "covered": true,
+    "context": ", supporting electrolyte: NaBr 4.10-2 mol.L-1' -> PhBr 15/50 = 0.30 M, NiBr2(bpy) 1.5/50 = 0.03"
+   },
+   {
+    "value": "25",
+    "kind": "count/50",
+    "covered": true,
+    "context": " remains the highest rung across that range.Thresholds 25 / 50 mA cm-225; 50mA cm-2measured\u2014Ferre"
+   },
+   {
+    "value": "32",
+    "kind": "count/50",
+    "covered": true,
+    "context": "counts are identical in every case (36/50 clearing 25, 32/50 clearing 50). No reported number o"
+   },
+   {
+    "value": "34",
+    "kind": "count/50",
+    "covered": true,
+    "context": "able S5: 9/50 reactions clear it in an unstirred cell, 34/50 at a rotating-cylinder electrode, "
+   },
+   {
+    "value": "36",
+    "kind": "count/50",
+    "covered": true,
+    "context": "n industrially relevant 25 mA cm\u22122 rises from 12/50 to 36/50. Second, the benefit is mechanism-"
+   },
+   {
+    "value": "5",
+    "kind": "count/50",
+    "covered": true,
+    "context": "r 4.10-2 mol.L-1' -> PhBr 15/50 = 0.30 M, NiBr2(bpy) 1.5/50 = 0.030 M, NaBr 0.04 M (Courtois/B"
+   },
+   {
+    "value": "9",
+    "kind": "count/50",
+    "covered": true,
+    "context": " integer. The unstirred counts are therefore 12/50 and 9/50. One caveat belongs with that numb"
+   },
+   {
+    "value": "0.00059",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "argest absolute movement is 0.0059 mA cm-2 at 1e-4 and 0.00059 mA cm-2 at 1e-6, a factor of ten for a fac"
+   },
+   {
+    "value": "0.0059",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "erturbation should -- the largest absolute movement is 0.0059 mA cm-2 at 1e-4 and 0.00059 mA cm-2 at 1e-"
+   },
+   {
+    "value": "0.75",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "eral times the planar-profile propylene diffusion cap, 0.75 mA cm\u22122, the excess reflecting the curved "
+   },
+   {
+    "value": "1",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "lmer asinh terms for the two electrodes (\u03b1 = 1\u20442, i0 = 1 mA cm\u22122 per electrode; both illustrative \u2014"
+   },
+   {
+    "value": "1.0",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " of 1-50 V in these cells.i0 (exchange current density)1.0mA cm-2assumption\u2014declared modelling choic"
+   },
+   {
+    "value": "1.16",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "8.24 mA cm\u22122 and the commuting bound F\u00b7D_med\u00b7C_med/\u03b4 = 1.16 mA cm\u22122 follow from them, as does \u03b3 = D_S\u00b7"
+   },
+   {
+    "value": "10",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "g material 2 concentration of 0.3M and electrolyzed at 10 mA cm2' with '1.6 equiv LiBr and 5 mol% ("
+   },
+   {
+    "value": "100",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "). The Joule dissipation per electrode area is (S19)At 100 mA cm\u22122 across the canonical 2 cm beaker g"
+   },
+   {
+    "value": "1000",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": ", its activation term alone putting out 0.71 W cm\u22122 at 1000 mA cm\u22122 against 0.043 W cm\u22122 of passive re"
+   },
+   {
+    "value": "108",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "cent solution, cathode heights 0.25-3.0 in., i_lim 0.4-108 mA cm-2 -- the archetype and the current r"
+   },
+   {
+    "value": "108.29",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "E column at all three values: median 108.49 / 108.37 / 108.29 mA cm-2, and the counts are identical in e"
+   },
+   {
+    "value": "111",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " column gives a column that does not move: a median of 111 mA cm-2, 36 of 50 clearing 25 mA cm-2 and "
+   },
+   {
+    "value": "121.7",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " (six architectures)8.2 / 9.3 / 16.8 / 110.7 / 108.5 / 121.7mA cm-2derived\u2014the median over the solved "
+   },
+   {
+    "value": "122",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "ell to 17 mA cm\u22122 in a recirculating flow cell and to \u2248122 mA cm\u22122 at a turbulent rotating-cylinder e"
+   },
+   {
+    "value": "131",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "point of one third of the carrier limit derived below, 131 mA cm\u22122, only 2.7% of the generated oxidan"
+   },
+   {
+    "value": "132",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "-dependent verdicts are MeCN in the RDE 1600 rpm (83 \u2192 132 mA cm\u22122 against 108); DMF in the RDE 1600 "
+   },
+   {
+    "value": "135.7",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "an shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider tha"
+   },
+   {
+    "value": "137.8",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": ". Concentration control reaches it, and resolves it at 137.8 mA cm\u22122, an amplification of 15.1 over tha"
+   },
+   {
+    "value": "15",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "nrepresentative but self-invalidating: at its apparent 15 mA cm\u22122 ceiling the 2 cm cell requires 52 "
+   },
+   {
+    "value": "157",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "nd the stirred beaker jumps from a 10 mA cm\u22122 floor to 157 mA cm\u22122. Second, the dilute-nitroxyl syste"
+   },
+   {
+    "value": "17",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "s rises from 8.2 mA cm\u22122 in an unstirred batch cell to 17 mA cm\u22122 in a recirculating flow cell and t"
+   },
+   {
+    "value": "172",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "m2 electrodes the passive ceiling runs 63, 79, 136 and 172 mA cm\u22122 at 50, 100, 500 and 1000 mL, so a "
+   },
+   {
+    "value": "18.3",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "t band the recirculating column gives a median of 15.6-18.3 mA cm-2 about 16.8, 18-20 of 50 clearing 2"
+   },
+   {
+    "value": "18.8",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "ffusivities (Table S6) and reach i_lim = 868, 18.0 and 18.8 mA cm\u22122, with 99 %, 97 % and 3 % of the ac"
+   },
+   {
+    "value": "180",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "nsification: for DMF it runs 79, 84, 84, 1116, 84, 76, 180 mA cm\u22122, flat wherever the gap is unchange"
+   },
+   {
+    "value": "185",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " against 108); DMF in the rotating cyl. 3000 rpm (76 \u2192 185 mA cm\u22122 against 122). Each is flagged as b"
+   },
+   {
+    "value": "192",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " produces the largest single change in the table (79 \u2192 192 mA cm\u22122 in the beaker, 1116 \u2192 1427 mA cm\u22122"
+   },
+   {
+    "value": "2000",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "+/- 50 mA cm-2 partial current over 200 h). Tested 500-2000 mA cm-2: the stack fails in all four elect"
+   },
+   {
+    "value": "203",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "32 mA cm\u22122 against 108); DMF in the RDE 1600 rpm (84 \u2192 203 mA cm\u22122 against 108); DMF in the rotating "
+   },
+   {
+    "value": "22",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "runs at 30 mM \u2014 and the 25 mM ACT mediator plateaus at 22 mA cm\u22122 in every architecture. For that cl"
+   },
+   {
+    "value": "23.7",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "_h = 4.27 \u00c5 on the deciding row (Ni-XEC C(sp2)-C(sp3), 23.7 mA cm\u22122 at best, 1.05\u00d7 short of the thresh"
+   },
+   {
+    "value": "25",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "related across the set. Of the 12 reactions that clear 25 mA cm\u22122 in the unstirred beaker, 10 are co"
+   },
+   {
+    "value": "25.6",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "\u22122 is HMF \u2192 FDCA (biomass) in the microfluidic cell at 25.6 mA cm\u22122, 2.6% above the threshold.S11. Con"
+   },
+   {
+    "value": "250",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "boils at 26, MeCN at 78, DMF at 79 and aqueous NaOH at 250 mA cm\u22122. Every ceiling in this section is "
+   },
+   {
+    "value": "250.2",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " 87.8 -> 78.2, DMF 88.8 -> 79.2, aqueous NaOH 282.4 -> 250.2 mA cm-2) and changes none of the 20 archit"
+   },
+   {
+    "value": "26.3",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "206 mS cm-1 the ceilings are 6.9/7.3/7.4/155.1/7.4/6.7/26.3 mA cm-2 against transport ceilings of 8.2/"
+   },
+   {
+    "value": "282.50",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "s the unstirred-beaker boil-off ceiling from 285.05 to 282.50 mA cm-2, i.e. the margin against that cell"
+   },
+   {
+    "value": "3.6",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "elow, 131 mA cm\u22122, only 2.7% of the generated oxidant (3.6 mA cm\u22122 equivalent \u2014 several times the pla"
+   },
+   {
+    "value": "30",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "tch (\u00d713\u2013\u00d722) yet land at nearly the same 14\u201322 and 14\u201330 mA cm\u22122 in every reactor from beaker to RC"
+   },
+   {
+    "value": "300",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "eow et al.:28 their headline runs oxidize 1.0 M KCl at 300 mA cm\u22122 with ethylene sparged into the ano"
+   },
+   {
+    "value": "420",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "en move from 26 to 38, 78 to 124, 79 to 192 and 250 to 420 mA cm\u22122 respectively, and across all 28 (a"
+   },
+   {
+    "value": "478",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "ceilings run 29 -> 42, 88 -> 140, 89 -> 215 and 282 -> 478 mA cm-2. Across all 28 (architecture, solv"
+   },
+   {
+    "value": "48.24",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "ions in Table S7d, and the substrate cap F\u00b7D_S\u00b7C_S/\u03b4 = 48.24 mA cm\u22122 and the commuting bound F\u00b7D_med\u00b7C_"
+   },
+   {
+    "value": "50",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "f any single architecture moves by at most \u00b11 and the \u226550 mA cm\u22122 count by at most \u00b11 from any one r"
+   },
+   {
+    "value": "57",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " vessel: tetrahydrofuran's ceiling runs 21 / 26 / 45 / 57 mA cm-2 over the same sweep against an uns"
+   },
+   {
+    "value": "75.9",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "S cm-1 the ceilings are 38.7/40.8/41.0/461.7/41.0/37.3/75.9 mA cm-2 against transport ceilings of 8.2/"
+   },
+   {
+    "value": "79",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "ble in an unstirred beaker of DMF, consistent with the 79 mA cm\u22122 passive ceiling \u00a7S6.1 reports for "
+   },
+   {
+    "value": "8",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " as a validation. At k = 0 the same row's ceiling was \u22488 mA cm\u22122 in the rotating-cylinder cell and "
+   },
+   {
+    "value": "8.01",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "pread in nu and D is included. The unstirred median is 8.01 mA cm-2 at 228 um and 6.11 at 300 um, the "
+   },
+   {
+    "value": "8.2",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "an limiting current across the 50 reactions rises from 8.2 mA cm\u22122 in an unstirred batch cell to 17 m"
+   },
+   {
+    "value": "85.1",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "t, so the rotating-cylinder median falls from 121.7 to 85.1 mA cm\u22122 (-30%), the count clearing 25 mA c"
+   },
+   {
+    "value": "85.8",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "1 and every beaker ceiling by about +/-6 pct (DMF 80.3-85.8 mA cm-2). Nothing flips.H_EXT (external fi"
+   },
+   {
+    "value": "9.1",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "ured stirred-cell film of 200 \u00b1 7 \u03bcm gives a median of 9.1 mA cm\u22122, but the overlapping unstirred-fil"
+   },
+   {
+    "value": "9.14",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " ramp dies far below the cell's own commuting bound of 9.14 mA cm\u22122, which a homogeneous source that o"
+   },
+   {
+    "value": "9.6",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "\u22121 s\u22121 (\u00a7S5.7) the row's recirculating-flow ceiling is 9.6 mA cm\u22122 (5.7\u201311.0 across the measured brac"
+   },
+   {
+    "value": "9.7",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "certainty, +/-7 um, carries through to a median of 9.0-9.7 mA cm-2 about 9.3, 13-14 of 50 clearing 25"
+   },
+   {
+    "value": "0.206",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "er. Band 0.2\u20136.6 mS cm\u22121, with a state-B hard floor of 0.206 mS cm\u22121 obtained by ohmic differencing on "
+   },
+   {
+    "value": "0.256",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "hat margin where it appears; the floor for this row is 0.256 mS cm\u22121, which is the highest concentratio"
+   },
+   {
+    "value": "0.26",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "ement points higher. The band is therefore reported as 0.26 mS cm-1 to not established above; the two "
+   },
+   {
+    "value": "0.51",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "ade supporting electrolytes such as 0.1 M Bu4NPF6/THF (0.51 mS cm\u22121 at 22.0 \u00b1 1.0 \u00b0C; Zhang et al., JA"
+   },
+   {
+    "value": "1.5",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "d by rounding alone -- raises it to 6.58. do not adopt 1.5 mS cm-1 as a derived point value: it fails"
+   },
+   {
+    "value": "13.1",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "ows why. Continuing kappa ~ c^1.75 to 3.0 M would give 13.1 mS cm-1, four times the carried value, so "
+   },
+   {
+    "value": "13.16",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": ", and the 13.8 V figure leaves the 10\u201320 V band at \u03ba = 13.16 mS cm\u22121 (\u00d71.50) or \u03ba = 5.68 mS cm\u22121 (\u00d70.65"
+   },
+   {
+    "value": "14.11",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": " estimate. T_ss falls back to the boiling point at \u03ba = 14.11 mS cm\u22121, a margin of 1.61\u00d7, and the 13.8 V"
+   },
+   {
+    "value": "16",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "5.68 mS cm\u22121 (\u00d70.65). Both thresholds lie inside the 4\u201316 mS cm\u22121 band of that row, so both statemen"
+   },
+   {
+    "value": "16.27",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "e value adopted \u2014 and with it a hard ceiling \u03ba \u2264 c\u039b\u00b0 = 16.27 mS cm\u22121. \u039b(c) at 0.2 M has never been meas"
+   },
+   {
+    "value": "16.38",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "<= c Lambda0 = 2.000e-4 mol cm-3 x 81.92 S cm2 mol-1 = 16.38 mS cm-1, since Lambda(c) <= Lambda0 for al"
+   },
+   {
+    "value": "166",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": " from p. 5-71 (NaOH 2% = 93.1, 5% = 206 mS cm\u22121) \u2192 162\u2013166 mS cm\u22121 at 20 \u00b0C, corrected 20 \u2192 25 \u00b0C at "
+   },
+   {
+    "value": "174.5",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": " established. The aqueous reference uses 1 M NaOH (\u03ba = 174.5 mS cm\u22121, now measured), and its CRC citati"
+   },
+   {
+    "value": "18.9",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "nd \u03c1(MeCN) = 0.7768 g cm\u22123 giving m\u0304 = 0.347 \u2014 returns 18.9 mS cm\u22121. The two agree to 5.6%, which is t"
+   },
+   {
+    "value": "182",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "a 20 \u2192 25 \u00b0C correction at \u03b1 = 1.5\u20131.9%/K, derives 174\u2013182 mS cm\u22121.10 The adopted 174.5 mS cm\u22121 is no"
+   },
+   {
+    "value": "19.95",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "ve anywhere in the band. MeCN uses 0.25 M Bu4NBF4 (\u03ba = 19.95 mS cm\u22121), now measured: it is read directl"
+   },
+   {
+    "value": "206",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": " mass %), \u03ba(mass %) from p. 5-71 (NaOH 2% = 93.1, 5% = 206 mS cm\u22121) \u2192 162\u2013166 mS cm\u22121 at 20 \u00b0C, corre"
+   },
+   {
+    "value": "23",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "3519 (32.75 derived vs 32.3 tabulated, +1.4%). Band 15\u201323 mS cm\u22121. A mass-action bound of 24\u201336 mS c"
+   },
+   {
+    "value": "3",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": " in 320 mL THF, SM p. S15) but whose conductivity, \u03ba \u2248 3 mS cm\u22121, is an order-of-magnitude estimate"
+   },
+   {
+    "value": "3.0",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "dicts. Recomputed from the lumped thermal model at \u03ba = 3.0 mS cm\u22121 and T_b = 66 \u00b0C, and judged agains"
+   },
+   {
+    "value": "3.000",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": ".5/121.7/1000.0, so 1 of the 7 architectures clear; at 3.000 mS cm-1 the ceilings are 26.3/27.7/27.9/39"
+   },
+   {
+    "value": "3.89",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "sses the 0.08 W cm-2 K-1 forced-air ceiling at kappa = 3.89 mS cm-1; U' = 0.0986 at 3.0, 0.0544 at 6.5"
+   },
+   {
+    "value": "32.3",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": ". Cross-check: Gong Table 3, p. 3519 (Bu4NBF4/AN, 1 M, 32.3 mS cm-1, tabulated after Izutsu 2009)Carri"
+   },
+   {
+    "value": "33.40",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "fit the same article prints in Table 3, p. 1499 (\u03ba_max 33.40 mS cm\u22121, m\u0304_max 1.48127 mol kg\u22121, a 0.7864"
+   },
+   {
+    "value": "34.8",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "00 rpm 0.62x. The two shortfalls would reverse only at 34.8 mS cm-1 (1.74x carried, RDE 1600 rpm) and "
+   },
+   {
+    "value": "35.6",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "the fitting window); continued to 3.0 M they give 10.9\u201335.6 mS cm\u22121, all below the rotating-disc rever"
+   },
+   {
+    "value": "36",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": " +1.4%). Band 15\u201323 mS cm\u22121. A mass-action bound of 24\u201336 mS cm\u22121 is not used: it is a Lee\u2013Wheaton e"
+   },
+   {
+    "value": "4.76",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "he same example in 0.1 M Bu4NBF4/DMF \u2014 measured at \u03ba = 4.76 mS cm\u22121 (Table S7f) \u2014 across a 5 mm gap gi"
+   },
+   {
+    "value": "5.68",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "s the 10\u201320 V band at \u03ba = 13.16 mS cm\u22121 (\u00d71.50) or \u03ba = 5.68 mS cm\u22121 (\u00d70.65). Both thresholds lie insid"
+   },
+   {
+    "value": "53.9",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "only at 34.8 mS cm-1 (1.74x carried, RDE 1600 rpm) and 53.9 mS cm-1 (2.70x carried, rotating cyl. 3000"
+   },
+   {
+    "value": "6.580",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": ".5/121.7/1000.0, so 4 of the 7 architectures clear; at 6.580 mS cm-1 the ceilings are 38.7/40.8/41.0/46"
+   },
+   {
+    "value": "6.6",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "ally complete and \u03ba cannot be derived either. Band 0.2\u20136.6 mS cm\u22121, with a state-B hard floor of 0.20"
+   },
+   {
+    "value": "8.30",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "l activity coefficients and Onsager relaxation \u2014 gives 8.30 mS cm\u22121, within 5% of the adopted value. T"
+   },
+   {
+    "value": "8.77",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "\u039b\u00b0 at 0.2 M is 0.539, giving \u03ba = 0.2 \u00d7 81.35 \u00d7 0.539 = 8.77 mS cm\u22121. The single assumption \u2014 equal att"
+   },
+   {
+    "value": "8.9",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "of the cell it was built from, with the handbook's \u03ba = 8.9 mS cm\u22121 at 20 \u00b0C (Table S7i) carried to 9."
+   },
+   {
+    "value": "9.72",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "r limiting law on that same methanol measurement gives 9.72 mS cm\u22121 as the better estimate. The floor "
+   },
+   {
+    "value": "9.8",
+    "kind": "mS/cm",
+    "covered": true,
+    "context": "'s \u03ba = 8.9 mS cm\u22121 at 20 \u00b0C (Table S7i) carried to 9.6\u20139.8 mS cm\u22121 at 25 \u00b0C on the same 1.5\u20131.9%/K co"
+   },
+   {
+    "value": "0.07",
+    "kind": "ratio",
+    "covered": true,
+    "context": "all and its fails -- all four electrolytes, at margins 0.07x, 0.11x, 0.18x, 0.15x -- stand unaf"
+   },
+   {
+    "value": "0.11",
+    "kind": "ratio",
+    "covered": true,
+    "context": ", i.e. sigma in [0.51, 1.52]: the zero-gap margin runs 0.11x-0.23x against i_design = 1000 mA c"
+   },
+   {
+    "value": "0.15",
+    "kind": "ratio",
+    "covered": true,
+    "context": "all four electrolytes, at margins 0.07x, 0.11x, 0.18x, 0.15x -- stand unaffected; (ii) the fail"
+   },
+   {
+    "value": "0.17",
+    "kind": "ratio",
+    "covered": true,
+    "context": "he breaking points lie far below it -- the tightest is 0.17x the declared 7.0. This row carries"
+   },
+   {
+    "value": "0.18",
+    "kind": "ratio",
+    "covered": true,
+    "context": " = 1.0 instead of 0.8 would move the margins from 0.07-0.18x to 0.08-0.21x.h_int (stagnant elec"
+   },
+   {
+    "value": "0.21",
+    "kind": "ratio",
+    "covered": true,
+    "context": " of 0.8 would move the margins from 0.07-0.18x to 0.08-0.21x.h_int (stagnant electrolyte)100W m"
+   },
+   {
+    "value": "0.23",
+    "kind": "ratio",
+    "covered": true,
+    "context": "t the stack all four solvents still fail (margins 0.04-0.23x); at the microfluidic all four sti"
+   },
+   {
+    "value": "0.26",
+    "kind": "ratio",
+    "covered": true,
+    "context": "els are the two rotating cells (RDE 1600 rpm in THF at 0.26x; RDE 1600 rpm in MeCN at 0.77x; RD"
+   },
+   {
+    "value": "0.36",
+    "kind": "ratio",
+    "covered": true,
+    "context": "c chip: those four verdicts would reverse only at 0.03-0.36x the carried conductivity, far belo"
+   },
+   {
+    "value": "0.37",
+    "kind": "ratio",
+    "covered": true,
+    "context": "rpm in DMF at 0.59x; rotating cyl. 3000 rpm in MeCN at 0.37x; rotating cyl. 3000 rpm in DMF at "
+   },
+   {
+    "value": "0.39",
+    "kind": "ratio",
+    "covered": true,
+    "context": "rpm in MeCN at 0.37x; rotating cyl. 3000 rpm in DMF at 0.39x). The tetrahydrofuran verdicts at "
+   },
+   {
+    "value": "0.57",
+    "kind": "ratio",
+    "covered": true,
+    "context": "amide at a rotating electrode (RDE 1600 rpm in MeCN at 0.57x; RDE 1600 rpm in DMF at 0.59x; rot"
+   },
+   {
+    "value": "0.59",
+    "kind": "ratio",
+    "covered": true,
+    "context": "(RDE 1600 rpm in MeCN at 0.57x; RDE 1600 rpm in DMF at 0.59x; rotating cyl. 3000 rpm in MeCN at"
+   },
+   {
+    "value": "0.62",
+    "kind": "ratio",
+    "covered": true,
+    "context": "5 um 6.14x, RDE 1600 rpm 0.77x, rotating cyl. 3000 rpm 0.62x. The two shortfalls would reverse "
+   },
+   {
+    "value": "0.63",
+    "kind": "ratio",
+    "covered": true,
+    "context": " disc (margin 0.77x) and the rotating cylinder (margin 0.63x) and the stack, and its microfluid"
+   },
+   {
+    "value": "0.755",
+    "kind": "ratio",
+    "covered": true,
+    "context": ", the Sc^(1/3) asymptote moves per-row values by 0.667-0.755x and the RCE median 121.7 -> 85.1 m"
+   },
+   {
+    "value": "0.77",
+    "kind": "ratio",
+    "covered": true,
+    "context": "ry modelled archetype except the rotating disc (margin 0.77x) and the rotating cylinder (margin"
+   },
+   {
+    "value": "1",
+    "kind": "ratio",
+    "covered": true,
+    "context": "height 5.09 cm): A_external = 0.00996 m2 over 10 cm2 = 1\u00d710\u22123 m2 of electrode, so \u03c3 = 9.96 a"
+   },
+   {
+    "value": "1.01",
+    "kind": "ratio",
+    "covered": true,
+    "context": "(architecture, solvent) pairs the bracket factor spans 1.01x-2.43x. What depends on it: 25 of t"
+   },
+   {
+    "value": "1.14",
+    "kind": "ratio",
+    "covered": true,
+    "context": "value sits. The contrast with the stirred archetype is 1.14x at the central value and 1.49x at "
+   },
+   {
+    "value": "1.16",
+    "kind": "ratio",
+    "covered": true,
+    "context": "are compared centre against centre and the contrast is 1.16x rather than the 1.49x an edge-agai"
+   },
+   {
+    "value": "1.21",
+    "kind": "ratio",
+    "covered": true,
+    "context": "ves 0.01115 m2 and a 6 cm vessel 0.00920 m2, a span of 1.21x.h natural convection (air)7W m-2 K"
+   },
+   {
+    "value": "1.297",
+    "kind": "ratio",
+    "covered": true,
+    "context": " passive and forced-air rejection' claim flips at only 1.297x (U'_req crosses the 0.08 W cm-2 K-"
+   },
+   {
+    "value": "1.3",
+    "kind": "ratio",
+    "covered": true,
+    "context": "old plate in the construction still clears the duty by 1.3x, and the margin runs to 26x at the"
+   },
+   {
+    "value": "1.4",
+    "kind": "ratio",
+    "covered": true,
+    "context": "as L^-1/2 and every ceiling on this gap rises by up to 1.4x at 1 cm. 4 of the 7 archetypes sha"
+   },
+   {
+    "value": "1.48",
+    "kind": "ratio",
+    "covered": true,
+    "context": "xed)derived; the source's own diffusion-layer form \u03b4 = 1.48 x (Sc Gr)^\u22121\u20444 (Eq. XVII) at a decla"
+   },
+   {
+    "value": "1.49",
+    "kind": "ratio",
+    "covered": true,
+    "context": "he stirred archetype is 1.14x at the central value and 1.49x at 300 um; it is the softest compa"
+   },
+   {
+    "value": "1.5",
+    "kind": "ratio",
+    "covered": true,
+    "context": "le S1 footnote a): 'undivided cell, anode and cathode (1.5 x 1.5 cm2, J = 8.9 mA/cm2), 1 (0.3 m"
+   },
+   {
+    "value": "1.52",
+    "kind": "ratio",
+    "covered": true,
+    "context": "00 rpm (76 -> 185 mA cm-2 against 122, margin 0.63x -> 1.52x). Every one of them is reported as"
+   },
+   {
+    "value": "1.6",
+    "kind": "ratio",
+    "covered": true,
+    "context": "5 mol% (relative to species 2) Ni catalyst' -- so LiBr 1.6 x 0.3 = 0.48 M and Ni 5 mol% x 0.3 ="
+   },
+   {
+    "value": "1.61",
+    "kind": "ratio",
+    "covered": true,
+    "context": "oint' flips at kappa_crit = 14.11 mS cm-1, a margin of 1.61x, which is inside the honest 4-16 b"
+   },
+   {
+    "value": "1.66",
+    "kind": "ratio",
+    "covered": true,
+    "context": "(RDE 1600 rpm in MeCN at 1.69x; RDE 1600 rpm in DMF at 1.66x). A cell with twice the outer surf"
+   },
+   {
+    "value": "1.74",
+    "kind": "ratio",
+    "covered": true,
+    "context": "The two shortfalls would reverse only at 34.8 mS cm-1 (1.74x carried, RDE 1600 rpm) and 53.9 mS"
+   },
+   {
+    "value": "1.8",
+    "kind": "ratio",
+    "covered": true,
+    "context": "N (measured 2.4\u00d710\u22125 cm2 s\u22121) our implementation gives 1.8\u00d710\u22125 cm2 s\u22121, \u221224%. The miss is in "
+   },
+   {
+    "value": "1.87",
+    "kind": "ratio",
+    "covered": true,
+    "context": "00 rpm (84 -> 203 mA cm-2 against 108, margin 0.77x -> 1.87x); DMF in the rotating cyl. 3000 rp"
+   },
+   {
+    "value": "10",
+    "kind": "ratio",
+    "covered": true,
+    "context": " most generous possible revision -- multiplies them by 10x and 5x and leaves both still below"
+   },
+   {
+    "value": "10.1",
+    "kind": "ratio",
+    "covered": true,
+    "context": "n 0.63x) and the stack, and its microfluidic margin is 10.1x. The binding kappa-axis verdict is"
+   },
+   {
+    "value": "11.83",
+    "kind": "ratio",
+    "covered": true,
+    "context": "x, MeCN 4.02-8.09x, DMF 7.49-11.93x, aqueous NaOH 5.40-11.83x). i0 can matter only where activat"
+   },
+   {
+    "value": "11.93",
+    "kind": "ratio",
+    "covered": true,
+    "context": "still clear (THF 2.60-4.26x, MeCN 4.02-8.09x, DMF 7.49-11.93x, aqueous NaOH 5.40-11.83x). i0 can"
+   },
+   {
+    "value": "13.2",
+    "kind": "ratio",
+    "covered": true,
+    "context": "pct of one another while their transport ceilings span 13.2x.Inter-electrode gap (rotating cyli"
+   },
+   {
+    "value": "15.2",
+    "kind": "ratio",
+    "covered": true,
+    "context": "architecture ordering and the unstirred-to-RCE span of 15.2x hold across the whole interval, so"
+   },
+   {
+    "value": "16",
+    "kind": "ratio",
+    "covered": true,
+    "context": "gth and velocity, and the pressure-drop ratio 1/h^2 is 16x whatever the velocity. Changing th"
+   },
+   {
+    "value": "16.5",
+    "kind": "ratio",
+    "covered": true,
+    "context": "mA cm-2. Where THF does fall short the multipliers are 16.5x (rotating disc) and 25.7x (rotatin"
+   },
+   {
+    "value": "2",
+    "kind": "ratio",
+    "covered": true,
+    "context": "ating pointdelta ~ omega^(-1/2), so 400-3600 rpm spans 2x in delta and 2x in i_lim. The RDE "
+   },
+   {
+    "value": "2.00",
+    "kind": "ratio",
+    "covered": true,
+    "context": "ximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are i"
+   },
+   {
+    "value": "2.08",
+    "kind": "ratio",
+    "covered": true,
+    "context": "pa(T_b)/kappa(25 C) are a function of T_b alone -- THF 2.08x, MeCN 2.63x, aq. NaOH 3.37x, DMF 6"
+   },
+   {
+    "value": "2.1",
+    "kind": "ratio",
+    "covered": true,
+    "context": "ppa) bound against, so the declared 15 kJ mol-1 is 1.8-2.1x the measured range -- an upper bou"
+   },
+   {
+    "value": "2.19",
+    "kind": "ratio",
+    "covered": true,
+    "context": "he rotating disc at 16.5x, against a band whose top is 2.19x the carried value, so every THF ve"
+   },
+   {
+    "value": "2.4",
+    "kind": "ratio",
+    "covered": true,
+    "context": "ls outside that band: against ferrocene/MeCN (measured 2.4\u00d710\u22125 cm2 s\u22121) our implementation gi"
+   },
+   {
+    "value": "2.43",
+    "kind": "ratio",
+    "covered": true,
+    "context": "tecture, solvent) pairs the bracket factor spans 1.01x-2.43x. What depends on it: 25 of the 28 "
+   },
+   {
+    "value": "2.5",
+    "kind": "ratio",
+    "covered": true,
+    "context": "/3) in the entrance regime, so the 4x gap step gives a 2.5x film step at any common length and"
+   },
+   {
+    "value": "2.63",
+    "kind": "ratio",
+    "covered": true,
+    "context": "a(25 C) are a function of T_b alone -- THF 2.08x, MeCN 2.63x, aq. NaOH 3.37x, DMF 6.14x -- and "
+   },
+   {
+    "value": "2.70",
+    "kind": "ratio",
+    "covered": true,
+    "context": "S cm-1 (1.74x carried, RDE 1600 rpm) and 53.9 mS cm-1 (2.70x carried, rotating cyl. 3000 rpm), "
+   },
+   {
+    "value": "22.05",
+    "kind": "ratio",
+    "covered": true,
+    "context": ".37x, MeCN 3.51-14.51x, DMF 6.09-21.36x, aq. NaOH 4.72-22.05x), and the breaking points lie far "
+   },
+   {
+    "value": "23.9",
+    "kind": "ratio",
+    "covered": true,
+    "context": "der gain is 6.9-6.9x at the adopted value against 23.9-23.9x at k = 0. With every sourced row m"
+   },
+   {
+    "value": "25",
+    "kind": "ratio",
+    "covered": true,
+    "context": "989 on the table's 0.1 mass pct row, drho/rho = 0.078, 25x the declared centre, and a film th"
+   },
+   {
+    "value": "25.0",
+    "kind": "ratio",
+    "covered": true,
+    "context": "der gain is 3.3-3.4x at the adopted value against 23.9-25.0x at k = 0. With every sourced row m"
+   },
+   {
+    "value": "25.7",
+    "kind": "ratio",
+    "covered": true,
+    "context": "ll short the multipliers are 16.5x (rotating disc) and 25.7x (rotating cylinder), with the zero"
+   },
+   {
+    "value": "26",
+    "kind": "ratio",
+    "covered": true,
+    "context": " still clears the duty by 1.3x, and the margin runs to 26x at the top. The conclusion is ther"
+   },
+   {
+    "value": "26.1",
+    "kind": "ratio",
+    "covered": true,
+    "context": "der gain is 3.1-4.8x at the adopted value against 23.3-26.1x at k = 0. With every sourced row m"
+   },
+   {
+    "value": "3",
+    "kind": "ratio",
+    "covered": true,
+    "context": "t is verified to machine precision (max face deviation 3\u00d710\u221212, \u00a7S5.6). Total mediator is li"
+   },
+   {
+    "value": "3.00",
+    "kind": "ratio",
+    "covered": true,
+    "context": " p. 58 (the aluminium holder for the small-scale cell, 3.00 x 3.00 inch, 'Unit: inch'), with the"
+   },
+   {
+    "value": "3.37",
+    "kind": "ratio",
+    "covered": true,
+    "context": "nction of T_b alone -- THF 2.08x, MeCN 2.63x, aq. NaOH 3.37x, DMF 6.14x -- and the unstirred-be"
+   },
+   {
+    "value": "3.4",
+    "kind": "ratio",
+    "covered": true,
+    "context": "ectures the unstirred-to-rotating-cylinder gain is 3.3-3.4x at the adopted value against 23.9-"
+   },
+   {
+    "value": "34.8",
+    "kind": "ratio",
+    "covered": true,
+    "context": " cell's own transport ceiling of 8.2 mA cm-2 goes from 34.8x to 34.5x. The aqueous reference cl"
+   },
+   {
+    "value": "4",
+    "kind": "ratio",
+    "covered": true,
+    "context": "^(2/3) L^(1/3) u^(-1/3) in the entrance regime, so the 4x gap step gives a 2.5x film step at"
+   },
+   {
+    "value": "4.26",
+    "kind": "ratio",
+    "covered": true,
+    "context": "x); at the microfluidic all four still clear (THF 2.60-4.26x, MeCN 4.02-8.09x, DMF 7.49-11.93x,"
+   },
+   {
+    "value": "4.8",
+    "kind": "ratio",
+    "covered": true,
+    "context": "ectures the unstirred-to-rotating-cylinder gain is 3.1-4.8x at the adopted value against 23.3-"
+   },
+   {
+    "value": "5",
+    "kind": "ratio",
+    "covered": true,
+    "context": "nerous possible revision -- multiplies them by 10x and 5x and leaves both still below 25 mA "
+   },
+   {
+    "value": "50",
+    "kind": "ratio",
+    "covered": true,
+    "context": "n, entries 9-12 = 4; p. 3: FEP spacers 0.001-0.005 in, 50 x 50 x 3 mm glassy-carbon platesThe "
+   },
+   {
+    "value": "6.14",
+    "kind": "ratio",
+    "covered": true,
+    "context": "ch 8.84x, recirculating flow 4.93x, microfluidic 25 um 6.14x, RDE 1600 rpm 0.77x, rotating cyl."
+   },
+   {
+    "value": "6.9",
+    "kind": "ratio",
+    "covered": true,
+    "context": "ectures the unstirred-to-rotating-cylinder gain is 6.9-6.9x at the adopted value against 23.9-"
+   },
+   {
+    "value": "7",
+    "kind": "ratio",
+    "covered": true,
+    "context": ".0 \u00c5 for M(bpy)/M(salen) cores), consistent with the 3\u20137\u00d710\u22126 cm2 s\u22121 range reported for suc"
+   },
+   {
+    "value": "7.37",
+    "kind": "ratio",
+    "covered": true,
+    "context": "ctrolyte clears at every point in that range (THF 2.19-7.37x, MeCN 3.51-14.51x, DMF 6.09-21.36x"
+   },
+   {
+    "value": "8",
+    "kind": "ratio",
+    "covered": true,
+    "context": "irred batch and ANEC flow-cell columns shown; the full 8\u00d77 matrix is solved). Fitting ln i_l"
+   },
+   {
+    "value": "8.09",
+    "kind": "ratio",
+    "covered": true,
+    "context": "luidic all four still clear (THF 2.60-4.26x, MeCN 4.02-8.09x, DMF 7.49-11.93x, aqueous NaOH 5.4"
+   },
+   {
+    "value": "9",
+    "kind": "ratio",
+    "covered": true,
+    "context": "flips.D_S, substrate (catalyst-carried rows, S5.7)1.0e-9 x (0.369 / mu)m2 s-1assumption\u2014Decla"
+   }
+  ],
+  "MS": [
+   {
+    "value": "868",
+    "kind": "mA/cm2",
+    "covered": false,
+    "context": "ont to five times the bromide bulk, and the ceiling of 868 mA cm\u22122 is set by how fast amide reaches t"
+   },
+   {
+    "value": "1",
+    "kind": "W/cm2",
+    "covered": true,
+    "context": " a 13 V cell dominated by ohmic loss and approximately 1 W cm\u22122 of heat. The corresponding batch r"
+   },
+   {
+    "value": "10",
+    "kind": "count of N",
+    "covered": true,
+    "context": "t-carried ceiling 7-fold, from 0.8 to 5.3 mA cm\u22122, yet 10 of 11 reactions remain below 25 mA cm\u22122 "
+   },
+   {
+    "value": "11",
+    "kind": "count of N",
+    "covered": true,
+    "context": "ell, the median limiting current is 9 mA cm\u22122 and only 11 of 50 reactions exceed 50 mA cm\u22122. Reduc"
+   },
+   {
+    "value": "28",
+    "kind": "count of N",
+    "covered": true,
+    "context": "nds on the current-carrying species. Convection allows 28 of 31 substrate-carried reactions to cle"
+   },
+   {
+    "value": "34",
+    "kind": "count of N",
+    "covered": true,
+    "context": " that count from 9 of 50 in the unstirred archetype to 34 of 50 at a rotating-cylinder electrode ("
+   },
+   {
+    "value": "36",
+    "kind": "count of N",
+    "covered": true,
+    "context": "trode. The number clearing 25 mA cm\u22122 rises from 12 to 36 of 50. For substrate-carried chemistry, "
+   },
+   {
+    "value": "9",
+    "kind": "count of N",
+    "covered": true,
+    "context": "xceed 50 mA cm\u22122. Reducing \u03b4 increases that count from 9 of 50 in the unstirred archetype to 34 o"
+   },
+   {
+    "value": "34",
+    "kind": "count/50",
+    "covered": true,
+    "context": "50 mA cm\u22122 increases from 9/50 in an unstirred cell to 34/50 at a rotating-cylinder electrode. "
+   },
+   {
+    "value": "36",
+    "kind": "count/50",
+    "covered": true,
+    "context": "l current-density threshold10\u2013100 g\u226525 (needs flow; 18\u201336/50 clear)flow cell / micro-flow; divi"
+   },
+   {
+    "value": "9",
+    "kind": "count/50",
+    "covered": true,
+    "context": "umber of reactions exceeding 50 mA cm\u22122 increases from 9/50 in an unstirred cell to 34/50 at a"
+   },
+   {
+    "value": "1",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "none offers divided cells, one is limited to less than 1 mA cm\u22122, and another reports neither curre"
+   },
+   {
+    "value": "100",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " that, these systems have run for about 1,000 hours at 100 mA cm\u22122 while delivering 20 wt% H2O2, and "
+   },
+   {
+    "value": "111",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " in recirculating flow, 44.2 mA cm\u22122 in the ANEC cell, 111 mA cm\u22122 in the 25 \u03bcm microfluidic cell, an"
+   },
+   {
+    "value": "122",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " cell, 111 mA cm\u22122 in the 25 \u03bcm microfluidic cell, and 122 mA cm\u22122 at a rotating-cylinder electrode. "
+   },
+   {
+    "value": "16.8",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "e unstirred archetype to 9.3 mA cm\u22122 in stirred batch, 16.8 mA cm\u22122 in recirculating flow, 44.2 mA cm\u2212"
+   },
+   {
+    "value": "17",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " Forced convection raises the median ceiling from 9 to 17 mA cm\u22122 in a recirculating flow cell and t"
+   },
+   {
+    "value": "18.0",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "the substrate stays at 93 % of bulk, so its ceiling of 18.0 mA cm\u22122 is the Sav\u00e9ant current F C_med \u221a(D"
+   },
+   {
+    "value": "18.8",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "o most of the PINO leaves unreacted and its ceiling of 18.8 mA cm\u22122 is the mediator's own transport bo"
+   },
+   {
+    "value": "20",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "trooxidation of liquid alkenes had been confined below 20 mA cm\u22122.51 Anthraquinone autoxidation has "
+   },
+   {
+    "value": "25",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "s, and most processes under development operated below 25 mA cm\u22122 (Figure 1d).4 This sharp drop-off "
+   },
+   {
+    "value": "26",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " gap reaches the boiling point of THF at approximately 26 mA cm\u22122, compared with 78-79 mA cm\u22122 for M"
+   },
+   {
+    "value": "395",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "rs ohmic heating and raises the modeled THF ceiling to 395 mA cm\u22122 in the 25 \u03bcm microfluidic cell (Fi"
+   },
+   {
+    "value": "44",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "om 9 to 17 mA cm\u22122 in a recirculating flow cell and to 44 mA cm\u22122 in the angled-inlet ANEC cell. Tie"
+   },
+   {
+    "value": "44.2",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": " in stirred batch, 16.8 mA cm\u22122 in recirculating flow, 44.2 mA cm\u22122 in the ANEC cell, 111 mA cm\u22122 in t"
+   },
+   {
+    "value": "5",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "sification raises the median ceiling from about 0.8 to 5 mA cm\u22122, yet 10 of 11 remain below 25 mA c"
+   },
+   {
+    "value": "5.3",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "he median catalyst-carried ceiling 7-fold, from 0.8 to 5.3 mA cm\u22122, yet 10 of 11 reactions remain bel"
+   },
+   {
+    "value": "50",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "tecture cases as \u03b4 decreases; dotted lines mark 25 and 50 mA cm\u22122. (c) Calculated substrate profiles"
+   },
+   {
+    "value": "79",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "t of THF at approximately 26 mA cm\u22122, compared with 78-79 mA cm\u22122 for MeCN and DMF (Figure 7a). Redu"
+   },
+   {
+    "value": "8.2",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "on set, the median limiting current density rises from 8.2 mA cm\u22122 in the unstirred archetype to 9.3 "
+   },
+   {
+    "value": "9",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "but the median reaction in our set supports only about 9 mA cm\u22122 in a stirred beaker. Tier 2 spans "
+   },
+   {
+    "value": "9.3",
+    "kind": "mA/cm2",
+    "covered": true,
+    "context": "y rises from 8.2 mA cm\u22122 in the unstirred archetype to 9.3 mA cm\u22122 in stirred batch, 16.8 mA cm\u22122 in "
+   }
+  ]
+ }
+}

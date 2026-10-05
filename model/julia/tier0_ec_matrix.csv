@@ -1,0 +1,51 @@
+class,reaction,carrier,natural,stirred,flow,anec,micro,rde,rce
+C-N formation,Ni-catalyzed aryl amination (ArBr + amine),catalyst,0.8738,0.9809,1.6011,2.6914,3.4924,3.9818,3.9306
+C-N formation,Electrochemical amination of ArX with NH3,catalyst,1.991,2.2044,3.2955,4.802,5.6315,6.0649,6.1202
+C-O formation,Shono oxidation (N-acyliminium capture),substrate,167.142,190.5419,356.4863,1052.7177,3048.6705,3015.0899,3429.5868
+Cyclization,Oxidative benzimidazole annulation (C-H/N-H),substrate,3.834,4.3707,8.1772,24.1476,69.9314,69.871,82.5344
+C-N formation,Mn-catalyzed alkene diazidation,catalyst,0.1634,0.1863,0.3485,1.0291,2.9803,2.9751,3.604
+Functional group intraconversion,Br-mediated Hofmann rearrangement,mediator,137.7964,157.0901,293.9303,868.113,2409.7807,2011.6703,2359.5319
+C-N formation,Arene C-H pyridination,substrate,3.5817,4.0831,7.6391,22.5585,65.3295,57.9565,69.6456
+Cyclization,Amidyl-radical C-H amination (phenanthridinone),substrate,4.8008,5.4729,10.2393,30.2371,87.5667,88.7698,107.6456
+Cyclization,Co-catalyzed aza-Wacker cyclization,catalyst,0.581,0.5907,0.6536,1.167,3.0684,3.2939,3.9989
+C-N formation,Ritter-type C(sp3)-H amination,substrate,22.1854,25.2914,47.3179,139.7315,404.6625,396.5704,479.7902
+C-N formation,Co-H alkene reduction (e-HAT),catalyst,5.3479,5.962,9.2999,14.4404,17.0849,17.383,17.8787
+C-C formation,Kolbe homocoupling of 10-undecenoate,substrate,140.2232,159.8544,299.0728,883.1735,2557.6706,2382.1619,2967.8065
+C-C formation,Ni-XEC C(sp2)-C(sp3) (ArBr + RBr),catalyst,5.0137,5.657,9.5974,17.6417,22.6657,23.7183,23.6221
+C-C formation,Doubly decarboxylative Csp3-Csp3,substrate,1.0146,1.1567,2.1641,6.3905,18.507,20.4214,22.6572
+C-C formation,BDD phenol-arene cross-coupling,substrate,10.91,12.4374,23.2692,68.7149,198.9982,210.108,225.2962
+C-C formation,Decarboxylative Minisci alkylation,substrate,6.4549,7.3586,13.7672,40.655,117.7369,108.1387,130.2559
+C-C formation,Cathodic Giese (R-I + alkene),substrate,4.0571,4.6251,8.6532,25.5532,74.002,74.7747,80.7113
+C-C formation,Rh-catalyzed electrooxidative C-H alkenylation,catalyst,0.0456,0.052,0.0973,0.2875,0.8325,1.2302,1.1099
+C-C formation,Cu-catalyzed benzylic cyanation,catalyst,0.2388,0.2722,0.5093,1.5041,4.3558,4.3482,5.2673
+C-C formation,Cathodic Ni aryl-aryl homocoupling,catalyst,14.42,16.3062,28.0458,51.2266,64.727,67.5376,69.6169
+C-C formation,Anodic dehydrogenative 2-naphthol coupling,substrate,78.9233,89.9725,168.3303,497.0858,1439.5606,1331.9751,1605.2027
+C-C formation,Acrylonitrile hydrodimerization (ADN),substrate,382.2368,435.7499,815.2478,2407.4583,6971.9991,6519.6364,7082.1392
+Reduction,Birch reduction of naphthalene,substrate,24.5812,28.0225,52.4276,154.8207,448.3606,395.8571,469.0721
+Reduction,Nitroarene -> aniline,substrate,47.8922,54.5971,102.1461,301.6414,873.5534,1020.2348,997.9235
+Reduction,Rapid-alternating-polarity imide reduction,substrate,8.4256,9.6051,17.9703,53.0671,153.6823,143.8001,162.954
+Multicomponent coupling,Diazo difunctionalization (thiol + alcohol),substrate,14.0595,16.0279,29.9867,88.5517,256.4458,226.0373,271.5066
+Functional group intraconversion,Cathodic aryl chloride dehalogenation,substrate,7.0212,8.0041,14.975,44.2218,128.0662,117.1652,141.0909
+Reduction,Benzaldehyde -> benzyl alcohol,substrate,0.9569,1.0908,2.0408,6.0267,17.4532,19.1885,18.6919
+Oxidation,"ACT-mediated alcohol oxidation (flow, hectogram)",mediator,14.0145,14.53,16.4115,18.0408,20.1083,21.4177,22.318
+C-O formation,Anodic methoxylation of 4-tBu-toluene (Lysmeral),substrate,177.5751,202.4356,378.7382,1118.4287,3238.9695,3179.0302,3614.1956
+C-O formation,Shono alpha-methoxylation of amides,substrate,184.7799,210.649,394.1048,1163.8068,3370.3846,3223.6379,3658.4761
+Oxidation,Cl-mediated ethylene epoxidation,mediator,173.1846,197.4304,369.371,1090.0715,3149.3435,2547.4001,2740.028
+Unclassified,Alkaline lignin -> vanillin (pilot),substrate,49.7698,56.7376,106.1507,313.4671,907.8008,955.9543,1046.8529
+Oxidation,Thioether -> sulfone (kilo-scale),substrate,121.5305,138.5447,259.2044,765.4405,2216.7157,2117.5084,2470.684
+Oxidation,NHPI-mediated allylic C-H -> enone,mediator,4.6904,4.9319,7.1726,18.77,53.5228,49.2457,61.2371
+Multicomponent coupling,"Alkenesulfonate from cinnamic acid, SO2 and alcohol",substrate,9.1091,10.3844,19.4283,57.3724,166.1504,154.4991,186.2544
+Oxidation,HMF -> FDCA (biomass),mediator,14.1019,14.8037,17.507,20.0744,25.642,28.5317,30.3901
+Cyclization,Radical-cation Diels-Alder (catalytic in e-),substrate,0.4124,0.4701,0.8795,2.5972,7.5215,7.8403,9.3114
+C-O formation,BQ-mediated Wacker-Tsuji oxidation,mediator,14.9007,16.8321,28.6731,53.0404,84.298,79.6793,87.0351
+Functional group intraconversion,Non-Kolbe decarboxylative alpha-methoxylation,substrate,10.7839,12.2936,23.0002,67.9206,196.6981,194.1118,220.7647
+Isomerization,Co-H alkene isomerization (catalytic),catalyst,0.8042,0.8963,1.393,2.1491,2.5603,2.5817,2.6957
+Cyclization,Anodic oxazoline/oxazole cyclization,substrate,8.3752,9.5478,17.863,52.7502,152.7645,138.577,166.7786
+Cyclization,Cathodic aryl-halide radical 5-exo cyclization,catalyst,0.2705,0.3084,0.577,1.7038,4.9343,6.0143,6.718
+Cyclization,Dehydrogenative lactonization (C-H/O-H),substrate,8.0221,9.1452,17.1098,50.5258,146.3228,145.051,175.6268
+Halogenation,Anodic benzylic fluorination,substrate,16.7505,19.0956,35.726,105.5003,305.529,277.1539,333.5571
+Halogenation,Br- oxidation / electrophilic bromination,mediator,33.3446,38.0135,71.1293,210.1649,606.709,482.3211,511.8805
+Multicomponent coupling,Sulfonylation of alkenes with sulfinates,substrate,5.2398,5.9734,11.1756,33.002,95.5737,85.8242,96.9841
+C-S formation,Aryl thiocyanation (NH4SCN),mediator,7.9967,9.0814,16.5387,44.2334,103.5795,108.8042,113.0826
+Other bond formation,Anodic C-H phosphonylation of azoles,substrate,6.9087,7.8759,14.735,43.5131,126.0138,121.8863,147.3327
+Other bond formation,N-N azo/pyrazole formation (N-H/N-H),substrate,1.8604,2.1208,3.9679,11.7173,33.9334,41.5864,45.0468

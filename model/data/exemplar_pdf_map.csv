@@ -1,0 +1,51 @@
+row,reaction,pdf
+0,Ni-catalyzed aryl amination (ArBr + amine),ja9b01886.pdf
+1,Electrochemical amination of ArX with NH3,Angew Chem Int Ed - 2025 - Liu - Electrochemical Amination of Aryl Halides with NH3.pdf
+2,Shono oxidation (N-acyliminium capture),ja00848a020.pdf
+3,Oxidative benzimidazole annulation (C-H/N-H),ChemSusChem - 2021 - Zhao - Electrochemical Synthesis of Benzimidazoles via Dehydrogenative Cyclization of Amidines.pdf
+4,Mn-catalyzed alkene diazidation,science.aan6206.pdf
+5,Br-mediated Hofmann rearrangement,op3c00332.pdf
+6,Arene C-H pyridination,ja402083e.pdf
+7,Amidyl-radical C-H amination (phenanthridinone),ol8b00981.pdf
+8,Co-catalyzed aza-Wacker cyclization,s41467-021-24125-5.pdf
+9,Ritter-type C(sp3)-H amination,s41467-022-31813-3.pdf
+10,Co-H alkene reduction (e-HAT),s41586-022-04595-3 (1).pdf
+11,Kolbe homocoupling of 10-undecenoate,science.adf4762 (1).pdf
+12,Ni-XEC C(sp2)-C(sp3) (ArBr + RBr),acs.oprd.6c00110.pdf
+13,Doubly decarboxylative Csp3-Csp3,s41586-022-04691-4 (1).pdf
+14,BDD phenol-arene cross-coupling,ja211005g.pdf
+15,Decarboxylative Minisci alkylation,science.aba3823.pdf
+16,Cathodic Giese (R-I + alkene),d0sc01694b.pdf
+17,Rh-catalyzed electrooxidative C-H alkenylation,Angew Chem Int Ed - 2018 - Qiu - Electrooxidative Rhodium‐Catalyzed C H C H Activation  Electricity as Oxidant for (1).pdf
+18,Cu-catalyzed benzylic cyanation,Photoelectrochemical_asymmetric_catalysis_enables_.pdf
+19,Cathodic Ni aryl-aryl homocoupling,1-s2.0-S0040402097007448-main.pdf
+20,Anodic dehydrogenative 2-naphthol coupling,c39940002535.pdf
+21,Acrylonitrile hydrodimerization (ADN),Baizer_1964_J._Electrochem._Soc._111_215.pdf
+22,Birch reduction of naphthalene,science.aav5606 (1).pdf
+23,Nitroarene -> aniline,op3c00067.pdf
+24,Rapid-alternating-polarity imide reduction,ja2c02102.pdf
+25,Diazo difunctionalization (thiol + alcohol),s41467-023-37032-8.pdf
+26,Cathodic aryl chloride dehalogenation,Chemistry A European J - 2019 - Ke - Hydrodehalogenation of Aryl Halides through Direct Electrolysis (1).pdf
+27,Benzaldehyde -> benzyl alcohol,sc8b02637.pdf
+28,"ACT-mediated alcohol oxidation (flow, hectogram)",op1c00036.pdf
+29,Anodic methoxylation of 4-tBu-toluene (Lysmeral),5507922.pdf
+30,Shono alpha-methoxylation of amides,ja00848a020.pdf
+31,Cl-mediated ethylene epoxidation,science.aaz8459 (1).pdf
+32,Alkaline lignin -> vanillin (pilot),sc4c02898.pdf
+33,Thioether -> sulfone (kilo-scale),op2c00111.pdf
+34,NHPI-mediated allylic C-H -> enone,nature17431.pdf
+35,"Alkenesulfonate from cinnamic acid, SO2 and alcohol",ChemSusChem - 2025 - Chien - Electrochemical Three‐Component Synthesis of Vinyl Sulfonamides via Decarboxylative.pdf
+36,HMF -> FDCA (biomass),sc9b00203.pdf
+37,Radical-cation Diels-Alder (catalytic in e-),c6sc02117d.pdf
+38,BQ-mediated Wacker-Tsuji oxidation,miller-wayner-2011-electrode-mediated-wacker-oxidation-of-cyclic-and-internal-olefins.pdf
+39,Non-Kolbe decarboxylative alpha-methoxylation,d1ra08124a.pdf
+40,Co-H alkene isomerization (catalytic),s41586-022-04595-3 (1).pdf
+41,Anodic oxazoline/oxazole cyclization,ol2c02252.pdf
+42,Cathodic aryl-halide radical 5-exo cyclization,1-s2.0-S0040403900758011-main.pdf
+43,Dehydrogenative lactonization (C-H/O-H),ol7b03617.pdf
+44,Anodic benzylic fluorination,1-s2.0-S1388248102003818-main.pdf
+45,Br- oxidation / electrophilic bromination,s41467-025-57329-0.pdf
+46,Sulfonylation of alkenes with sulfinates,ao9b02442.pdf
+47,Aryl thiocyanation (NH4SCN),1-s2.0-S0013468610007140-main.pdf
+48,Anodic C-H phosphonylation of azoles,s41467-021-26960-y.pdf
+49,N-N azo/pyrazole formation (N-H/N-H),Angew Chem Int Ed - 2016 - Gieshoff - Access to Pyrazolidin‐3 5‐diones through Anodic N N Bond Formation.pdf

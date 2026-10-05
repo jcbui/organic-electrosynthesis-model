@@ -1,0 +1,34 @@
+{
+ "median_D_m2_s": 1.4036639685786667e-05,
+ "median_nu_m2_s": 6.387389064730342e-07,
+ "channels": [
+  {
+   "archetype": "Illustrative channel, 1 mm gap",
+   "gap_m": 0.001,
+   "length_m": 0.05,
+   "velocity_m_s": 0.05,
+   "delta_um": 500.0,
+   "tau_s": 1.0,
+   "km_um_s": 28073.279371573335,
+   "conversion_per_pass": 0.9999999999993574,
+   "dP_Pa": 28.500000000000007
+  },
+  {
+   "archetype": "Illustrative channel, 250 um gap",
+   "gap_m": 0.00025,
+   "length_m": 0.025,
+   "velocity_m_s": 0.1,
+   "delta_um": 125.0,
+   "tau_s": 0.25,
+   "km_um_s": 112293.11748629334,
+   "conversion_per_pass": 1.0,
+   "dP_Pa": 456.0000000000001
+  }
+ ],
+ "ratios": {
+  "delta": 4.0,
+  "tau": 0.25,
+  "X_pass": 1.0000000000006426,
+  "dP": 16.0
+ }
+}

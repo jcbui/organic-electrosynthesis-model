@@ -1,0 +1,158 @@
+{
+  "n_flagged": 13,
+  "baseline_per_arch": [
+    12,
+    14,
+    18,
+    31,
+    36,
+    36,
+    36
+  ],
+  "baseline_substrate": 28,
+  "n_substrate": 31,
+  "sweep": [
+    {
+      "mu_factor": 0.25,
+      "per_arch": [
+        16,
+        18,
+        22,
+        33,
+        37,
+        37,
+        37
+      ],
+      "substrate_clearing": 29,
+      "unchanged": false
+    },
+    {
+      "mu_factor": 0.5,
+      "per_arch": [
+        14,
+        16,
+        20,
+        32,
+        37,
+        37,
+        37
+      ],
+      "substrate_clearing": 29,
+      "unchanged": false
+    },
+    {
+      "mu_factor": 0.75,
+      "per_arch": [
+        12,
+        14,
+        19,
+        32,
+        36,
+        36,
+        36
+      ],
+      "substrate_clearing": 28,
+      "unchanged": false
+    },
+    {
+      "mu_factor": 1.0,
+      "per_arch": [
+        12,
+        14,
+        18,
+        31,
+        36,
+        36,
+        36
+      ],
+      "substrate_clearing": 28,
+      "unchanged": true
+    },
+    {
+      "mu_factor": 1.5,
+      "per_arch": [
+        11,
+        14,
+        16,
+        30,
+        35,
+        36,
+        36
+      ],
+      "substrate_clearing": 28,
+      "unchanged": false
+    },
+    {
+      "mu_factor": 2.0,
+      "per_arch": [
+        10,
+        13,
+        16,
+        29,
+        35,
+        35,
+        35
+      ],
+      "substrate_clearing": 27,
+      "unchanged": false
+    },
+    {
+      "mu_factor": 3.0,
+      "per_arch": [
+        10,
+        12,
+        15,
+        26,
+        32,
+        35,
+        34
+      ],
+      "substrate_clearing": 27,
+      "unchanged": false
+    },
+    {
+      "mu_factor": 4.0,
+      "per_arch": [
+        10,
+        12,
+        15,
+        26,
+        31,
+        32,
+        31
+      ],
+      "substrate_clearing": 25,
+      "unchanged": false
+    }
+  ],
+  "band_mu": [
+    0.75,
+    1.5
+  ],
+  "per_arch_span": [
+    [
+      11,
+      14,
+      16,
+      30,
+      35,
+      36,
+      36
+    ],
+    [
+      12,
+      14,
+      19,
+      32,
+      36,
+      36,
+      36
+    ]
+  ],
+  "substrate_span": [
+    28,
+    28
+  ],
+  "worst_count_movement": 3,
+  "ordering_preserved": true
+}

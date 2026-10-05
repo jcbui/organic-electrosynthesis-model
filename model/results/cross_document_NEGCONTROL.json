@@ -1,0 +1,31 @@
+{
+ "ms": "01_Manuscript_tracked_JCB_hsa3_20261003_JCB.docx",
+ "checked": 11,
+ "legal_counts": [
+  9,
+  11,
+  12,
+  13,
+  14,
+  18,
+  24,
+  31,
+  33,
+  34,
+  36,
+  50,
+  56
+ ],
+ "medians": [
+  8,
+  9,
+  17,
+  44,
+  111,
+  108,
+  122
+ ],
+ "failures": [
+  "SI says 9/50 unstirred and 35/50 rotating-cylinder clear 50 mA cm-2; the matrix gives 9 and 34"
+ ]
+}

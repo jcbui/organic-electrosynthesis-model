@@ -1,0 +1,72 @@
+{
+ "n_corpus": 21459,
+ "n_set": 48,
+ "shares": [
+  {
+   "cls": "Cyclization",
+   "set_pct": 14.6,
+   "corpus_pct": 20.9,
+   "diff": -6.3
+  },
+  {
+   "cls": "C-C formation",
+   "set_pct": 22.9,
+   "corpus_pct": 18.7,
+   "diff": 4.2
+  },
+  {
+   "cls": "C-N formation",
+   "set_pct": 10.4,
+   "corpus_pct": 15.1,
+   "diff": -4.7
+  },
+  {
+   "cls": "Functional group intraconversion",
+   "set_pct": 6.2,
+   "corpus_pct": 8.9,
+   "diff": -2.6
+  },
+  {
+   "cls": "Other bond formation",
+   "set_pct": 4.2,
+   "corpus_pct": 7.5,
+   "diff": -3.4
+  },
+  {
+   "cls": "Multicomponent coupling",
+   "set_pct": 6.2,
+   "corpus_pct": 6.3,
+   "diff": -0.0
+  },
+  {
+   "cls": "C-O formation",
+   "set_pct": 8.3,
+   "corpus_pct": 5.9,
+   "diff": 2.5
+  },
+  {
+   "cls": "Oxidation",
+   "set_pct": 10.4,
+   "corpus_pct": 5.2,
+   "diff": 5.2
+  },
+  {
+   "cls": "C-S formation",
+   "set_pct": 2.1,
+   "corpus_pct": 4.6,
+   "diff": -2.5
+  },
+  {
+   "cls": "Reduction",
+   "set_pct": 10.4,
+   "corpus_pct": 3.9,
+   "diff": 6.5
+  },
+  {
+   "cls": "Halogenation",
+   "set_pct": 4.2,
+   "corpus_pct": 3.1,
+   "diff": 1.1
+  }
+ ]
+}

@@ -1,0 +1,87 @@
+{
+  "reactor": "unstirred 100 mL beaker",
+  "barrier_mAcm2": 50.0,
+  "rows": [
+    {
+      "solvent": "THF",
+      "electrolyte": "3.0 M LiBr/THF",
+      "state": "assumption",
+      "claim_direction": "below",
+      "band_Sm": [
+        0.0206,
+        null
+      ],
+      "band_ceiling_established": false,
+      "carried_Sm": 0.3,
+      "binding_reactor": "microfluidic 25 $\\mu$m",
+      "binding_fold": 0.032028044258023726,
+      "binding_kappa_mScm": 0.09608413277407118,
+      "i_boil_lo": 6.947072447055452,
+      "i_boil_carried": 26.299765291313342,
+      "i_boil_hi": null,
+      "crossing_kappa_Sm": 1.111468790252731,
+      "crossing_kappa_mScm": 11.11468790252731,
+      "claim_holds_across_band": null,
+      "kappa_fold_error_to_break": 3.704895967509103,
+      "band_basis": "floor B: ohmic-differencing bound, Lee OPRD 2022 SI Fig. S3 p. S6; ceiling: NOT ESTABLISHED -- the conductivity maximum of LiBr in THF has never been located (SI S6, band-proof claim withdrawn)"
+    },
+    {
+      "solvent": "DMF",
+      "electrolyte": "0.2 M NaI/DMF",
+      "state": "derived",
+      "claim_direction": "above",
+      "band_Sm": [
+        0.26666666666666666,
+        1.627
+      ],
+      "band_ceiling_established": true,
+      "carried_Sm": 0.877,
+      "binding_reactor": "rotating cyl. 3000 rpm",
+      "binding_fold": 0.3855322471851413,
+      "binding_kappa_mScm": 22.747772888083336,
+      "i_boil_lo": 43.936548402355314,
+      "i_boil_carried": 79.16821567634489,
+      "i_boil_hi": 107.22798033008789,
+      "crossing_kappa_Sm": 0.346070105094244,
+      "crossing_kappa_mScm": 3.4607010509424403,
+      "claim_holds_across_band": false,
+      "kappa_fold_error_to_break": 2.5341686181219547,
+      "band_basis": "ceiling B: hard Kohlrausch bound c*Lambda0 = 0.2 x 81.35, with Lambda0 MEASURED directly (Krumgalz & Barthel, Z. Phys. Chem. 1984, 142, 167-178, Table 2, NaI block, 25 C). Supersedes the 16.4 built on the Gopal & Jha Kohlrausch SUM 81.9; floor: 3x below carried, unsourced"
+    }
+  ],
+  "gate": {
+    "checks": [
+      {
+        "label": "THF rotating-disc ceiling reaches its transport ceiling (x carried kappa)",
+        "got": 16.500573869998828,
+        "registry": 16.5
+      },
+      {
+        "label": "DMF T_ss(100 mA/cm2) crosses 153 C",
+        "got": 14.08588045831536,
+        "registry": 14.09
+      },
+      {
+        "label": "DMF T_ss at carried kappa (C)",
+        "got": 228.0835807823253,
+        "registry": 228
+      },
+      {
+        "label": "DMF E_cell at 50 mA/cm2 (V)",
+        "got": 13.804596064351898,
+        "registry": 13.8
+      },
+      {
+        "label": "DMF E_cell 20 V edge",
+        "got": 5.682492174618065,
+        "registry": 5.68
+      },
+      {
+        "label": "DMF E_cell 10 V edge",
+        "got": 13.161509844201335,
+        "registry": 13.16
+      }
+    ],
+    "failed": []
+  }
+}

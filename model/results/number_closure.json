@@ -1,0 +1,19 @@
+{
+ "tally": {
+  "COSMETIC": 0,
+  "STRUCTURAL": 383,
+  "REGISTRY": 174,
+  "DATA": 24,
+  "GATED": 34,
+  "NAMED-GATE": 21
+ },
+ "unaccounted": [
+  {
+   "file": "julia/npp_ecprime.jl",
+   "line": 893,
+   "value": 1.0002,
+   "context": "ifin, ufin = _push_to_fold(pk, u, i_safe; tol = 1.0002)"
+  }
+ ],
+ "baseline": 1
+}

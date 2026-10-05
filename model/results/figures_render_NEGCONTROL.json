@@ -1,0 +1,103 @@
+{
+ "pinned_interpreter": "/opt/anaconda3/bin/python3.12",
+ "generators": [
+  {
+   "script": "figs/make_figs_sec34.py",
+   "exit": 1,
+   "crashed": true,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/combined_figure.py",
+   "exit": 1,
+   "crashed": true,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_fig_trle.py",
+   "exit": 1,
+   "crashed": true,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_fig_carrier.py",
+   "exit": 1,
+   "crashed": true,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_fig_specs.py",
+   "exit": 1,
+   "crashed": true,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_fig_failure_modes.py",
+   "exit": 1,
+   "crashed": true,
+   "changed": [],
+   "wrote": false
+  },
+  {
+   "script": "figs/make_fig6_final.py",
+   "exit": 1,
+   "crashed": true,
+   "changed": [],
+   "wrote": false
+  },
+  {
+   "script": "figs/make_figs.py",
+   "exit": 1,
+   "crashed": true,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_figFG.py",
+   "exit": 1,
+   "crashed": true,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_figH_ecprime.py",
+   "exit": 1,
+   "crashed": true,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_figK.py",
+   "exit": 1,
+   "crashed": true,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "../Figure1/fig_composite.py",
+   "exit": 1,
+   "crashed": true,
+   "changed": [],
+   "wrote": false
+  }
+ ],
+ "failures": [
+  "figs/make_figs_sec34.py does not run: ModuleNotFoundError: No module named '__definitely_not_a_module__'",
+  "figs/combined_figure.py does not run: ModuleNotFoundError: No module named '__definitely_not_a_module__'",
+  "figs/make_fig_trle.py does not run: ModuleNotFoundError: No module named '__definitely_not_a_module__'",
+  "figs/make_fig_carrier.py does not run: ModuleNotFoundError: No module named '__definitely_not_a_module__'",
+  "figs/make_fig_specs.py does not run: ModuleNotFoundError: No module named '__definitely_not_a_module__'",
+  "figs/make_fig_failure_modes.py does not run: ModuleNotFoundError: No module named '__definitely_not_a_module__'",
+  "figs/make_fig6_final.py does not run: ModuleNotFoundError: No module named '__definitely_not_a_module__'",
+  "figs/make_figs.py does not run: ModuleNotFoundError: No module named '__definitely_not_a_module__'",
+  "figs/make_figFG.py does not run: ModuleNotFoundError: No module named '__definitely_not_a_module__'",
+  "figs/make_figH_ecprime.py does not run: ModuleNotFoundError: No module named '__definitely_not_a_module__'",
+  "figs/make_figK.py does not run: ModuleNotFoundError: No module named '__definitely_not_a_module__'",
+  "../Figure1/fig_composite.py does not run: ModuleNotFoundError: No module named '__definitely_not_a_module__'"
+ ]
+}

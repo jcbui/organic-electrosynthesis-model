@@ -1,0 +1,30 @@
+{
+  "note": "ex-cell chloride-mediated propylene epoxidation; written by julia/run_excell.jl",
+  "inputs": {"C_Cl_M": 2, "C_P_mM": 5.67, "D_Cl_m2s": 2.03e-09, "D_OX_m2s": 1.4e-09, "D_P_m2s": 1.3663e-09, "D_H_m2s": 9.3e-09, "D_Na_m2s": 1.33e-09, "c_OX_bulk_molm3": 0.02},
+  "delta_um": 200,
+  "i_fick_Cl_mAcm2": 195.865,
+  "i_cap_P_mAcm2": 0.747464,
+  "x_k_um": 157.135,
+  "i_ccontrol_mAcm2": 392.019,
+  "ccontrol_frac_carrier": 0.00166392,
+  "ccontrol_converged": true,
+  "i_analytic_mAcm2": 391.73,
+  "reachable_film_um": 25,
+  "reachable_ratio_to_fick": 2.00198,
+  "c_OX_at_limit_M": 5.79252,
+  "dcont": [
+    {"delta_um": 50, "i_mAcm2": 1570.84, "ratio_fick": 2.00501, "pct_of_analytic": 100.25, "c_Cl_frac": 0.000101147, "c_OX_M": 5.80183, "converged": true},
+    {"delta_um": 100, "i_mAcm2": 784.81, "ratio_fick": 2.00344, "pct_of_analytic": 100.172, "c_Cl_frac": 0.000753711, "c_OX_M": 5.79807, "converged": true},
+    {"delta_um": 200, "i_mAcm2": 392.405, "ratio_fick": 2.00344, "pct_of_analytic": 100.172, "c_Cl_frac": 0.000678731, "c_OX_M": 5.7985, "converged": true}
+  ],
+  "i_op_mAcm2": 130.6,
+  "k_M": 10,
+  "i_infilm_mAcm2": 3.57651,
+  "infilm_pct": 2.73852,
+  "exported_pct": 97.2615,
+  "half_delta_um": 100,
+  "infilm_pct_half_delta": 2.72014,
+  "exported_pct_half_delta": 97.2799,
+  "c_OX_at_op_M": 1.92248,
+  "propylene_free_zone_um": 119.604
+}

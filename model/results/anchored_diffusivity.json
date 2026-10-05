@@ -1,0 +1,101 @@
+{
+  "anchor": "ferrocene",
+  "anchor_D": 2.4e-05,
+  "rows": [
+    {
+      "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
+      "solvent": "DMA",
+      "M": 374.68899999999996,
+      "D_typed": 2.518388600525423e-06,
+      "D_anchored": 3.6391263258762587e-06,
+      "ratio": 1.4450217591983265
+    },
+    {
+      "reaction": "Electrochemical amination of ArX with NH3",
+      "solvent": "DMSO/THF",
+      "M": 374.68899999999996,
+      "D_typed": 3.1309256988467685e-06,
+      "D_anchored": 4.524255761266807e-06,
+      "ratio": 1.4450217591983263
+    },
+    {
+      "reaction": "Mn-catalyzed alkene diazidation",
+      "solvent": "MeCN",
+      "M": 343.24399999999997,
+      "D_typed": 1.4795533028086863e-05,
+      "D_anchored": 1.9567791391484372e-05,
+      "ratio": 1.3225472414098343
+    },
+    {
+      "reaction": "Co-catalyzed aza-Wacker cyclization",
+      "solvent": "MeCN",
+      "M": 325.233,
+      "D_typed": 1.183642642246949e-05,
+      "D_anchored": 1.9922534742801936e-05,
+      "ratio": 1.683154529223644
+    },
+    {
+      "reaction": "Co-H alkene reduction (e-HAT)",
+      "solvent": "THF",
+      "M": 374.929,
+      "D_typed": 9.578160855024652e-06,
+      "D_anchored": 1.537521887435547e-05,
+      "ratio": 1.605237070777498
+    },
+    {
+      "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
+      "solvent": "DMA",
+      "M": 486.905,
+      "D_typed": 2.518388600525423e-06,
+      "D_anchored": 3.3348223333731293e-06,
+      "ratio": 1.324188940768462
+    },
+    {
+      "reaction": "Rh-catalyzed electrooxidative C-H alkenylation",
+      "solvent": "tAmOH/H2O",
+      "M": 618.072,
+      "D_typed": 1.733191011861604e-06,
+      "D_anchored": 2.1196530134799504e-06,
+      "ratio": 1.2229771554165003
+    },
+    {
+      "reaction": "Cu-catalyzed benzylic cyanation",
+      "solvent": "MeCN",
+      "M": 261.764,
+      "D_typed": 1.4795533028086863e-05,
+      "D_anchored": 2.1417699541055533e-05,
+      "ratio": 1.4475787726199243
+    },
+    {
+      "reaction": "Cathodic Ni aryl-aryl homocoupling",
+      "solvent": "EtOH/MeOH",
+      "M": 374.68899999999996,
+      "D_typed": 6.749561659544494e-06,
+      "D_anchored": 9.753263463092559e-06,
+      "ratio": 1.4450217591983263
+    },
+    {
+      "reaction": "Co-H alkene isomerization (catalytic)",
+      "solvent": "acetone",
+      "M": 325.233,
+      "D_typed": 1.427333774474262e-05,
+      "D_anchored": 2.402423307220233e-05,
+      "ratio": 1.6831545292236438
+    },
+    {
+      "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
+      "solvent": "DMF",
+      "M": 343.185,
+      "D_typed": 6.112008606061071e-06,
+      "D_anchored": 9.094368741604665e-06,
+      "ratio": 1.4879509057932425
+    }
+  ],
+  "bracket": [
+    1.2229771554165003,
+    1.683154529223644
+  ],
+  "n_clear_typed": 1,
+  "n_clear_anchored": 1,
+  "second_best_anchored": 13.076261178553501
+}

@@ -1,0 +1,51 @@
+row,reaction,direction,z_product_rule,basis
+0,Ni-catalyzed aryl amination (ArBr + amine),anodic,z_c + n,"Kawamata/Baran JACS 2019: ""(+)RVC/(-)Ni"" and the mechanism text ""oxidation of NiII to NiIII affords an energetically feasible reaction"" -- the Ni carrier is oxidised at the RVC anode; the Ni plate is the counter electrode"
+1,Electrochemical amination of ArX with NH3,cathodic,z_c - n,"Liu/Qiu Angew 2025: ""cell equipped with a Zn anode and Ni foam cathode"" -- Zn is the sacrificial anode, so the Ni-catalysed amination is the CATHODIC half"
+2,Shono oxidation (N-acyliminium capture),anodic,z_c + n,Shono JACS 1975: anodic oxidation of the carbamate
+3,Oxidative benzimidazole annulation (C-H/N-H),anodic,z_c + n,"ChemSusChem 2021: ""RVC anode, Pt cathode""; oxidative dehydrogenative cyclization"
+4,Mn-catalyzed alkene diazidation,anodic,z_c + n,"Fu/Lin Science 2017: ""RVC as the anode, Pt as the cathode""; Mn(II)->Mn(III) oxidation"
+5,Br-mediated Hofmann rearrangement,anodic,z_c + n,Br- -> Br2 anodic oxidation (mediator generation)
+6,Arene C-H pyridination,anodic,z_c + n,Morofuji/Yoshida JACS 2013: anodic oxidation of the arene in the anodic chamber of an H-cell
+7,Amidyl-radical C-H amination (phenanthridinone),anodic,z_c + n,Zhang/Xu/Zeng OL 2018: anodic generation of the amidyl radical
+8,Co-catalyzed aza-Wacker cyclization,anodic,z_c + n,Cai/H.-C. Xu Nat Commun 2021: oxidative aza-Wacker; Co(II)->Co(III) at the anode
+9,Ritter-type C(sp3)-H amination,anodic,z_c + n,Zhang/Ye Nat Commun 2022: anodic C(sp3)-H oxidation
+10,Co-H alkene reduction (e-HAT),cathodic,z_c - n,"Gnaim/Baran Nature 2022: ""Mg(+)/C(-)"" and ""Zn(+)/Sn(-)"" sacrificial anodes; text states ""Reduction of Co(salen)-1 at -2.03 V"" and ""Co(III)-H can be reduced to Co(II)-H"" -- the Co carrier is reduced at the cathode"
+11,Kolbe homocoupling of 10-undecenoate,anodic,z_c + n,Kolbe: carboxylate oxidised (decarboxylative radical generation)
+12,Ni-XEC C(sp2)-C(sp3) (ArBr + RBr),cathodic,z_c - n,"Kelly/Stahl/Schreier OPRD 2026: ""Zn anode and carbon felt cathode"", ""sacrificial Zn metal rods"" -- the Ni XEC cycle is reductive at the cathode"
+13,Doubly decarboxylative Csp3-Csp3,cathodic,z_c - n,"Zhang/Baran Nature 2022: ""Zn anode and Ni foam cathode"", ""(+)Zn/(-)Ni"" -- the RAE is reduced at the cathode"
+14,BDD phenol-arene cross-coupling,anodic,z_c + n,"Kirste/Waldvogel JACS 2012: ""BDD anode, nickel cathode""; anodic phenol oxidation"
+15,Decarboxylative Minisci alkylation,cathodic,z_c - n,"Mo/Jensen Science 2020: the abstract calls dicyanobenzene ""the cathodic radical precursor""; the paper notes ""The cathode and anode simultaneously generate the corresponding reactive intermediates"". This rows carrier IS the dicyanobenzene, so its own step is cathodic"
+16,Cathodic Giese (R-I + alkene),cathodic,z_c - n,"Li/Wilden Chem Sci 2020: ""constant reductive potential (-1.0 V) applied to the cathode""; the alkyl iodide is reduced"
+17,Rh-catalyzed electrooxidative C-H alkenylation,anodic,z_c + n,Qiu/Ackermann Angew 2018: electrooxidative Rh-catalysed C-H activation
+18,Cu-catalyzed benzylic cyanation,anodic,z_c + n,"Cai/H.-C. Xu Nat Catal 2022: ""RVC(+)/Pt(-)"" and ""on the anode to close both catalytic cycles"" -- the Cu carrier is oxidised"
+19,Cathodic Ni aryl-aryl homocoupling,cathodic,z_c - n,Courtois/Perichon Tetrahedron 1997: sacrificial Fe/Ni anode with Ni-foam cathode; electroREDUCTIVE coupling of aryl halides -- the Ni(bpy) carrier is reduced
+20,Anodic dehydrogenative 2-naphthol coupling,anodic,z_c + n,Osa/Bobbitt Chem Commun 1994: anodic 2-naphthol coupling on a TEMPO-modified electrode
+21,Acrylonitrile hydrodimerization (ADN),cathodic,z_c - n,Baizer JES 1964: acrylonitrile reduced at a mercury CATHODE (catholyte composition given)
+22,Birch reduction of naphthalene,cathodic,z_c - n,"Peters/Baran Science 2019: ""Mg(+)/Stainless steel plate(-)""; Birch reduction is cathodic"
+23,Nitroarene -> aniline,cathodic,z_c - n,Kisukuri/Waldvogel OPRD 2024: nitroarene reduced at the CuSn7Pb15 cathode
+24,Rapid-alternating-polarity imide reduction,cathodic,z_c - n,Hayashi/Baran JACS 2022: (hetero)arene ELECTROREDUCTION
+25,Diazo difunctionalization (thiol + alcohol),anodic,z_c + n,Yang/Lei Nat Commun 2023: the thiophenol carrier is the anodic species (recorded in the row name)
+26,Cathodic aryl chloride dehalogenation,cathodic,z_c - n,Ke/Chi Chem Eur J 2019: hydrodehalogenation by direct cathodic reduction
+27,Benzaldehyde -> benzyl alcohol,cathodic,z_c - n,Lopez-Ruiz ACS SCE 2018: electrocatalytic hydrogenation of benzaldehyde at the cathode
+28,"ACT-mediated alcohol oxidation (flow, hectogram)",anodic,z_c + n,ACT -> oxoammonium anodic oxidation (mediator generation)
+29,Anodic methoxylation of 4-tBu-toluene (Lysmeral),anodic,z_c + n,"BASF US 5,507,922: anodic methoxylation at graphite anodes"
+30,Shono alpha-methoxylation of amides,anodic,z_c + n,Shono protocol by analogy: anodic alpha-methoxylation
+31,Cl-mediated ethylene epoxidation,anodic,z_c + n,"Leow/Sargent Science 2020: Cl- oxidised to Cl2 at the Pt anode (""Pt foil as the working electrode (anode)"")"
+32,Alkaline lignin -> vanillin (pilot),anodic,z_c + n,Ruecker/Waldvogel ACS SCE 2024: carbonate oxidised to peroxodicarbonate on BDD (anodic)
+33,Thioether -> sulfone (kilo-scale),anodic,z_c + n,Bottecchia/Strotman OPRD 2022: anodic thioether oxidation to the sulfone
+34,NHPI-mediated allylic C-H -> enone,anodic,z_c + n,Horn/Baran Nature 2016: NHPI oxidised to PINO at the anode
+35,"Alkenesulfonate from cinnamic acid, SO2 and alcohol",anodic,z_c + n,Chien/Manolikakes ChemSusChem 2025: anodic decarboxylative activation of the cinnamate
+36,HMF -> FDCA (biomass),anodic,z_c + n,Cardiel/Choi ACS SCE 2019: ACT oxidised to ACT+ at the anode
+37,Radical-cation Diels-Alder (catalytic in e-),anodic,z_c + n,Okada/Chiba Chem Sci 2016: anodic generation of the anethole radical cation
+38,BQ-mediated Wacker-Tsuji oxidation,anodic,z_c + n,"Miller/Wayner Can J Chem 1992: H2Q oxidised to BQ at ""a platinum mesh working electrode"" at +0.90 V vs SCE (anodic)"
+39,Non-Kolbe decarboxylative alpha-methoxylation,anodic,z_c + n,Walecka-Kurczyk RSC Adv 2022: anodic decarboxylative elimination
+40,Co-H alkene isomerization (catalytic),cathodic,z_c - n,"Gnaim/Baran Nature 2022 (isomerisation conditions): ""Zn(+)/Ni(-)"" sacrificial Zn anode; the Co(salen) carrier is reduced at the cathode"
+41,Anodic oxazoline/oxazole cyclization,anodic,z_c + n,Bao OL 2022: anodic oxazoline/oxazole cyclization
+42,Cathodic aryl-halide radical 5-exo cyclization,cathodic,z_c - n,Ozaki/Ohmori Tet Lett 1994: the source writes Ni(tet a)(ClO4)2 and the Ni(II) dication is REDUCED at the cathode to drive the aryl-halide radical cyclization. THIS IS THE ONE CHARGED CARRIER WHOSE DIRECTION CHANGES A NUMBER
+43,Dehydrogenative lactonization (C-H/O-H),anodic,z_c + n,Zhang/Xu/Zeng OL 2018: anodic dehydrogenative lactonization
+44,Anodic benzylic fluorination,anodic,z_c + n,Tajima/Fuchigami Electrochem Commun 2002: anodic benzylic fluorination
+45,Br- oxidation / electrophilic bromination,anodic,z_c + n,"Zhang/Su Nat Commun 2025: bromine evolution reaction, Br- oxidised at the Co-Ov@CP anode"
+46,Sulfonylation of alkenes with sulfinates,anodic,z_c + n,Mei/Han ACS Omega 2019: the sulfinate is the anodically discharged species
+47,Aryl thiocyanation (NH4SCN),anodic,z_c + n,Gitkis/Becker Electrochim Acta 2010: SCN- oxidised to (SCN)2 at the Pt anode
+48,Anodic C-H phosphonylation of azoles,anodic,z_c + n,Long/H.-C. Xu Nat Commun 2021: anodic C-H phosphonylation
+49,N-N azo/pyrazole formation (N-H/N-H),anodic,z_c + n,Gieshoff/Waldvogel Angew 2016: anodic N-N bond formation

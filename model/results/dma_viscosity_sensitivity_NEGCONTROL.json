@@ -1,0 +1,114 @@
+{
+ "mu_printed": 1.927,
+ "mu_alternative_not_adopted": 0.927,
+ "adopted": 1.927,
+ "swept": [
+  {
+   "mu": 1.927,
+   "counts": {
+    "natural": 12,
+    "stirred": 14,
+    "flow": 18,
+    "anec": 31,
+    "micro": 36,
+    "rde": 36,
+    "rce": 36
+   },
+   "catalyst_clearing": 1
+  },
+  {
+   "mu": 0.9683175,
+   "counts": {
+    "natural": 12,
+    "stirred": 14,
+    "flow": 18,
+    "anec": 32,
+    "micro": 37,
+    "rde": 37,
+    "rce": 37
+   },
+   "catalyst_clearing": 2
+  },
+  {
+   "mu": 0.009635,
+   "counts": {
+    "natural": 14,
+    "stirred": 16,
+    "flow": 20,
+    "anec": 33,
+    "micro": 38,
+    "rde": 38,
+    "rce": 38
+   },
+   "catalyst_clearing": 3
+  }
+ ],
+ "base_counts": {
+  "natural": 12,
+  "stirred": 14,
+  "flow": 18,
+  "anec": 31,
+  "micro": 36,
+  "rde": 36,
+  "rce": 36
+ },
+ "base_catalyst_clearing": 1,
+ "count_moves": [
+  {
+   "mu": 0.9683175,
+   "arch": "anec",
+   "delta": 1
+  },
+  {
+   "mu": 0.9683175,
+   "arch": "micro",
+   "delta": 1
+  },
+  {
+   "mu": 0.9683175,
+   "arch": "rde",
+   "delta": 1
+  },
+  {
+   "mu": 0.9683175,
+   "arch": "rce",
+   "delta": 1
+  },
+  {
+   "mu": 0.009635,
+   "arch": "natural",
+   "delta": 2
+  },
+  {
+   "mu": 0.009635,
+   "arch": "stirred",
+   "delta": 2
+  },
+  {
+   "mu": 0.009635,
+   "arch": "flow",
+   "delta": 2
+  },
+  {
+   "mu": 0.009635,
+   "arch": "anec",
+   "delta": 2
+  },
+  {
+   "mu": 0.009635,
+   "arch": "micro",
+   "delta": 2
+  },
+  {
+   "mu": 0.009635,
+   "arch": "rde",
+   "delta": 2
+  },
+  {
+   "mu": 0.009635,
+   "arch": "rce",
+   "delta": 2
+  }
+ ],
+ "source": "CRC 97th ed. 2016, Sect. 6 'Viscosity of Liquids', p. 6-244, eta(25 C) column"
+}

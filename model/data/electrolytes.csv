@@ -1,0 +1,76 @@
+electrolyte,kappa_mScm,state,status
+0.077 M Et4NBF4/MeCN,9.26,derived,registered
+0.1 M Bu4NPF6/MeCN,9.9,assumption,registered
+0.1 M Bu4NBF4/MeCN,9.93,measured,registered
+0.1 M Bu4NBF4/DMF,4.76,measured,registered
+0.1 M Bu4NPF6/THF,0.51,measured,unused-legacy (no registry row)
+1 M LiBF4/THF,5.0,assumption,unused-legacy (no registry row)
+0.5 M NaOMe/MeOH,15.0,assumption,unused-legacy (no registry row)
+0.1 M Bu4NBF4/HFIP,2.5,assumption,unused-legacy (no registry row)
+1 M KOH aq,200.0,assumption,unused-legacy (no registry row)
+0.5 M H2SO4 aq,200.0,assumption,unused-legacy (no registry row)
+phosphate buffer aq,15.0,assumption,unused-legacy (no registry row)
+1 M NaBr aq,80.0,assumption,unused-legacy (no registry row)
+0.2 M Et4NOTs/MeOH,8.0,assumption,unused-legacy (no registry row)
+Et3N.3HF/MeCN,30.0,assumption,unused-legacy (no registry row)
+0.1 M LiClO4/MeCN,10.0,assumption,registered
+emulsion + Na2HPO4/TAEP,50.0,assumption,unused-legacy (no registry row)
+neat carboxylate/MeOH,30.0,assumption,unused-legacy (no registry row)
+0.2 M nBu4NBr/DMA,6.0,assumption,registered
+0.21 M TBAB/DMSO-THF,4.0,assumption,registered
+0.48 M LiBr/DMA,12.0,assumption,registered
+0.2 M NaI/DMF,8.77,derived,registered
+0.171 M NaI/DMF,7.5,assumption,registered
+0.24 M Et3NHBF4/THF-HFIP,5.0,assumption,registered
+0.1 M TBABF4/acetone,8.0,assumption,registered
+0.033 M Et4NPF6/MeOH,3.0,assumption,unused-legacy (no registry row)
+1 M LiClO4/MeNO2,12.0,assumption,registered
+0.25 M KOAc/tAmOH-H2O,8.0,assumption,registered
+2 M H2SO4 aq,700.0,assumption,registered
+1 M carbonate buffer pH 8.5 aq,60.0,assumption,registered
+0.5 M borate buffer pH 10 aq,25.0,assumption,registered
+1 M NaOH aq,174.5,measured,registered
+1 M Na2CO3 aq,80.0,derived,registered
+1 M KHCO3 aq,76.0,measured,unused-legacy (no registry row)
+1 M Et4NF.4HF/MeCN,60.0,assumption,registered
+0.1 M HBF4/MeCN,15.0,assumption,registered
+0.1 M LiClO4/AcOH-HCOOH,3.0,assumption,registered
+0.0625 M LiClO4/MeOH,4.0,assumption,unused-legacy (no registry row)
+0.033 M Et4NPF6/THF-MeOH 5:1,0.35,assumption,registered
+0.04 M NaBr/EtOH-MeOH 1:1,1.8,assumption,registered
+1 M KCl aq,111.6,assumption,registered
+0.152 M NaBr/H2O-MeCN-MeOH-DCM 10:10:10:3,19.0,assumption,registered
+0.0625 M TsOH/MeOH,7.5,assumption,registered
+Me4N carboxylate (10 mol%)/acetone,2.0,assumption,unused-legacy (no registry row)
+0.3 M LiClO4/MeCN,20.0,assumption,registered
+0.1 M Et4NClO4/DMF,4.0,assumption,registered
+0.2 M NaClO4/MeCN,12.0,assumption,registered
+0.091 M MTES/HFIP-MeOH,2.0,assumption,registered
+0.01 M Bu4NPF6/HFIP,0.3,assumption,registered
+0.085 M Et4NPF6/MeCN-HCl aq,8.0,assumption,registered
+0.08 M NaBr/MeCN,4.0,assumption,registered
+0.5 M NaBr aq/MeCN 1:1,40.0,assumption,unused-legacy (no registry row)
+Et3N 7.5 mM (no salt)/MeOH,0.5,assumption,registered
+0.1 M TBAP/MeCN-H2O,10.0,assumption,registered
+5 wt% AcOH/MeOH-H2O,10.0,assumption,registered
+Me4NBF4/MeOH,6.0,assumption,unused-legacy (no registry row)
+0.1 M LiClO4/acetone,8.0,assumption,registered
+56 wt% Et4NOTs aq,80.0,assumption,registered
+0.156 M Et4NOTs/MeOH,7.0,assumption,registered
+0.3 M Bu4NBF4/MeCN,22.5,measured,registered
+0.04 M NaBr/MeCN,1.5,assumption,registered
+0.033 M Et4NPF6/MeCN,3.5,assumption,registered
+0.077 M Bu4NBF4/MeCN,8.26,measured,registered
+0.043 M Bu4NBF4/MeCN,5.66,derived,registered
+0.25 M Bu4NBF4/MeCN,19.95,measured,registered
+0.04 M NaBr/MeOH,2.5,assumption,unused-legacy (no registry row)
+2 M NaCl aq,148.9,measured,unused-legacy (no registry row)
+no added salt (25 um flow gap)/MeCN,0.5,assumption,unused-legacy (no registry row)
+pH 2 HCl (salt in ESI)/H2O-MeCN,5.0,assumption,unused-legacy (no registry row)
+3.0 M LiBr/THF,3.0,assumption,registered
+0.3 wt% H2SO4/MeOH (BASF),3.0,assumption,registered
+0.15 M Me4NOH + 0.05 M Me4NBF4/acetone,6.0,assumption,registered
+0.48 M Bu4N carboxylate (in situ)/MeCN,15.0,assumption,registered
+NaCl 7 mol% + pH 2 HCl/H2O-MeCN,1.2,assumption,registered
+0.08 M Me4NBF4/MeOH,5.0,assumption,unused-legacy (no registry row)
+0.0833 M Me4NBF4/MeOH,5.21,assumption,registered

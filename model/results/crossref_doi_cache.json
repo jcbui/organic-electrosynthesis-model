@@ -1,0 +1,1802 @@
+{
+ "10.1146/annurev-chembioeng-101121-090840": {
+  "title": "Electrochemical Manufacturing Routes for Organic Chemical Commodities",
+  "journal": "Annual Review of Chemical and Biomolecular Engineering",
+  "year": "2023",
+  "authors": [
+   "Mathison",
+   "Ramos Figueroa",
+   "Bloomquist",
+   "Modestino"
+  ]
+ },
+ "10.1126/science.aaz8459": {
+  "title": "Chloride-mediated selective electrosynthesis of ethylene and propylene oxides at high current density",
+  "journal": "Science",
+  "year": "2020",
+  "authors": [
+   "Leow",
+   "Lum",
+   "Ozden",
+   "Wang",
+   "Nam",
+   "Chen",
+   "Wicks",
+   "Zhuang",
+   "Li",
+   "Sinton",
+   "Sargent"
+  ]
+ },
+ "10.1038/s41467-024-53049-z": {
+  "title": "Universal high-efficiency electrocatalytic olefin epoxidation via a surface-confined radical promotion",
+  "journal": "Nature Communications",
+  "year": "2024",
+  "authors": [
+   "Ran",
+   "Qiu",
+   "Liu",
+   "Wang",
+   "Tian",
+   "Xiang",
+   "Li",
+   "Lv",
+   "Ding"
+  ]
+ },
+ "10.1038/s41467-024-48070-1": {
+  "title": "Spatial decoupling of bromide-mediated process boosts propylene oxide electrosynthesis",
+  "journal": "Nature Communications",
+  "year": "2024",
+  "authors": [
+   "Chi",
+   "Ke",
+   "Liu",
+   "Wei",
+   "Li",
+   "Zhao",
+   "Zhou",
+   "Gu",
+   "Geng",
+   "Zeng"
+  ]
+ },
+ "10.1038/s41929-026-01535-6": {
+  "title": "Direct electrochemical propylene epoxidation over amorphized perovskite oxide in non-halogenated aqueous electrolyte",
+  "journal": "Nature Catalysis",
+  "year": "2026",
+  "authors": [
+   "Koner",
+   "Adams",
+   "Miu",
+   "Delgado-Kukuczka",
+   "Jiang",
+   "Kim",
+   "Park",
+   "Bui",
+   "Oyala",
+   "Li",
+   "Manthiram"
+  ]
+ },
+ "10.1021/acscatal.4c07033": {
+  "title": "Electrochemical Manufacturing of Hydrogen Peroxide with High Concentration and Durability",
+  "journal": "ACS Catalysis",
+  "year": "2025",
+  "authors": [
+   "Xia",
+   "Zhu",
+   "Yang",
+   "Qiu",
+   "Wang"
+  ]
+ },
+ "10.1038/s41557-025-01940-7": {
+  "title": "Electrifying industrial hydrogen peroxide production via soft interfacial molecular mediation",
+  "journal": "Nature Chemistry",
+  "year": "2025",
+  "authors": [
+   "Xi",
+   "Wu",
+   "Li",
+   "Yan",
+   "Liu",
+   "Aziz"
+  ]
+ },
+ "10.1126/science.aay1844": {
+  "title": "Direct electrosynthesis of pure aqueous H\n                    <sub>2</sub>\n                    O\n                    <sub>2</sub>\n                    solutions up to 20% by weight using a solid electrolyte",
+  "journal": "Science",
+  "year": "2019",
+  "authors": [
+   "Xia",
+   "Xia",
+   "Zhu",
+   "Fan",
+   "Wang"
+  ]
+ },
+ "10.1038/s41467-022-30337-0": {
+  "title": "Electrochemical oxygen reduction to hydrogen peroxide at practical rates in strong acidic media",
+  "journal": "Nature Communications",
+  "year": "2022",
+  "authors": [
+   "Zhang",
+   "Zhao",
+   "Zhu",
+   "Adler",
+   "Wu",
+   "Liu",
+   "Wang"
+  ]
+ },
+ "10.1016/j.joule.2019.09.019": {
+  "title": "Electrosynthesis of Hydrogen Peroxide by Phase-Transfer Catalysis",
+  "journal": "Joule",
+  "year": "2019",
+  "authors": [
+   "Murray",
+   "Voskian",
+   "Schreier",
+   "Hatton",
+   "Surendranath"
+  ]
+ },
+ "10.1038/s41929-023-01025-z": {
+  "title": "Direct synthesis of hydrazine by efficient electrochemical ruthenium-catalysed ammonia oxidation",
+  "journal": "Nature Catalysis",
+  "year": "2023",
+  "authors": [
+   "Chen",
+   "He",
+   "Liu",
+   "Mo",
+   "Wei",
+   "Chen",
+   "Cheng",
+   "Fu",
+   "Yi"
+  ]
+ },
+ "10.1021/jacs.0c04626": {
+  "title": "Electrochemical Strategy for Hydrazine Synthesis: Development and Overpotential Analysis of Methods for Oxidative N\u2013N Coupling of an Ammonia Surrogate",
+  "journal": "Journal of the American Chemical Society",
+  "year": "2020",
+  "authors": [
+   "Wang",
+   "Gerken",
+   "Bates",
+   "Kim",
+   "Stahl"
+  ]
+ },
+ "10.1002/anie.202520218": {
+  "title": "Electrochemistry\u2010Mediated Synthesis of Hydrazine from Ammonia",
+  "journal": "Angewandte Chemie International Edition",
+  "year": "2025",
+  "authors": [
+   "Xu",
+   "Yao",
+   "Wu",
+   "Chen",
+   "Wang",
+   "Wu",
+   "Zhu",
+   "Lu",
+   "Thuy Nga",
+   "Dong",
+   "Zou",
+   "Wang"
+  ]
+ },
+ "10.1038/s41467-024-52825-1": {
+  "title": "Upgrading of nitrate to hydrazine through cascading electrocatalytic ammonia production with controllable N-N coupling",
+  "journal": "Nature Communications",
+  "year": "2024",
+  "authors": [
+   "Jia",
+   "Zhang",
+   "Liu",
+   "Wang",
+   "Jin",
+   "Wu",
+   "Song",
+   "Tan",
+   "Ma",
+   "Feng",
+   "Zhu",
+   "Kang",
+   "Qian",
+   "Sun",
+   "Han"
+  ]
+ },
+ "10.1021/acscatal.5c00116": {
+  "title": "Catalytic Selective Conversion of Ammonia into Hydrazine by a Ru<sup>II</sup>(trpy) Complex Bearing a Pyridylpyrrole Ligand",
+  "journal": "ACS Catalysis",
+  "year": "2025",
+  "authors": [
+   "Zhou",
+   "Zhang",
+   "Zhao",
+   "Zhong",
+   "Ding",
+   "Yang",
+   "Pan",
+   "He",
+   "Yi"
+  ]
+ },
+ "10.1021/acscatal.8b01640": {
+  "title": "Electrochemical Oxidation of Alcohols and Aldehydes to Carboxylic Acids Catalyzed by 4-Acetamido-TEMPO: An Alternative to \u201cAnelli\u201d and \u201cPinnick\u201d Oxidations",
+  "journal": "ACS Catalysis",
+  "year": "2018",
+  "authors": [
+   "Rafiee",
+   "Konz",
+   "Graaf",
+   "Koolman",
+   "Stahl"
+  ]
+ },
+ "10.1021/jacs.9b07243": {
+  "title": "Electrochemical Aminoxyl-Mediated Oxidation of Primary Alcohols in Lignin to Carboxylic Acids: Polymer Modification and Depolymerization",
+  "journal": "Journal of the American Chemical Society",
+  "year": "2019",
+  "authors": [
+   "Rafiee",
+   "Alherech",
+   "Karlen",
+   "Stahl"
+  ]
+ },
+ "10.1039/C4GC00401A": {
+  "title": "Electrocatalytic oxidation of 5-hydroxymethylfurfural to 2,5-furandicarboxylic acid on supported Au and Pd bimetallic nanoparticles",
+  "journal": "Green Chem.",
+  "year": "2014",
+  "authors": [
+   "Chadderdon",
+   "Xin",
+   "Qi",
+   "Qiu",
+   "Krishna",
+   "More",
+   "Li"
+  ]
+ },
+ "10.1016/j.cattod.2012.05.008": {
+  "title": "Oxidation of biomass derived 5-hydroxymethylfurfural using heterogeneous and electrochemical catalysis",
+  "journal": "Catalysis Today",
+  "year": "2012",
+  "authors": [
+   "Vuyyuru",
+   "Strasser"
+  ]
+ },
+ "10.1021/acsenergylett.4c00945": {
+  "title": "Tandem Electrocatalytic\u2013Thermocatalytic Conversion of CO<sub>2</sub> to Aromatic Hydrocarbons",
+  "journal": "ACS Energy Letters",
+  "year": "2024",
+  "authors": [
+   "Garg",
+   "Xie",
+   "Lam",
+   "Chen"
+  ]
+ },
+ "10.1038/s44286-023-00020-2": {
+  "title": "Tandem reactors and reactions for CO2 conversion",
+  "journal": "Nature Chemical Engineering",
+  "year": "2024",
+  "authors": [
+   "Garg",
+   "Xie",
+   "Chen"
+  ]
+ },
+ "10.1021/acsami.0c19053": {
+  "title": "Activating Magnesium Electrolytes through Chemical Generation of Free Chloride and Removal of Trace Water",
+  "journal": "ACS Applied Materials &amp; Interfaces",
+  "year": "2020",
+  "authors": [
+   "Kim",
+   "See"
+  ]
+ },
+ "10.1039/c7ta01769c": {
+  "title": "MgCl\n                    <sub>2</sub>\n                    /AlCl\n                    <sub>3</sub>\n                    electrolytes for reversible Mg deposition/stripping: electrochemical conditioning or not?",
+  "journal": "Journal of Materials Chemistry A",
+  "year": "2017",
+  "authors": [
+   "He",
+   "Luo",
+   "Liu"
+  ]
+ },
+ "10.1039/d3sc06885d": {
+  "title": "A guide to troubleshooting metal sacrificial anodes for organic electrosynthesis",
+  "journal": "Chemical Science",
+  "year": "2024",
+  "authors": [
+   "Ware",
+   "Zhang",
+   "Guan",
+   "Lin",
+   "See"
+  ]
+ },
+ "10.1515/revac-2015-0008": {
+  "title": "Recent strategies to minimise fouling in electrochemical detection systems",
+  "journal": "Reviews in Analytical Chemistry",
+  "year": "2016",
+  "authors": [
+   "Hanssen",
+   "Siraj",
+   "Wong"
+  ]
+ },
+ "10.1007/s00604-003-0067-4": {
+  "title": "Recent Advances in Electropolymerized Conducting Polymers in Amperometric Biosensors",
+  "journal": "Microchimica Acta",
+  "year": "2003",
+  "authors": [
+   "Vidal",
+   "Garcia-Ruiz",
+   "Castillo"
+  ]
+ },
+ "10.1016/j.electacta.2013.01.019": {
+  "title": "Modeling analysis of electrode fouling during electrolysis of phenolic compounds",
+  "journal": "Electrochimica Acta",
+  "year": "2013",
+  "authors": [
+   "Yang",
+   "Kirsch",
+   "Fergus",
+   "Simonian"
+  ]
+ },
+ "10.1002/celc.201801620": {
+  "title": "Use of Boron\u2010Doped Diamond Electrodes in Electro\u2010Organic Synthesis",
+  "journal": "ChemElectroChem",
+  "year": "2019",
+  "authors": [
+   "Lips",
+   "Waldvogel"
+  ]
+ },
+ "10.1007/s10800-011-0351-7": {
+  "title": "Characterization of the performance and failure mechanisms of boron-doped ultrananocrystalline diamond electrodes",
+  "journal": "Journal of Applied Electrochemistry",
+  "year": "2011",
+  "authors": [
+   "Chaplin",
+   "Wyle",
+   "Zeng",
+   "Carlisle",
+   "Farrell"
+  ]
+ },
+ "10.1016/j.proeng.2011.12.360": {
+  "title": "Nanoporous Gold Electrode for Electrochemical Sensors in Biological Environment",
+  "journal": "Procedia Engineering",
+  "year": "2011",
+  "authors": [
+   "Summerlot",
+   "Kumar",
+   "Das",
+   "Goldstein",
+   "Seal",
+   "Diaz",
+   "Cho"
+  ]
+ },
+ "10.1016/j.ab.2009.01.036": {
+  "title": "Nafion/lead nitroprusside nanoparticles modified carbon ceramic electrode as a novel amperometric sensor for l-cysteine",
+  "journal": "Analytical Biochemistry",
+  "year": "2009",
+  "authors": [
+   "Razmi",
+   "Heidari"
+  ]
+ },
+ "10.1021/la303022a": {
+  "title": "Influence of the Molecular Design on the Antifouling Performance of Poly(ethylene glycol) Monolayers Grafted on (111) Si",
+  "journal": "Langmuir",
+  "year": "2012",
+  "authors": [
+   "Perez",
+   "Lahlil",
+   "Rougeau",
+   "Moraillon",
+   "Chazalviel",
+   "Ozanam",
+   "Gouget-Laemmel"
+  ]
+ },
+ "10.1021/jacsau.2c00031": {
+  "title": "Electrocatalysis with Molecular Transition-Metal Complexes for Reductive Organic Synthesis",
+  "journal": "JACS Au",
+  "year": "2022",
+  "authors": [
+   "Kaeffer",
+   "Leitner"
+  ]
+ },
+ "10.1002/tcr.202100163": {
+  "title": "The Longer Route can be Better: Electrosynthesis in Extended Path Flow Cells",
+  "journal": "The Chemical Record",
+  "year": "2021",
+  "authors": [
+   "Brown"
+  ]
+ },
+ "10.1021/acs.oprd.0c00170": {
+  "title": "Supporting-Electrolyte-Free and Scalable Flow Process for the Electrochemical Synthesis of 3,3\u2032,5,5\u2032-Tetramethyl-2,2\u2032-biphenol",
+  "journal": "Organic Process Research &amp; Development",
+  "year": "2020",
+  "authors": [
+   "Selt",
+   "Franke",
+   "Waldvogel"
+  ]
+ },
+ "10.1002/cite.202400155": {
+  "title": "Trends and Challenges in Electrifying Technical Organic Synthesis",
+  "journal": "Chemie Ingenieur Technik",
+  "year": "2025",
+  "authors": [
+   "Rose",
+   "Neugebauer",
+   "Tamang",
+   "Waldvogel",
+   "Krewer"
+  ]
+ },
+ "10.1021/acsenergylett.6c00886": {
+  "title": "Scaling Low-Temperature CO2-to-Syngas Electroreduction: Failure Modes, Engineering Bottlenecks, and Mitigation Strategies",
+  "journal": "ACS Energy Letters",
+  "year": "2026",
+  "authors": [
+   "Pachamuthu",
+   "Gao",
+   "Ozden",
+   "Legrand",
+   "Favaro",
+   "Isaacs",
+   "Garcia de Arquer",
+   "Azenha",
+   "Mendes",
+   "Sargent",
+   "Janaky",
+   "Gratzel",
+   "Jimenez-Calvo"
+  ]
+ },
+ "10.1021/acs.chemrev.7b00353": {
+  "title": "Applications of Flow Microreactors in Electrosynthetic Processes",
+  "journal": "Chemical Reviews",
+  "year": "2017",
+  "authors": [
+   "Atobe",
+   "Tateno",
+   "Matsumura"
+  ]
+ },
+ "10.1021/acs.oprd.6c00110": {
+  "title": "Development of Kilogram-Scale Electrochemical Ni-Catalyzed Cross Electrophile Coupling in Flow",
+  "journal": "Organic Process Research &amp; Development",
+  "year": "2026",
+  "authors": [
+   "Kelly",
+   "Cardinale",
+   "Sackett",
+   "Zhang",
+   "Beutner",
+   "Cohen",
+   "Stahl",
+   "Schreier"
+  ]
+ },
+ "10.1557/mrc.2017.46": {
+  "title": "Lifetime limitations in organic electronic devices due to metal electrochemical migration",
+  "journal": "MRS Communications",
+  "year": "2017",
+  "authors": [
+   "Abbel",
+   "van de Peppel",
+   "Kirchner",
+   "Michels",
+   "Groen"
+  ]
+ },
+ "10.1021/acsorginorgau.3c00051": {
+  "title": "Advanced Electroanalysis for Electrosynthesis",
+  "journal": "ACS Organic &amp; Inorganic Au",
+  "year": "2023",
+  "authors": [
+   "Brachi",
+   "El Housseini",
+   "Beaver",
+   "Jadhav",
+   "Dantanarayana",
+   "Boucher",
+   "Minteer"
+  ]
+ },
+ "10.1021/acs.orglett.0c01906": {
+  "title": "Alternating Current Electrolysis for Organic Electrosynthesis: Trifluoromethylation of (Hetero)arenes",
+  "journal": "Organic Letters",
+  "year": "2020",
+  "authors": [
+   "Rodrigo",
+   "Um",
+   "Mixdorf",
+   "Gunasekera",
+   "Nguyen",
+   "Luo"
+  ]
+ },
+ "10.1126/sciadv.abc6601": {
+  "title": "Layer-engineered large-area exfoliation of graphene",
+  "journal": "Science Advances",
+  "year": "2020",
+  "authors": [
+   "Moon",
+   "Kim",
+   "Kim",
+   "Xu",
+   "Choi",
+   "Whang",
+   "Watanabe",
+   "Taniguchi",
+   "Park",
+   "Seo",
+   "Cho",
+   "Son",
+   "Lee"
+  ]
+ },
+ "10.1149/MA2024-01412342mtgabs": {
+  "title": "Concepts for Sustainable Organic Electrosynthesis",
+  "journal": "ECS Meeting Abstracts",
+  "year": "2024",
+  "authors": [
+   "Francke"
+  ]
+ },
+ "10.1021/acs.orglett.6b02979": {
+  "title": "Electrosynthesis Using a Recyclable Mediator\u2013Electrolyte System Based on Ionically Tagged Phenyl Iodide and 1,1,1,3,3,3-Hexafluoroisopropanol",
+  "journal": "Organic Letters",
+  "year": "2016",
+  "authors": [
+   "Broese",
+   "Francke"
+  ]
+ },
+ "10.1039/c9re00389d": {
+  "title": "Insights into membrane-separated organic electrosynthesis: the case of adiponitrile electrochemical production",
+  "journal": "Reaction Chemistry &amp; Engineering",
+  "year": "2020",
+  "authors": [
+   "Blanco",
+   "Prasad",
+   "Dunningan",
+   "Modestino"
+  ]
+ },
+ "10.1515/chem-2016-0002": {
+  "title": "Ion-exchange membranes in chemical synthesis \u2013 a review",
+  "journal": "Open Chemistry",
+  "year": "2016",
+  "authors": [
+   "Jaroszek",
+   "Dydo"
+  ]
+ },
+ "10.1016/S0022-0728(01)00476-4": {
+  "title": "Analysis and minimization of cell voltage in electro-organic syntheses using the solid polymer electrolyte technology",
+  "journal": "Journal of Electroanalytical Chemistry",
+  "year": "2001",
+  "authors": [
+   "Hoormann",
+   "Kubon",
+   "Jorissen",
+   "Kroner",
+   "Putter"
+  ]
+ },
+ "10.3389/fceng.2024.1384772": {
+  "title": "2D simulation of temperature distribution within large-scale PEM electrolysis stack based on thermal conductivity measurements",
+  "journal": "Frontiers in Chemical Engineering",
+  "year": "2024",
+  "authors": [
+   "Eichner",
+   "Amiri",
+   "Burheim",
+   "Lamb"
+  ]
+ },
+ "10.1021/acs.oprd.3c00340": {
+  "title": "Overview of Recent Scale-Ups in Organic Electrosynthesis (2000\u20132023)",
+  "journal": "Organic Process Research &amp; Development",
+  "year": "2024",
+  "authors": [
+   "Lehnherr",
+   "Chen"
+  ]
+ },
+ "10.1021/jacs.5c10303": {
+  "title": "Tech-Enhanced Synthesis: Exploring the Synergy between Organic Chemistry and Technology",
+  "journal": "Journal of the American Chemical Society",
+  "year": "2025",
+  "authors": [
+   "Bonciolini",
+   "Pulcinella",
+   "Noel"
+  ]
+ },
+ "10.1021/acs.oprd.3c00255": {
+  "title": "Scaling-up Electroorganic Synthesis Using a Spinning Electrode Electrochemical Reactor in Batch and Flow Mode",
+  "journal": "Organic Process Research &amp; Development",
+  "year": "2023",
+  "authors": [
+   "Petrovic",
+   "Malviya",
+   "Kappe",
+   "Cantillo"
+  ]
+ },
+ "10.1021/acscentsci.4c00988": {
+  "title": "ERCAD: A Parametric Reactor Design Tool That Enables Rapid Prototyping and Optimization of Electrochemical Reactors through 3D Printing",
+  "journal": "ACS Central Science",
+  "year": "2024",
+  "authors": [
+   "Heard",
+   "Deeks",
+   "Lennox"
+  ]
+ },
+ "10.1021/acs.accounts.9b00412": {
+  "title": "The Fundamentals Behind the Use of Flow Reactors in Electrochemistry",
+  "journal": "Accounts of Chemical Research",
+  "year": "2019",
+  "authors": [
+   "Noel",
+   "Cao",
+   "Laudadio"
+  ]
+ },
+ "10.1038/s41929-018-0083-8": {
+  "title": "Complete electron economy by pairing electrolysis with hydrogenation",
+  "journal": "Nature Catalysis",
+  "year": "2018",
+  "authors": [
+   "Sherbo",
+   "Delima",
+   "Chiykowski",
+   "MacLeod",
+   "Berlinguette"
+  ]
+ },
+ "10.1021/acs.chemrev.1c00901": {
+  "title": "Continuum Modeling of Porous Electrodes for Electrochemical Synthesis",
+  "journal": "Chemical Reviews",
+  "year": "2022",
+  "authors": [
+   "Bui",
+   "Lees",
+   "Pant",
+   "Zenyuk",
+   "Bell",
+   "Weber"
+  ]
+ },
+ "10.1126/science.abg2371": {
+  "title": "Nitrogen reduction to ammonia at high efficiency and rates based on a phosphonium proton shuttle",
+  "journal": "Science",
+  "year": "2021",
+  "authors": [
+   "Suryanto",
+   "Matuszek",
+   "Choi",
+   "Hodgetts",
+   "Du",
+   "Bakker",
+   "Kang",
+   "Cherepanov",
+   "Simonov",
+   "MacFarlane"
+  ]
+ },
+ "10.1021/jacs.5c10599": {
+  "title": "Use of Electron-Transfer Mediators to Access Higher Electrochemical Current Densities in Ni-Catalyzed Cross-Electrophile Coupling",
+  "journal": "Journal of the American Chemical Society",
+  "year": "2025",
+  "authors": [
+   "Zhu",
+   "Stahl"
+  ]
+ },
+ "10.1073/pnas.1909985116": {
+  "title": "Optimizing organic electrosynthesis through controlled voltage dosing and artificial intelligence",
+  "journal": "Proceedings of the National Academy of Sciences",
+  "year": "2019",
+  "authors": [
+   "Blanco",
+   "Lee",
+   "Modestino"
+  ]
+ },
+ "10.1039/d4re00346b": {
+  "title": "Technoeconomic analysis of fine chemical electrosynthesis: a case study using electrooxidation of 2-methylnaphthelene to vitamin K\n                    <sub>3</sub>",
+  "journal": "Reaction Chemistry &amp; Engineering",
+  "year": "2025",
+  "authors": [
+   "Yang",
+   "Liang",
+   "Xu",
+   "Li",
+   "Wang",
+   "Shen",
+   "Mo"
+  ]
+ },
+ "10.1039/D1CS00223F": {
+  "title": "Electrocatalysis as an enabling technology for organic synthesis",
+  "journal": "Chemical Society Reviews",
+  "year": "2021",
+  "authors": [
+   "Novaes",
+   "Liu",
+   "Shen",
+   "Lu",
+   "Meinhardt",
+   "Lin"
+  ]
+ },
+ "10.1021/acs.oprd.4c00353": {
+  "title": "Adoption of Electrochemistry within the Pharmaceutical Industry: Insights from an Industry-Wide Survey",
+  "journal": "Organic Process Research &amp; Development",
+  "year": "2025",
+  "authors": [
+   "Ferretti",
+   "Cohen",
+   "Deng",
+   "Diwan",
+   "Frederick",
+   "Lehnherr"
+  ]
+ },
+ "10.1021/jacs.4c10979": {
+  "title": "Non-Innocent Role of Sacrificial Anodes in Electrochemical Nickel-Catalyzed C(sp\n                    <sup>2</sup>\n                    )\u2013C(sp\n                    <sup>3</sup>\n                    ) Cross-Electrophile Coupling",
+  "journal": "Journal of the American Chemical Society",
+  "year": "2024",
+  "authors": [
+   "Cardinale",
+   "Beutner",
+   "Bemis",
+   "Weix",
+   "Stahl"
+  ]
+ },
+ "10.1038/s41586-022-04691-4": {
+  "title": "Ni-electrocatalytic Csp3\u2013Csp3 doubly decarboxylative coupling",
+  "journal": "Nature",
+  "year": "2022",
+  "authors": [
+   "Zhang",
+   "Gao",
+   "Hioki",
+   "Oderinde",
+   "Qiao",
+   "Rodriguez",
+   "Zhang",
+   "Kawamata",
+   "Baran"
+  ]
+ },
+ "10.1126/science.adf4762": {
+  "title": "Overcoming the limitations of Kolbe coupling with waveform-controlled electrosynthesis",
+  "journal": "Science",
+  "year": "2023",
+  "authors": [
+   "Hioki",
+   "Costantini",
+   "Griffin",
+   "Harper",
+   "Merini",
+   "Nissl",
+   "Kawamata",
+   "Baran"
+  ]
+ },
+ "10.1002/anie.201904795": {
+  "title": "The Buchwald\u2013Hartwig Amination After 25\u2005Years",
+  "journal": "Angewandte Chemie International Edition",
+  "year": "2019",
+  "authors": [
+   "Dorel",
+   "Grugel",
+   "Haydl"
+  ]
+ },
+ "10.1021/acsorginorgau.4c00068": {
+  "title": "The Future of Electro-organic Synthesis in Drug Discovery and Early Development",
+  "journal": "ACS Organic &amp; Inorganic Au",
+  "year": "2024",
+  "authors": [
+   "Stephen",
+   "Rockl"
+  ]
+ },
+ "10.1038/s41467-020-14322-z": {
+  "title": "Is electrosynthesis always green and advantageous compared to traditional methods?",
+  "journal": "Nature Communications",
+  "year": "2020",
+  "authors": [
+   "Yuan",
+   "Lei"
+  ]
+ },
+ "10.1021/acscentsci.4c01733": {
+  "title": "Scaling Organic Electrosynthesis: The Crucial Interplay between Mechanism and Mass Transport",
+  "journal": "ACS Central Science",
+  "year": "2025",
+  "authors": [
+   "Oliver",
+   "Abrams",
+   "Cardinale",
+   "Chen",
+   "Beutner",
+   "Caille",
+   "Cohen",
+   "Deng",
+   "Diwan",
+   "Frederick",
+   "Harper",
+   "Hawkins",
+   "Lehnherr",
+   "Lucky",
+   "Meyer",
+   "Noh",
+   "Nunez",
+   "Quasdorf",
+   "Teli",
+   "Stahl",
+   "Schreier"
+  ]
+ },
+ "10.1021/acsenergylett.4c00955": {
+  "title": "CO\n                    <sub>2</sub>\n                    Electrolysis Technologies: Bridging the Gap toward Scale-up and Commercialization",
+  "journal": "ACS Energy Letters",
+  "year": "2024",
+  "authors": [
+   "Belsa",
+   "Xia",
+   "Garcia de Arquer"
+  ]
+ },
+ "10.1002/biot.202000066": {
+  "title": "Microbial Electrosynthesis\u2014An Inventory on Technology Readiness Level and Performance of Different Process Variants",
+  "journal": "Biotechnology Journal",
+  "year": "2020",
+  "authors": [
+   "Fruehauf",
+   "Enzmann",
+   "Harnisch",
+   "Ulber",
+   "Holtmann"
+  ]
+ },
+ "10.1021/acs.iecr.8b05693": {
+  "title": "Specifying Technology Readiness Levels for the Chemical Industry",
+  "journal": "Industrial &amp; Engineering Chemistry Research",
+  "year": "2019",
+  "authors": [
+   "Buchner",
+   "Stepputat",
+   "Zimmermann",
+   "Schomacker"
+  ]
+ },
+ "10.1039/D4CS00539B": {
+  "title": "Enhancing electrochemical reactions in organic synthesis: the impact of flow chemistry",
+  "journal": "Chemical Society Reviews",
+  "year": "2024",
+  "authors": [
+   "Regnier",
+   "Vega",
+   "Ioannou",
+   "Noel"
+  ]
+ },
+ "10.1002/anie.201711060": {
+  "title": "Electrifying Organic Synthesis",
+  "journal": "Angewandte Chemie International Edition",
+  "year": "2018",
+  "authors": [
+   "Wiebe",
+   "Gieshoff",
+   "Mohle",
+   "Rodrigo",
+   "Zirbes",
+   "Waldvogel"
+  ]
+ },
+ "10.1021/acs.oprd.3c00432": {
+  "title": "A Scalable Solution to Constant-Potential Flow Electrochemistry",
+  "journal": "Organic Process Research &amp; Development",
+  "year": "2024",
+  "authors": [
+   "Griffin",
+   "Harper",
+   "Velasquez Morales",
+   "Morrill",
+   "Thornton",
+   "Sutherland",
+   "Greiner"
+  ]
+ },
+ "10.1021/acs.oprd.2c00111": {
+  "title": "Kilo-Scale Electrochemical Oxidation of a Thioether to a Sulfone: A Workflow for Scaling up Electrosynthesis",
+  "journal": "Organic Process Research &amp; Development",
+  "year": "2022",
+  "authors": [
+   "Bottecchia",
+   "Lehnherr",
+   "Levesque",
+   "Reibarkh",
+   "Ji",
+   "Rodrigues",
+   "Wang",
+   "Lam",
+   "Vickery",
+   "Armstrong",
+   "Mattern",
+   "Stone",
+   "Wismer",
+   "Singh",
+   "Regalado",
+   "Maloney",
+   "Strotman"
+  ]
+ },
+ "10.1021/acs.oprd.2c00108": {
+  "title": "High-Productivity Single-Pass Electrochemical Birch Reduction of Naphthalenes in a Continuous Flow Electrochemical Taylor Vortex Reactor",
+  "journal": "Organic Process Research &amp; Development",
+  "year": "2022",
+  "authors": [
+   "Lee",
+   "Love",
+   "Mansouri",
+   "Waldron Clarke",
+   "Harrowven",
+   "Jefferson-Loveday",
+   "Pickering",
+   "Poliakoff",
+   "George"
+  ]
+ },
+ "10.1021/acs.oprd.1c00102": {
+  "title": "A Continuous-Flow Electrochemical Taylor Vortex Reactor: A Laboratory-Scale High-Throughput Flow Reactor with Enhanced Mixing for Scalable Electrosynthesis",
+  "journal": "Organic Process Research &amp; Development",
+  "year": "2021",
+  "authors": [
+   "Love",
+   "Lee",
+   "Gennari",
+   "Jefferson-Loveday",
+   "Pickering",
+   "Poliakoff",
+   "George"
+  ]
+ },
+ "10.1126/science.aba3823": {
+  "title": "Microfluidic electrochemistry for single-electron transfer redox-neutral reactions",
+  "journal": "Science",
+  "year": "2020",
+  "authors": [
+   "Mo",
+   "Lu",
+   "Rughoobur",
+   "Patil",
+   "Gershenfeld",
+   "Akinwande",
+   "Buchwald",
+   "Jensen"
+  ]
+ },
+ "10.1126/science.adh4355": {
+  "title": "Direct propylene epoxidation via water activation over Pd-Pt electrocatalysts",
+  "journal": "Science",
+  "year": "2024",
+  "authors": [
+   "Chung",
+   "Maalouf",
+   "Adams",
+   "Jiang",
+   "Roman-Leshkov",
+   "Manthiram"
+  ]
+ },
+ "10.1038/s41467-023-37257-7": {
+  "title": "Bioelectrocatalysis with a palladium membrane reactor",
+  "journal": "Nature Communications",
+  "year": "2023",
+  "authors": [
+   "Kurimoto",
+   "Nasseri",
+   "Hunt",
+   "Rooney",
+   "Dvorak",
+   "LeSage",
+   "Jansonius",
+   "Withers",
+   "Berlinguette"
+  ]
+ },
+ "10.1021/acssuschemeng.3c04020": {
+  "title": "Water-Based Electrooxidation of Cyclohexene in a Novel Liquid Diffusion Electrode Reactor Design",
+  "journal": "ACS Sustainable Chemistry &amp; Engineering",
+  "year": "2023",
+  "authors": [
+   "Deberghes",
+   "Ruggiero",
+   "Notestein",
+   "Seitz"
+  ]
+ },
+ "10.1021/acscatal.4c03356": {
+  "title": "Chlorine-Mediated Electrooxidation of Cyclohexene at High Current Density in a Liquid Diffusion Electrode Reactor",
+  "journal": "ACS Catalysis",
+  "year": "2024",
+  "authors": [
+   "Deberghes",
+   "Kazour",
+   "Notestein",
+   "Seitz"
+  ]
+ },
+ "10.1126/science.abl4300": {
+  "title": "Enhancement of lithium-mediated ammonia synthesis by addition of oxygen",
+  "journal": "Science",
+  "year": "2021",
+  "authors": [
+   "Li",
+   "Andersen",
+   "Statt",
+   "Saccoccio",
+   "Bukas",
+   "Krempl",
+   "Sazinas",
+   "Pedersen",
+   "Shadravan",
+   "Zhou",
+   "Chakraborty",
+   "Kibsgaard",
+   "Vesborg",
+   "N\u00f8rskov",
+   "Chorkendorff"
+  ]
+ },
+ "10.1021/jacs.2c02102": {
+  "title": "Chemoselective (Hetero)Arene Electroreduction Enabled by Rapid Alternating Polarity",
+  "journal": "Journal of the American Chemical Society",
+  "year": "2022",
+  "authors": [
+   "Hayashi",
+   "Griffin",
+   "Harper",
+   "Kawamata",
+   "Baran"
+  ]
+ },
+ "10.1021/acssuschemeng.4c02898": {
+  "title": "Pilot Scale Electrolysis of Peroxodicarbonate as an Oxidizer for Lignin Valorization",
+  "journal": "ACS Sustainable Chemistry &amp; Engineering",
+  "year": "2024",
+  "authors": [
+   "Rucker",
+   "Pettersen",
+   "Graute",
+   "Wittgens",
+   "Gra\u00dfl",
+   "Waldvogel"
+  ]
+ },
+ "10.1149/1.2426086": {
+  "title": "Electrolytic Reductive Coupling",
+  "journal": "Journal of The Electrochemical Society",
+  "year": "1964",
+  "authors": [
+   "Baizer"
+  ]
+ },
+ "10.1021/jm200187y": {
+  "title": "The Medicinal Chemist\u2019s Toolbox: An Analysis of Reactions Used in the Pursuit of Drug Candidates",
+  "journal": "Journal of Medicinal Chemistry",
+  "year": "2011",
+  "authors": [
+   "Roughley",
+   "Jordan"
+  ]
+ },
+ "10.1016/j.poly.2022.116124": {
+  "title": "A retrospective-prospective review of Suzuki\u2013Miyaura reaction: From cross-coupling reaction to pharmaceutical industry applications",
+  "journal": "Polyhedron",
+  "year": "2022",
+  "authors": [
+   "Farhang",
+   "Akbarzadeh",
+   "Rabbani",
+   "Ghadiri"
+  ]
+ },
+ "10.1021/jo502288q": {
+  "title": "Photoredox Catalysis in a\nComplex Pharmaceutical Setting:\nToward the Preparation of JAK2 Inhibitor LY2784544",
+  "journal": "The Journal of Organic Chemistry",
+  "year": "2014",
+  "authors": [
+   "Douglas",
+   "Cole",
+   "Stephenson"
+  ]
+ },
+ "10.1002/anie.202010134": {
+  "title": "Mass\u2010Spectrometric Imaging of Electrode Surfaces\u2014a View on Electrochemical Side Reactions",
+  "journal": "Angewandte Chemie International Edition",
+  "year": "2020",
+  "authors": [
+   "Fangmeyer",
+   "Behrens",
+   "Gleede",
+   "Waldvogel",
+   "Karst"
+  ]
+ },
+ "10.1002/anie.202204140": {
+  "title": "Counter Electrode Reactions\u2014Important Stumbling Blocks on the Way to a Working Electro\u2010organic Synthesis",
+  "journal": "Angewandte Chemie International Edition",
+  "year": "2022",
+  "authors": [
+   "Klein",
+   "Waldvogel"
+  ]
+ },
+ "10.1021/acscentsci.1c00328": {
+  "title": "Unlocking the Potential of High-Throughput Experimentation for Electrochemistry with a Standardized Microscale Reactor",
+  "journal": "ACS Central Science",
+  "year": "2021",
+  "authors": [
+   "Rein",
+   "Annand",
+   "Wismer",
+   "Fu",
+   "Siu",
+   "Klapars",
+   "Strotman",
+   "Kalyani",
+   "Lehnherr",
+   "Lin"
+  ]
+ },
+ "10.1038/s41586-024-08373-1": {
+  "title": "Light-harvesting microelectronic devices for wireless electrosynthesis",
+  "journal": "Nature",
+  "year": "2025",
+  "authors": [
+   "Gorski",
+   "Rein",
+   "Norris",
+   "Ji",
+   "McEuen",
+   "Lin"
+  ]
+ },
+ "10.1021/acsmeasuresciau.3c00022": {
+  "title": "Legion: An Instrument for High-Throughput Electrochemistry",
+  "journal": "ACS Measurement Science Au",
+  "year": "2023",
+  "authors": [
+   "Gerroll",
+   "Kulesa",
+   "Ault",
+   "Baker"
+  ]
+ },
+ "10.1021/acscentsci.3c00856": {
+  "title": "Wireless Electrochemical Reactor for Accelerated Exploratory Study of Electroorganic Synthesis",
+  "journal": "ACS Central Science",
+  "year": "2023",
+  "authors": [
+   "Chen",
+   "Mo"
+  ]
+ },
+ "10.1002/anie.202009819": {
+  "title": "A Multifunctional Microfluidic Platform for High\u2010Throughput Experimentation of Electroorganic Chemistry",
+  "journal": "Angewandte Chemie International Edition",
+  "year": "2020",
+  "authors": [
+   "Mo",
+   "Rughoobur",
+   "Nambiar",
+   "Zhang",
+   "Jensen"
+  ]
+ },
+ "10.1021/jacs.2c08997": {
+  "title": "Machine-Learning-Guided Discovery of Electrochemical Reactions",
+  "journal": "Journal of the American Chemical Society",
+  "year": "2022",
+  "authors": [
+   "Zahrt",
+   "Mo",
+   "Nandiwale",
+   "Shprints",
+   "Heid",
+   "Jensen"
+  ]
+ },
+ "10.1002/anie.202418074": {
+  "title": "Integrating Machine Learning and Large Language Models to Advance Exploration of Electrochemical Reactions",
+  "journal": "Angewandte Chemie International Edition",
+  "year": "2024",
+  "authors": [
+   "Zheng",
+   "Florit",
+   "Jin",
+   "Wu",
+   "Li",
+   "Nandiwale",
+   "Salazar",
+   "Mustakis",
+   "Green",
+   "Jensen"
+  ]
+ },
+ "10.1021/acselectrochem.5c00377": {
+  "title": "Opportunities of Large Language Models in the Development of Organic Electrosynthesis",
+  "journal": "ACS Electrochemistry",
+  "year": "2025",
+  "authors": [
+   "Yu",
+   "Yang",
+   "Mo"
+  ]
+ },
+ "10.1021/acsmeasuresciau.2c00045": {
+  "title": "Electrochemical Mechanistic Analysis from Cyclic Voltammograms Based on Deep Learning",
+  "journal": "ACS Measurement Science Au",
+  "year": "2022",
+  "authors": [
+   "Hoar",
+   "Zhang",
+   "Xu",
+   "Deeba",
+   "Costentin",
+   "Gu",
+   "Liu"
+  ]
+ },
+ "10.1021/jacs.4c14420": {
+  "title": "Molecular Processes That Control Organic Electrosynthesis in Near-Electrode Microenvironments",
+  "journal": "Journal of the American Chemical Society",
+  "year": "2025",
+  "authors": [
+   "Mathison",
+   "Atwi",
+   "McConnell",
+   "Ochoa",
+   "Rani",
+   "Akashige",
+   "Rohr",
+   "Taylor",
+   "Avalos",
+   "Aydil",
+   "Rajput",
+   "Modestino"
+  ]
+ },
+ "10.1021/acs.jpcc.5c04993": {
+  "title": "Computational Electrosynthesis: A Perspective on Mechanistic Questions, Methodological Approaches, and Elucidating the Role of the Electrical Double Layer",
+  "journal": "The Journal of Physical Chemistry C",
+  "year": "2025",
+  "authors": [
+   "Hymel",
+   "Renfro",
+   "Khan",
+   "Pederson",
+   "McDaniel"
+  ]
+ },
+ "10.1002/anie.202014544": {
+  "title": "Reproducibility in Electroorganic Synthesis\u2014Myths and Misunderstandings",
+  "journal": "Angewandte Chemie International Edition",
+  "year": "2021",
+  "authors": [
+   "Beil",
+   "Pollok",
+   "Waldvogel"
+  ]
+ },
+ "10.1021/acs.orglett.3c00686": {
+  "title": "New Guidelines for Presenting Electrochemical Data in All ACS Journals",
+  "journal": "Organic Letters",
+  "year": "2023",
+  "authors": [
+   "Minteer",
+   "Chen",
+   "Lin",
+   "Crudden",
+   "Dehnen",
+   "Kamat",
+   "Kozlowski",
+   "Masson",
+   "Miller"
+  ]
+ },
+ "10.1038/s41560-019-0356-8": {
+  "title": "Data-driven prediction of battery cycle life before capacity degradation",
+  "journal": "Nature Energy",
+  "year": "2019",
+  "authors": [
+   "Severson",
+   "Attia",
+   "Jin",
+   "Perkins",
+   "Jiang",
+   "Yang",
+   "Chen",
+   "Aykol",
+   "Herring",
+   "Fraggedakis",
+   "Bazant",
+   "Harris",
+   "Chueh",
+   "Braatz"
+  ]
+ },
+ "10.1016/j.apenergy.2018.09.111": {
+  "title": "Data-driven proton exchange membrane fuel cell degradation predication through deep learning method",
+  "journal": "Applied Energy",
+  "year": "2018",
+  "authors": [
+   "Ma",
+   "Yang",
+   "Breaz",
+   "Li",
+   "Briois",
+   "Gao"
+  ]
+ },
+ "10.1088/2515-7655/abb194": {
+  "title": "Modeling proton-exchange-membrane fuel cell performance/degradation tradeoffs with chemical scavengers",
+  "journal": "Journal of Physics: Energy",
+  "year": "2020",
+  "authors": [
+   "Ehlinger",
+   "Crothers",
+   "Kusoglu",
+   "Weber"
+  ]
+ },
+ "10.1021/cr050182l": {
+  "title": "Scientific Aspects of Polymer Electrolyte Fuel Cell Durability and Degradation",
+  "journal": "Chemical Reviews",
+  "year": "2007",
+  "authors": [
+   "Borup",
+   "Meyers",
+   "Pivovar",
+   "Kim",
+   "Mukundan",
+   "Garland",
+   "Myers",
+   "Wilson",
+   "Garzon",
+   "Wood",
+   "Zelenay",
+   "More",
+   "Stroh",
+   "Zawodzinski",
+   "Boncella",
+   "McGrath",
+   "Inaba",
+   "Miyatake",
+   "Hori",
+   "Ota",
+   "Ogumi",
+   "Miyata",
+   "Nishikata",
+   "Siroma",
+   "Uchimoto",
+   "Yasuda",
+   "Kimijima",
+   "Iwashita"
+  ]
+ },
+ "10.1016/j.coelec.2020.02.007": {
+  "title": "Recent developments in catalyst-related PEM fuel cell durability",
+  "journal": "Current Opinion in Electrochemistry",
+  "year": "2020",
+  "authors": [
+   "Borup",
+   "Kusoglu",
+   "Neyerlin",
+   "Mukundan",
+   "Ahluwalia",
+   "Cullen",
+   "More",
+   "Weber",
+   "Myers"
+  ]
+ },
+ "10.1038/s41467-023-37520-x": {
+  "title": "Unintended cation crossover influences CO2 reduction selectivity in Cu-based zero-gap electrolysers",
+  "journal": "Nature Communications",
+  "year": "2023",
+  "authors": [
+   "El-Nagar",
+   "Haun",
+   "Gupta",
+   "Stojkovikj",
+   "Mayer"
+  ]
+ },
+ "10.1016/j.joule.2023.01.013": {
+  "title": "In operando investigations of oscillatory water and carbonate effects in MEA-based CO2 electrolysis devices",
+  "journal": "Joule",
+  "year": "2023",
+  "authors": [
+   "Moss",
+   "Garg",
+   "Mirolo",
+   "Giron Rodriguez",
+   "Ilvonen",
+   "Chorkendorff",
+   "Drnec",
+   "Seger"
+  ]
+ },
+ "10.1038/s41560-021-00813-w": {
+  "title": "Operando cathode activation with alkali metal cations for high current density operation of water-fed zero-gap carbon dioxide electrolysers",
+  "journal": "Nature Energy",
+  "year": "2021",
+  "authors": [
+   "Endrodi",
+   "Samu",
+   "Kecsenovity",
+   "Halmagyi",
+   "Sebok",
+   "Janaky"
+  ]
+ },
+ "10.1038/s41929-023-00920-9": {
+  "title": "The value of negative results in data-driven catalysis research",
+  "journal": "Nature Catalysis",
+  "year": "2023",
+  "authors": [
+   "Taniike",
+   "Takahashi"
+  ]
+ },
+ "10.1039/d0ee04086j": {
+  "title": "Durability of anion exchange membrane water electrolyzers",
+  "journal": "Energy &amp; Environmental Science",
+  "year": "2021",
+  "authors": [
+   "Li",
+   "Motz",
+   "Bae",
+   "Fujimoto",
+   "Yang",
+   "Zhang",
+   "Ayers",
+   "Kim"
+  ]
+ },
+ "10.1149/1.2220960": {
+  "title": "Water and Thermal Management in Solid\u2010Polymer\u2010Electrolyte Fuel Cells",
+  "journal": "Journal of The Electrochemical Society",
+  "year": "1993",
+  "authors": [
+   "Fuller",
+   "Newman"
+  ]
+ },
+ "10.1021/acs.accounts.1c00650": {
+  "title": "Engineering Catalyst\u2013Electrolyte Microenvironments to Optimize the Activity and Selectivity for the Electrochemical Reduction of CO\n                    <sub>2</sub>\n                    on Cu and Ag",
+  "journal": "Accounts of Chemical Research",
+  "year": "2022",
+  "authors": [
+   "Bui",
+   "Kim",
+   "King",
+   "Romiluyi",
+   "Kusoglu",
+   "Weber",
+   "Bell"
+  ]
+ },
+ "10.1149/2.0751412jes": {
+  "title": "A Critical Review of Modeling Transport Phenomena in Polymer-Electrolyte Fuel Cells",
+  "journal": "Journal of The Electrochemical Society",
+  "year": "2014",
+  "authors": [
+   "Weber",
+   "Borup",
+   "Darling",
+   "Das",
+   "Dursch",
+   "Gu",
+   "Harvey",
+   "Kusoglu",
+   "Litster",
+   "Mench",
+   "Mukundan",
+   "Owejan",
+   "Pharoah",
+   "Secanell",
+   "Zenyuk"
+  ]
+ },
+ "10.1039/c8cp01319e": {
+  "title": "Modeling gas-diffusion electrodes for CO\n                    <sub>2</sub>\n                    reduction",
+  "journal": "Physical Chemistry Chemical Physics",
+  "year": "2018",
+  "authors": [
+   "Weng",
+   "Bell",
+   "Weber"
+  ]
+ },
+ "10.1039/c9ee00909d": {
+  "title": "Towards membrane-electrode assembly systems for CO\n                    <sub>2</sub>\n                    reduction: a modeling study",
+  "journal": "Energy &amp; Environmental Science",
+  "year": "2019",
+  "authors": [
+   "Weng",
+   "Bell",
+   "Weber"
+  ]
+ },
+ "10.1038/s41467-024-47210-x": {
+  "title": "Autonomous closed-loop mechanistic investigation of molecular electrochemistry via automation",
+  "journal": "Nature Communications",
+  "year": "2024",
+  "authors": [
+   "Sheng",
+   "Sun",
+   "Rodriguez",
+   "Hoar",
+   "Zhang",
+   "Xiang",
+   "Tang",
+   "Hazra",
+   "Min",
+   "Doyle",
+   "Sigman",
+   "Costentin",
+   "Gu",
+   "Rodriguez-Lopez",
+   "Liu"
+  ]
+ },
+ "10.1016/j.ijhydene.2008.10.012": {
+  "title": "A review of accelerated stress tests of MEA durability in PEM fuel cells",
+  "journal": "International Journal of Hydrogen Energy",
+  "year": "2009",
+  "authors": [
+   "ZHANG",
+   "YUAN",
+   "WANG",
+   "MERIDA",
+   "ZHU",
+   "SHEN",
+   "WU",
+   "ZHANG"
+  ]
+ },
+ "10.1021/acs.macromol.1c00494": {
+  "title": "Impacts of Organic Sorbates on the Ionic Conductivity and Nanostructure of Perfluorinated Sulfonic-Acid Ionomers",
+  "journal": "Macromolecules",
+  "year": "2021",
+  "authors": [
+   "Katzenberg",
+   "Angulo",
+   "Kusoglu",
+   "Modestino"
+  ]
+ },
+ "10.1016/j.checat.2024.100998": {
+  "title": "Accelerated analysis of the electrochemical production route for biomass-derived adiponitrile",
+  "journal": "Chem Catalysis",
+  "year": "2024",
+  "authors": [
+   "Mathison",
+   "Rani",
+   "Patel",
+   "Lopez Cerrato",
+   "Bloomquist",
+   "Modestino"
+  ]
+ },
+ "10.1002/cssc.202300657": {
+  "title": "Early Warning for the Electrolyzer: Monitoring CO\n                    <sub>2</sub>\n                    Reduction via In\u2010Line Electrochemical Impedance Spectroscopy",
+  "journal": "ChemSusChem",
+  "year": "2023",
+  "authors": [
+   "Warkentin",
+   "O'Brien",
+   "Holowka",
+   "Maxwell",
+   "Awara",
+   "Bouman",
+   "Zeraati",
+   "Nicholas",
+   "Ip",
+   "Elsahwi",
+   "Gabardo",
+   "Sinton"
+  ]
+ },
+ "10.1149/2.F04143if": {
+  "title": "Electrochemical Manufacturing in the Chemical Industry",
+  "journal": "Interface magazine",
+  "year": "2014",
+  "authors": [
+   "Botte"
+  ]
+ },
+ "10.1126/science.aan6206": {
+  "title": "Metal-catalyzed electrochemical diazidation of alkenes",
+  "journal": "Science",
+  "year": "2017",
+  "authors": [
+   "Fu",
+   "Sauer",
+   "Saha",
+   "Loo",
+   "Lin"
+  ]
+ },
+ "10.1038/s41586-019-1539-y": {
+  "title": "Hindered dialkyl ether synthesis with electrogenerated carbocations",
+  "journal": "Nature",
+  "year": "2019",
+  "authors": [
+   "Xiang",
+   "Shang",
+   "Kawamata",
+   "Lundberg",
+   "Reisberg",
+   "Chen",
+   "Mykhailiuk",
+   "Beutner",
+   "Collins",
+   "Davies",
+   "Del Bel",
+   "Gallego",
+   "Spangler",
+   "Starr",
+   "Yang",
+   "Blackmond",
+   "Baran"
+  ]
+ },
+ "10.1021/jacs.2c03213": {
+  "title": "A Unified Synthetic Strategy to Introduce Heteroatoms via Electrochemical Functionalization of Alkyl Organoboron Reagents",
+  "journal": "Journal of the American Chemical Society",
+  "year": "2022",
+  "authors": [
+   "Go",
+   "Chung",
+   "Shin",
+   "An",
+   "Youn",
+   "Im",
+   "Kim",
+   "Chung",
+   "Lee"
+  ]
+ },
+ "10.1021/acs.orglett.0c02799": {
+  "title": "Electrochemical Decarboxylative\n                    <i>N</i>\n                    -Alkylation of Heterocycles",
+  "journal": "Organic Letters",
+  "year": "2020",
+  "authors": [
+   "Sheng",
+   "Zhang",
+   "Shang",
+   "He",
+   "Vantourout",
+   "Baran"
+  ]
+ },
+ "10.1021/jacs.0c13093": {
+  "title": "Electrochemically Enabled, Nickel-Catalyzed Dehydroxylative Cross-Coupling of Alcohols with Aryl Halides",
+  "journal": "Journal of the American Chemical Society",
+  "year": "2021",
+  "authors": [
+   "Li",
+   "Sun",
+   "Wang",
+   "Li",
+   "Zhang",
+   "Li"
+  ]
+ },
+ "10.1021/acs.chemrev.4c00464": {
+  "title": "Electrophotocatalysis for Organic Synthesis",
+  "journal": "Chemical Reviews",
+  "year": "2024",
+  "authors": [
+   "Lamb",
+   "Steiniger",
+   "Trigoura",
+   "Wu",
+   "Kundu",
+   "Huang",
+   "Lambert"
+  ]
+ },
+ "10.1039/D3CS00511A": {
+  "title": "A tutorial on asymmetric electrocatalysis",
+  "journal": "Chemical Society Reviews",
+  "year": "2023",
+  "authors": [
+   "Rein",
+   "Zacate",
+   "Mao",
+   "Lin"
+  ]
+ },
+ "10.1021/jacs.2c08006": {
+  "title": "Overcoming Limitations in Decarboxylative Arylation via Ag\u2013Ni Electrocatalysis",
+  "journal": "Journal of the American Chemical Society",
+  "year": "2022",
+  "authors": [
+   "Palkowitz",
+   "Laudadio",
+   "Kolb",
+   "Choi",
+   "Oderinde",
+   "Ewing",
+   "Bolduc",
+   "Chen",
+   "Zhang",
+   "Cheng",
+   "Zhang",
+   "Mandler",
+   "Blasczak",
+   "Richter",
+   "Collins",
+   "Schioldager",
+   "Bravo",
+   "Dhar",
+   "Vokits",
+   "Zhu",
+   "Echeverria",
+   "Poss",
+   "Shaw",
+   "Clementson",
+   "Petersen",
+   "Mykhailiuk",
+   "Baran"
+  ]
+ },
+ "10.1039/D0RE00064G": {
+  "title": "Organic electrosynthesis: from academia to industry",
+  "journal": "Reaction Chemistry &amp; Engineering",
+  "year": "2020",
+  "authors": [
+   "Leech",
+   "Garcia",
+   "Petti",
+   "Dobbs",
+   "Lam"
+  ]
+ }
+}

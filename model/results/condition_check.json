@@ -1,0 +1,352 @@
+[
+ [
+  "Ni-catalyzed aryl amination (ArBr + amine)",
+  "Y",
+  "Y",
+  "Y",
+  "."
+ ],
+ [
+  "Electrochemical amination of ArX with NH3",
+  ".",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Shono oxidation (N-acyliminium capture)",
+  "Y",
+  "Y",
+  ".",
+  "Y"
+ ],
+ [
+  "Oxidative benzimidazole annulation (C-H/N-H)",
+  "Y",
+  "Y",
+  "Y",
+  "."
+ ],
+ [
+  "Mn-catalyzed alkene diazidation",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Br-mediated Hofmann rearrangement",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Arene C-H pyridination",
+  "Y",
+  "Y",
+  "Y",
+  "."
+ ],
+ [
+  "Amidyl-radical C-H amination (phenanthridinone)",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Co-catalyzed aza-Wacker cyclization",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Ritter-type C(sp3)-H amination",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Co-H alkene reduction (e-HAT)",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Kolbe homocoupling of hexanoate",
+  "Y",
+  "Y",
+  ".",
+  "."
+ ],
+ [
+  "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Doubly decarboxylative Csp3-Csp3",
+  "Y",
+  "Y",
+  "Y",
+  "?"
+ ],
+ [
+  "BDD phenol-arene cross-coupling",
+  "Y",
+  "Y",
+  "Y",
+  "."
+ ],
+ [
+  "Decarboxylative Minisci alkylation",
+  "Y",
+  "Y",
+  ".",
+  "."
+ ],
+ [
+  "Cathodic Giese (R-I + alkene)",
+  "Y",
+  "Y",
+  ".",
+  "."
+ ],
+ [
+  "Rh-catalyzed electrooxidative C-H alkenylation",
+  "Y",
+  "Y",
+  ".",
+  "Y"
+ ],
+ [
+  "Cu-catalyzed benzylic cyanation",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Cathodic Ni aryl-aryl homocoupling",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Anodic dehydrogenative 2-naphthol coupling",
+  "Y",
+  "Y",
+  "Y",
+  "."
+ ],
+ [
+  "Acrylonitrile hydrodimerization (ADN)",
+  ".",
+  ".",
+  ".",
+  "."
+ ],
+ [
+  "Birch reduction of naphthalene",
+  ".",
+  ".",
+  "Y",
+  "Y"
+ ],
+ [
+  "Nitroarene -> aniline",
+  "Y",
+  "Y",
+  "Y",
+  "."
+ ],
+ [
+  "Rapid-alternating-polarity imide reduction",
+  "Y",
+  "Y",
+  "Y",
+  "."
+ ],
+ [
+  "Diazo difunctionalization (thiol + alcohol)",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Cathodic aryl chloride dehalogenation",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Benzaldehyde -> benzyl alcohol",
+  "Y",
+  "Y",
+  ".",
+  "."
+ ],
+ [
+  "ACT-mediated alcohol oxidation (flow, hectogram)",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Anodic methoxylation of 4-tBu-toluene (Lysmeral)",
+  "NO TEXT",
+  "",
+  "",
+  ""
+ ],
+ [
+  "Shono alpha-methoxylation of amides",
+  "Y",
+  "Y",
+  ".",
+  "Y"
+ ],
+ [
+  "Cl-mediated propylene epoxidation",
+  "Y",
+  ".",
+  "Y",
+  "."
+ ],
+ [
+  "Alkaline lignin -> vanillin (pilot)",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Thioether -> sulfone (kilo-scale)",
+  "Y",
+  "Y",
+  "Y",
+  "."
+ ],
+ [
+  "NHPI-mediated allylic C-H -> enone",
+  "Y",
+  ".",
+  "Y",
+  "Y"
+ ],
+ [
+  "Alkenesulfonate from cinnamic acid, SO2 and alcohol",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "HMF -> FDCA (biomass)",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Radical-cation Diels-Alder (catalytic in e-)",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "BQ-mediated Wacker-Tsuji oxidation",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Non-Kolbe decarboxylative alpha-methoxylation",
+  "Y",
+  "Y",
+  ".",
+  "."
+ ],
+ [
+  "Co-H alkene isomerization (catalytic)",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Anodic oxazoline/oxazole cyclization",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Cathodic aryl-halide radical 5-exo cyclization",
+  "Y",
+  "Y",
+  "Y",
+  "."
+ ],
+ [
+  "Dehydrogenative lactonization (C-H/O-H)",
+  ".",
+  ".",
+  ".",
+  "Y"
+ ],
+ [
+  "Anodic benzylic fluorination",
+  "Y",
+  "Y",
+  "Y",
+  "."
+ ],
+ [
+  "Br- oxidation / electrophilic bromination",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "Sulfonylation of alkenes with sulfinates",
+  ".",
+  ".",
+  ".",
+  "Y"
+ ],
+ [
+  "Aryl thiocyanation (NH4SCN)",
+  "Y",
+  ".",
+  "Y",
+  "Y"
+ ],
+ [
+  "Anodic C-H phosphonylation of azoles",
+  "Y",
+  "Y",
+  "Y",
+  "Y"
+ ],
+ [
+  "N-N azo/pyrazole formation (N-H/N-H)",
+  "Y",
+  "Y",
+  "Y",
+  "."
+ ]
+]
