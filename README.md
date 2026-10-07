@@ -2,7 +2,7 @@
 
 This repository holds the transport and thermal model, the page-verified reaction set it runs on,
 and the figure generators behind the Perspective *Reaction engineering for electrified organic
-synthesis* (J. C. Bui, A. X. Lam, J. Rein, K. Lam, C. W. Coley, K. F. Jensen), submitted to
+synthesis* (J. C. Bui, A. X. Lam, J. Rein, K. Leung, C. W. Coley, K. F. Jensen), submitted to
 *Reaction Chemistry & Engineering*.
 
 Everything here is computed. Nothing in the published figures is a typed literal: each median,
@@ -142,7 +142,7 @@ and the Figure 6 overlay.
 
 ## Citation
 
-Bui, J. C.; Lam, A. X.; Rein, J.; Lam, K.; Coley, C. W.; Jensen, K. F. *Reaction engineering for
+Bui, J. C.; Lam, A. X.; Rein, J.; Leung, K.; Coley, C. W.; Jensen, K. F. *Reaction engineering for
 electrified organic synthesis.* Submitted to *Reaction Chemistry & Engineering*, 2026. Please cite
 the published article once it appears; cite this repository for the code and model.
 
