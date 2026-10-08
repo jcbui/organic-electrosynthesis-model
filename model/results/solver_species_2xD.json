@@ -1,0 +1,165 @@
+{
+ "species": [
+  "ClO4-",
+  "SCN-",
+  "Br-",
+  "Br2"
+ ],
+ "factor": 2.0,
+ "rows_resolved": [
+  "Br-mediated Hofmann rearrangement",
+  "NHPI-mediated allylic C-H -> enone",
+  "BQ-mediated Wacker-Tsuji oxidation",
+  "Br- oxidation / electrophilic bromination",
+  "Aryl thiocyanation (NH4SCN)",
+  "Amidyl-radical C-H amination (phenanthridinone)",
+  "Oxazole synthesis from ketones and acetonitrile"
+ ],
+ "values_doubled": 15,
+ "n_cells": 350,
+ "n_moved_gt1pct": 28,
+ "count_moves": [
+  {
+   "arch": "natural",
+   "threshold": 25,
+   "from": 12,
+   "to": 13
+  },
+  {
+   "arch": "natural",
+   "threshold": 50,
+   "from": 9,
+   "to": 10
+  },
+  {
+   "arch": "stirred",
+   "threshold": 25,
+   "from": 14,
+   "to": 15
+  },
+  {
+   "arch": "flow",
+   "threshold": 25,
+   "from": 19,
+   "to": 20
+  },
+  {
+   "arch": "anec",
+   "threshold": 50,
+   "from": 23,
+   "to": 24
+  }
+ ],
+ "median_shift_pct": {
+  "natural": 5.88,
+  "stirred": 6.11,
+  "flow": 0.0,
+  "anec": 0.0,
+  "micro": 1.03,
+  "rde": 0.0,
+  "rce": 3.16
+ },
+ "medians": {
+  "natural": [
+   8.554,
+   9.058
+  ],
+  "stirred": [
+   9.731,
+   10.326
+  ],
+  "flow": [
+   17.437,
+   17.437
+  ],
+  "anec": [
+   44.478,
+   44.478
+  ],
+  "micro": [
+   108.575,
+   109.693
+  ],
+  "rde": [
+   104.29,
+   104.29
+  ],
+  "rce": [
+   122.065,
+   125.921
+  ]
+ },
+ "max_cell_change_pct": 99.8,
+ "ordering_preserved": true,
+ "homogeneous_partners": {
+  "species_doubled": [
+   {
+    "spec": "HMF -> FDCA (biomass)",
+    "species": "B(OH)4-",
+    "D": 9.39e-10,
+    "s": 0.0,
+    "nu": -1.0
+   },
+   {
+    "spec": "HMF -> FDCA (biomass)",
+    "species": "B(OH)3",
+    "D": 1.64e-09,
+    "s": 0.0,
+    "nu": 1.0
+   },
+   {
+    "spec": "Aryl thiocyanation (NH4SCN)",
+    "species": "H+",
+    "D": 2e-09,
+    "s": 0.0,
+    "nu": 1.0
+   }
+  ],
+  "factor": 2.0,
+  "rows_resolved": [
+   "HMF -> FDCA (biomass)",
+   "Aryl thiocyanation (NH4SCN)"
+  ],
+  "control_max_deviation": 0.0,
+  "per_row": {
+   "HMF -> FDCA (biomass)": {
+    "change_pct": {
+     "natural": 0.599,
+     "stirred": 0.578,
+     "flow": 0.533,
+     "anec": 0.349,
+     "micro": 0.05,
+     "rde": 0.028,
+     "rce": 0.02
+    },
+    "min_pct": 0.02,
+    "max_pct": 0.599
+   },
+   "Aryl thiocyanation (NH4SCN)": {
+    "change_pct": {
+     "natural": -3.439,
+     "stirred": -3.434,
+     "flow": -3.336,
+     "anec": -2.939,
+     "micro": -1.818,
+     "rde": -1.773,
+     "rce": -1.701
+    },
+    "min_pct": -3.439,
+    "max_pct": -1.701
+   }
+  },
+  "max_cell_change_pct": 3.439,
+  "count_moves": [],
+  "median_shift_pct": {
+   "natural": -1.802,
+   "stirred": -1.796,
+   "flow": 0.108,
+   "anec": -0.416,
+   "micro": -0.967,
+   "rde": 0.0,
+   "rce": -0.854
+  },
+  "ordering_preserved": true
+ }
+}

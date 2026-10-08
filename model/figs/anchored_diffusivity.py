@@ -88,10 +88,11 @@ COMPLEX_FORMULA = {
     "Ni-catalyzed aryl amination (ArBr + amine)":      {"C": 10, "H": 8, "N": 2, "Br": 2, "Ni": 1},
     "Electrochemical amination of ArX with NH3":       {"C": 10, "H": 8, "N": 2, "Br": 2, "Ni": 1},
     "Mn-catalyzed alkene diazidation":                 {"C": 18, "H": 12, "N": 2, "O": 2, "Mn": 1},
-    "Co-catalyzed aza-Wacker cyclization":             {"C": 16, "H": 14, "Co": 1, "N": 2, "O": 2},
-    "Co-H alkene reduction (e-HAT)":         {"C": 10, "H": 8, "N": 2, "Br": 2, "Co": 1},
+    "Co-catalyzed allylic C-H amination":             {"C": 16, "H": 14, "Co": 1, "N": 2, "O": 2},
+    "Co-H alkene reduction (e-HAT)":         {"C": 12, "H": 12, "N": 2, "Br": 2, "Co": 1},   # CoBr2(6,6'-Me2bpy), Gnaim conditions C
     "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)":               {"C": 18, "H": 24, "Br": 2, "N": 2, "Ni": 1},
-    "Rh-catalyzed electrooxidative C-H alkenylation":  {"C": 20, "H": 30, "Cl": 4, "Rh": 2},
+    "Rh-catalyzed electrooxidative C-H alkenylation":  {"C": 10, "H": 15, "Cl": 2, "Rh": 1},   # Cp*RhCl2, the monomer of the charged dimer
+    "Doubly decarboxylative Csp3-Csp3":               {"C": 12, "H": 13, "Cl": 2, "N": 3, "Ni": 1, "O": 3},   # NiCl2((4-OMe)-H-PyBox)
     "Cu-catalyzed benzylic cyanation":                 {"C": 10, "H": 14, "O": 4, "Cu": 1},
     "Cathodic Ni aryl-aryl homocoupling":              {"C": 10, "H": 8, "N": 2, "Br": 2, "Ni": 1},
     "Co-H alkene isomerization (catalytic)":           {"C": 16, "H": 14, "Co": 1, "N": 2, "O": 2},
@@ -139,8 +140,8 @@ def main():
     n_typed = int((best_typed >= THRESH).sum())
     n_anch = sum(1 for x in best_anch if x >= THRESH)
     second = sorted(best_anch)[-2]
-    print("\ncatalyst rows clearing %.0f mA cm-2:  typed %d/11   anchored %d/11"
-          % (THRESH, n_typed, n_anch))
+    print("\ncatalyst rows clearing %.0f mA cm-2:  typed %d/%d   anchored %d/%d"
+          % (THRESH, n_typed, len(cat), n_anch, len(cat)))
     print("second-best at the TOP of the bracket: %.1f mA cm-2" % second)
 
     report = dict(anchor=ANCHOR["name"], anchor_D=ANCHOR["D_cm2s"], rows=rows,

@@ -44,6 +44,13 @@
    "wrote": true
   },
   {
+   "script": "figs/combined_figure.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": null
+  },
+  {
    "script": "figs/make_fig6_final.py",
    "exit": 0,
    "crashed": false,
@@ -73,6 +80,13 @@
   },
   {
    "script": "figs/make_figK.py",
+   "exit": 0,
+   "crashed": false,
+   "changed": [],
+   "wrote": null
+  },
+  {
+   "script": "figs/make_figK_MSlayout.py",
    "exit": 0,
    "crashed": false,
    "changed": [],

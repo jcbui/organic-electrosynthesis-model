@@ -100,9 +100,7 @@ def _assert_exponents(tol=2e-3):
         raise SystemExit("MU_EXP has drifted from the correlations:\n  " + "\n  ".join(bad))
 
 
-def elyte_M(s):
-    m = re.match(r"\s*([0-9.]+)\s*M\b", str(s))
-    return float(m.group(1)) if m else 0.0
+from dilute_theory_stratify import elyte_M, c_total   # one concentration rule for both gates
 
 
 def main(neg=False):
@@ -110,11 +108,8 @@ def main(neg=False):
     mat = pd.read_csv(os.path.join(ROOT, "julia", "tier0_ec_matrix.csv"))
     rx = pd.read_csv(os.path.join(HERE, "reactions_50.csv"))
     med = set(pd.read_csv(os.path.join(ROOT, "julia", "mediated_ec_matrix.csv")).reaction.unique())
-    m = mat.merge(rx[["reaction", "C_carrier_M", "C_substrate_M", "electrolyte"]], on="reaction")
-
-    # total dissolved concentration seen by the medium
-    m["c_tot"] = (m.C_carrier_M.astype(float) + m.C_substrate_M.astype(float)
-                  + m.electrolyte.map(elyte_M))
+    # total dissolved concentration seen by the medium, each species counted once (dilute_theory_stratify.c_total)
+    m = mat.merge(c_total(rx)[["reaction", "c_tot"]], on="reaction")
     if neg:
         # THE CONTROL USED TO RUN THE WRONG WAY: it set c_tot = 0 so NOTHING was flagged, then
         # confirmed no count moved. That shows the code is quiet when asked to do nothing -- it
@@ -163,7 +158,7 @@ def main(neg=False):
             breaks["ordering"] = r["factor"]
 
     out = os.path.join(ROOT, "results", "solution_viscosity_sensitivity.json")
-    json.dump({"cut_M": CUT, "n_flagged": int(flag.sum()), "factors": FACTORS,
+    json.dump({"cut_M": CUT, "n_flagged": int(flag.sum()), "c_tot_max_M": float(m.c_tot.max()), "factors": FACTORS,
                "baseline_n25": n25_base, "sweep": rows_out, "breaks_at": breaks},
               io.open(_out(out, neg), "w", encoding="utf8"), indent=1)
     print("\n-> %s" % _out(out, neg))

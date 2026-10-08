@@ -1,0 +1,86 @@
+{
+ "recipe": "Cardiel, Taitt & Choi 2019: 0.5 M boric acid adjusted to pH 10 with NaOH",
+ "constant": "Mesmer, Baes & Sweeton 1972, log Q11 (abstract p. 537; Table III p. 541); polyborates Table VI p. 542",
+ "pKw_declared": 13.995,
+ "monomers_mM": {
+  "B(OH)4-": 451.8600397846255,
+  "B(OH)3": 48.139960215374536,
+  "Na+": 451.9982807530242,
+  "OH-": 0.13824096839873012
+ },
+ "ionic_strength": 0.4519982807525815,
+ "log_Q11_at_I": 4.831861441757234,
+ "carried_in_run_mediated_mM": {
+  "Na+": 452.0,
+  "B(OH)4-": 452.0,
+  "B(OH)3": 48.0
+ },
+ "carried_matches": true,
+ "schemes": {
+  "I": {
+   "computed_mM": {
+    "B(OH)4-": 260.3063013033682,
+    "B(OH)3": 28.207440166141712,
+    "Na+": 357.4058965763247,
+    "polyborate_charge": 96.96119058930577
+   },
+   "fraction_of_boron_pct": 42.29725170609806,
+   "carried_mM": {
+    "B(OH)4-": 260,
+    "B(OH)3": 28,
+    "Na+": 357,
+    "polyborate_charge": 97
+   },
+   "carried_is_rounded_computed": true,
+   "resolve_pct": [
+    -0.6667647272227462,
+    -0.0805901637333406
+   ],
+   "resolve_by_reactor_pct": {
+    "Unstirred batch": -0.6667647272227462,
+    "Stirred batch": -0.6250988415881564,
+    "Recirculating flow cell": -0.519757691295375,
+    "ANEC flow cell": -0.35928687127884107,
+    "Microfluidic cell (25 um gap)": -0.1280544172540532,
+    "RDE 1600 rpm": -0.09546026145467179,
+    "Rotating cylinder 3000 rpm": -0.0805901637333406
+   },
+   "counts_move": [],
+   "printed_medians_move": [],
+   "Na_over_carrier": 8.925
+  },
+  "II": {
+   "computed_mM": {
+    "B(OH)4-": 199.37806108107563,
+    "B(OH)3": 20.930157323915537,
+    "Na+": 360.84922704957677,
+    "polyborate_charge": 161.333399082987
+   },
+   "fraction_of_boron_pct": 55.93835631900181,
+   "carried_mM": {
+    "B(OH)4-": 199,
+    "B(OH)3": 21,
+    "Na+": 360,
+    "polyborate_charge": 161
+   },
+   "carried_is_rounded_computed": true,
+   "resolve_pct": [
+    -28.0685600472683,
+    -0.0774207102506419
+   ],
+   "resolve_by_reactor_pct": {
+    "Unstirred batch": -28.0685600472683,
+    "Stirred batch": -21.11540250369144,
+    "Recirculating flow cell": -0.49888990721435045,
+    "ANEC flow cell": -0.3450278069014656,
+    "Microfluidic cell (25 um gap)": -0.1230157237332885,
+    "RDE 1600 rpm": -0.09170548093356823,
+    "Rotating cylinder 3000 rpm": -0.0774207102506419
+   },
+   "counts_move": [],
+   "printed_medians_move": [],
+   "Na_over_carrier": 9.0
+  }
+ },
+ "Na_over_carrier_monomer": 11.299957018825605
+}

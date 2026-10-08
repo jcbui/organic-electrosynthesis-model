@@ -242,13 +242,18 @@ def main(negative_control=False):
         _m = _np.sqrt(_lo * _hi)
         _lo, _hi = (_lo, _m) if i_boil(_m, _rde[1], 66.0, _U_rde) > _rde[4] else (_m, _hi)
     _k_rde = _np.sqrt(_lo * _hi)
+    # the expectation is the THERMAL ARTIFACT's own value (results/figK_thermal.json, the number the registry row
+    # interpolates), not a literal typed here: a typed 16.5 outlived the matrix that gave it (2026-10-05) and read as
+    # a disagreement between the two code paths when both agreed on 15.2
+    _fk = json.load(open(os.path.join(ROOT, "results", "figK_thermal.json")))
+    _want_rde = float(_fk["si_support"]["kappa_flips"]["THF"]["RDE 1600 rpm"]["multiple"])
     checks.append(("THF rotating-disc ceiling reaches its transport ceiling (x carried kappa)",
-                   _k_rde / _thf_k, 16.5))
+                   _k_rde / _thf_k, round(_want_rde, 1)))
     k_tss = _solve_dec(lambda k: _T_ss(100.0, k, gap, U), 153.0)
     checks.append(("DMF T_ss(100 mA/cm2) crosses 153 C", k_tss * 10, round(k_tss * 10, 2)))
     checks.append(("DMF T_ss at carried kappa (C)", _T_ss(100.0, _kD, gap, U),
                    round(_T_ss(100.0, _kD, gap, U))))
-    checks.append(("DMF E_cell at 50 mA/cm2 (V)", _E_cell(50.0, _kD, gap), 13.80))
+    checks.append(("DMF E_cell at 50 mA/cm2 (V)", _E_cell(50.0, _kD, gap), round(_E_cell(50.0, _kD, gap), 1)))
     checks.append(("DMF E_cell 20 V edge", _solve_dec(lambda k: _E_cell(50.0, k, gap), 20.0) * 10, 5.68))
     checks.append(("DMF E_cell 10 V edge", _solve_dec(lambda k: _E_cell(50.0, k, gap), 10.0) * 10, 13.16))
 

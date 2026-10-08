@@ -1,114 +1,199 @@
 {
  "mu_printed": 1.927,
  "mu_alternative_not_adopted": 0.927,
+ "mu_krumgalz": 0.919,
+ "mu_low": 0.919,
  "adopted": 1.927,
+ "method": "every DMA cell re-solved at each swept viscosity (data/dma_viscosity_ecprime.jl); carrier, product and substrate D scale as 1/mu, nu as mu, supporting ions and k held",
+ "dma_rows": {
+  "Ni-catalyzed aryl amination (ArBr + amine)": {
+   "carrier_type": "catalyst"
+  },
+  "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)": {
+   "carrier_type": "catalyst"
+  }
+ },
  "swept": [
-  {
-   "mu": 1.927,
-   "counts": {
-    "natural": 12,
-    "stirred": 14,
-    "flow": 18,
-    "anec": 31,
-    "micro": 36,
-    "rde": 36,
-    "rce": 36
-   },
-   "catalyst_clearing": 1
-  },
-  {
-   "mu": 0.9683175,
-   "counts": {
-    "natural": 12,
-    "stirred": 14,
-    "flow": 18,
-    "anec": 32,
-    "micro": 37,
-    "rde": 37,
-    "rce": 37
-   },
-   "catalyst_clearing": 2
-  },
   {
    "mu": 0.009635,
    "counts": {
-    "natural": 14,
-    "stirred": 16,
-    "flow": 20,
-    "anec": 33,
-    "micro": 38,
-    "rde": 38,
-    "rce": 38
+    "25": {
+     "natural": 13,
+     "stirred": 15,
+     "flow": 20,
+     "anec": 30,
+     "micro": 36,
+     "rde": 36,
+     "rce": 36
+    },
+    "50": {
+     "natural": 10,
+     "stirred": 13,
+     "flow": 13,
+     "anec": 25,
+     "micro": 34,
+     "rde": 34,
+     "rce": 34
+    }
    },
-   "catalyst_clearing": 3
+   "catalyst_clearing": 3,
+   "dma_cells": {
+    "Ni-catalyzed aryl amination (ArBr + amine)": {
+     "natural": 10.700000000000001,
+     "stirred": 12.200000000000001,
+     "flow": 22.82,
+     "anec": 67.36000000000001,
+     "micro": 195.10000000000002,
+     "rde": 113.85819871343182,
+     "rce": 251.28454424898356
+    },
+    "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)": {
+     "natural": 1456.2800000000002,
+     "stirred": 1550.9200000000003,
+     "flow": 1939.0600000000002,
+     "anec": 2322.4200000000005,
+     "micro": 2473.1000000000004,
+     "rde": 1036.0293856927146,
+     "rce": 2349.2073857785886
+    }
+   },
+   "dma_best": {
+    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
+    "arch": "micro",
+    "i_lim": 2473.1000000000004
+   }
   }
  ],
  "base_counts": {
-  "natural": 12,
-  "stirred": 14,
-  "flow": 18,
-  "anec": 31,
-  "micro": 36,
-  "rde": 36,
-  "rce": 36
+  "25": {
+   "natural": 12,
+   "stirred": 14,
+   "flow": 19,
+   "anec": 28,
+   "micro": 34,
+   "rde": 34,
+   "rce": 34
+  },
+  "50": {
+   "natural": 9,
+   "stirred": 12,
+   "flow": 12,
+   "anec": 23,
+   "micro": 32,
+   "rde": 32,
+   "rce": 32
+  }
  },
  "base_catalyst_clearing": 1,
+ "n_catalyst_rows": 12,
  "count_moves": [
   {
-   "mu": 0.9683175,
-   "arch": "anec",
-   "delta": 1
-  },
-  {
-   "mu": 0.9683175,
-   "arch": "micro",
-   "delta": 1
-  },
-  {
-   "mu": 0.9683175,
-   "arch": "rde",
-   "delta": 1
-  },
-  {
-   "mu": 0.9683175,
-   "arch": "rce",
-   "delta": 1
-  },
-  {
    "mu": 0.009635,
+   "threshold": 25.0,
    "arch": "natural",
-   "delta": 2
+   "delta": 1
   },
   {
    "mu": 0.009635,
+   "threshold": 25.0,
    "arch": "stirred",
-   "delta": 2
+   "delta": 1
   },
   {
    "mu": 0.009635,
+   "threshold": 25.0,
    "arch": "flow",
-   "delta": 2
+   "delta": 1
   },
   {
    "mu": 0.009635,
+   "threshold": 25.0,
    "arch": "anec",
    "delta": 2
   },
   {
    "mu": 0.009635,
+   "threshold": 25.0,
    "arch": "micro",
    "delta": 2
   },
   {
    "mu": 0.009635,
+   "threshold": 25.0,
    "arch": "rde",
    "delta": 2
   },
   {
    "mu": 0.009635,
+   "threshold": 25.0,
+   "arch": "rce",
+   "delta": 2
+  },
+  {
+   "mu": 0.009635,
+   "threshold": 50.0,
+   "arch": "natural",
+   "delta": 1
+  },
+  {
+   "mu": 0.009635,
+   "threshold": 50.0,
+   "arch": "stirred",
+   "delta": 1
+  },
+  {
+   "mu": 0.009635,
+   "threshold": 50.0,
+   "arch": "flow",
+   "delta": 1
+  },
+  {
+   "mu": 0.009635,
+   "threshold": 50.0,
+   "arch": "anec",
+   "delta": 2
+  },
+  {
+   "mu": 0.009635,
+   "threshold": 50.0,
+   "arch": "micro",
+   "delta": 2
+  },
+  {
+   "mu": 0.009635,
+   "threshold": 50.0,
+   "arch": "rde",
+   "delta": 2
+  },
+  {
+   "mu": 0.009635,
+   "threshold": 50.0,
    "arch": "rce",
    "delta": 2
   }
  ],
+ "catalyst_clearing_moves_at": [
+  0.009635
+ ],
+ "mu_power_law_at_homolog": {
+  "Ni-catalyzed aryl amination (ArBr + amine)": {
+   "natural": 0.11121305285868394,
+   "stirred": 0.12680366774541532,
+   "flow": 0.23718522114347357,
+   "anec": 0.7001225458468178,
+   "micro": 2.027819309600863,
+   "rde": 2.533228096215736,
+   "rce": 2.758903424827623
+  },
+  "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)": {
+   "natural": 15.13620043149946,
+   "stirred": 16.119864293419635,
+   "flow": 20.154091801510248,
+   "anec": 24.13863721682848,
+   "micro": 25.704766450916942,
+   "rde": 23.050590805037064,
+   "rce": 25.792419194047234
+  }
+ },
  "source": "CRC 97th ed. 2016, Sect. 6 'Viscosity of Liquids', p. 6-244, eta(25 C) column"
 }

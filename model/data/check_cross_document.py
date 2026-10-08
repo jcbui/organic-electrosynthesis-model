@@ -109,15 +109,26 @@ def main(neg=False):
             fails.append("SI says %d/50 unstirred and %d/50 rotating-cylinder clear 50 mA cm-2; "
                          "the matrix gives %d and %d" % (got + want))
 
-    # the seven architecture medians: wherever a document prints the ladder, it must print ALL seven
-    med = [round(float(mat[k].median())) for k in ARCH]
-    for lab, t in (("MS", ms), ("SI", si)):
-        if re.search(r"\b%d\b[^.]{0,80}\b%d\b" % (med[0], med[1]), t):
-            checked += 1
-            missing = [v for v in med if not re.search(r"\b%d\b" % v, t)]
-            if missing:
-                fails.append("%s prints the median ladder but omits %s of %s"
-                             % (lab, missing, med))
+    # the MS median ladder: one sentence, each value bound to its architecture BY POSITION, printed at the
+    # document's precision (one decimal below 100 mA cm-2, integers above). Declared omission: the RDE, which
+    # the sentence leaves out (it lists the six reactor archetypes; the RDE is the analytical reference).
+    med = [round(float(mat[k].median()), 1) for k in ARCH]
+    LADDER = [k for k in ARCH if k != "rde"]
+    fmt = lambda v: ("%.0f" % v) if v >= 100 else ("%.1f" % v)
+    m = re.search(r"median limiting current density rises from (.*?)\.\s+[A-Z]", ms)
+    checked += 1
+    if not m:
+        fails.append("the MS median-ladder sentence is gone; re-point this check")
+    else:
+        _lad = m.group(1)
+        if neg:      # perturb the DOCUMENT's third rung, so the sentence regex is exercised, not a parsed list
+            _r3 = re.findall(r"(\d+(?:\.\d+)?) mA cm", _lad)[2]
+            _lad = _lad.replace(_r3 + " mA cm", "%.1f mA cm" % (float(_r3) + 0.5), 1)
+        got = re.findall(r"(\d+(?:\.\d+)?) mA cm", _lad)
+        want = [fmt(float(mat[k].median())) for k in LADDER]
+        if got != want:
+            fails.append("MS median ladder prints %s; the matrix gives %s (in the order %s)"
+                         % (got, want, LADDER))
 
     print("\n  %d comparisons" % checked)
     for f in fails:
@@ -128,7 +139,7 @@ def main(neg=False):
                                    % ("_NEGCONTROL" if neg else "")), "w", encoding="utf8"),
               indent=1)
     if neg:
-        ok = any(("%d/50" % (_rce50 + 1)) in f for f in fails)
+        ok = any(("%d/50" % (_rce50 + 1)) in f for f in fails) and any("median ladder prints" in f for f in fails)
         print("\nNEGATIVE CONTROL: the SI's rotating-cylinder count rewritten %d -> %d, the exact "
               "kind of stale literal this gate exists to catch." % (_rce50, _rce50 + 1))
         print("G-XDOC control: %s (%d finding(s))"
@@ -141,8 +152,8 @@ def main(neg=False):
         print("\nG-XDOC: FAIL -- %d disagreement(s)" % len(fails))
         return 1
     print("\nG-XDOC: PASS -- every 'N/50' the manuscript states is a count the matrix produces, "
-          "the SI's unstirred/rotating-cylinder sentence matches the matrix, and wherever a "
-          "document prints the median ladder it prints all six values (%d checks)" % checked)
+          "the SI's unstirred/rotating-cylinder sentence matches the matrix, and the MS median ladder prints "
+          "each archetype's median in order, the RDE declared omitted (%d checks)" % checked)
     return 0
 
 

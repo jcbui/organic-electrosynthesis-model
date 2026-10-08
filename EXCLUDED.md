@@ -68,13 +68,13 @@ including the analytic audit `model/julia/run_audit.jl` (16/16) and the regenera
 ## 4. Author-drawn artwork
 
 **Withheld:** the Illustrator and ChemDraw sources behind Figures 2, 3 and 8, and the hand-placed
-Figure 6 overlay (`Figure6_with_schemes_20261002.pdf`).
+Figure 6 page (`Figure6_generated_20261006b_JCB.pdf`, the generated page with the schemes placed by hand).
 
 **Why:** they are the authors' drawings, not model output.
 
 **What remains:** the generators that build the schemes and rasterise the artwork
 (`make_fig2_lato_cdxml.py`, `make_fig_case_studies_cdxml.py`, `make_fig_failure_modes.py`,
-`make_fig6_schemes_cdxml.py`, `make_fig6_final.py`) and the six Figure 6 ChemDraw scheme crops in
+`make_fig6_schemes_cdxml.py`, `make_fig6_final.py`) and the Figure 6 ChemDraw scheme crops in
 `model/figs/fig6_schemes/`. Those generators will raise on the missing source files.
 
 ---

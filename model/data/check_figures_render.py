@@ -69,7 +69,23 @@ GENERATORS = [
     # be watched -- the entry above keeps the model-to-render path, this one the artwork-to-document
     # path -- and the generator additionally refuses to run once the render it was laid out over has
     # moved, because an Illustrator file cannot follow a model change.
-    ("figs/make_fig6_final.py", ["../Figures/Figure6_with_schemes_20261002_600dpi.png"],
+    # The INLINE render (FIG6_INLINE=1) is what the author lays the schemes out over, and
+    # make_fig6_final.py pins it by md5. Pinning a file on disk says nothing about whether the model
+    # still draws it, so the inline render is re-rendered here like any other figure: a model change
+    # then shows up as a stale inline render BEFORE the pin can vouch for it.
+    ("figs/combined_figure.py", ["figs/combined_figure_grounded_inline.png"],
+     PINNED, ROOT, None, {"FIG6_INLINE": "1"}),
+    # INTERIM (chemistry audit, 2026-10-05 night): panel (h) moved and nothing else did, so make_fig6_final.py refuses (the
+    # render under the author's placement changed). Until he re-places (h) on the 20261005d hand-off page, the manuscript
+    # carries his artwork for (a)-(g) and the generator's (h); make_fig6_interim.py builds that and refuses unless every pixel
+    # that moved lies in panel (h). Restore the make_fig6_final.py entry when his new page arrives.
+    # 2026-10-06 (chemistry review): (f) and (g) moved too (the NHPI row's valencene), so the interim carries the generator's
+    # (f)-(h) and the author's (a)-(e); make_fig6_interim.py refuses unless nothing else moved and he drew nothing it replaces.
+    # 2026-10-06 night: the substrate-limited panel (d) became the anisole bromination (author-approved swap), so the whole of
+    # (d) and its scheme band come from the generator as well; the output is the 20261006b interim.
+    # 2026-10-07 evening: the author placed the (g)/(h) schemes and deleted the x_k markers on the 20261006b hand-off page,
+    # so the interim composite is retired and Figure 6 is his page again, rasterised by make_fig6_final.py
+    ("figs/make_fig6_final.py", ["../Figures/Figure6_final_20261007_600dpi.png"],
      PINNED, ROOT, "wrote "),
     # The SI embeds five figures of its own, and they were exposed to exactly the same trap: on
     # 2026-08-31 Figures C and F were both found to re-render differently, i.e. the SI had been
@@ -79,6 +95,9 @@ GENERATORS = [
     ("figs/make_figFG.py", ["figs/sec4_figF_gap.png"]),
     ("figs/make_figH_ecprime.py", ["figs/sec4_figH_ecprime.png"]),
     ("figs/make_figK.py", ["figs/sec4_figK_boiloff.png"]),
+    # chemistry audit pass 7: the manuscript's Figure 7 had no entry here, so a thermal-model change (H_EXT, the DMF kappa)
+    # left its render untested; the manuscript chain embeds this file
+    ("figs/make_figK_MSlayout.py", ["../MS Drafts/_replacement_artwork/MS_Fig5_figK_boiloff_remediated.png"]),
     # Figure 1 (added 2026-09-07, once its pinned env existed). Three things make it unlike the
     # rest, and the third is the one that matters:
     #   (i)  it lives outside Section4_Model, so it runs with cwd = Figure1/ (customplot reads the
@@ -95,12 +114,13 @@ GENERATORS = [
 
 
 def _norm(entry):
-    """(script, artifacts) or (script, artifacts, interpreter, cwd, required stdout marker)."""
+    """(script, artifacts) or (script, artifacts, interpreter, cwd, required stdout marker[, extra env])."""
     script, arts = entry[0], entry[1]
     interp = entry[2] if len(entry) > 2 else PINNED
     cwd = entry[3] if len(entry) > 3 else ROOT
     marker = entry[4] if len(entry) > 4 else None
-    return script, arts, interp, cwd, marker
+    extra = entry[5] if len(entry) > 5 else None
+    return script, arts, interp, cwd, marker, extra
 
 
 def md5(p):
@@ -116,7 +136,7 @@ def main(neg=False):
     env = dict(os.environ, MPLBACKEND="Agg")
     rows, fails = [], []
     for entry in GENERATORS:
-        script, arts, interp, cwd, marker = _norm(entry)
+        script, arts, interp, cwd, marker, extra = _norm(entry)
         if not os.path.exists(interp):
             fails.append("%s needs the interpreter %s, which is missing -- build it from "
                          "Figure_1b_Kasie/requirements.txt (see trap 19); refusing to render with "
@@ -134,7 +154,8 @@ def main(neg=False):
             # generator exits non-zero without writing anything. A control that edited a figure
             # input would leave real artwork perturbed on disk.
             cmd = [PINNED, "-c", "import __definitely_not_a_module__"]
-        r = subprocess.run(cmd, cwd=cwd, env=env, capture_output=True, text=True)
+        r = subprocess.run(cmd, cwd=cwd, env=dict(env, **extra) if extra else env,
+                           capture_output=True, text=True)
         crashed = r.returncode != 0 or "Traceback" in r.stderr
         # A generator that guards its own environment can exit 0 having written nothing; that is
         # indistinguishable from success by exit status and by byte-comparison alike.

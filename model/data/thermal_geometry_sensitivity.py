@@ -244,7 +244,12 @@ def main():
                      for r in rows if r["arch"] in ROT and r["solvent"] == "THF")
     conditional = [{"arch": r["arch"], "solvent": r["solvent"], "verdict": r["verdict"],
                     "flips_at_gap_x": r["gap_flip_x"], "flips_at_gap_mm": r["gap_flip_m"] * 1e3}
-                   for r in rows if r["arch"] in ROT and r["solvent"] in ("MeCN", "DMF")]
+                   for r in rows if r["gap_state"] in ("inherited", "declared") and r["gap_flip_x"]
+                   and 1 / 2.5 <= r["gap_flip_x"] <= 2.5]
+    # 2026-10-07 (audit pass 28): the list was "every MeCN/DMF cell at a rotating electrode", which counted the rotating
+    # cylinder although its gap is derived from Eisenberg (2.435 cm), not inherited, and which reverses only at 0.39-0.40x
+    # of it. It is now every inherited or declared gap that reverses within the same factor of 2.5 used for sigma: the
+    # rotating disc in MeCN and DMF, at 0.66x.
     # SIGMA IS THE OTHER UNSOURCED GEOMETRIC TERM, and the row that declares it must say what it is
     # worth. Until 2026-09-12 this gate swept sigma and printed the breaking points but published
     # only the gap side, so the sigma row carried a sensitivity about a different quantity. A cell
@@ -284,7 +289,7 @@ def main():
         print("  %s" % note)
 
     ok = (spread <= 0.07 and tspan >= 10.0 and len(ident) == 2 and ispan >= 5.0
-          and micro_ok and thf_robust and len(conditional) == 4 and si_ok)
+          and micro_ok and thf_robust and len(conditional) == 2 and si_ok)
 
     if neg:
         # Drop every transport ceiling tenfold.  The two rotating cells then clear their boil-off

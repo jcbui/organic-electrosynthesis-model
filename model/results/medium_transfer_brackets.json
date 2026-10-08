@@ -1,0 +1,79 @@
+{
+ "carried": {
+  "cl34": 2.3e-09,
+  "br46": 2.08e-09,
+  "br2": 2.2e-09
+ },
+ "cases": {
+  "cl34_lo": {
+   "rows": [
+    "Thioether -> sulfone (kilo-scale)"
+   ],
+   "D": 2.055e-09,
+   "ratio_lo": 0.8459,
+   "ratio_hi": 0.9869,
+   "lowest_cell_mAcm2": 117.13,
+   "count_moves": [],
+   "median_moves": []
+  },
+  "cl34_hi": {
+   "rows": [
+    "Thioether -> sulfone (kilo-scale)"
+   ],
+   "D": 3.768e-09,
+   "ratio_lo": 1.0564,
+   "ratio_hi": 2.1412,
+   "lowest_cell_mAcm2": 125.37,
+   "count_moves": [],
+   "median_moves": []
+  },
+  "br46_lo": {
+   "rows": [
+    "Br- oxidation / electrophilic bromination"
+   ],
+   "D": 1.2e-09,
+   "ratio_lo": 0.5896,
+   "ratio_hi": 0.7173,
+   "lowest_cell_mAcm2": 27.06,
+   "count_moves": [
+    {
+     "arch": "stirred",
+     "threshold": 50,
+     "from": 12,
+     "to": 11
+    }
+   ],
+   "median_moves": []
+  },
+  "br46_hi": {
+   "rows": [
+    "Br- oxidation / electrophilic bromination"
+   ],
+   "D": 2.217e-09,
+   "ratio_lo": 1.0401,
+   "ratio_hi": 1.064,
+   "lowest_cell_mAcm2": 48.83,
+   "count_moves": [],
+   "median_moves": []
+  },
+  "br2_hi": {
+   "rows": [
+    "Br-mediated Hofmann rearrangement",
+    "Amidyl-radical C-H amination (phenanthridinone)"
+   ],
+   "D": 2.846e-09,
+   "ratio_lo": 0.8917,
+   "ratio_hi": 0.9989,
+   "lowest_cell_mAcm2": 14.78,
+   "count_moves": [
+    {
+     "arch": "flow",
+     "threshold": 25,
+     "from": 19,
+     "to": 18
+    }
+   ],
+   "median_moves": []
+  }
+ }
+}

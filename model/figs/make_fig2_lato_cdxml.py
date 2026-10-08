@@ -172,6 +172,28 @@ def main():
     x = "".join(out)
     if "hetrocycles" in x or "heterocycles" not in x:
         raise SystemExit("the heterocycles typo was not fixed")
+    # chemistry review 2026-10-06: the two panel headers had "paired" and "coupled" swapped against the caption, the body
+    # and the cited works -- both electrogenerated intermediates from ONE electrode is anodically COUPLED electrolysis
+    # (Rein 2023, p. 8111, "anodically coupled electrolysis"); productive half-reactions at BOTH electrodes is PAIRED
+    # electrolysis (Li 2021, the deoxygenative "paired electrolysis")
+    for old, new in (("Anodically (or cathodically) paired electrolysis", "Anodically (or cathodically) coupled electrolysis"),
+                     ("within the same cell, enabling coupled electrolysis.", "within the same cell, enabling paired electrolysis.")):
+        if x.count(old) != 1:
+            raise SystemExit("panel header %r occurs %d times" % (old, x.count(old)))
+        x = x.replace(old, new)
+
+    # chemistry audit 2026-10-06: of the legend's metals only Mn and Cu are supported by the works the figure cites -- Fu's
+    # own catalyst screen (ref 16, SI Table S1) gives FeBr2 and Ni(OAc)2 below 10%, and no other cited work runs Fe or Ni
+    # in this radical functionalization -- so the legend names the two it can show. The label's LineStarts are character
+    # offsets of each line's end, so they move with the text.
+    legs = [m for m in re.finditer(r"<t\b[^>]*>(?:(?!</t>).)*?M = Mn, Fe, Cu, Ni(?:(?!</t>).)*?</t>", x, re.S)]
+    if len(legs) != 1:
+        raise SystemExit("the metal legend occurs %d times" % len(legs))
+    t_old = legs[0].group(0)
+    if 'LineStarts="10 29 43"' not in t_old:
+        raise SystemExit("the legend's line offsets are not the expected 10 29 43")
+    t_new = t_old.replace("M = Mn, Fe, Cu, Ni", "M = Mn, Cu").replace('LineStarts="10 29 43"', 'LineStarts="10 21 35"')
+    x = x[:legs[0].start()] + t_new + x[legs[0].end():]
 
     # the cathode step: "- e-, Br" -> "+ e-, - Br-" (a reduction), keeping the caption's own position
     m = re.search(r'(<t\b[^>]*\bp="52\.\d+ 361\.\d+"[^>]*>)(.*?)(</t>)', x, re.S)

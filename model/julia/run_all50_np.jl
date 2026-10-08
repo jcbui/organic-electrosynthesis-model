@@ -63,6 +63,7 @@ num(x) = (y = tryparse(Float64, strip(x)); y === nothing ? NaN : y)
 const CARRIER_IS_SUPPORTING_ANION = Set([
     "Br- oxidation / electrophilic bromination",     # bromide in 0.5 M NaBr
     "Br-mediated Hofmann rearrangement",             # bromide in 0.08 M NaBr
+    "Amidyl-radical C-H amination (phenanthridinone)",   # bromide in 0.04 M NaBr, the only salt
     "Cl-mediated ethylene epoxidation",              # chloride in 1 M KCl
     "Alkaline lignin -> vanillin (pilot)",           # carbonate in 1 M Na2CO3
     ## NOT "Non-Kolbe decarboxylative alpha-methoxylation". It was added here on 2026-08-24 and had to be
@@ -103,6 +104,9 @@ open(joinpath(@__DIR__, "all50_np_matrix.csv"), "w") do io
     nrev = 0
     for (k, r) in enumerate(rxd)
         rxn  = getf(r, rxh, "reaction")
+        ## ONE-ROW MODE, for the sensitivity sweeps: NP_ONLY="<reaction>" solves that row alone, in
+        ## an isolated copy of julia/ and data/. Unset in production, where it changes nothing.
+        (!isempty(get(ENV, "NP_ONLY", "")) && rxn != ENV["NP_ONLY"]) && continue
         ## carrier D, C, n and the solvent kinematic viscosity come from reactions_table.jl,
         ## the SAME generated table run_tier0.jl uses -- so any difference between this matrix
         ## and the Tier-0 one is the physics, not a different set of inputs.

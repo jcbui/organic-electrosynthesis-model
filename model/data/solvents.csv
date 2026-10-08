@@ -14,10 +14,12 @@ MeOH/H2O,26.4,1.6,0.87,1.94,"1:1 v/v; CRC mu, phiM P-G"
 EtOH/H2O,33.0,2.4,0.89,1.58,"1:1 v/v; CRC mu (40-50 wt%: 2.3-2.4), phiM P-G"
 DMF/H2O,56.0,1.0,0.96,1.15,"9:1 v/v; mu lit, phiM P-G"
 acetone,58.08,0.306,0.784,1.0,"CRC 97th ed. 2016 (Haynes), Sect.6 'Viscosity of Liquids' pp.6-243..6-247 (mu, 25 C); Sect.15 'Laboratory Solvents' pp.15-13..15-20 (rho)"
-MeNO2,61.04,0.62,1.137,1.0,"CRC 97th ed. 2016 (Haynes), Sect.6 'Viscosity of Liquids' pp.6-243..6-247 (mu, 25 C); Sect.15 'Laboratory Solvents' pp.15-13..15-20 (rho)"
+MeNO2,61.04,0.63,1.137,1.0,"CRC 97th ed. 2016 (Haynes), Sect.6 'Viscosity of Liquids' p.6-246, nitromethane, eta(25 C) column (mu); Sect.15 'Laboratory Solvents' pp.15-13..15-20 (rho)"
 DMSO/THF,77.1,1.55,1.06,1.0,5:1 v/v; P-G
 tAmOH/H2O,35.0,2.8,0.85,1.73,"3:1 v/v; mu est (viscous alcohol/water), phiM P-G"
 AcOH/HCOOH,53.0,1.28,1.13,1.0,1:1 v/v est.
 H2O/MeCN,24.0,0.9,0.94,1.916,2:1 v/v; phiM Eq. S30
-THF/MeOH,60.65,0.48,0.867,1.136,"5:1 v/v (ChemSusChem 2021 standard conditions). x(THF)=0.714. phi*M = 0.714*1.0*72.11 + 0.286*1.9*32.04 = 68.90 (Perkins-Geankoplis, Poling 5th ed. Eq. 11-9.8). mu 0.480 mPa s is a MOLE-FRACTION LOG-MIX ESTIMATE from THF 0.456 and MeOH 0.544 (CRC 97th ed.), not a measured mixture value; both endpoints lie within 20% of it so the estimate is tightly bracketed. rho volume-weighted."
+H2O/MeCN 1:1,23.88,0.835,0.905,1.9,1:1 v/v; Ansari & Singh Table-1 p. 68 at 43.8 wt%; phiM Eq. S30
+THF/MeOH,60.65,0.48,0.867,1.136,"5:1 v/v (ChemSusChem 2021 standard conditions). x(THF)=0.714. phi*M = 0.714*1.0*72.11 + 0.286*1.9*32.04 = 68.90 (Perkins-Geankoplis, Reid, Prausnitz & Poling 4th ed. Eq. 11-12.4, p. 618). mu 0.480 mPa s is a MOLE-FRACTION LOG-MIX ESTIMATE from THF 0.456 and MeOH 0.544 (CRC 97th ed.), not a measured mixture value; both endpoints lie within 20% of it so the estimate is tightly bracketed. rho volume-weighted."
 EtOH/MeOH,37.79,0.719,0.786,1.7,"1:1 v/v (Courtois/Perichon Tetrahedron 1997). x(EtOH)=0.410. phi*M = 0.410*1.5*46.07 + 0.590*1.9*32.04 = 64.25 (Perkins-Geankoplis). mu 0.719 mPa s is a MOLE-FRACTION LOG-MIX ESTIMATE from EtOH 1.074 and MeOH 0.544 (CRC 97th ed.), not measured; alcohol-alcohol mixtures are near-ideal. rho volume-weighted."
+THF/EtOH,56.96,0.751,0.834,1.235,"1:1 v/v (Hayashi/Baran JACS 2022 rAP general procedure, SI p. 4). x(THF)=0.418. phi*M = 0.418*1.0*72.11 + 0.582*1.5*46.07 = 70.36 (Perkins-Geankoplis, Reid, Prausnitz & Poling 4th ed. Eq. 11-12.4, p. 618). mu 0.751 mPa s is a MOLE-FRACTION LOG-MIX ESTIMATE from THF 0.456 and EtOH 1.074 (CRC 97th ed.), not a measured mixture value. rho volume-weighted."

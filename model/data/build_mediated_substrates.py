@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the 8 mediated-spec substrate diffusivities by Wilke-Chang, from named structures.
+"""Generate the mediated-spec substrate diffusivities by Wilke-Chang, from named structures.
 
     /opt/anaconda3/envs/echem_analysis/bin/python data/build_mediated_substrates.py
     (needs rdkit; the base env does not have it -- see CLAUDE.md 2)
@@ -55,8 +55,8 @@ ROWS = [
  ("Br-mediated Hofmann rearrangement", "2-phenylacetamide", "NC(=O)Cc1ccccc1", "MeCN",
   "op3c00332.pdf: 'the transformation of 2-phenylacetamide 1a into carbamate 2a was selected as a "
   "model'; 'concentrations of 1a of 0.4 M' = C_sub 400 mol/m3", 2.00e-9),
- ("ACT-mediated alcohol oxidation (flow, hectogram)", "2-(2-oxopyrrolidin-1-yl)butan-1-ol",
-  "CCC(CO)N1CCCC1=O", "H2O",
+ ("ACT-mediated alcohol oxidation (flow, hectogram)", "(S)-2-(2-oxopyrrolidin-1-yl)butan-1-ol",
+  "CC[C@@H](CO)N1CCCC1=O", "H2O",
   "confirmed by exact reproduction of the carried value (ratio 1.000)", 7.22e-10),
  ## 2026-09-05 (author instruction): the row is Leow's HEADLINE system -- ethylene sparged into
  ## 1.0 M KCl, C_sat = ethene's measured solubility -- so the substrate is ethylene, and its
@@ -74,17 +74,37 @@ ROWS = [
   "page raster 2026-09-05. Substrate is Leow's headline alkene (1.0 M KCl, ethylene sparged); the "
   "solubility this row carries is ethene's (IUPAC SDS vol. 57)", 1.3663e-9,
   {"D_m2s": 1.87e-9, "source": "Cussler 3rd ed. Table 5.2-1 p. 127"}),
- ("NHPI-mediated allylic C-H -> enone", "valencene", "CC1=CC2CCC(C(=C)C)C2(C)CC1", "acetone",
-  "nature17431.pdf: valencene (4) -> nootkatone (5), the paper's model substrate", 1.78e-9),
+ ("NHPI-mediated allylic C-H -> enone", "valencene", "CC1CCC=C2CCC(CC12C)C(C)=C", "acetone",
+  "nature17431.pdf: valencene (4) -> nootkatone (5), the paper's model substrate. The SMILES is the decalin of "
+  "Horn Fig. 2a (C15H24); until 2026-10-06 it encoded a C14H22 hydrindane, which put D_S 4 pct high", 1.78e-9),
  ("HMF -> FDCA (biomass)", "5-hydroxymethylfurfural", "OCc1ccc(C=O)o1", "H2O",
   "confirmed by exact reproduction of the carried value (ratio 1.000)", 9.52e-10),
  ("BQ-mediated Wacker-Tsuji oxidation", "1-decene", "C=CCCCCCCCC", "MeCN/H2O",
   "confirmed by exact reproduction of the carried value (ratio 1.002)", 1.17e-9),
- ("Br- oxidation / electrophilic bromination", "anisole", "COc1ccccc1", "H2O/MeCN",
-  "s41467-025-57329-0.pdf: electrochemical bromination of anisole; scale-up 4 mmol in 33 mL = "
-  "0.121 M = C_sub, and 0.5 M NaBr x 10/33 = 152 mol/m3 = C_carrier", 6.25e-10),
+ ("Br- oxidation / electrophilic bromination", "anisole", "COc1ccccc1", "H2O/MeCN 1:1",
+  "s41467-025-57329-0.pdf: anisole is brominated in the H-cell (Methods; Fig 4), 0.5 mmol in 7.5 mL MeCN + "
+  "7.5 mL 0.5 M aqueous NaBr = 0.0333 M substrate, 0.25 M Br-, water/MeCN 1:1 v/v", 6.25e-10),
  ("Aryl thiocyanation (NH4SCN)", "anisole", "COc1ccccc1", "AcOH/HCOOH",
   "confirmed by exact reproduction of the carried value (ratio 0.999)", 6.91e-10),
+ ## Three rows carried as mediated since 2026-10-05, when each exemplar was read for the species
+ ## that exchanges electrons with the electrode. `None` in the last slot: no typed value preceded
+ ## these, so there is nothing to compare the Wilke-Chang result against.
+ ("Amidyl-radical C-H amination (phenanthridinone)", "N-(pivaloyloxy)biphenyl-2-carboxamide",
+  "CC(C)(C)C(=O)ONC(=O)c1ccccc1-c1ccccc1", "MeCN",
+  "ol8b00981.pdf: 'the pivaloyloxy group (OPiv) proved to be the optimal substituents to furnish "
+  "the lactam (2e)', i.e. the N-OPiv biaryl amide is the model substrate", None),
+ ("Cathodic Giese (R-I + alkene)", "2-iodopropane", "CC(C)I", "H2O/MeCN",
+  "d0sc01694b.pdf: 'the reaction of isopropyliodide with phenylvinylsulfone under the optimal "
+  "conditions'; the relay the exemplar proposes activates the iodide (1.43 mmol), so it is the substrate of "
+  "the solution step; the sulfone (1.19 mmol) is the limiting reagent of the product",
+  None),
+ ("Thioether -> sulfone (kilo-scale)", "4-methyl-2-(methylthio)pyrimidine", "CSc1nccc(C)n1",
+  "MeCN/H2O",
+  "op2c00111.pdf Scheme 1C (p. 2424) draws thioether 1 as 4-methyl-2-(methylthio)pyrimidine, oxidized to "
+  "sulfoxide 2 and sulfone 3 (C6H8N2S; read from the page raster)", None),
+ ## reclassified from the catalyst rows on 2026-10-05 (a triarylamine is an outer-sphere mediator); same molecule, same method
+ ("Oxazole synthesis from ketones and acetonitrile", "benzyl phenyl ketone", "O=C(Cc1ccccc1)c1ccccc1", "MeCN",
+  "ol2c02252.pdf: 'benzyl phenyl ketone (1a) was chosen as the model substrate'", None),
 ]
 
 def main():
@@ -93,17 +113,20 @@ def main():
     print("%-46s %-26s %10s %10s %7s" % ("reaction", "substrate", "D_WC", "was", "ratio"))
     for row in ROWS:
         label, name, smi, solv, prov, old = row[:6]
+        new_row = old is None
         measured = row[6] if len(row) > 6 else None
         Dcm2, V = br.wilke_chang(smi, solv)
         D_wc = Dcm2 * 1e-4
         ## a MEASURED, page-anchored value displaces the estimate; the estimate stays in its own
         ## column so the two can be compared (G-DSUB binds the solver to D_sub_m2s only)
         D = measured["D_m2s"] if measured else D_wc
+        if new_row:
+            old = D
         method = ("measured (%s)" % measured["source"]) if measured else "Wilke-Chang"
         rows.append(dict(reaction=label, substrate=name, smiles=smi, solvent=solv,
                          lebas_V_cm3mol="%.2f" % V, D_sub_m2s="%.4e" % D,
-                         previous_typed_value="%.4e" % old,
-                         ratio_new_over_old="%.4f" % (D / old), identified_by=prov,
+                         previous_typed_value=("" if new_row else "%.4e" % old),
+                         ratio_new_over_old=("" if new_row else "%.4f" % (D / old)), identified_by=prov,
                          method=method, D_wilke_chang_m2s="%.4e" % D_wc))
         print("%-46s %-26s %10.4g %10.4g %7.3f  %s" % (label[:46], name[:26], D, old, D / old, method))
     with io.open(out, "w", newline="", encoding="utf-8") as f:

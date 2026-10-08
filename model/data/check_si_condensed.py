@@ -253,7 +253,7 @@ def run_checks(det_xml, con_xml, ms_items=None):
              "NIST Chemistry WebBook": "NIST Chemistry WebBook", "Cussler, Diffusion": "Cussler",
              "Bard & Faulkner": "Bard & Faulkner", "Newman & Thomas-Alyea": "Newman & Thomas-Alyea",
              "Sigma-Aldrich specification": "Sigma-Aldrich"}
-    internal = {"Declared", "No source", "This table", "Vessel geometry", "Table S2", "Table S5", "Table S6"}
+    internal = {"Declared", "No source", "This table", "Vessel geometry", "Table S2", "Table S5", "Table S6", "Table S10"}
     for r in s7c:
         name, src = norm(plain(r[0])), norm(plain(r[5]))
         row = reg.get(name) or reg.get(r[0])
@@ -311,8 +311,20 @@ def run_checks(det_xml, con_xml, ms_items=None):
     same_cols("Solvent | M", "Solvent | M", [0, 1, 2, 3, 4, 5], "Table S3")
     same_cols("Electrolyte | κ", "Electrolyte | κ", [0, 1, 2], "Table S4")
     same_cols("Reactor archetype | median", "Reactor archetype | median", [0, 1, 2, 3], "Table S5")
-    same_cols("Mediated system", "Mediated system", [0, 1, 3, 4, 5, 6], "Table S6")
+    same_cols("Mediated system", "Mediated system", [0, 1, 3, 4, 5, 6, 7], "Table S6")
     same_cols("Catalyst-carried entry", "Catalyst-carried entry", [0, 1, 2, 3, 4], "catalyst table")
+    same_cols("Entry | Step solved", "Entry | Step solved", [0, 1, 2, 4, 5, 6], "Table S11")
+    # its "Measured on" column ends in a citation group, renumbered in the condensed list: compare the text without the digits
+    _a = next((r for h, rr in dt.items() if h.startswith("Entry | Step solved") for r in rr), None)
+    _b = next((r for h, rr in ct.items() if h.startswith("Entry | Step solved") for r in rr), None)
+    if _a is not None and _b is not None:
+        _strip = lambda c: re.sub(r"\[[\d,–\- ]+\]", "[#]", norm(plain(c)))
+        if [_strip(x[3]) for x in _a[1:]] != [_strip(x[3]) for x in _b[1:]]:
+            fails.append("Table S11: the 'Measured on' column differs from the detailed table beyond its citation numbers")
+        for x, y in zip(_a[1:], _b[1:]):
+            na = re.findall(r"\[([\d,–\- ]+)\]", norm(plain(x[3]))); nb = re.findall(r"\[([\d,–\- ]+)\]", norm(plain(y[3])))
+            if cite_works(na, dref) != cite_works(nb, cref):
+                fails.append("Table S11 row %r: the source cell cites a different work" % norm(plain(x[0]))[:40])
     for k, (hd, lab) in enumerate([("Reported quantity", "Table S8"), ("Reported quantity", "Table S9")]):
         a = [rr for h, rr in dt.items() if h.startswith(hd)]
         b = [rr for h, rr in ct.items() if h.startswith(hd)]
@@ -401,6 +413,15 @@ def run_checks(det_xml, con_xml, ms_items=None):
             if h.startswith("Mediated system"):
                 for r in rows[1:]:
                     cited.update(int(x) for x in re.findall(r"\d+", norm(r[2])))
+            if h.startswith("Entry | Step solved"):          # Table S11: the sources follow the "Measured on" text as [n,m]
+                for r in rows[1:]:
+                    for g in re.findall(r"\[([\d,\u2013\s-]+)\]", norm(r[3])):
+                        for part in g.split(","):
+                            ab = re.split(r"[\u2013-]", part.strip())
+                            if len(ab) == 2 and ab[0].isdigit() and ab[1].isdigit():
+                                cited.update(range(int(ab[0]), int(ab[1]) + 1))
+                            elif part.strip().isdigit():
+                                cited.add(int(part.strip()))
             if h.startswith("Archetype | Model"):
                 for r in rows[1:]:
                     cited.update(int(x) for x in re.findall(r"\((\d+)[,)]", norm(r[4])))
@@ -494,10 +515,12 @@ def main(neg=False):
             return
         f, _ = run_checks(det_xml, txt.replace(old, new, 1).encode("utf8"), mi)
         probes.append((label, any(expect in x for x in f), "; ".join(f)[:160]))
-    probe("number changed in a verbatim sentence", "reproduced to 0.5% and 0.26%", "reproduced to 0.5% and 0.27%", "new sentence prints a number")
+    # the perturbed digit must be one the detailed SI prints NOWHERE: 0.27 went inert on 2026-10-05 when a Table S6
+    # label began carrying "0.27 mM", so the perturbation is a four-digit value no table or sentence can hold by chance
+    probe("number changed in a verbatim sentence", "reproduced to 0.5% and 0.26%", "reproduced to 0.5% and 0.2617%", "new sentence prints a number")
     probe("equation S16 dropped", "\t(S16)</w:t>", "\t(S99)</w:t>", "equations")
     probe("Table S7 value altered", ">1.380649e-23<", ">1.380649e-22<", "Table S7")
-    m = re.search(r'<w:t xml:space="preserve">(\d+)</w:t>(?:(?!<w:t[ >]).){0,800}<w:t xml:space="preserve">\] Table 4, p\. 6399', txt, re.S)
+    m = re.search(r'<w:t xml:space="preserve">(\d+)</w:t>(?:(?!<w:t[ >]).){0,800}<w:t xml:space="preserve">\] SI p\. S12, SI p\. S33', txt, re.S)
     if m:
         probe("Table S2 source cites another work", m.group(0), m.group(0).replace(">%s</w:t>" % m.group(1), ">%d</w:t>" % (int(m.group(1)) + 1), 1), "Table S2")
     else:
@@ -508,7 +531,7 @@ def main(neg=False):
     else:
         probes.append(("citation renumbered to another work", False, "probe string absent -- repoint the control"))
     probe("heading renamed", ">S6.2 Cooling duty<", ">S6.2 Cooling requirement<", "headings")
-    probe("dangling cross-reference", "Values and locators: Table S7g.", "Values and locators: Table S12.", "dangling cross-reference")
+    probe("dangling cross-reference", "Values and locators: Table S7g.", "Values and locators: Table S99.", "dangling cross-reference")   # S12 became a real table on 2026-10-07
     for label, ok, detail in probes:
         print("  %-5s %-42s %s" % ("fired" if ok else "MISSED", label, "" if ok else detail))
     good = all(ok for _, ok, _ in probes)

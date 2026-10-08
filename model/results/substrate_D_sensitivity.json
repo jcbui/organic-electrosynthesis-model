@@ -1,107 +1,107 @@
 {
-  "note": "G-DSUBSENS: all eight mediated substrate diffusivities scaled together, mediated matrix re-solved per scale; counts over the eight mediated rows per architecture. Written by data/sensitivity_substrate_D.py",
+  "note": "G-DSUBSENS: all mediated substrate diffusivities scaled together, mediated matrix re-solved per scale; counts over the mediated rows per architecture. Written by data/sensitivity_substrate_D.py",
   "scales": [
     0.7,
     1.3
   ],
   "base_counts": {
     "Unstirred batch": [
-      3,
-      2
-    ],
-    "Stirred batch": [
-      3,
-      2
-    ],
-    "Recirculating flow cell": [
       4,
       3
     ],
-    "ANEC flow cell": [
+    "Stirred batch": [
       5,
       4
     ],
-    "Microfluidic cell (25 um gap)": [
-      7,
-      6
+    "Recirculating flow cell": [
+      6,
+      4
     ],
-    "RDE 1600 rpm": [
+    "ANEC flow cell": [
       7,
       5
     ],
+    "Microfluidic cell (25 um gap)": [
+      9,
+      8
+    ],
+    "RDE 1600 rpm": [
+      9,
+      8
+    ],
     "Rotating cylinder 3000 rpm": [
-      7,
-      6
+      9,
+      8
     ]
   },
   "counts": {
     "0.7": {
       "Unstirred batch": [
-        3,
-        2
+        4,
+        3
       ],
       "Stirred batch": [
-        3,
-        2
+        4,
+        4
       ],
       "Recirculating flow cell": [
-        3,
-        3
+        5,
+        4
       ],
       "ANEC flow cell": [
-        5,
-        3
-      ],
-      "Microfluidic cell (25 um gap)": [
-        7,
-        6
-      ],
-      "RDE 1600 rpm": [
         7,
         5
       ],
+      "Microfluidic cell (25 um gap)": [
+        9,
+        8
+      ],
+      "RDE 1600 rpm": [
+        9,
+        8
+      ],
       "Rotating cylinder 3000 rpm": [
-        7,
-        6
+        9,
+        8
       ]
     },
     "1.3": {
       "Unstirred batch": [
-        3,
-        2
-      ],
-      "Stirred batch": [
-        3,
-        2
-      ],
-      "Recirculating flow cell": [
-        4,
+        5,
         3
       ],
-      "ANEC flow cell": [
+      "Stirred batch": [
         5,
         4
       ],
-      "Microfluidic cell (25 um gap)": [
-        7,
-        6
+      "Recirculating flow cell": [
+        6,
+        4
       ],
-      "RDE 1600 rpm": [
+      "ANEC flow cell": [
         7,
         5
       ],
+      "Microfluidic cell (25 um gap)": [
+        9,
+        8
+      ],
+      "RDE 1600 rpm": [
+        9,
+        8
+      ],
       "Rotating cylinder 3000 rpm": [
-        7,
-        6
+        9,
+        8
       ]
     }
   },
   "counts_moved": true,
   "closest_cell_to_25": {
-    "reaction": "HMF -> FDCA (biomass)",
-    "reactor": "Microfluidic cell (25 um gap)",
-    "i_mAcm2": 25.64203114399756,
-    "margin_pct_to_25": 2.5681245759902396
+    "reaction": "NHPI-mediated allylic C-H -> enone",
+    "reactor": "Stirred batch",
+    "i_mAcm2": 25.239959280734258,
+    "margin_pct_to_25": 0.9598371229370316
   },
-  "verdict": "FAIL"
+  "verdict": "PASS"
 }

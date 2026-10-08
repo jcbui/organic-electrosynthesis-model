@@ -34,11 +34,12 @@ WORKS = [
     ("Table S6", "Table S6"),
     ("the median over the solved 50-reaction transport matrix", "Table S5"),
     ("the balanced half-reaction of each exemplar", "Table S2"),
+    ("the balanced reaction of each exemplar", "Table S10"),
     ("Leveque entrance solution (Pickett & Ong", "Pickett & Ong 1974"),
 ]
 # Short names printed without locator tokens: pointers inside this SI, or a method whose locator
 # text describes this SI's own tables rather than the cited work.
-BARE = {"Table S2", "Table S5", "Table S6", "Pickett & Ong 1974"}
+BARE = {"Table S2", "Table S5", "Table S6", "Table S10", "Pickett & Ong 1974"}
 # Citations that name no external source.
 INTERNAL = [
     (re.compile(r"^(this registry|rows? '|rows '|declared basis: the value of row)", re.I), "This table"),
@@ -67,6 +68,11 @@ def tokens(text):
     out = []
     for m in TOK.finditer(text or ""):
         t = norm_tok(m.group(0))
+        # "SI pp 8, 10-13, 38": a page list continues past the first number, and stopping there prints "SI pp. 8"
+        if re.search(r"(?<![A-Za-z])pp\.", t):
+            more = re.match(r"(?:,\s*\d+(?:[-–]\d+)?)+", (text or "")[m.end():])
+            if more:
+                t += re.sub(r"\s+", " ", more.group(0))
         # "Ch. 11-12" after "Ch. 11": a range restating tokens already kept adds nothing
         if "-" in t and any(o == t.split("-")[0] for o in out):
             continue
@@ -99,7 +105,7 @@ def author_year(part):
     names = head.split(", ")
     if "et al" in head[:60]:
         return s + " et al. " + y.group(1)
-    m2 = re.match(r"^([A-Z][\w'\-]+) & ([A-Z][\w'\-]+),", part)
+    m2 = re.match(r"^([A-Z][\w'\-]+) & ([A-Z][\w'\-]+(?: (?:[a-z]{1,3} )?[A-Z][\w'\-]+)*),", part)   # "Ponce de Leon"
     if m2:
         return m2.group(1) + " & " + m2.group(2) + " " + y.group(1)
     return s + " et al. " + y.group(1)
@@ -153,10 +159,11 @@ def registry_short(cit, loc, cls="measured"):
     names = {n: surname_of(n) for n, _ in shorts}
     for seg in (re.split(r";\s+", loc) if loc else []):
         owner = shorts[0][0]
-        for n, sn in names.items():
-            if len(sn) > 2 and sn.lower() in seg[:25].lower():
-                owner = n
-                break
+        cand = [n for n, sn in names.items() if len(sn) > 2 and sn.lower() in seg[:25].lower()]
+        if len(cand) > 1:          # two cited works share a surname (Krumgalz 1983, Krumgalz & Barthel 1984): match the year
+            cand = [n for n in cand if n.split()[-1] in seg[:25]] or cand
+        if cand:
+            owner = cand[0]
         else:
             if FOREIGN.search(seg[:25]):
                 continue
@@ -178,8 +185,30 @@ def registry_short(cit, loc, cls="measured"):
     return prefix + "; ".join(cells)
 
 
-def s2_short(conc):
+# Table S2: a parenthesized group that names a work other than the row's exemplar (a handbook, a solubility
+# compilation, another paper) carries THAT work's page, so it must not become the row's short locator. A name
+# counts as the exemplar's when the exemplar string carries it, or when the same group also names the exemplar's
+# first author (an author list such as "Ke, Wang, ..., Zhang, Pan & Chi" is the exemplar's own).
+S2_FOREIGN = re.compile(r"\b(Reid|Poling|CRC|Amatore|Krumgalz|Dorn|Gong|Casteel|Kalugin|Izutsu|Barthel|Das|Lee|Zhang|"
+                        r"Cussler|Incropera|Newman|Bard|IUPAC|SDS|Sander|Yano|Ansari|Shinkle|Watkins|Mo|Jang|"
+                        r"Eisenberg|Wilke)\b")
+
+
+def foreign_group(grp, exemplar):
+    names = set(S2_FOREIGN.findall(grp or ""))
+    ex = exemplar or ""
+    other = {n for n in names if not re.search(r"\b%s\b" % re.escape(n), ex)}
+    if not other:
+        return False
+    first = re.match(r"[^\W\d_][\w'\-]*", ex)
+    if first and re.search(r"\b%s\b" % re.escape(first.group(0)), grp):
+        return False
+    return True
+
+
+def s2_short(conc, exemplar=None):
     m = re.findall(r"\(([^()]*?(?:p{1,2}\.?\s*[A-Z]?\d|Table|SI|SM|Fig)[^()]*)\)", conc or "")
+    m = [g for g in m if not foreign_group(g, exemplar)]
     toks = []
     for grp in (m or [conc or ""]):
         for t in tokens(grp):
@@ -200,7 +229,7 @@ def main():
             if r["parameter"] in live:
                 reg[r["parameter"]] = registry_short(r["citation"], r["locator"], r["provenance_class"])
     with open(os.path.join(HERE, "reactions_50.csv"), newline="") as f:
-        s2 = [s2_short(r["conc_provenance"]) for r in csv.DictReader(f)]
+        s2 = [s2_short(r["conc_provenance"], r["exemplar"]) for r in csv.DictReader(f)]
     out = {"registry": reg, "table_s2": s2}
     p = os.path.join(ROOT, "results", "si_short_locators.json")
     with open(p, "w") as f:

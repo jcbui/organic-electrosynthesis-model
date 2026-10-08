@@ -49,10 +49,10 @@
    "k_M": 20.0,
    "delta_um": 36.2,
    "xk_um": 7.700649323271382,
-   "gamma": 48.70623946037099,
-   "ilim_mAcm2": 18.040780423571373,
-   "share_in_film": 0.9724745191000048,
-   "c_S_surf_norm": 0.9269587563339736,
+   "gamma": 97.41247892074198,
+   "ilim_mAcm2": 18.366414655604466,
+   "share_in_film": 0.97347561040772,
+   "c_S_surf_norm": 0.9626332346035772,
    "regime_solved": "kinetic",
    "regime_analytic_solver": "kinetic",
    "regime_analytic_gate": "kinetic",
@@ -64,108 +64,108 @@
      "span_decades": 0.22184874961635628
     },
     "k2": {
-     "base": 2147.0232488110914,
-     "lo": 966.1604619649914,
-     "hi": 4472.965101689774,
+     "base": 8588.092995244366,
+     "lo": 3864.6418478599658,
+     "hi": 17891.860406759097,
      "span_decades": 0.665546248849069
     }
    },
-   "margin_decades": 1.3443624477020688,
+   "margin_decades": 0.8519823934874879,
    "worst_span_decades": 0.665546248849069,
    "perturbations": [
     {
      "var": "D_med",
      "factor": 0.75,
-     "ilim_mAcm2": 15.675584705675568,
+     "ilim_mAcm2": 15.93570554158542,
      "regime_solved": "mediator-limited"
     },
     {
      "var": "D_med",
      "factor": 1.25,
-     "ilim_mAcm2": 20.1178641835515,
+     "ilim_mAcm2": 20.51530591878275,
      "regime_solved": "kinetic"
     },
     {
      "var": "D_S",
      "factor": 0.75,
-     "ilim_mAcm2": 17.82261014566073,
+     "ilim_mAcm2": 18.256747053915745,
      "regime_solved": "kinetic"
     },
     {
      "var": "D_S",
      "factor": 1.25,
-     "ilim_mAcm2": 18.169823882724017,
+     "ilim_mAcm2": 18.437167407065477,
      "regime_solved": "kinetic"
     }
    ],
    "label_survives": false
   },
-  "Hofmann": {
-   "k_M": 1000.0,
+  "Bromination": {
+   "k_M": 22800.0,
    "delta_um": 36.2,
-   "xk_um": 2.345207879911715,
-   "gamma": 6.892962962962964,
-   "ilim_mAcm2": 868.1132514504529,
-   "share_in_film": 0.989840152508228,
-   "c_S_surf_norm": 0.0003305605858295,
+   "xk_um": 1.2571904773411902,
+   "gamma": 0.1254449423076923,
+   "ilim_mAcm2": 289.1437828711966,
+   "share_in_film": 0.6461555001430845,
+   "c_S_surf_norm": 3.0535840897755417e-30,
    "regime_solved": "substrate-limited",
    "regime_analytic_solver": "substrate-limited",
    "regime_analytic_gate": "substrate-limited",
    "boundaries": {
     "k1": {
-     "base": 4.19706358169775,
-     "lo": 3.1477976862733126,
-     "hi": 5.246329477122188,
-     "span_decades": 0.22184874961635645
+     "base": 27.49918808647175,
+     "lo": 20.624391064853814,
+     "hi": 34.37398510808969,
+     "span_decades": 0.2218487496163564
     },
     "k2": {
-     "base": 199.4148234549352,
-     "lo": 89.73667055472083,
-     "hi": 415.4475488644483,
-     "span_decades": 0.6655462488490692
+     "base": 0.4327391460176707,
+     "lo": 0.19473261570795186,
+     "hi": 0.9015398875368139,
+     "span_decades": 0.665546248849069
     }
    },
-   "margin_decades": 0.7002425616442175,
-   "worst_span_decades": 0.6655462488490692,
+   "margin_decades": 2.4262349213108996,
+   "worst_span_decades": 0.665546248849069,
    "perturbations": [
     {
      "var": "D_med",
      "factor": 0.75,
-     "ilim_mAcm2": 749.885576526241,
+     "ilim_mAcm2": 219.02050378320735,
      "regime_solved": "substrate-limited"
     },
     {
      "var": "D_med",
      "factor": 1.25,
-     "ilim_mAcm2": 986.1309494500944,
+     "ilim_mAcm2": 359.2348404836741,
      "regime_solved": "substrate-limited"
     },
     {
      "var": "D_S",
      "factor": 0.75,
-     "ilim_mAcm2": 679.9370349740229,
+     "ilim_mAcm2": 286.11278132191234,
      "regime_solved": "substrate-limited"
     },
     {
      "var": "D_S",
      "factor": 1.25,
-     "ilim_mAcm2": 1056.4034570751376,
+     "ilim_mAcm2": 292.21395025921083,
      "regime_solved": "substrate-limited"
     }
    ],
    "label_survives": true
   },
   "NHPI": {
-   "k_M": 0.5,
+   "k_M": 20.2,
    "delta_um": 36.2,
-   "xk_um": 158.20853365024428,
-   "gamma": 18.83610845295056,
-   "ilim_mAcm2": 18.769978880204217,
-   "share_in_film": 0.0254122108724604,
-   "c_S_surf_norm": 0.9990741416766856,
-   "regime_solved": "mediator-limited",
-   "regime_analytic_solver": "mediator-limited",
-   "regime_analytic_gate": "mediator-limited",
+   "xk_um": 24.89082106442851,
+   "gamma": 9.036450630709002,
+   "ilim_mAcm2": 32.688991520764205,
+   "share_in_film": 0.5357686474570875,
+   "c_S_surf_norm": 0.9272910815400583,
+   "regime_solved": "mixed",
+   "regime_analytic_solver": "mixed",
+   "regime_analytic_gate": "mixed",
    "boundaries": {
     "k1": {
      "base": 9.550204557156558,
@@ -174,46 +174,46 @@
      "span_decades": 0.22184874961635645
     },
     "k2": {
-     "base": 3388.402851440899,
-     "lo": 1524.7812831484046,
-     "hi": 7059.1726071685425,
-     "span_decades": 0.6655462488490692
+     "base": 779.8452556255913,
+     "lo": 350.9303650315162,
+     "hi": 1624.677615886649,
+     "span_decades": 0.665546248849069
     }
    },
-   "margin_decades": 1.2810426695611206,
-   "worst_span_decades": 0.6655462488490692,
+   "margin_decades": 0.16704135866509637,
+   "worst_span_decades": 0.665546248849069,
    "perturbations": [
     {
      "var": "D_med",
      "factor": 0.75,
-     "ilim_mAcm2": 14.157747654741431,
-     "regime_solved": "mediator-limited"
+     "ilim_mAcm2": 27.164247333214902,
+     "regime_solved": "mixed"
     },
     {
      "var": "D_med",
      "factor": 1.25,
-     "ilim_mAcm2": 23.37985882528558,
-     "regime_solved": "mediator-limited"
+     "ilim_mAcm2": 38.069489600382376,
+     "regime_solved": "mixed"
     },
     {
      "var": "D_S",
      "factor": 0.75,
-     "ilim_mAcm2": 18.769898096723946,
-     "regime_solved": "mediator-limited"
+     "ilim_mAcm2": 32.426454887233746,
+     "regime_solved": "mixed"
     },
     {
      "var": "D_S",
      "factor": 1.25,
-     "ilim_mAcm2": 18.770027370884986,
-     "regime_solved": "mediator-limited"
+     "ilim_mAcm2": 32.84814251702915,
+     "regime_solved": "mixed"
     }
    ],
    "label_survives": true
   }
  },
  "labels_survive": false,
- "rows_min_margin_decades": 0.7002425616442175,
- "rows_worst_span_decades": 0.6655462488490692,
+ "rows_min_margin_decades": 0.16704135866509637,
+ "rows_worst_span_decades": 0.665546248849069,
  "worst_span_decades": 0.665546248849069,
  "margin_decades": [
   0.9208187539523752,

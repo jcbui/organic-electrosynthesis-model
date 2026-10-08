@@ -1,14 +1,25 @@
 {
-  "n_catalyst": 11,
+  "n_catalyst": 12,
+  "n_stokes_einstein": 12,
   "n_clear": 1,
   "threshold": 25.0,
-  "second_best_i_lim": 23.7183,
-  "f_crit": 1.054038442890089,
-  "r_crit_from_4p5A": 4.269294,
-  "r_crit_sqrt_from_4p5A": 4.050415835208,
-  "r_expected_deciding_A": 3.3983065871162856,
-  "deciding_row": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
-  "conditional": true,
+  "second_best_i_lim": 13.6637,
+  "f_crit": 1.8296654639665684,
+  "r_crit_from_4p5A": 2.73274,
+  "r_crit_sqrt_from_4p5A": 1.49357358152,
+  "r_assumed_deciding_A": 5.0,
+  "band_A": [
+    4.0,
+    5.0
+  ],
+  "in_band": false,
+  "conditional_under_sqrt_law": false,
+  "i_at_anchor_linear": 21.412215288466054,
+  "i_at_anchor_sqrt": 17.104680237789122,
+  "deciding_complex": "CoBr2(6,6'-dimethyl-2,2'-bipyridine)",
+  "r_expected_deciding_A": 3.1906320331460787,
+  "deciding_row": "Co-H alkene reduction (e-HAT)",
+  "conditional": false,
   "r_ferrocene_A": 2.4659221713478106,
   "anchor": "ferrocene in MeCN, D = 2.4e-5 cm2/s, 25 C"
 }

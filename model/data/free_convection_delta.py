@@ -42,6 +42,15 @@ import os
 import re
 import statistics
 import sys
+import csv as _csv
+
+
+def _carrier_range():
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reactions_50.csv")
+    v = [float(r["C_carrier_M"]) for r in _csv.DictReader(io.open(p, encoding="utf-8"))]
+    if len(v) != 50:
+        raise SystemExit("reactions_50.csv: expected 50 rows, found %d" % len(v))
+    return [min(v), max(v)]
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -172,7 +181,9 @@ def main():
                                   "ratio_to_declared_centre": drho_nacl / drc,
                                   "delta_um_at_central_height": d_nacl * 1e6},
         "source_experiment_range": WILKE_RANGE,
-        "set_depleted_concentration_M": [0.00352, 13.70],
+        # the carrier each row depletes at its limiting current, read from the reaction table (chemistry audit pass 4: it was
+        # typed [0.00352, 13.70], the 13.70 being the adiponitrile row counted twice and the floor missing the 0.27 mM oxygen)
+        "set_depleted_concentration_M": _carrier_range(),
         "correlation": "Sh = a (Sc Gr)^(1/4), Gr = g h^3 (drho/rho)/nu^2, delta = h/Sh",
         "b_eq_XVII": B_COEF, "h_m": [H_LO, H_HI], "h_centre_m": hc,
         "drho_rho": [DR_LO, DR_HI], "drho_rho_centre": drc,

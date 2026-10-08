@@ -160,31 +160,45 @@ def main(negative_control=False):
         ## twenty-two, behind a fully green suite, because every gate here watched the NUMBERS
         ## and none watched the sentence describing how they were obtained. Bind it.
         import re as _re
-        _reach = sum(1 for x in m.limiter.astype(str)
+        ## pass 15 (2026-10-07): a cell whose concentration-control walk was REJECTED (it did not rise above the k = 0
+        ## floor) keeps the ramp's value and the path "direct-ramp", while its limiter still carries the rejected
+        ## "plateau (c-control ...)" label. Counting that label as a plateau put ten floor-valued cells into the census;
+        ## the census is over the cells whose published value IS the concentration-control result.
+        _cc = m[m.path == "c-control"]
+        _reach = sum(1 for x in _cc.limiter.astype(str)
                      if "plateau (c-control" in x or x.startswith("collapse"))
         ## A cell whose limiter is "collapse (c-control)" crossed the 1e-3 criterion exactly and
         ## records no plateau value; it sits AT the criterion, so it enters the census at 1e-3.
         ## (Until 2026-09-05 such cells were skipped, so the share "at or below 0.28%" undercounted
         ## them -- 35 where the honest figure is 39.)
         _fr = [float(_re.search(r"c_red/cb ([0-9.eE+-]+)", str(x)).group(1)) if "c_red/cb" in str(x)
-               else 1e-3 for x in m.limiter if "c_red/cb" in str(x) or str(x).startswith("collapse")]
-        if len(_fr) != len(m):
-            fails.append("%d of %d mediated cells carry neither a plateau value nor a collapse "
-                         "label" % (len(m) - len(_fr), len(m)))
-        _ncoll = sum(1 for x in m.limiter if str(x).startswith("collapse"))
-        if _reach != len(m):
-            fails.append("%d of %d mediated cells reach the concentration-control criterion; the "
-                         "SI states that all of them do" % (_reach, len(m)))
+               else 1e-3 for x in _cc.limiter if "c_red/cb" in str(x) or str(x).startswith("collapse")]
+        if len(_fr) != len(_cc):
+            fails.append("%d of %d concentration-control cells carry neither a plateau value nor a collapse "
+                         "label" % (len(_cc) - len(_fr), len(_cc)))
+        _ncoll = sum(1 for x in _cc.limiter if str(x).startswith("collapse"))
+        if _reach != len(_cc):
+            fails.append("%d of %d concentration-control cells reach the criterion" % (_reach, len(_cc)))
+        # the rest are published at their k = 0 floor: checked against the Stage-1 layer, a second artifact
+        _np = pd.read_csv(os.path.join(ROOT, "julia", "all50_np_matrix.csv")).set_index(["reaction", "reactor"])
+        if negative_control:     # move one floor cell 1 % off its k = 0 value: the floor check must name it
+            m = m.copy(); _i0 = m.index[m.path != "c-control"][0]; m.loc[_i0, "i_ec_mAcm2"] *= 1.01
+        for _r in m[m.path != "c-control"].itertuples():
+            _k0 = float(_np.loc[(_r.reaction, _r.reactor), "i_np_mAcm2"])
+            if abs(_r.i_ec_mAcm2 / _k0 - 1) > 1e-4:
+                fails.append("%s / %s keeps its ramp value but is not at its k = 0 floor (%.4f vs %.4f); the SI says it is"
+                             % (_r.reaction, _r.reactor, _r.i_ec_mAcm2, _k0))
         _claims = [
-            ("all cells reach the criterion",
-             "All %d mediated cells reach the c_red/c_bulk = 10\u22123 collapse criterion" % len(m)),
+            ("cells ending on a concentration-control plateau",
+             "Of the %d mediated cells, %d end on a plateau of this walk" % (len(m), len(_cc))),
+            ("the others published at their k = 0 floor", "so the value published is that floor"),
             ("plateau depletion range",
-             "the reduced mediator sits between %.2f%% and %.1f%% of its bulk value"
+             "the reduced mediator there sits between %.2f%% and %.1f%% of its bulk value"
              % (100*min(_fr), 100*max(_fr))),
             ("cells at the criterion exactly",
              "%d of them reaching the 10\u22123 criterion exactly" % _ncoll),
             ("share at or below 0.28%%",
-             "%d of the %d at or below 0.28%%" % (sum(1 for v in _fr if 100*v <= 0.28), len(m))),
+             "%d of the %d at or below 0.28%%" % (sum(1 for v in _fr if 100*v <= 0.28), len(_cc))),
         ]
         # the wall sentence names the cells; both the count and the archetype list are read from the
         # matrix here exactly as make_si.js computes them (it was a typed "Two cells" until 2026-09-07)
@@ -193,14 +207,23 @@ def main(negative_control=False):
                "Recirculating flow cell": "recirculating-flow", "ANEC flow cell": "ANEC",
                "Microfluidic cell (25 um gap)": "microfluidic", "RDE 1600 rpm": "rotating-disk",
                "Rotating cylinder 3000 rpm": "rotating-cylinder"}
-        _NW = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]
-        _names = [_WN[r] for r in _wall.reactor]
-        _lst = _names[0] if len(_names) == 1 else ", ".join(_names[:-1]) + " and " + _names[-1]
-        if len(_wall) and _wall.reaction.nunique() == 1:
-            _claims.append(("cells recording a ramp wall first",
-                            "%s cells \u2014 the %s architectures" % (_NW[len(_wall)], _lst)))
+        _NW = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"]
+        # 2026-10-05: the wall cells can span two systems (the triarylamine row, a mediator solved at k = 0, walls in every
+        # architecture); the sentence names each system, every architecture or a list, exactly as make_si.js builds it
+        _SYS = [("Cl-mediated ethylene", "the Cl\u207b/ethylene system"),
+                ("Oxazole synthesis", "the triarylamine-mediated oxazole synthesis, solved at k = 0")]
+        _and = lambda xs: xs[0] if len(xs) == 1 else ", ".join(xs[:-1]) + " and " + xs[-1]
+        _parts = []
+        for _key, _label in _SYS:
+            _w = _wall[_wall.reaction.str.contains(_key, regex=False)]
+            if len(_w):
+                _parts.append(("every architecture" if len(_w) == 7 else "the %s architectures" % _and([_WN[r] for r in _w.reactor]))
+                              + " of " + _label)
+        _unnamed = [r for r in _wall.reaction.unique() if not any(k in r for k, _ in _SYS)]
+        if _unnamed:
+            fails.append("wall cells of %r have no name in the SI's wall sentence" % _unnamed)
         elif len(_wall):
-            fails.append("wall cells span %d systems; the SI's wall sentence assumes one" % _wall.reaction.nunique())
+            _claims.append(("cells recording a ramp wall first", "%s cells \u2014 %s \u2014" % (_NW[len(_wall)], _and(_parts))))
         for _lbl, _ph in _claims:
             if unicodedata.normalize("NFKC", _ph) not in si:
                 fails.append("SI census claim %r is absent or reworded -- expected %r"
@@ -229,9 +252,9 @@ def main(negative_control=False):
     for f in fails:
         print("  " + f)
     if negative_control:
-        fired = any("rde" in f for f in fails)
+        fired = any("rde" in f for f in fails) and any("not at its k = 0 floor" in f for f in fails)
         print("\nnegative control: tripled every RDE solve, so the RDE end of the bracket must "
-              "move")
+              "move, and moved one floor cell 1 % off its k = 0 value, which the floor check must name")
         print("  %s" % ("OK -- the gate fired on rde" if fired
                         else "BAD -- the gate did not notice"))
         sys.exit(0 if fired else 1)

@@ -55,13 +55,18 @@ A_FIT, RE_P = 0.0791, 0.70
 
 
 # The calibration window is a RETRIEVED FACT, and this file owns it. Eisenberg, Tobias & Wilke,
-# J. Electrochem. Soc. 1954, 101, 306-320, p. 313, verbatim:
-#   "These experiments involved a Schmidt number variation of 2230 to 3650 and a Reynolds number
-#    range of 112.0-162,000 (peripheral velocities 1.17 to 426 cm/sec)."
+# J. Electrochem. Soc. 1954, 101, 306-320. Chemistry audit pass 5 (2026-10-06) re-read the page rasters: the
+# sentence this file once quoted (p. 312, "These experiments involved a Schmidt number variation of 2230 to 3650 and a
+# Reynolds number range of 112.0-162,000") describes the two ELECTROLYTIC runs only. The correlation the model uses,
+# Eq. IX (j_D' = 0.0791 Re^-0.30, i.e. Sh = 0.0791 Re^0.70 Sc^0.356), is the straight line fitted to all five systems:
+#   p. 312: "In the Reynolds number range 1000-100,000 data are best represented by a straight line ... (IX)"
+#   p. 314, Fig. 10 legend: "POINTS REPRESENT DATA FOR FIVE SYSTEMS ... RANGE OF SCHMIDT NUMBERS STUDIED: 835-11490"
+# so the window of the correlation is Sc 835-11,490 and Re 1,000-100,000.
 # An earlier version read these two numbers back OUT of the registry row -- but that row is now
 # generated FROM this gate's JSON, which made the dependency circular and broke the gate the
 # moment the row was reworded. The fact lives here, with its locator; the registry consumes it.
-CAL_LO, CAL_HI = 2230.0, 3650.0
+CAL_LO, CAL_HI = 835.0, 11490.0
+CAL_RE_LO, CAL_RE_HI = 1000.0, 100000.0
 
 
 def sc_of(rx, sol):
@@ -121,15 +126,18 @@ def main(neg=False):
     inside = int(mat.Sc.between(CAL_LO, CAL_HI).sum())
     n_below = int((mat.Sc < CAL_LO).sum())
     n_above = int((mat.Sc > CAL_HI).sum())
-    print("  Eisenberg-Tobias-Wilke calibration (retrieved, p. 313): Sc %.0f-%.0f"
-          % (CAL_LO, CAL_HI))
+    print("  Eisenberg-Tobias-Wilke Eq. IX window (retrieved, pp. 312 and 314): Sc %.0f-%.0f, Re %.0f-%.0f"
+          % (CAL_LO, CAL_HI, CAL_RE_LO, CAL_RE_HI))
     print("  corpus Schmidt numbers: min %.0f  median %.0f  max %.0f"
           % (mat.Sc.min(), mat.Sc.median(), mat.Sc.max()))
     print("  rows INSIDE: %d of %d   BELOW the floor: %d   ABOVE the ceiling: %d"
           % (inside, len(mat), n_below, n_above))
     print("  the extrapolation is predominantly to %s Sc" % ("LOW" if n_below > n_above else "HIGH"))
-    print("  Reynolds number at the RCE operating point: %.0f-%.0f (fitted 112-162,000)"
-          % (re_lo, re_hi))
+    print("  Reynolds number at the RCE operating point: %.0f-%.0f (straight-line range %.0f-%.0f)"
+          % (re_lo, re_hi, CAL_RE_LO, CAL_RE_HI))
+    if not (CAL_RE_LO <= re_lo and re_hi <= CAL_RE_HI):
+        print("G-SCRANGE: FAIL -- the RCE operating Reynolds numbers leave Eq. IX's straight-line range")
+        return 1
 
     ## THE SENSITIVITY IS NOW A SECOND MEASURED CORRELATION, NOT A PERTURBATION OF OUR OWN.
     ## What stood here until 2026-09-04 swapped the fitted Sc exponent for the theoretical 1/3
@@ -200,7 +208,8 @@ def main(neg=False):
     print("\n  full span unstirred -> RCE: %.1fx, and %.1fx under the alternative exponent"
           % (span, span_alt))
 
-    json.dump({"fitted_p": p_fit, "cal_window": [CAL_LO, CAL_HI],
+    json.dump({"fitted_p": p_fit, "cal_window": [CAL_LO, CAL_HI], "cal_re": [CAL_RE_LO, CAL_RE_HI],
+               "cal_locator": "Eq. IX, p. 312 (straight line for Re 1000-100,000); Fig. 10, p. 314 (five systems, Sc 835-11,490)",
                "alt_correlation": "Jang 2022 Eq. 7: Sh = %.3f Re^%.2f Sc^%.2f"
                                   % (JANG_A, JANG_RE_P, JANG_SC_P),
                "alt_valid_Re": [JANG_RE_LO, JANG_RE_HI], "alt_valid_Sc_min": JANG_SC_MIN,
@@ -239,10 +248,18 @@ def main(neg=False):
     # The SI must DISCLOSE the extrapolation and state its direction. It must not claim the
     # column is an upper estimate on this axis -- the re-anchored comparison says the opposite,
     # and an earlier draft of S3.3 published that error.
-    for need in ("2230", "3650"):
+    ## the window the SI states must be the one this file owns, with its locators, and the retired electrolytic-runs
+    ## range must not reappear as the correlation's window
+    for need in ("{:,}".format(int(CAL_LO)), "{:,}".format(int(CAL_HI)), "{:,}".format(int(CAL_RE_LO)), "{:,}".format(int(CAL_RE_HI))):
         checked_si = True
         if need not in t:
             fails.append("the SI no longer states the calibration window (%s missing)" % need)
+    for gone in ("2230", "3650", "p. 313"):
+        if gone in t:
+            fails.append("the SI still states the electrolytic-runs range or its page (%s)" % gone)
+    for need in ("%d of %d sit below the fitted floor" % (n_below, len(mat)), "%d inside the window" % inside):
+        if need not in t:
+            fails.append("the SI does not state the census this file computes (%r)" % need)
     if "below" not in t.lower() or "extrapolat" not in t.lower():
         fails.append("the SI no longer states that the extrapolation is predominantly below the "
                      "fitted floor")
@@ -293,12 +310,11 @@ def main(neg=False):
         return 1
     print("\nG-SCRANGE: PASS -- %d of %d rows sit outside the calibrated window (%d below "
           "the floor, %d above the ceiling), and the SI states that with its direction. "
-          "Re-anchored at the fit centre the alternative exponent moves per-row values "
-          "%.3f-%.3fx and RAISES the RCE median %.1f -> %.1f mA cm-2, so on this axis the "
-          "column is an under-estimate rather than an upper one; no count moves and every "
-          "adjacent pair keeps its order."
+          "Against the Jang correlation the per-row values move %.3f-%.3fx and the RCE median "
+          "%.1f -> %.1f mA cm-2; the RDE/RCE pair %s, and the four-step ordering holds."
           % (len(mat) - inside, len(mat), n_below, n_above,
-             scale.min(), scale.max(), med["rce"], med_alt["rce"]))
+             scale.min(), scale.max(), med["rce"], med_alt["rce"],
+             "inverts" if any(p["lo"] == "rde" and p["hi"] == "rce" for p in inverted) else "keeps its order"))
     return 0
 
 

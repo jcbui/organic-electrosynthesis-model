@@ -27,7 +27,7 @@
       "ratio": 1.3225472414098343
     },
     {
-      "reaction": "Co-catalyzed aza-Wacker cyclization",
+      "reaction": "Co-catalyzed allylic C-H amination",
       "solvent": "MeCN",
       "M": 325.233,
       "D_typed": 1.183642642246949e-05,
@@ -37,10 +37,10 @@
     {
       "reaction": "Co-H alkene reduction (e-HAT)",
       "solvent": "THF",
-      "M": 374.929,
+      "M": 402.983,
       "D_typed": 9.578160855024652e-06,
-      "D_anchored": 1.537521887435547e-05,
-      "ratio": 1.605237070777498
+      "D_anchored": 1.5009817421002068e-05,
+      "ratio": 1.5670876328129317
     },
     {
       "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
@@ -51,12 +51,20 @@
       "ratio": 1.324188940768462
     },
     {
+      "reaction": "Doubly decarboxylative Csp3-Csp3",
+      "solvent": "DMF",
+      "M": 376.847,
+      "D_typed": 6.112008606061071e-06,
+      "D_anchored": 8.815094469091949e-06,
+      "ratio": 1.442258189942717
+    },
+    {
       "reaction": "Rh-catalyzed electrooxidative C-H alkenylation",
       "solvent": "tAmOH/H2O",
-      "M": 618.072,
+      "M": 309.036,
       "D_typed": 1.733191011861604e-06,
-      "D_anchored": 2.1196530134799504e-06,
-      "ratio": 1.2229771554165003
+      "D_anchored": 2.670595450156491e-06,
+      "ratio": 1.540854661649803
     },
     {
       "reaction": "Cu-catalyzed benzylic cyanation",
@@ -92,10 +100,10 @@
     }
   ],
   "bracket": [
-    1.2229771554165003,
+    1.3225472414098343,
     1.683154529223644
   ],
   "n_clear_typed": 1,
   "n_clear_anchored": 1,
-  "second_best_anchored": 13.076261178553501
+  "second_best_anchored": 21.412215288466054
 }

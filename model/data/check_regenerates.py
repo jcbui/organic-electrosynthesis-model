@@ -63,12 +63,22 @@ GENERATORS = [
         # "a shipped artifact is not what its generator produces" the moment that was wired up.
         "script": os.path.join(HERE, "build_param_tables.py"),
         "inputs": [(os.path.join(HERE, "solvents.csv"), "data/solvents.csv"),
+                   # chemistry audit pass 5: registry sentences computed from these
+                   (os.path.join(HERE, "electrolyte_ions.csv"), "data/electrolyte_ions.csv"),
+                   (os.path.join(HERE, "sensitivity_solution_viscosity.py"), "data/sensitivity_solution_viscosity.py"),
+                   (os.path.join(ROOT, "results", "kappa_derivation.json"), "results/kappa_derivation.json"),
+                   (os.path.join(ROOT, "results", "lebas_increment_sensitivity.json"), "results/lebas_increment_sensitivity.json"),
+                   (os.path.join(ROOT, "julia", "audit_gates.csv"), "julia/audit_gates.csv"),
+                   (os.path.join(ROOT, "julia", "run_mediated.jl"), "julia/run_mediated.jl"),
+                   (os.path.join(ROOT, "julia", "emit_deltas.jl"), "julia/emit_deltas.jl"),
                    (os.path.join(HERE, "electrolytes.csv"), "data/electrolytes.csv"),
                    (os.path.join(HERE, "reactions_50.csv"), "data/reactions_50.csv"),
                    (os.path.join(ROOT, "results", "figK_kappaT_sensitivity.json"),
                     "results/figK_kappaT_sensitivity.json"),
                    (os.path.join(ROOT, "results", "schmidt_extrapolation.json"),
                     "results/schmidt_extrapolation.json"),
+                   # audit pass 30: the cooling class along the stack gap/current, inherited sigma and charge
+                   (os.path.join(ROOT, "results", "thermal_axis_sweeps.json"), "results/thermal_axis_sweeps.json"),
                    # 2026-09-12: the seven-archetype thermal table. The registry's inherited-gap
                    # sensitivity reads the sweep, and the MeCN row recomputes its own margins from
                    # the same module the figure draws from, so both are inputs now.
@@ -77,7 +87,21 @@ GENERATORS = [
                    (os.path.join(ROOT, "figs", "thermal_model.py"), "figs/thermal_model.py"),
                    (os.path.join(ROOT, "julia", "tier0_ec_matrix.csv"),
                     "julia/tier0_ec_matrix.csv"),
+                   # chemistry audit pass 3: the stirred-film row reads the unstirred archetype's film from here
+                   (os.path.join(ROOT, "julia", "mediated_ec_matrix.csv"),
+                    "julia/mediated_ec_matrix.csv"),
+                   # chemistry audit pass 4: the free-convection row reads the concentrated-row count from here
+                   (os.path.join(ROOT, "results", "dilute_theory_stratify.json"),
+                    "results/dilute_theory_stratify.json"),
                    (os.path.join(ROOT, "results", "excell.json"), "results/excell.json"),
+                   # pass 16: the NEGLIGIBLE_C row reads the threshold sweep on the production path
+                   (os.path.join(ROOT, "results", "negligible_c_sweep.json"), "results/negligible_c_sweep.json"),
+                   (os.path.join(ROOT, "results", "cref_scale_sweep.json"), "results/cref_scale_sweep.json"),
+                   # pass 17: the c_ref row reads the ex-cell mesh's first cell from run_excell.jl's own signature
+                   (os.path.join(ROOT, "julia", "run_excell.jl"), "julia/run_excell.jl"),
+                   # 2026-10-07: the borate speciation and the pyridinium bracket
+                   (os.path.join(ROOT, "results", "hmf_buffer_speciation.json"), "results/hmf_buffer_speciation.json"),
+                   (os.path.join(ROOT, "results", "pyridinium_bracket.json"), "results/pyridinium_bracket.json"),
                    (os.path.join(ROOT, "results", "free_convection_delta.json"),
                     "results/free_convection_delta.json"),
                    (os.path.join(ROOT, "results", "unsourced_D_sensitivity.json"),
@@ -90,6 +114,14 @@ GENERATORS = [
                     "results/substrate_D_sensitivity.json"),
                    (os.path.join(ROOT, "results", "catalyst_ec_sensitivity.json"),
                     "results/catalyst_ec_sensitivity.json"),
+                   # chemistry audit pass 6: the Casteel-Amis rows are computed by casteel_amis.py on Dorn's isotherms,
+                   # the channel-pair row reads reactor_engineering.json, the Ea row both viscosity-Ea artifacts
+                   (os.path.join(HERE, "casteel_amis.py"), "data/casteel_amis.py"),
+                   (os.path.join(HERE, "dorn_isotherms.csv"), "data/dorn_isotherms.csv"),
+                   (os.path.join(ROOT, "figs", "archetype_bands.py"), "figs/archetype_bands.py"),
+                   (os.path.join(ROOT, "results", "reactor_engineering.json"), "results/reactor_engineering.json"),
+                   (os.path.join(ROOT, "results", "ea_viscosity_crc.json"), "results/ea_viscosity_crc.json"),
+                   (os.path.join(ROOT, "results", "ea_viscosity_water.json"), "results/ea_viscosity_water.json"),
                    # 2026-09-11: the DMA-viscosity and catalyst-radius sensitivities feed two registry rows
                    (os.path.join(ROOT, "results", "dma_viscosity_sensitivity.json"),
                     "results/dma_viscosity_sensitivity.json"),
@@ -97,7 +129,24 @@ GENERATORS = [
                     "results/catalyst_D_sensitivity.json"),
                    (os.path.join(ROOT, "results", "si_sensitivity_bounds.json"),
                     "results/si_sensitivity_bounds.json"),
+                   # 2026-10-06: the viscosity row interpolates the maximum dissolved concentration and the flagged count
+                   (os.path.join(ROOT, "results", "solution_viscosity_sensitivity.json"),
+                    "results/solution_viscosity_sensitivity.json"),
+                   (os.path.join(ROOT, "results", "homocoupling_charge_sensitivity.json"),
+                    "results/homocoupling_charge_sensitivity.json"),
+                   # 2026-10-06 (chemistry audit, pass 4): the solver-species rows read the doubled-D sweep, the
+                   # medium-transfer brackets and the trace-seed sweep
+                   (os.path.join(ROOT, "results", "solver_species_2xD.json"), "results/solver_species_2xD.json"),
+                   (os.path.join(ROOT, "results", "medium_transfer_brackets.json"), "results/medium_transfer_brackets.json"),
+                   (os.path.join(ROOT, "results", "trace_init_sensitivity.json"), "results/trace_init_sensitivity.json"),
+                   (os.path.join(ROOT, "results", "xec_charge_sensitivity.json"), "results/xec_charge_sensitivity.json"),
                    (os.path.join(HERE, "carrier_charge.csv"), "data/carrier_charge.csv"),
+                   # 2026-10-05: the class counts, the substrate rows and the electron-count row are
+                   # computed from the reaction table and its three companions, never typed.
+                   (os.path.join(HERE, "catalyst_substrates.csv"), "data/catalyst_substrates.csv"),
+                   (os.path.join(HERE, "mediated_substrates.csv"), "data/mediated_substrates.csv"),
+                   (os.path.join(HERE, "reaction_stoichiometry.csv"), "data/reaction_stoichiometry.csv"),
+                   (os.path.join(ROOT, "julia", "catalyst_ec_sourced.csv"), "julia/catalyst_ec_sourced.csv"),
                    # added 2026-09-07: the builder reads the published matrix to COUNT the reactor
                    # archetypes, after three sensitivity rows shipped "the six architectures" into
                    # Table S7 with seven in the model. This gate caught the undeclared input on the
@@ -134,6 +183,80 @@ GENERATORS = [
         "needs": None,
         "perturb": ("data/parameters_provenance.csv", "pp. 6-243 to 6-247", "pp. 6-243 to 6-249"),
     },
+    # 2026-10-05: four generators written or wired in by the reaction audit. The two substrate tables
+    # import build_reactions50.py for its Le Bas and Wilke-Chang functions, so it is an input to both.
+    {
+        "script": os.path.join(HERE, "build_mediated_substrates.py"),
+        "inputs": [(os.path.join(HERE, "build_reactions50.py"), "data/build_reactions50.py"),
+                   (os.path.join(HERE, "solvents.csv"), "data/solvents.csv"),
+                   (os.path.join(HERE, "reactions_50.csv"), "data/reactions_50.csv")],
+        "outputs": [(os.path.join(HERE, "mediated_substrates.csv"), "data/mediated_substrates.csv")],
+        "needs": "rdkit",
+        "perturb": ("data/build_mediated_substrates.py", "NC(=O)Cc1ccccc1", "NC(=O)CCc1ccccc1"),
+    },
+    {
+        "script": os.path.join(HERE, "build_catalyst_substrates.py"),
+        "inputs": [(os.path.join(HERE, "build_reactions50.py"), "data/build_reactions50.py"),
+                   (os.path.join(HERE, "solvents.csv"), "data/solvents.csv"),
+                   (os.path.join(HERE, "reactions_50.csv"), "data/reactions_50.csv")],
+        "outputs": [(os.path.join(HERE, "catalyst_substrates.csv"), "data/catalyst_substrates.csv")],
+        "needs": "rdkit",
+        "perturb": ("data/build_catalyst_substrates.py", "Cc1ccc(Br)cc1", "CCc1ccc(Br)cc1"),
+    },
+    {
+        # the balanced reaction behind every row (SI Table S10); it asserts atom and charge balance itself
+        "script": os.path.join(HERE, "build_reaction_stoichiometry.py"),
+        "inputs": [(os.path.join(HERE, "reactions_50.csv"), "data/reactions_50.csv"),
+                   (os.path.join(HERE, "electrode_direction.csv"), "data/electrode_direction.csv")],
+        "outputs": [(os.path.join(HERE, "reaction_stoichiometry.csv"), "data/reaction_stoichiometry.csv")],
+        "needs": "rdkit",
+        "perturb": ("data/electrode_direction.csv", "Benzaldehyde -> benzyl alcohol,cathodic", "Benzaldehyde -> benzyl alcohol,anodic"),
+    },
+    {
+        # Lambda(c) by the Onsager limiting law at the registry viscosities (Table S4 caption, the display-only rows)
+        "script": os.path.join(HERE, "derive_kappa.py"),
+        "inputs": [(os.path.join(HERE, "solvents.csv"), "data/solvents.csv"),
+                   (os.path.join(HERE, "electrolytes.csv"), "data/electrolytes.csv")],
+        "outputs": [(os.path.join(ROOT, "results", "kappa_derivation.json"), "results/kappa_derivation.json")],
+        "needs": None,
+        "perturb": ("data/solvents.csv", "MeCN,41.05,0.369", "MeCN,41.05,0.343"),
+    },
+    {
+        # Reid's specific Le Bas increments against the general ones the model carries, and the ferrocene benchmark
+        "script": os.path.join(HERE, "lebas_increment_sensitivity.py"),
+        "inputs": [(os.path.join(HERE, "build_reactions50.py"), "data/build_reactions50.py"),
+                   (os.path.join(HERE, "reactions_50.csv"), "data/reactions_50.csv"),
+                   (os.path.join(HERE, "solvents.csv"), "data/solvents.csv"),
+                   (os.path.join(HERE, "mediated_substrates.csv"), "data/mediated_substrates.csv"),
+                   (os.path.join(ROOT, "julia", "tier0_ec_matrix.csv"), "julia/tier0_ec_matrix.csv")],
+        "outputs": [(os.path.join(ROOT, "results", "lebas_increment_sensitivity.json"), "results/lebas_increment_sensitivity.json")],
+        "needs": "rdkit",
+        # it reads mu from build_reactions50.SOLVENTS, not from solvents.csv, so the generator source is what to perturb
+        "perturb": ("data/build_reactions50.py", '"MeCN":      (41.05, 0.369,', '"MeCN":      (41.05, 0.500,'),
+    },
+    {
+        # the cooling-class verdicts of SI S6.2 against the Table S4 conductivity bands, and the Bu4NPF6/THF example of S6.1
+        "script": os.path.join(HERE, "thermal_conditional_flips.py"),
+        "inputs": [(os.path.join(ROOT, "figs", "thermal_model.py"), "figs/thermal_model.py"),
+                   (os.path.join(HERE, "si_sensitivity_bounds.py"), "data/si_sensitivity_bounds.py"),
+                   (os.path.join(HERE, "parameters_provenance.csv"), "data/parameters_provenance.csv"),   # the bands, read at import
+                   (os.path.join(HERE, "electrolytes.csv"), "data/electrolytes.csv"),
+                   (os.path.join(ROOT, "julia", "tier0_ec_matrix.csv"), "julia/tier0_ec_matrix.csv")],
+        "outputs": [(os.path.join(ROOT, "results", "thermal_conditional_flips.json"), "results/thermal_conditional_flips.json")],
+        "needs": None,
+        "perturb": ("data/electrolytes.csv", "0.1 M Bu4NPF6/THF,0.51", "0.1 M Bu4NPF6/THF,0.60"),
+    },
+    {
+        # the two band-edge mediated solvers are run_mediated.jl with one inserted block and a renamed output
+        "script": os.path.join(HERE, "build_bounds_solvers.py"),
+        "inputs": [(os.path.join(ROOT, "julia", "run_mediated.jl"), "julia/run_mediated.jl"),
+                   (os.path.join(ROOT, "julia", "emit_deltas.jl"), "julia/emit_deltas.jl"),
+                   (os.path.join(ROOT, "results", "free_convection_delta.json"), "results/free_convection_delta.json")],
+        "outputs": [(os.path.join(ROOT, "julia", "_bounds_lo.jl"), "julia/_bounds_lo.jl"),
+                    (os.path.join(ROOT, "julia", "_bounds_hi.jl"), "julia/_bounds_hi.jl")],
+        "needs": None,
+        "perturb": ("julia/run_mediated.jl", "MATRIX DONE", "MATRIX COMPLETE"),
+    },
 ]
 RDKIT_PY = "/opt/anaconda3/envs/echem_analysis/bin/python"
 
@@ -153,7 +276,7 @@ RDKIT_PY = "/opt/anaconda3/envs/echem_analysis/bin/python"
 #       is verified deterministic by running it twice, and every number it publishes is bound to
 #       the SI by G-EXCELL, so the artifact cannot drift from the document unnoticed -- but
 #       nothing re-derives it here.
-UNCOVERED = ["build_mediated_substrates.py", "build_ion_diffusivities.py",
+UNCOVERED = ["build_ion_diffusivities.py",
              "build_merged_matrix.py", "run_excell.jl (Julia)"]   # apply_ion_diffusivities.py covered 2026-09-05
 
 

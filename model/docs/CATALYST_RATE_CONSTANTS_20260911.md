@@ -1,5 +1,24 @@
 # Rate constants for the eleven molecular-catalyst rows — retrieval dossier (2026-09-11)
 
+
+> **CORRECTION, 2026-10-05 (Jonas Rein).** Two rows of this dossier name the cobalt-hydride
+> chemistry wrongly, and the tables below are left as written because this is a dated record.
+>
+> * The row called **"Co–H Markovnikov hydroamination"** is an **alkene reduction**. Gnaim et al.
+>   Nature 2022 captions its Fig. 3 "Scope of e-HAT reduction" and writes "the selective reduction of
+>   monosubstituted alkenes was similarly achieved by relying on e-HAT (conditions C)". The word
+>   "hydroamination" appears in that paper exactly once, in its own reference 13 (Gui et al., olefin
+>   hydroamination with nitroarenes) — a cited title, which is how the name got in.
+> * That row's conditions are **conditions C** (CoBr₂·glyme / 6,6′-Me-bpy / HFIP 9 equiv / Et₃NHBF₄ /
+>   THF / Mg(+)C(−), 5 mA), not conditions A. The table below says "conditions A, CoBr₂/4,4′-MeO-bpy,
+>   THF/HFIP", which mixes conditions A's ligand with conditions C's solvent. Conditions A is
+>   CoBr₂(glyme)/4,4′-MeO-bpy in **MeCN** and is the ISOMERIZATION manifold — the other cobalt row.
+>
+> **No rate constant and no computed number moves**: k = 7 × 10² M⁻¹ s⁻¹ is a Co(III)–H + alkene MHAT
+> step, which is the step in both manifolds, and the names are carried as labels only. The live data
+> (`data/reactions_50.csv`), the registry row, both SI builds and the manuscript now read
+> "Co-H alkene reduction (e-HAT)". Full account: `docs/REVISION_NOTES_20261005.md`.
+
 **Status: ADOPTED 2026-09-11 (author decision). The retrieval record follows; what was changed in the tree
 is in the closing section.**
 

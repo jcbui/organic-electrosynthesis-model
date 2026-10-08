@@ -1,0 +1,80 @@
+{
+ "note": "NEGLIGIBLE_C swept with julia/run_mediated.jl in isolated copies (data/solver_setting_sweeps.py)",
+ "thresholds": [
+  1e-06,
+  1e-08,
+  1e-10,
+  1e-12,
+  1e-14,
+  1e-16
+ ],
+ "rows": [
+  "ACT-mediated alcohol oxidation (flow, hectogram)",
+  "Br- oxidation / electrophilic bromination",
+  "Br-mediated Hofmann rearrangement"
+ ],
+ "n_cells": 21,
+ "max_rel_change_vs_published": 0.0,
+ "control_1e-10_reproduces_published": true,
+ "cells_with_a_species_below_1e-10_of_bulk": [
+  {
+   "reaction": "Br- oxidation / electrophilic bromination",
+   "reactor": "ANEC flow cell",
+   "c_sub_over_bulk": 3.1e-30
+  },
+  {
+   "reaction": "Br- oxidation / electrophilic bromination",
+   "reactor": "Microfluidic cell (25 um gap)",
+   "c_sub_over_bulk": 1.1e-11
+  },
+  {
+   "reaction": "Br- oxidation / electrophilic bromination",
+   "reactor": "RDE 1600 rpm",
+   "c_sub_over_bulk": 2.2e-14
+  },
+  {
+   "reaction": "Br- oxidation / electrophilic bromination",
+   "reactor": "Recirculating flow cell",
+   "c_sub_over_bulk": 4.5e-47
+  },
+  {
+   "reaction": "Br- oxidation / electrophilic bromination",
+   "reactor": "Rotating cylinder 3000 rpm",
+   "c_sub_over_bulk": 1.5e-13
+  },
+  {
+   "reaction": "Br- oxidation / electrophilic bromination",
+   "reactor": "Stirred batch",
+   "c_sub_over_bulk": 5.9e-49
+  },
+  {
+   "reaction": "Br- oxidation / electrophilic bromination",
+   "reactor": "Unstirred batch",
+   "c_sub_over_bulk": 4.9e-58
+  }
+ ],
+ "matrix_md5": "2735928761e7019ddc65ce0501871e9b",
+ "rule_off": [
+  {
+   "reaction": "Br- oxidation / electrophilic bromination",
+   "reactor": "Recirculating flow cell",
+   "rel_change": -0.4501663363310897,
+   "limiter": "newton-wall (no collapse); limit reached, solution ceases (c-control; c_red/cb 2.57e-01, c_sub/cb 5.4e-44)",
+   "flag": "wall"
+  },
+  {
+   "reaction": "Br- oxidation / electrophilic bromination",
+   "reactor": "Stirred batch",
+   "rel_change": -0.14449152818947053,
+   "limiter": "limit reached, solution ceases (c-control; c_red/cb 1.52e-01, c_sub/cb 1.8e-44)",
+   "flag": "wall"
+  },
+  {
+   "reaction": "Br- oxidation / electrophilic bromination",
+   "reactor": "Unstirred batch",
+   "rel_change": -0.12050139924245384,
+   "limiter": "limit reached, solution ceases (c-control; c_red/cb 1.27e-01, c_sub/cb 5.1e-45)",
+   "flag": "wall"
+  }
+ ]
+}

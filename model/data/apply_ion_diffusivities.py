@@ -23,8 +23,8 @@ def solvent_key(elec):
                      ("MeOH-H2O","MeOH"),("MeOH","MeOH"),("acetone","acetone"),
                      ("DMA","DMA"),("DMF","DMF"),("DMSO","DMSO"),("MeNO2","MeNO2"),
                      ("HFIP-MeOH","HFIP"),("HFIP","HFIP"),("THF-HFIP","THF"),
-                     ("THF-MeOH","THF"),("THF","THF"),("EtOH-MeOH","EtOH"),
-                     ("H2O-MeCN","H2O"),("tAmOH-H2O","H2O"),("AcOH-HCOOH","AcOH")]:
+                     ("THF-MeOH","THF"),("THF-EtOH","EtOH"),("THF","THF"),("EtOH-MeOH","EtOH"),
+                     ("H2O-MeCN","H2O"),("tAmOH-H2O","tAmOH"),("AcOH-HCOOH","AcOH")]:
         if s.startswith(pre):
             return key
     return "aq"
@@ -78,6 +78,36 @@ for extra in ("D_cat_basis", "D_an_basis"):
     if extra not in fields:
         fields.append(extra)
 
+## Class defaults of the declared supporting-ion slots (registry rows 'Bu4N+/Q+ (organic)' and
+## 'BF4-/generic A- (organic)').
+CLASS_DEFAULT = {"cation": 1.0e-9, "anion": 1.5e-9}
+## Declared slots that carry a value other than the class default: (ion, solvent key) -> (D in m2/s,
+## the basis of that value). Each is a supporting ion in a medium for which no limiting conductance is
+## tabulated; the basis says where the number comes from.
+## Slots outside Krumgalz/CRC that a retrieved source does cover (2026-10-07): state B by Nernst-Einstein from a measured
+## limiting conductance. Checked like DECLARED_VALUES: the table must carry exactly this value.
+SOURCED_VALUES = {
+    ("B(OH)4-", "aq"): (9.39e-10,
+        "state B; Nernst-Einstein from lambda0(B(OH)4-) = 35.27 S cm2 mol-1 at 25 C (Corti, Crovetto & Fernandez-Prini, "
+        "J. Solution Chem. 1980, 9, 617-625, Table III, p. 621)"),
+}
+DECLARED_VALUES = {
+    ("K+", "tAmOH"): (1.957e-9,
+        "value: the aqueous K+ diffusivity (CRC 97th ed., Vanysek, p. 5-75, D column) carried to tAmOH/H2O 3:1"),
+    ("Br-", "THF"): (2.08e-9,
+        "value: the aqueous Br- diffusivity (CRC 97th ed., Vanysek, p. 5-75, D column, 2.080e-9) carried to THF"),
+    ("RCO2- (Et3NH+ carboxylate pair)", "MeOH"): (1.269e-9,
+        "value: the carboxylate given the Wilke-Chang diffusivity in MeOH of its parent acid, this row's carrier "
+        "(Table S2, 1.269e-5 cm2 s-1)"),
+    ("ClO4-", "AcOH"): (1.7e-9,
+        "value: the registry row 'ClO4- (MeCN, aq-like)' (Table S7d), 5% below the aqueous 1.792e-9 (CRC 97th ed., "
+        "Vanysek, p. 5-75), carried to AcOH/HCOOH as in this row's EC' solve"),
+    ("H+", "MeCN"): (3e-9,
+        "value: the registry row 'H+ (MeCN/organic)' (Table S7d), about a third of the aqueous 9.311e-9 (CRC 97th "
+        "ed., Vanysek, p. 5-75) because an aprotic medium supports no Grotthuss shuttle"),
+}
+declared_used = set()
+
 n_set = n_gap = 0
 gaps = {}
 for r in rows:
@@ -96,12 +126,41 @@ for r in rows:
             r[basis_col] = note
             n_set += 1
         else:
-            r[basis_col] = ("DECLARED CLASS DEFAULT (supporting ion: it carries no flux, so its D "
-                            "does not enter i_lim; Table S7d) -- no lambda0 for %s in %s in "
-                            "Krumgalz 1983 or CRC 5-75/5-76" % (ion, sv))
+            ## A slot with no tabulated limiting conductance keeps the D the table carries, and the label
+            ## says which kind of declaration that D is: the class default (1.0e-9 for a cation, 1.5e-9
+            ## for an anion), or a declared value of another origin, which must be one of DECLARED_VALUES
+            ## and must carry exactly the value recorded there. Anything else stops the script, so a slot
+            ## can never be labelled a class default while holding some other number.
+            d_now = float(r[d_col])
+            gap_txt = ("(supporting ion: it carries no flux, so its D does not enter i_lim; Table S7d) -- "
+                       "no lambda0 for %s in %s in Krumgalz 1983 or CRC 97th ed. pp. 5-75 to 5-77" % (ion, sv))
+            if (ion, sv) in SOURCED_VALUES:
+                d_src, why = SOURCED_VALUES[(ion, sv)]
+                if abs(d_now - d_src) > 1e-6 * d_src:
+                    raise SystemExit("%s in %s carries D = %g, but SOURCED_VALUES records %g" % (ion, sv, d_now, d_src))
+                r[basis_col] = why
+                n_set += 1
+                continue
+            if abs(d_now - CLASS_DEFAULT[ion_col]) <= 1e-6 * CLASS_DEFAULT[ion_col]:
+                r[basis_col] = "DECLARED CLASS DEFAULT " + gap_txt
+            elif (ion, sv) in DECLARED_VALUES:
+                d_decl, why = DECLARED_VALUES[(ion, sv)]
+                if abs(d_now - d_decl) > 1e-6 * d_decl:
+                    raise SystemExit("%s in %s (%s) carries D = %g, but DECLARED_VALUES records %g for it; "
+                                     "fix the table or the record" % (ion, sv, r["reaction"], d_now, d_decl))
+                r[basis_col] = "DECLARED VALUE " + gap_txt + "; " + why
+                declared_used.add((ion, sv))
+            else:
+                raise SystemExit("%s in %s (%s) has no tabulated lambda0 and carries D = %g, which is neither the "
+                                 "class default (%g) nor a value recorded in DECLARED_VALUES; record its basis "
+                                 "there" % (ion, sv, r["reaction"], d_now, CLASS_DEFAULT[ion_col]))
             gaps[(ion, sv)] = gaps.get((ion, sv), 0) + 1
             n_gap += 1
 
+unused = sorted(set(DECLARED_VALUES) - declared_used)
+if unused:
+    raise SystemExit("DECLARED_VALUES records %s, which no slot of the table uses; remove the record or restore "
+                     "the slot" % unused)
 print("sourced   : %d of %d (ion, row) slots" % (n_set, 2 * len(rows)))
 print("unsourced : %d slots, %d distinct (ion, solvent) pairs" % (n_gap, len(gaps)))
 print("\nremaining gaps, by frequency:")

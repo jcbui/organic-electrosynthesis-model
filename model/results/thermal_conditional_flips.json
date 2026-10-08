@@ -1,0 +1,719 @@
+{
+ "verdicts": [
+  {
+   "solvent": "THF",
+   "electrolyte": "3.0 M LiBr/THF",
+   "architecture": "unstirred batch",
+   "i_mAcm2": 8.554,
+   "U_req": 0.001236109348506823,
+   "U_passive": 0.012082270354763792,
+   "class": "passive",
+   "U_liquid": [
+    0.0656814205552011,
+    0.07883011406472461
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.09885367084058182,
+   "band_multiple": [
+    0.06666666666666667,
+    2.1999999999999997
+   ],
+   "conditional": true,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "THF",
+   "electrolyte": "3.0 M LiBr/THF",
+   "architecture": "stirred batch",
+   "i_mAcm2": 9.731,
+   "U_req": 0.0015954664458946765,
+   "U_passive": 0.013516464648533984,
+   "class": "passive",
+   "U_liquid": [
+    0.15520847550312208,
+    0.2561837037346071
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.11438572170694601,
+   "band_multiple": [
+    0.06666666666666667,
+    2.1999999999999997
+   ],
+   "conditional": true,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "THF",
+   "electrolyte": "3.0 M LiBr/THF",
+   "architecture": "recirculating flow",
+   "i_mAcm2": 17.42,
+   "U_req": 0.005059317189012431,
+   "U_passive": 0.013655401394101893,
+   "class": "passive",
+   "U_liquid": [
+    0.17574077062735347,
+    0.31738968181904215
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.3646872398659671,
+   "band_multiple": [
+    0.06666666666666667,
+    2.1999999999999997
+   ],
+   "conditional": true,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "THF",
+   "electrolyte": "3.0 M LiBr/THF",
+   "architecture": "microfluidic 25 $\\mu$m",
+   "i_mAcm2": 108.575,
+   "U_req": 0.0015153454539814362,
+   "U_passive": 0.009633411783477602,
+   "class": "passive",
+   "U_liquid": [
+    0.06118876800912814,
+    0.14240841272835408
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.028668633407407773,
+   "band_multiple": [
+    0.06666666666666667,
+    2.1999999999999997
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "THF",
+   "electrolyte": "3.0 M LiBr/THF",
+   "architecture": "RDE 1600 rpm",
+   "i_mAcm2": 104.29,
+   "U_req": 0.17806697331106755,
+   "U_passive": 0.013655401394101893,
+   "class": "liquid cooling",
+   "U_liquid": [
+    0.17574077062735347,
+    0.31738968181904215
+   ],
+   "liquid_holds_across_construction": false,
+   "flip_up_multiple": 14.21580414948282,
+   "flip_down_multiple": 0.5593491160042455,
+   "band_multiple": [
+    0.06666666666666667,
+    2.1999999999999997
+   ],
+   "conditional": true,
+   "class_up": "passive",
+   "class_down": "beyond liquid cooling"
+  },
+  {
+   "solvent": "THF",
+   "electrolyte": "3.0 M LiBr/THF",
+   "architecture": "rotating cyl. 3000 rpm",
+   "i_mAcm2": 122.065,
+   "U_req": 0.29643845292124343,
+   "U_passive": 0.013655401394101893,
+   "class": "liquid cooling",
+   "U_liquid": [
+    0.17574077062735347,
+    0.31738968181904215
+   ],
+   "liquid_holds_across_construction": false,
+   "flip_up_multiple": 24.20685918910472,
+   "flip_down_multiple": 0.9336817698622041,
+   "band_multiple": [
+    0.06666666666666667,
+    2.1999999999999997
+   ],
+   "conditional": true,
+   "class_up": "passive",
+   "class_down": "beyond liquid cooling"
+  },
+  {
+   "solvent": "THF",
+   "electrolyte": "3.0 M LiBr/THF",
+   "architecture": "zero-gap PEM stack",
+   "i_mAcm2": 1000.0,
+   "U_req": 0.0986160307716276,
+   "U_passive": 0.0011009613466831545,
+   "class": "liquid cooling",
+   "U_liquid": [
+    0.06118876800912814,
+    0.14240841272835408
+   ],
+   "liquid_holds_across_construction": false,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.6499219484398859,
+   "band_multiple": [
+    0.06666666666666667,
+    2.1999999999999997
+   ],
+   "conditional": true,
+   "class_up": null,
+   "class_down": "beyond liquid cooling"
+  },
+  {
+   "solvent": "MeCN",
+   "electrolyte": "0.25 M Bu4NBF4/MeCN",
+   "architecture": "unstirred batch",
+   "i_mAcm2": 8.554,
+   "U_req": 0.00016315077327431284,
+   "U_passive": 0.012082270354763792,
+   "class": "passive",
+   "U_liquid": [
+    0.0656814205552011,
+    0.07883011406472461
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.010756680263705676,
+   "band_multiple": [
+    0.7518796992481203,
+    1.1528822055137844
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "MeCN",
+   "electrolyte": "0.25 M Bu4NBF4/MeCN",
+   "architecture": "stirred batch",
+   "i_mAcm2": 9.731,
+   "U_req": 0.00020810692820350367,
+   "U_passive": 0.013516464648533984,
+   "class": "passive",
+   "U_liquid": [
+    0.15520847550312208,
+    0.2561837037346071
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.012445779235149243,
+   "band_multiple": [
+    0.7518796992481203,
+    1.1528822055137844
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "MeCN",
+   "electrolyte": "0.25 M Bu4NBF4/MeCN",
+   "architecture": "recirculating flow",
+   "i_mAcm2": 17.42,
+   "U_req": 0.0006279946784332464,
+   "U_passive": 0.013655401394101893,
+   "class": "passive",
+   "U_liquid": [
+    0.17574077062735347,
+    0.31738968181904215
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.03962438926525299,
+   "band_multiple": [
+    0.7518796992481203,
+    1.1528822055137844
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "MeCN",
+   "electrolyte": "0.25 M Bu4NBF4/MeCN",
+   "architecture": "microfluidic 25 $\\mu$m",
+   "i_mAcm2": 108.575,
+   "U_req": 0.0009502242701965555,
+   "U_passive": 0.009633411783477602,
+   "class": "passive",
+   "U_liquid": [
+    0.06118876800912814,
+    0.14240841272835408
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.0029967832552053827,
+   "band_multiple": [
+    0.7518796992481203,
+    1.1528822055137844
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "MeCN",
+   "electrolyte": "0.25 M Bu4NBF4/MeCN",
+   "architecture": "RDE 1600 rpm",
+   "i_mAcm2": 104.29,
+   "U_req": 0.020144455210276357,
+   "U_passive": 0.013655401394101893,
+   "class": "liquid cooling",
+   "U_liquid": [
+    0.17574077062735347,
+    0.31738968181904215
+   ],
+   "liquid_holds_across_construction": true,
+   "flip_up_multiple": 1.5079347505546363,
+   "flip_down_multiple": 0.060865198765895245,
+   "band_multiple": [
+    0.7518796992481203,
+    1.1528822055137844
+   ],
+   "conditional": false,
+   "class_up": "passive",
+   "class_down": "beyond liquid cooling"
+  },
+  {
+   "solvent": "MeCN",
+   "electrolyte": "0.25 M Bu4NBF4/MeCN",
+   "architecture": "rotating cyl. 3000 rpm",
+   "i_mAcm2": 122.065,
+   "U_req": 0.03319567593298665,
+   "U_passive": 0.013655401394101893,
+   "class": "liquid cooling",
+   "U_liquid": [
+    0.17574077062735347,
+    0.31738968181904215
+   ],
+   "liquid_holds_across_construction": true,
+   "flip_up_multiple": 2.551985231996067,
+   "flip_down_multiple": 0.10157527679777797,
+   "band_multiple": [
+    0.7518796992481203,
+    1.1528822055137844
+   ],
+   "conditional": false,
+   "class_up": "passive",
+   "class_down": "beyond liquid cooling"
+  },
+  {
+   "solvent": "MeCN",
+   "electrolyte": "0.25 M Bu4NBF4/MeCN",
+   "architecture": "zero-gap PEM stack",
+   "i_mAcm2": 1000.0,
+   "U_req": 0.02139888800592718,
+   "U_passive": 0.0011009613466831545,
+   "class": "liquid cooling",
+   "U_liquid": [
+    0.06118876800912814,
+    0.14240841272835408
+   ],
+   "liquid_holds_across_construction": true,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.06819406597672277,
+   "band_multiple": [
+    0.7518796992481203,
+    1.1528822055137844
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "beyond liquid cooling"
+  },
+  {
+   "solvent": "DMF",
+   "electrolyte": "0.2 M NaI/DMF",
+   "architecture": "unstirred batch",
+   "i_mAcm2": 8.554,
+   "U_req": 0.00014941775545182257,
+   "U_passive": 0.012082270354763792,
+   "class": "passive",
+   "U_liquid": [
+    0.0656814205552011,
+    0.07883011406472461
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.01115074901333706,
+   "band_multiple": [
+    0.47003525264394835,
+    1.8801410105757934
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "DMF",
+   "electrolyte": "0.2 M NaI/DMF",
+   "architecture": "stirred batch",
+   "i_mAcm2": 9.731,
+   "U_req": 0.000192020794429253,
+   "U_passive": 0.013516464648533984,
+   "class": "passive",
+   "U_liquid": [
+    0.15520847550312208,
+    0.2561837037346071
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.012900201645772,
+   "band_multiple": [
+    0.47003525264394835,
+    1.8801410105757934
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "DMF",
+   "electrolyte": "0.2 M NaI/DMF",
+   "architecture": "recirculating flow",
+   "i_mAcm2": 17.42,
+   "U_req": 0.0005981344382858772,
+   "U_passive": 0.013655401394101893,
+   "class": "passive",
+   "U_liquid": [
+    0.17574077062735347,
+    0.31738968181904215
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.04098740073756233,
+   "band_multiple": [
+    0.47003525264394835,
+    1.8801410105757934
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "DMF",
+   "electrolyte": "0.2 M NaI/DMF",
+   "architecture": "microfluidic 25 $\\mu$m",
+   "i_mAcm2": 108.575,
+   "U_req": 0.0004363737390353454,
+   "U_passive": 0.009633411783477602,
+   "class": "passive",
+   "U_liquid": [
+    0.06118876800912814,
+    0.14240841272835408
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.0029377252245260115,
+   "band_multiple": [
+    0.47003525264394835,
+    1.8801410105757934
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "DMF",
+   "electrolyte": "0.2 M NaI/DMF",
+   "architecture": "RDE 1600 rpm",
+   "i_mAcm2": 104.29,
+   "U_req": 0.020390896037462383,
+   "U_passive": 0.013655401394101893,
+   "class": "liquid cooling",
+   "U_liquid": [
+    0.17574077062735347,
+    0.31738968181904215
+   ],
+   "liquid_holds_across_construction": true,
+   "flip_up_multiple": 1.507739394419393,
+   "flip_down_multiple": 0.06309511635821882,
+   "band_multiple": [
+    0.47003525264394835,
+    1.8801410105757934
+   ],
+   "conditional": true,
+   "class_up": "passive",
+   "class_down": "beyond liquid cooling"
+  },
+  {
+   "solvent": "DMF",
+   "electrolyte": "0.2 M NaI/DMF",
+   "architecture": "rotating cyl. 3000 rpm",
+   "i_mAcm2": 122.065,
+   "U_req": 0.033831169211001204,
+   "U_passive": 0.013655401394101893,
+   "class": "liquid cooling",
+   "U_liquid": [
+    0.17574077062735347,
+    0.31738968181904215
+   ],
+   "liquid_holds_across_construction": true,
+   "flip_up_multiple": 2.530347769313684,
+   "flip_down_multiple": 0.10526237438617791,
+   "band_multiple": [
+    0.47003525264394835,
+    1.8801410105757934
+   ],
+   "conditional": false,
+   "class_up": "passive",
+   "class_down": "beyond liquid cooling"
+  },
+  {
+   "solvent": "DMF",
+   "electrolyte": "0.2 M NaI/DMF",
+   "architecture": "zero-gap PEM stack",
+   "i_mAcm2": 1000.0,
+   "U_req": 0.014749703129211804,
+   "U_passive": 0.0011009613466831545,
+   "class": "liquid cooling",
+   "U_liquid": [
+    0.06118876800912814,
+    0.14240841272835408
+   ],
+   "liquid_holds_across_construction": true,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.0671867801047592,
+   "band_multiple": [
+    0.47003525264394835,
+    1.8801410105757934
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "beyond liquid cooling"
+  },
+  {
+   "solvent": "aq. NaOH",
+   "electrolyte": "1 M NaOH aq",
+   "architecture": "unstirred batch",
+   "i_mAcm2": 8.554,
+   "U_req": 3.651114827342488e-05,
+   "U_passive": 0.012082270354763792,
+   "class": "passive",
+   "U_liquid": [
+    0.0656814205552011,
+    0.07883011406472461
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": null,
+   "band_multiple": [
+    0.997134670487106,
+    1.0429799426934097
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": null
+  },
+  {
+   "solvent": "aq. NaOH",
+   "electrolyte": "1 M NaOH aq",
+   "architecture": "stirred batch",
+   "i_mAcm2": 9.731,
+   "U_req": 4.4964692846729416e-05,
+   "U_passive": 0.013516464648533984,
+   "class": "passive",
+   "U_liquid": [
+    0.15520847550312208,
+    0.2561837037346071
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.00107338731113492,
+   "band_multiple": [
+    0.997134670487106,
+    1.0429799426934097
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "aq. NaOH",
+   "electrolyte": "1 M NaOH aq",
+   "architecture": "recirculating flow",
+   "i_mAcm2": 17.42,
+   "U_req": 0.00011470698533481637,
+   "U_passive": 0.013655401394101893,
+   "class": "passive",
+   "U_liquid": [
+    0.17574077062735347,
+    0.31738968181904215
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.0034143367096768976,
+   "band_multiple": [
+    0.997134670487106,
+    1.0429799426934097
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "aq. NaOH",
+   "electrolyte": "1 M NaOH aq",
+   "architecture": "microfluidic 25 $\\mu$m",
+   "i_mAcm2": 108.575,
+   "U_req": 0.0006999003864018155,
+   "U_passive": 0.009633411783477602,
+   "class": "passive",
+   "U_liquid": [
+    0.06118876800912814,
+    0.14240841272835408
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": null,
+   "band_multiple": [
+    0.997134670487106,
+    1.0429799426934097
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": null
+  },
+  {
+   "solvent": "aq. NaOH",
+   "electrolyte": "1 M NaOH aq",
+   "architecture": "RDE 1600 rpm",
+   "i_mAcm2": 104.29,
+   "U_req": 0.0023270435849050346,
+   "U_passive": 0.013655401394101893,
+   "class": "passive",
+   "U_liquid": [
+    0.17574077062735347,
+    0.31738968181904215
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.1279868354358236,
+   "band_multiple": [
+    0.997134670487106,
+    1.0429799426934097
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "aq. NaOH",
+   "electrolyte": "1 M NaOH aq",
+   "architecture": "rotating cyl. 3000 rpm",
+   "i_mAcm2": 122.065,
+   "U_req": 0.003577079065351468,
+   "U_passive": 0.013655401394101893,
+   "class": "passive",
+   "U_liquid": [
+    0.17574077062735347,
+    0.31738968181904215
+   ],
+   "liquid_holds_across_construction": null,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.21578503922948303,
+   "band_multiple": [
+    0.997134670487106,
+    1.0429799426934097
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "liquid cooling"
+  },
+  {
+   "solvent": "aq. NaOH",
+   "electrolyte": "1 M NaOH aq",
+   "architecture": "zero-gap PEM stack",
+   "i_mAcm2": 1000.0,
+   "U_req": 0.010233287787249948,
+   "U_passive": 0.0011009613466831545,
+   "class": "liquid cooling",
+   "U_liquid": [
+    0.06118876800912814,
+    0.14240841272835408
+   ],
+   "liquid_holds_across_construction": true,
+   "flip_up_multiple": null,
+   "flip_down_multiple": 0.0057496302714812875,
+   "band_multiple": [
+    0.997134670487106,
+    1.0429799426934097
+   ],
+   "conditional": false,
+   "class_up": null,
+   "class_down": "beyond liquid cooling"
+  }
+ ],
+ "band_source": "si_sensitivity_bounds.KAPPA_BAND",
+ "liquid_cooling": {
+  "unstirred batch": {
+   "cooler": "jacket",
+   "U_lo": 0.0656814205552011,
+   "U_hi": 0.07883011406472461
+  },
+  "stirred batch": {
+   "cooler": "jacket",
+   "U_lo": 0.15520847550312208,
+   "U_hi": 0.2561837037346071
+  },
+  "recirculating flow": {
+   "cooler": "jacket",
+   "U_lo": 0.17574077062735347,
+   "U_hi": 0.31738968181904215
+  },
+  "microfluidic 25 $\\mu$m": {
+   "cooler": "plate",
+   "U_lo": 0.06118876800912814,
+   "U_hi": 0.14240841272835408
+  },
+  "RDE 1600 rpm": {
+   "cooler": "jacket",
+   "U_lo": 0.17574077062735347,
+   "U_hi": 0.31738968181904215
+  },
+  "rotating cyl. 3000 rpm": {
+   "cooler": "jacket",
+   "U_lo": 0.17574077062735347,
+   "U_hi": 0.31738968181904215
+  },
+  "zero-gap PEM stack": {
+   "cooler": "plate",
+   "U_lo": 0.06118876800912814,
+   "U_hi": 0.14240841272835408
+  }
+ },
+ "thf_pf6_example": {
+  "kappa_mScm": 0.51,
+  "gap_m": 0.02,
+  "i_boil_mAcm2": 11.207499404102181,
+  "E_cell_V": 46.20014373268658,
+  "ohmic_V": 43.95097805530267
+ },
+ "ohmic_share_cm_gap": [
+  0.8379447127145129,
+  0.9843978819513728
+ ],
+ "dmf_heat_ratio_2cm_over_25um": {
+  "50": 29.15946575863071,
+  "100": 47.69541460714547
+ },
+ "dmf_ohmic_ratio_2cm_over_25um": 800.0,
+ "wall_conduction": {
+  "L_m": [
+   0.002,
+   0.003
+  ],
+  "k_W_mK": 1.4,
+  "n_cells": 20,
+  "U_drop_pct": [
+   1.702862783810466,
+   2.85308670902652
+  ],
+  "ceiling_drop_pct": [
+   0.8606223311838135,
+   1.5343218436695172
+  ],
+  "verdicts_changed": 0
+ }
+}

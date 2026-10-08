@@ -46,6 +46,7 @@ COVERS = {
  "median + count clearing 50, stirred (Sec 4 body)":     "count >=50, stirred",
  "count clearing 50, unstirred -> RCE (Sec 4 body)":     "count >=50, natural",
  "count clearing 50, unstirred -> RCE (Fig 5 caption)":  "count >=50, natural",
+ "count clearing 50, thinning the film (abstract)":       "count >=50, natural",
  "count clearing 25, unstirred -> RCE (Sec 8)":          "count >=25, natural",
  "median, stirred (Sec 3 body)":                         "median, stirred",
  "Fig7a beaker ceilings":                                "THF beaker ceiling",
@@ -114,12 +115,15 @@ EXEMPT = {
  # so a bounds row would restate that bracket under a square root.
  "catalyst kinetic ceilings, body":
      "the Saveant plateau nFD_catC_cat/x_k scales as sqrt(k), so the measured rate-constant bracket "
-     "tabulated in S5.7 (10-10^4 and 10^2-10^4 M^-1 s^-1) brackets it directly; the band-edge solves "
+     "tabulated in S5.7 (10-10^4 M^-1 s^-1 for the nickel and the cobalt-hydride rows) brackets it directly; the band-edge solves "
      "for these rows are published in the same section",
- "catalyst aza-Wacker reaction layer, body":
-     "x_k = sqrt(D_cat/kC_S) from inputs that each carry a registry row: the declared k with its "
-     "bracket in S5.7, and the Stokes-Einstein catalyst diffusivity whose own conditionality is stated "
-     "there; the length scales as 1/sqrt(k) over that same bracket",
+ "catalyst kinetic gains, body":
+     "the unstirred-to-rotating-cylinder gain of each sourced catalyst row, a ratio of two cells of the SAME row whose "
+     "only uncertain input is the declared rate constant; the band-edge re-solves of S5.7 bracket both cells, and the "
+     "gain's own range over the band is printed in Table S11",
+ "catalyst homocoupling sentence, body":
+     "a statement of which catalyst row clears 25 mA cm-2 and from which architecture on; the row's ceilings are cells of "
+     "the published matrix bracketed by the band-edge re-solves of S5.7, and no number of its own is printed",
  # 2026-09-05: Fig. 3a draws its convective profiles at the archetype MEDIAN films of Fig. 2b and
  # prints the exact linear-profile surface value 1 - i/i_lim for each; films are geometric
  # (delta_range has no bounds row), surfaces follow from them by identity.
@@ -181,12 +185,18 @@ EXEMPT = {
                                      "the per-row property sweep of Table S7, not a class band.",
  "Fig4b catalyst exception loading": "a page-verified INPUT (that row's 30 mM loading, Table S2), "
                                      "not a modelled quantity.",
- "catalyst loading range, body": "the range of page-verified inputs across the eleven catalyst rows "
+ "catalyst loading range, body": "the range of page-verified inputs across the catalyst rows "
                                  "(Table S2), not a modelled quantity.",
  "Fig4c flat slopes": "fitted log-log slopes of the solver's own output across the six architectures "
                       "-- a SHAPE descriptor of each mediated trace, not a ceiling -- recomputed by "
                       "model_medians from the matrix, the same source the figure draws.",
  "Fig4c steep slopes": "as above, for the six reactor-sensitive traces.",
+ # 2026-10-05: Section 4 now names the four nearly architecture-independent mediated rows and gives both
+ # slope ranges in one sentence (eleven mediated rows since the reaction audit re-typed three).
+ "mediated slopes, flat and steep":
+     "fitted log-log slopes of the solver's own output across the seven architectures -- a SHAPE descriptor "
+     "of each mediated trace, not a ceiling -- recomputed by model_medians from the matrix. What can move a "
+     "slope is the rate constant, and the tenfold sweep of S5.5 is where that is measured per row.",
  "Fig4d ceiling and cap ratio": "the DECLARED generic base case of Fig. 4 (d-f), not a measured "
                                 "system: the sensitivity of its two declared diffusivities is computed "
                                 "separately (S5.4: +/-25% moves the regime boundaries by at most 0.67 "
@@ -220,9 +230,11 @@ EXEMPT = {
  "catalyst span and exception, body": "a ratio of two architecture medians WITHIN the "
    "catalyst-carried subset plus the subset's own extremum; the individual medians are bracketed, "
    "the ratio moves numerator and denominator together.",
- "mediated intensification range, body": "the low and high ends of the same ratio, now stated as "
-   "one range in the manuscript: a ratio of two cells of ONE mediated row, so a property "
-   "perturbation moves numerator and denominator together and there is no band for it to sit in.",
+ # 2026-10-05: G-MSDERIVED pins the two ends separately, each at half its own last printed digit
+ "mediated intensification range, low end, body": "the low end of the mediated range: a ratio of two cells of ONE "
+   "mediated row, so a property perturbation moves numerator and denominator together and there is no band for it to sit in.",
+ "mediated intensification range, high end, body": "the high end of the mediated range: a ratio of two cells of ONE "
+   "mediated row, so a property perturbation moves numerator and denominator together and there is no band for it to sit in.",
  # 2026-09-09: the catalyst class under a finite rate constant (G-CATK, SI S5.7). The suite's first run
  # after the sweep failed here, correctly: three new pins, no declared decision for any of them.
  "catalyst finite-k uplift, body": "the TOP EDGE of a declared sensitivity band -- the class's largest "
@@ -253,7 +265,8 @@ EXEMPT = {
      "perturbation moves them, and the fifth is their median ratio. The sixth and seventh are the class median "
      "ceiling ratio at its lowest and highest architecture, a ratio of two medians in the SAME column, so a "
      "property perturbation moves numerator and denominator together; re-solved at both edges of the "
-     "architecture film band it reads 17-24 against the 17-23 printed at the central films.",
+     "architecture film band it reads 22-47 against the 24-47 printed at the central films (2026-10-05, on "
+     "the 11 mediated and 12 stoichiometric catalyst rows; chain rows are outside both medians).",
  "carrier loading overlap, body":
      "two carrier concentrations read from the exemplar papers and printed per row in Table S2 -- page-verified "
      "INPUTS, not model outputs, so no property perturbation can move them; data/ms_phrases.py asserts that no "

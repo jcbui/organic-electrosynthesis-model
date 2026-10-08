@@ -1,0 +1,50 @@
+{
+ "matrix_md5": "2735928761e7019ddc65ce0501871e9b",
+ "excell_walk_alt_scale": [
+  {
+   "delta_um": 50,
+   "i_mAcm2": 1571.0,
+   "ratio_fick": 2.005,
+   "pct_of_limit": 100,
+   "converged": true
+  },
+  {
+   "delta_um": 100,
+   "i_mAcm2": 673.4,
+   "ratio_fick": 1.719,
+   "pct_of_limit": 86,
+   "converged": false
+  },
+  {
+   "delta_um": 200,
+   "i_mAcm2": 202.2,
+   "ratio_fick": 1.032,
+   "pct_of_limit": 52,
+   "converged": false
+  }
+ ],
+ "note": "julia/run_mediated.jl re-solved in an isolated copy with c_ref = max(c_bulk, 0.01 c_max_bulk), no in-film maximum (data/solver_setting_sweeps.py)",
+ "n_cells": 84,
+ "bit_identical": 50,
+ "within_1e-9": 32,
+ "moved": [
+  {
+   "reaction": "Br- oxidation / electrophilic bromination",
+   "reactor": "Unstirred batch",
+   "published": 45.895068273806686,
+   "alternative": 44.87271889429373,
+   "rel_change": -0.02227580038477528,
+   "published_limiter": "plateau (c-control; c_red/cb 1.66e-03, c_sub/cb 4.9e-58)",
+   "alternative_limiter": "limit reached, solution ceases (c-control; c_red/cb 2.49e-02, c_sub/cb 1.4e-25)"
+  },
+  {
+   "reaction": "Br- oxidation / electrophilic bromination",
+   "reactor": "Stirred batch",
+   "published": 52.32076450545708,
+   "alternative": 52.26903535741636,
+   "rel_change": -0.0009886925110836886,
+   "published_limiter": "plateau (c-control; c_red/cb 1.66e-03, c_sub/cb 5.9e-49)",
+   "alternative_limiter": "limit reached, solution ceases (c-control; c_red/cb 2.69e-03, c_sub/cb 1.8e-39)"
+  }
+ ]
+}

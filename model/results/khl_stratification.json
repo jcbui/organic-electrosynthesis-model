@@ -4,15 +4,15 @@
  "shares": [
   {
    "cls": "Cyclization",
-   "set_pct": 14.6,
+   "set_pct": 18.8,
    "corpus_pct": 20.9,
-   "diff": -6.3
+   "diff": -2.1
   },
   {
    "cls": "C-C formation",
-   "set_pct": 22.9,
+   "set_pct": 20.8,
    "corpus_pct": 18.7,
-   "diff": 4.2
+   "diff": 2.1
   },
   {
    "cls": "C-N formation",
@@ -22,15 +22,15 @@
   },
   {
    "cls": "Functional group intraconversion",
-   "set_pct": 6.2,
+   "set_pct": 2.1,
    "corpus_pct": 8.9,
-   "diff": -2.6
+   "diff": -6.8
   },
   {
    "cls": "Other bond formation",
-   "set_pct": 4.2,
+   "set_pct": 2.1,
    "corpus_pct": 7.5,
-   "diff": -3.4
+   "diff": -5.5
   },
   {
    "cls": "Multicomponent coupling",
@@ -40,15 +40,15 @@
   },
   {
    "cls": "C-O formation",
-   "set_pct": 8.3,
+   "set_pct": 10.4,
    "corpus_pct": 5.9,
-   "diff": 2.5
+   "diff": 4.5
   },
   {
    "cls": "Oxidation",
-   "set_pct": 10.4,
+   "set_pct": 12.5,
    "corpus_pct": 5.2,
-   "diff": 5.2
+   "diff": 7.3
   },
   {
    "cls": "C-S formation",
@@ -68,5 +68,11 @@
    "corpus_pct": 3.1,
    "diff": 1.1
   }
- ]
+ ],
+ "drawn_as_reactant": {
+  "n_records": 25941,
+  "water": 5,
+  "hydrogen_peroxide": 0,
+  "methanol": 739
+ }
 }

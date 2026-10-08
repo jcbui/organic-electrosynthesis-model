@@ -26,5 +26,7 @@
   "infilm_pct_half_delta": 2.72014,
   "exported_pct_half_delta": 97.2799,
   "c_OX_at_op_M": 1.92248,
-  "propylene_free_zone_um": 119.604
+  "propylene_free_zone_um": 119.604,
+  "k_sweep_mesh_dev_pct": 0.00340178,
+  "k_sweep": [{"k_M": 10, "infilm_pct": 2.71749}, {"k_M": 100, "infilm_pct": 5.80022}, {"k_M": 1000, "infilm_pct": 12.2434}, {"k_M": 10000, "infilm_pct": 25.2032}, {"k_M": 100000, "infilm_pct": 48.8827}, {"k_M": 1e+06, "infilm_pct": 81.6405}]
 }

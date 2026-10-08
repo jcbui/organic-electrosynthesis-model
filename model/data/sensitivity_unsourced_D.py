@@ -57,6 +57,10 @@ JULIA = os.path.join(ROOT, "julia")
 IONS = os.path.join(HERE, "electrolyte_ions.csv")
 MATRIX = os.path.join(JULIA, "all50_np_matrix.csv")
 FACTORS = [("div3", 1.0 / 3.0), ("mul3", 3.0)]
+## The slots this sweep perturbs: every supporting-ion diffusivity data/apply_ion_diffusivities.py labels
+## as declared, both the class defaults and the declared values of another origin ("DECLARED VALUE"), so
+## no declared slot sits outside the sweep because of how its label reads.
+DECLARED_PREFIXES = ("UNSOURCED", "DECLARED CLASS DEFAULT", "DECLARED VALUE")
 
 
 def load(path):
@@ -71,7 +75,7 @@ def perturb(rows, factor):
     for r in rows:
         r = dict(r)
         for d_col, b_col in (("D_cat", "D_cat_basis"), ("D_an", "D_an_basis")):
-            if str(r.get(b_col, "")).startswith(("UNSOURCED", "DECLARED CLASS DEFAULT")):
+            if str(r.get(b_col, "")).startswith(DECLARED_PREFIXES):
                 r[d_col] = "%.4g" % (float(r[d_col]) * factor)
                 n += 1
         out.append(r)
@@ -90,47 +94,75 @@ def write(rows, path):
     io.open(path, "w", encoding="utf8", newline="").write(txt)
 
 
-def solve(tag):
-    log = os.path.join("/tmp", "dsens_%s.log" % tag)
-    with open(log, "w") as fh:
-        rc = subprocess.call(["julia", "run_all50_np.jl"], cwd=JULIA, stdout=fh, stderr=fh)
-    if rc != 0:
-        raise SystemExit("julia failed for case %s; see %s" % (tag, log))
-    return {(r["reaction"], r["reactor"]): float(r["i_np_mAcm2"])
-            for r in csv.DictReader(open(MATRIX))}
+def solve_iso(tag, rows):
+    """Re-solve the whole Nernst-Planck layer with the given ion table, in an isolated copy of julia/
+    and data/. Until 2026-10-05 the perturbed table was written over data/electrolyte_ions.csv and
+    the layer re-solved over the published matrix, with both restored from backups afterwards."""
+    import glob, tempfile
+    d = tempfile.mkdtemp(prefix="dsens_")
+    try:
+        os.makedirs(os.path.join(d, "julia")); os.makedirs(os.path.join(d, "data"))
+        for f in glob.glob(os.path.join(JULIA, "*.jl")):
+            shutil.copy(f, os.path.join(d, "julia"))
+        for f in ("reactions_50.csv", "carrier_charge.csv", "electrode_direction.csv"):
+            shutil.copy(os.path.join(HERE, f), os.path.join(d, "data"))
+        write(rows, os.path.join(d, "data", "electrolyte_ions.csv"))
+        log = os.path.join(tempfile.gettempdir(), "dsens_%s.log" % tag)
+        with open(log, "w") as fh:
+            rc = subprocess.call(["julia", "run_all50_np.jl"], cwd=os.path.join(d, "julia"), stdout=fh, stderr=fh)
+        if rc != 0:
+            raise SystemExit("julia failed for case %s; see %s" % (tag, log))
+        return {(r["reaction"], r["reactor"]): float(r["i_np_mAcm2"])
+                for r in csv.DictReader(open(os.path.join(d, "julia", "all50_np_matrix.csv")))}
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
 
 
 def main():
     base_rows = load(IONS)
     n_uns = sum(1 for r in base_rows for b in ("D_cat_basis", "D_an_basis")
-                if str(r.get(b, "")).startswith(("UNSOURCED", "DECLARED CLASS DEFAULT")))
+                if str(r.get(b, "")).startswith(DECLARED_PREFIXES))
     import re as _re
     pairs = set()
     for r in base_rows:
         for b in ("D_cat_basis", "D_an_basis"):
-            m = _re.search(r"no lambda0 for (\S+) in (\S+) in", str(r.get(b, "")))
-            if m and str(r.get(b, "")).startswith(("UNSOURCED", "DECLARED CLASS DEFAULT")):
+            # a basis may qualify the ion in parentheses ("no lambda0 for RCO2- (Et3NH+ carboxylate pair) in MeOH")
+            m = _re.search(r"no lambda0 for (\S+?)(?: \([^)]*\))? in (\S+) in", str(r.get(b, "")))
+            if m and str(r.get(b, "")).startswith(DECLARED_PREFIXES):
                 pairs.add((m.group(1), m.group(2)))
     print("declared-default diffusivity slots being perturbed: %d (%d ion/solvent pairs)" % (n_uns, len(pairs)))
+    if "--recount" in sys.argv:
+        ## Re-derive the slot and pair census over the stored sweep without re-solving: the census is descriptive and the
+        ## solves it labels do not depend on it. Refuses if the slot count no longer matches what was solved.
+        import json as _json
+        OUT_JSON = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results", "unsourced_D_sensitivity.json")
+        out = _json.load(open(OUT_JSON))
+        if out["n_slots"] != n_uns:
+            raise SystemExit("--recount: the stored sweep perturbed %d slots, electrolyte_ions.csv now declares %d -- re-run"
+                             % (out["n_slots"], n_uns))
+        out["n_pairs"], out["pairs"] = len(pairs), sorted(pairs)
+        with open(OUT_JSON, "w") as fh:
+            _json.dump(out, fh, indent=2)
+        print("recounted: %d slots, %d ion/solvent pairs" % (n_uns, len(pairs)))
+        return
     if not n_uns:
         print("nothing unsourced -- G-DSENS trivially PASSES"); return
 
-    shutil.copy(IONS, IONS + ".dsens_backup")
-    shutil.copy(MATRIX, MATRIX + ".dsens_backup")
-    try:
-        print("\nsolving BASE case ...")
-        base = solve("base")
-        results = {}
-        for tag, f in FACTORS:
-            rows, n = perturb(base_rows, f)
-            write(rows, IONS)
-            print("solving %s (x%.3f on %d slots) ..." % (tag, f, n))
-            results[tag] = solve(tag)
-    finally:
-        shutil.copy(IONS + ".dsens_backup", IONS)
-        shutil.copy(MATRIX + ".dsens_backup", MATRIX)
-        os.remove(IONS + ".dsens_backup"); os.remove(MATRIX + ".dsens_backup")
-        print("\n(restored the unperturbed table and matrix)")
+    ## BASE = the published layer. The two perturbed cases are solved side by side, each in its own copy.
+    base = {(r["reaction"], r["reactor"]): float(r["i_np_mAcm2"]) for r in csv.DictReader(open(MATRIX))}
+    if len(base) != 350:
+        raise SystemExit("julia/all50_np_matrix.csv holds %d cells, expected 350; re-solve it first" % len(base))
+    from concurrent.futures import ThreadPoolExecutor
+    def run(tf):
+        tag, f = tf
+        rows, n = perturb(base_rows, f)
+        print("solving %s (x%.3f on %d slots) ..." % (tag, f, n)); sys.stdout.flush()
+        return tag, solve_iso(tag, rows)
+    with ThreadPoolExecutor(max_workers=len(FACTORS)) as ex:
+        results = dict(ex.map(run, FACTORS))
+    for tag, res in results.items():
+        if len(res) != 350:
+            raise SystemExit("case %s solved %d cells, expected 350" % (tag, len(res)))
 
     RM = {"Unstirred batch": "natural", "Stirred batch": "stirred",
           "Recirculating flow cell": "flow", "RDE 1600 rpm": "rde",

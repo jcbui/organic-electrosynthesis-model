@@ -29,12 +29,22 @@ stands and the DISAGREEMENT IS DECLARED AND BOUNDED HERE instead of being quietl
 
 WHAT IS AT STAKE
 ----------------
-Two of the fifty rows run in DMA, both catalyst-carried:
-    Ni-catalyzed aryl amination (ArBr + amine)      best ceiling 2.75 mA cm-2
-    Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)               best ceiling 8.26 mA cm-2
-Both sit far below the 25 mA cm-2 threshold, and i_lim rises only as mu^p with p in [-1, -2/3].
-The test below sweeps the whole interval between the two candidate viscosities and asks whether
-ANY threshold count, or the 10-of-11 catalyst conclusion, moves anywhere inside it.
+Two of the fifty rows run in DMA, both catalyst-carried: the Ni-catalyzed aryl amination, carried at
+the floor k = 0, and the kilogram-scale Ni-XEC row, carried at its sourced k = 1e2 M-1 s-1 (S5.7).
+The test sweeps the whole interval between the two candidate viscosities and asks whether ANY
+threshold count (>= 25 or >= 50 mA cm-2), or the count of catalyst rows clearing 25 mA cm-2 anywhere,
+moves inside it.
+
+HOW THE DMA CELLS ARE SCALED
+----------------------------
+Every DMA cell is RE-SOLVED at each swept viscosity (data/dma_viscosity_ecprime.jl, run in a scratch
+copy, artifact results/dma_viscosity_ecprime.csv), and this script reads those solves. An earlier
+version scaled every DMA cell as mu^p, p the archetype's transport exponent. That is exact for a cell
+solved at k = 0 -- the whole Nernst-Planck problem scales with D -- and wrong for a cell solved as an
+EC' problem at a finite rate constant: on the kinetic plateau the current is n F C_cat (D k C_S)^(1/2),
+i.e. mu^(-1/2), so mu^-1 roughly doubled the Ni-XEC thin-film cells (12.4 -> 25.7 mA cm-2 in the
+microfluidic cell) where the solver gives 18.1. The re-solve is refused unless, at the printed
+viscosity, every one of its cells reproduces the published matrix.
 """
 import io
 import json
@@ -50,6 +60,8 @@ from sensitivity_solution_viscosity import ARCH, MU_EXP, THRESH, _assert_exponen
 
 MU_PRINTED = 1.927        # CRC 97th ed. p. 6-244, eta(25 C) column -- what the model carries
 MU_HOMOLOG = 0.927        # the figure the leading-digit reading would give; NOT adopted
+MU_KRUMGALZ = 0.919       # Krumgalz, J. Chem. Soc. Faraday Trans. 1 1983, 79, 571, Table 3 p. 578: 0.00919 P; NOT adopted
+MU_LOW = min(MU_HOMOLOG, MU_KRUMGALZ)   # the sweep's lower edge covers both readings
 OUT = os.path.join(ROOT, "results", "dma_viscosity_sensitivity.json")
 
 
@@ -65,6 +77,38 @@ ARCH_WORD = {"natural": "unstirred", "stirred": "stirred", "flow": "recirculatin
 def _out(path, neg):
     return path[:-5] + "_NEGCONTROL.json" if neg and path.endswith(".json") else path
 
+ECP = os.path.join(ROOT, "results", "dma_viscosity_ecprime.csv")
+THRESHOLDS = (25.0, 50.0)
+
+
+def _resolved_cells(m, dma):
+    """{mu: {reaction: {arch: i_lim}}} from the scratch re-solve, after the control: at the printed viscosity each
+    re-solved cell must reproduce the published matrix to its printed precision (four decimals, so 5e-5 absolute)."""
+    if not os.path.exists(ECP):
+        raise SystemExit("G-DMAMU: %s is absent; run data/dma_viscosity_ecprime.jl in a scratch copy" % ECP)
+    ec = pd.read_csv(ECP)
+    out = {}
+    for _, r in ec.iterrows():
+        out.setdefault(round(float(r.mu_mPas), 6), {}).setdefault(r.reaction, {})[r.reactor_key] = float(r.i_ec_mAcm2)
+    want_rx = set(m[dma].reaction)
+    for mu, d in out.items():
+        if set(d) != want_rx or any(set(v) != set(ARCH) for v in d.values()):
+            raise SystemExit("G-DMAMU: the re-solve at mu = %g does not cover the %d DMA rows x %d architectures"
+                             % (mu, len(want_rx), len(ARCH)))
+    base = out.get(round(MU_PRINTED, 6))
+    if base is None:
+        raise SystemExit("G-DMAMU: the re-solve carries no solve at the printed viscosity %.3f" % MU_PRINTED)
+    bad = []
+    for _, r in m[dma].iterrows():
+        for a in ARCH:
+            if abs(base[r.reaction][a] - r[a]) > 5.0001e-5:
+                bad.append("%s/%s: re-solve %.6g vs published %.6g" % (r.reaction[:30], a, base[r.reaction][a], r[a]))
+    if bad:
+        raise SystemExit("G-DMAMU: the re-solve does not reproduce the published matrix at the printed viscosity "
+                         "(stale artifact?):\n  " + "\n  ".join(bad))
+    return out
+
+
 def main(neg=False):
     _assert_exponents()
     rx = pd.read_csv(os.path.join(HERE, "reactions_50.csv"))
@@ -73,80 +117,98 @@ def main(neg=False):
     dma = m.solvent.str.strip() == "DMA"
     if int(dma.sum()) != 2:
         raise SystemExit("expected 2 DMA rows, found %d" % int(dma.sum()))
+    solved = _resolved_cells(m, dma)
+    mus = sorted(solved, reverse=True)
+    if abs(mus[-1] - MU_LOW) > 1e-9:
+        raise SystemExit("G-DMAMU: the re-solve's lowest viscosity is %g, not %g (the lower of the homolog reading and "
+                         "Krumgalz's Table 3 value)" % (mus[-1], MU_LOW))
 
-    lo = MU_HOMOLOG if not neg else MU_PRINTED / 200.0   # control: an absurd viscosity
-    base_counts = {a: int((m[a] >= THRESH).sum()) for a in ARCH}
-    base_cat = int((m[m.carrier_type == "catalyst"][ARCH].max(axis=1) >= THRESH).sum())
+    cat = (m.carrier_type == "catalyst")
+    def counts(s):
+        return {str(int(t)): {a: int((s[a] >= t).sum()) for a in ARCH} for t in THRESHOLDS}
+    def cat_clear(s):
+        return int((s[cat][ARCH].max(axis=1) >= THRESH).sum())
+    base_counts = counts(m)
+    base_cat = cat_clear(m)
 
-    print("  CRC p. 6-244 prints eta(25 C) = %.3f mPa s for DMA; DMF, one CH2 lighter, is 0.794"
-          % MU_PRINTED)
-    print("  in the same column of the same page. Sweeping mu(DMA) over [%.3f, %.3f] mPa s:\n"
-          % (lo, MU_PRINTED))
+    print("  CRC p. 6-244 prints eta(25 C) = %.3f mPa s for DMA; DMF, one CH2 lighter, is 0.794" % MU_PRINTED)
+    print("  in the same column of the same page. Every DMA cell RE-SOLVED at mu(DMA) in %s mPa s:\n"
+          % ", ".join("%.3f" % u for u in mus))
     print("  %-46s %-9s %s" % ("row", "mu", "  ".join("%8s" % a for a in ARCH)))
-    rows, worst = [], []
-    for mu in (MU_PRINTED, (MU_PRINTED + lo) / 2.0, lo):
-        f = mu / MU_PRINTED                      # i_lim scales as f**MU_EXP[arch]
+    sweep = []
+    if neg:
+        # control: an absurd viscosity, every DMA cell scaled as mu^p (exact at k = 0, an overestimate on the plateau);
+        # the counting and declaring logic below must see a count move
+        lo = MU_PRINTED / 200.0
+        cases = [(lo, {r.reaction: {a: r[a] * (lo / MU_PRINTED) ** MU_EXP[a] for a in ARCH}
+                       for _, r in m[dma].iterrows()})]
+    else:
+        cases = [(mu, solved[mu]) for mu in mus]
+    for mu, cells in cases:
         s = m.copy()
-        for a in ARCH:
-            s.loc[dma, a] = s.loc[dma, a] * (f ** MU_EXP[a])
+        for rxn, row in cells.items():
+            for a in ARCH:
+                s.loc[s.reaction == rxn, a] = row[a]
         for _, r in s[dma].iterrows():
-            print("  %-46s %-9.3f %s" % (r.reaction[:46], mu,
-                                         "  ".join("%8.2f" % r[a] for a in ARCH)))
-        counts = {a: int((s[a] >= THRESH).sum()) for a in ARCH}
-        cat = int((s[s.carrier_type == "catalyst"][ARCH].max(axis=1) >= THRESH).sum())
-        rows.append({"mu": mu, "counts": counts, "catalyst_clearing": cat})
-        if counts != base_counts or cat != base_cat:
-            worst.append((mu, counts, cat))
+            print("  %-46s %-9.3f %s" % (r.reaction[:46], mu, "  ".join("%8.2f" % r[a] for a in ARCH)))
+        best = max(((r.reaction, a, float(r[a])) for _, r in s[dma].iterrows() for a in ARCH), key=lambda x: x[2])
+        sweep.append({"mu": mu, "counts": counts(s), "catalyst_clearing": cat_clear(s),
+                      "dma_cells": {r.reaction: {a: float(r[a]) for a in ARCH} for _, r in s[dma].iterrows()},
+                      "dma_best": {"reaction": best[0], "arch": best[1], "i_lim": best[2]}})
         print()
 
-    # 2026-09-11: which counts move, by architecture, at each swept viscosity -- the registry row that
-    # publishes this sweep must DECLARE each of them (existence alone is no longer the verdict: the
-    # seven sourced-k catalyst rows put the Ni-XEC row close enough to 25 mA cm-2 that the homolog
-    # reading carries it over in the thin films, and a sensitivity the row states is what the standard asks for)
     moves = []
-    for rr in rows:
-        for a in ARCH:
-            d = rr["counts"][a] - base_counts[a]
-            if d:
-                moves.append({"mu": rr["mu"], "arch": a, "delta": d})
-    json.dump({"mu_printed": MU_PRINTED, "mu_alternative_not_adopted": MU_HOMOLOG,
-               "adopted": MU_PRINTED, "swept": rows, "base_counts": base_counts,
-               "base_catalyst_clearing": base_cat, "count_moves": moves,
-               "source": "CRC 97th ed. 2016, Sect. 6 'Viscosity of Liquids', p. 6-244, "
-                         "eta(25 C) column"},
-              io.open(_out(OUT, neg), "w", encoding="utf8"), indent=1)
+    for rr in sweep:
+        for t in rr["counts"]:
+            for a in ARCH:
+                d = rr["counts"][t][a] - base_counts[t][a]
+                if d:
+                    moves.append({"mu": rr["mu"], "threshold": float(t), "arch": a, "delta": d})
+    cat_moves = [rr["mu"] for rr in sweep if rr["catalyst_clearing"] != base_cat]
+    # the scaling the re-solve replaces, kept so the artifact records what it would have said
+    naive = {}
+    for _, r in m[dma].iterrows():
+        naive[r.reaction] = {a: float(r[a] * (MU_HOMOLOG / MU_PRINTED) ** MU_EXP[a]) for a in ARCH}
+    out = {"mu_printed": MU_PRINTED, "mu_alternative_not_adopted": MU_HOMOLOG, "mu_krumgalz": MU_KRUMGALZ,
+           "mu_low": MU_LOW, "adopted": MU_PRINTED,
+           "method": "every DMA cell re-solved at each swept viscosity (data/dma_viscosity_ecprime.jl); "
+                     "carrier, product and substrate D scale as 1/mu, nu as mu, supporting ions and k held",
+           "dma_rows": {r.reaction: {"carrier_type": r.carrier_type} for _, r in m[dma].iterrows()},
+           "swept": sweep, "base_counts": base_counts, "base_catalyst_clearing": base_cat,
+           "n_catalyst_rows": int(cat.sum()), "count_moves": moves, "catalyst_clearing_moves_at": cat_moves,
+           "mu_power_law_at_homolog": naive,
+           "source": "CRC 97th ed. 2016, Sect. 6 'Viscosity of Liquids', p. 6-244, eta(25 C) column"}
+    json.dump(out, io.open(_out(OUT, neg), "w", encoding="utf8"), indent=1)
 
     print("  threshold counts at the printed value: %s" % base_counts)
-    print("  catalyst rows clearing %.0f in >=1 architecture: %d of 11" % (THRESH, base_cat))
+    print("  catalyst rows clearing %.0f in >=1 architecture: %d of %d" % (THRESH, base_cat, int(cat.sum())))
     if neg:
         print("\nNEGATIVE CONTROL: mu(DMA) driven to %.4f mPa s, %.0fx below the printed value, so"
-              % (lo, MU_PRINTED / lo))
+              % (cases[0][0], MU_PRINTED / cases[0][0]))
         print("  at least one count MUST move.")
-        print("G-DMAMU control: %s" % ("GOOD (a count moved: %s)" % worst[-1][1] if worst
+        print("G-DMAMU control: %s" % ("GOOD (counts moved: %s)" % moves if moves
                                        else "BAD -- test is inert, no count moved"))
-        return 0 if worst else 1
-    if worst:
+        return 0 if moves else 1
+    if moves or cat_moves:
         # a movement is allowed only while the registry row that publishes this sweep DECLARES it
-        # (the row is built from this gate's artifact by data/build_param_tables.py; G-REGEN keeps
-        # the two in step). The check reads the shipped registry, not the builder.
         import csv
         reg = list(csv.DictReader(io.open(os.path.join(HERE, "parameters_provenance.csv"), encoding="utf8")))
-        row = [r for r in reg if r.get("solvent", "") == "DMA" and "viscosity" in r.get("parameter", "").lower()] or \
-              [r for r in reg if "DMA" in r.get("parameter", "") and "mu" in r.get("parameter", "").lower()]
+        row = [r for r in reg if r.get("parameter", "") == "DMA: mu (25 C)"]
         text = " ".join(r.get("sensitivity", "") for r in row)
         undeclared = sorted({mv["arch"] for mv in moves if ARCH_WORD[mv["arch"]] not in text})
         if undeclared or not row:
             print("\nG-DMAMU: FAIL -- a published count moves inside the interval between the printed viscosity "
                   "and its homolog reading (%s) and the DMA viscosity registry row does not declare it for: %s"
-                  % (worst, undeclared or "(no DMA viscosity row found)"))
+                  % (moves, undeclared or "(no DMA viscosity row found)"))
             return 1
-        print("\nG-DMAMU: PASS -- the printed %.3f mPa s is carried; inside the interval down to %.3f the >=%.0f "
-              "count moves in %s, and the DMA viscosity row of the registry declares each movement (Table S7b)."
-              % (MU_PRINTED, lo, THRESH, ", ".join(ARCH_WORD[a] for a in sorted({m["arch"] for m in moves}))))
+        print("\nG-DMAMU: PASS -- the printed %.3f mPa s is carried; inside the interval down to %.3f a count moves "
+              "(%s), and the DMA viscosity row of the registry declares each movement (Table S7b)."
+              % (MU_PRINTED, MU_LOW, moves))
         return 0
-    print("\nG-DMAMU: PASS -- the printed %.3f mPa s is carried, and nothing published depends on "
-          "it: across the whole interval down to %.3f every architecture's >=%.0f count and the "
-          "10-of-11 catalyst conclusion are unchanged." % (MU_PRINTED, lo, THRESH))
+    b = sweep[-1]["dma_best"]
+    print("\nG-DMAMU: PASS -- the printed %.3f mPa s is carried; re-solving every DMA cell across the whole interval "
+          "down to %.3f moves no >=25 or >=50 count and leaves %d catalyst row(s) clearing 25 (best DMA cell at the "
+          "lowest swept viscosity: %s, %s, %.2f mA cm-2)." % (MU_PRINTED, MU_LOW, base_cat, b["reaction"], b["arch"], b["i_lim"]))
     return 0
 
 

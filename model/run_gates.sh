@@ -110,6 +110,18 @@ run () {  # run <label> <command...>
 echo "=== structural gates ==="
 run G-ORPHAN   $PY data/check_orphans.py
 run G-NAMES    $PY data/check_reaction_names.py
+# G-STOICH (2026-10-05): the balanced reaction behind every row (SI Table S10). The builder asserts atom
+# and charge balance, that each row's electrons are the reaction table's n, and that the electrode is
+# the one electrode_direction.csv carries; it needs RDKit, and a missing interpreter is a FAIL, not a skip.
+RDPY=/opt/anaconda3/envs/echem_analysis/bin/python
+run G-STOICH   $RDPY data/build_reaction_stoichiometry.py --check
+# G-RXNTABLE (2026-10-05): SI Table S10 audited AS BUILT -- compositions recomputed by a second parser that
+# shares nothing with RDKit, and the printed equations, charges, electron counts and electrodes read back
+# out of both SI documents.
+run G-RXNTABLE $RDPY data/check_reaction_table.py
+# G-KBASIS (2026-10-05): every rate constant the solvers use has a record of the system it was MEASURED on
+# (data/rate_constant_basis.csv); the record's k equals the solver's and SI Table S11 reads back from both builds.
+run G-KBASIS $PYFIG data/check_rate_constant_basis.py
 
 echo "=== provenance gates ==="
 run G-COND     $PY data/check_conditions.py
@@ -155,6 +167,7 @@ run G-DILUTE-SI $PYFIG data/dilute_theory_stratify.py --check-si
 run G-ECPANEL   $PYFIG data/ecprime_panel_sensitivity.py
 run G-HINT      $PYFIG data/hint_series_bound.py
 run G-THERMGEO  $PYFIG data/thermal_geometry_sensitivity.py
+run G-THERMAXIS $PYFIG data/thermal_axis_sweeps.py
 run G-THERMROWS $PYFIG data/check_thermal_rows.py
 run G-DERIVE    $PYFIG data/check_derived_inputs.py
 run G-SCRANGE   $PYFIG data/schmidt_extrapolation.py
@@ -180,10 +193,22 @@ run G-DSUBSENS-REG $PYFIG data/sensitivity_substrate_D.py --check-registry
 # Fast tier re-checks the STORED result (control vs the published matrix, no unresolved cell);
 # the 45-minute Julia sweep that produces it runs under --all as G-CATK-SWEEP.
 run G-CATK $PYFIG data/catalyst_ec_sensitivity.py
+# G-PLATEAU (2026-10-05): mediated cells whose concentration-control plateau stops short of full depletion,
+# each walked on to the 1e-3 criterion in an isolated solve. Fast tier re-checks the STORED result against
+# the matrix; the solve itself (a few minutes) runs under --all as G-PLATEAU-SOLVE.
+run G-PLATEAU $PYFIG data/plateau_continuation.py --check
 run G-FREECONV  $PYFIG data/free_convection_delta.py
 run G-SIBIB     $PYFIG data/verify_si_bibliography.py
 run G-TRANSCRIBE $PYFIG data/check_transcription.py
 run G-CATD      $PYFIG figs/analysis_catalyst_D_sensitivity.py
+# chemistry audit pass 5: the surrogate-anchored catalyst diffusivities (S9.0), the cooling-class verdicts of S6.2 against
+# the Table S4 bands, and Reid's specific Le Bas increments with the ferrocene benchmark (S3.1); each writes the artifact
+# the SI reads
+run G-ANCHOR    $PYFIG figs/anchored_diffusivity.py
+run G-COOLFLIP  $PYFIG data/thermal_conditional_flips.py
+run G-BORATE   $PYFIG data/hmf_buffer_speciation.py
+run G-PYH      $PYFIG data/pyridinium_bracket.py
+run G-LEBASINC  $RDPY data/lebas_increment_sensitivity.py
 run G-KAPPAT    $PYFIG figs/analysis_kappaT_sensitivity.py
 run G-KAPPA     $PYFIG figs/analysis_kappa_value_sensitivity.py
 run G-COVER     $PYFIG data/audit_number_coverage.py
@@ -212,6 +237,7 @@ run G-DILUTE-SI-NEG $PYFIG data/dilute_theory_stratify.py --check-si --negative-
 run G-ECPANEL-NEG $PYFIG data/ecprime_panel_sensitivity.py --negative-control
 run G-HINT-NEG  $PYFIG data/hint_series_bound.py --negative-control
 run G-THERMGEO-NEG $PYFIG data/thermal_geometry_sensitivity.py --negative-control
+run G-THERMAXIS-NEG $PYFIG data/thermal_axis_sweeps.py --negative-control
 run G-THERMROWS-NEG $PYFIG data/check_thermal_rows.py --negative-control
 run G-DERIVE-NEG $PYFIG data/check_derived_inputs.py --negative-control
 run G-SCRANGE-NEG $PYFIG data/schmidt_extrapolation.py --negative-control
@@ -219,6 +245,8 @@ run G-GHOST-NEG $PYFIG data/check_ghost_refs.py --negative-control
 run G-FIGRUN-NEG $PYFIG data/check_figures_render.py --negative-control
 run G-NUMCLOSE-NEG $PYFIG data/check_number_closure.py --negative-control
 run G-XDOC-NEG  $PYFIG data/check_cross_document.py --negative-control
+run G-COOLFLIP-NEG $PYFIG data/thermal_conditional_flips.py --negative-control
+run G-LEBASINC-NEG $RDPY data/lebas_increment_sensitivity.py --negative-control
 run G-PROVPRINT-NEG $PYFIG data/check_printed_provenance.py --negative-control
 run G-SIFRESH-NEG $PYFIG data/check_si_fresh.py --negative-control
 run G-SICOND-NEG $PYFIG data/check_si_condensed.py --negative-control
@@ -237,15 +265,31 @@ run G-ANACONST-NEG $PY data/check_analysis_constants.py --negative-control
 run G-REGEN-NEG $PYFIG data/check_regenerates.py --negative-control
 run G-DSUBSENS-REG-NEG $PYFIG data/sensitivity_substrate_D.py --check-registry --negative-control
 run G-CATK-NEG $PYFIG data/catalyst_ec_sensitivity.py --negative-control
+run G-STOICH-NEG $RDPY data/build_reaction_stoichiometry.py --negative-control
+run G-RXNTABLE-NEG $RDPY data/check_reaction_table.py --negative-control
+run G-KBASIS-NEG $PYFIG data/check_rate_constant_basis.py --negative-control
+run G-PLATEAU-NEG $PYFIG data/plateau_continuation.py --negative-control
 run G-DIFF-VAL  $PY data/build_ion_diffusivities.py --validate
 
 if [ "${1:-}" = "--all" ]; then
   echo "=== sensitivity sweeps (slow: each re-solves the matrix many times) ==="
+  # pass 16: NEGLIGIBLE_C and the residual reference re-measured on the production path, isolated copies (~30 min)
+  run G-SOLVSET  $PYFIG data/solver_setting_sweeps.py
   run G-DSENS  $PY data/sensitivity_unsourced_D.py
   run G-ZSENS  $PY data/sensitivity_carrier_charge.py
+  # 2026-10-06: the Ni homocoupling's carrier charge at its adopted k (z = +1, +2; ~15 min), read by Table S2 and the registry
+  run G-HOMOZ  $PY data/homocoupling_charge_sensitivity.py
+  # 2026-10-06 (chemistry audit, pass 4): four sweeps whose results the registry and the SI now read rather than type --
+  # the cross-coupling's charge at its sourced k, the doubled solver-species diffusivities, the medium-transfer brackets
+  # of three declared diffusivities, and the trace seed of the electrogenerated form (each a few minutes in scratch copies)
+  run G-XECZ    $PY data/xec_charge_sensitivity.py
+  run G-SPEC2X  $PY data/sensitivity_solver_species_2xD.py
+  run G-MEDXFER $PY data/sensitivity_medium_transfer.py
+  run G-TRACE   $PY data/sensitivity_trace_init.py
   run G-KSENS  $PY data/sensitivity_rate_constants.py
   run G-DSUBSENS $PY data/sensitivity_substrate_D.py 0.7 1.3
   run G-CATK-SWEEP $PYFIG data/catalyst_ec_sensitivity.py --sweep
+  run G-PLATEAU-SOLVE $PYFIG data/plateau_continuation.py
   # 2026-09-11: the seven sourced-k catalyst rows and the Fig. 6h film sweep (julia/run_catalyst_sourced.jl,
   # run_catalyst_delta.jl, ~30 min); the fast-tier G-CATK reads their artifacts and checks them against the sweep grid
   run G-CATK-SOURCED $PYFIG data/catalyst_ec_sensitivity.py --sweep-sourced
@@ -255,7 +299,8 @@ if [ "${1:-}" = "--all" ]; then
   run G-EXEMPLAR2 $PY data/verify_exemplars_full.py
 else
   echo "=== sensitivity sweeps SKIPPED (pass --all to run them) ==="
-  skip=8
+  skip=$(sed -n '/^if \[ "\${1:-}" = "--all" \]; then/,/^else/p' "$(basename "$0")" | grep -c '^  run ')   # counted, never typed
+  [ "$skip" -gt 0 ] || { echo "run_gates.sh: the slow-tier skip count read 0 -- the --all block header changed"; exit 1; }
 fi
 
 echo

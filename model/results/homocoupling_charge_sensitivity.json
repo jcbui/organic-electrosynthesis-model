@@ -1,0 +1,95 @@
+{
+ "reaction": "Cathodic Ni aryl-aryl homocoupling",
+ "k_adopted": 100.0,
+ "z_carried": 0,
+ "carried": {
+  "natural": 18.59,
+  "stirred": 20.893,
+  "flow": 34.286,
+  "anec": 55.587,
+  "micro": 65.613,
+  "rde": 68.284,
+  "rce": 70.227
+ },
+ "alternatives": {
+  "1": {
+   "natural": 29.988,
+   "stirred": 34.142,
+   "flow": 63.06,
+   "anec": 156.948,
+   "micro": 145.674,
+   "rde": 137.388,
+   "rce": 134.002
+  },
+  "2": {
+   "natural": 37.763,
+   "stirred": 43.019,
+   "flow": 79.912,
+   "anec": 219.282,
+   "micro": 310.965,
+   "rde": 275.038,
+   "rce": 251.133
+  }
+ },
+ "count_moves": {
+  "1": [
+   {
+    "arch": "natural",
+    "threshold": 25,
+    "from": 12,
+    "to": 13
+   },
+   {
+    "arch": "stirred",
+    "threshold": 25,
+    "from": 14,
+    "to": 15
+   },
+   {
+    "arch": "flow",
+    "threshold": 50,
+    "from": 12,
+    "to": 13
+   }
+  ],
+  "2": [
+   {
+    "arch": "natural",
+    "threshold": 25,
+    "from": 12,
+    "to": 13
+   },
+   {
+    "arch": "stirred",
+    "threshold": 25,
+    "from": 14,
+    "to": 15
+   },
+   {
+    "arch": "flow",
+    "threshold": 50,
+    "from": 12,
+    "to": 13
+   }
+  ]
+ },
+ "ratio": {
+  "1": [
+   1.613,
+   2.823
+  ],
+  "2": [
+   2.031,
+   4.739
+  ]
+ },
+ "clears25_every_arch": {
+  "1": true,
+  "2": true
+ },
+ "clears25_from": {
+  "1": "natural",
+  "2": "natural",
+  "0": "flow"
+ }
+}

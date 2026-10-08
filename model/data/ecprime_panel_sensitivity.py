@@ -13,7 +13,7 @@ and D_S. Setting delta/x_k = 1 and delta/x_k = gamma for the crossing rate const
     k1 = D_ox / (C_S delta^2)                         -- shuttle | kinetic boundary
     k2 = gamma^2 k1 = (n_S s_red)^2 D_S^2 C_S D_ox / (D_red^2 C_med^2 delta^2)   -- kinetic | total-catalysis boundary
 
-(Eqs. S12-S15; D_ox = D_red = D_med for the base case and for two of the three rows, the Hofmann row's Br2 and Br- differ).
+(Eqs. S12-S15; D_ox = D_red = D_med for the base case and for two of the three rows; the bromination row's Br2 and Br- differ).
 With both mediator forms scaled together, k1 ~ D_med^(+1) and k2 ~ D_S^(+2) D_med^(-1): the two boundaries do NOT move
 together, the lower one is blind to D_S and the upper one is twice as sensitive to D_S as to anything else. The exponents are MEASURED from the formulas below rather
 than asserted from this docstring.
@@ -23,7 +23,8 @@ TWO SUBJECTS, SINCE v90 (2026-09-11)
 (1) The SI's own base case (S5.4, Fig. H; julia/run_ecprime.jl): D_med = 6e-10 and D_S = 1e-9 m2/s are DECLARED (state C,
     Table S7 category 4), so the SI states how far the boundaries move across +/-25 % and how far the Fig. H rate constants
     sit from them. The constants are parsed out of run_ecprime.jl, never retyped.
-(2) Main-text Fig. 6d-f, which since v90 draws three REAL mediated rows (Hofmann / ACT / NHPI) at their cited k on the
+(2) Main-text Fig. 6d-f, which since v90 draws three REAL mediated rows (anisole bromination / ACT / NHPI; the bromination row replaced the
+    Hofmann rearrangement on 2026-10-06, when the Hofmann constant became the measured 3.3 M-1 s-1) at their k on the
     36.2 um ANEC film (julia/run_mediated_profiles.jl). Their diffusivities are the rows' own (Table S6). The regime label
     on each panel is assigned FROM THE SOLVE (substrate exhausted at the wall / most of the activated mediator escaping /
     neither) and the same solver re-solves every row with D_med and D_S scaled by 0.75 and 1.25 and writes the label it
@@ -85,12 +86,33 @@ def boundaries(base):
     return rep
 
 
+## Three labels along the kinetic axis (2026-10-05), as julia/run_mediated_profiles.jl names them: the share of the activated
+## mediator consumed inside the film is 1 - 1/cosh(delta/x_k) for a first-order step with the substrate in excess, so one
+## third and two thirds are delta/x_k = acosh(3/2) and acosh(3), i.e. k = A_LO k1 and k = A_HI k1 (k1 is delta = x_k).
+A_LO, A_HI = math.acosh(1.5) ** 2, math.acosh(3.0) ** 2
+
+
 def margin(k_M, rep):
+    """Decades to the nearest label boundary: the two edges of the mixed band (both move as k1) and k2."""
+    return min(abs(math.log10(k_M / (A_LO * rep["k1"]["base"]))), abs(math.log10(k_M / (A_HI * rep["k1"]["base"]))),
+               abs(math.log10(k_M / rep["k2"]["base"])))
+
+
+def margin_two(k_M, rep):
+    """The SI's base case (Fig. H) is read against the two analytic crossings k1 and k2 themselves."""
     return min(abs(math.log10(k_M / rep["k1"]["base"])), abs(math.log10(k_M / rep["k2"]["base"])))
 
 
-def analytic_regime(k_M, rep):
+def analytic_two(k_M, rep):
     return "mediator-limited" if k_M < rep["k1"]["base"] else ("substrate-limited" if k_M > rep["k2"]["base"] else "kinetic")
+
+
+def analytic_regime(k_M, rep):
+    if k_M < A_LO * rep["k1"]["base"]:
+        return "mediator-limited"
+    if k_M > rep["k2"]["base"]:
+        return "substrate-limited"
+    return "kinetic" if k_M > A_HI * rep["k1"]["base"] else "mixed"
 
 
 def main(neg=False):
@@ -120,13 +142,13 @@ def main(neg=False):
     gamma0 = base["D_S"] * base["C_S"] / (base["D_med"] * base["C_med"])
     rep0 = boundaries(b0)
     figh_k = sorted(set(pd.read_csv(FIGH_PROFILES).k_M.astype(float))) if os.path.exists(FIGH_PROFILES) else []
-    m0 = [margin(k, rep0) for k in figh_k]
+    m0 = [margin_two(k, rep0) for k in figh_k]
     print("\n  base case (julia/run_ecprime.jl, the SI's S5.4 / Fig. H): D_med %.3g  D_S %.3g m2/s ; C_med %.4g  C_S %.4g mol/m3 ; delta %.4g m ; gamma %.2f"
           % (base["D_med"], base["D_S"], base["C_med"], base["C_S"], base["delta"], gamma0))
     for f in ("k1", "k2"):
         print("    %s: %.4g M-1 s-1, band [%.4g, %.4g] = %.2f decades" % (f, rep0[f]["base"], rep0[f]["lo"], rep0[f]["hi"], rep0[f]["span_decades"]))
     for k, m in zip(figh_k, m0):
-        print("    Fig. H k = %-8g -> %-18s nearest boundary %.2f decades away" % (k, analytic_regime(k, rep0), m))
+        print("    Fig. H k = %-8g -> %-18s nearest boundary %.2f decades away" % (k, analytic_two(k, rep0), m))
     worst0 = max(rep0[f]["span_decades"] for f in rep0)
 
     # (3) the three rows of main-text Fig. 6d-f: solved labels, analytic labels, margins, and the re-solved labels

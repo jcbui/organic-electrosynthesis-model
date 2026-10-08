@@ -54,7 +54,7 @@ HALO = [_pe.withStroke(linewidth=2.4, foreground="white")]   # 2026-09-12 (autho
 # each is placed in a gutter the data cannot enter.
 from thermal_model import (TAMB, H_EXT, SIGMA_BEAKER, GAP_BEAKER, GAP_MICRO,
                            SOLVENTS as _SOLV, REACTORS,
-                           COOLING_BANDS, U_passive, q_Wcm2, i_boil, U_required)
+                           COOLING_BANDS, U_passive, q_Wcm2, i_boil, U_required, U_liquid)
 
 TICK, ANN, AX, SMALL = 7.0, 7.0, 8.5, 6.6   # 2026-09-08: nothing under 6.5 pt at 6.5 in printed width
 BLUE = rainbow_2[1]; LBLUE = rainbow_2[2]; RED = rainbow_2[5]
@@ -307,9 +307,10 @@ cx.set_xlabel("interelectrode gap (mm)", fontsize=AX)
 # because the question this panel asks is what intensification costs to cool.
 INT = REACTORS[2:]
 yd = np.arange(len(INT))[::-1]
-_BAND_NAME = {"natural convection\n(passive)": "natural\nconvection", "forced air": "forced\nair",
-              "liquid cold plate\n(PEM-class)": "liquid\ncold plate"}
-for nm, lo, hi, cshade in COOLING_BANDS:
+_BAND_NAME = {"natural convection\n(passive)": "natural\nconvection"}
+# 2026-10-06: liquid cooling is drawn per row, as the range each architecture's own cooler supplies (a water jacket on
+# a vessel cell, a cooled plate behind the stack's electrode; thermal_model.U_liquid), never as one shared band
+for nm, lo, hi, cshade in [b for b in COOLING_BANDS if not b[0].startswith("liquid")]:
     dx.axvspan(lo, hi, color=cshade, alpha=0.55, zorder=0)
     dx.text(np.sqrt(lo * hi), 0.985, _BAND_NAME.get(nm, nm.replace("\n", " ")),
             transform=dx.get_xaxis_transform(), fontsize=SMALL, color="0.35", ha="center",
@@ -327,9 +328,13 @@ for lab, elyte, kap, Tb, prov, col in sorted(SOLVENTS, key=lambda _s: (_MK[_s[0]
 avail = [U_passive(sig, hi) for rl, L, sig, hi, iop in INT]
 for _y0, _a0 in zip(yd, avail):
     dx.plot([_a0, _a0], [_y0 - 0.30, _y0 + 0.30], color=_DK, lw=1.7, zorder=5, solid_capstyle="butt")
-_avail_handle = _L2Da([0], [0], color=_DK, lw=1.7, label="this cell, passive")
+_avail_handle = _L2Da([0], [0], color=_DK, ls="none", marker="|", ms=9, mew=1.7, label="this cell, passive")   # the plotted mark is a vertical tick (chemistry audit pass 10)
+liq = [U_liquid(r) for r in INT]
+for _y0, (_lo, _hi) in zip(yd, liq):
+    dx.plot([_lo, _hi], [_y0, _y0], color="0.62", lw=6.0, alpha=0.55, zorder=2, solid_capstyle="butt")
+_liq_handle = _L2Da([0], [0], color="0.62", lw=6.0, alpha=0.55, label="liquid-cooled")
 dx.set_xscale("log")
-_allr = [v for _l in req for v in req[_l]] + avail
+_allr = [v for _l in req for v in req[_l]] + avail + [h for l, h in liq]
 # the right edge reaches the TOP of the highest cooling band, so no band is cut off under
 # its own name; the left edge clears the smallest duty
 dx.set_xlim(10 ** (np.log10(min(_allr)) - 0.30),
@@ -343,14 +348,15 @@ dx.tick_params(axis="y", which="minor", left=False, right=False)
 dx.xaxis.set_minor_locator(_LL(base=10, subs=tuple(np.arange(2, 10) * .1), numticks=99))
 dx.set_xlabel("$U'$ needed to stay below boiling\n(W cm$^{-2}$ K$^{-1}$)", fontsize=AX)
 # (d) carries the solvents too rather than sending the reader back to (b) (author, 2026-09-12)
-_lgd = dx.legend(handles=_solv_handles + [_avail_handle], loc="lower left", fontsize=ANN, ncol=3,
-                 frameon=True, handletextpad=0.35, columnspacing=0.9, borderpad=0.42,
+_lgd = dx.legend(handles=_solv_handles + [_avail_handle, _liq_handle], loc="lower left", fontsize=ANN, ncol=3,
+                 frameon=True, handletextpad=0.6, columnspacing=0.9, borderpad=0.42,
                  labelspacing=0.3, borderaxespad=0.4)
 _lgd.get_frame().set(facecolor="white", edgecolor="0.75", linewidth=0.6); _lgd.set_zorder(7)
 print("(d) cooling duty at the transport ceiling, %d architectures" % len(INT))
 for lab, elyte, kap, Tb, prov, col in SOLVENTS:
     print("  %-9s " % lab + " ".join("%7.4f" % v for v in req[lab]))
 print("  %-9s " % "passive" + " ".join("%7.4f" % v for v in avail))
+print("  %-9s " % "liquid" + " ".join("%.3f-%.3f" % v for v in liq))
 
 # the right margin is reserved explicitly: (b) AND (d) both put their architecture names
 # outside the axes on the figure edge, and the longest is "rotating cyl. 3000 rpm"

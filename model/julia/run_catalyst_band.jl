@@ -33,23 +33,31 @@ getf(row, h, n) = row[col(h, n)]
 num(x) = (y = tryparse(Float64, strip(x)); y === nothing ? NaN : y)
 const CARRIER_IS_SUPPORTING_ANION = Set([
     "Br- oxidation / electrophilic bromination", "Br-mediated Hofmann rearrangement",
+    "Amidyl-radical C-H amination (phenanthridinone)",
     "Cl-mediated ethylene epoxidation", "Alkaline lignin -> vanillin (pilot)"])
 carrier_is_electrolyte_anion(rxn) = rxn in CARRIER_IS_SUPPORTING_ANION
 
+## CHEMISTRY AUDIT, 2026-10-05: the two Ni aminations and the Co(salen) allylic C-H amination left this table. In the
+## aminations the oxidative addition happens at the cathode and the cycle closes only at the ANODE (Kawamata JACS 2019
+## p. 6396, steps B-F; Liu/Qiu Angew 2025 Fig. 4f), so it cannot regenerate the carrier inside one electrode's film; in the
+## allylic amination the catalyst does not regenerate at room temperature at all (Cai/Xu Nat Commun 2021 p. 6) and turns
+## over by heat-induced homolysis at reflux (p. 7), whose rate is not reported. All three are solved at the floor, k = 0.
 const K_SOURCED = Dict(
     "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)"          => 100.0,
-    "Ni-catalyzed aryl amination (ArBr + amine)" => 100.0,
-    "Electrochemical amination of ArX with NH3"  => 100.0,
     "Cathodic Ni aryl-aryl homocoupling"         => 100.0,
     "Co-H alkene reduction (e-HAT)"    => 700.0,
-    "Co-H alkene isomerization (catalytic)"      => 700.0,
-    "Co-catalyzed aza-Wacker cyclization"        => 10.0)
+    "Co-H alkene isomerization (catalytic)"      => 700.0)
 db = csvrows(joinpath("..", "julia", "delta_bounds.csv")); dbh = db[1]; dbd = db[2:end]
 const REACTORS = ["Unstirred batch", "Stirred batch", "Recirculating flow cell", "ANEC flow cell", "Microfluidic cell (25 um gap)", "RDE 1600 rpm", "Rotating cylinder 3000 rpm"]
-const D_S_REF, MU_REF = 1.0e-9, 0.369
+## SUBSTRATE DIFFUSIVITIES: each row's own molecule, read from its exemplar and computed by
+## Wilke-Chang in the row's solvent (data/build_catalyst_substrates.py -> catalyst_substrates.csv).
+## Until 2026-10-05 every row used one declared value, 1.0e-9 m^2/s x (0.369 mPa s / mu).
+const D_SUB = let t = csvrows("catalyst_substrates.csv"), h = t[1]
+    Dict(getf(r, h, "reaction") => num(getf(r, h, "D_sub_m2s")) for r in t[2:end])
+end
 
 catrows = [r for r in rxd if haskey(K_SOURCED, getf(r, rxh, "reaction"))]
-length(catrows) == 7 || error("expected 7 sourced rows, found $(length(catrows))")
+length(catrows) == length(K_SOURCED) || error("expected $(length(K_SOURCED)) sourced rows, found $(length(catrows))")
 
 function np_species(r)
     rxn = getf(r, rxh, "reaction")
@@ -96,7 +104,7 @@ for (edge, dcol) in (("lo", "delta_lo_um"), ("hi", "delta_hi_um"))
     println(io, "reaction,reactor,k_M,delta_um,xk_um,i_fick_mAcm2,i_subcap_mAcm2,i_ec_mAcm2,limiter,path,flag")
     for r in catrows
         sp0, Cc, nc, Dc, nu_s, Csub, nsub, dirn, zc, zprod, Dan_like, Dcat_like, rxn = np_species(r)
-        mu = num(getf(r, rxh, "mu_mPas")); D_S = D_S_REF * MU_REF / mu
+        mu = num(getf(r, rxh, "mu_mPas")); D_S = D_SUB[getf(r, rxh, "reaction")]
         sp = ECSpecies[]
         for (j, s) in enumerate(sp0)
             nu = j == 1 ? +1.0 : (j == 2 ? -1.0 : 0.0)

@@ -1,4 +1,4 @@
-## run_mediated.jl — the full EC' matrix: all 8 mediated reactions x 6 reactors,
+## run_mediated.jl — the full EC' matrix: every mediated reaction x every reactor archetype,
 ## with mediator generation at the electrode BC and substrate consumption coupled
 ## through the homogeneous source term R = k*c_ox*c_S in the film (npp_ecprime.jl).
 ##
@@ -32,7 +32,10 @@ tr(C) = C * 1e-5     # trace bulk value for the electrogenerated form
 ## conditions PAGE-VERIFIED against the primary-source PDFs (papers-for-model corpus,
 ## Jul 2026); see build_reactions50.py VERIFIED dict for anchors.
 SPECS = MedSpec[
- MedSpec("Br-mediated Hofmann rearrangement", 1e3, 4.755e-7, 2.7e-9, 1, 2, 80., 400., 1.8611e-09,
+ MedSpec("Br-mediated Hofmann rearrangement", 3.3, 4.755e-7, 2.7e-9, 1, 2, 80., 400., 1.8611e-09,
+   ## k = 3.3 M-1 s-1 (2026-10-06, author): HOBr + propionamide, the unbranched primary amide nearest 2-phenylacetamide,
+   ## apparent at pH 7.2-7.5 and 22 C; Heeb, Criquet, Zimmermann-Steffens & von Gunten, Water Res. 2014, 48, 15, Table 6
+   ## p. 30, compiled from Pattison & Davies 2004 (2-methylpropionamide 1.5, trimethylacetamide 0.9). It was a declared 1e3.
    ## Malviya/Cantillo OPRD 2023 scale-up: 0.4 M amide, NaBr 0.08 M in MeCN
    ## (MeOH 10 equiv = reagent, no alkoxide base). RC(O)NH2 + Br2 + MeOH ->
    ## carbamate + 2 H+ + 2 Br-: sum z_j*nu_j = 0 (charge-conserving)
@@ -41,12 +44,13 @@ SPECS = MedSpec[
     S("Sub",   0.0, 1.8611e-09, 400.,    0.0, -1.0),      # phenylacetamide, 2 e-, 1 Br2/S
     S("H+",   +1.0, 3.0e-9, 1e-3,     0.0, +2.0),      # HBr released; sum z*nu = 0
     S("Na+",  +1.0, 1.33e-9, 80.,     0.0,  0.0)]),
- MedSpec("ACT-mediated alcohol oxidation (flow, hectogram)", 20., 8.93e-7, 5.93e-10, 1, 2, 25., 500., 7.2207e-10,
+ MedSpec("ACT-mediated alcohol oxidation (flow, hectogram)", 20., 8.93e-7, 5.93e-10, 1, 4, 25., 500., 7.2207e-10,
    ## Zhong/Stahl OPRD 2021 200-g campaign: 0.5 M alcohol, ACT 25 mM (5 mol%),
    ## purely aqueous 1 M NaHCO3 / 1 M Na2CO3 pH 8.5 -- released H+ is buffered
    [S("ACT",  0.0, 5.93e-10, 25.,    -1.0, +1.0),
     S("ACT+",+1.0, 5.93e-10, tr(25.),+1.0, -1.0),
-    S("Sub",  0.0, 7.2207e-10, 500.,    0.0, -0.5),      # 2 ox per alcohol
+    S("Sub",  0.0, 7.2207e-10, 500.,    0.0, -0.25),     # 4 ox per alcohol: the paper takes the
+                                                         # primary alcohol to the carboxylic acid
     S("Na+", +1.0, 1.33e-9, 3000.,    0.0,  0.0),
     S("CO3--",-2.0, 0.92e-9, 1000.,   0.0, -1.0),      # buffer absorbs the proton:
     S("HCO3-",-1.0, 1.18e-9, 1000. + tr(25.), 0.0, +1.0)]),  # sum z*nu = 0
@@ -75,62 +79,153 @@ SPECS = MedSpec[
     S("Sub",  0.0, 1.87e-09, 3.52,      0.0, -0.5),
     S("H+",  +1.0, 9.3e-9, 1e-3,       0.0, +1.0),     # Cl2 hydrolysis/chlorohydrin H+
     S("K+",  +1.0, 1.96e-9, 1000.,     0.0,  0.0)]),
- MedSpec("NHPI-mediated allylic C-H -> enone", 0.5, 3.90e-7, 2.09e-9, 1, 4, 33., 167., 1.9448e-09,
+ MedSpec("NHPI-mediated allylic C-H -> enone", 20.2, 3.90e-7, 2.09e-9, 1, 2, 33., 167., 1.8660e-09,
    ## Horn/Baran Nature 2016: Cl4NHPI 33 mM (20 mol%), substrate 167 mM,
+   ## k = 20.2 M-1 s-1 (2026-10-05): electrogenerated PINO + cyclohexene in MeCN with pyridine, Ueda, Noyama,
+   ## Ohmori & Masui, Chem. Pharm. Bull. 1987, 35, 1372, Table II p. 1375 (allylic substrates 12.8-77.6). It was
+   ## 0.5, the order of PINO + substituted TOLUENES in acetic acid (Koshino 2003) -- a benzylic value in another
+   ## solvent, carried for an ALLYLIC oxidation whose own exemplar cites the Masui study as its kinetic reference.
    ## ACETONE, LiClO4 0.1 M, pyridine base takes the anodic proton
-   [S("NHPI", 0.0, 2.09e-9, 33.,    -1.0, +1.0),
+   ## The species at the anode is the N-oxide ANION: 'deprotonation of Cl4NHPI by pyridine, followed by anodic
+   ## oxidation, leads to the tetra-chlorophthalimido N-oxyl radical' (Horn p. 81), carrier_charge.csv z = -1.
+   ## Electrode: NHPI(-) -> PINO + e-. Solution: PINO + 1/2 Sub -> NHPI, which pyridine deprotonates back to the
+   ## anion, the proton leaving as pyridinium ("H+" below, 33 mM in the bulk as the anion's counter-cation).
+   [S("NHPI", -1.0, 2.09e-9, 33.,    -1.0, +1.0),
     S("PINO", 0.0, 2.09e-9, tr(33.),+1.0, -1.0),
-    S("H+",  +1.0, 3.0e-9, 1e-3,    +1.0,  0.0),       # deprotonation carries charge
-    S("Sub",  0.0, 1.9448e-09, 167.,    0.0, -0.25),      # 4 e- per allylic/benzylic C=O
+    S("H+",  +1.0, 3.0e-9, 33.,      0.0, +1.0),       # pyridinium; sum z*nu = -1 + 1 = 0
+    S("Sub",  0.0, 1.8660e-09, 167.,    0.0, -0.5),       # 2 anodic e- per enone; tBuOOH (1.5 equiv)
+                                                          # supplies the oxygen and the other two
     S("Li+", +1.0, 1.0e-9, 100.,     0.0,  0.0),
-    S("ClO4-",-1.0, 1.7e-9, 100. + 1e-3, 0.0, 0.0)]),
+    S("ClO4-",-1.0, 1.7e-9, 100.,    0.0,  0.0)]),
  MedSpec("HMF -> FDCA (biomass)", 50., 8.93e-7, 5.93e-10, 1, 6, 40., 100., 9.5163e-10,
    ## Cardiel/Choi ACS SCE 2019 concentrated run: HMF 100 mM + ACT 40 mM,
    ## 0.5 M borate buffer pH 10 (not KOH); borate absorbs the released proton
    [S("ACT",   0.0, 5.93e-10, 40.,    -1.0, +1.0),
     S("ACT+", +1.0, 5.93e-10, tr(40.),+1.0, -1.0),
     S("Sub",   0.0, 9.5163e-10, 100.,    0.0, -1/6),
-    S("Na+",  +1.0, 1.33e-9, 500.,     0.0,  0.0),
-    S("B(OH)4-",-1.0, 0.96e-9, 500. + tr(40.), 0.0, -1.0),  # buffer base consumed;
-    S("B(OH)3", 0.0, 0.96e-9, 300.,    0.0, +1.0)]),        # sum z*nu = 0
- MedSpec("BQ-mediated Wacker-Tsuji oxidation", 100., 5.85e-7, 1.78e-9, 2, 2, 23.5, 118., 1.1729e-09,
-   ## Miller/Wayner CJC 1992, Experimental + Table 1 fn -- ONE experiment, exact values:
-   ## "Pd(OAc)2 (0.1 mmol), benzoquinone (2 mmol) ... dissolved in acetonitrile/water
-   ## (7 : 1 v/v, 85 mL containing 0.1 M TBAP)" with "10 mmol olefin, 20 mol% benzoquinone".
-   ## -> BQ 2/85 = 23.5 mM, olefin 10/85 = 118 mM. Tightened 2026-08-23 from 22/110, which were
-   ## ~6% low. HClO4 0.015-0.36 M in the paper; 150 mM is mid-range (acidic anolyte, H+ a reservoir)
-   [S("H2Q", 0.0, 1.78e-9, 23.5,     -0.5, +1.0),
-    S("BQ",  0.0, 1.78e-9, tr(23.5), +0.5, -1.0),
+    ## 0.500 M boron at pH 10 (Mesmer 1972 Q11, activity-corrected; data/hmf_buffer_speciation.py, G-BORATE):
+    ## B(OH)4- 452 / B(OH)3 48 / Na+ 452 mM. D(B(OH)4-) from Corti 1980 lambda0 by Nernst-Einstein; D(B(OH)3) Park & Lee 1994
+    S("Na+",  +1.0, 1.33e-9, 452.,     0.0,  0.0),
+    S("B(OH)4-",-1.0, 9.39e-10, 452. + tr(40.), 0.0, -1.0),  # buffer base consumed;
+    S("B(OH)3", 0.0, 1.64e-9, 48.,    0.0, +1.0)]),        # sum z*nu = 0
+ ## k = 0.06 M-1 s-1 (chemistry audit, 2026-10-05; was a declared 1e2). BQ is not consumed by the alkene but by Pd(0), and
+ ## the palladium turns over no faster than 0.14 s-1 with stoichiometric BQ (0.025 s-1 at the maximum electrolysis current),
+ ## Miller & Wayner, Can. J. Chem. 1992, 70, 2485, p. 2487. In-film regeneration of H2Q is therefore capped at
+ ## TOF x [Pd] = 0.14 s-1 x 1.18 mM (0.1 mmol / 85 mL); as the rate law below writes it, k = TOF [Pd] / (C_BQ C_S)
+ ## = 0.14 x 1.18e-3 / (0.0235 x 0.118) = 0.0595 M-1 s-1. x_k ~ 0.4 mm: thicker than every film (the shuttle limit).
+ MedSpec("BQ-mediated Wacker-Tsuji oxidation", 0.06, 5.85e-7, 1.78e-9, 2, 2, 22., 110., 1.1729e-09,
+   ## Miller/Wayner CJC 1992 print the molarities themselves (Results, p 2486): "benzoquinone (0.022 M ...),
+   ## palladium acetate (0.0011 M ...), olefin (0.11 M)" -- BQ 22 mM, olefin 110 mM (2 and 10 mmol over the
+   ## 85 mL of solvent and the olefin's own volume). HClO4 0.015-0.36 M in the paper; 150 mM is mid-range.
+   [S("H2Q", 0.0, 1.78e-9, 22.,      -0.5, +1.0),
+    S("BQ",  0.0, 1.78e-9, tr(22.), +0.5, -1.0),
     S("H+", +1.0, 3.0e-9, 150.,     +1.0,  0.0),
-    S("Sub", 0.0, 1.1729e-09, 118.,     0.0, -1.0),       # BQ = 2 e-; 1 BQ per alkene
+    S("Sub", 0.0, 1.1729e-09, 110.,     0.0, -1.0),       # BQ = 2 e-; 1 BQ per alkene
     S("Q+", +1.0, 1.0e-9, 100.,      0.0,  0.0),
     S("ClO4-",-1.0, 1.7e-9, 250.,    0.0,  0.0)]),
- MedSpec("Br- oxidation / electrophilic bromination", 1e3, 9.57e-7, 2.08e-9, 1, 2, 152., 121., 9.1482e-10,
-   ## Zhang/Su Nat Commun 2025. CORRECTED 2026-08-23 by the condition audit: this row used to
-   ## pair Br- 0.25 M (the Fig 4 H-cell) with arene 0.12 M (the Fig 5b flow run) -- two DIFFERENT
-   ## experiments. The exemplar cites the 518 g flow run, whose Fig 5b footnote reads
-   ## "Substrate (4 mmol), solvent (0.5 M NaBr in deionized water (10 mL):CH3CN:CH3OH:CH2Cl2
-   ## = 10:10:10:3)": 33 mL total, so Br- = 0.5*10/33 = 0.152 M and arene = 4/33 = 0.121 M.
-   [S("Br-", -1.0, 2.08e-9, 152.001, -1.0, +1.0),      # 1 Br- returned (1 Br into product)
-    S("Br2",  0.0, 1.2e-9,  tr(152.),+0.5, -1.0),
-    S("Sub",  0.0, 9.1482e-10, 121.,    0.0, -1.0),
+ MedSpec("Br- oxidation / electrophilic bromination", 2.28e4, 9.227e-7, 2.08e-9, 1, 2, 250., 33.3, 9.7945e-10,
+   ## k = 2.28e4 M-1 s-1 (2026-10-05): Br2 + ANISOLE, this row's own carrier and substrate, measured in water at
+   ## 20 C: (2.23 +/- 0.14)e4 para + (5.4 +/- 0.6)e2 ortho, Sivey, Bickley & Victor, Environ. Sci. Technol. 2015,
+   ## 49, 4937, Table 1 p. 4941. It was a declared 1e3 ("conservative low end") while the measurement sat in a
+   ## source the row already cited. The row is transport-limited: no cell moves by more than 0.4 %.
+   ## Zhang/Su Nat Commun 2025, the campaign run on ANISOLE (2026-10-06): the divided H-cell of Methods and Fig 4,
+   ## "each cell was filled with 7.5 mL acetonitrile and 7.5 mL 0.5 mol/L NaBr aqueous solution. 0.5 mmol
+   ## substrate was dissolved in the anodic cell": anisole 0.5/15 = 33.3 mM, Br- 0.5 x 7.5/15 = 250 mM, water/MeCN
+   ## 1:1. The flow runs of Fig 5b/c (10:10:10:3 medium, 518 g) are on drug and natural-product derivatives.
+   [S("Br-", -1.0, 2.08e-9, 250.001, -1.0, +1.0),      # 1 Br- returned (1 Br into product)
+    S("Br2",  0.0, 1.2e-9,  tr(250.),+0.5, -1.0),
+    S("Sub",  0.0, 9.7945e-10, 33.3,    0.0, -1.0),
     S("H+",  +1.0, 5.0e-9,  1e-3,     0.0, +1.0),      # ArH + Br2 -> ArBr + Br- + H+; sum z*nu = 0
-    S("Na+", +1.0, 1.33e-9, 152.,     0.0,  0.0)]),
+    S("Na+", +1.0, 1.33e-9, 250.,     0.0,  0.0)]),
  ## ArH + (SCN)2 -> ArSCN + SCN- + H+ (2 e- per substrate): SCN mass and charge
  ## both close (2 SCN in -> 1 in product + 1 regenerated; +1 charge in H+, -1 in SCN-)
- MedSpec("Aryl thiocyanation (NH4SCN)", 100., 1.13e-6, 7.8e-10, 1, 2, 100., 250., 6.9056e-10,
+ MedSpec("Aryl thiocyanation (NH4SCN)", 100., 1.13e-6, 8.7e-10, 1, 2, 100., 250., 6.9056e-10,
    ## Gitkis/Becker EA 2010 constant-current runs: NH4SCN 0.1 M + ArH 0.25 M,
    ## LiClO4 0.1 M in the AcOH/HCOOH 1:1 CC medium (0.5 M belongs to the glacial-
    ## AcOH CPE variant); D(SCN-) Walden-scaled from lambda0(MeCN)
-   [S("SCN-",  -1.0, 7.8e-10, 100.,    -1.0, +1.0),
+   [S("SCN-",  -1.0, 8.7e-10, 100.,    -1.0, +1.0),       # Walden: 3.02e-9 (MeCN, NE from lambda0 113.3) x 0.369/1.28
     S("(SCN)2", 0.0, 5.5e-10, tr(100.),+0.5, -1.0),
     S("Sub",    0.0, 6.9056e-10, 250.,    0.0, -1.0),    # 1 ArH per (SCN)2, 2 e-/ArH
     S("H+",    +1.0, 2.0e-9, 1e-3,      0.0, +1.0),
     S("NH4+",  +1.0, 2.0e-9, 100.,      0.0,  0.0),
     S("Li+",   +1.0, 1.0e-9, 100.,      0.0,  0.0),
     S("ClO4-", -1.0, 1.7e-9, 100.001,   0.0,  0.0)]),
+ ## ── THREE ROWS CARRIED AS MEDIATED SINCE 2026-10-05 ──────────────────────────────────────────
+ ## Each was typed as a direct electrolysis of its substrate until the exemplars were read for the
+ ## species that actually exchanges electrons with the electrode (docs/REACTION_AUDIT_20261005.md).
+ ##
+ ## Zhang/K. Xu/Zeng OL 2018: N-OPiv biaryl amide 0.04 M and NaBr 0.04 M (1 equiv) in MeCN/MeOH
+ ## 14:1, "NaBr as the catalyst and electrolyte"; "anodically in situ generated bromine is
+ ## intercepted by the substrate" to give the N-Br intermediate. ArC(O)NH-OPiv + Br2 -> lactam +
+ ## 2 H+ + 2 Br-: sum z*nu = 0. k: N-bromination of an amide N-H by Br2 -- the step, and so the
+ ## decade, of the Hofmann row above.
+ MedSpec("Amidyl-radical C-H amination (phenanthridinone)", 3.3, 4.755e-7, 2.7e-9, 1, 2, 40., 40., 1.1580e-09,
+   ## k = 3.3 (2026-10-06): the same N-bromination step as the Hofmann row, carried over from it as before (Heeb Table 6).
+   [S("Br-",  -1.0, 2.7e-9, 40.001,  -1.0, +2.0),
+    S("Br2",   0.0, 2.2e-9, tr(40.), +0.5, -1.0),
+    S("Sub",   0.0, 1.1580e-09, 40.,   0.0, -1.0),      # N-OPiv biaryl amide, 2 e-, 1 Br2/S
+    S("H+",   +1.0, 3.0e-9, 1e-3,     0.0, +2.0),
+    S("Na+",  +1.0, 1.33e-9, 40.,     0.0,  0.0)]),
+ ## Bottecchia/Strotman OPRD 2022 kilo run: thioether 0.47 M in MeCN / 0.1 M aq HCl 6:1, so
+ ## chloride 14 mM (3 mol%), Et4NPF6 0.085 M. "Cl- being oxidized at the anode ... and acting as
+ ## the mediator". R2S + 2 Cl2 + 2 H2O -> R2SO2 + 4 HCl, written per electron-equivalent of
+ ## oxidant as for the ethylene row: OX + 1/4 S -> Cl- + H+, sum z*nu = 0.
+ ## k IS BOUNDED BELOW BY THE EXEMPLAR'S OWN OPERATION. Its planar RuO2/Ti flow cell ran at
+ ## 40 mA/cm2 with 0.1 M thioether and the same 14 mM chloride; a mediated cell cannot exceed
+ ## the plateau n F C_med sqrt(D_ox k C_S) once the film is thicker than the reaction layer, so
+ ##   k >= (i / (F C_med))^2 / (D_ox C_S) = (400 / (96485 x 14))^2 / (2.6e-9 x 100) = 0.34 m3/mol/s
+ ## i.e. 3.4e2 M-1 s-1 (2.2e2 if only the 80 pct faradaic efficiency is credited). The adopted
+ ## 1e3 is the lowest decade not below that bound.
+ MedSpec("Thioether -> sulfone (kilo-scale)", 1e3, 5.854e-7, 2.3e-9, 1, 4, 14., 470., 1.4265e-09,
+   [S("Cl-", -1.0, 2.3e-9, 14.001, -1.0, +1.0),
+    S("OX",   0.0, 2.6e-9, tr(14.), +1.0, -1.0),      # per-electron chlorine equiv, Walden-scaled
+    S("Sub",  0.0, 1.4265e-09, 470.,  0.0, -0.25),    # 4 e- per sulfone; 4-methyl-2-(methylthio)pyrimidine
+    S("H+",  +1.0, 3.0e-9, 14.001,   0.0, +1.0),      # the HCl proton; one more per oxidant consumed
+    S("Q+",  +1.0, 1.0e-9, 85.,      0.0,  0.0),
+    S("A-",  -1.0, 1.5e-9, 85.,      0.0,  0.0)]),
+ ## Li/Wilden Chem Sci 2020 -- A CATHODIC ROW (sum z*s = -1). "the only species that was redox
+ ## active at the potentials employed was molecular oxygen"; "the alkyl halide is not reduced
+ ## within the redox window of the solvent". Alkene 79 mM (limiting), iodide 95 mM, in 10 mL
+ ## pH-2 HCl + 5 mL MeCN with NaCl 7 mol%; O2 at air saturation, 0.266 mol/m3 (CRC p. 5-134).
+ ## Written as O2 + H+ + e- -> HO2. at the cathode (pH 2, pKa 4.88) and HO2. + 1/2 S -> O2 + 1/2 P in solution
+ ## (2 e- per product, the proton from the aqueous acid): sum z*nu = 0.
+ ## k IS FIXED BY THE EXEMPLAR'S OWN CHARGE RECORD. The electrolysis is potentiostatic on the
+ ## oxygen wave, so the current it draws is the mediated limit of that cell: "around 300 C" over
+ ## the ~84 ks charge record (Fig. 2) on 4.12 cm2 is a mean 8.7 A/m2, and the plateau n F C_med sqrt(D k C_S) reaches it at
+ ##   k = (8.7 / (96485 x 0.266))^2 / (2.1e-9 x 79) = 0.69 m3/mol/s, i.e. 7e2 M-1 s-1: decade 1e3.
+ ## The product C_med sqrt(k) is what the record fixes, so the ceiling does not depend on the
+ ## oxygen solubility assumed for the mixed solvent.
+ MedSpec("Cathodic Giese (R-I + alkene)", 1e3, 9.574e-7, 2.1e-9, 1, 2, 0.266, 95., 1.0055e-09,
+   ## the reduced oxygen is the NEUTRAL hydroperoxyl radical at pH 2 (pKa 4.88, Li/Wilden Chem. Sci. 2020 p. 5336), so the
+   ## electrode step consumes the proton: O2 + H+ + e- -> HO2. It was O2- (z = -1) until the chemistry audit of 2026-10-05.
+   [S("O2",   0.0, 2.1e-9, 0.266,      -1.0, +1.0),
+    S("HO2",  0.0, 2.1e-9, tr(0.266),  +1.0, -1.0),
+    S("Sub",  0.0, 1.0055e-09, 95.,     0.0, -0.5),    # 2-iodopropane, the species the relay activates (chemistry audit pass 2); 2 e- per product
+    S("H+",  +1.0, 9.3e-9, 6.7,        -1.0,  0.0),
+    S("Na+", +1.0, 1.33e-9, 5.6,        0.0,  0.0),
+    S("Cl-", -1.0, 2.03e-9, 12.3, 0.0, 0.0)]),
+ ## Reclassified from the catalyst rows (chemistry audit, 2026-10-05): tri(p-tolyl)amine is an outer-sphere electron-transfer
+ ## mediator. No rate constant exists for its radical cation with the ketone, and the exemplar runs on carbon felt at constant
+ ## voltage (Bao OL 2022, Table 1), so no bound can be read from its operation either: k = 0, the floor, with the declared
+ ## band of S5.7 as its sensitivity. 5 mM amine (10 mol%), 0.05 M benzyl phenyl ketone, 0.3 M LiClO4/MeCN.
+ MedSpec("Oxazole synthesis from ketones and acetonitrile", 0.0, 4.755e-7, 1.1225e-9, 1, 2, 5., 50., 1.4703e-09,
+   [S("Ar3N",   0.0, 1.1225e-9, 5.,       -1.0, +1.0),
+    S("Ar3N+", +1.0, 1.1225e-9, tr(5.),   +1.0, -1.0),
+    S("Sub",    0.0, 1.4703e-09, 50.,      0.0, -0.5),   # 2 e- per oxazole
+    S("H+",    +1.0, 3.0e-9, 1e-3,         0.0, +1.0),
+    S("Li+",   +1.0, 1.863e-9, 300.,       0.0,  0.0),
+    S("ClO4-", -1.0, 2.759e-9, 300. + 1e-3 + tr(5.), 0.0, 0.0)]),
 ]
 
+
+## ONE-ROW MODE, for the sensitivity sweeps. MED_ONLY="<label>" restricts this run to that spec, so
+## a perturbation of one row re-solves its seven cells in an isolated copy of this directory
+## rather than every cell of the matrix in place. Unset in production, where it changes nothing.
+if !isempty(get(ENV, "MED_ONLY", ""))
+    filter!(s -> s.label == ENV["MED_ONLY"], SPECS)
+    isempty(SPECS) && error("MED_ONLY=$(ENV["MED_ONLY"]) matches no MedSpec label")
+    println("ONE-ROW MODE: ", SPECS[1].label)
+end
 
 ## ---------------------------------------------------------------------------------------------
 ## reactions_table.jl was never loaded here at all -- run_mediated.jl was fully self-contained,
@@ -157,11 +252,12 @@ for spec in SPECS
               "solvents.csv is the source of truth -- fix this file, not the table.")
     end
     for (what, mine, theirs) in (("C_med", spec.C_med, r.C), ("C_S", spec.C_S, r.Csub))
-        ## reactions_table.jl prints concentrations to one decimal, so 5.67 arrives as 5.7.
-        ## The tolerance has to absorb that rounding without going slack: 1% relative, floored at
-        ## 0.06 mol/m^3 absolute. Real drift is tens of percent (the bromination row this gate was
-        ## written for was out by 64%), so this still fails loudly on anything that matters.
-        if abs(mine - theirs) > max(0.06, 0.01 * abs(theirs))
+        ## reactions_table.jl prints concentrations to four decimals of mol/m^3 (one decimal until
+        ## 2026-10-05, which is why this floor used to be 0.06). 1% relative, floored at 0.0006
+        ## mol/m^3 absolute so that the 0.266 mol/m^3 oxygen row is held as tightly as the rest.
+        ## Real drift is tens of percent (the bromination row this gate was written for was out by
+        ## 64%), so this still fails loudly on anything that matters.
+        if abs(mine - theirs) > max(0.0006, 0.01 * abs(theirs))
             error("G-MEDSYNC: $(spec.label) disagrees with reactions_table.jl on $what: " *
                   "run_mediated.jl has $mine mol/m^3, the audited table has $theirs mol/m^3. " *
                   "reactions_50.csv is the source of truth -- fix this file, not the table.")
@@ -175,11 +271,12 @@ for spec in SPECS
     zs  = sum(sp.z * sp.s  for sp in spec.species)
     znu = sum(sp.z * sp.nu for sp in spec.species)
     en  = sum(sp.z * sp.c_bulk for sp in spec.species)
-    @assert isapprox(zs, 1.0; atol = 1e-9)  "sum z*s != 1 (anodic BC): $(spec.label)"
+    ## +1 for an anodic row, -1 for a cathodic one (the Giese row, oxygen reduced at the cathode)
+    @assert isapprox(abs(zs), 1.0; atol = 1e-9)  "sum z*s != +/-1 (electrode BC): $(spec.label)"
     @assert isapprox(znu, 0.0; atol = 1e-9) "homogeneous step injects charge (div i != 0): $(spec.label)"
     @assert abs(en) < 1e-6 * maximum(sp.c_bulk for sp in spec.species) "bulk not electroneutral: $(spec.label)"
 end
-println("invariants OK: sum z*s = 1, sum z*nu = 0, bulk EN for all $(length(SPECS)) specs")
+println("invariants OK: |sum z*s| = 1, sum z*nu = 0, bulk EN for all $(length(SPECS)) specs")
 
 open(joinpath(@__DIR__, "mediated_ec_matrix.csv"), "w") do io
     println(io, "reaction,reactor,delta_um,xk_um,i_tier0_mAcm2,i_saveant_mAcm2,i_subcap_mAcm2,i_ec_mAcm2,amplification,limiter,flag,path")

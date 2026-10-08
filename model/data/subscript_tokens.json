@@ -77,6 +77,8 @@
   "electrode",
   "ohm",
   "stirred",
-  "ec"
+  "ec",
+  "Ar",
+  "BQ"
  ]
 }

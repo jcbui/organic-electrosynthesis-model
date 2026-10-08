@@ -1,351 +1,351 @@
 reaction,reactor,delta_ref_um,delta_lo_um,delta_hi_um
-"Ni-catalyzed aryl amination (ArBr + amine)","Unstirred batch",228.000000,103.000000,528.000000
+"Ni-catalyzed aryl amination (ArBr + amine)","Unstirred batch",228.000000,102.900000,529.600000
 "Ni-catalyzed aryl amination (ArBr + amine)","Stirred batch",200.000000,193.000000,207.000000
 "Ni-catalyzed aryl amination (ArBr + amine)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Ni-catalyzed aryl amination (ArBr + amine)","ANEC flow cell",36.200000,31.804722,40.595278
 "Ni-catalyzed aryl amination (ArBr + amine)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Ni-catalyzed aryl amination (ArBr + amine)","RDE 1600 rpm",8.857642,5.905095,17.715284
 "Ni-catalyzed aryl amination (ArBr + amine)","Rotating cylinder 3000 rpm",9.107329,6.369376,19.650605
-"Electrochemical amination of ArX with NH3","Unstirred batch",228.000000,103.000000,528.000000
+"Electrochemical amination of ArX with NH3","Unstirred batch",228.000000,102.900000,529.600000
 "Electrochemical amination of ArX with NH3","Stirred batch",200.000000,193.000000,207.000000
 "Electrochemical amination of ArX with NH3","Recirculating flow cell",106.900000,93.920573,119.879427
 "Electrochemical amination of ArX with NH3","ANEC flow cell",36.200000,31.804722,40.595278
 "Electrochemical amination of ArX with NH3","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Electrochemical amination of ArX with NH3","RDE 1600 rpm",8.998029,5.998686,17.996058
 "Electrochemical amination of ArX with NH3","Rotating cylinder 3000 rpm",8.751810,6.120738,18.883512
-"Shono oxidation (N-acyliminium capture)","Unstirred batch",228.000000,103.000000,528.000000
+"Shono oxidation (N-acyliminium capture)","Unstirred batch",228.000000,102.900000,529.600000
 "Shono oxidation (N-acyliminium capture)","Stirred batch",200.000000,193.000000,207.000000
 "Shono oxidation (N-acyliminium capture)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Shono oxidation (N-acyliminium capture)","ANEC flow cell",36.200000,31.804722,40.595278
 "Shono oxidation (N-acyliminium capture)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Shono oxidation (N-acyliminium capture)","RDE 1600 rpm",12.639219,8.426146,25.278437
-"Shono oxidation (N-acyliminium capture)","Rotating cylinder 3000 rpm",11.111654,7.771137,23.975274
-"Oxidative benzimidazole annulation (C-H/N-H)","Unstirred batch",228.000000,103.000000,528.000000
+"Shono oxidation (N-acyliminium capture)","RDE 1600 rpm",13.611946,9.074631,27.223893
+"Shono oxidation (N-acyliminium capture)","Rotating cylinder 3000 rpm",12.027304,8.411514,25.950945
+"Oxidative benzimidazole annulation (C-H/N-H)","Unstirred batch",228.000000,102.900000,529.600000
 "Oxidative benzimidazole annulation (C-H/N-H)","Stirred batch",200.000000,193.000000,207.000000
 "Oxidative benzimidazole annulation (C-H/N-H)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Oxidative benzimidazole annulation (C-H/N-H)","ANEC flow cell",36.200000,31.804722,40.595278
 "Oxidative benzimidazole annulation (C-H/N-H)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Oxidative benzimidazole annulation (C-H/N-H)","RDE 1600 rpm",12.510801,8.340534,25.021603
-"Oxidative benzimidazole annulation (C-H/N-H)","Rotating cylinder 3000 rpm",10.591254,7.407186,22.852424
-"Mn-catalyzed alkene diazidation","Unstirred batch",228.000000,103.000000,528.000000
+"Oxidative benzimidazole annulation (C-H/N-H)","RDE 1600 rpm",12.462439,8.308292,24.924877
+"Oxidative benzimidazole annulation (C-H/N-H)","Rotating cylinder 3000 rpm",10.547534,7.376609,22.758089
+"Mn-catalyzed alkene diazidation","Unstirred batch",228.000000,102.900000,529.600000
 "Mn-catalyzed alkene diazidation","Stirred batch",200.000000,193.000000,207.000000
 "Mn-catalyzed alkene diazidation","Recirculating flow cell",106.900000,93.920573,119.879427
 "Mn-catalyzed alkene diazidation","ANEC flow cell",36.200000,31.804722,40.595278
 "Mn-catalyzed alkene diazidation","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Mn-catalyzed alkene diazidation","RDE 1600 rpm",12.521638,8.347759,25.043276
 "Mn-catalyzed alkene diazidation","Rotating cylinder 3000 rpm",10.336763,7.229203,22.303315
-"Br-mediated Hofmann rearrangement","Unstirred batch",228.000000,103.000000,528.000000
+"Br-mediated Hofmann rearrangement","Unstirred batch",228.000000,102.900000,529.600000
 "Br-mediated Hofmann rearrangement","Stirred batch",200.000000,193.000000,207.000000
 "Br-mediated Hofmann rearrangement","Recirculating flow cell",106.900000,93.920573,119.879427
 "Br-mediated Hofmann rearrangement","ANEC flow cell",36.200000,31.804722,40.595278
 "Br-mediated Hofmann rearrangement","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Br-mediated Hofmann rearrangement","RDE 1600 rpm",15.301510,10.201007,30.603020
 "Br-mediated Hofmann rearrangement","Rotating cylinder 3000 rpm",12.804973,8.955391,27.628897
-"Arene C-H pyridination","Unstirred batch",228.000000,103.000000,528.000000
+"Arene C-H pyridination","Unstirred batch",228.000000,102.900000,529.600000
 "Arene C-H pyridination","Stirred batch",200.000000,193.000000,207.000000
 "Arene C-H pyridination","Recirculating flow cell",106.900000,93.920573,119.879427
 "Arene C-H pyridination","ANEC flow cell",36.200000,31.804722,40.595278
 "Arene C-H pyridination","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Arene C-H pyridination","RDE 1600 rpm",14.090194,9.393463,28.180388
 "Arene C-H pyridination","Rotating cylinder 3000 rpm",11.725349,8.200336,25.299425
-"Amidyl-radical C-H amination (phenanthridinone)","Unstirred batch",228.000000,103.000000,528.000000
+"Amidyl-radical C-H amination (phenanthridinone)","Unstirred batch",228.000000,102.900000,529.600000
 "Amidyl-radical C-H amination (phenanthridinone)","Stirred batch",200.000000,193.000000,207.000000
 "Amidyl-radical C-H amination (phenanthridinone)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Amidyl-radical C-H amination (phenanthridinone)","ANEC flow cell",36.200000,31.804722,40.595278
 "Amidyl-radical C-H amination (phenanthridinone)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Amidyl-radical C-H amination (phenanthridinone)","RDE 1600 rpm",12.330580,8.220387,24.661161
-"Amidyl-radical C-H amination (phenanthridinone)","Rotating cylinder 3000 rpm",10.168405,7.111459,21.940055
-"Co-catalyzed aza-Wacker cyclization","Unstirred batch",228.000000,103.000000,528.000000
-"Co-catalyzed aza-Wacker cyclization","Stirred batch",200.000000,193.000000,207.000000
-"Co-catalyzed aza-Wacker cyclization","Recirculating flow cell",106.900000,93.920573,119.879427
-"Co-catalyzed aza-Wacker cyclization","ANEC flow cell",36.200000,31.804722,40.595278
-"Co-catalyzed aza-Wacker cyclization","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Co-catalyzed aza-Wacker cyclization","RDE 1600 rpm",11.623797,7.749198,23.247594
-"Co-catalyzed aza-Wacker cyclization","Rotating cylinder 3000 rpm",9.547158,6.676979,20.599611
-"Ritter-type C(sp3)-H amination","Unstirred batch",228.000000,103.000000,528.000000
+"Amidyl-radical C-H amination (phenanthridinone)","RDE 1600 rpm",15.301510,10.201007,30.603020
+"Amidyl-radical C-H amination (phenanthridinone)","Rotating cylinder 3000 rpm",12.804973,8.955391,27.628897
+"Co-catalyzed allylic C-H amination","Unstirred batch",228.000000,102.900000,529.600000
+"Co-catalyzed allylic C-H amination","Stirred batch",200.000000,193.000000,207.000000
+"Co-catalyzed allylic C-H amination","Recirculating flow cell",106.900000,93.920573,119.879427
+"Co-catalyzed allylic C-H amination","ANEC flow cell",36.200000,31.804722,40.595278
+"Co-catalyzed allylic C-H amination","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
+"Co-catalyzed allylic C-H amination","RDE 1600 rpm",11.623797,7.749198,23.247594
+"Co-catalyzed allylic C-H amination","Rotating cylinder 3000 rpm",9.547158,6.676979,20.599611
+"Ritter-type C(sp3)-H amination","Unstirred batch",228.000000,102.900000,529.600000
 "Ritter-type C(sp3)-H amination","Stirred batch",200.000000,193.000000,207.000000
 "Ritter-type C(sp3)-H amination","Recirculating flow cell",106.900000,93.920573,119.879427
 "Ritter-type C(sp3)-H amination","ANEC flow cell",36.200000,31.804722,40.595278
 "Ritter-type C(sp3)-H amination","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Ritter-type C(sp3)-H amination","RDE 1600 rpm",12.755066,8.503377,25.510131
 "Ritter-type C(sp3)-H amination","Rotating cylinder 3000 rpm",10.542693,7.373224,22.747645
-"Co-H alkene reduction (e-HAT)","Unstirred batch",228.000000,103.000000,528.000000
+"Co-H alkene reduction (e-HAT)","Unstirred batch",228.000000,102.900000,529.600000
 "Co-H alkene reduction (e-HAT)","Stirred batch",200.000000,193.000000,207.000000
 "Co-H alkene reduction (e-HAT)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Co-H alkene reduction (e-HAT)","ANEC flow cell",36.200000,31.804722,40.595278
 "Co-H alkene reduction (e-HAT)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Co-H alkene reduction (e-HAT)","RDE 1600 rpm",10.981965,7.321310,21.963930
 "Co-H alkene reduction (e-HAT)","Rotating cylinder 3000 rpm",9.109137,6.370641,19.654505
-"Kolbe homocoupling of 10-undecenoate","Unstirred batch",228.000000,103.000000,528.000000
+"Kolbe homocoupling of 10-undecenoate","Unstirred batch",228.000000,102.900000,529.600000
 "Kolbe homocoupling of 10-undecenoate","Stirred batch",200.000000,193.000000,207.000000
 "Kolbe homocoupling of 10-undecenoate","Recirculating flow cell",106.900000,93.920573,119.879427
 "Kolbe homocoupling of 10-undecenoate","ANEC flow cell",36.200000,31.804722,40.595278
 "Kolbe homocoupling of 10-undecenoate","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Kolbe homocoupling of 10-undecenoate","RDE 1600 rpm",13.420953,8.947302,26.841905
-"Kolbe homocoupling of 10-undecenoate","Rotating cylinder 3000 rpm",10.772563,7.533988,23.243628
-"Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)","Unstirred batch",228.000000,103.000000,528.000000
+"Kolbe homocoupling of 10-undecenoate","RDE 1600 rpm",13.332946,8.888631,26.665892
+"Kolbe homocoupling of 10-undecenoate","Rotating cylinder 3000 rpm",10.697136,7.481237,23.080882
+"Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)","Unstirred batch",228.000000,102.900000,529.600000
 "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)","Stirred batch",200.000000,193.000000,207.000000
 "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)","ANEC flow cell",36.200000,31.804722,40.595278
 "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)","RDE 1600 rpm",8.857642,5.905095,17.715284
 "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)","Rotating cylinder 3000 rpm",9.107329,6.369376,19.650605
-"Doubly decarboxylative Csp3-Csp3","Unstirred batch",228.000000,103.000000,528.000000
+"Doubly decarboxylative Csp3-Csp3","Unstirred batch",228.000000,102.900000,529.600000
 "Doubly decarboxylative Csp3-Csp3","Stirred batch",200.000000,193.000000,207.000000
 "Doubly decarboxylative Csp3-Csp3","Recirculating flow cell",106.900000,93.920573,119.879427
 "Doubly decarboxylative Csp3-Csp3","ANEC flow cell",36.200000,31.804722,40.595278
 "Doubly decarboxylative Csp3-Csp3","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Doubly decarboxylative Csp3-Csp3","RDE 1600 rpm",11.328170,7.552113,22.656339
-"Doubly decarboxylative Csp3-Csp3","Rotating cylinder 3000 rpm",10.210329,7.140779,22.030513
-"BDD phenol-arene cross-coupling","Unstirred batch",228.000000,103.000000,528.000000
+"Doubly decarboxylative Csp3-Csp3","RDE 1600 rpm",10.255432,6.836955,20.510864
+"Doubly decarboxylative Csp3-Csp3","Rotating cylinder 3000 rpm",9.181126,6.420988,19.809834
+"BDD phenol-arene cross-coupling","Unstirred batch",228.000000,102.900000,529.600000
 "BDD phenol-arene cross-coupling","Stirred batch",200.000000,193.000000,207.000000
 "BDD phenol-arene cross-coupling","Recirculating flow cell",106.900000,93.920573,119.879427
 "BDD phenol-arene cross-coupling","ANEC flow cell",36.200000,31.804722,40.595278
 "BDD phenol-arene cross-coupling","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "BDD phenol-arene cross-coupling","RDE 1600 rpm",11.839043,7.892695,23.678086
 "BDD phenol-arene cross-coupling","Rotating cylinder 3000 rpm",11.040920,7.721669,23.822655
-"Decarboxylative Minisci alkylation","Unstirred batch",228.000000,103.000000,528.000000
-"Decarboxylative Minisci alkylation","Stirred batch",200.000000,193.000000,207.000000
-"Decarboxylative Minisci alkylation","Recirculating flow cell",106.900000,93.920573,119.879427
-"Decarboxylative Minisci alkylation","ANEC flow cell",36.200000,31.804722,40.595278
-"Decarboxylative Minisci alkylation","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Decarboxylative Minisci alkylation","RDE 1600 rpm",13.609475,9.072984,27.218951
-"Decarboxylative Minisci alkylation","Rotating cylinder 3000 rpm",11.298610,7.901889,24.378665
-"Cathodic Giese (R-I + alkene)","Unstirred batch",228.000000,103.000000,528.000000
+"Decarboxylative arylation (radical-radical)","Unstirred batch",228.000000,102.900000,529.600000
+"Decarboxylative arylation (radical-radical)","Stirred batch",200.000000,193.000000,207.000000
+"Decarboxylative arylation (radical-radical)","Recirculating flow cell",106.900000,93.920573,119.879427
+"Decarboxylative arylation (radical-radical)","ANEC flow cell",36.200000,31.804722,40.595278
+"Decarboxylative arylation (radical-radical)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
+"Decarboxylative arylation (radical-radical)","RDE 1600 rpm",13.609475,9.072984,27.218951
+"Decarboxylative arylation (radical-radical)","Rotating cylinder 3000 rpm",11.298610,7.901889,24.378665
+"Cathodic Giese (R-I + alkene)","Unstirred batch",228.000000,102.900000,529.600000
 "Cathodic Giese (R-I + alkene)","Stirred batch",200.000000,193.000000,207.000000
 "Cathodic Giese (R-I + alkene)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Cathodic Giese (R-I + alkene)","ANEC flow cell",36.200000,31.804722,40.595278
 "Cathodic Giese (R-I + alkene)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Cathodic Giese (R-I + alkene)","RDE 1600 rpm",12.370814,8.247209,24.741628
-"Cathodic Giese (R-I + alkene)","Rotating cylinder 3000 rpm",11.460909,8.015395,24.728851
-"Rh-catalyzed electrooxidative C-H alkenylation","Unstirred batch",228.000000,103.000000,528.000000
+"Cathodic Giese (R-I + alkene)","RDE 1600 rpm",15.812870,10.541913,31.625739
+"Cathodic Giese (R-I + alkene)","Rotating cylinder 3000 rpm",14.896393,10.418063,32.141489
+"Rh-catalyzed electrooxidative C-H alkenylation","Unstirred batch",228.000000,102.900000,529.600000
 "Rh-catalyzed electrooxidative C-H alkenylation","Stirred batch",200.000000,193.000000,207.000000
 "Rh-catalyzed electrooxidative C-H alkenylation","Recirculating flow cell",106.900000,93.920573,119.879427
 "Rh-catalyzed electrooxidative C-H alkenylation","ANEC flow cell",36.200000,31.804722,40.595278
 "Rh-catalyzed electrooxidative C-H alkenylation","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Rh-catalyzed electrooxidative C-H alkenylation","RDE 1600 rpm",8.459096,5.639397,16.918191
 "Rh-catalyzed electrooxidative C-H alkenylation","Rotating cylinder 3000 rpm",9.375592,6.556991,20.229426
-"Cu-catalyzed benzylic cyanation","Unstirred batch",228.000000,103.000000,528.000000
+"Cu-catalyzed benzylic cyanation","Unstirred batch",228.000000,102.900000,529.600000
 "Cu-catalyzed benzylic cyanation","Stirred batch",200.000000,193.000000,207.000000
 "Cu-catalyzed benzylic cyanation","Recirculating flow cell",106.900000,93.920573,119.879427
 "Cu-catalyzed benzylic cyanation","ANEC flow cell",36.200000,31.804722,40.595278
 "Cu-catalyzed benzylic cyanation","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Cu-catalyzed benzylic cyanation","RDE 1600 rpm",12.521638,8.347759,25.043276
 "Cu-catalyzed benzylic cyanation","Rotating cylinder 3000 rpm",10.336763,7.229203,22.303315
-"Cathodic Ni aryl-aryl homocoupling","Unstirred batch",228.000000,103.000000,528.000000
+"Cathodic Ni aryl-aryl homocoupling","Unstirred batch",228.000000,102.900000,529.600000
 "Cathodic Ni aryl-aryl homocoupling","Stirred batch",200.000000,193.000000,207.000000
 "Cathodic Ni aryl-aryl homocoupling","Recirculating flow cell",106.900000,93.920573,119.879427
 "Cathodic Ni aryl-aryl homocoupling","ANEC flow cell",36.200000,31.804722,40.595278
 "Cathodic Ni aryl-aryl homocoupling","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Cathodic Ni aryl-aryl homocoupling","RDE 1600 rpm",10.749678,7.166452,21.499356
 "Cathodic Ni aryl-aryl homocoupling","Rotating cylinder 3000 rpm",9.789934,6.846768,21.123439
-"Anodic dehydrogenative 2-naphthol coupling","Unstirred batch",228.000000,103.000000,528.000000
+"Anodic dehydrogenative 2-naphthol coupling","Unstirred batch",228.000000,102.900000,529.600000
 "Anodic dehydrogenative 2-naphthol coupling","Stirred batch",200.000000,193.000000,207.000000
 "Anodic dehydrogenative 2-naphthol coupling","Recirculating flow cell",106.900000,93.920573,119.879427
 "Anodic dehydrogenative 2-naphthol coupling","ANEC flow cell",36.200000,31.804722,40.595278
 "Anodic dehydrogenative 2-naphthol coupling","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Anodic dehydrogenative 2-naphthol coupling","RDE 1600 rpm",13.509643,9.006428,27.019285
 "Anodic dehydrogenative 2-naphthol coupling","Rotating cylinder 3000 rpm",11.210115,7.839998,24.187722
-"Acrylonitrile hydrodimerization (ADN)","Unstirred batch",228.000000,103.000000,528.000000
+"Acrylonitrile hydrodimerization (ADN)","Unstirred batch",228.000000,102.900000,529.600000
 "Acrylonitrile hydrodimerization (ADN)","Stirred batch",200.000000,193.000000,207.000000
 "Acrylonitrile hydrodimerization (ADN)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Acrylonitrile hydrodimerization (ADN)","ANEC flow cell",36.200000,31.804722,40.595278
 "Acrylonitrile hydrodimerization (ADN)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Acrylonitrile hydrodimerization (ADN)","RDE 1600 rpm",13.367308,8.911539,26.734616
 "Acrylonitrile hydrodimerization (ADN)","Rotating cylinder 3000 rpm",12.305602,8.606147,26.551420
-"Birch reduction of naphthalene","Unstirred batch",228.000000,103.000000,528.000000
+"Birch reduction of naphthalene","Unstirred batch",228.000000,102.900000,529.600000
 "Birch reduction of naphthalene","Stirred batch",200.000000,193.000000,207.000000
 "Birch reduction of naphthalene","Recirculating flow cell",106.900000,93.920573,119.879427
 "Birch reduction of naphthalene","ANEC flow cell",36.200000,31.804722,40.595278
 "Birch reduction of naphthalene","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Birch reduction of naphthalene","RDE 1600 rpm",14.157906,9.438604,28.315813
 "Birch reduction of naphthalene","Rotating cylinder 3000 rpm",11.948074,8.356103,25.779992
-"Nitroarene -> aniline","Unstirred batch",228.000000,103.000000,528.000000
+"Nitroarene -> aniline","Unstirred batch",228.000000,102.900000,529.600000
 "Nitroarene -> aniline","Stirred batch",200.000000,193.000000,207.000000
 "Nitroarene -> aniline","Recirculating flow cell",106.900000,93.920573,119.879427
 "Nitroarene -> aniline","ANEC flow cell",36.200000,31.804722,40.595278
 "Nitroarene -> aniline","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Nitroarene -> aniline","RDE 1600 rpm",10.702849,7.135232,21.405697
 "Nitroarene -> aniline","Rotating cylinder 3000 rpm",10.942140,7.652584,23.609518
-"Rapid-alternating-polarity imide reduction","Unstirred batch",228.000000,103.000000,528.000000
-"Rapid-alternating-polarity imide reduction","Stirred batch",200.000000,193.000000,207.000000
-"Rapid-alternating-polarity imide reduction","Recirculating flow cell",106.900000,93.920573,119.879427
-"Rapid-alternating-polarity imide reduction","ANEC flow cell",36.200000,31.804722,40.595278
-"Rapid-alternating-polarity imide reduction","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Rapid-alternating-polarity imide reduction","RDE 1600 rpm",13.359027,8.906018,26.718054
-"Rapid-alternating-polarity imide reduction","Rotating cylinder 3000 rpm",11.788784,8.244700,25.436297
-"Diazo difunctionalization (thiol + alcohol)","Unstirred batch",228.000000,103.000000,528.000000
+"Rapid-alternating-polarity (hetero)arene reduction","Unstirred batch",228.000000,102.900000,529.600000
+"Rapid-alternating-polarity (hetero)arene reduction","Stirred batch",200.000000,193.000000,207.000000
+"Rapid-alternating-polarity (hetero)arene reduction","Recirculating flow cell",106.900000,93.920573,119.879427
+"Rapid-alternating-polarity (hetero)arene reduction","ANEC flow cell",36.200000,31.804722,40.595278
+"Rapid-alternating-polarity (hetero)arene reduction","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
+"Rapid-alternating-polarity (hetero)arene reduction","RDE 1600 rpm",13.239729,8.826486,26.479459
+"Rapid-alternating-polarity (hetero)arene reduction","Rotating cylinder 3000 rpm",12.197814,8.530763,26.318848
+"Diazo difunctionalization (thiol + alcohol)","Unstirred batch",228.000000,102.900000,529.600000
 "Diazo difunctionalization (thiol + alcohol)","Stirred batch",200.000000,193.000000,207.000000
 "Diazo difunctionalization (thiol + alcohol)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Diazo difunctionalization (thiol + alcohol)","ANEC flow cell",36.200000,31.804722,40.595278
 "Diazo difunctionalization (thiol + alcohol)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Diazo difunctionalization (thiol + alcohol)","RDE 1600 rpm",14.181610,9.454406,28.363219
-"Diazo difunctionalization (thiol + alcohol)","Rotating cylinder 3000 rpm",11.806612,8.257169,25.474764
-"Cathodic aryl chloride dehalogenation","Unstirred batch",228.000000,103.000000,528.000000
-"Cathodic aryl chloride dehalogenation","Stirred batch",200.000000,193.000000,207.000000
-"Cathodic aryl chloride dehalogenation","Recirculating flow cell",106.900000,93.920573,119.879427
-"Cathodic aryl chloride dehalogenation","ANEC flow cell",36.200000,31.804722,40.595278
-"Cathodic aryl chloride dehalogenation","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Cathodic aryl chloride dehalogenation","RDE 1600 rpm",13.662995,9.108663,27.325989
-"Cathodic aryl chloride dehalogenation","Rotating cylinder 3000 rpm",11.346070,7.935080,24.481067
-"Benzaldehyde -> benzyl alcohol","Unstirred batch",228.000000,103.000000,528.000000
+"Diazo difunctionalization (thiol + alcohol)","RDE 1600 rpm",14.067657,9.378438,28.135314
+"Diazo difunctionalization (thiol + alcohol)","Rotating cylinder 3000 rpm",11.705320,8.186328,25.256209
+"Cathodic aryl halide hydrodehalogenation","Unstirred batch",228.000000,102.900000,529.600000
+"Cathodic aryl halide hydrodehalogenation","Stirred batch",200.000000,193.000000,207.000000
+"Cathodic aryl halide hydrodehalogenation","Recirculating flow cell",106.900000,93.920573,119.879427
+"Cathodic aryl halide hydrodehalogenation","ANEC flow cell",36.200000,31.804722,40.595278
+"Cathodic aryl halide hydrodehalogenation","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
+"Cathodic aryl halide hydrodehalogenation","RDE 1600 rpm",12.650356,8.433571,25.300712
+"Cathodic aryl halide hydrodehalogenation","Rotating cylinder 3000 rpm",10.450286,7.308598,22.548261
+"Benzaldehyde -> benzyl alcohol","Unstirred batch",228.000000,102.900000,529.600000
 "Benzaldehyde -> benzyl alcohol","Stirred batch",200.000000,193.000000,207.000000
 "Benzaldehyde -> benzyl alcohol","Recirculating flow cell",106.900000,93.920573,119.879427
 "Benzaldehyde -> benzyl alcohol","ANEC flow cell",36.200000,31.804722,40.595278
 "Benzaldehyde -> benzyl alcohol","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Benzaldehyde -> benzyl alcohol","RDE 1600 rpm",11.369599,7.579733,22.739198
 "Benzaldehyde -> benzyl alcohol","Rotating cylinder 3000 rpm",11.671663,8.162790,25.183588
-"ACT-mediated alcohol oxidation (flow, hectogram)","Unstirred batch",228.000000,103.000000,528.000000
+"ACT-mediated alcohol oxidation (flow, hectogram)","Unstirred batch",228.000000,102.900000,529.600000
 "ACT-mediated alcohol oxidation (flow, hectogram)","Stirred batch",200.000000,193.000000,207.000000
 "ACT-mediated alcohol oxidation (flow, hectogram)","Recirculating flow cell",106.900000,93.920573,119.879427
 "ACT-mediated alcohol oxidation (flow, hectogram)","ANEC flow cell",36.200000,31.804722,40.595278
 "ACT-mediated alcohol oxidation (flow, hectogram)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "ACT-mediated alcohol oxidation (flow, hectogram)","RDE 1600 rpm",10.252266,6.834844,20.504531
 "ACT-mediated alcohol oxidation (flow, hectogram)","Rotating cylinder 3000 rpm",9.269227,6.482603,19.999926
-"Anodic methoxylation of 4-tBu-toluene (Lysmeral)","Unstirred batch",228.000000,103.000000,528.000000
+"Anodic methoxylation of 4-tBu-toluene (Lysmeral)","Unstirred batch",228.000000,102.900000,529.600000
 "Anodic methoxylation of 4-tBu-toluene (Lysmeral)","Stirred batch",200.000000,193.000000,207.000000
 "Anodic methoxylation of 4-tBu-toluene (Lysmeral)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Anodic methoxylation of 4-tBu-toluene (Lysmeral)","ANEC flow cell",36.200000,31.804722,40.595278
 "Anodic methoxylation of 4-tBu-toluene (Lysmeral)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Anodic methoxylation of 4-tBu-toluene (Lysmeral)","RDE 1600 rpm",12.735682,8.490455,25.471364
 "Anodic methoxylation of 4-tBu-toluene (Lysmeral)","Rotating cylinder 3000 rpm",11.202249,7.834497,24.170748
-"Shono alpha-methoxylation of amides","Unstirred batch",228.000000,103.000000,528.000000
+"Shono alpha-methoxylation of amides","Unstirred batch",228.000000,102.900000,529.600000
 "Shono alpha-methoxylation of amides","Stirred batch",200.000000,193.000000,207.000000
 "Shono alpha-methoxylation of amides","Recirculating flow cell",106.900000,93.920573,119.879427
 "Shono alpha-methoxylation of amides","ANEC flow cell",36.200000,31.804722,40.595278
 "Shono alpha-methoxylation of amides","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Shono alpha-methoxylation of amides","RDE 1600 rpm",13.069026,8.712684,26.138052
-"Shono alpha-methoxylation of amides","Rotating cylinder 3000 rpm",11.515671,8.053694,24.847010
-"Cl-mediated ethylene epoxidation","Unstirred batch",228.000000,103.000000,528.000000
+"Shono alpha-methoxylation of amides","RDE 1600 rpm",14.311748,9.541166,28.623497
+"Shono alpha-methoxylation of amides","Rotating cylinder 3000 rpm",12.688821,8.874158,27.378280
+"Cl-mediated ethylene epoxidation","Unstirred batch",228.000000,102.900000,529.600000
 "Cl-mediated ethylene epoxidation","Stirred batch",200.000000,193.000000,207.000000
 "Cl-mediated ethylene epoxidation","Recirculating flow cell",106.900000,93.920573,119.879427
 "Cl-mediated ethylene epoxidation","ANEC flow cell",36.200000,31.804722,40.595278
 "Cl-mediated ethylene epoxidation","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Cl-mediated ethylene epoxidation","RDE 1600 rpm",15.453715,10.302476,30.907429
 "Cl-mediated ethylene epoxidation","Rotating cylinder 3000 rpm",14.367296,10.048030,30.999874
-"Alkaline lignin -> vanillin (pilot)","Unstirred batch",228.000000,103.000000,528.000000
+"Alkaline lignin -> vanillin (pilot)","Unstirred batch",228.000000,102.900000,529.600000
 "Alkaline lignin -> vanillin (pilot)","Stirred batch",200.000000,193.000000,207.000000
 "Alkaline lignin -> vanillin (pilot)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Alkaline lignin -> vanillin (pilot)","ANEC flow cell",36.200000,31.804722,40.595278
 "Alkaline lignin -> vanillin (pilot)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Alkaline lignin -> vanillin (pilot)","RDE 1600 rpm",11.870349,7.913566,23.740698
 "Alkaline lignin -> vanillin (pilot)","Rotating cylinder 3000 rpm",10.839642,7.580901,23.388362
-"Thioether -> sulfone (kilo-scale)","Unstirred batch",228.000000,103.000000,528.000000
+"Thioether -> sulfone (kilo-scale)","Unstirred batch",228.000000,102.900000,529.600000
 "Thioether -> sulfone (kilo-scale)","Stirred batch",200.000000,193.000000,207.000000
 "Thioether -> sulfone (kilo-scale)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Thioether -> sulfone (kilo-scale)","ANEC flow cell",36.200000,31.804722,40.595278
 "Thioether -> sulfone (kilo-scale)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Thioether -> sulfone (kilo-scale)","RDE 1600 rpm",13.085637,8.723758,26.171274
-"Thioether -> sulfone (kilo-scale)","Rotating cylinder 3000 rpm",11.215091,7.843478,24.198457
-"NHPI-mediated allylic C-H -> enone","Unstirred batch",228.000000,103.000000,528.000000
+"Thioether -> sulfone (kilo-scale)","RDE 1600 rpm",15.016404,10.010936,30.032807
+"Thioether -> sulfone (kilo-scale)","Rotating cylinder 3000 rpm",12.990872,9.085402,28.030005
+"NHPI-mediated allylic C-H -> enone","Unstirred batch",228.000000,102.900000,529.600000
 "NHPI-mediated allylic C-H -> enone","Stirred batch",200.000000,193.000000,207.000000
 "NHPI-mediated allylic C-H -> enone","Recirculating flow cell",106.900000,93.920573,119.879427
 "NHPI-mediated allylic C-H -> enone","ANEC flow cell",36.200000,31.804722,40.595278
 "NHPI-mediated allylic C-H -> enone","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "NHPI-mediated allylic C-H -> enone","RDE 1600 rpm",13.602469,9.068313,27.204939
 "NHPI-mediated allylic C-H -> enone","Rotating cylinder 3000 rpm",10.928239,7.642863,23.579526
-"Alkenesulfonate from cinnamic acid, SO2 and alcohol","Unstirred batch",228.000000,103.000000,528.000000
+"Alkenesulfonate from cinnamic acid, SO2 and alcohol","Unstirred batch",228.000000,102.900000,529.600000
 "Alkenesulfonate from cinnamic acid, SO2 and alcohol","Stirred batch",200.000000,193.000000,207.000000
 "Alkenesulfonate from cinnamic acid, SO2 and alcohol","Recirculating flow cell",106.900000,93.920573,119.879427
 "Alkenesulfonate from cinnamic acid, SO2 and alcohol","ANEC flow cell",36.200000,31.804722,40.595278
 "Alkenesulfonate from cinnamic acid, SO2 and alcohol","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Alkenesulfonate from cinnamic acid, SO2 and alcohol","RDE 1600 rpm",13.442667,8.961778,26.885334
 "Alkenesulfonate from cinnamic acid, SO2 and alcohol","Rotating cylinder 3000 rpm",11.150771,7.798494,24.059675
-"HMF -> FDCA (biomass)","Unstirred batch",228.000000,103.000000,528.000000
+"HMF -> FDCA (biomass)","Unstirred batch",228.000000,102.900000,529.600000
 "HMF -> FDCA (biomass)","Stirred batch",200.000000,193.000000,207.000000
 "HMF -> FDCA (biomass)","Recirculating flow cell",106.900000,93.920573,119.879427
 "HMF -> FDCA (biomass)","ANEC flow cell",36.200000,31.804722,40.595278
 "HMF -> FDCA (biomass)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "HMF -> FDCA (biomass)","RDE 1600 rpm",10.252266,6.834844,20.504531
 "HMF -> FDCA (biomass)","Rotating cylinder 3000 rpm",9.269227,6.482603,19.999926
-"Radical-cation Diels-Alder (catalytic in e-)","Unstirred batch",228.000000,103.000000,528.000000
+"Radical-cation Diels-Alder (catalytic in e-)","Unstirred batch",228.000000,102.900000,529.600000
 "Radical-cation Diels-Alder (catalytic in e-)","Stirred batch",200.000000,193.000000,207.000000
 "Radical-cation Diels-Alder (catalytic in e-)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Radical-cation Diels-Alder (catalytic in e-)","ANEC flow cell",36.200000,31.804722,40.595278
 "Radical-cation Diels-Alder (catalytic in e-)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Radical-cation Diels-Alder (catalytic in e-)","RDE 1600 rpm",11.991717,7.994478,23.983433
-"Radical-cation Diels-Alder (catalytic in e-)","Rotating cylinder 3000 rpm",10.097128,7.061610,21.786264
-"BQ-mediated Wacker-Tsuji oxidation","Unstirred batch",228.000000,103.000000,528.000000
+"Radical-cation Diels-Alder (catalytic in e-)","RDE 1600 rpm",11.959677,7.973118,23.919353
+"Radical-cation Diels-Alder (catalytic in e-)","Rotating cylinder 3000 rpm",10.095111,7.060200,21.781912
+"BQ-mediated Wacker-Tsuji oxidation","Unstirred batch",228.000000,102.900000,529.600000
 "BQ-mediated Wacker-Tsuji oxidation","Stirred batch",200.000000,193.000000,207.000000
 "BQ-mediated Wacker-Tsuji oxidation","Recirculating flow cell",106.900000,93.920573,119.879427
 "BQ-mediated Wacker-Tsuji oxidation","ANEC flow cell",36.200000,31.804722,40.595278
 "BQ-mediated Wacker-Tsuji oxidation","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "BQ-mediated Wacker-Tsuji oxidation","RDE 1600 rpm",13.786020,9.190680,27.572041
 "BQ-mediated Wacker-Tsuji oxidation","Rotating cylinder 3000 rpm",11.857323,8.292634,25.584181
-"Non-Kolbe decarboxylative alpha-methoxylation","Unstirred batch",228.000000,103.000000,528.000000
+"Non-Kolbe decarboxylative alpha-methoxylation","Unstirred batch",228.000000,102.900000,529.600000
 "Non-Kolbe decarboxylative alpha-methoxylation","Stirred batch",200.000000,193.000000,207.000000
 "Non-Kolbe decarboxylative alpha-methoxylation","Recirculating flow cell",106.900000,93.920573,119.879427
 "Non-Kolbe decarboxylative alpha-methoxylation","ANEC flow cell",36.200000,31.804722,40.595278
 "Non-Kolbe decarboxylative alpha-methoxylation","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Non-Kolbe decarboxylative alpha-methoxylation","RDE 1600 rpm",12.666550,8.444366,25.333099
 "Non-Kolbe decarboxylative alpha-methoxylation","Rotating cylinder 3000 rpm",11.137317,7.789085,24.030647
-"Co-H alkene isomerization (catalytic)","Unstirred batch",228.000000,103.000000,528.000000
+"Co-H alkene isomerization (catalytic)","Unstirred batch",228.000000,102.900000,529.600000
 "Co-H alkene isomerization (catalytic)","Stirred batch",200.000000,193.000000,207.000000
 "Co-H alkene isomerization (catalytic)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Co-H alkene isomerization (catalytic)","ANEC flow cell",36.200000,31.804722,40.595278
 "Co-H alkene isomerization (catalytic)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Co-H alkene isomerization (catalytic)","RDE 1600 rpm",11.971768,7.981178,23.943535
 "Co-H alkene isomerization (catalytic)","Rotating cylinder 3000 rpm",9.534973,6.668457,20.573318
-"Anodic oxazoline/oxazole cyclization","Unstirred batch",228.000000,103.000000,528.000000
-"Anodic oxazoline/oxazole cyclization","Stirred batch",200.000000,193.000000,207.000000
-"Anodic oxazoline/oxazole cyclization","Recirculating flow cell",106.900000,93.920573,119.879427
-"Anodic oxazoline/oxazole cyclization","ANEC flow cell",36.200000,31.804722,40.595278
-"Anodic oxazoline/oxazole cyclization","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Anodic oxazoline/oxazole cyclization","RDE 1600 rpm",13.779750,9.186500,27.559500
-"Anodic oxazoline/oxazole cyclization","Rotating cylinder 3000 rpm",11.449649,8.007521,24.704557
-"Cathodic aryl-halide radical 5-exo cyclization","Unstirred batch",228.000000,103.000000,528.000000
+"Oxazole synthesis from ketones and acetonitrile","Unstirred batch",228.000000,102.900000,529.600000
+"Oxazole synthesis from ketones and acetonitrile","Stirred batch",200.000000,193.000000,207.000000
+"Oxazole synthesis from ketones and acetonitrile","Recirculating flow cell",106.900000,93.920573,119.879427
+"Oxazole synthesis from ketones and acetonitrile","ANEC flow cell",36.200000,31.804722,40.595278
+"Oxazole synthesis from ketones and acetonitrile","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
+"Oxazole synthesis from ketones and acetonitrile","RDE 1600 rpm",11.420238,7.613492,22.840476
+"Oxazole synthesis from ketones and acetonitrile","Rotating cylinder 3000 rpm",9.368704,6.552173,20.214564
+"Cathodic aryl-halide radical 5-exo cyclization","Unstirred batch",228.000000,102.900000,529.600000
 "Cathodic aryl-halide radical 5-exo cyclization","Stirred batch",200.000000,193.000000,207.000000
 "Cathodic aryl-halide radical 5-exo cyclization","Recirculating flow cell",106.900000,93.920573,119.879427
 "Cathodic aryl-halide radical 5-exo cyclization","ANEC flow cell",36.200000,31.804722,40.595278
 "Cathodic aryl-halide radical 5-exo cyclization","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Cathodic aryl-halide radical 5-exo cyclization","RDE 1600 rpm",10.255432,6.836955,20.510864
 "Cathodic aryl-halide radical 5-exo cyclization","Rotating cylinder 3000 rpm",9.181126,6.420988,19.809834
-"Dehydrogenative lactonization (C-H/O-H)","Unstirred batch",228.000000,103.000000,528.000000
+"Dehydrogenative lactonization (C-H/O-H)","Unstirred batch",228.000000,102.900000,529.600000
 "Dehydrogenative lactonization (C-H/O-H)","Stirred batch",200.000000,193.000000,207.000000
 "Dehydrogenative lactonization (C-H/O-H)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Dehydrogenative lactonization (C-H/O-H)","ANEC flow cell",36.200000,31.804722,40.595278
 "Dehydrogenative lactonization (C-H/O-H)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Dehydrogenative lactonization (C-H/O-H)","RDE 1600 rpm",12.609597,8.406398,25.219193
 "Dehydrogenative lactonization (C-H/O-H)","Rotating cylinder 3000 rpm",10.414330,7.283451,22.470679
-"Anodic benzylic fluorination","Unstirred batch",228.000000,103.000000,528.000000
+"Anodic benzylic fluorination","Unstirred batch",228.000000,102.900000,529.600000
 "Anodic benzylic fluorination","Stirred batch",200.000000,193.000000,207.000000
 "Anodic benzylic fluorination","Recirculating flow cell",106.900000,93.920573,119.879427
 "Anodic benzylic fluorination","ANEC flow cell",36.200000,31.804722,40.595278
 "Anodic benzylic fluorination","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
 "Anodic benzylic fluorination","RDE 1600 rpm",13.779750,9.186500,27.559500
 "Anodic benzylic fluorination","Rotating cylinder 3000 rpm",11.449649,8.007521,24.704557
-"Br- oxidation / electrophilic bromination","Unstirred batch",228.000000,103.000000,528.000000
+"Br- oxidation / electrophilic bromination","Unstirred batch",228.000000,102.900000,529.600000
 "Br- oxidation / electrophilic bromination","Stirred batch",200.000000,193.000000,207.000000
 "Br- oxidation / electrophilic bromination","Recirculating flow cell",106.900000,93.920573,119.879427
 "Br- oxidation / electrophilic bromination","ANEC flow cell",36.200000,31.804722,40.595278
 "Br- oxidation / electrophilic bromination","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Br- oxidation / electrophilic bromination","RDE 1600 rpm",15.762510,10.508340,31.525020
-"Br- oxidation / electrophilic bromination","Rotating cylinder 3000 rpm",14.845731,10.382632,32.032178
-"Sulfonylation of alkenes with sulfinates","Unstirred batch",228.000000,103.000000,528.000000
-"Sulfonylation of alkenes with sulfinates","Stirred batch",200.000000,193.000000,207.000000
-"Sulfonylation of alkenes with sulfinates","Recirculating flow cell",106.900000,93.920573,119.879427
-"Sulfonylation of alkenes with sulfinates","ANEC flow cell",36.200000,31.804722,40.595278
-"Sulfonylation of alkenes with sulfinates","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Sulfonylation of alkenes with sulfinates","RDE 1600 rpm",13.919986,9.279991,27.839973
-"Sulfonylation of alkenes with sulfinates","Rotating cylinder 3000 rpm",12.318214,8.614967,26.578631
-"Aryl thiocyanation (NH4SCN)","Unstirred batch",228.000000,103.000000,528.000000
+"Br- oxidation / electrophilic bromination","RDE 1600 rpm",15.665545,10.443697,31.331091
+"Br- oxidation / electrophilic bromination","Rotating cylinder 3000 rpm",14.657853,10.251236,31.626800
+"Alkoxysulfonylation of styrenes with sulfinates","Unstirred batch",228.000000,102.900000,529.600000
+"Alkoxysulfonylation of styrenes with sulfinates","Stirred batch",200.000000,193.000000,207.000000
+"Alkoxysulfonylation of styrenes with sulfinates","Recirculating flow cell",106.900000,93.920573,119.879427
+"Alkoxysulfonylation of styrenes with sulfinates","ANEC flow cell",36.200000,31.804722,40.595278
+"Alkoxysulfonylation of styrenes with sulfinates","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
+"Alkoxysulfonylation of styrenes with sulfinates","RDE 1600 rpm",13.490778,8.993852,26.981557
+"Alkoxysulfonylation of styrenes with sulfinates","Rotating cylinder 3000 rpm",11.912997,8.331571,25.704307
+"Aryl thiocyanation (NH4SCN)","Unstirred batch",228.000000,102.900000,529.600000
 "Aryl thiocyanation (NH4SCN)","Stirred batch",200.000000,193.000000,207.000000
 "Aryl thiocyanation (NH4SCN)","Recirculating flow cell",106.900000,93.920573,119.879427
 "Aryl thiocyanation (NH4SCN)","ANEC flow cell",36.200000,31.804722,40.595278
 "Aryl thiocyanation (NH4SCN)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Aryl thiocyanation (NH4SCN)","RDE 1600 rpm",11.689670,7.793113,23.379340
-"Aryl thiocyanation (NH4SCN)","Rotating cylinder 3000 rpm",11.093493,7.758436,23.936089
-"Anodic C-H phosphonylation of azoles","Unstirred batch",228.000000,103.000000,528.000000
-"Anodic C-H phosphonylation of azoles","Stirred batch",200.000000,193.000000,207.000000
-"Anodic C-H phosphonylation of azoles","Recirculating flow cell",106.900000,93.920573,119.879427
-"Anodic C-H phosphonylation of azoles","ANEC flow cell",36.200000,31.804722,40.595278
-"Anodic C-H phosphonylation of azoles","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"Anodic C-H phosphonylation of azoles","RDE 1600 rpm",12.923296,8.615531,25.846592
-"Anodic C-H phosphonylation of azoles","Rotating cylinder 3000 rpm",10.691266,7.477131,23.068215
-"N-N azo/pyrazole formation (N-H/N-H)","Unstirred batch",228.000000,103.000000,528.000000
-"N-N azo/pyrazole formation (N-H/N-H)","Stirred batch",200.000000,193.000000,207.000000
-"N-N azo/pyrazole formation (N-H/N-H)","Recirculating flow cell",106.900000,93.920573,119.879427
-"N-N azo/pyrazole formation (N-H/N-H)","ANEC flow cell",36.200000,31.804722,40.595278
-"N-N azo/pyrazole formation (N-H/N-H)","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
-"N-N azo/pyrazole formation (N-H/N-H)","RDE 1600 rpm",10.199678,6.799785,20.399355
-"N-N azo/pyrazole formation (N-H/N-H)","Rotating cylinder 3000 rpm",9.416152,6.585357,20.316943
+"Aryl thiocyanation (NH4SCN)","RDE 1600 rpm",12.123010,8.082007,24.246021
+"Aryl thiocyanation (NH4SCN)","Rotating cylinder 3000 rpm",11.533244,8.065984,24.884926
+"Anodic C-H phosphorylation of arenes","Unstirred batch",228.000000,102.900000,529.600000
+"Anodic C-H phosphorylation of arenes","Stirred batch",200.000000,193.000000,207.000000
+"Anodic C-H phosphorylation of arenes","Recirculating flow cell",106.900000,93.920573,119.879427
+"Anodic C-H phosphorylation of arenes","ANEC flow cell",36.200000,31.804722,40.595278
+"Anodic C-H phosphorylation of arenes","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
+"Anodic C-H phosphorylation of arenes","RDE 1600 rpm",13.380948,8.920632,26.761896
+"Anodic C-H phosphorylation of arenes","Rotating cylinder 3000 rpm",11.096102,7.760261,23.941718
+"Anodic N-N coupling to pyrazolidine-3,5-diones","Unstirred batch",228.000000,102.900000,529.600000
+"Anodic N-N coupling to pyrazolidine-3,5-diones","Stirred batch",200.000000,193.000000,207.000000
+"Anodic N-N coupling to pyrazolidine-3,5-diones","Recirculating flow cell",106.900000,93.920573,119.879427
+"Anodic N-N coupling to pyrazolidine-3,5-diones","ANEC flow cell",36.200000,31.804722,40.595278
+"Anodic N-N coupling to pyrazolidine-3,5-diones","Microfluidic cell (25 um gap)",12.500000,12.500000,12.500000
+"Anodic N-N coupling to pyrazolidine-3,5-diones","RDE 1600 rpm",9.943222,6.628815,19.886444
+"Anodic N-N coupling to pyrazolidine-3,5-diones","Rotating cylinder 3000 rpm",9.163516,6.408671,19.771837

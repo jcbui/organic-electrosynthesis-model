@@ -13,5 +13,5 @@ G10,"Cl-/propylene stirred, mesh-matched: hits migration ceiling",7889.437798447
 G9,"EC' commuting bound, refined mesh (N=130)",11.545891105975013,11.57823984,-0.279,2.5,true,""
 G9,"EC' Saveant, refined mesh (N=130), depletion-corrected",166.27959437976182,164.78802207373903,0.905,4.0,true,""
 G11,"EC' current conservation, max face deviation at 0.9 i_lim",1.0000000000030935,1.0,0.0,0.5,true,"max |i(x)-i_app|/i_app = 3.1e-10%"
-G12,"production mesh converged: ACT-mediated alcohol oxidation",14.531063157124633,14.529968574171498,0.008,1.0,true,"N 90->180, growth 1.15->1.02, c-control path; limiter 'plateau (c-control; c_red/cb 2.05e-03, c_sub/cb 6.0e-01)'"
-G12,"production mesh converged: BQ-mediated Wacker-Tsuji oxida",16.83191697797302,16.832107204825387,-0.001,1.0,true,"N 90->180, growth 1.15->1.02, c-control path; limiter 'plateau (c-control; c_red/cb 5.29e-03, c_sub/cb 4.1e-02)'"
+G12,"production mesh converged: ACT-mediated alcohol oxidation",16.448883727027887,16.448483760939656,0.002,1.0,true,"N 90->180, growth 1.15->1.02, c-control path; limiter 'plateau (c-control; c_red/cb 1.84e-03, c_sub/cb 7.7e-01)'"
+G12,"production mesh converged: BQ-mediated Wacker-Tsuji oxida",3.967418588758697,3.9749362760072557,-0.189,1.0,true,"N 90->180, growth 1.15->1.02, c-control path; limiter 'plateau (c-control; c_red/cb 1.73e-03, c_sub/cb 9.9e-01)'"

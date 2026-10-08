@@ -146,8 +146,18 @@ for rxn, g in ec.groupby("reaction"):
         val = float(row.i_ec_mAcm2)
         m.at[rxn, col] = round(val, 4)
         n_over += 1
-if n_over != 56:
-    raise SystemExit("expected 56 mediated overlay cells, applied %d" % n_over)
+## The overlay must cover EXACTLY the rows the reaction table types as mediator-carried: no more
+## (a spec for a row that is not mediated) and no fewer (a mediated row left at its k = 0 value).
+## The count was a literal 56 until 2026-10-05, when three rows were re-typed as mediated.
+_med_table = set(t0.loc[t0.carrier == "mediator", "reaction"])
+_med_solved = set(ec.reaction.unique())
+if _med_table != _med_solved:
+    raise SystemExit("mediated rows disagree between the reaction table and mediated_ec_matrix.csv:\n"
+                     "  typed mediator but not solved: %s\n  solved but not typed mediator: %s"
+                     % (sorted(_med_table - _med_solved), sorted(_med_solved - _med_table)))
+if n_over != len(COLS) * len(_med_table):
+    raise SystemExit("expected %d mediated overlay cells (%d rows x %d architectures), applied %d"
+                     % (len(COLS) * len(_med_table), len(_med_table), len(COLS), n_over))
 
 ## ---- the SEVEN catalyst rows with a SOURCED rate constant (2026-09-11) --------------------
 ## julia/catalyst_ec_sourced.csv (run_catalyst_sourced.jl) solves every catalyst row at k = 0 and,
@@ -170,9 +180,15 @@ if _rel.max() > 1e-6:
     raise SystemExit("catalyst_ec_sourced.csv: the k = 0 control differs from all50_np_matrix.csv by %.2e "
                      "(%s / %s) -- the two layers are no longer the same physics" % (_rel.max(), _w.reaction, _w.reactor))
 csk = cs[cs.k_M > 0]
-if len(csk) != 49 or csk.reaction.nunique() != 7:
-    raise SystemExit("expected 49 sourced catalyst cells (7 rows x 7 architectures), found %d over %d rows"
-                     % (len(csk), csk.reaction.nunique()))
+## the rows carried at a sourced k are the ones run_catalyst_sourced.jl's K_SOURCED table gives a k > 0 (seven until the
+## chemistry audit of 2026-10-05, four since); read from the solver so a typed count cannot outlive the table
+import re as _re
+_ks = dict((n, float(k)) for n, k in _re.findall(r'"([^"]+)"\s*=>\s*\(([0-9.eE+-]+),',
+                                                 open(os.path.join(JULIA, "run_catalyst_sourced.jl"), encoding="utf-8").read()))
+_ks_rows = {n for n, k in _ks.items() if k > 0}
+if not _ks_rows or set(csk.reaction) != _ks_rows or len(csk) != len(COLS) * len(_ks_rows):
+    raise SystemExit("catalyst_ec_sourced.csv holds %d sourced cells over %r; run_catalyst_sourced.jl's K_SOURCED names %r"
+                     % (len(csk), sorted(set(csk.reaction)), sorted(_ks_rows)))
 n_cat = 0; n_cat_wall = 0
 for row in csk.itertuples():
     col = RMAP[row.reactor]
@@ -192,8 +208,8 @@ for row in csk.itertuples():
         raise SystemExit("sourced catalyst cell %s / %s is below its own k = 0 solve" % (row.reaction, col))
     m.at[row.reaction, col] = round(float(row.i_ec_mAcm2), 4)
     n_cat += 1
-if n_cat != 49:
-    raise SystemExit("expected 49 sourced catalyst overlay cells, applied %d" % n_cat)
+if n_cat != len(COLS) * len(_ks_rows):
+    raise SystemExit("expected %d sourced catalyst overlay cells, applied %d" % (len(COLS) * len(_ks_rows), n_cat))
 print("sourced catalyst overlay: %d cells over %d rows (%d end on a ramp wall tight to a plateau; "
       "k = 0 control vs the NP layer: worst %.1e)" % (n_cat, csk.reaction.nunique(), n_cat_wall, _rel.max()))
 
@@ -205,7 +221,7 @@ for c in META:
 OUT = os.path.join(JULIA, "tier0_ec_matrix.csv")
 out.to_csv(OUT, index=False)
 
-print("PUBLISHED MATRIX -- one physics for all 50 rows (NP + migration; EC' source on the 8 mediated rows and the 7 catalyst rows with a sourced k)")
+print("PUBLISHED MATRIX -- one physics for all 50 rows (NP + migration; EC' source on the %d mediated rows and the %d catalyst rows with a sourced k)" % (len(_med_table), csk.reaction.nunique()))
 for c in COLS:
     col = out[c].dropna()
     print("  %-8s >=25: %2d/%d   >=50: %2d/%d   median %7.1f"

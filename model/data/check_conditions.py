@@ -135,12 +135,30 @@ def relative(t, base):
 ## Each entry records the quote and the arithmetic, so the exemption is auditable and can be
 ## re-checked by opening the paper -- it is never a bare suppression.
 HAND_VERIFIED = {
+    # chemistry review 2026-10-06: the row is the alprenolol run (compound 45), which the SI runs at HALF the general
+    # procedure's scale in the same volume, so its substrate concentration is in the SI alone
+    "38": ("Miller & Wayner, Can. J. Chem. 1992, 70, 2485, Results p. 2486: 'Oxidations were carried out in solutions of "
+           "acetonitrile/water (7:1 v/v), containing benzoquinone (0.022 M, 20 mol% based on olefin), palladium acetate "
+           "(0.0011 M, 1 mol% based on olefin), olefin (0.11 M), and perchloric acid (0.015-0.24 M)' -> the row's BQ 0.022 M and "
+           "olefin 0.11 M as printed. The text layer reads '0.11 MI' and '0.001 1 M' (OCR), which is why the matcher misses the "
+           "olefin; the digits were read on the page. One sentence, every number. Verified 2026-10-06."),
+    "40": ("Gnaim/Baran Nature 2022 SI (41586_2022_4595_MOESM1_ESM.pdf), printed pp. 66-67, Compound 17: 'Following "
+           "the general procedure B on 0.2 mmol scale, using Co(salen)-1 (4.8 mg, 8 umol), TBABF4 (60 mg), HFIP (84 uL, "
+           "0.8 mmol), and acetone (2.5 mL), with zinc as anode and nickel foam as cathode under the electrolysis of 5 mA "
+           "for 3 F/mol' -> alkene 0.2/2.5 = 0.080 M, Co(salen)-1 0.008/2.5 = 0.0032 M, TBABF4 60 mg / 329.3 g mol-1 = "
+           "0.182 mmol / 2.5 mL = 0.073 M. One passage, all three numbers, and the 3 F/mol the row carries as n."),
+    "10": ("Gnaim/Baran Nature 2022 SI (41586_2022_4595_MOESM1_ESM.pdf), printed p. 83, Compound 45: 'Following the "
+           "general procedure C on 0.1 mmol scale, using CoBr2*glyme (6.2 mg, 20 umol), 6,6'-dimethyl-2,2'-bipyridine "
+           "(5.5 mg, 30 umol), Et3N*HBF4 (114 mg), HFIP (300 uL), and THF (2.2 mL)' -> 2.5 mL in all: alprenolol "
+           "0.1/2.5 = 0.040 M, Co 0.020/2.5 = 0.008 M, Et3NHBF4 114 mg / 189.0 g mol-1 = 0.603 mmol / 2.5 mL = 0.24 M. "
+           "One passage, all three numbers."),
     "2": ("Shono JACS 1975 p 4268: 'Anodic oxidation of 12 (13.42 mmol) in methanol (8.61 ml) "
           "containing [Et4NOTs] (1.34 mmol)' -> 13.42/8.61 = 1.559 M substrate and "
           "1.34/8.61 = 0.1556 M Et4NOTs. One experiment, both numbers."),
-    "30": ("Same Shono 1975 compound-12 electrolysis as row 2; this row is declared in the "
-           "exemplar column as 'carbamate protocol, by analogy', so it is state C by "
-           "construction, not state A."),
+    "30": ("Shono JACS 1975 p 4268: 'A mixture of 13 (20.21 mmol) and 14 (20.21 mmol) was anodically "
+           "oxidized in methanol (25.63 ml) containing Et4NOTs (4.04 mmol)'; 13 is N,N-dimethylacetamide and 14 "
+           "its d9 isotopologue (drawn p 4266) -> 40.42/25.63 = 1.577 M amide and 4.04/25.63 = 0.158 M Et4NOTs. "
+           "One passage, both numbers."),
     "43": ("Org. Lett. 2017 Fig 2 fn a: '1 (0.5 mmol), CH3CN (7 mL), MeOH (1 mL), n-Bu4NBF4 "
            "(2 mmol)' -> 0.5/8 = 0.0625 M substrate, 2/8 = 0.25 M Bu4NBF4. The CH3CN subscript "
            "bleeds into the text as 'MeOH (1 3 mL)', so the 1 mL is unreadable to the matcher."),
@@ -171,21 +189,12 @@ HAND_VERIFIED = {
            "Corrected 2026-08-31. It changes no computed number (this row's architecture is "
            "declared, not derived from the flow rate), but it was a wrong number inside a "
            "page-anchored claim. Digits are what OCR gets wrong; confirm them against the image."),
-    "45": ("Zhang/Su, Nat. Commun. 2025, 16, 3052, DOI 10.1038/s41467-025-57329-0. The total "
-           "volume is the one number this row needs and the paper never PRINTS it -- which is why "
-           "the matcher cannot find 0.121 M -- but the footnote fixes it completely. Fig. 5 "
-           "footnote b: 'Substrate (4 mmol), solvent (0.5 M NaBr in deionized water (10 mL): "
-           "CH3CN: CH3OH: CH2Cl2 = 10:10:10:3), flow cell, two-electrode system and constant "
-           "voltage (4-5 V), at room temperature, flow rate: 5 mL/min'. The water term is stated "
-           "as 10 mL AND is the first term of the ratio, so the ratio is in mL and the four "
-           "volumes are 10 : 10 : 10 : 3 = 33 mL. Substrate 4/33 = 0.1212 M; NaBr is 0.5 M in the "
-           "aqueous 10 mL only, i.e. 5 mmol over the whole 33 mL = 0.1515 M. This row's exemplar "
-           "cites the 518 g campaign, footnote c, which reads 'the same as condition b except for "
-           "4 tandem cells, constant voltage (6 V), 18 h, flow rate: 50 mL/min, 518 g substrate' "
-           "-- the composition is unchanged, so b's concentrations are the right ones to carry. "
-           "STATE B, not A: the volume is a SUM the paper does not print, reproducible from the "
-           "quote alone. The supporting information would upgrade it if it states the total "
-           "volume or the 518 g run's charge outright. Verified 2026-08-31."),
+    "45": ("Zhang/Su, Nat. Commun. 2025, 16, 3052, DOI 10.1038/s41467-025-57329-0. The row carries the campaign run on "
+           "anisole, the divided H-cell (Methods; Fig. 4 footnote): 'each cell was filled with 7.5 mL acetonitrile and "
+           "7.5 mL 0.5 mol/L NaBr aqueous solution. 0.5 mmol substrate was dissolved in the anodic cel,l and constant "
+           "voltage was applied' -> 15 mL in the anodic chamber: anisole 0.5/15 = 0.0333 M, Br- 0.5 x 7.5/15 = 0.25 M, "
+           "water/MeCN 1:1 v/v. One sentence, both numbers. The flow runs of Fig. 5b/c (4 mmol in 33 mL of the 10:10:10:3 "
+           "medium; the 518 g run) are on natural-product and drug derivatives, not anisole. Verified 2026-10-06."),
     "31": ("Leow/Sargent, Science 2020, aaz8459. The substrate concentration is NOT in the "
            "exemplar paper and is not supposed to be -- it is a measured GAS SOLUBILITY from a "
            "different cited source, which is why a matcher searching the exemplar PDF reports "
@@ -290,17 +299,13 @@ HAND_VERIFIED = {
            "solvent 27 + 6 = 33 mL, so the phenol -- which is both the substrate and the carrier "
            "for this row -- is 0.005/0.033 = 0.152 M and the ammonium electrolyte is "
            "0.003/0.033 = 0.0909 M. ONE sentence, all three numbers. Verified 2026-08-31."),
-    "22": ("Peters/Baran, Science 2019, aav5606. This row is anchored to the 10 g BATCH scale-up, "
-           "not to the 0.1 mmol ElectraSyn procedure (0.029 M substrate, 0.21 M LiBr -- a "
-           "different experiment) and not to the 100 g flow run (0.45 mol in 2.5 L = 0.18 M). "
-           "SI p. 16: 'A clean and dry 500 mL beaker with a stir bar was charged with "
-           "tert-butyldimethyl(p-tolyloxy)silane (10.0 g, 45.0 mmol), 1,3-dimethylurea (DMU, "
-           "47.5 g, 540.0 mmol), tris(pyrrolidinophosphine) oxide (TPPA, 40.5 g, 157.5 mmol) and "
-           "LiBr solution (320 mL)'. That gives substrate 45.0 mmol / 320 mL = 0.141 M, and the "
-           "LiBr solution is prepared at 3.0 M on SI p. 15 ('Preparation of LiBr solution in THF "
-           "(3.0 M)', LiBr 83.4 g = 1.0 mol in THF 320 mL). ONE paragraph, both numbers. The "
-           "dissolved solids only raise the volume, so 0.141 M is itself an upper bound. "
-           "Verified 2026-08-31."),
+    "22": ("Peters/Baran, Science 2019, aav5606, SM. The row carries naphthalene under its own preparative procedure: SM "
+           "p. S93, compound SI-6, 'Following General Procedure A or B on 0.1 mmol scale (9 F/mol) with naphthalene' "
+           "(1,4,5,8-tetrahydronaphthalene, 75%). General Procedure B, SM pp. S12-S13 (room temperature): 'substrate "
+           "(0.1 mmol, 1.0 eq.), 1,3-dimethylurea (DMU, 0.3 mmol, 3.0 eq) and tri(pyrrolidin-1-yl)phosphine oxide (TPPA, "
+           "10 eq.), followed by 500 uL's of a 1.5 M THF solution of LiBr (0.75 mmol, 7.5 eq.). Next, 3 mL of dry THF' "
+           "-> 3.5 mL of liquid: naphthalene 0.1/3.5 = 0.0286 M, LiBr 0.75/3.5 = 0.214 M. One paragraph, both numbers. "
+           "The 10 g batch run (SM pp. S15-S16, 3.0 M LiBr) is on tert-butyldimethyl(p-tolyloxy)silane and is not this row."),
     "4": ("Fu/Lin, Science 2017, aan6206. Main text gives no molarity; the SI is in this repo "
           "(papers for model/concentrations/SIs/aan6206_fu_sm.pdf) and states the standard "
           "conditions in a table footnote, SI p. 8: 'Standard conditions: 0.2 mmol alkene, "

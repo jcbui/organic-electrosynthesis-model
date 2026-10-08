@@ -1,0 +1,4910 @@
+{
+ "classes": [
+  "passive",
+  "liquid cooling",
+  "beyond liquid cooling"
+ ],
+ "axes": [
+  {
+   "key": "kappa_band",
+   "label": "conductivity, across its own band",
+   "fmt": "%.2fx carried",
+   "x0": null,
+   "x1": null,
+   "rows": [
+    "3.0 M LiBr/THF",
+    "0.25 M Bu4NBF4/MeCN",
+    "0.2 M NaI/DMF",
+    "1 M NaOH aq"
+   ],
+   "log": true,
+   "declared": 1.0,
+   "cells": [
+    {
+     "arch": "unstirred batch",
+     "solvent": "THF",
+     "range": [
+      0.06666666666666667,
+      2.1999999999999997
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": [
+      [
+       0.09885367084058182,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "MeCN",
+     "range": [
+      0.7518796992481203,
+      1.1528822055137844
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "DMF",
+     "range": [
+      0.47003525264394835,
+      1.8801410105757934
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.997134670487106,
+      1.0429799426934097
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "THF",
+     "range": [
+      0.06666666666666667,
+      2.1999999999999997
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": [
+      [
+       0.11438572170694601,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "MeCN",
+     "range": [
+      0.7518796992481203,
+      1.1528822055137844
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "DMF",
+     "range": [
+      0.47003525264394835,
+      1.8801410105757934
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.997134670487106,
+      1.0429799426934097
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "THF",
+     "range": [
+      0.06666666666666667,
+      2.1999999999999997
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": [
+      [
+       0.3646872398659671,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "MeCN",
+     "range": [
+      0.7518796992481203,
+      1.1528822055137844
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "DMF",
+     "range": [
+      0.47003525264394835,
+      1.8801410105757934
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.997134670487106,
+      1.0429799426934097
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "THF",
+     "range": [
+      0.06666666666666667,
+      2.1999999999999997
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "MeCN",
+     "range": [
+      0.7518796992481203,
+      1.1528822055137844
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "DMF",
+     "range": [
+      0.47003525264394835,
+      1.8801410105757934
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.997134670487106,
+      1.0429799426934097
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "THF",
+     "range": [
+      0.06666666666666667,
+      2.1999999999999997
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       0.5593491160042455,
+       "beyond liquid cooling",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "MeCN",
+     "range": [
+      0.7518796992481203,
+      1.1528822055137844
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "DMF",
+     "range": [
+      0.47003525264394835,
+      1.8801410105757934
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       1.507739394419393,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.997134670487106,
+      1.0429799426934097
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "THF",
+     "range": [
+      0.06666666666666667,
+      2.1999999999999997
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       0.9336817698622041,
+       "beyond liquid cooling",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "MeCN",
+     "range": [
+      0.7518796992481203,
+      1.1528822055137844
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "DMF",
+     "range": [
+      0.47003525264394835,
+      1.8801410105757934
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.997134670487106,
+      1.0429799426934097
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "THF",
+     "range": [
+      0.06666666666666667,
+      2.1999999999999997
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       0.6499219484398859,
+       "beyond liquid cooling",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "MeCN",
+     "range": [
+      0.7518796992481203,
+      1.1528822055137844
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "DMF",
+     "range": [
+      0.47003525264394835,
+      1.8801410105757934
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.997134670487106,
+      1.0429799426934097
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "kappa_T",
+   "label": "conductivity raised to its value at T_b (S6.3 bracket)",
+   "fmt": "%.2fx its 25 C value",
+   "x0": null,
+   "x1": null,
+   "rows": [
+    "Ea (kappa(T) Arrhenius upper bound, S6.3)"
+   ],
+   "log": true,
+   "declared": 1.0,
+   "cells": [
+    {
+     "arch": "unstirred batch",
+     "solvent": "THF",
+     "range": [
+      1.0,
+      2.0782800329062976
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "MeCN",
+     "range": [
+      1.0,
+      2.6260313385579916
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "DMF",
+     "range": [
+      1.0,
+      6.144722943251546
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      1.0,
+      3.373385966535076
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "THF",
+     "range": [
+      1.0,
+      2.0782800329062976
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "MeCN",
+     "range": [
+      1.0,
+      2.6260313385579916
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "DMF",
+     "range": [
+      1.0,
+      6.144722943251546
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      1.0,
+      3.373385966535076
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "THF",
+     "range": [
+      1.0,
+      2.0782800329062976
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "MeCN",
+     "range": [
+      1.0,
+      2.6260313385579916
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "DMF",
+     "range": [
+      1.0,
+      6.144722943251546
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "aq. NaOH",
+     "range": [
+      1.0,
+      3.373385966535076
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "THF",
+     "range": [
+      1.0,
+      2.0782800329062976
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "MeCN",
+     "range": [
+      1.0,
+      2.6260313385579916
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "DMF",
+     "range": [
+      1.0,
+      6.144722943251546
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "aq. NaOH",
+     "range": [
+      1.0,
+      3.373385966535076
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "THF",
+     "range": [
+      1.0,
+      2.0782800329062976
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "MeCN",
+     "range": [
+      1.0,
+      2.6260313385579916
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       1.5079347505546363,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "DMF",
+     "range": [
+      1.0,
+      6.144722943251546
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       1.507739394419393,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      1.0,
+      3.373385966535076
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "THF",
+     "range": [
+      1.0,
+      2.0782800329062976
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "MeCN",
+     "range": [
+      1.0,
+      2.6260313385579916
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       2.551985231996067,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "DMF",
+     "range": [
+      1.0,
+      6.144722943251546
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       2.530347769313684,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      1.0,
+      3.373385966535076
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "THF",
+     "range": [
+      1.0,
+      2.0782800329062976
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "MeCN",
+     "range": [
+      1.0,
+      2.6260313385579916
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "DMF",
+     "range": [
+      1.0,
+      6.144722943251546
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "aq. NaOH",
+     "range": [
+      1.0,
+      3.373385966535076
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "inherited_sigma",
+   "label": "inherited sigma (factor of 2.5 either way)",
+   "fmt": "%.2fx declared",
+   "x0": 0.4,
+   "x1": 2.5,
+   "rows": [
+    "sigma (recirculating flow, RDE, rotating cylinder)"
+   ],
+   "log": true,
+   "declared": 1.0,
+   "cells": [
+    {
+     "arch": "recirculating flow",
+     "solvent": "THF",
+     "range": [
+      0.4,
+      2.5
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "MeCN",
+     "range": [
+      0.4,
+      2.5
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "DMF",
+     "range": [
+      0.4,
+      2.5
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.4,
+      2.5
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "THF",
+     "range": [
+      0.4,
+      2.5
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       0.5610357976684048,
+       "beyond liquid cooling",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "MeCN",
+     "range": [
+      0.4,
+      2.5
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       1.4752005180145966,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "DMF",
+     "range": [
+      0.4,
+      2.5
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       1.4932476497007048,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.4,
+      2.5
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "THF",
+     "range": [
+      0.4,
+      2.5
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       0.9339889413615405,
+       "beyond liquid cooling",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "MeCN",
+     "range": [
+      0.4,
+      2.5
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       2.430955705727162,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "DMF",
+     "range": [
+      0.4,
+      2.5
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       2.477493574492341,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.4,
+      2.5
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "vessel_diameter",
+   "label": "vessel inside diameter at 100 mL",
+   "fmt": "%.2f cm",
+   "x0": 4.0,
+   "x1": 6.0,
+   "rows": [
+    "Vessel external area",
+    "sigma (unstirred 100 mL beaker)"
+   ],
+   "log": true,
+   "declared": 5.0,
+   "cells": [
+    {
+     "arch": "unstirred batch",
+     "solvent": "THF",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "MeCN",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "DMF",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "THF",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "MeCN",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "DMF",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "THF",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "MeCN",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "DMF",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "aq. NaOH",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "THF",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "MeCN",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "DMF",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "THF",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "MeCN",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "DMF",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      4.0,
+      6.0
+     ],
+     "declared": 5.0,
+     "declared_class": "passive",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "volume",
+   "label": "charge (sigma ~ V^2/3)",
+   "fmt": "%.0f mL",
+   "x0": 50.0,
+   "x1": 1000.0,
+   "rows": [
+    "Cell volume / electrode area"
+   ],
+   "log": true,
+   "declared": 100.0,
+   "cells": [
+    {
+     "arch": "unstirred batch",
+     "solvent": "THF",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "MeCN",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "DMF",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "THF",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "MeCN",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "DMF",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "THF",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "MeCN",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "DMF",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "aq. NaOH",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "THF",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "MeCN",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       179.17465805583825,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "DMF",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       182.47264183068802,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "THF",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       90.26358973217437,
+       "beyond liquid cooling",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "MeCN",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       379.02300325455496,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "DMF",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       389.9588717450004,
+       "liquid cooling",
+       "passive"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      50.0,
+      1000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "beaker_gap",
+   "label": "beaker gap (1 cm, where a plate replaces the jacket, to 2.5x)",
+   "fmt": "%.2f cm",
+   "x0": 1.0,
+   "x1": 5.0,
+   "rows": [
+    "Inter-electrode gap (beaker)"
+   ],
+   "log": true,
+   "declared": 2.0,
+   "cells": [
+    {
+     "arch": "unstirred batch",
+     "solvent": "THF",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "MeCN",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "DMF",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "THF",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "MeCN",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "DMF",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "THF",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "MeCN",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "DMF",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "aq. NaOH",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "THF",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       3.575584447665095,
+       "liquid cooling",
+       "beyond liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "MeCN",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       1.3263173351926378,
+       "passive",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "DMF",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       1.3264891846711802,
+       "passive",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      1.0,
+      5.0
+     ],
+     "declared": 2.0,
+     "declared_class": "passive",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "cylinder_gap",
+   "label": "rotating-cylinder gap (Eisenberg annuli)",
+   "fmt": "%.2f cm",
+   "x0": 2.435,
+   "x1": 6.25,
+   "rows": [
+    "Inter-electrode gap (rotating cylinder)"
+   ],
+   "log": true,
+   "declared": 2.435,
+   "cells": [
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "THF",
+     "range": [
+      2.435,
+      6.25
+     ],
+     "declared": 2.435,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       2.607954957029273,
+       "liquid cooling",
+       "beyond liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "MeCN",
+     "range": [
+      2.435,
+      6.25
+     ],
+     "declared": 2.435,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "DMF",
+     "range": [
+      2.435,
+      6.25
+     ],
+     "declared": 2.435,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      2.435,
+      6.25
+     ],
+     "declared": 2.435,
+     "declared_class": "passive",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "stack_gap",
+   "label": "stack gap",
+   "fmt": "%.0f um",
+   "x0": 50.0,
+   "x1": 200.0,
+   "rows": [
+    "Inter-electrode gap (zero-gap PEM stack)"
+   ],
+   "log": true,
+   "declared": 100.0,
+   "cells": [
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "THF",
+     "range": [
+      50.0,
+      200.0
+     ],
+     "declared": 100.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       153.86462980677356,
+       "liquid cooling",
+       "beyond liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "MeCN",
+     "range": [
+      50.0,
+      200.0
+     ],
+     "declared": 100.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "DMF",
+     "range": [
+      50.0,
+      200.0
+     ],
+     "declared": 100.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "aq. NaOH",
+     "range": [
+      50.0,
+      200.0
+     ],
+     "declared": 100.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "stack_sigma",
+   "label": "stack sigma (pitch 4-12 mm)",
+   "fmt": "%.2f",
+   "x0": 0.51,
+   "x1": 1.52,
+   "rows": [
+    "sigma (zero-gap PEM stack)"
+   ],
+   "log": true,
+   "declared": 0.8,
+   "cells": [
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "THF",
+     "range": [
+      0.51,
+      1.52
+     ],
+     "declared": 0.8,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "MeCN",
+     "range": [
+      0.51,
+      1.52
+     ],
+     "declared": 0.8,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "DMF",
+     "range": [
+      0.51,
+      1.52
+     ],
+     "declared": 0.8,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.51,
+      1.52
+     ],
+     "declared": 0.8,
+     "declared_class": "liquid cooling",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "micro_sigma",
+   "label": "microfluidic sigma",
+   "fmt": "%.1f",
+   "x0": 3.5,
+   "x1": 21.0,
+   "rows": [
+    "sigma (microfluidic 25 um)"
+   ],
+   "log": true,
+   "declared": 7.0,
+   "cells": [
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "THF",
+     "range": [
+      3.5,
+      21.0
+     ],
+     "declared": 7.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "MeCN",
+     "range": [
+      3.5,
+      21.0
+     ],
+     "declared": 7.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "DMF",
+     "range": [
+      3.5,
+      21.0
+     ],
+     "declared": 7.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "aq. NaOH",
+     "range": [
+      3.5,
+      21.0
+     ],
+     "declared": 7.0,
+     "declared_class": "passive",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "stack_current",
+   "label": "stack current density",
+   "fmt": "%.0f mA cm-2",
+   "x0": 500.0,
+   "x1": 2000.0,
+   "rows": [
+    "i_design (zero-gap PEM stack)"
+   ],
+   "log": true,
+   "declared": 1000.0,
+   "cells": [
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "THF",
+     "range": [
+      500.0,
+      2000.0
+     ],
+     "declared": 1000.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       1218.4792607683462,
+       "liquid cooling",
+       "beyond liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "MeCN",
+     "range": [
+      500.0,
+      2000.0
+     ],
+     "declared": 1000.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "DMF",
+     "range": [
+      500.0,
+      2000.0
+     ],
+     "declared": 1000.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "aq. NaOH",
+     "range": [
+      500.0,
+      2000.0
+     ],
+     "declared": 1000.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "rde_rate",
+   "label": "rotation rate 400-3600 rpm, as its median current",
+   "fmt": "%.1f mA cm-2",
+   "x0": 57.15,
+   "x1": 154.71,
+   "rows": [
+    "RDE operating point"
+   ],
+   "log": true,
+   "declared": 104.28999999999999,
+   "cells": [
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "THF",
+     "range": [
+      57.15,
+      154.71
+     ],
+     "declared": 104.28999999999999,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       139.3320664980066,
+       "liquid cooling",
+       "beyond liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "MeCN",
+     "range": [
+      57.15,
+      154.71
+     ],
+     "declared": 104.28999999999999,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       85.55354775093855,
+       "passive",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "DMF",
+     "range": [
+      57.15,
+      154.71
+     ],
+     "declared": 104.28999999999999,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       85.20580020005362,
+       "passive",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      57.15,
+      154.71
+     ],
+     "declared": 104.28999999999999,
+     "declared_class": "passive",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "rce_rate",
+   "label": "rotation rate 1000-5000 rpm, as its median current",
+   "fmt": "%.1f mA cm-2",
+   "x0": 60.37,
+   "x1": 157.76,
+   "rows": [
+    "RCE operating point"
+   ],
+   "log": true,
+   "declared": 122.0649,
+   "cells": [
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "THF",
+     "range": [
+      60.37,
+      157.76
+     ],
+     "declared": 122.0649,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       126.31320176999508,
+       "liquid cooling",
+       "beyond liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "MeCN",
+     "range": [
+      60.37,
+      157.76
+     ],
+     "declared": 122.0649,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       77.7641684251133,
+       "passive",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "DMF",
+     "range": [
+      60.37,
+      157.76
+     ],
+     "declared": 122.0649,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       77.31978720584954,
+       "passive",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      60.37,
+      157.76
+     ],
+     "declared": 122.0649,
+     "declared_class": "passive",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "h_int",
+   "label": "electrolyte-side film h_int (50 to 1e6)",
+   "fmt": "%.0f W m-2 K-1",
+   "x0": 50.0,
+   "x1": 1000000.0,
+   "rows": [
+    "h_int (stagnant electrolyte)",
+    "h_int (stirred electrolyte)",
+    "h_int (forced flow, centimetre gap)",
+    "h_int (forced flow, thin gap)"
+   ],
+   "log": true,
+   "declared": null,
+   "cells": [
+    {
+     "arch": "unstirred batch",
+     "solvent": "THF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "MeCN",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "DMF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 100.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "THF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 800.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "MeCN",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 800.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "DMF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 800.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 800.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "THF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 2000.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "MeCN",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 2000.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "DMF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 2000.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "aq. NaOH",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 2000.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "THF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 5000.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "MeCN",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 5000.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "DMF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 5000.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "aq. NaOH",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 5000.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "THF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 2000.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       338.27616641482024,
+       "beyond liquid cooling",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "MeCN",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 2000.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "DMF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 2000.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 2000.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "THF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 2000.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       1385.2955869145148,
+       "beyond liquid cooling",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "MeCN",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 2000.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "DMF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 2000.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 2000.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "THF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 5000.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       1953.7805415155697,
+       "beyond liquid cooling",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "MeCN",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 5000.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       239.75443482566035,
+       "beyond liquid cooling",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "DMF",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 5000.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       159.29675537172673,
+       "beyond liquid cooling",
+       "liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "aq. NaOH",
+     "range": [
+      50.0,
+      1000000.0
+     ],
+     "declared": 5000.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       107.87690448816244,
+       "beyond liquid cooling",
+       "liquid cooling"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "key": "t_amb",
+   "label": "ambient and coolant temperature",
+   "fmt": "%.1f C",
+   "x0": 20.0,
+   "x1": 30.0,
+   "rows": [
+    "T_amb (\u00a7S6)",
+    "Coolant inlet temperature (liquid cooling)"
+   ],
+   "log": false,
+   "declared": 25.0,
+   "cells": [
+    {
+     "arch": "unstirred batch",
+     "solvent": "THF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "MeCN",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "DMF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "THF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "MeCN",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "DMF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "THF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "MeCN",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "DMF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "aq. NaOH",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "THF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "MeCN",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "DMF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "aq. NaOH",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "THF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "MeCN",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "DMF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "THF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "liquid cooling",
+     "changes": [
+      [
+       27.706453404176834,
+       "liquid cooling",
+       "beyond liquid cooling"
+      ]
+     ]
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "MeCN",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "DMF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "THF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "MeCN",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "DMF",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "aq. NaOH",
+     "range": [
+      20.0,
+      30.0
+     ],
+     "declared": 25.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "i0",
+   "label": "exchange current density i0",
+   "fmt": "%.3g mA cm-2",
+   "x0": 0.01,
+   "x1": 10.0,
+   "rows": [
+    "i0 (exchange current density)"
+   ],
+   "log": true,
+   "declared": 1.0,
+   "cells": [
+    {
+     "arch": "unstirred batch",
+     "solvent": "THF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "MeCN",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "DMF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "THF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "MeCN",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "DMF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "THF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "MeCN",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "DMF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "THF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "MeCN",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "DMF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "THF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "MeCN",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "DMF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "THF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "MeCN",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "DMF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "THF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "MeCN",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "DMF",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.01,
+      10.0
+     ],
+     "declared": 1.0,
+     "declared_class": "liquid cooling",
+     "changes": []
+    }
+   ]
+  },
+  {
+   "key": "alpha",
+   "label": "transfer coefficient alpha",
+   "fmt": "%.2f",
+   "x0": 0.3,
+   "x1": 0.7,
+   "rows": [
+    "Tafel slope b = 2RT/F per electrode"
+   ],
+   "log": false,
+   "declared": 0.5,
+   "cells": [
+    {
+     "arch": "unstirred batch",
+     "solvent": "THF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "MeCN",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "DMF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "unstirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "THF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "MeCN",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "DMF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "stirred batch",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "THF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "MeCN",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "DMF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "recirculating flow",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "THF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "MeCN",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "DMF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "microfluidic 25 um",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "THF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "MeCN",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "DMF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "RDE 1600 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "THF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "MeCN",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "DMF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "rotating cyl. 3000 rpm",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "passive",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "THF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "MeCN",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "DMF",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "liquid cooling",
+     "changes": []
+    },
+    {
+     "arch": "zero-gap PEM stack",
+     "solvent": "aq. NaOH",
+     "range": [
+      0.3,
+      0.7
+     ],
+     "declared": 0.5,
+     "declared_class": "liquid cooling",
+     "changes": []
+    }
+   ]
+  }
+ ],
+ "table": [
+  {
+   "cell": "unstirred batch",
+   "arch": "unstirred batch",
+   "solvent": "THF",
+   "input": "conductivity, across its own band",
+   "key": "kappa_band",
+   "range": "0.07x carried to 2.20x carried",
+   "declared": "1.00x carried",
+   "declared_class": "passive",
+   "classes": "liquid cooling below 0.10x carried; passive above 0.10x carried",
+   "rows": [
+    "3.0 M LiBr/THF"
+   ]
+  },
+  {
+   "cell": "stirred batch",
+   "arch": "stirred batch",
+   "solvent": "THF",
+   "input": "conductivity, across its own band",
+   "key": "kappa_band",
+   "range": "0.07x carried to 2.20x carried",
+   "declared": "1.00x carried",
+   "declared_class": "passive",
+   "classes": "liquid cooling below 0.11x carried; passive above 0.11x carried",
+   "rows": [
+    "3.0 M LiBr/THF"
+   ]
+  },
+  {
+   "cell": "recirculating flow",
+   "arch": "recirculating flow",
+   "solvent": "THF",
+   "input": "conductivity, across its own band",
+   "key": "kappa_band",
+   "range": "0.07x carried to 2.20x carried",
+   "declared": "1.00x carried",
+   "declared_class": "passive",
+   "classes": "liquid cooling below 0.36x carried; passive above 0.36x carried",
+   "rows": [
+    "3.0 M LiBr/THF"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "THF",
+   "input": "conductivity, across its own band",
+   "key": "kappa_band",
+   "range": "0.07x carried to 2.20x carried",
+   "declared": "1.00x carried",
+   "declared_class": "liquid cooling",
+   "classes": "beyond liquid cooling below 0.56x carried; liquid cooling above 0.56x carried",
+   "rows": [
+    "3.0 M LiBr/THF"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "DMF",
+   "input": "conductivity, across its own band",
+   "key": "kappa_band",
+   "range": "0.47x carried to 1.88x carried",
+   "declared": "1.00x carried",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 1.51x carried; passive above 1.51x carried",
+   "rows": [
+    "0.2 M NaI/DMF"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "THF",
+   "input": "conductivity, across its own band",
+   "key": "kappa_band",
+   "range": "0.07x carried to 2.20x carried",
+   "declared": "1.00x carried",
+   "declared_class": "liquid cooling",
+   "classes": "beyond liquid cooling below 0.93x carried; liquid cooling above 0.93x carried",
+   "rows": [
+    "3.0 M LiBr/THF"
+   ]
+  },
+  {
+   "cell": "zero-gap stack",
+   "arch": "zero-gap PEM stack",
+   "solvent": "THF",
+   "input": "conductivity, across its own band",
+   "key": "kappa_band",
+   "range": "0.07x carried to 2.20x carried",
+   "declared": "1.00x carried",
+   "declared_class": "liquid cooling",
+   "classes": "beyond liquid cooling below 0.65x carried; liquid cooling above 0.65x carried",
+   "rows": [
+    "3.0 M LiBr/THF"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "MeCN",
+   "input": "conductivity raised to its value at T_b (S6.3 bracket)",
+   "key": "kappa_T",
+   "range": "1.00x its 25 C value to 2.63x its 25 C value",
+   "declared": "1.00x its 25 C value",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 1.51x its 25 C value; passive above 1.51x its 25 C value",
+   "rows": [
+    "Ea (kappa(T) Arrhenius upper bound, S6.3)"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "DMF",
+   "input": "conductivity raised to its value at T_b (S6.3 bracket)",
+   "key": "kappa_T",
+   "range": "1.00x its 25 C value to 6.14x its 25 C value",
+   "declared": "1.00x its 25 C value",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 1.51x its 25 C value; passive above 1.51x its 25 C value",
+   "rows": [
+    "Ea (kappa(T) Arrhenius upper bound, S6.3)"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "MeCN",
+   "input": "conductivity raised to its value at T_b (S6.3 bracket)",
+   "key": "kappa_T",
+   "range": "1.00x its 25 C value to 2.63x its 25 C value",
+   "declared": "1.00x its 25 C value",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 2.55x its 25 C value; passive above 2.55x its 25 C value",
+   "rows": [
+    "Ea (kappa(T) Arrhenius upper bound, S6.3)"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "DMF",
+   "input": "conductivity raised to its value at T_b (S6.3 bracket)",
+   "key": "kappa_T",
+   "range": "1.00x its 25 C value to 6.14x its 25 C value",
+   "declared": "1.00x its 25 C value",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 2.53x its 25 C value; passive above 2.53x its 25 C value",
+   "rows": [
+    "Ea (kappa(T) Arrhenius upper bound, S6.3)"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "THF",
+   "input": "inherited sigma (factor of 2.5 either way)",
+   "key": "inherited_sigma",
+   "range": "0.40x declared to 2.50x declared",
+   "declared": "1.00x declared",
+   "declared_class": "liquid cooling",
+   "classes": "beyond liquid cooling below 0.56x declared; liquid cooling above 0.56x declared",
+   "rows": [
+    "sigma (recirculating flow, RDE, rotating cylinder)"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "MeCN",
+   "input": "inherited sigma (factor of 2.5 either way)",
+   "key": "inherited_sigma",
+   "range": "0.40x declared to 2.50x declared",
+   "declared": "1.00x declared",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 1.48x declared; passive above 1.48x declared",
+   "rows": [
+    "sigma (recirculating flow, RDE, rotating cylinder)"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "DMF",
+   "input": "inherited sigma (factor of 2.5 either way)",
+   "key": "inherited_sigma",
+   "range": "0.40x declared to 2.50x declared",
+   "declared": "1.00x declared",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 1.49x declared; passive above 1.49x declared",
+   "rows": [
+    "sigma (recirculating flow, RDE, rotating cylinder)"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "THF",
+   "input": "inherited sigma (factor of 2.5 either way)",
+   "key": "inherited_sigma",
+   "range": "0.40x declared to 2.50x declared",
+   "declared": "1.00x declared",
+   "declared_class": "liquid cooling",
+   "classes": "beyond liquid cooling below 0.93x declared; liquid cooling above 0.93x declared",
+   "rows": [
+    "sigma (recirculating flow, RDE, rotating cylinder)"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "MeCN",
+   "input": "inherited sigma (factor of 2.5 either way)",
+   "key": "inherited_sigma",
+   "range": "0.40x declared to 2.50x declared",
+   "declared": "1.00x declared",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 2.43x declared; passive above 2.43x declared",
+   "rows": [
+    "sigma (recirculating flow, RDE, rotating cylinder)"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "DMF",
+   "input": "inherited sigma (factor of 2.5 either way)",
+   "key": "inherited_sigma",
+   "range": "0.40x declared to 2.50x declared",
+   "declared": "1.00x declared",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 2.48x declared; passive above 2.48x declared",
+   "rows": [
+    "sigma (recirculating flow, RDE, rotating cylinder)"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "MeCN",
+   "input": "charge (sigma ~ V^2/3)",
+   "key": "volume",
+   "range": "50 mL to 1000 mL",
+   "declared": "100 mL",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 179 mL; passive above 179 mL",
+   "rows": [
+    "Cell volume / electrode area"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "DMF",
+   "input": "charge (sigma ~ V^2/3)",
+   "key": "volume",
+   "range": "50 mL to 1000 mL",
+   "declared": "100 mL",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 182 mL; passive above 182 mL",
+   "rows": [
+    "Cell volume / electrode area"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "THF",
+   "input": "charge (sigma ~ V^2/3)",
+   "key": "volume",
+   "range": "50 mL to 1000 mL",
+   "declared": "100 mL",
+   "declared_class": "liquid cooling",
+   "classes": "beyond liquid cooling below 90 mL; liquid cooling above 90 mL",
+   "rows": [
+    "Cell volume / electrode area"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "MeCN",
+   "input": "charge (sigma ~ V^2/3)",
+   "key": "volume",
+   "range": "50 mL to 1000 mL",
+   "declared": "100 mL",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 379 mL; passive above 379 mL",
+   "rows": [
+    "Cell volume / electrode area"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "DMF",
+   "input": "charge (sigma ~ V^2/3)",
+   "key": "volume",
+   "range": "50 mL to 1000 mL",
+   "declared": "100 mL",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 390 mL; passive above 390 mL",
+   "rows": [
+    "Cell volume / electrode area"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "THF",
+   "input": "beaker gap (1 cm, where a plate replaces the jacket, to 2.5x)",
+   "key": "beaker_gap",
+   "range": "1.00 cm to 5.00 cm",
+   "declared": "2.00 cm",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 3.58 cm; beyond liquid cooling above 3.58 cm",
+   "rows": [
+    "Inter-electrode gap (beaker)"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "MeCN",
+   "input": "beaker gap (1 cm, where a plate replaces the jacket, to 2.5x)",
+   "key": "beaker_gap",
+   "range": "1.00 cm to 5.00 cm",
+   "declared": "2.00 cm",
+   "declared_class": "liquid cooling",
+   "classes": "passive below 1.33 cm; liquid cooling above 1.33 cm",
+   "rows": [
+    "Inter-electrode gap (beaker)"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "DMF",
+   "input": "beaker gap (1 cm, where a plate replaces the jacket, to 2.5x)",
+   "key": "beaker_gap",
+   "range": "1.00 cm to 5.00 cm",
+   "declared": "2.00 cm",
+   "declared_class": "liquid cooling",
+   "classes": "passive below 1.33 cm; liquid cooling above 1.33 cm",
+   "rows": [
+    "Inter-electrode gap (beaker)"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "THF",
+   "input": "rotating-cylinder gap (Eisenberg annuli)",
+   "key": "cylinder_gap",
+   "range": "2.44 cm to 6.25 cm",
+   "declared": "2.44 cm",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 2.61 cm; beyond liquid cooling above 2.61 cm",
+   "rows": [
+    "Inter-electrode gap (rotating cylinder)"
+   ]
+  },
+  {
+   "cell": "zero-gap stack",
+   "arch": "zero-gap PEM stack",
+   "solvent": "THF",
+   "input": "stack gap",
+   "key": "stack_gap",
+   "range": "50 um to 200 um",
+   "declared": "100 um",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 154 um; beyond liquid cooling above 154 um",
+   "rows": [
+    "Inter-electrode gap (zero-gap PEM stack)"
+   ]
+  },
+  {
+   "cell": "zero-gap stack",
+   "arch": "zero-gap PEM stack",
+   "solvent": "THF",
+   "input": "stack current density",
+   "key": "stack_current",
+   "range": "500 mA cm-2 to 2000 mA cm-2",
+   "declared": "1000 mA cm-2",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 1218 mA cm-2; beyond liquid cooling above 1218 mA cm-2",
+   "rows": [
+    "i_design (zero-gap PEM stack)"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "THF",
+   "input": "rotation rate 400-3600 rpm, as its median current",
+   "key": "rde_rate",
+   "range": "57.1 mA cm-2 to 154.7 mA cm-2",
+   "declared": "104.3 mA cm-2",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 139.3 mA cm-2; beyond liquid cooling above 139.3 mA cm-2",
+   "rows": [
+    "RDE operating point"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "MeCN",
+   "input": "rotation rate 400-3600 rpm, as its median current",
+   "key": "rde_rate",
+   "range": "57.1 mA cm-2 to 154.7 mA cm-2",
+   "declared": "104.3 mA cm-2",
+   "declared_class": "liquid cooling",
+   "classes": "passive below 85.6 mA cm-2; liquid cooling above 85.6 mA cm-2",
+   "rows": [
+    "RDE operating point"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "DMF",
+   "input": "rotation rate 400-3600 rpm, as its median current",
+   "key": "rde_rate",
+   "range": "57.1 mA cm-2 to 154.7 mA cm-2",
+   "declared": "104.3 mA cm-2",
+   "declared_class": "liquid cooling",
+   "classes": "passive below 85.2 mA cm-2; liquid cooling above 85.2 mA cm-2",
+   "rows": [
+    "RDE operating point"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "THF",
+   "input": "rotation rate 1000-5000 rpm, as its median current",
+   "key": "rce_rate",
+   "range": "60.4 mA cm-2 to 157.8 mA cm-2",
+   "declared": "122.1 mA cm-2",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 126.3 mA cm-2; beyond liquid cooling above 126.3 mA cm-2",
+   "rows": [
+    "RCE operating point"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "MeCN",
+   "input": "rotation rate 1000-5000 rpm, as its median current",
+   "key": "rce_rate",
+   "range": "60.4 mA cm-2 to 157.8 mA cm-2",
+   "declared": "122.1 mA cm-2",
+   "declared_class": "liquid cooling",
+   "classes": "passive below 77.8 mA cm-2; liquid cooling above 77.8 mA cm-2",
+   "rows": [
+    "RCE operating point"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "DMF",
+   "input": "rotation rate 1000-5000 rpm, as its median current",
+   "key": "rce_rate",
+   "range": "60.4 mA cm-2 to 157.8 mA cm-2",
+   "declared": "122.1 mA cm-2",
+   "declared_class": "liquid cooling",
+   "classes": "passive below 77.3 mA cm-2; liquid cooling above 77.3 mA cm-2",
+   "rows": [
+    "RCE operating point"
+   ]
+  },
+  {
+   "cell": "rotating disc",
+   "arch": "RDE 1600 rpm",
+   "solvent": "THF",
+   "input": "electrolyte-side film h_int (50 to 1e6)",
+   "key": "h_int",
+   "range": "50 W m-2 K-1 to 1000000 W m-2 K-1",
+   "declared": "2000 W m-2 K-1",
+   "declared_class": "liquid cooling",
+   "classes": "beyond liquid cooling below 338 W m-2 K-1; liquid cooling above 338 W m-2 K-1",
+   "rows": [
+    "h_int (forced flow, centimetre gap)"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "THF",
+   "input": "electrolyte-side film h_int (50 to 1e6)",
+   "key": "h_int",
+   "range": "50 W m-2 K-1 to 1000000 W m-2 K-1",
+   "declared": "2000 W m-2 K-1",
+   "declared_class": "liquid cooling",
+   "classes": "beyond liquid cooling below 1385 W m-2 K-1; liquid cooling above 1385 W m-2 K-1",
+   "rows": [
+    "h_int (forced flow, centimetre gap)"
+   ]
+  },
+  {
+   "cell": "zero-gap stack",
+   "arch": "zero-gap PEM stack",
+   "solvent": "THF",
+   "input": "electrolyte-side film h_int (50 to 1e6)",
+   "key": "h_int",
+   "range": "50 W m-2 K-1 to 1000000 W m-2 K-1",
+   "declared": "5000 W m-2 K-1",
+   "declared_class": "liquid cooling",
+   "classes": "beyond liquid cooling below 1954 W m-2 K-1; liquid cooling above 1954 W m-2 K-1",
+   "rows": [
+    "h_int (forced flow, thin gap)"
+   ]
+  },
+  {
+   "cell": "zero-gap stack",
+   "arch": "zero-gap PEM stack",
+   "solvent": "MeCN",
+   "input": "electrolyte-side film h_int (50 to 1e6)",
+   "key": "h_int",
+   "range": "50 W m-2 K-1 to 1000000 W m-2 K-1",
+   "declared": "5000 W m-2 K-1",
+   "declared_class": "liquid cooling",
+   "classes": "beyond liquid cooling below 240 W m-2 K-1; liquid cooling above 240 W m-2 K-1",
+   "rows": [
+    "h_int (forced flow, thin gap)"
+   ]
+  },
+  {
+   "cell": "zero-gap stack",
+   "arch": "zero-gap PEM stack",
+   "solvent": "DMF",
+   "input": "electrolyte-side film h_int (50 to 1e6)",
+   "key": "h_int",
+   "range": "50 W m-2 K-1 to 1000000 W m-2 K-1",
+   "declared": "5000 W m-2 K-1",
+   "declared_class": "liquid cooling",
+   "classes": "beyond liquid cooling below 159 W m-2 K-1; liquid cooling above 159 W m-2 K-1",
+   "rows": [
+    "h_int (forced flow, thin gap)"
+   ]
+  },
+  {
+   "cell": "zero-gap stack",
+   "arch": "zero-gap PEM stack",
+   "solvent": "aq. NaOH",
+   "input": "electrolyte-side film h_int (50 to 1e6)",
+   "key": "h_int",
+   "range": "50 W m-2 K-1 to 1000000 W m-2 K-1",
+   "declared": "5000 W m-2 K-1",
+   "declared_class": "liquid cooling",
+   "classes": "beyond liquid cooling below 108 W m-2 K-1; liquid cooling above 108 W m-2 K-1",
+   "rows": [
+    "h_int (forced flow, thin gap)"
+   ]
+  },
+  {
+   "cell": "rotating cylinder",
+   "arch": "rotating cyl. 3000 rpm",
+   "solvent": "THF",
+   "input": "ambient and coolant temperature",
+   "key": "t_amb",
+   "range": "20.0 C to 30.0 C",
+   "declared": "25.0 C",
+   "declared_class": "liquid cooling",
+   "classes": "liquid cooling below 27.7 C; beyond liquid cooling above 27.7 C",
+   "rows": [
+    "T_amb (\u00a7S6)",
+    "Coolant inlet temperature (liquid cooling)"
+   ]
+  }
+ ],
+ "activation_share": {
+  "unstirred batch": {
+   "THF": 0.037464758796675476,
+   "MeCN": 0.20561657505074912,
+   "DMF": 0.09943301919212774,
+   "aq. NaOH": 0.6936294355083886
+  },
+  "stirred batch": {
+   "THF": 0.034944801908097615,
+   "MeCN": 0.1940667552797331,
+   "DMF": 0.09314831404688566,
+   "aq. NaOH": 0.6780657399411864
+  },
+  "recirculating flow": {
+   "THF": 0.024692097927197135,
+   "MeCN": 0.1440991305976004,
+   "DMF": 0.06700451891807549,
+   "aq. NaOH": 0.5955705403858939
+  },
+  "microfluidic 25 um": {
+   "THF": 0.8418822874461642,
+   "MeCN": 0.9725329615931207,
+   "DMF": 0.9379019069187261,
+   "aq. NaOH": 0.9967814894405356
+  },
+  "RDE 1600 rpm": {
+   "THF": 0.006822568506027603,
+   "MeCN": 0.04368609046603121,
+   "DMF": 0.019113841243087765,
+   "aq. NaOH": 0.2854959417710218
+  },
+  "rotating cyl. 3000 rpm": {
+   "THF": 0.004959138710160329,
+   "MeCN": 0.03207943445903999,
+   "DMF": 0.01394044988717292,
+   "aq. NaOH": 0.22474261471494983
+  },
+  "zero-gap PEM stack": {
+   "THF": 0.17558218099038722,
+   "MeCN": 0.5861438026557773,
+   "DMF": 0.3766150590761007,
+   "aq. NaOH": 0.9253072070629543
+  }
+ },
+ "stack_gap": {
+  "axis": "stack gap",
+  "range": [
+   50.0,
+   200.0
+  ],
+  "declared": 100.0,
+  "rows": [
+   {
+    "arch": "zero-gap PEM stack",
+    "solvent": "THF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "liquid_best": 153.86462980677356
+    },
+    "moves": true
+   },
+   {
+    "arch": "zero-gap PEM stack",
+    "solvent": "MeCN",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "zero-gap PEM stack",
+    "solvent": "DMF",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "zero-gap PEM stack",
+    "solvent": "aq. NaOH",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   }
+  ]
+ },
+ "stack_current": {
+  "axis": "stack current density",
+  "range": [
+   500.0,
+   2000.0
+  ],
+  "declared": 1000.0,
+  "rows": [
+   {
+    "arch": "zero-gap PEM stack",
+    "solvent": "THF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "liquid_best": 1218.4792607683462
+    },
+    "moves": true
+   },
+   {
+    "arch": "zero-gap PEM stack",
+    "solvent": "MeCN",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "zero-gap PEM stack",
+    "solvent": "DMF",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "zero-gap PEM stack",
+    "solvent": "aq. NaOH",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   }
+  ]
+ },
+ "inherited_sigma": {
+  "axis": "inherited sigma (factor of 2.5 either way)",
+  "range": [
+   0.4,
+   2.5
+  ],
+  "declared": 1.0,
+  "rows": [
+   {
+    "arch": "recirculating flow",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "THF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "liquid_best": 0.5610357976684048
+    },
+    "moves": true
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "MeCN",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 1.4752005180145966
+    },
+    "moves": true
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "DMF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 1.4932476497007048
+    },
+    "moves": true
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "THF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "liquid_best": 0.9339889413615405
+    },
+    "moves": true
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "MeCN",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 2.430955705727162
+    },
+    "moves": true
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "DMF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 2.477493574492341
+    },
+    "moves": true
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   }
+  ]
+ },
+ "beaker_gap": {
+  "axis": "beaker gap (1 cm, where a plate replaces the jacket, to 2.5x)",
+  "range": [
+   1.0,
+   5.0
+  ],
+  "declared": 2.0,
+  "rows": [
+   {
+    "arch": "unstirred batch",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "unstirred batch",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "unstirred batch",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "unstirred batch",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "THF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "liquid_best": 3.575584447665095
+    },
+    "moves": true
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "MeCN",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 1.3263173351926378
+    },
+    "moves": true
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "DMF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 1.3264891846711802
+    },
+    "moves": true
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   }
+  ]
+ },
+ "cylinder_gap": {
+  "axis": "rotating-cylinder gap (Eisenberg annuli)",
+  "range": [
+   2.435,
+   6.25
+  ],
+  "declared": 2.435,
+  "rows": [
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "THF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "liquid_best": 2.607954957029273
+    },
+    "moves": true
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "MeCN",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "DMF",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   }
+  ]
+ },
+ "vessel_diameter": {
+  "axis": "vessel inside diameter at 100 mL",
+  "range": [
+   4.0,
+   6.0
+  ],
+  "declared": 5.0,
+  "rows": [
+   {
+    "arch": "unstirred batch",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "unstirred batch",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "unstirred batch",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "unstirred batch",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "THF",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "MeCN",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "DMF",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "THF",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "MeCN",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "DMF",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   }
+  ]
+ },
+ "kappa_T": {
+  "axis": "conductivity raised to its value at T_b (S6.3 bracket)",
+  "range": [
+   null,
+   null
+  ],
+  "declared": 1.0,
+  "rows": [
+   {
+    "arch": "unstirred batch",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "unstirred batch",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "unstirred batch",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "unstirred batch",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "microfluidic 25 um",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "microfluidic 25 um",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "microfluidic 25 um",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "microfluidic 25 um",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "THF",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "MeCN",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 1.5079347505546363
+    },
+    "moves": true
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "DMF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 1.507739394419393
+    },
+    "moves": true
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "THF",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "MeCN",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 2.551985231996067
+    },
+    "moves": true
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "DMF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 2.530347769313684
+    },
+    "moves": true
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "zero-gap PEM stack",
+    "solvent": "THF",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "zero-gap PEM stack",
+    "solvent": "MeCN",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "zero-gap PEM stack",
+    "solvent": "DMF",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "zero-gap PEM stack",
+    "solvent": "aq. NaOH",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   }
+  ]
+ },
+ "volume": {
+  "axis": "charge (sigma ~ V^2/3)",
+  "range": [
+   50.0,
+   1000.0
+  ],
+  "declared": 100.0,
+  "rows": [
+   {
+    "arch": "unstirred batch",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "unstirred batch",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "unstirred batch",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "unstirred batch",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "stirred batch",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "THF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "MeCN",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "DMF",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "recirculating flow",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "THF",
+    "declared": "liquid cooling",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "MeCN",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 179.17465805583825
+    },
+    "moves": true
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "DMF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 182.47264183068802
+    },
+    "moves": true
+   },
+   {
+    "arch": "RDE 1600 rpm",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "THF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "liquid_best": 90.26358973217437
+    },
+    "moves": true
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "MeCN",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 379.02300325455496
+    },
+    "moves": true
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "DMF",
+    "declared": "liquid cooling",
+    "crossings": {
+     "passive": 389.9588717450004
+    },
+    "moves": true
+   },
+   {
+    "arch": "rotating cyl. 3000 rpm",
+    "solvent": "aq. NaOH",
+    "declared": "passive",
+    "crossings": {},
+    "moves": false
+   }
+  ],
+  "sigma": {
+   "50": 6.2766087978460146,
+   "100": 9.963495408493618,
+   "500": 29.133437309037788,
+   "1000": 46.24644903181617
+  }
+ }
+}

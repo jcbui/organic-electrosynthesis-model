@@ -107,6 +107,10 @@ def _covered_by_named_gate(path, ctx):
             return True
     if path == "data/casteel_amis.py" and re.search(r'":\s*\(', ctx):
         return True                                               # Dorn fit tuple
+    # chemistry audit pass 7: the Stefan-Boltzmann constant, exact in the SI since 2019, inside the registry's
+    # 'h radiation (linearized)' formula; build_param_tables.py prints the h_r it gives (6.6 W m-2 K-1 at 65 C)
+    if path == "figs/thermal_model.py" and "5.670374419e-8" in ctx:
+        return True
     return False
 
 
@@ -227,7 +231,10 @@ def main(verbose=False, neg=False):
             nu_fail.append("%s (%s): run_mediated.jl has nu = %.4g, mu/rho gives %.4g"
                            % (label, solv, got, want))
         n_nu += 1
-    print("  EC-prime kinematic viscosities checked against mu/rho: %d of 8" % n_nu)
+    n_spec = len(re.findall(r'MedSpec\("', med))
+    if n_nu + len([f for f in nu_fail if "no row" in f or "not in solvents" in f]) != n_spec:
+        nu_fail.append("parsed %d MedSpec viscosities of %d specs" % (n_nu, n_spec))
+    print("  EC-prime kinematic viscosities checked against mu/rho: %d of %d" % (n_nu, n_spec))
     for f in nu_fail:
         print("    FAIL  %s" % f)
 
@@ -253,12 +260,12 @@ def main(verbose=False, neg=False):
                                    % ("_NEGCONTROL" if neg else "")), "w", encoding="utf8"),
               indent=1)
     if neg:
-        ok = any(u["file"] == "<control>" for u in unacc) and len(nu_fail) == 8
+        ok = any(u["file"] == "<control>" for u in unacc) and len(nu_fail) == n_spec
         print("\nNEGATIVE CONTROL: an unaccountable literal was injected AND every solvent nu was "
-              "scaled x1.5, so all 8 viscosity checks must fire.")
-        print("G-NUMCLOSE control: %s (unaccounted caught: %s; nu failures: %d of 8)"
+              "scaled x1.5, so every viscosity check must fire.")
+        print("G-NUMCLOSE control: %s (unaccounted caught: %s; nu failures: %d of %d)"
               % ("GOOD" if ok else "BAD -- test is inert",
-                 any(u["file"] == "<control>" for u in unacc), len(nu_fail)))
+                 any(u["file"] == "<control>" for u in unacc), len(nu_fail), n_spec))
         return 0 if ok else 1
     if nu_fail:
         print("\nG-NUMCLOSE: FAIL -- %d EC-prime viscosity(ies) no longer equal mu/rho from "

@@ -1,0 +1,634 @@
+{
+ "locator": "Reid, Prausnitz & Poling, The Properties of Gases and Liquids, 4th ed., McGraw-Hill, 1987, Table 3-8, p. 53, Le Bas column",
+ "increments_specific": {
+  "O_methyl": 9.1,
+  "O_ethyl": 9.9,
+  "O_higher": 11.0,
+  "O_SPN": 8.3,
+  "N_tert_low": 12.0
+ },
+ "carried": {
+  "O": 7.4,
+  "N": 15.6
+ },
+ "n_wc_carriers": 30,
+ "n_carriers_moved": 10,
+ "carriers_moved": [
+  "Shono oxidation (N-acyliminium capture)",
+  "Arene C-H pyridination",
+  "BDD phenol-arene cross-coupling",
+  "Nitroarene -> aniline",
+  "Rapid-alternating-polarity (hetero)arene reduction",
+  "Cathodic aryl halide hydrodehalogenation",
+  "ACT-mediated alcohol oxidation (flow, hectogram)",
+  "NHPI-mediated allylic C-H -> enone",
+  "HMF -> FDCA (biomass)",
+  "Radical-cation Diels-Alder (catalytic in e-)"
+ ],
+ "carrier_D_ratio_range": [
+  0.9901,
+  0.99799
+ ],
+ "n_carriers_moved_tertN12": 13,
+ "carrier_D_ratio_range_tertN12": [
+  0.9901,
+  1.01918
+ ],
+ "max_abs_change_pct": 1.918,
+ "n_mediated_substrates": 11,
+ "n_substrates_moved": 5,
+ "substrate_D_ratio_range": [
+  0.98266,
+  1.0
+ ],
+ "substrate_D_ratio_range_tertN12": [
+  0.98266,
+  1.01137
+ ],
+ "cells_that_could_cross": [],
+ "closest_cell": {
+  "row": "NHPI-mediated allylic C-H -> enone",
+  "arch": "stirred",
+  "threshold": 25.0,
+  "value": 25.24,
+  "margin_pct": 0.96
+ },
+ "carriers": [
+  {
+   "row": "Shono oxidation (N-acyliminium capture)",
+   "smiles": "COC(=O)N1CCCC1",
+   "solvent": "MeOH",
+   "V_carried": 148.4,
+   "V_reid": 150.1,
+   "V_reid_tertN12": 146.5,
+   "D_ratio": 0.99319,
+   "D_ratio_tertN12": 1.00776,
+   "atoms_moved": [
+    "O methyl ester/ether 9.1"
+   ],
+   "atoms_moved_tertN12": [
+    "O methyl ester/ether 9.1",
+    "tertiary N 12.0"
+   ]
+  },
+  {
+   "row": "Oxidative benzimidazole annulation (C-H/N-H)",
+   "smiles": "CN(c1ccccc1)C(=N)c1ccccc1F",
+   "solvent": "THF/MeOH",
+   "V_carried": 261.6,
+   "V_reid": 261.6,
+   "V_reid_tertN12": 258.0,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.00835,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": [
+    "tertiary N 12.0"
+   ]
+  },
+  {
+   "row": "Arene C-H pyridination",
+   "smiles": "COc1ccccc1",
+   "solvent": "MeCN",
+   "V_carried": 125.6,
+   "V_reid": 127.3,
+   "V_reid_tertN12": 127.3,
+   "D_ratio": 0.99197,
+   "D_ratio_tertN12": 0.99197,
+   "atoms_moved": [
+    "O methyl ester/ether 9.1"
+   ],
+   "atoms_moved_tertN12": [
+    "O methyl ester/ether 9.1"
+   ]
+  },
+  {
+   "row": "Ritter-type C(sp3)-H amination",
+   "smiles": "CC12CC3CC(CC(C3)C1)(C2)C",
+   "solvent": "MeCN",
+   "V_carried": 206.6,
+   "V_reid": 206.6,
+   "V_reid_tertN12": 206.6,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Kolbe homocoupling of 10-undecenoate",
+   "smiles": "C=CCCCCCCCCC(=O)O",
+   "solvent": "acetone",
+   "V_carried": 256.2,
+   "V_reid": 256.2,
+   "V_reid_tertN12": 256.2,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "BDD phenol-arene cross-coupling",
+   "smiles": "Cc1ccc(O)c(OC)c1",
+   "solvent": "HFIP",
+   "V_carried": 155.2,
+   "V_reid": 156.9,
+   "V_reid_tertN12": 156.9,
+   "D_ratio": 0.99348,
+   "D_ratio_tertN12": 0.99348,
+   "atoms_moved": [
+    "O methyl ester/ether 9.1"
+   ],
+   "atoms_moved_tertN12": [
+    "O methyl ester/ether 9.1"
+   ]
+  },
+  {
+   "row": "Decarboxylative arylation (radical-radical)",
+   "smiles": "N#Cc1ccc(C#N)cc1",
+   "solvent": "MeCN",
+   "V_carried": 149.4,
+   "V_reid": 149.4,
+   "V_reid_tertN12": 149.4,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Anodic dehydrogenative 2-naphthol coupling",
+   "smiles": "Oc1ccc2ccccc2c1",
+   "solvent": "MeCN",
+   "V_carried": 155.0,
+   "V_reid": 155.0,
+   "V_reid_tertN12": 155.0,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Acrylonitrile hydrodimerization (ADN)",
+   "smiles": "C=CC#N",
+   "solvent": "H2O",
+   "V_carried": 71.1,
+   "V_reid": 71.1,
+   "V_reid_tertN12": 71.1,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Birch reduction of naphthalene",
+   "smiles": "c1ccc2ccccc2c1",
+   "solvent": "THF",
+   "V_carried": 147.6,
+   "V_reid": 147.6,
+   "V_reid_tertN12": 147.6,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Nitroarene -> aniline",
+   "smiles": "O=[N+]([O-])c1cccc(c1)C(F)(F)F",
+   "solvent": "MeOH/H2O",
+   "V_carried": 159.9,
+   "V_reid": 161.7,
+   "V_reid_tertN12": 161.7,
+   "D_ratio": 0.99331,
+   "D_ratio_tertN12": 0.99331,
+   "atoms_moved": [
+    "O-S/P/N 8.3",
+    "O-S/P/N 8.3"
+   ],
+   "atoms_moved_tertN12": [
+    "O-S/P/N 8.3",
+    "O-S/P/N 8.3"
+   ]
+  },
+  {
+   "row": "Rapid-alternating-polarity (hetero)arene reduction",
+   "smiles": "COC(=O)c1cccs1",
+   "solvent": "THF/EtOH",
+   "V_carried": 139.9,
+   "V_reid": 141.6,
+   "V_reid_tertN12": 141.6,
+   "D_ratio": 0.99278,
+   "D_ratio_tertN12": 0.99278,
+   "atoms_moved": [
+    "O methyl ester/ether 9.1"
+   ],
+   "atoms_moved_tertN12": [
+    "O methyl ester/ether 9.1"
+   ]
+  },
+  {
+   "row": "Diazo difunctionalization (thiol + alcohol)",
+   "smiles": "Fc1ccc(S)cc1",
+   "solvent": "MeCN",
+   "V_carried": 126.6,
+   "V_reid": 126.6,
+   "V_reid_tertN12": 126.6,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Cathodic aryl halide hydrodehalogenation",
+   "smiles": "Brc1ccc(Oc2ccccc2)cc1",
+   "solvent": "MeCN",
+   "V_carried": 215.3,
+   "V_reid": 218.9,
+   "V_reid_tertN12": 218.9,
+   "D_ratio": 0.9901,
+   "D_ratio_tertN12": 0.9901,
+   "atoms_moved": [
+    "O higher ester/ether 11.0"
+   ],
+   "atoms_moved_tertN12": [
+    "O higher ester/ether 11.0"
+   ]
+  },
+  {
+   "row": "Benzaldehyde -> benzyl alcohol",
+   "smiles": "O=Cc1ccccc1",
+   "solvent": "MeOH/H2O",
+   "V_carried": 118.2,
+   "V_reid": 118.2,
+   "V_reid_tertN12": 118.2,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "ACT-mediated alcohol oxidation (flow, hectogram)",
+   "smiles": "CC1(C)CC(NC(C)=O)CC(C)(C)N1[O]",
+   "solvent": "H2O",
+   "V_carried": 267.9,
+   "V_reid": 268.8,
+   "V_reid_tertN12": 265.2,
+   "D_ratio": 0.99799,
+   "D_ratio_tertN12": 1.0061,
+   "atoms_moved": [
+    "O-S/P/N 8.3"
+   ],
+   "atoms_moved_tertN12": [
+    "tertiary N 12.0",
+    "O-S/P/N 8.3"
+   ]
+  },
+  {
+   "row": "Anodic methoxylation of 4-tBu-toluene (Lysmeral)",
+   "smiles": "Cc1ccc(cc1)C(C)(C)C",
+   "solvent": "MeOH",
+   "V_carried": 207.0,
+   "V_reid": 207.0,
+   "V_reid_tertN12": 207.0,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Shono alpha-methoxylation of amides",
+   "smiles": "CC(=O)N(C)C",
+   "solvent": "MeOH",
+   "V_carried": 115.5,
+   "V_reid": 115.5,
+   "V_reid_tertN12": 111.9,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.01918,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": [
+    "tertiary N 12.0"
+   ]
+  },
+  {
+   "row": "NHPI-mediated allylic C-H -> enone",
+   "smiles": "O=C1c2c(Cl)c(Cl)c(Cl)c(Cl)c2C(=O)N1O",
+   "solvent": "acetone",
+   "V_carried": 231.8,
+   "V_reid": 232.7,
+   "V_reid_tertN12": 229.1,
+   "D_ratio": 0.99768,
+   "D_ratio_tertN12": 1.00705,
+   "atoms_moved": [
+    "O-S/P/N 8.3"
+   ],
+   "atoms_moved_tertN12": [
+    "tertiary N 12.0",
+    "O-S/P/N 8.3"
+   ]
+  },
+  {
+   "row": "Alkenesulfonate from cinnamic acid, SO2 and alcohol",
+   "smiles": "[O-]C(=O)/C=C/c1ccccc1",
+   "solvent": "MeCN",
+   "V_carried": 158.9,
+   "V_reid": 158.9,
+   "V_reid_tertN12": 158.9,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "HMF -> FDCA (biomass)",
+   "smiles": "CC1(C)CC(NC(C)=O)CC(C)(C)N1[O]",
+   "solvent": "H2O",
+   "V_carried": 267.9,
+   "V_reid": 268.8,
+   "V_reid_tertN12": 265.2,
+   "D_ratio": 0.99799,
+   "D_ratio_tertN12": 1.0061,
+   "atoms_moved": [
+    "O-S/P/N 8.3"
+   ],
+   "atoms_moved_tertN12": [
+    "tertiary N 12.0",
+    "O-S/P/N 8.3"
+   ]
+  },
+  {
+   "row": "Radical-cation Diels-Alder (catalytic in e-)",
+   "smiles": "COc1ccc(/C=C/C)cc1",
+   "solvent": "MeNO2",
+   "V_carried": 184.8,
+   "V_reid": 186.5,
+   "V_reid_tertN12": 186.5,
+   "D_ratio": 0.99452,
+   "D_ratio_tertN12": 0.99452,
+   "atoms_moved": [
+    "O methyl ester/ether 9.1"
+   ],
+   "atoms_moved_tertN12": [
+    "O methyl ester/ether 9.1"
+   ]
+  },
+  {
+   "row": "BQ-mediated Wacker-Tsuji oxidation",
+   "smiles": "Oc1ccc(O)cc1",
+   "solvent": "MeCN/H2O",
+   "V_carried": 110.8,
+   "V_reid": 110.8,
+   "V_reid_tertN12": 110.8,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Non-Kolbe decarboxylative alpha-methoxylation",
+   "smiles": "CC(C)(C)C(=O)NC(C)C(=O)O",
+   "solvent": "MeOH",
+   "V_carried": 212.7,
+   "V_reid": 212.7,
+   "V_reid_tertN12": 212.7,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Oxazole synthesis from ketones and acetonitrile",
+   "smiles": "Cc1ccc(N(c2ccc(C)cc2)c2ccc(C)cc2)cc1",
+   "solvent": "MeCN",
+   "V_carried": 359.1,
+   "V_reid": 359.1,
+   "V_reid_tertN12": 355.5,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.00606,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": [
+    "tertiary N 12.0"
+   ]
+  },
+  {
+   "row": "Dehydrogenative lactonization (C-H/O-H)",
+   "smiles": "OC(=O)c1ccccc1-c1ccccc1",
+   "solvent": "MeCN",
+   "V_carried": 218.8,
+   "V_reid": 218.8,
+   "V_reid_tertN12": 218.8,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Anodic benzylic fluorination",
+   "smiles": "CCc1ccccc1",
+   "solvent": "MeCN",
+   "V_carried": 140.4,
+   "V_reid": 140.4,
+   "V_reid_tertN12": 140.4,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Alkoxysulfonylation of styrenes with sulfinates",
+   "smiles": "CC(=C)c1ccccc1",
+   "solvent": "MeOH",
+   "V_carried": 155.2,
+   "V_reid": 155.2,
+   "V_reid_tertN12": 155.2,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Anodic C-H phosphorylation of arenes",
+   "smiles": "Cc1cc(C)cc(C)c1",
+   "solvent": "MeCN",
+   "V_carried": 162.6,
+   "V_reid": 162.6,
+   "V_reid_tertN12": 162.6,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Anodic N-N coupling to pyrazolidine-3,5-diones",
+   "smiles": "CC(C)(C(=O)Nc1ccc(C)cc1)C(=O)Nc1ccc(C)cc1",
+   "solvent": "HFIP",
+   "V_carried": 371.4,
+   "V_reid": 371.4,
+   "V_reid_tertN12": 371.4,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  }
+ ],
+ "mediated_substrates": [
+  {
+   "row": "Br-mediated Hofmann rearrangement",
+   "smiles": "NC(=O)Cc1ccccc1",
+   "solvent": "MeCN",
+   "V_carried": 154.6,
+   "V_reid": 154.6,
+   "V_reid_tertN12": 154.6,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "ACT-mediated alcohol oxidation (flow, hectogram)",
+   "smiles": "CC[C@@H](CO)N1CCCC1=O",
+   "solvent": "H2O",
+   "V_carried": 192.8,
+   "V_reid": 192.8,
+   "V_reid_tertN12": 189.2,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.01137,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": [
+    "tertiary N 12.0"
+   ]
+  },
+  {
+   "row": "NHPI-mediated allylic C-H -> enone",
+   "smiles": "CC1CCC=C2CCC(CC12C)C(C)=C",
+   "solvent": "acetone",
+   "V_carried": 280.8,
+   "V_reid": 280.8,
+   "V_reid_tertN12": 280.8,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "HMF -> FDCA (biomass)",
+   "smiles": "OCc1ccc(C=O)o1",
+   "solvent": "H2O",
+   "V_carried": 121.7,
+   "V_reid": 125.3,
+   "V_reid_tertN12": 125.3,
+   "D_ratio": 0.98266,
+   "D_ratio_tertN12": 0.98266,
+   "atoms_moved": [
+    "O higher ester/ether 11.0"
+   ],
+   "atoms_moved_tertN12": [
+    "O higher ester/ether 11.0"
+   ]
+  },
+  {
+   "row": "BQ-mediated Wacker-Tsuji oxidation",
+   "smiles": "C=CCCCCCCCC",
+   "solvent": "MeCN/H2O",
+   "V_carried": 222.0,
+   "V_reid": 222.0,
+   "V_reid_tertN12": 222.0,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Br- oxidation / electrophilic bromination",
+   "smiles": "COc1ccccc1",
+   "solvent": "H2O/MeCN 1:1",
+   "V_carried": 125.6,
+   "V_reid": 127.3,
+   "V_reid_tertN12": 127.3,
+   "D_ratio": 0.99197,
+   "D_ratio_tertN12": 0.99197,
+   "atoms_moved": [
+    "O methyl ester/ether 9.1"
+   ],
+   "atoms_moved_tertN12": [
+    "O methyl ester/ether 9.1"
+   ]
+  },
+  {
+   "row": "Aryl thiocyanation (NH4SCN)",
+   "smiles": "COc1ccccc1",
+   "solvent": "AcOH/HCOOH",
+   "V_carried": 125.6,
+   "V_reid": 127.3,
+   "V_reid_tertN12": 127.3,
+   "D_ratio": 0.99197,
+   "D_ratio_tertN12": 0.99197,
+   "atoms_moved": [
+    "O methyl ester/ether 9.1"
+   ],
+   "atoms_moved_tertN12": [
+    "O methyl ester/ether 9.1"
+   ]
+  },
+  {
+   "row": "Amidyl-radical C-H amination (phenanthridinone)",
+   "smiles": "CC(C)(C)C(=O)ONC(=O)c1ccccc1-c1ccccc1",
+   "solvent": "MeCN",
+   "V_carried": 340.9,
+   "V_reid": 341.8,
+   "V_reid_tertN12": 341.8,
+   "D_ratio": 0.99842,
+   "D_ratio_tertN12": 0.99842,
+   "atoms_moved": [
+    "O-S/P/N 8.3"
+   ],
+   "atoms_moved_tertN12": [
+    "O-S/P/N 8.3"
+   ]
+  },
+  {
+   "row": "Cathodic Giese (R-I + alkene)",
+   "smiles": "CC(C)I",
+   "solvent": "H2O/MeCN",
+   "V_carried": 107.3,
+   "V_reid": 107.3,
+   "V_reid_tertN12": 107.3,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Thioether -> sulfone (kilo-scale)",
+   "smiles": "CSc1nccc(C)n1",
+   "solvent": "MeCN/H2O",
+   "V_carried": 160.2,
+   "V_reid": 160.2,
+   "V_reid_tertN12": 160.2,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  },
+  {
+   "row": "Oxazole synthesis from ketones and acetonitrile",
+   "smiles": "O=C(Cc1ccccc1)c1ccccc1",
+   "solvent": "MeCN",
+   "V_carried": 229.0,
+   "V_reid": 229.0,
+   "V_reid_tertN12": 229.0,
+   "D_ratio": 1.0,
+   "D_ratio_tertN12": 1.0,
+   "atoms_moved": [],
+   "atoms_moved_tertN12": []
+  }
+ ],
+ "ferrocene_V_cm3mol": 182.0,
+ "ferrocene_D_cm2s": 1.687539376039845e-05,
+ "ferrocene_mu_MeCN_mPas": 0.369,
+ "ferrocene_Fe_increment": "none tabulated; the 20.0 fallback of lebas_volume()",
+ "ferrocene_disconnected_V_cm3mol": 205.0,
+ "ferrocene_disconnected_D_cm2s": 1.5712468909433077e-05,
+ "ferrocene_measured_cm2s": 2.4e-05,
+ "ferrocene_measured_basis": "upper end of the textbook range 1.7-2.4e-5 cm2 s-1; no page carrying 2.4e-5 has been located, so it is not a page-anchored value",
+ "ferrocene_miss_pct": -29.7,
+ "ferrocene_secondary_cm2s": 1.7e-05,
+ "ferrocene_secondary_basis": "Bard & Faulkner, Electrochemical Methods, 2nd ed., Wiley, 2001, Problem 6.12(a), p. 260: D_R = 1.70 x 10^-5 cm2/s for ferrocene in acetonitrile (0.5 M TBABF4), quoting Mirkin, Richards & Bard, J. Phys. Chem. 1993, 97, 7672 (secondary; the primary was not retrieved)",
+ "ferrocene_miss_secondary_pct": -0.7
+}

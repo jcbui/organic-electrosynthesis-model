@@ -69,6 +69,10 @@ MIX = {
     "AcOH/HCOOH": ("AcOH", "HCOOH", 1.0, 1.0, "organic-bracket"),
     "DMF/H2O":    ("DMF", "H2O", 9.0, 1.0, "aqueous-unsourced"),
     "tAmOH/H2O":  ("tAmOH", "H2O", 3.0, 1.0, "aqueous-unsourced"),
+    # chemistry review 2026-10-06: the three organic-organic mixtures the solver reads that this gate did not cover
+    "EtOH/MeOH":  ("EtOH", "MeOH", 1.0, 1.0, "organic-bracket"),
+    "THF/MeOH":   ("THF", "MeOH", 5.0, 1.0, "organic-bracket"),
+    "THF/EtOH":   ("THF", "EtOH", 1.0, 1.0, "organic-bracket"),
 }
 # pure components not in solvents.csv, with their own page anchors
 EXTRA_PURE = {

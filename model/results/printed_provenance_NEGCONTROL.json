@@ -6,9 +6,9 @@
    "UNANCHORED": 23
   },
   "SI": {
-   "COMPUTED": 60,
+   "COMPUTED": 98,
    "ANCHORED": 0,
-   "UNANCHORED": 74
+   "UNANCHORED": 65
   }
  },
  "rows": {
@@ -157,19 +157,19 @@
     "value": "25",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": "are correlated across the set. Of the 12 reactions that clear 25 mA cm\u22122 in the unstirred beaker, 10 a"
+    "ctx": "are correlated across the set. Of the 12 reactions that clear 25 mA cm\u22122 in the unstirred beaker, 8 ar"
    },
    {
-    "value": "8.2",
+    "value": "8.6",
     "unit": "mA/cm2",
     "class": "COMPUTED",
-    "ctx": "he median limiting current across the 50 reactions rises from 8.2 mA cm\u22122 in an unstirred batch cell to"
+    "ctx": "he median limiting current across the 50 reactions rises from 8.6 mA cm\u22122 in an unstirred batch cell to"
    },
    {
     "value": "17",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": "eactions rises from 8.2 mA cm\u22122 in an unstirred batch cell to 17 mA cm\u22122 in a recirculating flow cell "
+    "ctx": "eactions rises from 8.6 mA cm\u22122 in an unstirred batch cell to 17 mA cm\u22122 in a recirculating flow cell "
    },
    {
     "value": "122",
@@ -181,19 +181,25 @@
     "value": "22",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": "eption runs at 30 mM \u2014 and the 25 mM ACT mediator plateaus at 22 mA cm\u22122 in every architecture. For th"
+    "ctx": "diated rows do not either: the 25 mM ACT mediator tops out at 22 mA cm\u22122, the oxygen-mediated Giese ad"
    },
    {
-    "value": "85.1",
+    "value": "85.4",
     "unit": "mA/cm2",
     "class": "COMPUTED",
-    "ctx": " current, so the rotating-cylinder median falls from 121.7 to 85.1 mA cm\u22122 (-30%), the count clearing 25"
+    "ctx": "nder values fall to 0.667\u20130.755\u00d7 and the median from 122.1 to 85.4 mA cm\u22122, so the column is bounded bel"
+   },
+   {
+    "value": "4.0",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": "metric in charge: the catalyst-class median runs from 0.17 to 4.0 mA cm\u22122 (unstirred to rotating cylind"
    },
    {
     "value": "300",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": "on of Leow et al.:28 their headline runs oxidize 1.0 M KCl at 300 mA cm\u22122 with ethylene sparged into th"
+    "ctx": "on of Leow et al.:26 their headline runs oxidize 1.0 M KCl at 300 mA cm\u22122 with ethylene sparged into th"
    },
    {
     "value": "131",
@@ -210,7 +216,7 @@
    {
     "value": "0.75",
     "unit": "mA/cm2",
-    "class": "COMPUTED",
+    "class": "UNANCHORED",
     "ctx": "t \u2014 several times the planar-profile propylene diffusion cap, 0.75 mA cm\u22122, the excess reflecting the cu"
    },
    {
@@ -232,10 +238,22 @@
     "ctx": "starting material 2 concentration of 0.3M and electrolyzed at 10 mA cm2' with '1.6 equiv LiBr and 5 m"
    },
    {
-    "value": "18.8",
+    "value": "50",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": " ceilings are proportional, so the thin-film cells that clear 50 mA cm-2 do so conditionally on it. Th"
+   },
+   {
+    "value": "6.7",
     "unit": "mA/cm2",
     "class": "COMPUTED",
-    "ctx": " own diffusivities (Table S6) and reach i_lim = 868, 18.0 and 18.8 mA cm\u22122, with 99 %, 97 % and 3 % of t"
+    "ctx": "m is at most 4.6 pct of each ceiling, the largest of which is 6.7 mA cm-244CyclizationDehydrogenative l"
+   },
+   {
+    "value": "32.7",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": " own diffusivities (Table S6) and reach i_lim = 289, 18.4 and 32.7 mA cm\u22122, with 65 %, 97 % and 54 % of "
    },
    {
     "value": "48.24",
@@ -250,34 +268,76 @@
     "ctx": "S/\u03b4 = 48.24 mA cm\u22122 and the commuting bound F\u00b7D_med\u00b7C_med/\u03b4 = 1.16 mA cm\u22122 follow from them, as does \u03b3 ="
    },
    {
-    "value": "9.14",
+    "value": "45.9",
     "unit": "mA/cm2",
     "class": "COMPUTED",
-    "ctx": "e \u2014 the ramp dies far below the cell's own commuting bound of 9.14 mA cm\u22122, which a homogeneous source t"
+    "ctx": "y walk reaches it by concentration control and resolves it at 45.9 mA cm\u22122, 2.09 times the cell's own co"
    },
    {
-    "value": "137.8",
+    "value": "22.01",
     "unit": "mA/cm2",
     "class": "COMPUTED",
-    "ctx": "ive one. Concentration control reaches it, and resolves it at 137.8 mA cm\u22122, an amplification of 15.1 ove"
+    "ctx": "at 45.9 mA cm\u22122, 2.09 times the cell's own commuting bound of 22.01 mA cm\u22122: the bromide's migration lift"
    },
    {
-    "value": "50",
+    "value": "40",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": "count of any single architecture moves by at most \u00b11 and the \u226550 mA cm\u22122 count by at most \u00b11 from any "
+    "ctx": "ounded from the exemplar's own operation on plate electrodes: 40 mA cm\u22122 at 0.1 M thioether and 14 mM "
    },
    {
-    "value": "157",
+    "value": "0.9",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": " ks, Fig. 2) at one graphite rod of 4.12 cm2, a time-averaged 0.9 mA cm\u22122, with air-saturated oxygen as"
+   },
+   {
+    "value": "0.64",
     "unit": "mA/cm2",
     "class": "COMPUTED",
-    "ctx": "voir, and the stirred beaker jumps from a 10 mA cm\u22122 floor to 157 mA cm\u22122. Second, the dilute-nitroxyl "
+    "ctx": "d by the ethylene flux into the film, n F D C/\u03b4 for ethylene (0.64 mA cm\u22122 at the stirred film, against "
+   },
+   {
+    "value": "149",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": "er films: the stirred beaker jumps from a 10 mA cm\u22122 floor to 149 mA cm\u22122 (\u00d714), with the amide, five t"
    },
    {
     "value": "30",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": "y in batch (\u00d713\u2013\u00d722) yet land at nearly the same 14\u201322 and 14\u201330 mA cm\u22122 in every reactor from beaker "
+    "ctx": "y in batch (\u00d713\u2013\u00d726) yet land at nearly the same 16\u201322 and 14\u201330 mA cm\u22122 in every reactor from beaker "
+   },
+   {
+    "value": "29",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": "4.7\u2013\u00d78.2 above the transport floor to a kinetic plateau of 24\u201329 mA cm\u22122, and thicker than the microfl"
+   },
+   {
+    "value": "1.2",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": "0.27 mM, the reaction layer is 4.7 \u03bcm, and the ceiling is 1.1\u20131.2 mA cm\u22122 in every architecture, the lo"
+   },
+   {
+    "value": "119",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "loride migration, and is substrate-capped on the batch films (119 mA cm\u22122 unstirred against a planar su"
+   },
+   {
+    "value": "285",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "113). Between the two its ceiling passes through a maximum of 285 mA cm\u22122 on the ANEC film rather than "
+   },
+   {
+    "value": "117",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": "he row's ceilings move \u00d70.85\u2013\u00d72.14 and every cell stays above 117 mA cm\u22122, so the shape described here "
    },
    {
     "value": "1",
@@ -289,259 +349,403 @@
     "value": "100",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": "mA cm\u22122). The Joule dissipation per electrode area is (S19)At 100 mA cm\u22122 across the canonical 2 cm bea"
+    "ctx": "ble S12). The Joule dissipation per electrode area is (S19)At 100 mA cm\u22122 across the canonical 2 cm bea"
    },
    {
-    "value": "79",
+    "value": "80",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": " reachable in an unstirred beaker of DMF, consistent with the 79 mA cm\u22122 passive ceiling \u00a7S6.1 reports"
+    "ctx": " reachable in an unstirred beaker of DMF, consistent with the 80 mA cm\u22122 passive ceiling \u00a7S6.1 reports"
    },
    {
     "value": "1000",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": " at all, its activation term alone putting out 0.71 W cm\u22122 at 1000 mA cm\u22122 against 0.043 W cm\u22122 of passi"
+    "ctx": " at all, its activation term alone putting out 0.71 W cm\u22122 at 1000 mA cm\u22122 against 0.045 W cm\u22122 of passi"
    },
    {
-    "value": "15",
+    "value": "11.2",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "erely unrepresentative but self-invalidating: at its apparent 11.2 mA cm\u22122 ceiling the 2 cm cell require"
+   },
+   {
+    "value": "257",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": " LiBr) boils at 27, MeCN at 80, DMF at 80 and aqueous NaOH at 257 mA cm\u22122. Every ceiling in this sectio"
+   },
+   {
+    "value": "186",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": "erely unrepresentative but self-invalidating: at its apparent 15 mA cm\u22122 ceiling the 2 cm cell require"
+    "ctx": "th intensification: for DMF it runs 80, 85, 85, 1156, 85, 77, 186 mA cm\u22122, flat wherever the gap is unc"
    },
    {
-    "value": "250",
+    "value": "174",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": " LiBr) boils at 26, MeCN at 78, DMF at 79 and aqueous NaOH at 250 mA cm\u22122. Every ceiling in this sectio"
+    "ctx": "er 10 cm2 electrodes the passive ceiling runs 63, 80, 138 and 174 mA cm\u22122 at 50, 100, 500 and 1000 mL, "
    },
    {
-    "value": "180",
+    "value": "500",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": "th intensification: for DMF it runs 79, 84, 84, 1116, 84, 76, 180 mA cm\u22122, flat wherever the gap is unc"
-   },
-   {
-    "value": "172",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "er 10 cm2 electrodes the passive ceiling runs 63, 79, 136 and 172 mA cm\u22122 at 50, 100, 500 and 1000 mL, "
-   },
-   {
-    "value": "420",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "S6.1 then move from 26 to 38, 78 to 124, 79 to 192 and 250 to 420 mA cm\u22122 respectively, and across all "
-   },
-   {
-    "value": "132",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "3 bound-dependent verdicts are MeCN in the RDE 1600 rpm (83 \u2192 132 mA cm\u22122 against 108); DMF in the RDE "
-   },
-   {
-    "value": "203",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "(83 \u2192 132 mA cm\u22122 against 108); DMF in the RDE 1600 rpm (84 \u2192 203 mA cm\u22122 against 108); DMF in the rota"
-   },
-   {
-    "value": "185",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "mA cm\u22122 against 108); DMF in the rotating cyl. 3000 rpm (76 \u2192 185 mA cm\u22122 against 122). Each is flagged"
-   },
-   {
-    "value": "192",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "or that produces the largest single change in the table (79 \u2192 192 mA cm\u22122 in the beaker, 1116 \u2192 1427 mA"
-   },
-   {
-    "value": "1427",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "e change in the table (79 \u2192 192 mA cm\u22122 in the beaker, 1116 \u2192 1427 mA cm\u22122 in the microfluidic). Ion pai"
-   },
-   {
-    "value": "9.6",
-    "unit": "mA/cm2",
-    "class": "UNANCHORED",
-    "ctx": "= 102 M\u22121 s\u22121 (\u00a7S5.7) the row's recirculating-flow ceiling is 9.6 mA cm\u22122 (5.7\u201311.0 across the measured"
-   },
-   {
-    "value": "8",
-    "unit": "mA/cm2",
-    "class": "UNANCHORED",
-    "ctx": "claimed as a validation. At k = 0 the same row's ceiling was \u22488 mA cm\u22122 in the rotating-cylinder cell"
-   },
-   {
-    "value": "9.1",
-    "unit": "mA/cm2",
-    "class": "UNANCHORED",
-    "ctx": "he measured stirred-cell film of 200 \u00b1 7 \u03bcm gives a median of 9.1 mA cm\u22122, but the overlapping unstirre"
-   },
-   {
-    "value": "23.7",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "ks at r_h = 4.27 \u00c5 on the deciding row (Ni-XEC C(sp2)-C(sp3), 23.7 mA cm\u22122 at best, 1.05\u00d7 short of the t"
-   },
-   {
-    "value": "135.7",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "st median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wide"
-   },
-   {
-    "value": "25.64",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "MF -> FDCA (biomass) in the Microfluidic cell (25 um gap), at 25.64 mA cm-2 (2.6 pct away).D_med, mediato"
-   },
-   {
-    "value": "0.0059",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": " as a perturbation should -- the largest absolute movement is 0.0059 mA cm-2 at 1e-4 and 0.00059 mA cm-2 a"
-   },
-   {
-    "value": "0.00059",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "- the largest absolute movement is 0.0059 mA cm-2 at 1e-4 and 0.00059 mA cm-2 at 1e-6, a factor of ten for "
-   },
-   {
-    "value": "282.50",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "5 lowers the unstirred-beaker boil-off ceiling from 285.05 to 282.50 mA cm-2, i.e. the margin against that"
-   },
-   {
-    "value": "26.3",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": ": at 0.206 mS cm-1 the ceilings are 6.9/7.3/7.4/155.1/7.4/6.7/26.3 mA cm-2 against transport ceilings of"
-   },
-   {
-    "value": "65.6",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "3.000 mS cm-1 the ceilings are 26.3/27.7/27.9/394.6/27.9/25.3/65.6 mA cm-2 against transport ceilings of"
-   },
-   {
-    "value": "75.9",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "6.580 mS cm-1 the ceilings are 38.7/40.8/41.0/461.7/41.0/37.3/75.9 mA cm-2 against transport ceilings of"
-   },
-   {
-    "value": "108",
-    "unit": "mA/cm2",
-    "class": "UNANCHORED",
-    "ctx": "n quiescent solution, cathode heights 0.25-3.0 in., i_lim 0.4-108 mA cm-2 -- the archetype and the curr"
-   },
-   {
-    "value": "8.01",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "ction spread in nu and D is included. The unstirred median is 8.01 mA cm-2 at 228 um and 6.11 at 300 um,"
-   },
-   {
-    "value": "9.7",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": " own uncertainty, +/-7 um, carries through to a median of 9.0-9.7 mA cm-2 about 9.3, 13-14 of 50 cleari"
-   },
-   {
-    "value": "18.3",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "oss that band the recirculating column gives a median of 15.6-18.3 mA cm-2 about 16.8, 18-20 of 50 clear"
-   },
-   {
-    "value": "49.9",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "e it. Across that band the ANEC column gives a median of 39.7-49.9 mA cm-2 about 44.2, 30-33 of 50 clear"
-   },
-   {
-    "value": "111",
-    "unit": "mA/cm2",
-    "class": "UNANCHORED",
-    "ctx": "fluidic column gives a column that does not move: a median of 111 mA cm-2, 36 of 50 clearing 25 mA cm-2"
-   },
-   {
-    "value": "108.29",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": " the RDE column at all three values: median 108.49 / 108.37 / 108.29 mA cm-2, and the counts are identical"
-   },
-   {
-    "value": "1.0",
-    "unit": "mA/cm2",
-    "class": "UNANCHORED",
-    "ctx": "c terms of 1-50 V in these cells.i0 (exchange current density)1.0mA cm-2assumption\u2014declared modelling "
-   },
-   {
-    "value": "57",
-    "unit": "mA/cm2",
-    "class": "UNANCHORED",
-    "ctx": " on the vessel: tetrahydrofuran's ceiling runs 21 / 26 / 45 / 57 mA cm-2 over the same sweep against a"
-   },
-   {
-    "value": "250.2",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "3, MeCN 87.8 -> 78.2, DMF 88.8 -> 79.2, aqueous NaOH 282.4 -> 250.2 mA cm-2) and changes none of the 20 a"
-   },
-   {
-    "value": "85.8",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": " m-2 K-1 and every beaker ceiling by about +/-6 pct (DMF 80.3-85.8 mA cm-2). Nothing flips.H_EXT (extern"
-   },
-   {
-    "value": "110.7",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "e. Judged against this cell's own median transport ceiling of 110.7 mA cm-2, every electrolyte clears at "
-   },
-   {
-    "value": "121.7",
-    "unit": "mA/cm2",
-    "class": "COMPUTED",
-    "ctx": "g point (six architectures)8.2 / 9.3 / 16.8 / 110.7 / 108.5 / 121.7mA cm-2derived\u2014the median over the so"
+    "ctx": "d cooling above 154 \u03bcmzero-gap stackTHFstack current density, 500 mA cm\u22122 to 2000 mA cm\u22122 (declared 100"
    },
    {
     "value": "2000",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": "8: 420 +/- 50 mA cm-2 partial current over 200 h). Tested 500-2000 mA cm-2: the stack fails in all four "
+    "ctx": " 154 \u03bcmzero-gap stackTHFstack current density, 500 mA cm\u22122 to 2000 mA cm\u22122 (declared 1000 mA cm\u22122)liquid"
    },
    {
-    "value": "478",
+    "value": "1218",
     "unit": "mA/cm2",
     "class": "COMPUTED",
-    "ctx": "beaker ceilings run 29 -> 42, 88 -> 140, 89 -> 215 and 282 -> 478 mA cm-2. Across all 28 (architecture,"
+    "ctx": "m\u22122 (declared 1000 mA cm\u22122)liquid coolingliquid cooling below 1218 mA cm\u22122; beyond liquid cooling above "
    },
    {
-    "value": "84.2",
+    "value": "57.1",
     "unit": "mA/cm2",
     "class": "COMPUTED",
-    "ctx": "he dimethylformamide ceiling runs 74.9 / 79.2 / 83.5 / 83.9 / 84.2 mA cm-2 at h_int = 50 / 100 / 800 / 2"
+    "ctx": "ing discTHFrotation rate 400-3600 rpm, as its median current, 57.1 mA cm\u22122 to 154.7 mA cm\u22122 (declared 10"
    },
    {
-    "value": "1118.1",
+    "value": "154.7",
     "unit": "mA/cm2",
     "class": "COMPUTED",
-    "ctx": "n the unstirred batch, and 947.3 / 1024.6 / 1105.4 / 1113.0 / 1118.1 mA cm-2 in the microfluidic 25 um, wh"
+    "ctx": "ion rate 400-3600 rpm, as its median current, 57.1 mA cm\u22122 to 154.7 mA cm\u22122 (declared 104.3 mA cm\u22122)liqui"
    },
    {
-    "value": "25.6",
+    "value": "104.3",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "s its median current, 57.1 mA cm\u22122 to 154.7 mA cm\u22122 (declared 104.3 mA cm\u22122)liquid coolingliquid cooling "
+   },
+   {
+    "value": "139.3",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "\u22122 (declared 104.3 mA cm\u22122)liquid coolingliquid cooling below 139.3 mA cm\u22122; beyond liquid cooling above "
+   },
+   {
+    "value": "85.6",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "7 mA cm\u22122 (declared 104.3 mA cm\u22122)liquid coolingpassive below 85.6 mA cm\u22122; liquid cooling above 85.6 mA"
+   },
+   {
+    "value": "85.2",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "7 mA cm\u22122 (declared 104.3 mA cm\u22122)liquid coolingpassive below 85.2 mA cm\u22122; liquid cooling above 85.2 mA"
+   },
+   {
+    "value": "60.4",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "ylinderTHFrotation rate 1000-5000 rpm, as its median current, 60.4 mA cm\u22122 to 157.8 mA cm\u22122 (declared 12"
+   },
+   {
+    "value": "157.8",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "on rate 1000-5000 rpm, as its median current, 60.4 mA cm\u22122 to 157.8 mA cm\u22122 (declared 122.1 mA cm\u22122)liqui"
+   },
+   {
+    "value": "122.1",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "s its median current, 60.4 mA cm\u22122 to 157.8 mA cm\u22122 (declared 122.1 mA cm\u22122)liquid coolingliquid cooling "
+   },
+   {
+    "value": "126.3",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "\u22122 (declared 122.1 mA cm\u22122)liquid coolingliquid cooling below 126.3 mA cm\u22122; beyond liquid cooling above "
+   },
+   {
+    "value": "77.8",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "8 mA cm\u22122 (declared 122.1 mA cm\u22122)liquid coolingpassive below 77.8 mA cm\u22122; liquid cooling above 77.8 mA"
+   },
+   {
+    "value": "77.3",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "8 mA cm\u22122 (declared 122.1 mA cm\u22122)liquid coolingpassive below 77.3 mA cm\u22122; liquid cooling above 77.3 mA"
+   },
+   {
+    "value": "0.01",
     "unit": "mA/cm2",
     "class": "UNANCHORED",
-    "ctx": "5 mA cm\u22122 is HMF \u2192 FDCA (biomass) in the microfluidic cell at 25.6 mA cm\u22122, 2.6% above the threshold.S11"
+    "ctx": "1.52, microfluidic \u03c3, 3.5 to 21, exchange current density i0, 0.01 mA cm\u22122 to 10 mA cm\u22122 and transfer co"
+   },
+   {
+    "value": "433",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "S6.1 then move from 27 to 39, 80 to 127, 80 to 194 and 257 to 433 mA cm\u22122 respectively, and across all "
+   },
+   {
+    "value": "136",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "4 bound-dependent verdicts are MeCN in the RDE 1600 rpm (86 \u2192 136 mA cm\u22122 against 104); DMF in the RDE "
+   },
+   {
+    "value": "207",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": "(86 \u2192 136 mA cm\u22122 against 104); DMF in the RDE 1600 rpm (85 \u2192 207 mA cm\u22122 against 104); MeCN in the rot"
+   },
+   {
+    "value": "124",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "A cm\u22122 against 104); MeCN in the rotating cyl. 3000 rpm (78 \u2192 124 mA cm\u22122 against 122); DMF in the rota"
+   },
+   {
+    "value": "188",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "mA cm\u22122 against 122); DMF in the rotating cyl. 3000 rpm (77 \u2192 188 mA cm\u22122 against 122). Each is stated "
+   },
+   {
+    "value": "194",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": "or that produces the largest single change in the table (80 \u2192 194 mA cm\u22122 in the beaker, 1156 \u2192 1496 mA"
+   },
+   {
+    "value": "1496",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "e change in the table (80 \u2192 194 mA cm\u22122 in the beaker, 1156 \u2192 1496 mA cm\u22122 in the microfluidic). Ion pai"
+   },
+   {
+    "value": "9.7",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "= 102 M\u22121 s\u22121 (\u00a7S5.7) the row's recirculating-flow ceiling is 9.7 mA cm\u22122 (3.7\u201322.4 across the declared"
+   },
+   {
+    "value": "1.38",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": "talyzed aryl amination, carried at the floor k = 0, runs 0.05-1.38 mA cm-2 at the printed value and 0.11"
+   },
+   {
+    "value": "12.53",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "t its sourced rate constant k = 100 M-1 s-1 (S5.7), runs 7.28-12.53 mA cm-2 at the printed value and 12.4"
+   },
+   {
+    "value": "1020.00",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": " 2.2 pct (Nitroarene -> aniline, rotating cylinder, 997.92 -> 1020.00 mA cm-2), and no 25 or 50 mA cm-2 thr"
+   },
+   {
+    "value": "1.17",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "sion. One row runs in this solvent, with a highest ceiling of 1.17 mA cm-2; i_lim varies no faster than "
+   },
+   {
+    "value": "13.7",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "h = 2.73 Angstrom on the deciding row (Co-H alkene reduction, 13.7 mA cm-2 at best), below the 3.19 Angs"
+   },
+   {
+    "value": "25.24",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "-mediated allylic C-H -> enone in the stirred architecture at 25.24 mA cm-2, is 0.96 pct from 25 and its "
+   },
+   {
+    "value": "25.05",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "ld sit at or below 2.38e-09; there the unstirred cell reaches 25.05 mA cm-2, crossing 25 mA cm-2 at D = 2"
+   },
+   {
+    "value": "125.4",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "the upper end x1.056-x2.141, and its lowest cell is 117.1 and 125.4 mA cm-2; no threshold count or archit"
+   },
+   {
+    "value": "48.8",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": " the upper end x1.040-x1.064, and its lowest cell is 27.1 and 48.8 mA cm-2; at the lower end the stirred"
+   },
+   {
+    "value": "46",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "lder paper's own range, 0.05-0.5 F mol-1, that row reaches 37-46 mA cm-2 in the microfluidic, rotating"
+   },
+   {
+    "value": "8.7",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": "low 25 mA cm-2 at any substrate count by its kinetic plateau, 8.7 mA cm-2.Trace initializations (Med_ox"
+   },
+   {
+    "value": "0.029",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": "n, reactor) entries change at 1e-4 and 68 at 1e-6, by at most 0.029 mA cm-2 and 0.0029 mA cm-2 respective"
+   },
+   {
+    "value": "0.0029",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "s change at 1e-4 and 68 at 1e-6, by at most 0.029 mA cm-2 and 0.0029 mA cm-2 respectively (0.042 pct and 0"
+   },
+   {
+    "value": "262.2",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "oss the band the unstirred-beaker boil-off ceiling runs 257.0-262.2 mA cm-2 against that cell's own trans"
+   },
+   {
+    "value": "27.2",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": ": at 0.206 mS cm-1 the ceilings are 7.1/7.5/7.6/160.2/7.6/6.9/27.2 mA cm-2 against transport ceilings of"
+   },
+   {
+    "value": "68.2",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "3.000 mS cm-1 the ceilings are 27.0/28.6/28.7/411.0/28.7/26.1/68.2 mA cm-2 against transport ceilings of"
+   },
+   {
+    "value": "79.3",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "6.600 mS cm-1 the ceilings are 39.8/42.1/42.4/482.8/42.4/38.5/79.3 mA cm-2 against transport ceilings of"
+   },
+   {
+    "value": "17.4",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "t binds before heat in cells whose transport ceilings are 8.6-17.4 mA cm-2 (the microfluidic cell aside)"
+   },
+   {
+    "value": "108",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": "n quiescent solution, cathode heights 0.25-3.0 in., i_lim 0.4-108 mA cm-2 -- the same archetype as this"
+   },
+   {
+    "value": "8.55",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "ction spread in nu and D is included. The unstirred median is 8.55 mA cm-2 at the carried 228 um, with 1"
+   },
+   {
+    "value": "16.2",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "ich falls faster than 1/delta (Table S6) -- gives a median of 16.2 mA cm-2 with at most 21 and 12 of 50 "
+   },
+   {
+    "value": "4.6",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": ".2 mA cm-2 with at most 21 and 12 of 50 at the thin edge, and 4.6 mA cm-2 with at least 11 and 7 at the"
+   },
+   {
+    "value": "10.1",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": " own uncertainty, +/-7 um, carries through to a median of 9.4-10.1 mA cm-2 about 9.7, 12-15 of 50 (about"
+   },
+   {
+    "value": "19.1",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "oss that band the recirculating column gives a median of 16.1-19.1 mA cm-2 about 17.4, 18-21 of 50 (abou"
+   },
+   {
+    "value": "50.6",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "e it. Across that band the ANEC column gives a median of 39.7-50.6 mA cm-2 about 44.5, 28-30 of 50 (abou"
+   },
+   {
+    "value": "109",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "fluidic column gives a column that does not move: a median of 109 mA cm-2, 34 of 50 clearing 25 mA cm-2"
+   },
+   {
+    "value": "1.0",
+    "unit": "mA/cm2",
+    "class": "UNANCHORED",
+    "ctx": " that row states the consequence.i0 (exchange current density)1.0mA cm-2assumption\u2014declared modelling "
+   },
+   {
+    "value": "108.6",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": " 5.81-12.66x), judged against its median transport ceiling of 108.6 mA cm-2.Table S7h. Voltage stack \u2014 3 "
+   },
+   {
+    "value": "58",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": " on the vessel: tetrahydrofuran's ceiling runs 21 / 27 / 46 / 58 mA cm-2 over the same sweep against a"
+   },
+   {
+    "value": "80.1",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": " 6 cm across the four electrolytes (DMF 85.2 and 78.2 against 80.1 mA cm-2). No verdict changes class.h "
+   },
+   {
+    "value": "81.0",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "W m-2 K-1 and the four ceilings by -5.2 to +1.2 pct (DMF 76.2-81.0 mA cm-2 against 80.1). Nothing flips."
+   },
+   {
+    "value": "85.5",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "he dimethylformamide ceiling runs 75.6 / 80.1 / 84.8 / 85.2 / 85.5 mA cm-2 at h_int = 50 / 100 / 800 / 2"
+   },
+   {
+    "value": "1158.7",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "n the unstirred batch, and 974.0 / 1057.1 / 1144.8 / 1153.1 / 1158.7 mA cm-2 in the microfluidic 25 um, wh"
+   },
+   {
+    "value": "10.08",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "unstirred and stirred medians overlap (upper limits 17.69 and 10.08 mA cm\u22122), because the free-convection"
+   },
+   {
+    "value": "25.2",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": " is NHPI-mediated allylic C-H \u2192 enone in the stirred batch at 25.2 mA cm\u22122, 1.0% above the threshold.S11"
+   },
+   {
+    "value": "000",
+    "unit": "mA/cm2",
+    "class": "COMPUTED",
+    "ctx": "S5.5 and \u00a7S5.7. Five of the 350 cells lie above the panel's 4,000 mA cm\u22122 axis limit and are not drawn:"
    },
    {
     "value": "6.6",
@@ -553,7 +757,13 @@
     "value": "0.206",
     "unit": "mS/cm",
     "class": "UNANCHORED",
-    "ctx": "ed either. Band 0.2\u20136.6 mS cm\u22121, with a state-B hard floor of 0.206 mS cm\u22121 obtained by ohmic differencin"
+    "ctx": "ed either. Band 0.2\u20136.6 mS cm\u22121, with a state-B hard floor of 0.206 mS cm\u22121 obtained from the total cell "
+   },
+   {
+    "value": "1.09",
+    "unit": "mS/cm",
+    "class": "COMPUTED",
+    "ctx": " reaching its own transport ceiling only below 0.30, 0.34 and 1.09 mS cm\u22121 (unstirred batch, stirred bat"
    },
    {
     "value": "33.40",
@@ -562,22 +772,28 @@
     "ctx": "to the fit the same article prints in Table 3, p. 1499 (\u03ba_max 33.40 mS cm\u22121, m\u0304_max 1.48127 mol kg\u22121, a 0"
    },
    {
-    "value": "18.9",
+    "value": "20.03",
+    "unit": "mS/cm",
+    "class": "COMPUTED",
+    "ctx": "rent molar volume V_\u03c6 = 287 cm3 mol\u22121, gives 0.348) \u2014 returns 20.03 mS cm\u22121, 0.4% from the measured value"
+   },
+   {
+    "value": "32.3",
     "unit": "mS/cm",
     "class": "UNANCHORED",
-    "ctx": "mol\u22121 and \u03c1(MeCN) = 0.7768 g cm\u22123 giving m\u0304 = 0.347 \u2014 returns 18.9 mS cm\u22121. The two agree to 5.6%, which"
+    "ctx": "rgy Environ. Sci. 2015, 8, 3515\u20133530, Table 3, p. 3519, whose 32.3 mS cm\u22121 the same fit reproduces to wi"
    },
    {
     "value": "23",
     "unit": "mS/cm",
     "class": "UNANCHORED",
-    "ctx": " 3, p. 3519 (32.75 derived vs 32.3 tabulated, +1.4%). Band 15\u201323 mS cm\u22121. A mass-action bound of 24\u201336"
+    "ctx": "se 32.3 mS cm\u22121 the same fit reproduces to within 2%. Band 15\u201323 mS cm\u22121. A mass-action bound of 24\u201336"
    },
    {
     "value": "36",
     "unit": "mS/cm",
     "class": "UNANCHORED",
-    "ctx": "ulated, +1.4%). Band 15\u201323 mS cm\u22121. A mass-action bound of 24\u201336 mS cm\u22121 is not used: it is a Lee\u2013Whea"
+    "ctx": "s to within 2%. Band 15\u201323 mS cm\u22121. A mass-action bound of 24\u201336 mS cm\u22121 is not used: it is a Lee\u2013Whea"
    },
    {
     "value": "16.27",
@@ -586,22 +802,16 @@
     "ctx": "t is the value adopted \u2014 and with it a hard ceiling \u03ba \u2264 c\u039b\u00b0 = 16.27 mS cm\u22121. \u039b(c) at 0.2 M has never been"
    },
    {
-    "value": "8.77",
+    "value": "8.51",
     "unit": "mS/cm",
-    "class": "UNANCHORED",
-    "ctx": "ured \u039b/\u039b\u00b0 at 0.2 M is 0.539, giving \u03ba = 0.2 \u00d7 81.35 \u00d7 0.539 = 8.77 mS cm\u22121. The single assumption \u2014 equa"
+    "class": "COMPUTED",
+    "ctx": "5 cm3 mol\u22121) is 0.522\u20130.525, giving \u03ba = 0.2 \u00d7 81.35 \u00d7 0.523 = 8.51 mS cm\u22121. The single assumption \u2014 equa"
    },
    {
-    "value": "9.72",
+    "value": "3.1",
     "unit": "mS/cm",
     "class": "UNANCHORED",
-    "ctx": " Onsager limiting law on that same methanol measurement gives 9.72 mS cm\u22121 as the better estimate. The f"
-   },
-   {
-    "value": "8.30",
-    "unit": "mS/cm",
-    "class": "UNANCHORED",
-    "ctx": "e\u2013H\u00fcckel activity coefficients and Onsager relaxation \u2014 gives 8.30 mS cm\u22121, within 5% of the adopted val"
+    "ctx": "tside the range they fitted, and the form decides the answer: 3.1 mS cm\u22121 by the Onsager limiting law a"
    },
    {
     "value": "206",
@@ -622,52 +832,52 @@
     "ctx": "5) Table 1 Reference Solution A (1 demal KCl, 7.11352 mass %, 111.342 mS cm\u22121 at 25 \u00b0C) to within +0.3 to +"
    },
    {
-    "value": "14.11",
+    "value": "13.36",
     "unit": "mS/cm",
     "class": "COMPUTED",
-    "ctx": " a best estimate. T_ss falls back to the boiling point at \u03ba = 14.11 mS cm\u22121, a margin of 1.61\u00d7, and the 1"
+    "ctx": "bound (Table S4). T_ss falls back to the boiling point at \u03ba = 13.36 mS cm\u22121, a margin of 1.57\u00d7, and the 1"
    },
    {
     "value": "13.16",
     "unit": "mS/cm",
     "class": "COMPUTED",
-    "ctx": "f 1.61\u00d7, and the 13.8 V figure leaves the 10\u201320 V band at \u03ba = 13.16 mS cm\u22121 (\u00d71.50) or \u03ba = 5.68 mS cm\u22121 ("
+    "ctx": "f 1.57\u00d7, and the 14.2 V figure leaves the 10\u201320 V band at \u03ba = 13.16 mS cm\u22121 (\u00d71.55) or \u03ba = 5.68 mS cm\u22121 ("
    },
    {
     "value": "5.68",
     "unit": "mS/cm",
     "class": "COMPUTED",
-    "ctx": "e leaves the 10\u201320 V band at \u03ba = 13.16 mS cm\u22121 (\u00d71.50) or \u03ba = 5.68 mS cm\u22121 (\u00d70.65). Both thresholds lie "
+    "ctx": "e leaves the 10\u201320 V band at \u03ba = 13.16 mS cm\u22121 (\u00d71.55) or \u03ba = 5.68 mS cm\u22121 (\u00d70.67). Both thresholds lie "
    },
    {
     "value": "16",
     "unit": "mS/cm",
     "class": "UNANCHORED",
-    "ctx": "or \u03ba = 5.68 mS cm\u22121 (\u00d70.65). Both thresholds lie inside the 4\u201316 mS cm\u22121 band of that row, so both sta"
+    "ctx": "or \u03ba = 5.68 mS cm\u22121 (\u00d70.67). Both thresholds lie inside the 4\u201316 mS cm\u22121 band of that row, so both sta"
    },
    {
     "value": "4.76",
     "unit": "mS/cm",
     "class": "UNANCHORED",
-    "ctx": "ions. The same example in 0.1 M Bu4NBF4/DMF \u2014 measured at \u03ba = 4.76 mS cm\u22121 (Table S7f) \u2014 across a 5 mm g"
+    "ctx": "utes. The same example in 0.1 M Bu4NBF4/DMF \u2014 measured at \u03ba = 4.76 mS cm\u22121 (Table S7f) \u2014 across a 5 mm g"
    },
    {
     "value": "3",
     "unit": "mS/cm",
     "class": "UNANCHORED",
-    "ctx": "ol LiBr in 320 mL THF, SM p. S15) but whose conductivity, \u03ba \u2248 3 mS cm\u22121, is an order-of-magnitude est"
+    "ctx": "ock, 7.5 mol in 2.5 L, SM p. S21) but whose conductivity, \u03ba \u2248 3 mS cm\u22121, is an order-of-magnitude est"
    },
    {
     "value": "3.0",
     "unit": "mS/cm",
     "class": "UNANCHORED",
-    "ctx": "ail verdicts. Recomputed from the lumped thermal model at \u03ba = 3.0 mS cm\u22121 and T_b = 66 \u00b0C, and judged a"
+    "ctx": " binding one. Recomputed from the lumped thermal model at \u03ba = 3.0 mS cm\u22121 and T_b = 66 \u00b0C, and judged a"
    },
    {
     "value": "0.256",
     "unit": "mS/cm",
     "class": "UNANCHORED",
-    "ctx": " with that margin where it appears; the floor for this row is 0.256 mS cm\u22121, which is the highest concent"
+    "ctx": " the highest concentration in the sources retrieved here, \u03ba = 0.256 mS cm\u22121 at 0.316 M (J. Solution Chem."
    },
    {
     "value": "35.6",
@@ -676,16 +886,16 @@
     "ctx": "ing on the fitting window); continued to 3.0 M they give 10.9\u201335.6 mS cm\u22121, all below the rotating-disc "
    },
    {
-    "value": "49.5",
+    "value": "42.6",
     "unit": "mS/cm",
     "class": "COMPUTED",
-    "ctx": "ve 10.9\u201335.6 mS cm\u22121, all below the rotating-disc reversal at 49.5 mS cm\u22121. None of those continuations "
+    "ctx": "ve 10.9\u201335.6 mS cm\u22121, all below the rotating-disc reversal at 42.6 mS cm\u22121. None of those continuations "
    },
    {
     "value": "174.5",
     "unit": "mS/cm",
     "class": "UNANCHORED",
-    "ctx": "on \u03ba is established. The aqueous reference uses 1 M NaOH (\u03ba = 174.5 mS cm\u22121, now measured), and its CRC c"
+    "ctx": "on \u03ba is established. The aqueous reference uses 1 M NaOH (\u03ba = 174.5 mS cm\u22121, interpolated between two mea"
    },
    {
     "value": "182",
@@ -697,7 +907,7 @@
     "value": "19.95",
     "unit": "mS/cm",
     "class": "UNANCHORED",
-    "ctx": "d survive anywhere in the band. MeCN uses 0.25 M Bu4NBF4 (\u03ba = 19.95 mS cm\u22121), now measured: it is read di"
+    "ctx": "ity reversal needs a 4.6\u00d7 fall. MeCN uses 0.25 M Bu4NBF4 (\u03ba = 19.95 mS cm\u22121), measured: it is read direct"
    },
    {
     "value": "0.51",
@@ -714,80 +924,74 @@
    {
     "value": "9.8",
     "unit": "mS/cm",
-    "class": "UNANCHORED",
+    "class": "COMPUTED",
     "ctx": "andbook's \u03ba = 8.9 mS cm\u22121 at 20 \u00b0C (Table S7i) carried to 9.6\u20139.8 mS cm\u22121 at 25 \u00b0C on the same 1.5\u20131.9%"
    },
    {
-    "value": "16.38",
+    "value": "2.85",
     "unit": "mS/cm",
     "class": "COMPUTED",
-    "ctx": " kappa <= c Lambda0 = 2.000e-4 mol cm-3 x 81.92 S cm2 mol-1 = 16.38 mS cm-1, since Lambda(c) <= Lambda0 f"
+    "ctx": "e cell voltage over 12.48-13.53 V; it reaches 20 V at kappa = 2.85 mS cm-1 and 10 V at 6.64.0.2 M NaI/DM"
    },
    {
-    "value": "14.78",
+    "value": "12.83",
     "unit": "mS/cm",
     "class": "COMPUTED",
-    "ctx": "erdict is the rotating disc, which reverses if kappa rises to 14.78 mS cm-1, i.e. 1.69x the carried 8.77,"
+    "ctx": "erdict is the rotating disc, which reverses if kappa rises to 12.83 mS cm-1, i.e. 1.51x the carried 8.51,"
    },
    {
-    "value": "32.3",
-    "unit": "mS/cm",
-    "class": "UNANCHORED",
-    "ctx": "5 there. Cross-check: Gong Table 3, p. 3519 (Bu4NBF4/AN, 1 M, 32.3 mS cm-1, tabulated after Izutsu 2009)"
-   },
-   {
-    "value": "34.8",
+    "value": "0.77",
     "unit": "mS/cm",
     "class": "COMPUTED",
-    "ctx": "cyl. 3000 rpm 0.62x. The two shortfalls would reverse only at 34.8 mS cm-1 (1.74x carried, RDE 1600 rpm)"
+    "ctx": "n expanded uncertainty at the two bracketing points (0.71 and 0.77 mS cm-1, Table SI 85), than the sprea"
    },
    {
-    "value": "53.9",
+    "value": "7.041",
     "unit": "mS/cm",
     "class": "COMPUTED",
-    "ctx": "everse only at 34.8 mS cm-1 (1.74x carried, RDE 1600 rpm) and 53.9 mS cm-1 (2.70x carried, rotating cyl."
+    "ctx": "use of it: at m = 0.075 the published Table 3 parameters give 7.041 mS cm-1, the kappa_ref = 7.04 his dis"
    },
    {
-    "value": "13.1",
+    "value": "30.1",
     "unit": "mS/cm",
     "class": "COMPUTED",
-    "ctx": "tion shows why. Continuing kappa ~ c^1.75 to 3.0 M would give 13.1 mS cm-1, four times the carried value"
+    "ctx": "cyl. 3000 rpm 0.64x. The two shortfalls would reverse only at 30.1 mS cm-1 (1.51x carried, RDE 1600 rpm)"
    },
    {
-    "value": "0.26",
+    "value": "50.9",
     "unit": "mS/cm",
-    "class": "UNANCHORED",
-    "ctx": " measurement points higher. The band is therefore reported as 0.26 mS cm-1 to not established above; the"
+    "class": "COMPUTED",
+    "ctx": "everse only at 30.1 mS cm-1 (1.51x carried, RDE 1600 rpm) and 50.9 mS cm-1 (2.55x carried, rotating cyl."
    },
    {
-    "value": "1.5",
+    "value": "13.0",
     "unit": "mS/cm",
-    "class": "UNANCHORED",
-    "ctx": "admitted by rounding alone -- raises it to 6.58. do not adopt 1.5 mS cm-1 as a derived point value: it "
+    "class": "COMPUTED",
+    "ctx": "appa ~ c^1.75 from the top measured point to 3.0 M would give 13.0 mS cm-1, 4 times the carried value, s"
    },
    {
     "value": "3.000",
     "unit": "mS/cm",
     "class": "COMPUTED",
-    "ctx": "0.7/108.5/121.7/1000.0, so 1 of the 7 architectures clear; at 3.000 mS cm-1 the ceilings are 26.3/27.7/27"
+    "ctx": "8.6/104.3/122.1/1000.0, so 1 of the 7 architectures clear; at 3.000 mS cm-1 the ceilings are 27.0/28.6/28"
    },
    {
-    "value": "6.580",
+    "value": "6.600",
     "unit": "mS/cm",
     "class": "COMPUTED",
-    "ctx": "0.7/108.5/121.7/1000.0, so 4 of the 7 architectures clear; at 6.580 mS cm-1 the ceilings are 38.7/40.8/41"
+    "ctx": "8.6/104.3/122.1/1000.0, so 4 of the 7 architectures clear; at 6.600 mS cm-1 the ceilings are 39.8/42.1/42"
    },
    {
-    "value": "3.89",
+    "value": "1.68",
     "unit": "mS/cm",
     "class": "COMPUTED",
-    "ctx": "req crosses the 0.08 W cm-2 K-1 forced-air ceiling at kappa = 3.89 mS cm-1; U' = 0.0986 at 3.0, 0.0544 a"
+    "ctx": "ow 0.93x, 0.65x and 0.56x the carried conductivity (2.80/1.95/1.68 mS cm-1, against the top of each cool"
    },
    {
-    "value": "2.3",
+    "value": "2.4",
     "unit": "W/cm2",
     "class": "UNANCHORED",
-    "ctx": "aqueous reports. The overpotential heat at 100 mA cm\u22122 is q = 2.3 W cm\u22122. A 100 mL batch of DMF under "
+    "ctx": "\u22122 draws 14.2 V. The overpotential heat at 100 mA cm\u22122 is q = 2.4 W cm\u22122. A 100 mL batch of DMF under "
    },
    {
     "value": "1.10",
@@ -796,22 +1000,10 @@
     "ctx": "\u2014 across a 5 mm gap gives 12.98 V, of which 10.50 V is ohmic, 1.10 W cm\u22122 of heat and a passive steady "
    },
    {
-    "value": "2.5",
-    "unit": "W/cm2",
-    "class": "UNANCHORED",
-    "ctx": " architectures of PEM electrolyzer stacks reject of order 0.3\u20132.5 W cm\u22122 across in-cell gradients of 1"
-   },
-   {
-    "value": "10",
-    "unit": "W/cm2",
-    "class": "UNANCHORED",
-    "ctx": "f 14\u201327 K. That figure is stated conservatively: a range of 1\u201310 W cm\u22122 is sometimes quoted on a cita"
-   },
-   {
     "value": "0.42",
     "unit": "W/cm2",
     "class": "UNANCHORED",
-    "ctx": "ront. Chem. Eng. 2024, 6, 1384772, which in fact reports 0.32\u20130.42 W cm\u22122 into the anodic fluid at 2 A "
+    "ctx": "ar-plate architectures of PEM electrolyzer stacks reject 0.32\u20130.42 W cm\u22122 into the anodic fluid at 2 A "
    },
    {
     "value": "0.84",
@@ -823,55 +1015,55 @@
     "value": "1.9",
     "unit": "W/cm2",
     "class": "UNANCHORED",
-    "ctx": "ral voltage generates 0.84 W cm\u22122, and at 3 A cm\u22122 and 2.1 V, 1.9 W cm\u22122. The corresponding coefficien"
+    "ctx": "ral voltage generates 0.84 W cm\u22122, and at 3 A cm\u22122 and 2.1 V, 1.9 W cm\u22122. Liquid cooling is not taken "
    },
    {
-    "value": "0.30",
-    "unit": "W/cm2",
-    "class": "UNANCHORED",
-    "ctx": "2. The corresponding coefficient for that cooling class, U\u2032 = 0.30 W cm\u22122 K\u22121, is not taken from that l"
-   },
-   {
-    "value": "0.49",
-    "unit": "W/cm2",
-    "class": "UNANCHORED",
-    "ctx": "els (Nu = 4.36\u20138.23, D_h = 1\u20133 mm), which brackets it at 0.09\u20130.49 W cm\u22122 K\u22121 (Table S7i). Passive reje"
-   },
-   {
-    "value": "0.0115",
+    "value": "0.317",
     "unit": "W/cm2",
     "class": "COMPUTED",
-    "ctx": "ssumed cooling envelope: the construction of \u00a7S6.1 gives U\u2032 = 0.0115 W cm\u22122 K\u22121 for a 100 mL beaker in st"
+    "ctx": "ries (Incropera Table 8.1, Nu = 5.39), which gives U\u2032 = 0.176\u20130.317 W cm\u22122 K\u22121 for the vessel cells with"
    },
    {
-    "value": "0.0127",
+    "value": "0.142",
     "unit": "W/cm2",
     "class": "COMPUTED",
-    "ctx": "5 W cm\u22122 K\u22121 for a 100 mL beaker in still air, rising only to 0.0127 W cm\u22122 K\u22121 when the liquid is stirre"
+    "ctx": "1 for the vessel cells with forced electrolyte flow and 0.061\u20130.142 W cm\u22122 K\u22121 for the stack (Table S7i)"
+   },
+   {
+    "value": "0.0121",
+    "unit": "W/cm2",
+    "class": "COMPUTED",
+    "ctx": "ssumed cooling envelope: the construction of \u00a7S6.1 gives U\u2032 = 0.0121 W cm\u22122 K\u22121 for a 100 mL beaker in st"
+   },
+   {
+    "value": "0.0135",
+    "unit": "W/cm2",
+    "class": "COMPUTED",
+    "ctx": "1 W cm\u22122 K\u22121 for a 100 mL beaker in still air, rising only to 0.0135 W cm\u22122 K\u22121 when the liquid is stirre"
    },
    {
     "value": "0.02",
     "unit": "W/cm2",
     "class": "UNANCHORED",
-    "ctx": "so \u03c3 = 9.96 and U\u2032 = 0.0115 W cm\u22122 K\u22121. This is 43% below the 0.02 W cm\u22122 K\u22121 still-air value often ass"
+    "ctx": "de, so \u03c3 = 9.96 and U\u2032 = 0.0121 W cm\u22122 K\u22121. This is 40% below 0.02 W cm\u22122 K\u22121, the upper edge of the na"
    },
    {
     "value": "0.71",
     "unit": "W/cm2",
     "class": "UNANCHORED",
-    "ctx": "nreachable on \u03ba at all, its activation term alone putting out 0.71 W cm\u22122 at 1000 mA cm\u22122 against 0.043"
+    "ctx": "nreachable on \u03ba at all, its activation term alone putting out 0.71 W cm\u22122 at 1000 mA cm\u22122 against 0.045"
    },
    {
-    "value": "0.043",
-    "unit": "W/cm2",
-    "class": "UNANCHORED",
-    "ctx": "on term alone putting out 0.71 W cm\u22122 at 1000 mA cm\u22122 against 0.043 W cm\u22122 of passive rejection. The bin"
-   },
-   {
-    "value": "0.0129",
+    "value": "0.045",
     "unit": "W/cm2",
     "class": "COMPUTED",
-    "ctx": "ch cell supplies unaided is set almost entirely by its own \u03c3: 0.0129 W cm\u22122 K\u22121 for the centimetre-gap ce"
+    "ctx": "on term alone putting out 0.71 W cm\u22122 at 1000 mA cm\u22122 against 0.045 W cm\u22122 of passive rejection. The bin"
+   },
+   {
+    "value": "0.0137",
+    "unit": "W/cm2",
+    "class": "COMPUTED",
+    "ctx": " supplies unaided is set almost entirely by its own \u03c3: 0.0121\u20130.0137 W cm\u22122 K\u22121 for the centimetre-gap ce"
    },
    {
     "value": "1.098",
@@ -880,16 +1072,10 @@
     "ctx": " model gives E_cell = 12.98 V, of which 10.50 V is ohmic, q = 1.098 W cm-2, and a passive steady state o"
    },
    {
-    "value": "0.08",
-    "unit": "W/cm2",
-    "class": "UNANCHORED",
-    "ctx": "air rejection' claim flips at only 1.297x (U'_req crosses the 0.08 W cm-2 K-1 forced-air ceiling at kap"
-   },
-   {
-    "value": "0.01275",
+    "value": "0.01352",
     "unit": "W/cm2",
     "class": "COMPUTED",
-    "ctx": "'Vessel external area'Stirring raises U' only from 0.01146 to 0.01275 W cm-2 K-1, i.e. 11 pct, because h_e"
+    "ctx": "'Vessel external area'Stirring raises U' only from 0.01208 to 0.01352 W cm-2 K-1, i.e. 12 pct, because h_e"
    },
    {
     "value": "2",
@@ -898,64 +1084,52 @@
     "ctx": "d the term restored.Cooling band: natural convection8e-4 - 2e-2W cm-2 K-1assumption\u2014rows 'H_EXT' an"
    },
    {
-    "value": "1",
+    "value": "02",
     "unit": "W/cm2",
-    "class": "UNANCHORED",
-    "ctx": "ma range [0.8, 12.5] the derivable interval is 2.0e-3 to 3.1e-1 W cm-2 K-1, so the plotted band is a"
+    "class": "COMPUTED",
+    "ctx": "g the model does not have. The derived edges, 1.1e-03 to 1.4e-02 W cm-2 K-1, are registered on this r"
    },
    {
-    "value": "1.0",
+    "value": "0.034",
     "unit": "W/cm2",
-    "class": "UNANCHORED",
-    "ctx": "he band is shading only.Cooling band: liquid cold plate2e-1 - 1.0W cm-2 K-1assumption\u2014Incropera, DeWi"
-   },
-   {
-    "value": "2.6",
-    "unit": "W/cm2",
-    "class": "UNANCHORED",
-    "ctx": "band but does not produce it). The derivable interval is 0.13-2.6 W cm-2 K-1 for sigma of about 1-2, a"
+    "class": "COMPUTED",
+    "ctx": "eCN and DMF need liquid cooling there too, at duties of 0.020-0.034 W cm-2 K-1, all met within the decla"
    },
    {
     "value": "0.099",
     "unit": "W/cm2",
     "class": "COMPUTED",
-    "ctx": "atement rests on it: S6.2 places the zero-gap cooling duty of 0.099 W cm-2 K-1 inside liquid-loop territ"
+    "ctx": "thickness, channel size and rib factor. The stack's THF duty, 0.099 W cm-2 K-1, is met within the declar"
+   },
+   {
+    "value": "0.021",
+    "unit": "W/cm2",
+    "class": "COMPUTED",
+    "ctx": "s reference need liquid cooling there too, at duties of 0.010-0.021 W cm-2 K-1, all met within the decla"
    },
    {
     "value": "0.18",
     "unit": "W/cm2",
     "class": "UNANCHORED",
-    "ctx": "factor of two, rather than an unanchored guess.U' stirred bath0.18W cm-2 K-1assumption\u2014declared archit"
+    "ctx": "ed there. Those verdicts are conditional on it.U' stirred bath0.18W cm-2 K-1assumption\u2014declared archit"
    },
    {
-    "value": "0.1",
-    "unit": "W/cm2",
-    "class": "UNANCHORED",
-    "ctx": "jacent SI sentence quoting stirred-liquid heat rejection near 0.1 W cm-2 K-1 is scoped to this row.U' "
-   },
-   {
-    "value": "5.4",
-    "unit": "W/cm2",
-    "class": "UNANCHORED",
-    "ctx": "tus-Boelter at Re = 3e3-3e4, Pr = 6 and D_h = 2 mm gives 0.86-5.4 W cm-2 K-1 turbulent. 0.30 is the mi"
-   },
-   {
-    "value": "12.08",
+    "value": "12.15",
     "unit": "W/cm2",
     "class": "COMPUTED",
-    "ctx": "e's own transport ceiling of 121.7 mA cm-2 the dissipation is 12.08 W cm-2 while the passive path remove"
+    "ctx": "e's own transport ceiling of 122.1 mA cm-2 the dissipation is 12.15 W cm-2 while the passive path remove"
    },
    {
-    "value": "0.528",
+    "value": "0.560",
     "unit": "W/cm2",
     "class": "COMPUTED",
-    "ctx": "he dissipation is 12.08 W cm-2 while the passive path removes 0.528 W cm-2 at T = Tb, so evaporation wou"
+    "ctx": "he dissipation is 12.15 W cm-2 while the passive path removes 0.560 W cm-2 at T = Tb, so evaporation wou"
    },
    {
-    "value": "11.55",
+    "value": "11.59",
     "unit": "W/cm2",
     "class": "COMPUTED",
-    "ctx": "es 0.528 W cm-2 at T = Tb, so evaporation would have to carry 11.55 W cm-2, which is 96 pct of the total"
+    "ctx": "es 0.560 W cm-2 at T = Tb, so evaporation would have to carry 11.59 W cm-2, which is 95 pct of the total"
    }
   ]
  },

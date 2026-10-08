@@ -62,8 +62,8 @@ import numpy as np
 RT_F = 0.025693     # RT/F at 298.15 K = 8.3145*298.15/96485 (CODATA); not a fitted number
 # b = 2RT/F per electrode is the Tafel slope at alpha = 1/2, n = 1 -- Bard & Faulkner,
 # "Electrochemical Methods", 2nd edn, Wiley, 2001, ch. 3 (Butler-Volmer and Tafel forms).
-# alpha = 1/2 is the only free choice; alpha in [0.3, 0.7] moves the activation term by under
-# 60 mV against ohmic terms of 1-50 V in these cells, so nothing here turns on it.
+# alpha = 1/2 is the only free choice; alpha = 0.3 on both electrodes adds 148-473 mV across the
+# architectures' operating currents, never more than the i0 sweep (registry row 'Tafel slope b').
 B_TAFEL = 2*RT_F
 # i0 IS A DECLARED MODELLING CHOICE, not a measurement -- no source is claimed for it. It is
 # registered state C with a sweep: 0.01-10 mA/cm2 across all four Fig. K solvents. It matters
@@ -76,7 +76,7 @@ TAMB = 25.0         # C
 #     1975, 18, 1323-1329; restated as Incropera, DeWitt, Bergman & Lavine, 'Fundamentals of
 #     Heat and Mass Transfer', 6th edn, Wiley, Eq. 9.26-9.27 and Table A.4.
 #   h radiation (linearized) = 6 W m-2 K-1 -- same registry, linearized about T_amb.
-H_EXT = 13.0        # W/m2 K, natural convection + radiation off the outer surface
+H_EXT = None        # W/m2 K, natural convection + radiation off the outer surface; derived below at the vessel's wetted height
 
 # (short label, electrolyte as registered, kappa S/m, T_boil C, provenance STATE)
 # Three-state standard, docs/PROVENANCE_STANDARD.md: measured / derived / assumption.
@@ -107,7 +107,7 @@ H_EXT = 13.0        # W/m2 K, natural convection + radiation off the outer surfa
 #       5 mm flow 3.46x, 250 um microfluidic 39.5x, zero-gap stack UNREACHABLE on kappa at all
 #       (at 1000 mA cm-2 the activation term alone puts out 0.71 W cm-2 against 0.043 W cm-2
 #       of passive rejection, so no conductivity saves it). Quote 2.6x, not 2.9x.
-#       Separately -- 1.30x for the zero-gap 'beyond forced-air' claim and 1.40x for the
+#       Separately -- the zero-gap liquid-cooling claim and 1.40x for the
 #       25 mA cm-2 concession, both of which must be quoted conditionally
 #   MeCN 2.6-3.0x beaker & flow (was 2.5-2.9x at 18.0; unstirred beaker 3.02, stirred 3.37,
 #        5 mm flow 2.60), 0.60x microfluidic (was 0.57x)
@@ -137,7 +137,7 @@ H_EXT = 13.0        # W/m2 K, natural convection + radiation off the outer surfa
 ## (boiling-point elevation), so the real ceiling is slightly above the one reported here.
 SOLVENTS = [("THF",      "3.0 M LiBr/THF",      0.30,  66.0,   "assumption"),
             ("MeCN",     "0.25 M Bu4NBF4/MeCN", 1.995, 81.6,   "measured"),
-            ("DMF",      "0.2 M NaI/DMF",       0.877, 152.8,  "derived"),
+            ("DMF",      "0.2 M NaI/DMF",       0.851, 152.8,  "derived"),
             ("aq. NaOH", "1 M NaOH aq",        17.45,  99.974, "measured")]
 
 
@@ -200,6 +200,29 @@ _R_VESSEL = VESSEL_ID_M/2
 _FILL_M = CELL_VOLUME_M3/(_math.pi*_R_VESSEL**2)
 A_EXT_BEAKER = _math.pi*VESSEL_ID_M*_FILL_M + _math.pi*_R_VESSEL**2   # wetted wall + base, m2
 SIGMA_BEAKER = A_EXT_BEAKER/A_ELEC_M2                                  # = 9.963
+
+# External film coefficient, DERIVED at the declared vessel's own wetted height (chemistry audit, pass 7: the carried 13.0
+# was the sum evaluated over an 8 cm plate, a vessel the archetype no longer is). Churchill-Chu laminar vertical plate
+# (Incropera 6th ed. Eq. 9.27) with air properties from Table A.4 (p. 941, film temperature), plus linearized radiation
+# (Eq. 1.9, eps = 0.9 against 298.15 K surroundings); the constant used everywhere is the sum at Ts = 65 C.
+_AIR_A4 = {300.0: (15.89, 26.3, 22.5, 0.707), 350.0: (20.92, 30.0, 29.9, 0.700), 400.0: (26.41, 33.8, 38.3, 0.690)}
+def h_nat(ts_c, L=None):
+    L = _FILL_M if L is None else L
+    ts, tinf = ts_c + 273.15, 298.15
+    tf = 0.5*(ts + tinf)
+    lo = max(t for t in _AIR_A4 if t <= tf)
+    hi = min(t for t in _AIR_A4 if t >= tf) if tf < max(_AIR_A4) else lo
+    f = 0.0 if hi == lo else (tf - lo)/(hi - lo)
+    nu, k, al, pr = (a + f*(b - a) for a, b in zip(_AIR_A4[lo], _AIR_A4[hi]))
+    ra = 9.81*(1.0/tf)*(ts - tinf)*L**3/(nu*1e-6*al*1e-6)
+    nul = 0.68 + 0.670*ra**0.25/(1.0 + (0.492/pr)**(9.0/16.0))**(4.0/9.0)
+    return nul*k*1e-3/L
+def h_rad(ts_c, eps=0.9):
+    ts, tsur = ts_c + 273.15, 298.15
+    return eps*5.670374419e-8*(ts + tsur)*(ts**2 + tsur**2)
+def h_ext_at(ts_c):
+    return h_nat(ts_c) + h_rad(ts_c)
+H_EXT = round(h_ext_at(65.0), 1)
 
 # ── design currents: the architecture's OWN median transport ceiling ────────────────────────────
 # 2026-09-11, author's ruling. Until v93 each reactor carried a DECLARED design current (50, 50,
@@ -307,24 +330,71 @@ REACTORS = [("unstirred\nbatch",        GAP_BEAKER, SIGMA_BEAKER,  100., _IDES["
             ("rotating cyl.\n3000 rpm", GAP_RCE,    SIGMA_BEAKER, 2000., _IDES["rce"]),
             ("zero-gap\nPEM stack",     1.0e-4,     0.8,          5000., 1000.)]
 
+# LIQUID COOLING, BUILT AS EACH ARCHITECTURE WOULD BE COOLED (2026-10-06, author: "do whatever is more rigorous and
+# correct and consistent with actual devices"). It replaces a single declared "PEM-class cold plate" band of 0.2-1.0
+# W cm-2 K-1, which compared a coolant-channel coefficient with U'_req as if nothing stood between the electrolyte
+# and the coolant. Heat now crosses, in series, the cell's own electrolyte-side film (h_int of REACTORS, the same
+# film U_passive uses), the wall it is cooled through, and a laminar coolant channel heated from one wall
+# (Incropera 6th edn, Table 8.1 p. 519: parallel plates, one side insulated, uniform heat flux, Nu = 5.39), with
+# water at 300 K (Table A.6 p. 949, k = 0.613 W m-1 K-1):
+#   vessel cells (centimetre gap) -- a water jacket over the wetted glass wall, i.e. over the vessel's own sigma;
+#                                    Pyrex k = 1.4 W m-1 K-1 (Table A.3 p. 939); jacket gap 2-5 mm, D_h = 2 x gap
+#   thin cells (stack, chip)      -- a cooled plate behind the electrode, cooled face = electrode area; through-plane
+#                                    k = 5.70 W m-1 K-1, pyrolytic graphite perpendicular to its layers (Table A.2
+#                                    p. 933), the conservative graphite value; channel D_h 1-3 mm; coolant-side
+#                                    wetted area 1-2x the cooled face (ribs)
+# The wall thicknesses, jacket gap, channel size and rib factor are declared device dimensions (registry rows).
+# U_liquid returns the (lo, hi) pair over those declared ranges; a verdict that holds only toward hi is reported as
+# conditional on the cooler's construction.
+K_WATER_COOLANT = 0.613
+NU_ONE_WALL = 5.39
+K_PYREX = 1.4
+K_GRAPHITE_THROUGH = 5.70
+T_VESSEL_WALL = (2.0e-3, 3.0e-3)
+JACKET_GAP = (2.0e-3, 5.0e-3)
+T_COOLED_PLATE = (2.0e-3, 3.0e-3)
+D_H_PLATE = (1.0e-3, 3.0e-3)
+RIB_AREA = (1.0, 2.0)
+
+
+def cooler_type(reactor):
+    return "jacket" if reactor[1] >= 1e-2 else "plate"
+
+
+def U_liquid(reactor):
+    """(lo, hi) liquid-cooling U' referred to electrode area (W/cm2 K) for the architecture's own cooler."""
+    _lab, gap, sigma, h_int, _i = reactor
+    if cooler_type(reactor) == "jacket":
+        hj = lambda g: NU_ONE_WALL * K_WATER_COOLANT / (2.0 * g)
+        hi = sigma * 1e-4 / (1.0 / h_int + T_VESSEL_WALL[0] / K_PYREX + 1.0 / hj(JACKET_GAP[0]))
+        lo = sigma * 1e-4 / (1.0 / h_int + T_VESSEL_WALL[1] / K_PYREX + 1.0 / hj(JACKET_GAP[1]))
+    else:
+        hc = lambda dh: NU_ONE_WALL * K_WATER_COOLANT / dh
+        hi = 1e-4 / (1.0 / h_int + T_COOLED_PLATE[0] / K_GRAPHITE_THROUGH + 1.0 / (RIB_AREA[1] * hc(D_H_PLATE[0])))
+        lo = 1e-4 / (1.0 / h_int + T_COOLED_PLATE[1] / K_GRAPHITE_THROUGH + 1.0 / (RIB_AREA[0] * hc(D_H_PLATE[1])))
+    return lo, hi
+
+
+_LIQ = [U_liquid(r) for r in REACTORS]
+
 # Cooling classes as heat-rejection COEFFICIENTS (W/cm2 K), not heat fluxes.
-# All three are state C. Incropera 6th edn is the source for the two forced classes:
-#   forced air         -- Table 1.1, forced convection in gases, 25-250 W m-2 K-1
-#   liquid cold plate  -- Table 8.1 and Eq. 8.53 (laminar internal flow); Eq. 8.60
-#                         (Dittus-Boelter) for the turbulent end
+# 2026-10-06 (author: "forced air is dumb for a cell like this ... almost anything we'd do would be liquid cooled"):
+# the forced-air class is retired. Lab cells are cooled in an ice bath or a jacketed vessel on a chiller and stacks by
+# their process loop or cooling plates, so the ladder is passive -> liquid cooling (each cell's own cooler) -> beyond.
+# The liquid band drawn on the SI figures is the ENVELOPE of U_liquid over the architectures; every verdict uses the
+# architecture's own U_liquid, never the envelope.
 # natural convection carries NO external locator: its edges are derived from this file's own
 # H_EXT and sigma rows, then ROUNDED OUTWARD by about 25%, which visually credits the passive
 # class with more rejection than the model actually has. That rounding is declared in the
 # registry rather than quietly tightened, because the Fig. 5 verdicts are read off the band
 # edges and narrowing them here would move published conclusions.
 COOLING_BANDS = [("natural convection\n(passive)", 8e-4, 2e-2, "0.88"),
-                 ("forced air",                    2e-2, 8e-2, "0.80"),
-                 ("liquid cold plate\n(PEM-class)", 2e-1, 1.0, "0.70")]
+                 ("liquid cooling\n(jacket or plate)", min(l for l, h in _LIQ), max(h for l, h in _LIQ), "0.70")]
 
 
-def U_passive(sigma, h_int):
+def U_passive(sigma, h_int, h_ext=None):
     """Series internal + external film, referred to electrode area (W/cm2 K)."""
-    return (1.0/(1.0/h_int + 1.0/H_EXT))*sigma*1e-4
+    return (1.0/(1.0/h_int + 1.0/(H_EXT if h_ext is None else h_ext)))*sigma*1e-4
 
 
 def q_Wcm2(i, kappa, gap):

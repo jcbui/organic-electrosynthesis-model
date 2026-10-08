@@ -161,9 +161,17 @@ def main(scope_all=False, negative_control=False):
     # basis, so a measured or derived row can never hide behind the marker, and the papers those
     # sentences mention all carry their own primary citations on other rows anyway.
     DECLARED = re.compile(r"^(Declared\b|-- \()")
-    cits, declared_rows = {}, []
+    # A citation that is only a pointer to another table of this SI ("Table S2", "Table S6 and Table S11",
+    # "Table S2 per-row citations") is not a bibliographic entry: the rows it points to carry their own
+    # citations. Sent to Crossref's bibliographic search it resolves to whatever paper ranks first and reads
+    # as a chimera on one run and not the next (2026-10-05). Skip it by shape, for every class.
+    INTERNAL = re.compile(r"^Table S\d+( and Table S\d+)*( per-row citations)?$")
+    cits, declared_rows, internal_rows = {}, [], []
     for _, x in rows.iterrows():
         cit = str(x.citation).strip()
+        if INTERNAL.match(cit):
+            internal_rows.append(x.parameter)
+            continue
         if DECLARED.match(cit):
             if str(x.provenance_class).strip() != "assumption":
                 raise SystemExit("%s is class '%s' but carries a DECLARED basis instead of a "
@@ -246,7 +254,8 @@ def main(scope_all=False, negative_control=False):
                                               doi=meta.get("DOI", ""),
                                               issues=bad, how=how, params=params))
 
-    print("\ndeclared basis, not a citation    : %d (assumption-class only, asserted)"
+    print("\ninternal table pointer, not a citation: %d" % len(internal_rows))
+    print("declared basis, not a citation    : %d (assumption-class only, asserted)"
           % len(declared_rows))
     print("resolved and first author matches : %d" % len(ok))
     print("CHIMERA SUSPECTS (author mismatch) : %d" % len(fail))

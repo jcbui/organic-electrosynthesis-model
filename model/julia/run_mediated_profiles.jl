@@ -1,5 +1,6 @@
 ## run_mediated_profiles.jl (2026-09-11) -- Fig. 6d-f: the three mediated rows of Fig. 6g (ACT alcohol oxidation, NHPI allylic
-## C-H oxidation, bromide-mediated Hofmann rearrangement) solved at their cited rate constants on ONE measured film, the ANEC
+## C-H oxidation, bromide-mediated bromination of anisole; the Hofmann row it replaced on 2026-10-06 rests on a declared
+## k whose substrate-limited label flips inside its own band) solved at their cited rate constants on ONE measured film, the ANEC
 ## cell's 36.2 um (Watkins et al. 2023, the archetype film every row's ANEC cell of Table S5 uses), with the concentration
 ## profiles AT the limiting current (the c-control plateau). Author, 2026-09-11: "maybe we should show these profiles then for
 ## d-f bc they're really applicable?" -- the panels had drawn a declared base case (20 mM / 0.5 M, k = 1e5 / 1e2 / 1e-2).
@@ -13,9 +14,9 @@
 ## solved beside it as a mesh check and its i_lim written in the ilim_fine_mAcm2 column (0.05-0.85 % apart on the three rows).
 ##
 ## The regime of each row is NAMED FROM THE SOLVE, not from the analytic inequalities: substrate-limited when the substrate
-## is exhausted at the wall (c_S(0)/c_S,bulk < 0.05), mediator-limited when most of the activated mediator leaves the film
-## unreacted (the share consumed inside the film, the area of k c_ox c_S x/(i/F) against ln x, below 0.5), kinetic
-## otherwise (x_k from the ACTIVATED form's D, gamma = i_cap/i_shuttle from the RESTING form's, as Eqs. S12-S15 define
+## is exhausted at the wall (c_S(0)/c_S,bulk < 0.05); otherwise by the share of the activated mediator consumed inside the
+## film (the area of k c_ox c_S x/(i/F) against ln x): mediator-limited below one third, kinetic above two thirds, mixed
+## control between (x_k from the ACTIVATED form's D, gamma = i_cap/i_shuttle from the RESTING form's, as Eqs. S12-S15 define
 ## them; the Hofmann row's Br2 and Br- differ); the share is normalised by the electrode's flux of the ACTIVATED form, s_ox i/F, so one Br2 counts for the two
 ## electrons that make it. The analytic assignment (x_k against delta and gamma x_k, gamma = i_subcap / i_t0) is written beside it so
 ## data/ecprime_panel_sensitivity.py (G-ECPANEL) can compare the two. The same gate needs the labels' sensitivity to the two
@@ -44,38 +45,48 @@ S(args...) = ECSpecies(args...)
 tr(C) = C * 1e-5     # trace bulk value for the electrogenerated form
 
 SPECS = MedSpec[
- MedSpec("ACT-mediated alcohol oxidation (flow, hectogram)", 20., 8.93e-7, 5.93e-10, 1, 2, 25., 500., 7.2207e-10,
+ MedSpec("ACT-mediated alcohol oxidation (flow, hectogram)", 20., 8.93e-7, 5.93e-10, 1, 4, 25., 500., 7.2207e-10,
    ## Zhong/Stahl OPRD 2021 200-g campaign: 0.5 M alcohol, ACT 25 mM (5 mol%),
    ## purely aqueous 1 M NaHCO3 / 1 M Na2CO3 pH 8.5 -- released H+ is buffered
    [S("ACT",  0.0, 5.93e-10, 25.,    -1.0, +1.0),
     S("ACT+",+1.0, 5.93e-10, tr(25.),+1.0, -1.0),
-    S("Sub",  0.0, 7.2207e-10, 500.,    0.0, -0.5),      # 2 ox per alcohol
+    S("Sub",  0.0, 7.2207e-10, 500.,    0.0, -0.25),     # 4 ox per alcohol (to the carboxylic acid)
     S("Na+", +1.0, 1.33e-9, 3000.,    0.0,  0.0),
     S("CO3--",-2.0, 0.92e-9, 1000.,   0.0, -1.0),      # buffer absorbs the proton:
     S("HCO3-",-1.0, 1.18e-9, 1000. + tr(25.), 0.0, +1.0)]),
- MedSpec("NHPI-mediated allylic C-H -> enone", 0.5, 3.90e-7, 2.09e-9, 1, 4, 33., 167., 1.9448e-09,
+ MedSpec("NHPI-mediated allylic C-H -> enone", 20.2, 3.90e-7, 2.09e-9, 1, 2, 33., 167., 1.8660e-09,
    ## Horn/Baran Nature 2016: Cl4NHPI 33 mM (20 mol%), substrate 167 mM,
+   ## k = 20.2 M-1 s-1 (2026-10-05): electrogenerated PINO + cyclohexene in MeCN with pyridine, Ueda, Noyama,
+   ## Ohmori & Masui, Chem. Pharm. Bull. 1987, 35, 1372, Table II p. 1375 (allylic substrates 12.8-77.6). It was
+   ## 0.5, the order of PINO + substituted TOLUENES in acetic acid (Koshino 2003) -- a benzylic value in another
+   ## solvent, carried for an ALLYLIC oxidation whose own exemplar cites the Masui study as its kinetic reference.
    ## ACETONE, LiClO4 0.1 M, pyridine base takes the anodic proton
-   [S("NHPI", 0.0, 2.09e-9, 33.,    -1.0, +1.0),
+   ## the N-oxide ANION at the anode (Horn p. 81; carrier_charge.csv z = -1), pyridinium as its counter-cation
+   [S("NHPI", -1.0, 2.09e-9, 33.,    -1.0, +1.0),
     S("PINO", 0.0, 2.09e-9, tr(33.),+1.0, -1.0),
-    S("H+",  +1.0, 3.0e-9, 1e-3,    +1.0,  0.0),       # deprotonation carries charge
-    S("Sub",  0.0, 1.9448e-09, 167.,    0.0, -0.25),      # 4 e- per allylic/benzylic C=O
+    S("H+",  +1.0, 3.0e-9, 33.,      0.0, +1.0),       # pyridinium; sum z*nu = -1 + 1 = 0
+    S("Sub",  0.0, 1.8660e-09, 167.,    0.0, -0.5),       # 2 anodic e- per enone (tBuOOH supplies the rest)
     S("Li+", +1.0, 1.0e-9, 100.,     0.0,  0.0),
-    S("ClO4-",-1.0, 1.7e-9, 100. + 1e-3, 0.0, 0.0)]),
- MedSpec("Br-mediated Hofmann rearrangement", 1e3, 4.755e-7, 2.7e-9, 1, 2, 80., 400., 1.8611e-09,
-   ## Malviya/Cantillo OPRD 2023 scale-up: 0.4 M amide, NaBr 0.08 M in MeCN
-   ## (MeOH 10 equiv = reagent, no alkoxide base). RC(O)NH2 + Br2 + MeOH ->
-   ## carbamate + 2 H+ + 2 Br-: sum z_j*nu_j = 0 (charge-conserving)
-   [S("Br-",  -1.0, 2.7e-9, 80.001,  -1.0, +2.0),      # 2 Br- returned per Br2
-    S("Br2",   0.0, 2.2e-9, tr(80.), +0.5, -1.0),
-    S("Sub",   0.0, 1.8611e-09, 400.,    0.0, -1.0),      # phenylacetamide, 2 e-, 1 Br2/S
-    S("H+",   +1.0, 3.0e-9, 1e-3,     0.0, +2.0),      # HBr released; sum z*nu = 0
-    S("Na+",  +1.0, 1.33e-9, 80.,     0.0,  0.0)]),
+    S("ClO4-",-1.0, 1.7e-9, 100.,    0.0,  0.0)]),
+ MedSpec("Br- oxidation / electrophilic bromination", 2.28e4, 9.227e-7, 2.08e-9, 1, 2, 250., 33.3, 9.7945e-10,
+   ## k = 2.28e4 M-1 s-1 (2026-10-05): Br2 + ANISOLE, this row's own carrier and substrate, measured in water at
+   ## 20 C: (2.23 +/- 0.14)e4 para + (5.4 +/- 0.6)e2 ortho, Sivey, Bickley & Victor, Environ. Sci. Technol. 2015,
+   ## 49, 4937, Table 1 p. 4941. It was a declared 1e3 ("conservative low end") while the measurement sat in a
+   ## source the row already cited. The row is transport-limited: no cell moves by more than 0.4 %.
+   ## Zhang/Su Nat Commun 2025, the campaign run on ANISOLE (2026-10-06): the divided H-cell of Methods and Fig 4,
+   ## "each cell was filled with 7.5 mL acetonitrile and 7.5 mL 0.5 mol/L NaBr aqueous solution. 0.5 mmol
+   ## substrate was dissolved in the anodic cell": anisole 0.5/15 = 33.3 mM, Br- 0.5 x 7.5/15 = 250 mM, water/MeCN
+   ## 1:1. The flow runs of Fig 5b/c (10:10:10:3 medium, 518 g) are on drug and natural-product derivatives.
+   [S("Br-", -1.0, 2.08e-9, 250.001, -1.0, +1.0),      # 1 Br- returned (1 Br into product)
+    S("Br2",  0.0, 1.2e-9,  tr(250.),+0.5, -1.0),
+    S("Sub",  0.0, 9.7945e-10, 33.3,    0.0, -1.0),
+    S("H+",  +1.0, 5.0e-9,  1e-3,     0.0, +1.0),      # ArH + Br2 -> ArBr + Br- + H+; sum z*nu = 0
+    S("Na+", +1.0, 1.33e-9, 250.,     0.0,  0.0)]),
 ]
 const DELTA_UM = 36.2                      # the ANEC archetype film, measured (Watkins 2023, SI Table S1); Table S5's ANEC column
 const SHORT = Dict("ACT-mediated alcohol oxidation (flow, hectogram)" => "ACT",
                    "NHPI-mediated allylic C-H -> enone" => "NHPI",
-                   "Br-mediated Hofmann rearrangement" => "Hofmann")
+                   "Br- oxidation / electrophilic bromination" => "Bromination")
 const BAND = 0.25
 
 reached(l) = startswith(l, "collapse") || startswith(l, "plateau") || startswith(l, "limit reached")
@@ -122,8 +133,17 @@ function profile_stats(p, u, il, km)
     return share, c_red_surf, c_S_surf
 end
 
-regime_solved(c_S_surf, share) = c_S_surf < 0.05 ? "substrate-limited" : (share < 0.5 ? "mediator-limited" : "kinetic")
-regime_analytic(d, xk, gamma) = d < xk ? "mediator-limited" : (d > gamma * xk ? "substrate-limited" : "kinetic")
+## THREE labels along the kinetic axis since 2026-10-05, not two. With the NHPI row at the rate constant measured for PINO and
+## an allylic C-H (20.2 M-1 s-1) its reaction layer is about the film (x_k 25 um on 36 um) and 54 % of the activated mediator
+## reacts inside it: a two-way split at one half named it "kinetic", and a +25 % change in D_med (47 %) renamed it. A row
+## that sits at the boundary is named for where it sits. For a first-order step with the substrate in excess the share is
+## 1 - 1/cosh(delta/x_k), so one third and two thirds are delta/x_k = acosh(3/2) and acosh(3).
+const SHARE_LO, SHARE_HI = 1/3, 2/3
+const DXK_LO, DXK_HI = acosh(1 / (1 - SHARE_LO)), acosh(1 / (1 - SHARE_HI))
+regime_solved(c_S_surf, share) = c_S_surf < 0.05 ? "substrate-limited" :
+    (share < SHARE_LO ? "mediator-limited" : (share > SHARE_HI ? "kinetic" : "mixed"))
+regime_analytic(d, xk, gamma) = d < DXK_LO * xk ? "mediator-limited" :
+    (d > gamma * xk ? "substrate-limited" : (d > DXK_HI * xk ? "kinetic" : "mixed"))
 
 d = DELTA_UM * 1e-6
 open(joinpath(@__DIR__, "mediated_ec_profiles_dsens.csv"), "w") do ios

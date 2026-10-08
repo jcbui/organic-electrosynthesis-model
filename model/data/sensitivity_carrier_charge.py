@@ -18,7 +18,8 @@ headline >=25 / >=50 counts are compared with the base case.
 A row whose ceiling is unmoved by its charge does not need its charge settled before publication,
 and that can be said with a number attached. A row that moves has to be resolved.
 """
-import csv, io, os, shutil, subprocess, sys
+import csv, glob, io, os, shutil, subprocess, sys, tempfile
+from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -33,7 +34,7 @@ MATRIX = os.path.join(JULIA, "all50_np_matrix.csv")
 # against 0.1 M acid, so at most ~7.5% is deprotonated).
 ALTS = [-1, 0, 1, 2]
 
-_BACKUPS = [CC + ".zsens", MATRIX + ".zsens"]
+DATA_INPUTS = ["reactions_50.csv", "electrolyte_ions.csv", "electrode_direction.csv"]
 
 
 def read_raw(path):
@@ -57,14 +58,30 @@ def write_raw(path, head, rows):
     io.open(path, "w", encoding="utf8", newline="").write(txt)
 
 
-def solve(tag):
-    log = os.path.join("/tmp", "zsens_%s.log" % tag)
-    with open(log, "w") as fh:
-        rc = subprocess.call(["julia", "run_all50_np.jl"], cwd=JULIA, stdout=fh, stderr=fh)
-    if rc != 0:
-        return None, log
-    return {(r["reaction"], r["reactor"]): float(r["i_np_mAcm2"])
-            for r in csv.DictReader(open(MATRIX))}, log
+def solve_row(tag, rxn, head, rows):
+    """Solve ONE row of the Nernst-Planck layer, with the carrier-charge table given, in an isolated
+    copy of julia/ and data/. Until 2026-10-05 every alternative rewrote data/carrier_charge.csv in
+    place and re-solved all 350 cells over the published matrix -- twenty-one full solves, during
+    which the tree held a perturbed charge. A charge changes its own row only."""
+    d = tempfile.mkdtemp(prefix="zsens_")
+    try:
+        os.makedirs(os.path.join(d, "julia")); os.makedirs(os.path.join(d, "data"))
+        for f in glob.glob(os.path.join(JULIA, "*.jl")):
+            shutil.copy(f, os.path.join(d, "julia"))
+        for f in DATA_INPUTS:
+            shutil.copy(os.path.join(HERE, f), os.path.join(d, "data"))
+        write_raw(os.path.join(d, "data", "carrier_charge.csv"), head, rows)
+        log = os.path.join(tempfile.gettempdir(), "zsens_%s.log" % tag)
+        with open(log, "w") as fh:
+            rc = subprocess.call(["julia", "run_all50_np.jl"], cwd=os.path.join(d, "julia"), stdout=fh, stderr=fh,
+                                 env=dict(os.environ, NP_ONLY=rxn))
+        if rc != 0:
+            return None, log
+        out = {(r["reaction"], r["reactor"]): float(r["i_np_mAcm2"])
+               for r in csv.DictReader(open(os.path.join(d, "julia", "all50_np_matrix.csv")))}
+        return (out if len(out) == 7 and all(k[0] == rxn for k in out) else None), log
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
 
 
 def counts(res):
@@ -87,77 +104,39 @@ def main():
     if not med:
         print("\nG-ZSENS: nothing at medium confidence -- trivially PASSES"); return 0
 
-    # A SECOND INSTANCE WOULD OVERWRITE THE FIRST'S BACKUP and then the first's finally
-
-    # would delete it, leaving the second with nothing to restore -- which is how
-
-    # data/carrier_charge.csv was left holding a PERTURBED charge on 2026-08-26 and
-
-    # julia/all50_np_matrix.csv was left interleaved by two writers. Refuse instead.
-
-    for _b in _BACKUPS:
-
-        if os.path.exists(_b):
-
-            sys.exit("REFUSING TO RUN: %s exists, so another sweep owns these artifacts. "
-
-                     "Wait for it, or if it died, restore from that file by hand and "
-
-                     "delete it." % _b)
-
-
-    shutil.copy(CC, CC + ".zsens"); shutil.copy(MATRIX, MATRIX + ".zsens")
-    try:
-        print("\nsolving BASE ...")
-        base, log = solve("base")
-        if base is None:
-            raise SystemExit("base solve failed; see " + log)
-        # A SHORT BASE IS NOT A BASE. On 2026-08-26 a concurrent writer left the matrix
-        # interleaved, the base solve came back missing cells, and the first alternative died
-        # on `KeyError: ('Electrochemical amination of ArX with NH3', 'Recirculating flow cell')`
-        # 40 minutes in -- an obscure failure for a simple cause. Check it up front.
-        if len(base) != 350:
-            raise SystemExit(
-                "base solve produced %d cells, expected 350 (50 reactions x 7 archetypes). "
-                "Something else is writing julia/all50_np_matrix.csv, or the solve was cut "
-                "short; see %s" % (len(base), log))
-        base_c = counts(base)
-        worst_overall = 0.0
-        report = []
-        for r in med:
-            rxn, z0 = r["reaction"], r["z_carrier"]
-            for alt in ALTS:
-                if str(alt) == str(z0):
-                    continue
-                for rr in rows:
-                    rr["z_carrier"] = (str(alt) if rr["reaction"] == rxn
-                                       else rr["z_carrier"])
-                # restore every other row to its original value
-                for rr, orig in zip(rows, read_raw(CC + ".zsens")[1]):
-                    if rr["reaction"] != rxn:
-                        rr["z_carrier"] = orig["z_carrier"]
-                write_raw(CC, head, rows)
-                res, log = solve("%s_z%s" % (rxn[:12].replace(" ", "_"), alt))
-                if res is None:
-                    report.append((rxn, alt, None, None)); continue
-                cells = [(k, v) for k, v in res.items() if k[0] == rxn]
-                w = max((abs(v - base[k]) / base[k]) for k, v in cells) if cells else 0.0
-                same = counts(res) == base_c
-                worst_overall = max(worst_overall, w)
-                report.append((rxn, alt, w, same))
-            for rr, orig in zip(rows, read_raw(CC + ".zsens")[1]):
-                rr["z_carrier"] = orig["z_carrier"]
-            write_raw(CC, head, rows)
-    finally:
-        for _b in _BACKUPS:
-            _live = _b[:-len(".zsens")]
-            if os.path.exists(_b):
-                shutil.copy(_b, _live); os.remove(_b)
-            else:
-                print("!! RESTORE FAILED: %s is missing, so %s may still hold "
-                      "perturbed values. Check it before trusting any gate."
-                      % (_b, _live))
-        print("\n(restored carrier_charge.csv and the matrix)")
+    ## BASE = the published Nernst-Planck matrix; a short base is not a base.
+    base = {(r["reaction"], r["reactor"]): float(r["i_np_mAcm2"]) for r in csv.DictReader(open(MATRIX))}
+    if len(base) != 350:
+        raise SystemExit("julia/all50_np_matrix.csv holds %d cells, expected 350 (50 reactions x 7 "
+                         "archetypes); re-solve it before sweeping" % len(base))
+    base_c = counts(base)
+    ## CONTROL: an unperturbed one-row solve must reproduce the published cells.
+    ctl, log = solve_row("control", med[0]["reaction"], head, rows)
+    if ctl is None or any(abs(v - base[k]) > 1e-9 * max(1.0, abs(base[k])) for k, v in ctl.items()):
+        raise SystemExit("control failed: an unperturbed one-row solve of %r does not reproduce the "
+                         "published cells; see %s" % (med[0]["reaction"], log))
+    print("control: unperturbed one-row solve of %r reproduces its 7 published cells" % med[0]["reaction"][:40])
+    jobs = [(r["reaction"], alt) for r in med for alt in ALTS if str(alt) != str(r["z_carrier"])]
+    def run(job):
+        rxn, alt = job
+        rows2 = [dict(rr, z_carrier=(str(alt) if rr["reaction"] == rxn else rr["z_carrier"])) for rr in rows]
+        res, lg = solve_row("%s_z%s" % (rxn[:12].replace(" ", "_"), alt), rxn, head, rows2)
+        return job, res
+    print("\nsolving %d alternatives, %d at a time ..." % (len(jobs), int(os.environ.get("ZSENS_JOBS", "4"))))
+    with ThreadPoolExecutor(max_workers=int(os.environ.get("ZSENS_JOBS", "4"))) as ex:
+        results = dict(ex.map(run, jobs))
+    worst_overall = 0.0
+    report = []
+    for rxn, alt in jobs:
+        res = results[(rxn, alt)]
+        if res is None:
+            report.append((rxn, alt, None, None)); continue
+        w = max(abs(v - base[k]) / base[k] for k, v in res.items())
+        same = counts({**base, **res}) == base_c
+        worst_overall = max(worst_overall, w)
+        report.append((rxn, alt, w, same))
+    if any(r[2] is None for r in report):
+        raise SystemExit("an alternative-charge solve failed: %s" % [(r[0], r[1]) for r in report if r[2] is None])
 
     print("\n%-46s %-5s %-14s %s" % ("reaction", "z", "max change", "counts unchanged?"))
     for rxn, alt, w, same in report:

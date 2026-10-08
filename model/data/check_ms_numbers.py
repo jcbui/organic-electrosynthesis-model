@@ -121,7 +121,7 @@ def main(negative_control=False):
         ms += pad + " A second cell used an electrolyte of 6.66 S m\u22121."
         # The failure this gate was BUILT for: a caption number left behind by a provenance
         # upgrade. 0.877 is a real registry value -- DMF's -- so value-only matching passes it.
-        ms += pad + " and MeCN (0.25 M Bu4NBF4, 0.877 S m\u22121) follows"
+        ms += pad + " and MeCN (0.25 M Bu4NBF4, 0.851 S m\u22121) follows"
 
     ele = pd.read_csv(os.path.join(HERE, "electrolytes.csv"))
     reg = pd.read_csv(os.path.join(HERE, "parameters_provenance.csv"))
@@ -191,7 +191,7 @@ def main(negative_control=False):
         print("\nnegative control: injected 'κ = 77.7 mS cm-1' AND '6.66 S m-1'")
         print("  mS cm-1 branch fired: %s" % ms_fired)
         print("  S m-1   branch fired: %s" % sm_fired)
-        print("  stale-caption binding fired (0.877 attributed to MeCN): %s" % bind_fired)
+        print("  stale-caption binding fired (0.851 attributed to MeCN): %s" % bind_fired)
         if not (ms_fired and sm_fired and bind_fired):
             raise AssertionError("negative control did not fire on all three (mS %s, S/m %s, "
                                  "binding %s); the gate cannot detect the failure it exists to "

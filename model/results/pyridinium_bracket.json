@@ -1,0 +1,39 @@
+{
+ "brookes_bracket_m2s": [
+  2.4764488091590724e-09,
+  3.0889038909941124e-09
+ ],
+ "lambda0_brookes": {
+  "NH4+": 116.0,
+  "Me4N+": 93.0
+ },
+ "krumgalz_nh4_D_m2s": 2.383249122792871e-09,
+ "lambda0_krumgalz": {
+  "NH4+": 89.5
+ },
+ "carried": 3e-09,
+ "carried_inside_brookes": true,
+ "carried_above_krumgalz_edge": true,
+ "runs_D": [
+  7.5e-10,
+  1.5e-09,
+  2e-09,
+  2.383e-09,
+  2.48e-09,
+  3.09e-09
+ ],
+ "change_inside_brookes_pct": [
+  -0.6094024201466874,
+  4.456089767027138
+ ],
+ "counts_move_inside_brookes": false,
+ "unstirred_crosses_25_at_D": 2.4032701072249046e-09,
+ "unstirred_at_krumgalz_edge_mAcm2": 25.046730631311405,
+ "unstirred_clears_25_at_krumgalz_edge": true,
+ "other_cells_at_krumgalz_edge_cross": [],
+ "change_at_krumgalz_edge_pct": [
+  0.0984486852722899,
+  5.475187710690954
+ ],
+ "spectators_krumgalz_bitidentical": true
+}

@@ -289,18 +289,28 @@ N_DROP = len(MM.MEDIATED) - sum(v["n"] for v in MED.values())
 # (20 mM mediator / 0.5 M substrate / 100 um at k = 1e5, 1e2, 1e-2); it is archived (_archive/fig6_basecase_regimes_20260911/)
 # and the SI's own base case (S5.4, Fig. H) is untouched. The regime of each row is NAMED FROM THE SOLVE, in the solver's own
 # artifact: substrate-limited when the substrate is exhausted at the wall, mediator-limited when most of the activated mediator
-# leaves the film unreacted (the share consumed inside the film below one half), kinetic otherwise; G-ECPANEL
+# leaves the film unreacted (the share consumed inside the film below one third), kinetic above two thirds, mixed between; G-ECPANEL
 # (data/ecprime_panel_sensitivity.py) requires that label to agree with the analytic assignment and to survive the +/-25 %
 # re-solves on both diffusivities. What the panel prints IS the published cell: the drawn solve is run_mediated.jl's own mesh.
 REG = pd.read_csv(os.path.join(SEC4, "julia", "mediated_ec_profiles.csv"))
 F_CONST = 96485.332
-PANEL_ROWS = ["Hofmann", "ACT", "NHPI"]                 # (d) substrate-limited, (e) kinetic, (f) mediator-limited: k descending
-PANEL_REGIME = {"Hofmann": "substrate-limited", "ACT": "kinetic", "NHPI": "mediator-limited"}
+PANEL_ROWS = ["Bromination", "ACT", "NHPI"]             # (d) substrate-limited, (e) kinetic, (f) mixed control
+# 2026-10-06: (d) is the bromide-mediated bromination of anisole, whose k is measured for this carrier and this substrate
+# (Sivey 2015) and whose substrate-limited label holds until k falls ~17,000-fold. The Hofmann row it replaces carries a
+# DECLARED 1e3 whose label flips about 3-fold lower, inside its own 1e2-1e4 band.
+# 2026-10-05: the NHPI row is solved at the rate constant measured for PINO with an allylic C-H (20.2 M-1 s-1, Ueda/Masui
+# 1987), not at the benzylic 0.5 it carried. Its reaction layer is then about the ANEC film (x_k 25 um on 36 um) and half
+# of the activated mediator reacts inside it, so the solve names it "mixed": mediator-limited on thinner films, kinetic
+# on thicker ones, which is what panel (g) draws.
+PANEL_REGIME = {"Bromination": "substrate-limited", "ACT": "kinetic", "NHPI": "mixed"}
 REGIME_LABEL = {"substrate-limited": "substrate-limited:  $x_k \\ll \\delta$",
                 "kinetic": "kinetic:  $x_k < \\delta$",
+                "mixed": "mixed control:  $x_k \\approx \\delta$",
                 "mediator-limited": "mediator-limited (shuttle):  $x_k > \\delta$"}
-ROW_TITLE = {"Hofmann": "Br$^{-}$/Hofmann, k = 10$^{3}$", "ACT": "ACT, k = 20", "NHPI": "NHPI, k = 0.5"}
-SPECIES_LABEL = {"Hofmann": ("Br$_2$", "Br$^{-}$"), "ACT": ("ACT$^{+}$", "ACT"), "NHPI": ("PINO", "NHPI")}   # (activated, resting)
+ROW_NAME = {"Bromination": "Br$^{-}$/anisole", "ACT": "ACT", "NHPI": "NHPI"}
+REGIME_WORD = {"substrate-limited": "substrate-limited", "kinetic": "kinetic", "mixed": "mixed control",
+               "mediator-limited": "mediator-limited"}
+SPECIES_LABEL = {"Bromination": ("Br$_2$", "Br$^{-}$"), "ACT": ("ACT$^{+}$", "ACT"), "NHPI": ("Cl$_4$PINO", "Cl$_4$NHPI")}   # the exemplar runs Cl4NHPI (Horn/Baran)   # (activated, resting)
 
 
 def reg(short):
@@ -308,6 +318,26 @@ def reg(short):
     if g.empty:
         raise SystemExit(f"row {short!r} missing from mediated_ec_profiles.csv -- run julia/run_mediated_profiles.jl")
     return g
+
+
+def _kfmt_fig(k):
+    """A rate constant as the figure prints it: a decade as a power of ten, anything else to three significant figures."""
+    e = np.log10(k)
+    if k >= 100 and abs(e - round(e)) < 1e-9:
+        return "10$^{%d}$" % round(e)
+    if k >= 1000:                                    # 2026-10-06: the bromination row's 2.28e4 printed as "2.28e+04"
+        p = int(np.floor(e))
+        return "%.3g$\\times$10$^{%d}$" % (k / 10 ** p, p)
+    return "%.3g" % k
+
+
+def row_title(short):
+    """Row name and rate constant, READ from the profile artifact (the k was typed here until 2026-10-05)."""
+    return ROW_NAME[short] + ", k = " + _kfmt_fig(float(reg(short).k_M.iloc[0]))
+
+
+def row_label(short):
+    return row_title(short) + ": " + REGIME_WORD[str(reg(short).regime_solved.iloc[0])]
 
 
 def ge(short):
@@ -630,8 +660,8 @@ def ecpanel(ax, k):
     ax.plot(g.x_um, rho, color="0.35", lw=1.0, zorder=3.5)
     print(f"    reaction share inside delta, {k}: {share:.3f}  (area under rho d ln x; peak rho {rho.max():.2f}; the artifact says {float(g.share_in_film.iloc[0]):.3f})")
     assert abs(share - float(g.share_in_film.iloc[0])) < 0.01, (k, share, float(g.share_in_film.iloc[0]))   # the same integral, two code paths
-    if xk < XHI:
-        ax.axvline(xk, color="#999", lw=0.7, ls=":", zorder=2)
+    # 2026-10-07 (author): no x_k marker. x_k = sqrt(D_ox/(k C_S)) is evaluated at BULK substrate, so where the substrate
+    # is depleted -- panel (d), where the front sits at ~34 um against x_k = 1.3 um -- it does not mark the reaction zone
     ax.axvline(dlt, color=DK, lw=0.8, zorder=2)
     ax.set_xscale("log")
     ax.set_xlim(XLO, XHI)
@@ -656,7 +686,7 @@ def ecpanel(ax, k):
 iD = ecpanel(axD, PANEL_ROWS[0]); iE = ecpanel(axE, PANEL_ROWS[1]); iF = ecpanel(axF, PANEL_ROWS[2])
 for _ax, _s in zip((axD, axE, axF), PANEL_ROWS):
     _key = str(reg(_s).regime_solved.iloc[0]); assert _key in REGIME_LABEL, _key
-    _ax.set_title(ROW_TITLE[_s] + " M$^{-1}$ s$^{-1}$\n" + REGIME_LABEL[_key], fontsize=6.8, color=FS.SLATE, fontweight="bold", pad=3, linespacing=1.25)
+    _ax.set_title(row_title(_s) + " M$^{-1}$ s$^{-1}$\n" + REGIME_LABEL[_key], fontsize=6.8, color=FS.SLATE, fontweight="bold", pad=3, linespacing=1.25)
 axD.set_ylabel("c / $c_{bulk}$", fontsize=AX)
 import matplotlib.patheffects as _pe
 def label_curves(ax, g, names=("Med$_{ox}$", "Med$_{red}$"), fs=6.5, off=0.075, y_top=1.04, y_bot=0.06):
@@ -801,7 +831,7 @@ for _sp in axF2.spines.values(): _sp.set_visible(False)
 #     (the seven archetype medians and log-spaced fill) from julia/run_mediated_delta.jl.
 # (h) three of the seven catalyst rows the matrix now carries at a SOURCED rate constant (2026-09-11,
 #     docs/CATALYST_RATE_CONSTANTS_20260911.md): one per basis -- Ni(I)-bipyridine + aryl bromide
-#     (Ni-XEC, k = 1e2), cobalt hydride + alkene (hydroamination, 7e2) and the Co(salen) aza-Wacker
+#     (Ni-XEC, k = 1e2), cobalt hydride + alkene (e-HAT alkene reduction, 7e2) and the Co(salen) aza-Wacker
 #     step (1e1, the class median row) -- each with its own k = 0 floor dashed beneath it, from
 #     julia/run_catalyst_delta.jl on the same seventeen films. Every curve is a solve; nothing is drawn
 #     from a formula.
@@ -821,6 +851,7 @@ def _yv(i, i_fick, d):
     """the quantity plotted on (g)/(h): the current itself, or the current per F D_carrier C_carrier (um^-1)"""
     return (np.asarray(i) / (np.asarray(i_fick) * np.asarray(d))) if _NORM else np.asarray(i)
 _THRESH_LINES = []
+_THRESH_TEXT = []      # (axes, threshold, label) -- relocated by _thresh_labels_clear() once the curves exist
 for _ax in (axG, axH):
     _ax.set_xscale("log"); _ax.set_yscale("log"); _ax.set_xlim(260 * 1.02, 8 / 1.02); _ax.set_ylim(0.1, 1500)
     _ax.set_xticks([100, 10]); _ax.set_xticklabels(["100", "10"])
@@ -833,7 +864,8 @@ for _ax in (axG, axH):
     else:
         for _thr in (25, 50):      # v92 (author): red dotted with red "mA cm-2" labels, as Figure 5 draws them
             _THRESH_LINES.append(_ax.axhline(_thr, color=RED, ls=":", lw=1.0, zorder=1, alpha=0.85))
-            _ax.text(0.02, _thr * 1.07, str(_thr) + " mA cm$^{-2}$", transform=_ax.get_yaxis_transform(), fontsize=ANN, color=RED, ha="left", va="bottom", zorder=6)
+            _THRESH_TEXT.append((_ax, _thr, _ax.text(0.02, _thr * 1.07, str(_thr) + " mA cm$^{-2}$", transform=_ax.get_yaxis_transform(),
+                                                     fontsize=ANN, color=RED, ha="left", va="bottom", zorder=6)))
 axG.set_ylabel("$i_{lim}\\,/\\,(F\\,D_{carrier}\\,C_{carrier})$ (µm$^{-1}$)" if _NORM else "$i_{lim}$ (mA cm$^{-2}$)", fontsize=AX)
 axH.tick_params(axis="y", labelleft=False)
 
@@ -848,27 +880,139 @@ def _along(ax, xs, ys, text, col, xc, side, fs=ANN):
     rot = float(np.degrees(np.arctan2(pb[1] - pa[1], pb[0] - pa[0]))); nx, ny = -np.sin(np.radians(rot)), np.cos(np.radians(rot))
     q = ax.transData.inverted().transform((pc[0] + side * _LBL_OFF * fig.dpi / 72 * nx,
                                           pc[1] + side * _LBL_OFF * fig.dpi / 72 * ny))
-    ax.text(q[0], q[1], text, fontsize=fs, color=col, ha="center", va="center", rotation=rot, rotation_mode="anchor",
-            path_effects=[_pe.withStroke(linewidth=1.6, foreground="white")], zorder=8)
+    _t = ax.text(q[0], q[1], text, fontsize=fs, color=col, ha="center", va="center", rotation=rot, rotation_mode="anchor",
+                 path_effects=[_pe.withStroke(linewidth=1.6, foreground="white")], zorder=8)
+    _LABELS.append((ax, _t, text, np.asarray(xs, float), np.asarray(ys, float)))
     return rot, pc, (nx, ny)
+
+
+_LABELS = []
+
+
+def _labels_clear_of_curves(curves_by_ax):
+    """Every along-curve label must be clear of every OTHER curve in its panel.
+
+    2026-10-05: when the nickel row's electron count was corrected its curve dropped beside the
+    cobalt-hydride one, and the cobalt label -- placed 'below its curve' when that curve was the lower
+    of the two -- was drawn straight through the nickel curve. Nothing tested a label against a curve.
+    The label's rotated footprint is sampled in display space against every other curve of the panel."""
+    fig.canvas.draw()
+    rend = fig.canvas.get_renderer()
+    bad = []
+    for ax, t, text, xs, ys in _LABELS:
+        # the label's own unrotated extent, then its corners turned about the anchor
+        rot = t.get_rotation(); t.set_rotation(0)
+        bb = t.get_window_extent(rend); t.set_rotation(rot)
+        cx, cy = ax.transData.transform(t.get_position())
+        hw, hh = 0.5 * bb.width - 2.0, 0.5 * bb.height * 0.62      # the glyph body, not the line box
+        c, s = np.cos(np.radians(rot)), np.sin(np.radians(rot))
+        for key, xo, yo in curves_by_ax.get(ax, []):
+            if len(xo) == len(xs) and np.allclose(xo, xs) and np.allclose(yo, ys):
+                continue                                           # its own curve
+            lx = np.linspace(np.log(xo.min()), np.log(xo.max()), 600)
+            yy = np.interp(lx, np.log(xo[::-1]), yo[::-1])
+            P = ax.transData.transform(np.column_stack([np.exp(lx), yy]))
+            u = (P[:, 0] - cx) * c + (P[:, 1] - cy) * s
+            v = -(P[:, 0] - cx) * s + (P[:, 1] - cy) * c
+            if np.any((np.abs(u) < hw) & (np.abs(v) < hh)):
+                bad.append("%r lies over the curve of %s" % (text, key))
+    if bad:
+        raise SystemExit("a curve label is drawn over another curve: " + "; ".join(bad))
+
+
+def _rot_outline(t, rend):
+    """A text's true outline in display coordinates: its unrotated box turned about its anchor by its rotation."""
+    from matplotlib.path import Path as _P
+    rot = t.get_rotation()
+    if not rot:
+        return _bbox_path(t.get_window_extent(rend))
+    t.set_rotation(0)
+    b = t.get_window_extent(rend)
+    t.set_rotation(rot)
+    ax0, ay0 = t.get_transform().transform(t.get_position())
+    c, s_ = np.cos(np.deg2rad(rot)), np.sin(np.deg2rad(rot))
+    pts = [(ax0 + (x - ax0) * c - (y - ay0) * s_, ay0 + (x - ax0) * s_ + (y - ay0) * c)
+           for x, y in ((b.x0, b.y0), (b.x1, b.y0), (b.x1, b.y1), (b.x0, b.y1), (b.x0, b.y0))]
+    return _P(pts, closed=True)
+
+
+def _bbox_path(b):
+    from matplotlib.path import Path as _P
+    return _P([(b.x0, b.y0), (b.x1, b.y0), (b.x1, b.y1), (b.x0, b.y1), (b.x0, b.y0)], closed=True)
+
+
+def _thresh_labels_clear(curves_by_ax):
+    """A threshold rule's label may not sit on a curve: it keeps its place at the left end of its rule unless a curve
+    runs through it, then tries the right end, then below the rule at either end; none clear is a hard error.
+
+    2026-10-05 (night): the Ni homocoupling, the highest curve in (h), crosses 25 mA cm-2 at about 150 um and ran
+    straight through that rule's label at the left edge. A label no curve touches is not moved, so (g) is unchanged."""
+    fig.canvas.draw()
+    rend = fig.canvas.get_renderer()
+    cands = [(0.02, "left", 1.07, "bottom"), (0.98, "right", 1.07, "bottom"),
+             (0.02, "left", 1 / 1.07, "top"), (0.98, "right", 1 / 1.07, "top")]
+    # 2026-10-06 (audit pass 1): the NHPI curve, with its mediator now carried as the anion, runs along 25 mA cm-2 in the
+    # thick films, so the rule's ends can all be taken; mid-rule places are tried after the ends, ends first as before
+    cands += [(x, "center", fy, va) for x in (0.5, 0.3, 0.7) for fy, va in ((1.07, "bottom"), (1 / 1.07, "top"))]
+    # where two curves hug the rule from both sides along its whole length (the standalone layout of (g)), the label
+    # stands off it further, still in the rule's colour and directly above or below it
+    cands += [(x, ha, fy, va) for x, ha in ((0.98, "right"), (0.02, "left"), (0.5, "center"))
+              for fy, va in ((1.35, "bottom"), (1 / 1.35, "top"))]
+    # 2026-10-06: with the bromination row in (g) three curves span 15-90 mA cm-2 over every film, so a finer sweep along
+    # the rule follows, and last of all a place just outside the panel's right edge, which no curve can reach. Appended
+    # after every earlier candidate, so a label that found a place before keeps it.
+    cands += [(round(x, 2), "center", fy, va) for x in np.arange(0.10, 0.91, 0.05)
+              for fy, va in ((1.07, "bottom"), (1 / 1.07, "top"), (1.35, "bottom"), (1 / 1.35, "top"))]
+    cands += [(1.01, "left", 1.0, "center")]
+    _PLACED = {}
+    for ax, thr, t in _THRESH_TEXT:
+        pts = []
+        for key, xo, yo in curves_by_ax.get(ax, []):
+            lx = np.linspace(np.log(xo.min()), np.log(xo.max()), 600)
+            yy = np.interp(lx, np.log(xo[::-1]), yo[::-1])
+            pts.append(ax.transData.transform(np.column_stack([np.exp(lx), yy])))
+        P = np.vstack(pts) if pts else np.empty((0, 2))
+        # the curves' own labels, as their ROTATED outlines (2026-10-06): the axis-aligned box of a tilted label reaches far
+        # below and above the text itself, and with three curves crowding (g) that box alone closed every place on the rule
+        others = [_rot_outline(lt, rend) for lax, lt, *_ in _LABELS if lax is ax]
+        others += [_bbox_path(b) for b in _PLACED.get(ax, [])]   # and the threshold labels already set on this panel
+        for i, (x, ha, fy, va) in enumerate(cands):
+            t.set_position((x, thr * fy)); t.set_ha(ha); t.set_va(va)
+            bb = t.get_window_extent(rend)
+            pad = 1.5 * fig.dpi / 72                              # the curve's own half-width, about
+            hit = np.any((P[:, 0] > bb.x0 - pad) & (P[:, 0] < bb.x1 + pad) &
+                         (P[:, 1] > bb.y0 - pad) & (P[:, 1] < bb.y1 + pad)) or any(o.intersects_bbox(bb, filled=True) for o in others)
+            if os.environ.get("FIG6_DEBUG_THRESH") and thr == 50 and ax is axG and hit:
+                _ch = np.any((P[:, 0] > bb.x0 - pad) & (P[:, 0] < bb.x1 + pad) & (P[:, 1] > bb.y0 - pad) & (P[:, 1] < bb.y1 + pad))
+                _lh = [j for j, o in enumerate(others) if o.intersects_bbox(bb, filled=True)]
+                print("   dbg cand %2d %s %.2f %s/%s: curve=%s labels=%s" % (i, ha, x, fy, va, _ch, _lh))
+            if not hit:
+                if i:
+                    print("  threshold label %d mA cm-2 in %s moved to candidate %d (%s, %s): a curve crossed its first place"
+                          % (thr, "(g)" if ax is axG else "(h)", i, ha, va))
+                break
+        else:
+            raise SystemExit("no place on the %d mA cm-2 rule is clear of the curves" % thr)
+        _PLACED.setdefault(ax, []).append(t.get_window_extent(rend))
+
 
 fig.tight_layout(pad=0.6, w_pad=1.5, h_pad=1.45)      # the along-curve rotations need the final axes geometry
 # -- (g) mediated: three of the eight rows, one per regime, at their CITED rate constants (2026-09-11,
 #    author: "I LOVE how h corresponds to 3 different chemistries, can we do that for the mediated g?").
-#    ACT alcohol oxidation (k = 20, x_k 7.7 um: kinetic, flat), NHPI allylic C-H (k = 0.5, x_k 158 um:
-#    mediator-limited, on its own transport bound) and the bromide-mediated Hofmann rearrangement (k = 1e3,
+#    ACT alcohol oxidation (k = 20, x_k 7.7 um: kinetic, flat), NHPI allylic C-H (k = 20.2, x_k 25 um: on the
+#    mediator's transport bound in the thin films, at a kinetic plateau in the thick ones) and the Hofmann rearrangement (k = 1e3,
 #    x_k 2.4 um: substrate-limited on a DETACHED front, above its planar substrate cap). Same species,
 #    conditions and accept sequence as the published cells (julia/run_mediated_delta.jl); every point a solve.
 _MEDD = pd.read_csv(os.path.join(SEC4, "julia", "mediated_ec_delta.csv"))
-# the ACT and NHPI curves cross near 30 um, so their labels sit at opposite ends: ACT above its flat curve at the
-# thick-film end, NHPI above its rising curve at the thin-film end
-_GROWS = [("ACT-mediated alcohol oxidation (flow, hectogram)", "#8C4A1A", "ACT, k = 20: kinetic", 18, -1),        # v92: below, thin end, clear of the 25 line
-          ("NHPI-mediated allylic C-H -> enone", "#E3A46B", "NHPI, k = 0.5: mediator-limited", 85, -1),             # v92: below its curve mid-panel, clear of the 50 line and inside both frame edges
-          ("Br-mediated Hofmann rearrangement", "#C1611E", "Br$^{-}$/Hofmann, k = 10$^{3}$: substrate-limited", 60, +1)]
+# since 2026-10-05 the NHPI curve lies above ACT's on every film and closes on it in the thick ones, so its label sits
+# above it in the thin films and ACT's below its own flat curve
+_GROWS = [("ACT-mediated alcohol oxidation (flow, hectogram)", "#8C4A1A", row_label("ACT"), 18, -1),        # v92: below, thin end, clear of the 25 line
+          ("NHPI-mediated allylic C-H -> enone", "#E3A46B", row_label("NHPI"), 52, +1),
+          ("Br- oxidation / electrophilic bromination", "#C1611E", row_label("Bromination"), 22, -1)]   # 2026-10-06: below, thin end, clear of both rules
 if _NORM:   # normalised, ACT and Hofmann cross near 60 um and NHPI rides the grey line: labels where each curve is alone
-    _GROWS = [("ACT-mediated alcohol oxidation (flow, hectogram)", "#8C4A1A", "ACT, k = 20: kinetic", 170, +1),
-              ("NHPI-mediated allylic C-H -> enone", "#E3A46B", "NHPI, k = 0.5: mediator-limited", 30, -1),
-              ("Br-mediated Hofmann rearrangement", "#C1611E", "Br$^{-}$/Hofmann, k = 10$^{3}$: substrate-limited", 40, +1)]
+    _GROWS = [("ACT-mediated alcohol oxidation (flow, hectogram)", "#8C4A1A", row_label("ACT"), 170, +1),
+              ("NHPI-mediated allylic C-H -> enone", "#E3A46B", row_label("NHPI"), 30, -1),
+              ("Br- oxidation / electrophilic bromination", "#C1611E", row_label("Bromination"), 40, +1)]
 _GCURVES, _HCURVES = [], []
 _GFRAME, _HFRAME = {}, {}
 for _rx, _col, _lab, _xc, _side in _GROWS:
@@ -880,7 +1024,7 @@ for _rx, _col, _lab, _xc, _side in _GROWS:
     axG.plot(_g.delta_um, _yv(_g.i_ec_mAcm2, _g.i_tier0_mAcm2, _g.delta_um), color=_col, lw=2.0, zorder=5)
     _gf = _g[_g.delta_um.round(3).isin([round(_f, 3) for _f in _FILMS])]
     axG.scatter(_gf.delta_um, _yv(_gf.i_ec_mAcm2, _gf.i_tier0_mAcm2, _gf.delta_um), s=9, color=_col, zorder=6)
-    if _rx.startswith("Br-mediated Hofmann") and _NORM:   # v91 (author): the cap and floor lines come off the shipped panel; the variant keeps them
+    if _rx.startswith("Br- oxidation") and _NORM:   # v91 (author): the cap and floor lines come off the shipped panel; the variant keeps them
         axG.plot(_g.delta_um, _yv(_g.i_subcap_mAcm2, _g.i_tier0_mAcm2, _g.delta_um), color=_col, ls=(0, (1, 1.5)), lw=0.9, alpha=0.8, zorder=2)   # the cap the front detaches from
         axG.plot(_g.delta_um, _yv(_g.i_k0_mAcm2, _g.i_tier0_mAcm2, _g.delta_um), color=_col, lw=1.1, ls=(0, (4, 2)), alpha=0.75, zorder=4)   # its own k = 0 floor, 2/delta (migration)
     print(f"  (g) {_rx[:34]:34s} k={_g.k_M.iloc[0]:g}: {_g.i_ec_mAcm2.iloc[0]:.2f} -> {_g.i_ec_mAcm2.iloc[-1]:.2f} mA cm-2 over "
@@ -897,28 +1041,64 @@ else:
     # scheme. Nothing about the data moves -- (g)'s curves span 4.5-3342 and (h)'s 0.57-24 either
     # way -- but at the old limits (h)'s three curves left ONE usable band and three schemes
     # competed for it, which is what pushed two of them away from the lines they belong to.
-    axG.set_ylim(1, 5000) if not _INLINE else axG.set_ylim(0.6, 12000)
-    axH.set_ylim(0.4, 300) if not _INLINE else axH.set_ylim(0.13, 900)
-axG.text(0.03, 0.96, "mediated, cited k", transform=axG.transAxes, fontsize=6.8, color=FS.SLATE, fontweight="bold", va="top")
+    # 2026-10-07 (author: "give yourself more space if y axis started at 10^0"): both panels run 10^0 to 10^4. (h) hides
+    # its tick labels and is read on (g)'s scale, so the two must share ONE range -- they had differed (0.6-12000 against
+    # 1-900), which made every (h) value unreadable against (g)'s labels.
+    axG.set_ylim(1, 1e4); axH.set_ylim(1, 1e4)
+axG.text(0.03, 0.96, "mediated, literature-anchored k", transform=axG.transAxes, fontsize=6.8, color=FS.SLATE, fontweight="bold", va="top")
 if _NORM:
-    axG.text(0.97, 0.06, "grey: k = 0, neutral carrier (1/$\\delta$)\ndashed: Hofmann at k = 0 (2/$\\delta$); dotted: its substrate cap",
+    axG.text(0.97, 0.06, "grey: k = 0, neutral carrier (1/$\\delta$)\ndashed: bromination at k = 0 (2/$\\delta$); dotted: its substrate cap",
              transform=axG.transAxes, fontsize=6, color="0.4", ha="right", va="bottom", linespacing=1.3)
 # -- (h) molecular catalyst, three sourced rows and their floors
 # the nickel and cobalt-hydride rows nearly coincide (4.4 -> 24 and 4.8 -> 18 mA cm-2), so their labels sit at
 # opposite ends of the film range: nickel below its curve at the thick end, cobalt above at the thin end
-_HROWS = [("Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)", "#7A1626", "Ni–XEC, k = 10$^{2}$", 150, +1 if _INLINE else -1),
-          ("Co-H alkene reduction (e-HAT)", "#A31F34", "Co–H, k = 7×10$^{2}$", 30, -1),        # v92: below, thin end, clear of the 25 line
-          ("Co-catalyzed aza-Wacker cyclization", "#D2707E", "aza-Wacker, k = 10", 110, +1)]   # v91: above its curve, clear of the tightened frame
-if _NORM:   # the aza-Wacker curve merges with the grey line at thin films; its label goes above it at the thick end
-    _HROWS = [("Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)", "#7A1626", "Ni–XEC, k = 10$^{2}$", 150, -1),
-              ("Co-H alkene reduction (e-HAT)", "#A31F34", "Co–H, k = 7×10$^{2}$", 16, +1),
-              ("Co-catalyzed aza-Wacker cyclization", "#D2707E", "aza-Wacker, k = 10", 110, +1)]
+# 2026-10-05: the two curves run within a factor of 1.5 of each other from 200 um down, closer than a label
+# is tall, so neither label fits between them. Which is the upper one is a MODEL OUTPUT (it changed when the
+# nickel row's electron count was corrected), so the side is read from the solved curves: the upper curve's
+# label goes above it, mid-panel where it is furthest below the 25 mA cm-2 rule, and the lower curve's label
+# goes below it at the thin end.
+_NIX, _COH = "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)", "Co-H alkene reduction (e-HAT)"
+def _hval(rx, x):
+    _c = _CAT[(_CAT.reaction == rx) & (_CAT.k_M > 0)].sort_values("delta_um")
+    return float(np.interp(np.log(x), np.log(_c.delta_um.values), _c.i_ec_mAcm2.values))
+_upper = _NIX if _hval(_NIX, 40.0) > _hval(_COH, 40.0) else _COH
+# the upper label sits at the THICK end, where both 25 and 50 mA cm-2 rules still lie above the homocoupling curve, so
+# the band between the pair and that curve carries no rule for the label to cross (2026-10-05, night)
+_HPOS = {_upper: (150, +1), (_COH if _upper == _NIX else _NIX): (26, -1)}
+# chemistry audit, 2026-10-05 (night): the third row is the Ni aryl-aryl homocoupling at the nickel constant. It
+# replaced the Co(salen) allylic C-H amination (formerly labelled "aza-Wacker"), which has no measured rate constant --
+# no catalyst is regenerated at room temperature and it turns over by a heat-driven homolysis (Cai/Xu Nat Commun
+# 2021) -- and so could only be drawn as its k = 0 floor, a straight 1/delta line. No measured constant exists for the
+# other candidate, the Ni(tet a) cyclization, either (Ozaki, Matsushita & Ohmori, Perkin Trans. 1 1993, 649 and
+# Olivero, Rolland & Dunach, Organometallics 1998, 17, 3747 were read for one). The homocoupling is the highest curve
+# here (16 -> 70 mA cm-2) and clears 50 mA cm-2 below about 40 um, so its label sits ABOVE it at the thin end, clear of
+# both rules.
+_HOMO = "Cathodic Ni aryl-aryl homocoupling"
+_HROWS = [(_NIX, "#7A1626", "Ni–XEC", _HPOS[_NIX][0], _HPOS[_NIX][1]),
+          (_COH, "#A31F34", "Co–H", _HPOS[_COH][0], _HPOS[_COH][1]),
+          (_HOMO, "#D2707E", "Ni homocoupling", 20, +1)]
+if _NORM:
+    _HROWS = [(_NIX, "#7A1626", "Ni–XEC", 150, -1),
+              (_COH, "#A31F34", "Co–H", 16, +1),
+              (_HOMO, "#D2707E", "Ni homocoupling", 110, +1)]
+
+
+def _kmath(k):
+    """The solved rate constant as the label prints it (10², 7×10²) -- built from the data, never typed."""
+    e = int(np.floor(np.log10(k) + 1e-9)); m = k / 10 ** e
+    return ("10$^{%d}$" % e) if abs(m - 1) < 1e-9 else ("%g×10$^{%d}$" % (m, e))
+
+
 _FLOOR = "#E4A19B"
 for _rx, _col, _lab, _xc, _side in _HROWS:
     _c = _CAT[_CAT.reaction == _rx]
     if len(_c) == 0:
         raise SystemExit(f"{_rx!r} missing from catalyst_ec_delta.csv")
-    _k = float(_c[_c.k_M > 0].k_M.iloc[0])
+    _k = float(_c[_c.k_M > 0].k_M.iloc[0]) if (_c.k_M > 0).any() else 0.0
+    if _k <= 0.0:
+        raise SystemExit(f"{_rx!r} has no finite rate constant in catalyst_ec_delta.csv; panel (h) draws catalysts at their "
+                         f"cited constants, and at k = 0 a row is only its transport floor")
+    _lab = "%s, k = %s" % (_lab, _kmath(_k))
     _s = _c[_c.k_M == _k].sort_values("delta_um", ascending=False); _z = _c[_c.k_M == 0].sort_values("delta_um", ascending=False)
     axH.plot(_s.delta_um, _yv(_s.i_ec_mAcm2, _s.i_fick_mAcm2, _s.delta_um), color=_col, lw=2.0, zorder=5)
     _sf = _s[_s.delta_um.round(3).isin([round(_f, 3) for _f in _FILMS])]
@@ -928,7 +1108,12 @@ for _rx, _col, _lab, _xc, _side in _HROWS:
     _HCURVES.append((_rx, _col, _s.delta_um.values,
                      _yv(_s.i_ec_mAcm2.values, _s.i_fick_mAcm2.values, _s.delta_um.values), _xc))
     _HFRAME[_rx] = _along(axH, _s.delta_um.values, _yv(_s.i_ec_mAcm2.values, _s.i_fick_mAcm2.values, _s.delta_um.values), _lab, _col, _xc, _side) + (_side,)
-axH.text(0.03, 0.96, "molecular catalyst, cited k", transform=axH.transAxes, fontsize=6.8, color=FS.SLATE, fontweight="bold", va="top")
+axH.text(0.03, 0.96, "molecular catalyst, literature-anchored k", transform=axH.transAxes, fontsize=6.8, color=FS.SLATE, fontweight="bold", va="top")
+if not _NORM:
+    _labels_clear_of_curves({axG: [(c[0], np.asarray(c[2], float), np.asarray(c[3], float)) for c in _GCURVES],
+                             axH: [(c[0], np.asarray(c[2], float), np.asarray(c[3], float)) for c in _HCURVES]})
+    _thresh_labels_clear({axG: [(c[0], np.asarray(c[2], float), np.asarray(c[3], float)) for c in _GCURVES],
+                          axH: [(c[0], np.asarray(c[2], float), np.asarray(c[3], float)) for c in _HCURVES]})
 if _NORM:
     axH.text(0.97, 0.06, "grey: k = 0 (1/$\\delta$)", transform=axH.transAxes, fontsize=6, color="0.4", ha="right", va="bottom")
 
@@ -1026,6 +1211,23 @@ def scheme_hofmann(ax, W):
     _arrow(ax, 0.405 * W, 0.505 * W, cy, "Br$^-$")
 
 
+def scheme_brom(ax, W):
+    """Anisole -> 4-bromoanisole (2026-10-06, panel (d)); methoxy and bromine on opposite (para) vertices."""
+    r, cy, fs, arm = 0.165, 0.55, SCH_FS - 0.4, 0.11
+    for cx, br in ((0.21 * W, False), (0.71 * W, True)):
+        vx, vy = _ring(ax, cx, cy, r, dbl=(0, 2, 4))
+        a = np.deg2rad(210.0)
+        ex, ey = vx[2] + arm * np.cos(a), vy[2] + arm * np.sin(a)
+        _b(ax, (vx[2], vy[2]), (ex, ey))
+        ax.text(ex - 0.012, ey, "MeO", ha="right", va="center", fontsize=fs, color=SCH_COL)
+        if br:
+            a = np.deg2rad(30.0)
+            bx, by = vx[5] + arm * np.cos(a), vy[5] + arm * np.sin(a)
+            _b(ax, (vx[5], vy[5]), (bx, by))
+            ax.text(bx + 0.012, by, "Br", ha="left", va="center", fontsize=fs, color=SCH_COL)
+    _arrow(ax, 0.40 * W, 0.50 * W, cy, "Br$^-$")
+
+
 def scheme_act(ax, W):
     cy, d = 0.56, 0.17
     x = 0.10 * W
@@ -1049,7 +1251,7 @@ def scheme_nhpi(ax, W):
 
 
 _Wfig, _Hfig = fig.get_size_inches()
-for _ax, _fn, _cap in ([] if _INLINE else [(axSD, scheme_hofmann, "2-phenylacetamide $\\rightarrow$ carbamate"),
+for _ax, _fn, _cap in ([] if _INLINE else [(axSD, scheme_brom, "anisole $\\rightarrow$ 4-bromoanisole"),
                        (axSE, scheme_act,     "alcohol $\\rightarrow$ carboxylic acid"),
                        (axSF, scheme_nhpi,    "valencene $\\rightarrow$ nootkatone")]):
     _bb = _ax.get_position(original=True)
@@ -1115,15 +1317,15 @@ def _scheme_img(key, col):
     return out, a.shape[1] / _CD_DPI * 72.0, a.shape[0] / _CD_DPI * 72.0
 
 
-_MINI_G = [("Br-mediated Hofmann rearrangement", "hofmann", None),
+_MINI_G = [("Br- oxidation / electrophilic bromination", "brom", None),
            ("ACT-mediated alcohol oxidation (flow, hectogram)", "act", None),
            ("NHPI-mediated allylic C-H -> enone", "nhpi", None)]
 # the Ni-XEC and Co-H curves nearly coincide (4.4 -> 24 and 4.8 -> 18 mA cm-2), so their
 # schemes are split ACROSS the pair -- one above, one below -- rather than stacked in the
 # single band beneath both of them.
-_MINI_H = [("Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)", "nixec", +1),
-           ("Co-H alkene reduction (e-HAT)", "coh", -1),
-           ("Co-catalyzed aza-Wacker cyclization", "aza", -1)]
+_MINI_H = [("Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)", "nixec", _HPOS[_NIX][1]),
+           ("Co-H alkene reduction (e-HAT)", "coh", _HPOS[_COH][1]),
+           (_HOMO, "homo", None)]          # the highest curve: the placer picks the side with room
 
 
 
@@ -1271,7 +1473,43 @@ if _INLINE:
 
     _PLACED = []
     print("  FIG6_INLINE: scheme strip dropped; six schemes set along the curves of (g) and (h)")
-    for _bond in np.arange(8.0, 3.4, -0.2):
+    # FIG6_PLACED_JSON (2026-10-05): the author places the six schemes by hand in Illustrator, and a model
+    # change must not throw that placement away. The file lists [png key, centre x, centre y, width,
+    # height, rotation] per scheme in pixels of this figure's own 600-dpi canvas, measured off his artwork
+    # (figs/fig6_author_placement.py); each scheme is drawn exactly there, and the build FAILS if one now
+    # lies over the panel's ink, so a curve that moved under a scheme is reported instead of drawn through.
+    # FIG6_NO_SCHEMES=1 draws the panels with no scheme at all (the layer that script subtracts).
+    _FIXED = os.environ.get("FIG6_PLACED_JSON", "")
+    _NOSCH = os.environ.get("FIG6_NO_SCHEMES", "") not in ("", "0")
+    if _FIXED and not _NOSCH:
+        import json as _json
+        _cols = {c[0]: c[1] for c in (_GCURVES + _HCURVES)}
+        _keyof = {png: key for key, png, _p in (_MINI_G + _MINI_H)}
+        _axof = {png: (axG if (key, png, _p) in _MINI_G else axH) for key, png, _p in (_MINI_G + _MINI_H)}
+        _given = _json.load(open(_FIXED))
+        if sorted(g[0] for g in _given) != sorted(_keyof):
+            raise SystemExit("FIG6_PLACED_JSON must place exactly the six schemes %s" % sorted(_keyof))
+        _hits = []
+        for png, cx, cy, bw, bh, rot_d in _given:
+            ax = _axof[png]
+            img, _w, _h = _scheme_img(png, _cols[_keyof[png]])
+            T = Affine2D().scale(bw, bh).rotate_deg(rot_d).translate(cx, cy)
+            PTS = np.column_stack([np.repeat(np.linspace(-0.5, 0.5, 33), 9), np.tile(np.linspace(-0.5, 0.5, 9), 33)])
+            q = Affine2D().scale(bw, bh).rotate_deg(rot_d).transform(PTS) + np.array([cx, cy])
+            _n = sum(1 for px, py in zip(q[:, 0], q[:, 1]) if _ink_in(px - 2, _IH - py - 2, px + 2, _IH - py + 2))
+            if _n:
+                _hits.append("%s (%d of %d footprint samples on panel ink)" % (png, _n, len(q)))
+            ay0, ay1 = q[:, 1].min(), q[:, 1].max()
+            if any(ay0 < ty < ay1 for ty in _thr_py(ax)):
+                ax.add_patch(Rectangle((-0.5, -0.5), 1.0, 1.0, transform=T, zorder=8, facecolor="white", edgecolor="none", clip_on=False))
+            ax.imshow(img, extent=(-0.5, 0.5, -0.5, 0.5), transform=T, zorder=9, interpolation="antialiased", aspect="auto", clip_on=False)
+            _PLACED.append((png, cx, cy, bw, bh, rot_d))
+            print("    %-8s placed as given: centre (%.0f, %.0f) px, %.2f x %.2f in, %+.1f deg" % (png, cx, cy, bw / _DPI, bh / _DPI, rot_d))
+        if _hits and os.environ.get("FIG6_PLACED_ALLOW_INK", "") in ("", "0"):
+            raise SystemExit("FIG6_PLACED_JSON: a scheme now lies over the panel's own ink -- " + "; ".join(_hits))
+        for _h in _hits:
+            print("    WARNING (allowed): " + _h)
+    for _bond in ([] if (_FIXED or _NOSCH) else np.arange(8.0, 3.4, -0.2)):
         _arts = []
         if _place(axG, _GFRAME, _MINI_G, "g", _bond, _arts) and _place(axH, _HFRAME, _MINI_H, "h", _bond, _arts):
             print("    all six placed at a bond length of %.1f pt" % _bond)
@@ -1280,9 +1518,14 @@ if _INLINE:
             _a.remove()
         _PLACED.clear()
     else:
-        raise SystemExit("FIG6_INLINE: the six schemes do not fit at any common bond length down to 3.5 pt")
+        if not (_FIXED or _NOSCH):
+            raise SystemExit("FIG6_INLINE: the six schemes do not fit at any common bond length down to 3.5 pt")
 
 _SFX = "_normalized_gh" if _NORM else ("_inline" if _INLINE else "")            # the variant never overwrites the shipped render
+if _INLINE and os.environ.get("FIG6_NO_SCHEMES", "") not in ("", "0"):
+    _SFX = "_inline_noschemes"                                                   # nor does the scheme-free layer
+if _INLINE and os.environ.get("FIG6_OUT_SUFFIX", ""):
+    _SFX = "_inline" + os.environ["FIG6_OUT_SUFFIX"]
 fig.savefig(os.path.join(OUT, f"combined_figure_grounded{_SFX}.png"), dpi=600, facecolor="white")
 fig.savefig(os.path.join(OUT, f"combined_figure_grounded{_SFX}.svg"), facecolor="white")
 # a PDF too, for hand placement in Illustrator: the plot is vector and each scheme is a discrete
@@ -1324,4 +1567,16 @@ if _INLINE:
         json.dump([[k, float(a), float(b), float(c), float(d), float(e)]
                    for k, a, b, c, d, e in _PLACED],
                   open(os.environ["FIG6_DUMP_PLACED"], "w"))
+if os.environ.get("FIG6_DUMP_TEXT"):
+    # every string the figure prints, with the panel it sits in, for comparing two model states
+    import json as _json, matplotlib.text as _mt
+    _rows = []
+    for _t in fig.findobj(_mt.Text):
+        _s = _t.get_text()
+        if not _s.strip() or not _t.get_visible():
+            continue
+        _ax = _t.axes
+        _px = fig.transFigure.inverted().transform(_t.get_window_extent(fig.canvas.get_renderer()).get_points().mean(0))
+        _rows.append([_s, round(float(_px[0]), 3), round(float(_px[1]), 3), round(float(_t.get_rotation()), 1)])
+    _json.dump(_rows, open(os.environ["FIG6_DUMP_TEXT"], "w"), ensure_ascii=False, indent=0)
 print(f"saved -> {OUT}/combined_figure_grounded{_SFX}.{{png,svg}} | font {FONT}")

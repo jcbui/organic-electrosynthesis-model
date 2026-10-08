@@ -14,15 +14,15 @@
       "band_ceiling_established": false,
       "carried_Sm": 0.3,
       "binding_reactor": "microfluidic 25 $\\mu$m",
-      "binding_fold": 0.032028044258023726,
-      "binding_kappa_mScm": 0.09608413277407118,
-      "i_boil_lo": 6.947072447055452,
-      "i_boil_carried": 26.299765291313342,
+      "binding_fold": 0.02866863340740778,
+      "binding_kappa_mScm": 0.08600590022222333,
+      "i_boil_lo": 7.132576591039895,
+      "i_boil_carried": 27.006142132440807,
       "i_boil_hi": null,
-      "crossing_kappa_Sm": 1.111468790252731,
-      "crossing_kappa_mScm": 11.11468790252731,
+      "crossing_kappa_Sm": 1.0520364387849452,
+      "crossing_kappa_mScm": 10.520364387849453,
       "claim_holds_across_band": null,
-      "kappa_fold_error_to_break": 3.704895967509103,
+      "kappa_fold_error_to_break": 3.506788129283151,
       "band_basis": "floor B: ohmic-differencing bound, Lee OPRD 2022 SI Fig. S3 p. S6; ceiling: NOT ESTABLISHED -- the conductivity maximum of LiBr in THF has never been located (SI S6, band-proof claim withdrawn)"
     },
     {
@@ -35,17 +35,17 @@
         1.627
       ],
       "band_ceiling_established": true,
-      "carried_Sm": 1.09625,
+      "carried_Sm": 1.06375,
       "binding_reactor": "rotating cyl. 3000 rpm",
-      "binding_fold": 0.4819153089814266,
-      "binding_kappa_mScm": 22.747772888083336,
-      "i_boil_lo": 43.936548402355314,
-      "i_boil_carried": 88.35397115574541,
-      "i_boil_hi": 107.22798033008789,
-      "crossing_kappa_Sm": 0.346070105094244,
-      "crossing_kappa_mScm": 3.4607010509424403,
+      "binding_fold": 0.49400324143548136,
+      "binding_kappa_mScm": 21.53325951685946,
+      "i_boil_lo": 45.11394093694793,
+      "i_boil_carried": 89.40452431696802,
+      "i_boil_hi": 110.12929945968324,
+      "crossing_kappa_Sm": 0.3280818850163391,
+      "crossing_kappa_mScm": 3.2808188501633913,
       "claim_holds_across_band": false,
-      "kappa_fold_error_to_break": 3.1677107726524434,
+      "kappa_fold_error_to_break": 3.242330797834276,
       "band_basis": "ceiling B: hard Kohlrausch bound c*Lambda0 = 0.2 x 81.35, with Lambda0 MEASURED directly (Krumgalz & Barthel, Z. Phys. Chem. 1984, 142, 167-178, Table 2, NaI block, 25 C). Supersedes the 16.4 built on the Gopal & Jha Kohlrausch SUM 81.9; floor: 3x below carried, unsourced"
     }
   ],
@@ -53,23 +53,23 @@
     "checks": [
       {
         "label": "THF rotating-disc ceiling reaches its transport ceiling (x carried kappa)",
-        "got": 16.500573869998828,
-        "registry": 16.5
+        "got": 14.215804149482825,
+        "registry": 14.2
       },
       {
         "label": "DMF T_ss(100 mA/cm2) crosses 153 C",
-        "got": 14.08588045831536,
-        "registry": 14.09
+        "got": 13.340436468221641,
+        "registry": 13.34
       },
       {
         "label": "DMF T_ss at carried kappa (C)",
-        "got": 188.29268060782195,
-        "registry": 188
+        "got": 184.5288167357672,
+        "registry": 185
       },
       {
         "label": "DMF E_cell at 50 mA/cm2 (V)",
-        "got": 11.524094353975615,
-        "registry": 13.8
+        "got": 11.80279256534945,
+        "registry": 11.8
       },
       {
         "label": "DMF E_cell 20 V edge",
@@ -83,8 +83,8 @@
       }
     ],
     "failed": [
-      "DMF T_ss at carried kappa (C): no number within 1% of the expectation 188 appears in the DMF registry row's sensitivity text -- the gate is pinned to a quantity the registry does not state",
-      "DMF E_cell at 50 mA/cm2 (V)"
+      "DMF T_ss at carried kappa (C): no number within 1% of the expectation 185 appears in the DMF registry row's sensitivity text -- the gate is pinned to a quantity the registry does not state",
+      "DMF E_cell at 50 mA/cm2 (V): no number within 1% of the expectation 11.8 appears in the DMF registry row's sensitivity text -- the gate is pinned to a quantity the registry does not state"
     ]
   }
 }

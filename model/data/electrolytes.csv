@@ -19,8 +19,8 @@ neat carboxylate/MeOH,30.0,assumption,unused-legacy (no registry row)
 0.2 M nBu4NBr/DMA,6.0,assumption,registered
 0.21 M TBAB/DMSO-THF,4.0,assumption,registered
 0.48 M LiBr/DMA,12.0,assumption,registered
-0.2 M NaI/DMF,8.77,derived,registered
-0.171 M NaI/DMF,7.5,assumption,registered
+0.2 M NaI/DMF,8.51,derived,registered
+0.171 M NaI/DMF,7.28,assumption,registered
 0.24 M Et3NHBF4/THF-HFIP,5.0,assumption,registered
 0.1 M TBABF4/acetone,8.0,assumption,registered
 0.033 M Et4NPF6/MeOH,3.0,assumption,unused-legacy (no registry row)
@@ -39,7 +39,7 @@ neat carboxylate/MeOH,30.0,assumption,unused-legacy (no registry row)
 0.033 M Et4NPF6/THF-MeOH 5:1,0.35,assumption,registered
 0.04 M NaBr/EtOH-MeOH 1:1,1.8,assumption,registered
 1 M KCl aq,111.6,assumption,registered
-0.152 M NaBr/H2O-MeCN-MeOH-DCM 10:10:10:3,19.0,assumption,registered
+0.152 M NaBr/H2O-MeCN-MeOH-DCM 10:10:10:3,19.0,assumption,unused-legacy (no registry row)
 0.0625 M TsOH/MeOH,7.5,assumption,registered
 Me4N carboxylate (10 mol%)/acetone,2.0,assumption,unused-legacy (no registry row)
 0.3 M LiClO4/MeCN,20.0,assumption,registered
@@ -49,7 +49,7 @@ Me4N carboxylate (10 mol%)/acetone,2.0,assumption,unused-legacy (no registry row
 0.01 M Bu4NPF6/HFIP,0.3,assumption,registered
 0.085 M Et4NPF6/MeCN-HCl aq,8.0,assumption,registered
 0.08 M NaBr/MeCN,4.0,assumption,registered
-0.5 M NaBr aq/MeCN 1:1,40.0,assumption,unused-legacy (no registry row)
+0.25 M NaBr/H2O-MeCN 1:1,40.0,assumption,registered
 Et3N 7.5 mM (no salt)/MeOH,0.5,assumption,registered
 0.1 M TBAP/MeCN-H2O,10.0,assumption,registered
 5 wt% AcOH/MeOH-H2O,10.0,assumption,registered
@@ -57,6 +57,7 @@ Me4NBF4/MeOH,6.0,assumption,unused-legacy (no registry row)
 0.1 M LiClO4/acetone,8.0,assumption,registered
 56 wt% Et4NOTs aq,80.0,assumption,registered
 0.156 M Et4NOTs/MeOH,7.0,assumption,registered
+0.158 M Et4NOTs/MeOH,7.0,assumption,registered
 0.3 M Bu4NBF4/MeCN,22.5,measured,registered
 0.04 M NaBr/MeCN,1.5,assumption,registered
 0.033 M Et4NPF6/MeCN,3.5,assumption,registered
@@ -68,9 +69,11 @@ Me4NBF4/MeOH,6.0,assumption,unused-legacy (no registry row)
 no added salt (25 um flow gap)/MeCN,0.5,assumption,unused-legacy (no registry row)
 pH 2 HCl (salt in ESI)/H2O-MeCN,5.0,assumption,unused-legacy (no registry row)
 3.0 M LiBr/THF,3.0,assumption,registered
+0.214 M LiBr/THF,0.1,assumption,registered
 0.3 wt% H2SO4/MeOH (BASF),3.0,assumption,registered
 0.15 M Me4NOH + 0.05 M Me4NBF4/acetone,6.0,assumption,registered
 0.48 M Bu4N carboxylate (in situ)/MeCN,15.0,assumption,registered
 NaCl 7 mol% + pH 2 HCl/H2O-MeCN,1.2,assumption,registered
 0.08 M Me4NBF4/MeOH,5.0,assumption,unused-legacy (no registry row)
-0.0833 M Me4NBF4/MeOH,5.21,assumption,registered
+0.0833 M Me4NBF4/MeOH,5.21,assumption,unused-legacy (no registry row)
+0.0833 M Me4NBF4/THF-EtOH 1:1,1.2,assumption,registered

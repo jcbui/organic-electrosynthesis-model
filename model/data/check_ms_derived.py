@@ -64,12 +64,15 @@ def main(negative_control=False):
         # replaced when sigma became derived. A control pinned to a phrase the document has
         # stopped carrying asserts nothing (CLAUDE.md trap 10, aimed at a control), so both
         # probes are asserted present below before anything is perturbed.
-        _probes = [("rises from 12 to 36 of 50", "rises from 12/50 to 36/50"), ("reaches approximately 121 °C",)]
+        _rce25 = int((pd.read_csv(os.path.join(ROOT, "julia", "tier0_ec_matrix.csv"))["rce"] >= 25).sum())   # the matrix's own count
+        # pass 7: the worked example's steady state is read from the thermal artifact (121 -> 116 C when H_EXT was derived)
+        _tss = "reaches approximately %.0f °C" % json.load(open(os.path.join(ROOT, "results", "figK_thermal.json")))["si_support"]["worked_example"]["T_ss_C"]
+        _probes = [("rises from 12 to %d of 50" % _rce25, "rises from 12/50 to %d/50" % _rce25), (_tss,)]
         for _alts in _probes:
             assert any(_p in ms for _p in _alts), "negative control is perturbing a phrase the MS lacks: %r" % (_alts,)
         # either wording of the Section 8 sentence (Connor Coley's review redlined it to "12/50 to 36/50")
-        ms = ms.replace("rises from 12 to 36 of 50", "rises from 12 to 41 of 50").replace("rises from 12/50 to 36/50", "rises from 12/50 to 41/50")
-        ms = ms.replace("reaches approximately 121 °C", "reaches a warmer temperature")
+        ms = ms.replace("rises from 12 to %d of 50" % _rce25, "rises from 12 to 41 of 50").replace("rises from 12/50 to %d/50" % _rce25, "rises from 12/50 to 41/50")
+        ms = ms.replace(_tss, "reaches a warmer temperature")
 
     fk = json.load(open(os.path.join(ROOT, "results", "figK_thermal.json")))
     m = pd.read_csv(os.path.join(ROOT, "julia", "tier0_ec_matrix.csv")).merge(
@@ -126,7 +129,7 @@ def main(negative_control=False):
     # =====================================================================================
 
     # --- the rate ceiling, Sections 3 and 4 ------------------------------------------------
-    want("median, stirred (Sec 3 body)", "supports only about 9 mA cm−2 in a stirred beaker",
+    want("median, stirred (Sec 3 body)", "supports only about %.0f mA cm−2 in a stirred beaker" % med["stirred"],
          med["stirred"], 0.55)
     # 2026-09-11: the printed strings are BUILT from the model the way apply_v88_fixes.py builds them, so the
     # pin follows the document's own rounding rule rather than a typed literal (trap 10)
@@ -137,8 +140,8 @@ def main(negative_control=False):
                  "and to %s mA cm−2 in the angled-inlet ANEC" % (_c0(med["stirred"]), _c0(med["flow"]), _c0(med["anec"])),
                  [med["stirred"], med["flow"], 2, med["anec"], 2], 0.6)
     want_ordered("median + count clearing 50, stirred (Sec 4 body)",
-                 "the median limiting current is 9 mA cm−2 and only 11 of 50 reactions exceed "
-                 "50 mA cm−2",
+                 "the median limiting current is %.0f mA cm−2 and only %d of 50 reactions exceed "
+                 "50 mA cm−2" % (med["stirred"], n50["stirred"]),
                  [med["stirred"], 2, n50["stirred"], 50, 50, 2], 0.55)
     want_ordered("count clearing 50, unstirred -> RCE (Sec 4 body)",
                  "from %d of 50 in the unstirred archetype to %d of 50 at a rotating-cylinder "
@@ -146,6 +149,16 @@ def main(negative_control=False):
     want_ordered("count clearing 50, unstirred -> RCE (Fig 5 caption)",
                  "from %d/50 in an unstirred cell to %d/50 at a rotating-cylinder electrode" % (n50["natural"], n50["rce"]),
                  [n50["natural"], 50, n50["rce"], 50], 0.01)
+    # 2026-10-06 (chemistry audit, pass 2): the abstract printed "from 9 to 34" for the >=50 count -- 34 is the >=25
+    # count -- and nothing pinned it. The top of the range is the thinnest-film archetypes' count, read from the matrix.
+    want_ordered("count clearing 50, thinning the film (abstract)",
+                 "raises the number exceeding 50 mA cm−2, the current density needed for commercial applications, "
+                 "from %d to %d" % (n50["natural"], max(n50.values())), [50, 2, n50["natural"], max(n50.values())], 0.01)
+    # and the Fig. 4 caption counted THREE films measured on the cells themselves while the methods (and Table S1) give
+    # two, the stirred film being measured on a comparable cell; the count is in words, so presence is the check
+    _fig4_films = "two of the seven are measured on the cells themselves and one in a comparable convecting cell"
+    if _fig4_films not in ms or "three of the seven are measured on the cells themselves" in ms:
+        fails_pre.append(("Fig. 4 caption: how the seven films are anchored", _fig4_films[:60], 0.0, [1.0]))
 
     # --- the delta ladder, Section 8 (the one place the full median set survives) -----------
     want_ordered("architecture medians (Sec 8 ladder)",
@@ -159,19 +172,24 @@ def main(negative_control=False):
     # 2026-09-21: Connor Coley's review redlined this sentence to "12/50 to 36/50". Both wordings carry the same two
     # counts, so the pin binds whichever the manuscript prints -- a pin typed to one wording turns a reviewer's
     # rewording into a false failure (the v105/v106 lesson). If neither is present the gate still reports it GONE.
-    _sec8_slash = "The number clearing 25 mA cm−2 rises from 12/50 to 36/50"
+    _sec8_slash = "The number clearing 25 mA cm−2 rises from %d/50 to %d/50" % (n25["natural"], n25["rce"])
     if _sec8_slash in ms:
         want_ordered("count clearing 25, unstirred -> RCE (Sec 8)", _sec8_slash,
                      [25, 2, n25["natural"], 50, n25["rce"], 50], 0.01)
     else:
         want_ordered("count clearing 25, unstirred -> RCE (Sec 8)",
-                     "The number clearing 25 mA cm−2 rises from 12 to 36 of 50",
+                     "The number clearing 25 mA cm−2 rises from %d to %d of 50" % (n25["natural"], n25["rce"]),
                      [25, 2, n25["natural"], n25["rce"], 50], 0.01)
 
     # --- the carrier classes, Section 4 -----------------------------------------------------
     sys.path.insert(0, os.path.join(ROOT, "figs"))
     import model_medians as _MM
-    _cn, _cr = float(cat["natural"].median()), float(cat["rce"].median())
+    # 2026-10-05: class MEDIANS are over the catalyst rows that are stoichiometric in charge (the chain row,
+    # tabulated at the charge it passes, is left out; SI S4.2 and Table S10); class COUNTS are over every row.
+    _cat_st = cat[~cat.reaction.isin(_MM.CHAIN)]
+    if len(cat) - len(_cat_st) != 1:
+        raise SystemExit("expected one chain row in the catalyst class, found %d" % (len(cat) - len(_cat_st)))
+    _cn, _cr = float(_cat_st["natural"].median()), float(_cat_st["rce"].median())
     # 2026-09-11: the sentence is COMPUTED by ms_phrases.py (seven catalyst rows carried at a sourced k), and
     # pinned here from that module, NFKC-normalised as this gate reads the manuscript; its numbers are the
     # class median gain, the two medians, the rows below 25 everywhere, the class size (Figure 5b is a
@@ -180,8 +198,17 @@ def main(negative_control=False):
     sys.path.insert(0, HERE)
     from ms_phrases import phrases as _phrases0
     _P0 = _phrases0()
-    want_ordered("catalyst span and exception, body", _ud0.normalize("NFKC", _P0["catalyst_span"]).split(" (Figure 5b)")[0],
-                 [_cr / _cn, _cn, _cr, 2, int((cat[ARCH].max(axis=1) < 25).sum()), len(cat), 25, 2], 0.55)
+    # chemistry audit, 2026-10-05: the sentence now also says how many rows sit at the floor ("because 8 of the 12 carry no
+    # measured rate constant"), read here from the sweep artifact, not from the phrase module
+    _n_floor0 = int(json.load(open(os.path.join(ROOT, "results", "catalyst_ec_sensitivity.json")))["sourced"]["n_floor"])
+    # 2026-10-07 (author: restore the pedagogy of the pre-audit text): the span sentence states the two medians and the
+    # one exception; "two-thirds" at the floor and "all but one of the twelve" are words, asserted in ms_phrases and
+    # checked here against the sweep artifact and the matrix, a second path
+    want_ordered("catalyst span and exception, body", _ud0.normalize("NFKC", _P0["catalyst_span_short"]).split(" (Figure 5b)")[0],
+                 [_cn, _cr] + list(_P0["catalyst_span_short_values"])[2:], 0.06)   # the two medians from THIS gate's matrix read
+    if 3 * _n_floor0 != 2 * len(cat) or int((cat[ARCH].max(axis=1) < 25).sum()) != len(cat) - 1:
+        fails_pre.append(("catalyst span words ('two-thirds' at k = 0; all but one below 25)",
+                          "%d of %d at the floor, %d below 25" % (_n_floor0, len(cat), int((cat[ARCH].max(axis=1) < 25).sum())), 0.0, [1.0]))
     # --- the catalyst class under a finite k (G-CATK; SI S5.7) ------------------------------
     # The ten-of-eleven count above is a k = 0 statement. v83 added the sentences that say so,
     # every number in them read from results/catalyst_ec_sensitivity.json by ms_phrases.py; the
@@ -205,21 +232,35 @@ def main(negative_control=False):
     # bound to its own clause: the kinetic ceiling a row approaches is the Savéant plateau, computed in
     # ms_phrases from i(k = 0) at the 12.5 µm film and that row's x_k, never typed.
     _pr = _sr.get("per_row", {})
-    _NIXEC, _COH, _AZA = ("Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)", "Co-H alkene reduction (e-HAT)",
-                          "Co-catalyzed aza-Wacker cyclization")
+    _NIXEC, _COH, _HOMO = ("Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)", "Co-H alkene reduction (e-HAT)",
+                           "Cathodic Ni aryl-aryl homocoupling")
     _kin = lambda r: _pr[r]["i_k0_mAcm2"]["micro"] * 12.5 / _pr[r]["xk_um"]
     if _pr:
-        want_ordered("catalyst kinetic ceilings, body", _nf(_P["catalyst_kinetic_ceilings"]),
-                     [_kin(_NIXEC), _kin(_COH), 2, _pr[_NIXEC]["gain_unstirred_to_rce"],
-                      _pr[_COH]["gain_unstirred_to_rce"]], 0.3)
-        want("catalyst aza-Wacker reaction layer, body",
-             _nf("so its reaction layer, x_k = %.0f µm, is larger than δ" % _pr[_AZA]["xk_um"]),
-             _pr[_AZA]["xk_um"], 0.5)
-    want_ordered("catalyst gain at the sourced k, body", _nf(_P["catalyst_gain"]),
-                 [_sr.get("rows_clearing25_anywhere_at_band", [0, 0])[1], 11, 25, 2, 0.03, 0.3], 0.6)
-    want("catalyst restatement, Sec 8", _nf(_P["catalyst_conclusion"]), 11, 0.5)
-    want_ordered("catalyst medians, body", _nf(_P["catalyst_sec8_medians"]),
-                 [round(_cr / _cn), _cn, _cr, 2], 0.3)
+        # two pins, each at half the last digit it prints: the ceilings are printed as integers, the gains to 0.1.
+        # chemistry audit, 2026-10-05 (night): Figure 6h's third row is the Ni aryl-aryl homocoupling at the nickel constant
+        # (the Co(salen) allylic C-H amination has no measured constant and left the panel), so both pins carry three rows
+        if _HOMO not in _pr:
+            fails_pre.append(("Fig. 6h third row at a sourced k", "the sweep artifact does not carry the homocoupling", 0.0, [1.0]))
+        else:
+            _kc = _nf(_P["catalyst_kinetic_ceilings"])
+            want_ordered("catalyst kinetic ceilings, body", _kc[:_kc.index(", like ACT")],
+                         [_kin(_NIXEC), _kin(_COH), _kin(_HOMO), 2], 0.5)
+            want_ordered("catalyst kinetic gains, body", _kc[_kc.index("so their ceilings rise"):],
+                         [_pr[r]["gain_unstirred_to_rce"] for r in (_NIXEC, _COH, _HOMO)], 0.06)
+            # the homocoupling sentence says it is the only catalyst-carried row to clear 25 mA cm-2, from the recirculating
+            # flow cell on: checked here against the published matrix, a second path from the one ms_phrases asserts on
+            _a25 = sorted(cat[cat[ARCH].max(axis=1) >= 25].reaction)
+            _hrow = cat[cat.reaction == _HOMO][ARCH].iloc[0]
+            _from = [a for a in ARCH if _hrow[a] >= 25]
+            if _a25 != [_HOMO] or _from != list(ARCH)[list(ARCH).index("flow"):]:
+                fails_pre.append(("catalyst homocoupling sentence, body",
+                                  "rows clearing 25: %r; the homocoupling clears it at %r" % (_a25, _from), 1.0, [float(len(_a25))]))
+    want_ordered("catalyst gain at the sourced k, body", _nf(_P["catalyst_gain_tail"]),
+                 [_sr.get("rows_clearing25_anywhere_at_band", [0, 0])[1], len(cat), 25, 2], 0.01)
+    if _nf(_P["catalyst_gain"]) not in ms or "limited by substrate supply" in ms:
+        fails_pre.append(("catalyst gain sentence at the band top, body", _nf(_P["catalyst_gain"])[:60], 0.0, [1.0]))
+    # 2026-10-07: the "restatement" and "medians" pins read the same Section 4 sentence the span pin now covers (the
+    # catalyst_conclusion / catalyst_sec8_medians strings appear nowhere else in the manuscript), so they are retired with it
     want("Fig. 6 caption pointer to S5.7", _nf("are given in SI §§S5.1-S5.7 and Tables S6-S8"), 5.7, 0.05)
 
     # ---- the thermal numbers the main text prints (added 2026-09-12 by the post-v94 audit) -----
@@ -237,7 +278,7 @@ def main(negative_control=False):
     # the document rather than the retired unstirred value.
     # the tolerance is absolute (abs(n - value) <= tol) and the CELL prints one significant figure,
     # "~9", against a model median of 9.3, so it must admit half of the last printed digit.
-    want("Table 1 readiness gate, stirred median", _nf("~9 median (stirred)"),
+    want("Table 1 readiness gate, stirred median", _nf("~%.0f median (stirred)" % med["stirred"]),
          med["stirred"], 0.5)
     want_ordered("Sec 8.2 worked example: cell voltage and heat",
                  _nf("the model gives a 13 V cell dominated by ohmic loss and approximately "
@@ -253,6 +294,21 @@ def main(negative_control=False):
     assert _ohmic_share > 0.5, ("Section 4 calls the 10-20 V cell 'dominated by ohmic resistance' "
                                 "while the worked example puts the ohmic term at %.0f%% of it"
                                 % (100 * _ohmic_share))
+    # Section 5's "10-20 V in our energy balance" is the band the SI computes for ONE case -- 0.2 M NaI/DMF at 50 mA cm-2
+    # across the 2 cm beaker gap, inside 10-20 V for kappa between the two thresholds -- and the sentence scopes it to that
+    # case (pass 42, 2026-10-07: unscoped, it read as what the model gives for any poorly conducting electrolyte, when THF
+    # gives 36 V and MeCN 7 V). The printed conductivities are the thresholds rounded INWARD, so the band holds across them,
+    # and "dominated by ohmic resistance" must hold at both edges.
+    _dx = json.load(open(os.path.join(ROOT, "results", "figK_thermal.json")))["si_support"]["beaker_dmf_example"]
+    _klo, _khi = int(-(-_dx["kappa_E50_20V_mScm"] // 1)), int(_dx["kappa_E50_10V_mScm"] // 1)
+    assert abs(_dx["gap_m"] - 0.02) < 1e-12, "the DMF cell-voltage example is no longer at the 2 cm beaker gap"
+    for _k, _v in ((_dx["kappa_E50_20V_mScm"], 20.0), (_dx["kappa_E50_10V_mScm"], 10.0)):
+        assert 50.0 * 10.0 * _dx["gap_m"] / (0.1 * _k) / _v > 0.5, (
+            "at kappa = %.2f mS cm-1 the 50 mA cm-2 DMF cell is no longer ohmic-dominated" % _k)
+    _sec5 = _nf("the cell-voltage model presented in SI §S6 estimates 10–20 V across a 2 cm gap at 50 mA cm⁻² in DMF conducting "
+                "%d–%d mS cm⁻¹, dominated primarily by ohmic resistance" % (_klo, _khi))
+    assert negative_control or _sec5 in _nf(ms), (
+        "Section 5's cell-voltage band is not scoped to the computed case: expected %r" % _sec5)
     # skipped under the control, which perturbs this very clause
     # The claim is what is pinned, not one wording of it: the author writes "dominated primarily by
     # ohmic resistance" since v104, and an adverb between the two words must not read as a vanished
@@ -270,7 +326,7 @@ def main(negative_control=False):
     # different script), and the fine-mesh check the solver carries beside it must sit within 1 %.
     _prof = pd.read_csv(os.path.join(ROOT, "julia", "mediated_ec_profiles.csv")).groupby("short").first()
     _mmx = pd.read_csv(os.path.join(ROOT, "julia", "mediated_ec_matrix.csv"))
-    for _sh, _rx in (("Hofmann", "Br-mediated Hofmann rearrangement"), ("ACT", "ACT-mediated alcohol oxidation (flow, hectogram)"),
+    for _sh, _rx in (("Bromination", "Br- oxidation / electrophilic bromination"), ("ACT", "ACT-mediated alcohol oxidation (flow, hectogram)"),
                      ("NHPI", "NHPI-mediated allylic C-H -> enone")):
         _cell = float(_mmx[(_mmx.reaction == _rx) & (_mmx.reactor == "ANEC flow cell")].i_ec_mAcm2.iloc[0])
         _pan = float(_prof.loc[_sh, "ilim_mAcm2"]); _fine = float(_prof.loc[_sh, "ilim_fine_mAcm2"])
@@ -281,6 +337,11 @@ def main(negative_control=False):
     for _lab, _ph in (("catalyst both limits, body", _P["catalyst_both_limits"]),
                       ("catalyst sourced-k sentence, body", _P["catalyst_finite_k"]),
                       ("catalyst sourced-k numbers, body", _P["catalyst_finite_k2"]),
+                      ("catalyst homocoupling sentence, body", _P["catalyst_homo_short"]),
+                      # pass 16: the span pin above stops at "(Figure 5b)", so the sentence after it is pinned whole here
+                      ("catalyst span with its explanation, body", _P["catalyst_span_short"]),
+                      ("rate-constant provenance, body", _P["k_provenance_short"]),
+                      ("mediated regimes sort the twelve rows, body", _P["med_regime_sort"]),
                       ("Fig. 6 caption, body", _P["fig6_caption_body"]),
                       ("Sec 4 (d-f) analysis, body", _P["sec4_fig6df"]),        # v92: computed passages, presence = correctness
                       ("Sec 4 (g) analysis, body", _P["sec4_fig6g"]),
@@ -289,33 +350,46 @@ def main(negative_control=False):
                       ("Fig. 6 (a-c) loading clause", _P["fig6ac_loading"].strip())):
         if _nf(_ph) not in ms:
             fails_pre.append((_lab, _nf(_ph)[:60], 0.0, [1.0]))
-    want_ordered("mediated intensification range, body", _nf(_P["mediated_range"]),
-                 list(_P["med_amp_values"]), 0.2)   # "eight" is a word, so the digits are the two gains
+    # the count is a word, so the digits are the two gains; split so each is held to half its own last printed digit
+    # (2026-10-05: the top gain is printed as an integer, 24 against 23.6, which the old single 0.2 tolerance refused)
+    _mr = _nf(_P["mediated_range"])
+    want_ordered("mediated intensification range, low end, body", _mr[:_mr.index("-fold to ")], [_P["med_amp_values"][0]], 0.05)
+    want_ordered("mediated intensification range, high end, body", _mr[_mr.index("-fold to ") + 1:], [_P["med_amp_values"][1]], 0.5)
     # v118: carrier loading, the one thing that separates the two homogeneous classes (Connor Coley, comment 21).
     # Six numbers in one sentence, so POSITIONAL: 2.6 / 30 mM (catalyst range), 24 mM / 1.0 M (mediator range) and
     # the 17- to 23-fold span of the class median ceiling ratio. v129: the author writes the median loading ratio
     # as "order-of-magnitude" instead of printing 12-fold, and ms_phrases asserts that description against the
     # model, so the claim is still gated -- see RETIRED below for the number itself.
-    want_ordered("carrier loading separation, body", _nf(_P["carrier_loading"]),
-                 list(_P["carrier_loading_values"]), 0.75)
+    want_ordered("carrier loading separation, body", _nf(_P["carrier_loading_short"]),
+                 list(_P["carrier_loading_short_values"]), 0.06)
     # v120 (Connor's comment 48): what the model shows about porous electrodes -- the thinnest planar films modeled and
     # how many reactions still fall short there -- bound positionally (11, 13, 14, 50, 25)
     want_ordered("porous-electrode need, Sec 8", _nf(_P["porous_need"]), list(_P["porous_need_values"]), 0.75)
     _slopes = _MM.mediated_delta_slopes()
     _flat = sorted(-v["slope"] for v in _slopes.values() if v["slope"] > -0.5)
     _steep = sorted(-v["slope"] for v in _slopes.values() if v["slope"] <= -0.5)
-    want_ordered("Fig6c flat slopes", "log–log slopes of −0.13 and −0.22", _flat, 0.02)
-    want_ordered("Fig6c steep slopes", "the other six span −0.58 to −1.00",
-                 [_steep[0], _steep[-1]], 0.02)
+    # 2026-10-05: eleven mediated rows, four of them nearly flat; the sentence is computed in ms_phrases
+    # (it names the four and asserts they are the flat ones) and its four slopes are bound here.
+    # 2026-10-06 (chemistry audit, pass 4): three of the four are kinetic; the thioether's shallow fit is a rise through
+    # its substrate cap and a fall to a kinetic plateau, and the sentence now says so with its peak and thin-film currents.
+    # 2026-10-07: the slope-by-slope sentence left the manuscript (author: "you flooded them with numbers"); SI S7 and
+    # Table S6 print every slope, watched by the RETIRED entry below
     # (the "summarising all 56 mediator-architecture calculations" pin of the v87 caption (b) is retired with
     # that panel, 2026-09-11; the 56-cell census is asserted by G-ECBAND)
 
     # --- the Joule-heating ceiling, Section 4 ----------------------------------------------
-    want_ordered("Fig7a beaker ceilings",
-                 "boiling point of THF at approximately %.0f mA cm−2, compared with %.0f-%.0f "
-                 "mA cm−2 for MeCN and DMF"
-                 % (boil["THF"], boil["MeCN"], boil["DMF"]),
-                 [boil["THF"], 2, boil["MeCN"], boil["DMF"], 2], 1.0)
+    # pass 7: MeCN and DMF can round to one value (80 and 80 at H_EXT 13.8), and the manuscript then prints it once
+    if round(boil["MeCN"]) == round(boil["DMF"]):
+        want_ordered("Fig7a beaker ceilings",
+                     "boiling point of THF at approximately %.0f mA cm−2, compared with approximately %.0f "
+                     "mA cm−2 for MeCN and DMF" % (boil["THF"], boil["MeCN"]),
+                     [boil["THF"], 2, 0.5 * (boil["MeCN"] + boil["DMF"]), 2], 1.0)
+    else:
+        want_ordered("Fig7a beaker ceilings",
+                     "boiling point of THF at approximately %.0f mA cm−2, compared with %.0f-%.0f "
+                     "mA cm−2 for MeCN and DMF"
+                     % (boil["THF"], min(boil["MeCN"], boil["DMF"]), max(boil["MeCN"], boil["DMF"])),
+                     [boil["THF"], 2, min(boil["MeCN"], boil["DMF"]), max(boil["MeCN"], boil["DMF"]), 2], 1.0)
     # v106: the author replaced the absolute THF microfluidic ceiling with the passive-cooling margins
     # of Figure 7d. Each margin is required cooling duty over what the cell rejects passively, both from
     # results/figK_thermal.json; the retired ceiling is still stated (and gated) in the SI, see RETIRED.
@@ -327,14 +401,14 @@ def main(negative_control=False):
                  % (min(_mm), max(_mm)), [min(_mm), max(_mm)], 0.4)
     _thf = [_pc["THF"][r] / _av[r] for r in _ROT]
     want_ordered("Fig7d THF rotating shortfall",
-                 "THF requires %.0f- to %.0f-fold more heat rejection than the cell provides" % (min(_thf), max(_thf)),
-                 [min(_thf), max(_thf)], 0.2)
+                 "THF requires %.0f- to %.0f-fold more heat rejection than these cells provide" % (min(_thf), max(_thf)),
+                 [min(_thf), max(_thf)], 0.5)          # printed as integers: half the last digit
     _org = [_pc[s][r] / _av[r] for s in ("MeCN", "DMF") for r in _ROT]
     want_ordered("Fig7d MeCN/DMF rotating shortfall", "MeCN and DMF %.1f- to %.1f-fold more" % (min(_org), max(_org)),
                  [min(_org), max(_org)], 0.06)
     _st = [_pc[s]["zero-gap PEM stack"] / _av["zero-gap PEM stack"] for s in _SOLV]
     want_ordered("Fig7d stack shortfall", "%.0f- to %.0f-fold beyond what passive rejection supplies"
-                 % (min(_st), max(_st)), [min(_st), max(_st)], 0.2)
+                 % (min(_st), max(_st)), [min(_st), max(_st)], 0.5)      # printed as integers: half the last digit
 
     # --- the tier bands, Section 3 ----------------------------------------------------------
     _d = {k: _MM.delta_range(k) for k in ARCH}
@@ -361,11 +435,11 @@ def main(negative_control=False):
     #   "unpublished" -- NEITHER document may state it, so it cannot quietly reappear unwatched.
     # Without the second case this list would be a way to silence a check by asserting nothing.
     RETIRED = [
-        ("Fig. 5 zero-gap and cooling-duty values", "si", "zero-gap"),
-        ("the aq. NaOH beaker ceiling (283 mA cm-2)", "si", "283"),
-        ("the rotating-cylinder second-correlation bound", "si", "30%"),
+        ("Fig. 5 zero-gap and cooling-duty values", "si", "zero-gap ceiling"),     # pass 16: a Table S9 row label; bare "zero-gap" occurs 36 times
+        ("the aq. NaOH beaker ceiling", "si", "aq. NaOH beaker ceiling"),     # pass 16: "283" matched only a page range
+        ("the rotating-cylinder second-correlation bound", "si", "Against the correlation of Jang et al."),   # "30%" matched S4.1
         ("the Fig. 2b model floor (8.46 um)", "unpublished", "8.46"),
-        ("the Fig. 2c/3a illustrative corpus-median ceiling (13.5 mA cm-2)", "unpublished", "13.5"),
+        ("the Fig. 2c/3a illustrative corpus-median ceiling (13.5 mA cm-2)", "unpublished", "13.5 mA"),
         # probe carries the unit: a bare "3.96" is also the aza-Wacker row's k = 0 ceiling in the
         # S5.7 census table (found 2026-09-09), and a value-only match is trap 11
         ("the catalyst uplift at fixed delta (0.19 -> 3.96 mA cm-2)", "unpublished", "3.96 mA cm"),
@@ -381,7 +455,16 @@ def main(negative_control=False):
         # asserts against the model (3.2x-32x) -- and the two overlapping loadings are still in Table S2, which
         # prints every row's carrier concentration, so the SI keeps watching them.
         ("the median carrier-loading ratio (12-fold)", "unpublished", "12-fold difference"),
-        ("the two mediated rows inside the catalyst range (25 and 23.5 mM)", "si", "C_carrier"),
+        ("the two mediated rows inside the catalyst range (25 and 23.5 mM)", "si", "ACT 5 mol% = 25 mM"),   # Table S2's own cell
+        # 2026-10-07 (author: the modelling sections read as they did before the audits; the detail lives in the SI)
+        ("the fitted log-log slopes of the twelve mediated rows", "si", "of the 12 are nearly flat"),
+        ("the homocoupling's carrier-charge sensitivity (neutral precursor vs the dication)", "si",
+         "carries the neutral charge of its precursor"),
+        ("the Br2 accumulation multiple behind the bromination front", "si", "times the bromide bulk"),   # the SI computes the multiple
+        ("the substrate each Figure 6 (g)/(h) curve is solved for", "si", "dihydroalprenolol"),   # Table S10's balanced row
+        ("the loading decomposition of the catalyst-mediator gap (k = 0 and turnover gaps)", "unpublished",
+         "when no in-film turnover is credited"),
+        ("the mediator loading range quoted from 5 mM", "unpublished", "5 mM to 1.0 M for the mediators"),
     ]
     _si_path = os.path.join(ROOT, "SI_Section4_Transport_Model.docx")
     _si = _shared_asserted_text(_si_path) if os.path.exists(_si_path) else ""
@@ -447,10 +530,12 @@ def main(negative_control=False):
 
     if negative_control:
         # Both probes are asserted present above before being perturbed, so neither can go inert.
-        fired = any("12 to 36 of 50" in f[1] for f in fails)
+        # the perturbed count must make the Section 8 pin fail, whichever wording the document carries and
+        # whether the gate reports it as a wrong number or as a vanished phrase (both are failures)
+        fired = any(f[0].startswith("count clearing 25, unstirred -> RCE (Sec 8)") for f in fails)
         # the second probe is the Sec 8.2 steady state, whose phrase the control rewrites; the
         # "88-89" probe it used to look for left the manuscript when sigma became derived.
-        gone = any(not f[3] and "approximately 121" in f[1] for f in fails)
+        gone = any(not f[3] and _tss.replace("reaches ", "") in f[1] for f in fails)
         print("\nnegative control: rewrote 'rises from 12 to 36 of 50' as '... 12 to 41 of 50',"
               " and rewrote the Sec 8.2 steady-state phrase outright")
         print("  wrong-number branch fired: %s" % fired)

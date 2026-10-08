@@ -7,15 +7,16 @@
   1000.0,
   10000.0
  ],
- "D_S_rule": "1.0e-9 m2/s x (0.369 mPa s / mu_solvent), declared",
+ "n_rows": 12,
+ "D_S_rule": "per-row Wilke-Chang on the exemplar's own substrate (data/catalyst_substrates.csv)",
  "cells": [
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "Unstirred batch",
    "k_M": 0.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.1069639350292719,
-   "i_subcap_mAcm2": 0.8103471332586786,
+   "i_ec_mAcm2": 0.0534819675146359,
+   "i_subcap_mAcm2": 2.181034002608772,
    "path": "direct-ramp"
   },
   {
@@ -23,8 +24,8 @@
    "reactor": "Unstirred batch",
    "k_M": 1.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.3024892659137073,
-   "i_subcap_mAcm2": 0.8103471332586786,
+   "i_ec_mAcm2": 0.2335656091571354,
+   "i_subcap_mAcm2": 2.181034002608772,
    "path": "direct-ramp"
   },
   {
@@ -32,8 +33,8 @@
    "reactor": "Unstirred batch",
    "k_M": 10.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.642071494710768,
-   "i_subcap_mAcm2": 0.8103471332586786,
+   "i_ec_mAcm2": 0.6551856623850356,
+   "i_subcap_mAcm2": 2.181034002608772,
    "path": "c-control"
   },
   {
@@ -41,17 +42,17 @@
    "reactor": "Unstirred batch",
    "k_M": 100.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.873793579540342,
-   "i_subcap_mAcm2": 0.8103471332586786,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.4557564354234065,
+   "i_subcap_mAcm2": 2.181034002608772,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "Unstirred batch",
    "k_M": 1000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.9139461938618608,
-   "i_subcap_mAcm2": 0.8103471332586786,
+   "i_ec_mAcm2": 2.0781635888275978,
+   "i_subcap_mAcm2": 2.181034002608772,
    "path": "c-control"
   },
   {
@@ -59,8 +60,8 @@
    "reactor": "Unstirred batch",
    "k_M": 10000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.9156361292514928,
-   "i_subcap_mAcm2": 0.8103471332586786,
+   "i_ec_mAcm2": 2.217603153944975,
+   "i_subcap_mAcm2": 2.181034002608772,
    "path": "c-control"
   },
   {
@@ -68,8 +69,8 @@
    "reactor": "Stirred batch",
    "k_M": 0.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.1219388859333699,
-   "i_subcap_mAcm2": 0.9237957319148936,
+   "i_ec_mAcm2": 0.0609694429666849,
+   "i_subcap_mAcm2": 2.486378762974,
    "path": "direct-ramp"
   },
   {
@@ -77,8 +78,8 @@
    "reactor": "Stirred batch",
    "k_M": 1.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.3110706584504659,
-   "i_subcap_mAcm2": 0.9237957319148936,
+   "i_ec_mAcm2": 0.2355467558403642,
+   "i_subcap_mAcm2": 2.486378762974,
    "path": "direct-ramp"
   },
   {
@@ -86,26 +87,26 @@
    "reactor": "Stirred batch",
    "k_M": 10.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.6861110789109603,
-   "i_subcap_mAcm2": 0.9237957319148936,
-   "path": "c-control"
+   "i_ec_mAcm2": 0.6699156946909014,
+   "i_subcap_mAcm2": 2.486378762974,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "Stirred batch",
    "k_M": 100.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.980854562561652,
-   "i_subcap_mAcm2": 0.9237957319148936,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.5460071088041087,
+   "i_subcap_mAcm2": 2.486378762974,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "Stirred batch",
    "k_M": 1000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 1.0408511868801944,
-   "i_subcap_mAcm2": 0.9237957319148936,
+   "i_ec_mAcm2": 2.3233950366026765,
+   "i_subcap_mAcm2": 2.486378762974,
    "path": "c-control"
   },
   {
@@ -113,8 +114,8 @@
    "reactor": "Stirred batch",
    "k_M": 10000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 1.0438334599439496,
-   "i_subcap_mAcm2": 0.9237957319148936,
+   "i_ec_mAcm2": 2.523123218957255,
+   "i_subcap_mAcm2": 2.486378762974,
    "path": "c-control"
   },
   {
@@ -122,8 +123,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 0.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.2281363628313752,
-   "i_subcap_mAcm2": 1.7283362617678084,
+   "i_ec_mAcm2": 0.1140681814156876,
+   "i_subcap_mAcm2": 4.651784402196446,
    "path": "direct-ramp"
   },
   {
@@ -131,8 +132,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 1.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.3680607470051515,
-   "i_subcap_mAcm2": 1.7283362617678084,
+   "i_ec_mAcm2": 0.2476719573884361,
+   "i_subcap_mAcm2": 4.651784402196446,
    "path": "direct-ramp"
   },
   {
@@ -140,26 +141,26 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.8682361940417131,
-   "i_subcap_mAcm2": 1.7283362617678084,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 0.7186227947352943,
+   "i_subcap_mAcm2": 4.651784402196446,
+   "path": "c-control"
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "Recirculating flow cell",
    "k_M": 100.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 1.6010748230155796,
-   "i_subcap_mAcm2": 1.7283362617678084,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.9105543401910212,
+   "i_subcap_mAcm2": 4.651784402196446,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "Recirculating flow cell",
    "k_M": 1000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 1.9176477680228816,
-   "i_subcap_mAcm2": 1.7283362617678084,
+   "i_ec_mAcm2": 3.694269114174815,
+   "i_subcap_mAcm2": 4.651784402196446,
    "path": "c-control"
   },
   {
@@ -167,8 +168,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 1.9518281846322576,
-   "i_subcap_mAcm2": 1.7283362617678084,
+   "i_ec_mAcm2": 4.604917617042598,
+   "i_subcap_mAcm2": 4.651784402196446,
    "path": "c-control"
   },
   {
@@ -176,8 +177,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 0.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 0.6736955023943096,
-   "i_subcap_mAcm2": 5.103843822734219,
+   "i_ec_mAcm2": 0.3368477511971548,
+   "i_subcap_mAcm2": 13.736899242950276,
    "path": "direct-ramp"
   },
   {
@@ -185,8 +186,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 1.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 0.7304056460097309,
-   "i_subcap_mAcm2": 5.103843822734219,
+   "i_ec_mAcm2": 0.3937154229892856,
+   "i_subcap_mAcm2": 13.736899242950276,
    "path": "direct-ramp"
   },
   {
@@ -194,8 +195,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 10.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 1.1372095601078864,
-   "i_subcap_mAcm2": 5.103843822734219,
+   "i_ec_mAcm2": 0.775743228905722,
+   "i_subcap_mAcm2": 13.736899242950276,
    "path": "direct-ramp"
   },
   {
@@ -203,8 +204,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 100.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 2.691392925976347,
-   "i_subcap_mAcm2": 5.103843822734219,
+   "i_ec_mAcm2": 2.2615539698811893,
+   "i_subcap_mAcm2": 13.736899242950276,
    "path": "direct-ramp"
   },
   {
@@ -212,8 +213,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 1000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 4.828812124028897,
-   "i_subcap_mAcm2": 5.103843822734219,
+   "i_ec_mAcm2": 5.927508307695556,
+   "i_subcap_mAcm2": 13.736899242950276,
    "path": "c-control"
   },
   {
@@ -221,8 +222,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 10000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 5.679957894719118,
-   "i_subcap_mAcm2": 5.103843822734219,
+   "i_ec_mAcm2": 11.198007007312231,
+   "i_subcap_mAcm2": 13.736899242950276,
    "path": "c-control"
   },
   {
@@ -230,8 +231,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 0.0,
    "delta_um": 12.499999999999998,
-   "i_ec_mAcm2": 1.9510221749339216,
-   "i_subcap_mAcm2": 14.7807317106383,
+   "i_ec_mAcm2": 0.9755110874669608,
+   "i_subcap_mAcm2": 39.78206020758401,
    "path": "direct-ramp"
   },
   {
@@ -239,35 +240,35 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1.0,
    "delta_um": 12.499999999999998,
-   "i_ec_mAcm2": 1.9704212579732248,
-   "i_subcap_mAcm2": 14.7807317106383,
-   "path": "c-control"
+   "i_ec_mAcm2": 0.9960401594557436,
+   "i_subcap_mAcm2": 39.78206020758401,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10.0,
    "delta_um": 12.499999999999998,
-   "i_ec_mAcm2": 2.143504275057367,
-   "i_subcap_mAcm2": 14.7807317106383,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.1690546161612048,
+   "i_subcap_mAcm2": 39.78206020758401,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 100.0,
    "delta_um": 12.499999999999998,
-   "i_ec_mAcm2": 3.4924062362639603,
-   "i_subcap_mAcm2": 14.7807317106383,
-   "path": "c-control"
+   "i_ec_mAcm2": 2.430528056415799,
+   "i_subcap_mAcm2": 39.78206020758401,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1000.0,
    "delta_um": 12.499999999999998,
-   "i_ec_mAcm2": 8.280546733633505,
-   "i_subcap_mAcm2": 14.7807317106383,
+   "i_ec_mAcm2": 7.0961063222604,
+   "i_subcap_mAcm2": 39.78206020758401,
    "path": "direct-ramp"
   },
   {
@@ -275,17 +276,17 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10000.0,
    "delta_um": 12.499999999999998,
-   "i_ec_mAcm2": 14.339410960806966,
-   "i_subcap_mAcm2": 14.7807317106383,
-   "path": "c-control"
+   "i_ec_mAcm2": 18.403531526911745,
+   "i_subcap_mAcm2": 39.78206020758401,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "RDE 1600 rpm",
    "k_M": 0.0,
    "delta_um": 8.85764188710124,
-   "i_ec_mAcm2": 2.7533035877402323,
-   "i_subcap_mAcm2": 20.858728399488633,
+   "i_ec_mAcm2": 1.3766517938701162,
+   "i_subcap_mAcm2": 56.14087348902056,
    "path": "direct-ramp"
   },
   {
@@ -293,17 +294,17 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1.0,
    "delta_um": 8.85764188710124,
-   "i_ec_mAcm2": 2.766622302285191,
-   "i_subcap_mAcm2": 20.858728399488633,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.392746709620741,
+   "i_subcap_mAcm2": 56.14087348902056,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "RDE 1600 rpm",
    "k_M": 10.0,
    "delta_um": 8.85764188710124,
-   "i_ec_mAcm2": 2.894938846345731,
-   "i_subcap_mAcm2": 20.858728399488633,
+   "i_ec_mAcm2": 1.5182870524756151,
+   "i_subcap_mAcm2": 56.14087348902056,
    "path": "direct-ramp"
   },
   {
@@ -311,8 +312,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 100.0,
    "delta_um": 8.85764188710124,
-   "i_ec_mAcm2": 3.9818124120696794,
-   "i_subcap_mAcm2": 20.858728399488633,
+   "i_ec_mAcm2": 2.565413197702515,
+   "i_subcap_mAcm2": 56.14087348902056,
    "path": "direct-ramp"
   },
   {
@@ -320,26 +321,26 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1000.0,
    "delta_um": 8.85764188710124,
-   "i_ec_mAcm2": 9.114469298442971,
-   "i_subcap_mAcm2": 20.858728399488633,
-   "path": "c-control"
+   "i_ec_mAcm2": 7.288305162368815,
+   "i_subcap_mAcm2": 56.14087348902056,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "RDE 1600 rpm",
    "k_M": 10000.0,
    "delta_um": 8.85764188710124,
-   "i_ec_mAcm2": 18.089223973710787,
-   "i_subcap_mAcm2": 20.858728399488633,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 20.054185471986116,
+   "i_subcap_mAcm2": 56.14087348902056,
+   "path": "c-control"
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 0.0,
    "delta_um": 9.10732936801866,
-   "i_ec_mAcm2": 2.677818732713703,
-   "i_subcap_mAcm2": 20.28686335115756,
+   "i_ec_mAcm2": 1.3389093663568514,
+   "i_subcap_mAcm2": 54.601709513332835,
    "path": "direct-ramp"
   },
   {
@@ -347,17 +348,17 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1.0,
    "delta_um": 9.10732936801866,
-   "i_ec_mAcm2": 2.6914091073810056,
-   "i_subcap_mAcm2": 20.28686335115756,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.3545630222378746,
+   "i_subcap_mAcm2": 54.601709513332835,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10.0,
    "delta_um": 9.10732936801866,
-   "i_ec_mAcm2": 2.821832366819116,
-   "i_subcap_mAcm2": 20.28686335115756,
+   "i_ec_mAcm2": 1.4829230004622649,
+   "i_subcap_mAcm2": 54.601709513332835,
    "path": "direct-ramp"
   },
   {
@@ -365,8 +366,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 100.0,
    "delta_um": 9.10732936801866,
-   "i_ec_mAcm2": 3.9306121201837514,
-   "i_subcap_mAcm2": 20.28686335115756,
+   "i_ec_mAcm2": 2.549836248923239,
+   "i_subcap_mAcm2": 54.601709513332835,
    "path": "direct-ramp"
   },
   {
@@ -374,8 +375,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1000.0,
    "delta_um": 9.10732936801866,
-   "i_ec_mAcm2": 9.053436767109234,
-   "i_subcap_mAcm2": 20.28686335115756,
+   "i_ec_mAcm2": 7.280751342210369,
+   "i_subcap_mAcm2": 54.601709513332835,
    "path": "direct-ramp"
   },
   {
@@ -383,8 +384,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10000.0,
    "delta_um": 9.10732936801866,
-   "i_ec_mAcm2": 17.78591518451773,
-   "i_subcap_mAcm2": 20.28686335115756,
+   "i_ec_mAcm2": 19.946169380432583,
+   "i_subcap_mAcm2": 54.601709513332835,
    "path": "direct-ramp"
   },
   {
@@ -392,8 +393,8 @@
    "reactor": "Unstirred batch",
    "k_M": 0.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.1382977761874497,
-   "i_subcap_mAcm2": 2.095484493962649,
+   "i_ec_mAcm2": 0.0691488880937248,
+   "i_subcap_mAcm2": 2.8181909733594384,
    "path": "direct-ramp"
   },
   {
@@ -401,35 +402,35 @@
    "reactor": "Unstirred batch",
    "k_M": 1.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.5183673249092985,
-   "i_subcap_mAcm2": 2.095484493962649,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 0.2774033642288433,
+   "i_subcap_mAcm2": 2.8181909733594384,
+   "path": "c-control"
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "reactor": "Unstirred batch",
    "k_M": 10.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 1.2463792886258829,
-   "i_subcap_mAcm2": 2.095484493962649,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 0.7861302936406944,
+   "i_subcap_mAcm2": 2.8181909733594384,
+   "path": "c-control"
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "reactor": "Unstirred batch",
    "k_M": 100.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 1.9910072943389097,
-   "i_subcap_mAcm2": 2.095484493962649,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.793660648292201,
+   "i_subcap_mAcm2": 2.8181909733594384,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "reactor": "Unstirred batch",
    "k_M": 1000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 2.209849912516735,
-   "i_subcap_mAcm2": 2.095484493962649,
+   "i_ec_mAcm2": 2.651452334139829,
+   "i_subcap_mAcm2": 2.8181909733594384,
    "path": "c-control"
   },
   {
@@ -437,8 +438,8 @@
    "reactor": "Unstirred batch",
    "k_M": 10000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 2.229741040116456,
-   "i_subcap_mAcm2": 2.095484493962649,
+   "i_ec_mAcm2": 2.8611468934266178,
+   "i_subcap_mAcm2": 2.8181909733594384,
    "path": "c-control"
   },
   {
@@ -446,8 +447,8 @@
    "reactor": "Stirred batch",
    "k_M": 0.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.1576594648536927,
-   "i_subcap_mAcm2": 2.3888523231174195,
+   "i_ec_mAcm2": 0.0788297324268463,
+   "i_subcap_mAcm2": 3.2127377096297596,
    "path": "direct-ramp"
   },
   {
@@ -455,35 +456,35 @@
    "reactor": "Stirred batch",
    "k_M": 1.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.5273923010123279,
-   "i_subcap_mAcm2": 2.3888523231174195,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 0.2794269393329021,
+   "i_subcap_mAcm2": 3.2127377096297596,
+   "path": "c-control"
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "reactor": "Stirred batch",
    "k_M": 10.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 1.306882626647989,
-   "i_subcap_mAcm2": 2.3888523231174195,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 0.8017002222385456,
+   "i_subcap_mAcm2": 3.2127377096297596,
+   "path": "c-control"
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "reactor": "Stirred batch",
    "k_M": 100.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 2.20441165193955,
-   "i_subcap_mAcm2": 2.3888523231174195,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.8977537442221624,
+   "i_subcap_mAcm2": 3.2127377096297596,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "reactor": "Stirred batch",
    "k_M": 1000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 2.509946272453852,
-   "i_subcap_mAcm2": 2.3888523231174195,
+   "i_ec_mAcm2": 2.9548888690717123,
+   "i_subcap_mAcm2": 3.2127377096297596,
    "path": "c-control"
   },
   {
@@ -491,8 +492,8 @@
    "reactor": "Stirred batch",
    "k_M": 10000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 2.541643686070026,
-   "i_subcap_mAcm2": 2.3888523231174195,
+   "i_ec_mAcm2": 3.2538517751082257,
+   "i_subcap_mAcm2": 3.2127377096297596,
    "path": "c-control"
   },
   {
@@ -500,8 +501,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 0.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.2949662579114923,
-   "i_subcap_mAcm2": 4.469321465140168,
+   "i_ec_mAcm2": 0.1474831289557461,
+   "i_subcap_mAcm2": 6.010734723348475,
    "path": "direct-ramp"
   },
   {
@@ -509,8 +510,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 1.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.5810384741738274,
-   "i_subcap_mAcm2": 4.469321465140168,
+   "i_ec_mAcm2": 0.2973348787043852,
+   "i_subcap_mAcm2": 6.010734723348475,
    "path": "direct-ramp"
   },
   {
@@ -518,8 +519,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 1.5391562847609803,
-   "i_subcap_mAcm2": 4.469321465140168,
+   "i_ec_mAcm2": 0.8554938675878742,
+   "i_subcap_mAcm2": 6.010734723348475,
    "path": "direct-ramp"
   },
   {
@@ -527,26 +528,26 @@
    "reactor": "Recirculating flow cell",
    "k_M": 100.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 3.2955113092671127,
-   "i_subcap_mAcm2": 4.469321465140168,
-   "path": "c-control"
+   "i_ec_mAcm2": 2.305078109146375,
+   "i_subcap_mAcm2": 6.010734723348475,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "reactor": "Recirculating flow cell",
    "k_M": 1000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 4.51122589372798,
-   "i_subcap_mAcm2": 4.469321465140168,
-   "path": "c-control"
+   "i_ec_mAcm2": 4.616592333485023,
+   "i_subcap_mAcm2": 6.010734723348475,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "reactor": "Recirculating flow cell",
    "k_M": 10000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 4.742931534952269,
-   "i_subcap_mAcm2": 4.469321465140168,
+   "i_ec_mAcm2": 5.912014351274625,
+   "i_subcap_mAcm2": 6.010734723348475,
    "path": "c-control"
   },
   {
@@ -554,8 +555,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 0.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 0.8710467671474733,
-   "i_subcap_mAcm2": 13.198079133245413,
+   "i_ec_mAcm2": 0.4355233835737366,
+   "i_subcap_mAcm2": 17.749932097401988,
    "path": "direct-ramp"
   },
   {
@@ -563,17 +564,17 @@
    "reactor": "ANEC flow cell",
    "k_M": 1.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 0.991214559653399,
-   "i_subcap_mAcm2": 13.198079133245413,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 0.4966693317429745,
+   "i_subcap_mAcm2": 17.749932097401988,
+   "path": "c-control"
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "reactor": "ANEC flow cell",
    "k_M": 10.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 1.8134354180802348,
-   "i_subcap_mAcm2": 13.198079133245413,
+   "i_ec_mAcm2": 0.929249097894277,
+   "i_subcap_mAcm2": 17.749932097401988,
    "path": "direct-ramp"
   },
   {
@@ -581,8 +582,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 100.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 4.801980103208075,
-   "i_subcap_mAcm2": 13.198079133245413,
+   "i_ec_mAcm2": 2.6922145257150114,
+   "i_subcap_mAcm2": 17.749932097401988,
    "path": "direct-ramp"
   },
   {
@@ -590,8 +591,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 1000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 10.053019773125342,
-   "i_subcap_mAcm2": 13.198079133245413,
+   "i_ec_mAcm2": 7.178011369952029,
+   "i_subcap_mAcm2": 17.749932097401988,
    "path": "direct-ramp"
   },
   {
@@ -599,8 +600,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 10000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 13.418933013208653,
-   "i_subcap_mAcm2": 13.198079133245413,
+   "i_ec_mAcm2": 14.013513302336348,
+   "i_subcap_mAcm2": 17.749932097401988,
    "path": "c-control"
   },
   {
@@ -608,8 +609,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 0.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 2.522551437659084,
-   "i_subcap_mAcm2": 38.22163716987871,
+   "i_ec_mAcm2": 1.261275718829542,
+   "i_subcap_mAcm2": 51.40380335407615,
    "path": "direct-ramp"
   },
   {
@@ -617,8 +618,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 2.5651916974537485,
-   "i_subcap_mAcm2": 38.22163716987871,
+   "i_ec_mAcm2": 1.2828797406907388,
+   "i_subcap_mAcm2": 51.40380335407615,
    "path": "c-control"
   },
   {
@@ -626,8 +627,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 2.9352638401627407,
-   "i_subcap_mAcm2": 38.22163716987871,
+   "i_ec_mAcm2": 1.4713526700794182,
+   "i_subcap_mAcm2": 51.40380335407615,
    "path": "c-control"
   },
   {
@@ -635,17 +636,17 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 100.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 5.631502397467713,
-   "i_subcap_mAcm2": 38.22163716987871,
-   "path": "c-control"
+   "i_ec_mAcm2": 2.9046537944453945,
+   "i_subcap_mAcm2": 51.40380335407615,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 14.884830670295152,
-   "i_subcap_mAcm2": 38.22163716987871,
+   "i_ec_mAcm2": 8.449902725569848,
+   "i_subcap_mAcm2": 51.40380335407615,
    "path": "direct-ramp"
   },
   {
@@ -653,8 +654,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 30.319556949009776,
-   "i_subcap_mAcm2": 38.22163716987871,
+   "i_ec_mAcm2": 22.283836288252942,
+   "i_subcap_mAcm2": 51.40380335407615,
    "path": "direct-ramp"
   },
   {
@@ -662,8 +663,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 0.0,
    "delta_um": 8.99802898726582,
-   "i_ec_mAcm2": 3.5043111125073154,
-   "i_subcap_mAcm2": 53.09723555010032,
+   "i_ec_mAcm2": 1.7521555562536577,
+   "i_subcap_mAcm2": 71.40981017457237,
    "path": "direct-ramp"
   },
   {
@@ -671,8 +672,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1.0,
    "delta_um": 8.99802898726582,
-   "i_ec_mAcm2": 3.5370872102080853,
-   "i_subcap_mAcm2": 53.09723555010032,
+   "i_ec_mAcm2": 1.7685436051040426,
+   "i_subcap_mAcm2": 71.40981017457237,
    "path": "direct-ramp"
   },
   {
@@ -680,8 +681,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 10.0,
    "delta_um": 8.99802898726582,
-   "i_ec_mAcm2": 3.8074900162394374,
-   "i_subcap_mAcm2": 53.09723555010032,
+   "i_ec_mAcm2": 1.907842020332315,
+   "i_subcap_mAcm2": 71.40981017457237,
    "path": "direct-ramp"
   },
   {
@@ -689,8 +690,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 100.0,
    "delta_um": 8.99802898726582,
-   "i_ec_mAcm2": 6.064882290196774,
-   "i_subcap_mAcm2": 53.09723555010032,
+   "i_ec_mAcm2": 3.0860281187583447,
+   "i_subcap_mAcm2": 71.40981017457237,
    "path": "direct-ramp"
   },
   {
@@ -698,8 +699,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1000.0,
    "delta_um": 8.99802898726582,
-   "i_ec_mAcm2": 15.867512273426918,
-   "i_subcap_mAcm2": 53.09723555010032,
+   "i_ec_mAcm2": 8.666357852401623,
+   "i_subcap_mAcm2": 71.40981017457237,
    "path": "direct-ramp"
   },
   {
@@ -707,8 +708,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 10000.0,
    "delta_um": 8.99802898726582,
-   "i_ec_mAcm2": 36.01243092174189,
-   "i_subcap_mAcm2": 53.09723555010032,
+   "i_ec_mAcm2": 24.066731869787496,
+   "i_subcap_mAcm2": 71.40981017457237,
    "path": "direct-ramp"
   },
   {
@@ -716,8 +717,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 0.0,
    "delta_um": 8.751810133479612,
-   "i_ec_mAcm2": 3.602899570468843,
-   "i_subcap_mAcm2": 54.59104543365228,
+   "i_ec_mAcm2": 1.8014497852344216,
+   "i_subcap_mAcm2": 73.41881646494117,
    "path": "direct-ramp"
   },
   {
@@ -725,8 +726,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1.0,
    "delta_um": 8.751810133479612,
-   "i_ec_mAcm2": 3.636597773777983,
-   "i_subcap_mAcm2": 54.59104543365228,
+   "i_ec_mAcm2": 1.8182988868889916,
+   "i_subcap_mAcm2": 73.41881646494117,
    "path": "direct-ramp"
   },
   {
@@ -734,8 +735,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10.0,
    "delta_um": 8.751810133479612,
-   "i_ec_mAcm2": 3.8977588494238145,
-   "i_subcap_mAcm2": 54.59104543365228,
+   "i_ec_mAcm2": 1.9530917001255497,
+   "i_subcap_mAcm2": 73.41881646494117,
    "path": "direct-ramp"
   },
   {
@@ -743,17 +744,17 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 100.0,
    "delta_um": 8.751810133479612,
-   "i_ec_mAcm2": 6.120194321209145,
-   "i_subcap_mAcm2": 54.59104543365228,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 3.105624923542164,
+   "i_subcap_mAcm2": 73.41881646494117,
+   "path": "c-control"
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1000.0,
    "delta_um": 8.751810133479612,
-   "i_ec_mAcm2": 15.939018499056395,
-   "i_subcap_mAcm2": 54.59104543365228,
+   "i_ec_mAcm2": 8.675006789650368,
+   "i_subcap_mAcm2": 73.41881646494117,
    "path": "direct-ramp"
   },
   {
@@ -761,8 +762,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10000.0,
    "delta_um": 8.751810133479612,
-   "i_ec_mAcm2": 36.47374956938055,
-   "i_subcap_mAcm2": 54.59104543365228,
+   "i_ec_mAcm2": 24.170395721706964,
+   "i_subcap_mAcm2": 73.41881646494117,
    "path": "direct-ramp"
   },
   {
@@ -771,7 +772,7 @@
    "k_M": 0.0,
    "delta_um": 228.0,
    "i_ec_mAcm2": 0.1633918279463977,
-   "i_subcap_mAcm2": 4.3164490631578945,
+   "i_subcap_mAcm2": 6.469062210954736,
    "path": "direct-ramp"
   },
   {
@@ -779,17 +780,17 @@
    "reactor": "Unstirred batch",
    "k_M": 1.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.2496881171184312,
-   "i_subcap_mAcm2": 4.3164490631578945,
-   "path": "c-control"
+   "i_ec_mAcm2": 0.2502417161775114,
+   "i_subcap_mAcm2": 6.469062210954736,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Mn-catalyzed alkene diazidation",
    "reactor": "Unstirred batch",
    "k_M": 10.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.654089374299371,
-   "i_subcap_mAcm2": 4.3164490631578945,
+   "i_ec_mAcm2": 0.6656479399547982,
+   "i_subcap_mAcm2": 6.469062210954736,
    "path": "direct-ramp"
   },
   {
@@ -797,8 +798,8 @@
    "reactor": "Unstirred batch",
    "k_M": 100.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 1.747040975154375,
-   "i_subcap_mAcm2": 4.3164490631578945,
+   "i_ec_mAcm2": 1.8775327805973516,
+   "i_subcap_mAcm2": 6.469062210954736,
    "path": "direct-ramp"
   },
   {
@@ -806,8 +807,8 @@
    "reactor": "Unstirred batch",
    "k_M": 1000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 3.429094529590197,
-   "i_subcap_mAcm2": 4.3164490631578945,
+   "i_ec_mAcm2": 4.222307283003503,
+   "i_subcap_mAcm2": 6.469062210954736,
    "path": "c-control"
   },
   {
@@ -815,8 +816,8 @@
    "reactor": "Unstirred batch",
    "k_M": 10000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 4.323381173031922,
-   "i_subcap_mAcm2": 4.3164490631578945,
+   "i_ec_mAcm2": 6.131968965671061,
+   "i_subcap_mAcm2": 6.469062210954736,
    "path": "c-control"
   },
   {
@@ -825,7 +826,7 @@
    "k_M": 0.0,
    "delta_um": 200.0,
    "i_ec_mAcm2": 0.1862666838588934,
-   "i_subcap_mAcm2": 4.920751932,
+   "i_subcap_mAcm2": 7.3747309204884,
    "path": "direct-ramp"
   },
   {
@@ -833,17 +834,17 @@
    "reactor": "Stirred batch",
    "k_M": 1.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.2641938118620888,
-   "i_subcap_mAcm2": 4.920751932,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 0.2642906688444853,
+   "i_subcap_mAcm2": 7.3747309204884,
+   "path": "c-control"
   },
   {
    "reaction": "Mn-catalyzed alkene diazidation",
    "reactor": "Stirred batch",
    "k_M": 10.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.6602009718690661,
-   "i_subcap_mAcm2": 4.920751932,
+   "i_ec_mAcm2": 0.6706324577905742,
+   "i_subcap_mAcm2": 7.3747309204884,
    "path": "c-control"
   },
   {
@@ -851,17 +852,17 @@
    "reactor": "Stirred batch",
    "k_M": 100.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 1.800071891521613,
-   "i_subcap_mAcm2": 4.920751932,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 1.915256513793472,
+   "i_subcap_mAcm2": 7.3747309204884,
+   "path": "c-control"
   },
   {
    "reaction": "Mn-catalyzed alkene diazidation",
    "reactor": "Stirred batch",
    "k_M": 1000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 3.70600176871612,
-   "i_subcap_mAcm2": 4.920751932,
+   "i_ec_mAcm2": 4.475348118976011,
+   "i_subcap_mAcm2": 7.3747309204884,
    "path": "c-control"
   },
   {
@@ -869,8 +870,8 @@
    "reactor": "Stirred batch",
    "k_M": 10000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 4.875448153344882,
-   "i_subcap_mAcm2": 4.920751932,
+   "i_ec_mAcm2": 6.84699686008717,
+   "i_subcap_mAcm2": 7.3747309204884,
    "path": "c-control"
   },
   {
@@ -879,7 +880,7 @@
    "k_M": 0.0,
    "delta_um": 106.9,
    "i_ec_mAcm2": 0.3484877153580794,
-   "i_subcap_mAcm2": 9.20627115434986,
+   "i_subcap_mAcm2": 13.797438579024137,
    "path": "direct-ramp"
   },
   {
@@ -888,7 +889,7 @@
    "k_M": 1.0,
    "delta_um": 106.9,
    "i_ec_mAcm2": 0.39330491959353,
-   "i_subcap_mAcm2": 9.20627115434986,
+   "i_subcap_mAcm2": 13.797438579024137,
    "path": "direct-ramp"
   },
   {
@@ -896,8 +897,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.7091281261193478,
-   "i_subcap_mAcm2": 9.20627115434986,
+   "i_ec_mAcm2": 0.7124060681507162,
+   "i_subcap_mAcm2": 13.797438579024137,
    "path": "direct-ramp"
   },
   {
@@ -905,17 +906,17 @@
    "reactor": "Recirculating flow cell",
    "k_M": 100.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 1.9876815743929932,
-   "i_subcap_mAcm2": 9.20627115434986,
-   "path": "c-control"
+   "i_ec_mAcm2": 2.051963341715829,
+   "i_subcap_mAcm2": 13.797438579024137,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Mn-catalyzed alkene diazidation",
    "reactor": "Recirculating flow cell",
    "k_M": 1000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 4.918916768655389,
-   "i_subcap_mAcm2": 9.20627115434986,
+   "i_ec_mAcm2": 5.483099424219863,
+   "i_subcap_mAcm2": 13.797438579024137,
    "path": "c-control"
   },
   {
@@ -923,8 +924,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 8.264980306924706,
-   "i_subcap_mAcm2": 9.20627115434986,
+   "i_ec_mAcm2": 10.79415883104826,
+   "i_subcap_mAcm2": 13.797438579024137,
    "path": "c-control"
   },
   {
@@ -933,7 +934,7 @@
    "k_M": 0.0,
    "delta_um": 36.2,
    "i_ec_mAcm2": 1.029097700877864,
-   "i_subcap_mAcm2": 27.186474762430944,
+   "i_subcap_mAcm2": 40.74436972645525,
    "path": "direct-ramp"
   },
   {
@@ -942,7 +943,7 @@
    "k_M": 1.0,
    "delta_um": 36.2,
    "i_ec_mAcm2": 1.0459418565430512,
-   "i_subcap_mAcm2": 27.186474762430944,
+   "i_subcap_mAcm2": 40.74436972645525,
    "path": "direct-ramp"
   },
   {
@@ -950,17 +951,17 @@
    "reactor": "ANEC flow cell",
    "k_M": 10.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 1.1784967896022245,
-   "i_subcap_mAcm2": 27.186474762430944,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.1806951018645484,
+   "i_subcap_mAcm2": 40.74436972645525,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Mn-catalyzed alkene diazidation",
    "reactor": "ANEC flow cell",
    "k_M": 100.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 2.2150814011484576,
-   "i_subcap_mAcm2": 27.186474762430944,
+   "i_ec_mAcm2": 2.2296012355332615,
+   "i_subcap_mAcm2": 40.74436972645525,
    "path": "direct-ramp"
   },
   {
@@ -968,8 +969,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 1000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 6.239767997033702,
-   "i_subcap_mAcm2": 27.186474762430944,
+   "i_ec_mAcm2": 6.450263609313277,
+   "i_subcap_mAcm2": 40.74436972645525,
    "path": "direct-ramp"
   },
   {
@@ -977,9 +978,9 @@
    "reactor": "ANEC flow cell",
    "k_M": 10000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 15.193819884923863,
-   "i_subcap_mAcm2": 27.186474762430944,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 17.049731556120285,
+   "i_subcap_mAcm2": 40.74436972645525,
+   "path": "c-control"
   },
   {
    "reaction": "Mn-catalyzed alkene diazidation",
@@ -987,7 +988,7 @@
    "k_M": 0.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 2.9802669417422956,
-   "i_subcap_mAcm2": 78.732030912,
+   "i_subcap_mAcm2": 117.9956947278144,
    "path": "direct-ramp"
   },
   {
@@ -996,7 +997,7 @@
    "k_M": 1.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 2.9872356095717785,
-   "i_subcap_mAcm2": 78.732030912,
+   "i_subcap_mAcm2": 117.9956947278144,
    "path": "direct-ramp"
   },
   {
@@ -1005,7 +1006,7 @@
    "k_M": 10.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 3.0360162843781606,
-   "i_subcap_mAcm2": 78.732030912,
+   "i_subcap_mAcm2": 117.9956947278144,
    "path": "direct-ramp"
   },
   {
@@ -1013,17 +1014,17 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 100.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 3.4935137925342263,
-   "i_subcap_mAcm2": 78.732030912,
-   "path": "c-control"
+   "i_ec_mAcm2": 3.49943269503879,
+   "i_subcap_mAcm2": 117.9956947278144,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Mn-catalyzed alkene diazidation",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 6.910942295676401,
-   "i_subcap_mAcm2": 78.732030912,
+   "i_ec_mAcm2": 6.959088354922392,
+   "i_subcap_mAcm2": 117.9956947278144,
    "path": "c-control"
   },
   {
@@ -1031,9 +1032,9 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 19.494621342576284,
-   "i_subcap_mAcm2": 78.732030912,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 20.22891243818653,
+   "i_subcap_mAcm2": 117.9956947278144,
+   "path": "c-control"
   },
   {
    "reaction": "Mn-catalyzed alkene diazidation",
@@ -1041,7 +1042,7 @@
    "k_M": 0.0,
    "delta_um": 12.521638106453118,
    "i_ec_mAcm2": 2.9751168700986437,
-   "i_subcap_mAcm2": 78.59597746183152,
+   "i_subcap_mAcm2": 117.7917914220469,
    "path": "direct-ramp"
   },
   {
@@ -1050,7 +1051,7 @@
    "k_M": 1.0,
    "delta_um": 12.521638106453118,
    "i_ec_mAcm2": 2.9820734956717505,
-   "i_subcap_mAcm2": 78.59597746183152,
+   "i_subcap_mAcm2": 117.7917914220469,
    "path": "direct-ramp"
   },
   {
@@ -1059,7 +1060,7 @@
    "k_M": 10.0,
    "delta_um": 12.521638106453118,
    "i_ec_mAcm2": 3.0307698746834975,
-   "i_subcap_mAcm2": 78.59597746183152,
+   "i_subcap_mAcm2": 117.7917914220469,
    "path": "direct-ramp"
   },
   {
@@ -1068,7 +1069,7 @@
    "k_M": 100.0,
    "delta_um": 12.521638106453118,
    "i_ec_mAcm2": 3.493385475295094,
-   "i_subcap_mAcm2": 78.59597746183152,
+   "i_subcap_mAcm2": 117.7917914220469,
    "path": "direct-ramp"
   },
   {
@@ -1076,8 +1077,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1000.0,
    "delta_um": 12.521638106453118,
-   "i_ec_mAcm2": 6.913808300722812,
-   "i_subcap_mAcm2": 78.59597746183152,
+   "i_ec_mAcm2": 6.962081593745703,
+   "i_subcap_mAcm2": 117.7917914220469,
    "path": "direct-ramp"
   },
   {
@@ -1085,8 +1086,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 10000.0,
    "delta_um": 12.521638106453118,
-   "i_ec_mAcm2": 19.50373616218957,
-   "i_subcap_mAcm2": 78.59597746183152,
+   "i_ec_mAcm2": 20.23138103729686,
+   "i_subcap_mAcm2": 117.7917914220469,
    "path": "direct-ramp"
   },
   {
@@ -1095,7 +1096,7 @@
    "k_M": 0.0,
    "delta_um": 10.33676269222064,
    "i_ec_mAcm2": 3.6039655626238982,
-   "i_subcap_mAcm2": 95.20876271452602,
+   "i_subcap_mAcm2": 142.6893726802601,
    "path": "direct-ramp"
   },
   {
@@ -1104,7 +1105,7 @@
    "k_M": 1.0,
    "delta_um": 10.33676269222064,
    "i_ec_mAcm2": 3.6123926060283185,
-   "i_subcap_mAcm2": 95.20876271452602,
+   "i_subcap_mAcm2": 142.6893726802601,
    "path": "direct-ramp"
   },
   {
@@ -1112,8 +1113,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10.0,
    "delta_um": 10.33676269222064,
-   "i_ec_mAcm2": 3.6478315386598337,
-   "i_subcap_mAcm2": 95.20876271452602,
+   "i_ec_mAcm2": 3.6478369288948,
+   "i_subcap_mAcm2": 142.6893726802601,
    "path": "c-control"
   },
   {
@@ -1121,8 +1122,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 100.0,
    "delta_um": 10.33676269222064,
-   "i_ec_mAcm2": 4.034005168104612,
-   "i_subcap_mAcm2": 95.20876271452602,
+   "i_ec_mAcm2": 4.0345528743902035,
+   "i_subcap_mAcm2": 142.6893726802601,
    "path": "c-control"
   },
   {
@@ -1130,396 +1131,396 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1000.0,
    "delta_um": 10.33676269222064,
-   "i_ec_mAcm2": 7.130171672526024,
-   "i_subcap_mAcm2": 95.20876271452602,
-   "path": "c-control"
+   "i_ec_mAcm2": 7.1729564372317896,
+   "i_subcap_mAcm2": 142.6893726802601,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Mn-catalyzed alkene diazidation",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10000.0,
    "delta_um": 10.33676269222064,
-   "i_ec_mAcm2": 19.958418979502113,
-   "i_subcap_mAcm2": 95.20876271452602,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 20.55782379214751,
+   "i_subcap_mAcm2": 142.6893726802601,
+   "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Unstirred batch",
    "k_M": 0.0,
    "delta_um": 228.0,
    "i_ec_mAcm2": 0.1658943355114886,
-   "i_subcap_mAcm2": 2.792996452631579,
+   "i_subcap_mAcm2": 3.685079519602106,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Unstirred batch",
    "k_M": 1.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.2368374382843429,
-   "i_subcap_mAcm2": 2.792996452631579,
+   "i_ec_mAcm2": 0.2373504435658252,
+   "i_subcap_mAcm2": 3.685079519602106,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Unstirred batch",
    "k_M": 10.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.5810445332229909,
-   "i_subcap_mAcm2": 2.792996452631579,
+   "i_ec_mAcm2": 0.5917833753448454,
+   "i_subcap_mAcm2": 3.685079519602106,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Unstirred batch",
    "k_M": 100.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 1.4603668710806303,
-   "i_subcap_mAcm2": 2.792996452631579,
-   "path": "direct-ramp"
-  },
-  {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
-   "reactor": "Unstirred batch",
-   "k_M": 1000.0,
-   "delta_um": 228.0,
-   "i_ec_mAcm2": 2.5224574384123475,
-   "i_subcap_mAcm2": 2.792996452631579,
+   "i_ec_mAcm2": 1.564228649998804,
+   "i_subcap_mAcm2": 3.685079519602106,
    "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
+   "reactor": "Unstirred batch",
+   "k_M": 1000.0,
+   "delta_um": 228.0,
+   "i_ec_mAcm2": 3.0137222480336296,
+   "i_subcap_mAcm2": 3.685079519602106,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Unstirred batch",
    "k_M": 10000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 2.9119247102939756,
-   "i_subcap_mAcm2": 2.792996452631579,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 3.7336953587441544,
+   "i_subcap_mAcm2": 3.685079519602106,
+   "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Stirred batch",
    "k_M": 0.0,
    "delta_um": 200.0,
    "i_ec_mAcm2": 0.1891195424830969,
-   "i_subcap_mAcm2": 3.1840159559999996,
+   "i_subcap_mAcm2": 4.2009906523464,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Stirred batch",
    "k_M": 1.0,
    "delta_um": 200.0,
    "i_ec_mAcm2": 0.2530347250383449,
-   "i_subcap_mAcm2": 3.1840159559999996,
+   "i_subcap_mAcm2": 4.2009906523464,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Stirred batch",
    "k_M": 10.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.590695647321453,
-   "i_subcap_mAcm2": 3.1840159559999996,
+   "i_ec_mAcm2": 0.5988120760632745,
+   "i_subcap_mAcm2": 4.2009906523464,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Stirred batch",
    "k_M": 100.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 1.519634234762251,
-   "i_subcap_mAcm2": 3.1840159559999996,
+   "i_ec_mAcm2": 1.6144418888047278,
+   "i_subcap_mAcm2": 4.2009906523464,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Stirred batch",
    "k_M": 1000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 2.769218555041954,
-   "i_subcap_mAcm2": 3.1840159559999996,
+   "i_ec_mAcm2": 3.2660864038864297,
+   "i_subcap_mAcm2": 4.2009906523464,
    "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Stirred batch",
    "k_M": 10000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 3.2988314170544104,
-   "i_subcap_mAcm2": 3.1840159559999996,
+   "i_ec_mAcm2": 4.215785268323357,
+   "i_subcap_mAcm2": 4.2009906523464,
    "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Recirculating flow cell",
    "k_M": 0.0,
    "delta_um": 106.9,
    "i_ec_mAcm2": 0.3538251496409674,
-   "i_subcap_mAcm2": 5.95699898222638,
+   "i_subcap_mAcm2": 7.859664457149485,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Recirculating flow cell",
    "k_M": 1.0,
    "delta_um": 106.9,
    "i_ec_mAcm2": 0.3902280489025478,
-   "i_subcap_mAcm2": 5.95699898222638,
+   "i_subcap_mAcm2": 7.859664457149485,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Recirculating flow cell",
    "k_M": 10.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.6535708881255778,
-   "i_subcap_mAcm2": 5.95699898222638,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 0.6553851440988343,
+   "i_subcap_mAcm2": 7.859664457149485,
+   "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Recirculating flow cell",
    "k_M": 100.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 1.742360658785025,
-   "i_subcap_mAcm2": 5.95699898222638,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 1.7933070562550726,
+   "i_subcap_mAcm2": 7.859664457149485,
+   "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Recirculating flow cell",
    "k_M": 1000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 3.96201792518672,
-   "i_subcap_mAcm2": 5.95699898222638,
-   "path": "c-control"
+   "i_ec_mAcm2": 4.388985414455688,
+   "i_subcap_mAcm2": 7.859664457149485,
+   "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Recirculating flow cell",
    "k_M": 10000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 5.829530642550625,
-   "i_subcap_mAcm2": 5.95699898222638,
+   "i_ec_mAcm2": 7.205121561717188,
+   "i_subcap_mAcm2": 7.859664457149485,
    "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "ANEC flow cell",
    "k_M": 0.0,
    "delta_um": 36.2,
    "i_ec_mAcm2": 1.0448593507353423,
-   "i_subcap_mAcm2": 17.591248375690608,
+   "i_subcap_mAcm2": 23.209893106886188,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "ANEC flow cell",
    "k_M": 1.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 1.0573278120112255,
-   "i_subcap_mAcm2": 17.591248375690608,
+   "i_ec_mAcm2": 1.0573295199009518,
+   "i_subcap_mAcm2": 23.209893106886188,
    "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "ANEC flow cell",
    "k_M": 10.0,
    "delta_um": 36.2,
    "i_ec_mAcm2": 1.1670174977425922,
-   "i_subcap_mAcm2": 17.591248375690608,
+   "i_subcap_mAcm2": 23.209893106886188,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "ANEC flow cell",
    "k_M": 100.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 2.0325746829069895,
-   "i_subcap_mAcm2": 17.591248375690608,
-   "path": "direct-ramp"
-  },
-  {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
-   "reactor": "ANEC flow cell",
-   "k_M": 1000.0,
-   "delta_um": 36.2,
-   "i_ec_mAcm2": 5.442510968782199,
-   "i_subcap_mAcm2": 17.591248375690608,
+   "i_ec_mAcm2": 2.041791136967867,
+   "i_subcap_mAcm2": 23.209893106886188,
    "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "ANEC flow cell",
-   "k_M": 10000.0,
+   "k_M": 1000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 12.137919048676206,
-   "i_subcap_mAcm2": 17.591248375690608,
+   "i_ec_mAcm2": 5.629473449811555,
+   "i_subcap_mAcm2": 23.209893106886188,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
+   "reactor": "ANEC flow cell",
+   "k_M": 10000.0,
+   "delta_um": 36.2,
+   "i_ec_mAcm2": 13.535313411355933,
+   "i_subcap_mAcm2": 23.209893106886188,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 0.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 3.0259126797295512,
-   "i_subcap_mAcm2": 50.944255295999994,
+   "i_subcap_mAcm2": 67.2158504375424,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 3.0329880796042112,
-   "i_subcap_mAcm2": 50.944255295999994,
+   "i_subcap_mAcm2": 67.2158504375424,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 3.0683650789775108,
-   "i_subcap_mAcm2": 50.944255295999994,
+   "i_subcap_mAcm2": 67.2158504375424,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 100.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 3.443509258937843,
-   "i_subcap_mAcm2": 50.944255295999994,
+   "i_ec_mAcm2": 3.4442111735234415,
+   "i_subcap_mAcm2": 67.2158504375424,
    "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 6.313889719398757,
-   "i_subcap_mAcm2": 50.944255295999994,
+   "i_ec_mAcm2": 6.356583188575758,
+   "i_subcap_mAcm2": 67.2158504375424,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 16.946492812390613,
-   "i_subcap_mAcm2": 50.944255295999994,
+   "i_ec_mAcm2": 17.590030514126965,
+   "i_subcap_mAcm2": 67.2158504375424,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "RDE 1600 rpm",
    "k_M": 0.0,
    "delta_um": 11.623797242880606,
    "i_ec_mAcm2": 3.254006217270002,
-   "i_subcap_mAcm2": 54.7844372965153,
+   "i_subcap_mAcm2": 72.28258656902229,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "RDE 1600 rpm",
    "k_M": 1.0,
    "delta_um": 11.623797242880606,
    "i_ec_mAcm2": 3.261614961347796,
-   "i_subcap_mAcm2": 54.7844372965153,
+   "i_subcap_mAcm2": 72.28258656902229,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "RDE 1600 rpm",
    "k_M": 10.0,
    "delta_um": 11.623797242880606,
-   "i_ec_mAcm2": 3.2939353655074175,
-   "i_subcap_mAcm2": 54.7844372965153,
+   "i_ec_mAcm2": 3.2939410184046896,
+   "i_subcap_mAcm2": 72.28258656902229,
    "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "RDE 1600 rpm",
    "k_M": 100.0,
    "delta_um": 11.623797242880606,
    "i_ec_mAcm2": 3.649660909315301,
-   "i_subcap_mAcm2": 54.7844372965153,
+   "i_subcap_mAcm2": 72.28258656902229,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "RDE 1600 rpm",
    "k_M": 1000.0,
    "delta_um": 11.623797242880606,
-   "i_ec_mAcm2": 6.409895222666569,
-   "i_subcap_mAcm2": 54.7844372965153,
+   "i_ec_mAcm2": 6.436510704559993,
+   "i_subcap_mAcm2": 72.28258656902229,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "RDE 1600 rpm",
    "k_M": 10000.0,
    "delta_um": 11.623797242880606,
-   "i_ec_mAcm2": 17.16318276951058,
-   "i_subcap_mAcm2": 54.7844372965153,
+   "i_ec_mAcm2": 17.739452788827105,
+   "i_subcap_mAcm2": 72.28258656902229,
    "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 0.0,
    "delta_um": 9.547158477182505,
    "i_ec_mAcm2": 3.9617974905326743,
-   "i_subcap_mAcm2": 66.70080869841486,
+   "i_subcap_mAcm2": 88.00504699668858,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1.0,
    "delta_um": 9.547158477182505,
-   "i_ec_mAcm2": 3.963615869108738,
-   "i_subcap_mAcm2": 66.70080869841486,
+   "i_ec_mAcm2": 3.963615890515942,
+   "i_subcap_mAcm2": 88.00504699668858,
    "path": "c-control"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10.0,
    "delta_um": 9.547158477182505,
    "i_ec_mAcm2": 3.9988524943412416,
-   "i_subcap_mAcm2": 66.70080869841486,
+   "i_subcap_mAcm2": 88.00504699668858,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 100.0,
    "delta_um": 9.547158477182505,
    "i_ec_mAcm2": 4.28602877385764,
-   "i_subcap_mAcm2": 66.70080869841486,
+   "i_subcap_mAcm2": 88.00504699668858,
    "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1000.0,
    "delta_um": 9.547158477182505,
-   "i_ec_mAcm2": 6.731954160788755,
-   "i_subcap_mAcm2": 66.70080869841486,
-   "path": "c-control"
+   "i_ec_mAcm2": 6.758027134339494,
+   "i_subcap_mAcm2": 88.00504699668858,
+   "path": "direct-ramp"
   },
   {
-   "reaction": "Co-catalyzed aza-Wacker cyclization",
+   "reaction": "Co-catalyzed allylic C-H amination",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10000.0,
    "delta_um": 9.547158477182505,
-   "i_ec_mAcm2": 17.71414725480754,
-   "i_subcap_mAcm2": 66.70080869841486,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 18.16851266524943,
+   "i_subcap_mAcm2": 88.00504699668858,
+   "path": "c-control"
   },
   {
    "reaction": "Co-H alkene reduction (e-HAT)",
@@ -1527,7 +1528,7 @@
    "k_M": 0.0,
    "delta_um": 228.0,
    "i_ec_mAcm2": 0.3254517034616813,
-   "i_subcap_mAcm2": 5.479083950138504,
+   "i_subcap_mAcm2": 4.376371532505263,
    "path": "direct-ramp"
   },
   {
@@ -1535,17 +1536,17 @@
    "reactor": "Unstirred batch",
    "k_M": 1.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.6821509710624691,
-   "i_subcap_mAcm2": 5.479083950138504,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 0.5251727426025258,
+   "i_subcap_mAcm2": 4.376371532505263,
+   "path": "c-control"
   },
   {
    "reaction": "Co-H alkene reduction (e-HAT)",
    "reactor": "Unstirred batch",
    "k_M": 10.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 1.8348926816557776,
-   "i_subcap_mAcm2": 5.479083950138504,
+   "i_ec_mAcm2": 1.3381841684540074,
+   "i_subcap_mAcm2": 4.376371532505263,
    "path": "direct-ramp"
   },
   {
@@ -1553,17 +1554,17 @@
    "reactor": "Unstirred batch",
    "k_M": 100.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 3.962271174569536,
-   "i_subcap_mAcm2": 5.479083950138504,
-   "path": "c-control"
+   "i_ec_mAcm2": 3.0135635462509733,
+   "i_subcap_mAcm2": 4.376371532505263,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene reduction (e-HAT)",
    "reactor": "Unstirred batch",
    "k_M": 1000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 5.4757432037035825,
-   "i_subcap_mAcm2": 5.479083950138504,
+   "i_ec_mAcm2": 4.368146694099592,
+   "i_subcap_mAcm2": 4.376371532505263,
    "path": "c-control"
   },
   {
@@ -1571,8 +1572,8 @@
    "reactor": "Unstirred batch",
    "k_M": 10000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 5.775187841922785,
-   "i_subcap_mAcm2": 5.479083950138504,
+   "i_ec_mAcm2": 4.67363175025208,
+   "i_subcap_mAcm2": 4.376371532505263,
    "path": "c-control"
   },
   {
@@ -1581,7 +1582,7 @@
    "k_M": 0.0,
    "delta_um": 200.0,
    "i_ec_mAcm2": 0.3710149419463166,
-   "i_subcap_mAcm2": 6.2461557031578945,
+   "i_subcap_mAcm2": 4.989063547055999,
    "path": "direct-ramp"
   },
   {
@@ -1589,35 +1590,35 @@
    "reactor": "Stirred batch",
    "k_M": 1.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.7007267906371358,
-   "i_subcap_mAcm2": 6.2461557031578945,
-   "path": "c-control"
+   "i_ec_mAcm2": 0.5526221291864265,
+   "i_subcap_mAcm2": 4.989063547055999,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene reduction (e-HAT)",
    "reactor": "Stirred batch",
    "k_M": 10.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 1.8759493379618069,
-   "i_subcap_mAcm2": 6.2461557031578945,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.3662221429624262,
+   "i_subcap_mAcm2": 4.989063547055999,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene reduction (e-HAT)",
    "reactor": "Stirred batch",
    "k_M": 100.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 4.225983528305593,
-   "i_subcap_mAcm2": 6.2461557031578945,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 3.1892356600213723,
+   "i_subcap_mAcm2": 4.989063547055999,
+   "path": "c-control"
   },
   {
    "reaction": "Co-H alkene reduction (e-HAT)",
    "reactor": "Stirred batch",
    "k_M": 1000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 6.138123254552361,
-   "i_subcap_mAcm2": 6.2461557031578945,
+   "i_ec_mAcm2": 4.8795865538289735,
+   "i_subcap_mAcm2": 4.989063547055999,
    "path": "c-control"
   },
   {
@@ -1625,8 +1626,8 @@
    "reactor": "Stirred batch",
    "k_M": 10000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 6.57325484237629,
-   "i_subcap_mAcm2": 6.2461557031578945,
+   "i_ec_mAcm2": 5.316404607522273,
+   "i_subcap_mAcm2": 4.989063547055999,
    "path": "c-control"
   },
   {
@@ -1635,7 +1636,7 @@
    "k_M": 0.0,
    "delta_um": 106.9,
    "i_ec_mAcm2": 0.6941345967190212,
-   "i_subcap_mAcm2": 11.685978864654622,
+   "i_subcap_mAcm2": 9.334075859786717,
    "path": "direct-ramp"
   },
   {
@@ -1643,8 +1644,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 1.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.8990476742773446,
-   "i_subcap_mAcm2": 11.685978864654622,
+   "i_ec_mAcm2": 0.8001213211907721,
+   "i_subcap_mAcm2": 9.334075859786717,
    "path": "direct-ramp"
   },
   {
@@ -1652,8 +1653,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 2.0368582879816155,
-   "i_subcap_mAcm2": 11.685978864654622,
+   "i_ec_mAcm2": 1.5011396211143997,
+   "i_subcap_mAcm2": 9.334075859786717,
    "path": "c-control"
   },
   {
@@ -1661,26 +1662,26 @@
    "reactor": "Recirculating flow cell",
    "k_M": 100.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 5.30196153683583,
-   "i_subcap_mAcm2": 11.685978864654622,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 3.906677867161941,
+   "i_subcap_mAcm2": 9.334075859786717,
+   "path": "c-control"
   },
   {
    "reaction": "Co-H alkene reduction (e-HAT)",
    "reactor": "Recirculating flow cell",
    "k_M": 1000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 9.93186138302172,
-   "i_subcap_mAcm2": 11.685978864654622,
-   "path": "c-control"
+   "i_ec_mAcm2": 7.696827895008754,
+   "i_subcap_mAcm2": 9.334075859786717,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene reduction (e-HAT)",
    "reactor": "Recirculating flow cell",
    "k_M": 10000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 12.062429581153488,
-   "i_subcap_mAcm2": 11.685978864654622,
+   "i_ec_mAcm2": 9.702309715693149,
+   "i_subcap_mAcm2": 9.334075859786717,
    "path": "c-control"
   },
   {
@@ -1689,7 +1690,7 @@
    "k_M": 0.0,
    "delta_um": 36.2,
    "i_ec_mAcm2": 2.0498063090956733,
-   "i_subcap_mAcm2": 34.50914753125909,
+   "i_subcap_mAcm2": 27.563887000309393,
    "path": "direct-ramp"
   },
   {
@@ -1697,8 +1698,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 1.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 2.1264943081888865,
-   "i_subcap_mAcm2": 34.50914753125909,
+   "i_ec_mAcm2": 2.08815030864228,
+   "i_subcap_mAcm2": 27.563887000309393,
    "path": "direct-ramp"
   },
   {
@@ -1706,8 +1707,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 10.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 2.736223813479221,
-   "i_subcap_mAcm2": 34.50914753125909,
+   "i_ec_mAcm2": 2.406884804873447,
+   "i_subcap_mAcm2": 27.563887000309393,
    "path": "direct-ramp"
   },
   {
@@ -1715,27 +1716,27 @@
    "reactor": "ANEC flow cell",
    "k_M": 100.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 6.389821117432545,
-   "i_subcap_mAcm2": 34.50914753125909,
-   "path": "c-control"
+   "i_ec_mAcm2": 4.69167831103846,
+   "i_subcap_mAcm2": 27.563887000309393,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene reduction (e-HAT)",
    "reactor": "ANEC flow cell",
    "k_M": 1000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 16.443892396496455,
-   "i_subcap_mAcm2": 34.50914753125909,
-   "path": "c-control"
+   "i_ec_mAcm2": 12.146588850246255,
+   "i_subcap_mAcm2": 27.563887000309393,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene reduction (e-HAT)",
    "reactor": "ANEC flow cell",
    "k_M": 10000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 29.990929877976612,
-   "i_subcap_mAcm2": 34.50914753125909,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 23.30576051027563,
+   "i_subcap_mAcm2": 27.563887000309393,
+   "path": "c-control"
   },
   {
    "reaction": "Co-H alkene reduction (e-HAT)",
@@ -1743,7 +1744,7 @@
    "k_M": 0.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 5.936239071141066,
-   "i_subcap_mAcm2": 99.93849125052633,
+   "i_subcap_mAcm2": 79.82501675289599,
    "path": "direct-ramp"
   },
   {
@@ -1751,8 +1752,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 5.9640001268128096,
-   "i_subcap_mAcm2": 99.93849125052633,
+   "i_ec_mAcm2": 5.950119598976937,
+   "i_subcap_mAcm2": 79.82501675289599,
    "path": "direct-ramp"
   },
   {
@@ -1760,8 +1761,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 6.190183837248343,
-   "i_subcap_mAcm2": 99.93849125052633,
+   "i_ec_mAcm2": 6.0642723252360495,
+   "i_subcap_mAcm2": 79.82501675289599,
    "path": "c-control"
   },
   {
@@ -1769,8 +1770,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 100.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 8.27288712703168,
-   "i_subcap_mAcm2": 99.93849125052633,
+   "i_ec_mAcm2": 7.161889679048523,
+   "i_subcap_mAcm2": 79.82501675289599,
    "path": "direct-ramp"
   },
   {
@@ -1778,8 +1779,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 20.027368523855955,
-   "i_subcap_mAcm2": 99.93849125052633,
+   "i_ec_mAcm2": 14.62986381243955,
+   "i_subcap_mAcm2": 79.82501675289599,
    "path": "direct-ramp"
   },
   {
@@ -1787,8 +1788,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 50.67542408667772,
-   "i_subcap_mAcm2": 99.93849125052633,
+   "i_ec_mAcm2": 37.54926555211011,
+   "i_subcap_mAcm2": 79.82501675289599,
    "path": "direct-ramp"
   },
   {
@@ -1797,7 +1798,7 @@
    "k_M": 0.0,
    "delta_um": 10.981964909303445,
    "i_ec_mAcm2": 6.756804360793558,
-   "i_subcap_mAcm2": 113.75297143531068,
+   "i_subcap_mAcm2": 90.85921487200312,
    "path": "direct-ramp"
   },
   {
@@ -1805,17 +1806,17 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1.0,
    "delta_um": 10.981964909303445,
-   "i_ec_mAcm2": 6.777365059000134,
-   "i_subcap_mAcm2": 113.75297143531068,
-   "path": "c-control"
+   "i_ec_mAcm2": 6.772603591567043,
+   "i_subcap_mAcm2": 90.85921487200312,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene reduction (e-HAT)",
    "reactor": "RDE 1600 rpm",
    "k_M": 10.0,
    "delta_um": 10.981964909303445,
-   "i_ec_mAcm2": 6.979976958797138,
-   "i_subcap_mAcm2": 113.75297143531068,
+   "i_ec_mAcm2": 6.869100608681153,
+   "i_subcap_mAcm2": 90.85921487200312,
    "path": "c-control"
   },
   {
@@ -1823,8 +1824,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 100.0,
    "delta_um": 10.981964909303445,
-   "i_ec_mAcm2": 8.860471938283023,
-   "i_subcap_mAcm2": 113.75297143531068,
+   "i_ec_mAcm2": 7.84300147647062,
+   "i_subcap_mAcm2": 90.85921487200312,
    "path": "direct-ramp"
   },
   {
@@ -1832,8 +1833,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1000.0,
    "delta_um": 10.981964909303445,
-   "i_ec_mAcm2": 20.32670493354942,
-   "i_subcap_mAcm2": 113.75297143531068,
+   "i_ec_mAcm2": 14.956796559661887,
+   "i_subcap_mAcm2": 90.85921487200312,
    "path": "direct-ramp"
   },
   {
@@ -1841,8 +1842,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 10000.0,
    "delta_um": 10.981964909303445,
-   "i_ec_mAcm2": 52.61616002030397,
-   "i_subcap_mAcm2": 113.75297143531068,
+   "i_ec_mAcm2": 38.855547999592574,
+   "i_subcap_mAcm2": 90.85921487200312,
    "path": "direct-ramp"
   },
   {
@@ -1851,7 +1852,7 @@
    "k_M": 0.0,
    "delta_um": 9.109136779652111,
    "i_ec_mAcm2": 8.145995628808334,
-   "i_subcap_mAcm2": 137.1404525862536,
+   "i_subcap_mAcm2": 109.53976579208944,
    "path": "direct-ramp"
   },
   {
@@ -1860,7 +1861,7 @@
    "k_M": 1.0,
    "delta_um": 9.109136779652111,
    "i_ec_mAcm2": 8.165043163404144,
-   "i_subcap_mAcm2": 137.1404525862536,
+   "i_subcap_mAcm2": 109.53976579208944,
    "path": "direct-ramp"
   },
   {
@@ -1868,8 +1869,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10.0,
    "delta_um": 9.109136779652111,
-   "i_ec_mAcm2": 8.33647097476644,
-   "i_subcap_mAcm2": 137.1404525862536,
+   "i_ec_mAcm2": 8.241233301787387,
+   "i_subcap_mAcm2": 109.53976579208944,
    "path": "direct-ramp"
   },
   {
@@ -1877,8 +1878,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 100.0,
    "delta_um": 9.109136779652111,
-   "i_ec_mAcm2": 9.93741625754432,
-   "i_subcap_mAcm2": 137.1404525862536,
+   "i_ec_mAcm2": 9.060277289407242,
+   "i_subcap_mAcm2": 109.53976579208944,
    "path": "direct-ramp"
   },
   {
@@ -1886,8 +1887,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1000.0,
    "delta_um": 9.109136779652111,
-   "i_ec_mAcm2": 20.78073950398929,
-   "i_subcap_mAcm2": 137.1404525862536,
+   "i_ec_mAcm2": 15.546653292409848,
+   "i_subcap_mAcm2": 109.53976579208944,
    "path": "direct-ramp"
   },
   {
@@ -1895,8 +1896,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10000.0,
    "delta_um": 9.109136779652111,
-   "i_ec_mAcm2": 55.18660795200552,
-   "i_subcap_mAcm2": 137.1404525862536,
+   "i_ec_mAcm2": 40.4895175259107,
+   "i_subcap_mAcm2": 109.53976579208944,
    "path": "c-control"
   },
   {
@@ -1904,8 +1905,8 @@
    "reactor": "Unstirred batch",
    "k_M": 0.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.3208918050878158,
-   "i_subcap_mAcm2": 4.862082799552071,
+   "i_ec_mAcm2": 0.1604459025439079,
+   "i_subcap_mAcm2": 10.676355894568422,
    "path": "direct-ramp"
   },
   {
@@ -1913,8 +1914,8 @@
    "reactor": "Unstirred batch",
    "k_M": 1.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 2.0297786962987407,
-   "i_subcap_mAcm2": 4.862082799552071,
+   "i_ec_mAcm2": 1.2016320659627528,
+   "i_subcap_mAcm2": 10.676355894568422,
    "path": "direct-ramp"
   },
   {
@@ -1922,17 +1923,17 @@
    "reactor": "Unstirred batch",
    "k_M": 10.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 3.983106150312569,
-   "i_subcap_mAcm2": 4.862082799552071,
-   "path": "c-control"
+   "i_ec_mAcm2": 3.351711356910746,
+   "i_subcap_mAcm2": 10.676355894568422,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "reactor": "Unstirred batch",
    "k_M": 100.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 5.0136805340898825,
-   "i_subcap_mAcm2": 4.862082799552071,
+   "i_ec_mAcm2": 7.281352196462868,
+   "i_subcap_mAcm2": 10.676355894568422,
    "path": "c-control"
   },
   {
@@ -1940,8 +1941,8 @@
    "reactor": "Unstirred batch",
    "k_M": 1000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 5.167935072416647,
-   "i_subcap_mAcm2": 4.862082799552071,
+   "i_ec_mAcm2": 10.148390326707789,
+   "i_subcap_mAcm2": 10.676355894568422,
    "path": "c-control"
   },
   {
@@ -1949,8 +1950,8 @@
    "reactor": "Unstirred batch",
    "k_M": 10000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 5.174246527465838,
-   "i_subcap_mAcm2": 4.862082799552071,
+   "i_ec_mAcm2": 10.761682707472506,
+   "i_subcap_mAcm2": 10.676355894568422,
    "path": "c-control"
   },
   {
@@ -1958,8 +1959,8 @@
    "reactor": "Stirred batch",
    "k_M": 0.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.3658166578001102,
-   "i_subcap_mAcm2": 5.5427743914893615,
+   "i_ec_mAcm2": 0.1829083289000551,
+   "i_subcap_mAcm2": 12.171045719808,
    "path": "direct-ramp"
   },
   {
@@ -1967,8 +1968,8 @@
    "reactor": "Stirred batch",
    "k_M": 1.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 2.089928712713434,
-   "i_subcap_mAcm2": 5.5427743914893615,
+   "i_ec_mAcm2": 1.212234928144329,
+   "i_subcap_mAcm2": 12.171045719808,
    "path": "direct-ramp"
   },
   {
@@ -1976,8 +1977,8 @@
    "reactor": "Stirred batch",
    "k_M": 10.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 4.304847570922145,
-   "i_subcap_mAcm2": 5.5427743914893615,
+   "i_ec_mAcm2": 3.4275628608720994,
+   "i_subcap_mAcm2": 12.171045719808,
    "path": "direct-ramp"
   },
   {
@@ -1985,8 +1986,8 @@
    "reactor": "Stirred batch",
    "k_M": 100.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 5.657019484305406,
-   "i_subcap_mAcm2": 5.5427743914893615,
+   "i_ec_mAcm2": 7.754580842339121,
+   "i_subcap_mAcm2": 12.171045719808,
    "path": "c-control"
   },
   {
@@ -1994,8 +1995,8 @@
    "reactor": "Stirred batch",
    "k_M": 1000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 5.887110514465487,
-   "i_subcap_mAcm2": 5.5427743914893615,
+   "i_ec_mAcm2": 11.368651746485666,
+   "i_subcap_mAcm2": 12.171045719808,
    "path": "c-control"
   },
   {
@@ -2003,8 +2004,8 @@
    "reactor": "Stirred batch",
    "k_M": 10000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 5.89832214889893,
-   "i_subcap_mAcm2": 5.5427743914893615,
+   "i_ec_mAcm2": 12.240292713285752,
+   "i_subcap_mAcm2": 12.171045719808,
    "path": "c-control"
   },
   {
@@ -2012,8 +2013,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 0.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.6844090884941259,
-   "i_subcap_mAcm2": 10.370017570606851,
+   "i_ec_mAcm2": 0.3422045442470629,
+   "i_subcap_mAcm2": 22.77089938224135,
    "path": "direct-ramp"
   },
   {
@@ -2021,17 +2022,17 @@
    "reactor": "Recirculating flow cell",
    "k_M": 1.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 2.314537817614674,
-   "i_subcap_mAcm2": 10.370017570606851,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.24324166834143,
+   "i_subcap_mAcm2": 22.77089938224135,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "reactor": "Recirculating flow cell",
    "k_M": 10.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 5.715865026161339,
-   "i_subcap_mAcm2": 10.370017570606851,
+   "i_ec_mAcm2": 3.692968681706292,
+   "i_subcap_mAcm2": 22.77089938224135,
    "path": "c-control"
   },
   {
@@ -2039,8 +2040,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 100.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 9.597364713394256,
-   "i_subcap_mAcm2": 10.370017570606851,
+   "i_ec_mAcm2": 9.695296487133492,
+   "i_subcap_mAcm2": 22.77089938224135,
    "path": "c-control"
   },
   {
@@ -2048,8 +2049,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 1000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 10.899727506997294,
-   "i_subcap_mAcm2": 10.370017570606851,
+   "i_ec_mAcm2": 18.31290799259662,
+   "i_subcap_mAcm2": 22.77089938224135,
    "path": "c-control"
   },
   {
@@ -2057,8 +2058,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 11.03390044375992,
-   "i_subcap_mAcm2": 10.370017570606851,
+   "i_ec_mAcm2": 22.406852993785325,
+   "i_subcap_mAcm2": 22.77089938224135,
    "path": "c-control"
   },
   {
@@ -2066,8 +2067,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 0.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 2.02108650718293,
-   "i_subcap_mAcm2": 30.623062936405315,
+   "i_ec_mAcm2": 1.010543253591465,
+   "i_subcap_mAcm2": 67.24334651827625,
    "path": "direct-ramp"
   },
   {
@@ -2075,17 +2076,17 @@
    "reactor": "ANEC flow cell",
    "k_M": 1.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 2.9416339134202554,
-   "i_subcap_mAcm2": 30.623062936405315,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 1.4867070366930923,
+   "i_subcap_mAcm2": 67.24334651827625,
+   "path": "c-control"
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "reactor": "ANEC flow cell",
    "k_M": 10.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 7.259556759840113,
-   "i_subcap_mAcm2": 30.623062936405315,
+   "i_ec_mAcm2": 3.920714814951817,
+   "i_subcap_mAcm2": 67.24334651827625,
    "path": "direct-ramp"
   },
   {
@@ -2093,35 +2094,35 @@
    "reactor": "ANEC flow cell",
    "k_M": 100.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 17.64174639106143,
-   "i_subcap_mAcm2": 30.623062936405315,
-   "path": "c-control"
+   "i_ec_mAcm2": 11.61213573944417,
+   "i_subcap_mAcm2": 67.24334651827625,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "reactor": "ANEC flow cell",
    "k_M": 1000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 28.796314193545363,
-   "i_subcap_mAcm2": 30.623062936405315,
-   "path": "c-control"
+   "i_ec_mAcm2": 30.14448207241618,
+   "i_subcap_mAcm2": 67.24334651827625,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "reactor": "ANEC flow cell",
    "k_M": 10000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 32.26089812202886,
-   "i_subcap_mAcm2": 30.623062936405315,
-   "path": "c-control"
+   "i_ec_mAcm2": 55.562115598104256,
+   "i_subcap_mAcm2": 67.24334651827625,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 0.0,
    "delta_um": 12.499999999999998,
-   "i_ec_mAcm2": 5.853066524801763,
-   "i_subcap_mAcm2": 88.6843902638298,
+   "i_ec_mAcm2": 2.9265332624008815,
+   "i_subcap_mAcm2": 194.736731516928,
    "path": "direct-ramp"
   },
   {
@@ -2129,17 +2130,17 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1.0,
    "delta_um": 12.499999999999998,
-   "i_ec_mAcm2": 6.208903772607326,
-   "i_subcap_mAcm2": 88.6843902638298,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 3.104680056616505,
+   "i_subcap_mAcm2": 194.736731516928,
+   "path": "c-control"
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10.0,
    "delta_um": 12.499999999999998,
-   "i_ec_mAcm2": 8.964226855629759,
-   "i_subcap_mAcm2": 88.6843902638298,
+   "i_ec_mAcm2": 4.5445577325367585,
+   "i_subcap_mAcm2": 194.736731516928,
    "path": "direct-ramp"
   },
   {
@@ -2147,17 +2148,17 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 100.0,
    "delta_um": 12.499999999999998,
-   "i_ec_mAcm2": 22.66570782058393,
-   "i_subcap_mAcm2": 88.6843902638298,
-   "path": "c-control"
+   "i_ec_mAcm2": 12.36545240312283,
+   "i_subcap_mAcm2": 194.736731516928,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1000.0,
    "delta_um": 12.499999999999998,
-   "i_ec_mAcm2": 53.974523342463726,
-   "i_subcap_mAcm2": 88.6843902638298,
+   "i_ec_mAcm2": 36.471233191025654,
+   "i_subcap_mAcm2": 194.736731516928,
    "path": "direct-ramp"
   },
   {
@@ -2165,17 +2166,17 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10000.0,
    "delta_um": 12.499999999999998,
-   "i_ec_mAcm2": 85.07345694065835,
-   "i_subcap_mAcm2": 88.6843902638298,
-   "path": "c-control"
+   "i_ec_mAcm2": 93.95843417920054,
+   "i_subcap_mAcm2": 194.736731516928,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "reactor": "RDE 1600 rpm",
    "k_M": 0.0,
    "delta_um": 8.85764188710124,
-   "i_ec_mAcm2": 8.259910763220702,
-   "i_subcap_mAcm2": 125.1523703969318,
+   "i_ec_mAcm2": 4.129955381610351,
+   "i_subcap_mAcm2": 274.8145810123987,
    "path": "direct-ramp"
   },
   {
@@ -2183,17 +2184,17 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1.0,
    "delta_um": 8.85764188710124,
-   "i_ec_mAcm2": 8.510991448930453,
-   "i_subcap_mAcm2": 125.1523703969318,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 4.257150885246733,
+   "i_subcap_mAcm2": 274.8145810123987,
+   "path": "c-control"
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "reactor": "RDE 1600 rpm",
    "k_M": 10.0,
    "delta_um": 8.85764188710124,
-   "i_ec_mAcm2": 10.609762680493455,
-   "i_subcap_mAcm2": 125.1523703969318,
+   "i_ec_mAcm2": 5.338563253150014,
+   "i_subcap_mAcm2": 274.8145810123987,
    "path": "c-control"
   },
   {
@@ -2201,8 +2202,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 100.0,
    "delta_um": 8.85764188710124,
-   "i_ec_mAcm2": 23.71828891260704,
-   "i_subcap_mAcm2": 125.1523703969318,
+   "i_ec_mAcm2": 12.527024071893177,
+   "i_subcap_mAcm2": 274.8145810123987,
    "path": "direct-ramp"
   },
   {
@@ -2210,8 +2211,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1000.0,
    "delta_um": 8.85764188710124,
-   "i_ec_mAcm2": 60.76790911986075,
-   "i_subcap_mAcm2": 125.1523703969318,
+   "i_ec_mAcm2": 37.53466110722433,
+   "i_subcap_mAcm2": 274.8145810123987,
    "path": "direct-ramp"
   },
   {
@@ -2219,17 +2220,17 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 10000.0,
    "delta_um": 8.85764188710124,
-   "i_ec_mAcm2": 110.58578152615812,
-   "i_subcap_mAcm2": 125.1523703969318,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 103.08165250004866,
+   "i_subcap_mAcm2": 274.8145810123987,
+   "path": "c-control"
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 0.0,
    "delta_um": 9.10732936801866,
-   "i_ec_mAcm2": 8.033456198141105,
-   "i_subcap_mAcm2": 121.72118010694535,
+   "i_ec_mAcm2": 4.016728099070552,
+   "i_subcap_mAcm2": 267.28023612603494,
    "path": "direct-ramp"
   },
   {
@@ -2237,8 +2238,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1.0,
    "delta_um": 9.10732936801866,
-   "i_ec_mAcm2": 8.296437616942294,
-   "i_subcap_mAcm2": 121.72118010694535,
+   "i_ec_mAcm2": 4.148218808471147,
+   "i_subcap_mAcm2": 267.28023612603494,
    "path": "direct-ramp"
   },
   {
@@ -2246,8 +2247,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10.0,
    "delta_um": 9.10732936801866,
-   "i_ec_mAcm2": 10.44818915434774,
-   "i_subcap_mAcm2": 121.72118010694535,
+   "i_ec_mAcm2": 5.256497644847588,
+   "i_subcap_mAcm2": 267.28023612603494,
    "path": "direct-ramp"
   },
   {
@@ -2255,17 +2256,17 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 100.0,
    "delta_um": 9.10732936801866,
-   "i_ec_mAcm2": 23.622144366066976,
-   "i_subcap_mAcm2": 121.72118010694535,
-   "path": "c-control"
+   "i_ec_mAcm2": 12.517110565527252,
+   "i_subcap_mAcm2": 267.28023612603494,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1000.0,
    "delta_um": 9.10732936801866,
-   "i_ec_mAcm2": 60.2981050203204,
-   "i_subcap_mAcm2": 121.72118010694535,
+   "i_ec_mAcm2": 37.4991301169722,
+   "i_subcap_mAcm2": 267.28023612603494,
    "path": "direct-ramp"
   },
   {
@@ -2273,8 +2274,386 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10000.0,
    "delta_um": 9.10732936801866,
-   "i_ec_mAcm2": 108.48381158058442,
-   "i_subcap_mAcm2": 121.72118010694535,
+   "i_ec_mAcm2": 102.55385625050197,
+   "i_subcap_mAcm2": 267.28023612603494,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Unstirred batch",
+   "k_M": 0.0,
+   "delta_um": 228.0,
+   "i_ec_mAcm2": 0.1505649901212547,
+   "i_subcap_mAcm2": 1.5580612220246666,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Unstirred batch",
+   "k_M": 1.0,
+   "delta_um": 228.0,
+   "i_ec_mAcm2": 0.2525499602737245,
+   "i_subcap_mAcm2": 1.5580612220246666,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Unstirred batch",
+   "k_M": 10.0,
+   "delta_um": 228.0,
+   "i_ec_mAcm2": 0.6290593551661501,
+   "i_subcap_mAcm2": 1.5580612220246666,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Unstirred batch",
+   "k_M": 100.0,
+   "delta_um": 228.0,
+   "i_ec_mAcm2": 1.2739103506831757,
+   "i_subcap_mAcm2": 1.5580612220246666,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Unstirred batch",
+   "k_M": 1000.0,
+   "delta_um": 228.0,
+   "i_ec_mAcm2": 1.645696288816877,
+   "i_subcap_mAcm2": 1.5580612220246666,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Unstirred batch",
+   "k_M": 10000.0,
+   "delta_um": 228.0,
+   "i_ec_mAcm2": 1.703343954463707,
+   "i_subcap_mAcm2": 1.5580612220246666,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Stirred batch",
+   "k_M": 0.0,
+   "delta_um": 200.0,
+   "i_ec_mAcm2": 0.1716440887382304,
+   "i_subcap_mAcm2": 1.77618979310812,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Stirred batch",
+   "k_M": 1.0,
+   "delta_um": 200.0,
+   "i_ec_mAcm2": 0.2647116240850684,
+   "i_subcap_mAcm2": 1.77618979310812,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Stirred batch",
+   "k_M": 10.0,
+   "delta_um": 200.0,
+   "i_ec_mAcm2": 0.6475915779411517,
+   "i_subcap_mAcm2": 1.77618979310812,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Stirred batch",
+   "k_M": 100.0,
+   "delta_um": 200.0,
+   "i_ec_mAcm2": 1.3709859263527702,
+   "i_subcap_mAcm2": 1.77618979310812,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Stirred batch",
+   "k_M": 1000.0,
+   "delta_um": 200.0,
+   "i_ec_mAcm2": 1.854405640527653,
+   "i_subcap_mAcm2": 1.77618979310812,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Stirred batch",
+   "k_M": 10000.0,
+   "delta_um": 200.0,
+   "i_ec_mAcm2": 1.9403693580750463,
+   "i_subcap_mAcm2": 1.77618979310812,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Recirculating flow cell",
+   "k_M": 0.0,
+   "delta_um": 106.9,
+   "i_ec_mAcm2": 0.3211301940846219,
+   "i_subcap_mAcm2": 3.3230866101180925,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Recirculating flow cell",
+   "k_M": 1.0,
+   "delta_um": 106.9,
+   "i_ec_mAcm2": 0.37630798951882,
+   "i_subcap_mAcm2": 3.3230866101180925,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Recirculating flow cell",
+   "k_M": 10.0,
+   "delta_um": 106.9,
+   "i_ec_mAcm2": 0.7244434349410316,
+   "i_subcap_mAcm2": 3.3230866101180925,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Recirculating flow cell",
+   "k_M": 100.0,
+   "delta_um": 106.9,
+   "i_ec_mAcm2": 1.787424887688313,
+   "i_subcap_mAcm2": 3.3230866101180925,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Recirculating flow cell",
+   "k_M": 1000.0,
+   "delta_um": 106.9,
+   "i_ec_mAcm2": 3.1104126254715343,
+   "i_subcap_mAcm2": 3.3230866101180925,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Recirculating flow cell",
+   "k_M": 10000.0,
+   "delta_um": 106.9,
+   "i_ec_mAcm2": 3.5880874755639036,
+   "i_subcap_mAcm2": 3.3230866101180925,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "ANEC flow cell",
+   "k_M": 0.0,
+   "delta_um": 36.2,
+   "i_ec_mAcm2": 0.94830988253166,
+   "i_subcap_mAcm2": 9.813203276840444,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "ANEC flow cell",
+   "k_M": 1.0,
+   "delta_um": 36.2,
+   "i_ec_mAcm2": 0.9682665207454986,
+   "i_subcap_mAcm2": 9.813203276840444,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "ANEC flow cell",
+   "k_M": 10.0,
+   "delta_um": 36.2,
+   "i_ec_mAcm2": 1.1340974109077084,
+   "i_subcap_mAcm2": 9.813203276840444,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "ANEC flow cell",
+   "k_M": 100.0,
+   "delta_um": 36.2,
+   "i_ec_mAcm2": 2.2601752628562823,
+   "i_subcap_mAcm2": 9.813203276840444,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "ANEC flow cell",
+   "k_M": 1000.0,
+   "delta_um": 36.2,
+   "i_ec_mAcm2": 5.525773640658987,
+   "i_subcap_mAcm2": 9.813203276840444,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "ANEC flow cell",
+   "k_M": 10000.0,
+   "delta_um": 36.2,
+   "i_ec_mAcm2": 9.33274482653922,
+   "i_subcap_mAcm2": 9.813203276840444,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Microfluidic cell (25 um gap)",
+   "k_M": 0.0,
+   "delta_um": 12.5,
+   "i_ec_mAcm2": 2.746305419811687,
+   "i_subcap_mAcm2": 28.41903668972992,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Microfluidic cell (25 um gap)",
+   "k_M": 1.0,
+   "delta_um": 12.5,
+   "i_ec_mAcm2": 2.7528114609337067,
+   "i_subcap_mAcm2": 28.41903668972992,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Microfluidic cell (25 um gap)",
+   "k_M": 10.0,
+   "delta_um": 12.5,
+   "i_ec_mAcm2": 2.8169430494716914,
+   "i_subcap_mAcm2": 28.41903668972992,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Microfluidic cell (25 um gap)",
+   "k_M": 100.0,
+   "delta_um": 12.5,
+   "i_ec_mAcm2": 3.3813713164801933,
+   "i_subcap_mAcm2": 28.41903668972992,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Microfluidic cell (25 um gap)",
+   "k_M": 1000.0,
+   "delta_um": 12.5,
+   "i_ec_mAcm2": 7.035634950461709,
+   "i_subcap_mAcm2": 28.41903668972992,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Microfluidic cell (25 um gap)",
+   "k_M": 10000.0,
+   "delta_um": 12.5,
+   "i_ec_mAcm2": 16.936944748891126,
+   "i_subcap_mAcm2": 28.41903668972992,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "RDE 1600 rpm",
+   "k_M": 0.0,
+   "delta_um": 10.255432088558708,
+   "i_ec_mAcm2": 3.347378974499225,
+   "i_subcap_mAcm2": 34.63900453477128,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "RDE 1600 rpm",
+   "k_M": 1.0,
+   "delta_um": 10.255432088558708,
+   "i_ec_mAcm2": 3.3552060492642273,
+   "i_subcap_mAcm2": 34.63900453477128,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "RDE 1600 rpm",
+   "k_M": 10.0,
+   "delta_um": 10.255432088558708,
+   "i_ec_mAcm2": 3.402561355820462,
+   "i_subcap_mAcm2": 34.63900453477128,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "RDE 1600 rpm",
+   "k_M": 100.0,
+   "delta_um": 10.255432088558708,
+   "i_ec_mAcm2": 3.8783573113427674,
+   "i_subcap_mAcm2": 34.63900453477128,
+   "path": "c-control"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "RDE 1600 rpm",
+   "k_M": 1000.0,
+   "delta_um": 10.255432088558708,
+   "i_ec_mAcm2": 7.299524310730118,
+   "i_subcap_mAcm2": 34.63900453477128,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "RDE 1600 rpm",
+   "k_M": 10000.0,
+   "delta_um": 10.255432088558708,
+   "i_ec_mAcm2": 18.118698749309967,
+   "i_subcap_mAcm2": 34.63900453477128,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Rotating cylinder 3000 rpm",
+   "k_M": 0.0,
+   "delta_um": 9.181126281621856,
+   "i_ec_mAcm2": 3.7390638898370385,
+   "i_subcap_mAcm2": 38.692198290825694,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Rotating cylinder 3000 rpm",
+   "k_M": 1.0,
+   "delta_um": 9.181126281621856,
+   "i_ec_mAcm2": 3.747806829563859,
+   "i_subcap_mAcm2": 38.692198290825694,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Rotating cylinder 3000 rpm",
+   "k_M": 10.0,
+   "delta_um": 9.181126281621856,
+   "i_ec_mAcm2": 3.791521528197963,
+   "i_subcap_mAcm2": 38.692198290825694,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Rotating cylinder 3000 rpm",
+   "k_M": 100.0,
+   "delta_um": 9.181126281621856,
+   "i_ec_mAcm2": 4.219925574812183,
+   "i_subcap_mAcm2": 38.692198290825694,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Rotating cylinder 3000 rpm",
+   "k_M": 1000.0,
+   "delta_um": 9.181126281621856,
+   "i_ec_mAcm2": 7.48771639846043,
+   "i_subcap_mAcm2": 38.692198290825694,
+   "path": "direct-ramp"
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "reactor": "Rotating cylinder 3000 rpm",
+   "k_M": 10000.0,
+   "delta_um": 9.181126281621856,
+   "i_ec_mAcm2": 18.737882729936928,
+   "i_subcap_mAcm2": 38.692198290825694,
    "path": "direct-ramp"
   },
   {
@@ -2282,8 +2661,8 @@
    "reactor": "Unstirred batch",
    "k_M": 0.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.0456407771440181,
-   "i_subcap_mAcm2": 1.3942311837406016,
+   "i_ec_mAcm2": 0.0920176958548752,
+   "i_subcap_mAcm2": 3.055157256026316,
    "path": "direct-ramp"
   },
   {
@@ -2291,8 +2670,8 @@
    "reactor": "Unstirred batch",
    "k_M": 1.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.2578931185092502,
-   "i_subcap_mAcm2": 1.3942311837406016,
+   "i_ec_mAcm2": 0.5210969749666138,
+   "i_subcap_mAcm2": 3.055157256026316,
    "path": "direct-ramp"
   },
   {
@@ -2300,8 +2679,8 @@
    "reactor": "Unstirred batch",
    "k_M": 10.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.6616996861312103,
-   "i_subcap_mAcm2": 1.3942311837406016,
+   "i_ec_mAcm2": 1.3585690608890106,
+   "i_subcap_mAcm2": 3.055157256026316,
    "path": "direct-ramp"
   },
   {
@@ -2309,8 +2688,8 @@
    "reactor": "Unstirred batch",
    "k_M": 100.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 1.1896221611944082,
-   "i_subcap_mAcm2": 1.3942311837406016,
+   "i_ec_mAcm2": 2.5291406775200542,
+   "i_subcap_mAcm2": 3.055157256026316,
    "path": "c-control"
   },
   {
@@ -2318,8 +2697,8 @@
    "reactor": "Unstirred batch",
    "k_M": 1000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 1.4074255152382618,
-   "i_subcap_mAcm2": 1.3942311837406016,
+   "i_ec_mAcm2": 3.0618139718163295,
+   "i_subcap_mAcm2": 3.055157256026316,
    "path": "c-control"
   },
   {
@@ -2327,8 +2706,8 @@
    "reactor": "Unstirred batch",
    "k_M": 10000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 1.4359857590408749,
-   "i_subcap_mAcm2": 1.3942311837406016,
+   "i_ec_mAcm2": 3.1377120895205577,
+   "i_subcap_mAcm2": 3.055157256026316,
    "path": "c-control"
   },
   {
@@ -2336,8 +2715,8 @@
    "reactor": "Stirred batch",
    "k_M": 0.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.0520304859441806,
-   "i_subcap_mAcm2": 1.589423549464286,
+   "i_ec_mAcm2": 0.1049001732745577,
+   "i_subcap_mAcm2": 3.4828792718700003,
    "path": "direct-ramp"
   },
   {
@@ -2345,8 +2724,8 @@
    "reactor": "Stirred batch",
    "k_M": 1.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.2613107298663596,
-   "i_subcap_mAcm2": 1.589423549464286,
+   "i_ec_mAcm2": 0.5268361489241122,
+   "i_subcap_mAcm2": 3.4828792718700003,
    "path": "direct-ramp"
   },
   {
@@ -2354,17 +2733,17 @@
    "reactor": "Stirred batch",
    "k_M": 10.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.6860782767569815,
-   "i_subcap_mAcm2": 1.589423549464286,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.4074656535551169,
+   "i_subcap_mAcm2": 3.4828792718700003,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Rh-catalyzed electrooxidative C-H alkenylation",
    "reactor": "Stirred batch",
    "k_M": 100.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 1.3001793211482275,
-   "i_subcap_mAcm2": 1.589423549464286,
+   "i_ec_mAcm2": 2.752278751856068,
+   "i_subcap_mAcm2": 3.4828792718700003,
    "path": "c-control"
   },
   {
@@ -2372,8 +2751,8 @@
    "reactor": "Stirred batch",
    "k_M": 1000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 1.59326845389761,
-   "i_subcap_mAcm2": 1.589423549464286,
+   "i_ec_mAcm2": 3.4619667468391366,
+   "i_subcap_mAcm2": 3.4828792718700003,
    "path": "c-control"
   },
   {
@@ -2381,8 +2760,8 @@
    "reactor": "Stirred batch",
    "k_M": 10000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 1.6361278747974155,
-   "i_subcap_mAcm2": 1.589423549464286,
+   "i_ec_mAcm2": 3.5746215996349955,
+   "i_subcap_mAcm2": 3.4828792718700003,
    "path": "c-control"
   },
   {
@@ -2390,8 +2769,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 0.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.0973442206626391,
-   "i_subcap_mAcm2": 2.973664264666578,
+   "i_ec_mAcm2": 0.1962585094004822,
+   "i_subcap_mAcm2": 6.516144568512629,
    "path": "direct-ramp"
   },
   {
@@ -2399,8 +2778,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 1.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.2740742084824807,
-   "i_subcap_mAcm2": 2.973664264666578,
+   "i_ec_mAcm2": 0.5513482714347496,
+   "i_subcap_mAcm2": 6.516144568512629,
    "path": "direct-ramp"
   },
   {
@@ -2408,26 +2787,26 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.7776432319858801,
-   "i_subcap_mAcm2": 2.973664264666578,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.5769980501884833,
+   "i_subcap_mAcm2": 6.516144568512629,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Rh-catalyzed electrooxidative C-H alkenylation",
    "reactor": "Recirculating flow cell",
    "k_M": 100.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 1.817432270632084,
-   "i_subcap_mAcm2": 2.973664264666578,
-   "path": "c-control"
+   "i_ec_mAcm2": 3.771618720727512,
+   "i_subcap_mAcm2": 6.516144568512629,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Rh-catalyzed electrooxidative C-H alkenylation",
    "reactor": "Recirculating flow cell",
    "k_M": 1000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 2.783404877722102,
-   "i_subcap_mAcm2": 2.973664264666578,
+   "i_ec_mAcm2": 5.9829376463389154,
+   "i_subcap_mAcm2": 6.516144568512629,
    "path": "c-control"
   },
   {
@@ -2435,17 +2814,17 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 3.040603004456451,
-   "i_subcap_mAcm2": 2.973664264666578,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 6.631310372468244,
+   "i_subcap_mAcm2": 6.516144568512629,
+   "path": "c-control"
   },
   {
    "reaction": "Rh-catalyzed electrooxidative C-H alkenylation",
    "reactor": "ANEC flow cell",
    "k_M": 0.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 0.2874612483103903,
-   "i_subcap_mAcm2": 8.78134557715075,
+   "i_ec_mAcm2": 0.5795589683677225,
+   "i_subcap_mAcm2": 19.24242691640884,
    "path": "direct-ramp"
   },
   {
@@ -2453,8 +2832,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 1.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 0.3723216908649969,
-   "i_subcap_mAcm2": 8.78134557715075,
+   "i_ec_mAcm2": 0.7490901303540094,
+   "i_subcap_mAcm2": 19.24242691640884,
    "path": "direct-ramp"
   },
   {
@@ -2462,8 +2841,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 10.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 0.861202695330984,
-   "i_subcap_mAcm2": 8.78134557715075,
+   "i_ec_mAcm2": 1.7326909904387753,
+   "i_subcap_mAcm2": 19.24242691640884,
    "path": "direct-ramp"
   },
   {
@@ -2471,8 +2850,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 100.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 2.4375395070976325,
-   "i_subcap_mAcm2": 8.78134557715075,
+   "i_ec_mAcm2": 4.947475354901161,
+   "i_subcap_mAcm2": 19.24242691640884,
    "path": "direct-ramp"
   },
   {
@@ -2480,8 +2859,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 1000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 5.580294854249044,
-   "i_subcap_mAcm2": 8.78134557715075,
+   "i_ec_mAcm2": 11.60300052255591,
+   "i_subcap_mAcm2": 19.24242691640884,
    "path": "c-control"
   },
   {
@@ -2489,8 +2868,8 @@
    "reactor": "ANEC flow cell",
    "k_M": 10000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 8.318145981892576,
-   "i_subcap_mAcm2": 8.78134557715075,
+   "i_ec_mAcm2": 17.915735778480244,
+   "i_subcap_mAcm2": 19.24242691640884,
    "path": "c-control"
   },
   {
@@ -2498,8 +2877,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 0.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 0.8324877751068901,
-   "i_subcap_mAcm2": 25.430776791428578,
+   "i_ec_mAcm2": 1.6784027723929236,
+   "i_subcap_mAcm2": 55.726068349920006,
    "path": "direct-ramp"
   },
   {
@@ -2507,8 +2886,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 0.8636330698887534,
-   "i_subcap_mAcm2": 25.430776791428578,
+   "i_ec_mAcm2": 1.7411957054208735,
+   "i_subcap_mAcm2": 55.726068349920006,
    "path": "direct-ramp"
   },
   {
@@ -2516,8 +2895,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 1.1215599087533694,
-   "i_subcap_mAcm2": 25.430776791428578,
+   "i_ec_mAcm2": 2.256019265083782,
+   "i_subcap_mAcm2": 55.726068349920006,
    "path": "direct-ramp"
   },
   {
@@ -2525,8 +2904,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 100.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 2.70737429668328,
-   "i_subcap_mAcm2": 25.430776791428578,
+   "i_ec_mAcm2": 5.44641060712377,
+   "i_subcap_mAcm2": 55.726068349920006,
    "path": "direct-ramp"
   },
   {
@@ -2534,17 +2913,17 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 7.59765567663895,
-   "i_subcap_mAcm2": 25.430776791428578,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 15.41881518354988,
+   "i_subcap_mAcm2": 55.726068349920006,
+   "path": "c-control"
   },
   {
    "reaction": "Rh-catalyzed electrooxidative C-H alkenylation",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 17.060912745752024,
-   "i_subcap_mAcm2": 25.430776791428578,
+   "i_ec_mAcm2": 35.57885982290923,
+   "i_subcap_mAcm2": 55.726068349920006,
    "path": "direct-ramp"
   },
   {
@@ -2552,8 +2931,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 0.0,
    "delta_um": 8.459095584464121,
-   "i_ec_mAcm2": 1.2301666395575257,
-   "i_subcap_mAcm2": 37.57904219414197,
+   "i_ec_mAcm2": 2.4801746765272696,
+   "i_subcap_mAcm2": 82.34637467075362,
    "path": "direct-ramp"
   },
   {
@@ -2561,8 +2940,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1.0,
    "delta_um": 8.459095584464121,
-   "i_ec_mAcm2": 1.2510351973014424,
-   "i_subcap_mAcm2": 37.57904219414197,
+   "i_ec_mAcm2": 2.52189550625687,
+   "i_subcap_mAcm2": 82.34637467075362,
    "path": "c-control"
   },
   {
@@ -2570,26 +2949,26 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 10.0,
    "delta_um": 8.459095584464121,
-   "i_ec_mAcm2": 1.4345392188417705,
-   "i_subcap_mAcm2": 37.57904219414197,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 2.886117445447558,
+   "i_subcap_mAcm2": 82.34637467075362,
+   "path": "c-control"
   },
   {
    "reaction": "Rh-catalyzed electrooxidative C-H alkenylation",
    "reactor": "RDE 1600 rpm",
    "k_M": 100.0,
    "delta_um": 8.459095584464121,
-   "i_ec_mAcm2": 2.8098688031304477,
-   "i_subcap_mAcm2": 37.57904219414197,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 5.644006793455722,
+   "i_subcap_mAcm2": 82.34637467075362,
+   "path": "c-control"
   },
   {
    "reaction": "Rh-catalyzed electrooxidative C-H alkenylation",
    "reactor": "RDE 1600 rpm",
    "k_M": 1000.0,
    "delta_um": 8.459095584464121,
-   "i_ec_mAcm2": 8.029108723297796,
-   "i_subcap_mAcm2": 37.57904219414197,
+   "i_ec_mAcm2": 16.223401167574533,
+   "i_subcap_mAcm2": 82.34637467075362,
    "path": "direct-ramp"
   },
   {
@@ -2597,8 +2976,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 10000.0,
    "delta_um": 8.459095584464121,
-   "i_ec_mAcm2": 20.045553452389132,
-   "i_subcap_mAcm2": 37.57904219414197,
+   "i_ec_mAcm2": 41.35118952520572,
+   "i_subcap_mAcm2": 82.34637467075362,
    "path": "direct-ramp"
   },
   {
@@ -2606,8 +2985,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 0.0,
    "delta_um": 9.375591710277618,
-   "i_ec_mAcm2": 1.1099136470958797,
-   "i_subcap_mAcm2": 33.90556241313162,
+   "i_ec_mAcm2": 2.237729127209435,
+   "i_subcap_mAcm2": 74.29673517143526,
    "path": "direct-ramp"
   },
   {
@@ -2615,8 +2994,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1.0,
    "delta_um": 9.375591710277618,
-   "i_ec_mAcm2": 1.133271143956042,
-   "i_subcap_mAcm2": 33.90556241313162,
+   "i_ec_mAcm2": 2.2848208547500852,
+   "i_subcap_mAcm2": 74.29673517143526,
    "path": "direct-ramp"
   },
   {
@@ -2624,8 +3003,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10.0,
    "delta_um": 9.375591710277618,
-   "i_ec_mAcm2": 1.3331075059818784,
-   "i_subcap_mAcm2": 33.90556241313162,
+   "i_ec_mAcm2": 2.687716745931207,
+   "i_subcap_mAcm2": 74.29673517143526,
    "path": "direct-ramp"
   },
   {
@@ -2633,17 +3012,17 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 100.0,
    "delta_um": 9.375591710277618,
-   "i_ec_mAcm2": 2.771875609750738,
-   "i_subcap_mAcm2": 33.90556241313162,
-   "path": "c-control"
+   "i_ec_mAcm2": 5.575398881896946,
+   "i_subcap_mAcm2": 74.29673517143526,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Rh-catalyzed electrooxidative C-H alkenylation",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1000.0,
    "delta_um": 9.375591710277618,
-   "i_ec_mAcm2": 7.926876068697959,
-   "i_subcap_mAcm2": 33.90556241313162,
+   "i_ec_mAcm2": 16.0556510234401,
+   "i_subcap_mAcm2": 74.29673517143526,
    "path": "direct-ramp"
   },
   {
@@ -2651,8 +3030,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10000.0,
    "delta_um": 9.375591710277618,
-   "i_ec_mAcm2": 19.312287245438306,
-   "i_subcap_mAcm2": 33.90556241313162,
+   "i_ec_mAcm2": 39.96370102109194,
+   "i_subcap_mAcm2": 74.29673517143526,
    "path": "direct-ramp"
   },
   {
@@ -2661,7 +3040,7 @@
    "k_M": 0.0,
    "delta_um": 228.0,
    "i_ec_mAcm2": 0.2388034408447352,
-   "i_subcap_mAcm2": 3.2161777333333337,
+   "i_subcap_mAcm2": 5.37809240568,
    "path": "direct-ramp"
   },
   {
@@ -2669,8 +3048,8 @@
    "reactor": "Unstirred batch",
    "k_M": 1.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.3342792155902622,
-   "i_subcap_mAcm2": 3.2161777333333337,
+   "i_ec_mAcm2": 0.3350176821931862,
+   "i_subcap_mAcm2": 5.37809240568,
    "path": "direct-ramp"
   },
   {
@@ -2678,8 +3057,8 @@
    "reactor": "Unstirred batch",
    "k_M": 10.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.7971217921090059,
-   "i_subcap_mAcm2": 3.2161777333333337,
+   "i_ec_mAcm2": 0.8244516821241717,
+   "i_subcap_mAcm2": 5.37809240568,
    "path": "direct-ramp"
   },
   {
@@ -2687,17 +3066,17 @@
    "reactor": "Unstirred batch",
    "k_M": 100.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 1.9158128743146223,
-   "i_subcap_mAcm2": 3.2161777333333337,
-   "path": "c-control"
+   "i_ec_mAcm2": 2.197601493109409,
+   "i_subcap_mAcm2": 5.37809240568,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cu-catalyzed benzylic cyanation",
    "reactor": "Unstirred batch",
    "k_M": 1000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 3.0755844152434793,
-   "i_subcap_mAcm2": 3.2161777333333337,
+   "i_ec_mAcm2": 4.312827209215733,
+   "i_subcap_mAcm2": 5.37809240568,
    "path": "c-control"
   },
   {
@@ -2705,8 +3084,8 @@
    "reactor": "Unstirred batch",
    "k_M": 10000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 3.417652531375052,
-   "i_subcap_mAcm2": 3.2161777333333337,
+   "i_ec_mAcm2": 5.425450678593272,
+   "i_subcap_mAcm2": 5.37809240568,
    "path": "c-control"
   },
   {
@@ -2715,7 +3094,7 @@
    "k_M": 0.0,
    "delta_um": 200.0,
    "i_ec_mAcm2": 0.2722359225629981,
-   "i_subcap_mAcm2": 3.666442616,
+   "i_subcap_mAcm2": 6.1310253424752,
    "path": "direct-ramp"
   },
   {
@@ -2723,8 +3102,8 @@
    "reactor": "Stirred batch",
    "k_M": 1.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.3577260653538257,
-   "i_subcap_mAcm2": 3.666442616,
+   "i_ec_mAcm2": 0.3584581105080286,
+   "i_subcap_mAcm2": 6.1310253424752,
    "path": "direct-ramp"
   },
   {
@@ -2732,8 +3111,8 @@
    "reactor": "Stirred batch",
    "k_M": 10.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.8122027422876645,
-   "i_subcap_mAcm2": 3.666442616,
+   "i_ec_mAcm2": 0.8347231657882053,
+   "i_subcap_mAcm2": 6.1310253424752,
    "path": "direct-ramp"
   },
   {
@@ -2741,8 +3120,8 @@
    "reactor": "Stirred batch",
    "k_M": 100.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 2.008134141028421,
-   "i_subcap_mAcm2": 3.666442616,
+   "i_ec_mAcm2": 2.263714819201622,
+   "i_subcap_mAcm2": 6.1310253424752,
    "path": "c-control"
   },
   {
@@ -2750,17 +3129,17 @@
    "reactor": "Stirred batch",
    "k_M": 1000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 3.4037901745321637,
-   "i_subcap_mAcm2": 3.666442616,
-   "path": "c-control"
+   "i_ec_mAcm2": 4.663925395714606,
+   "i_subcap_mAcm2": 6.1310253424752,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cu-catalyzed benzylic cyanation",
    "reactor": "Stirred batch",
    "k_M": 10000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 3.88314547590118,
-   "i_subcap_mAcm2": 3.666442616,
+   "i_ec_mAcm2": 6.122084066977149,
+   "i_subcap_mAcm2": 6.1310253424752,
    "path": "c-control"
   },
   {
@@ -2769,7 +3148,7 @@
    "k_M": 0.0,
    "delta_um": 106.9,
    "i_ec_mAcm2": 0.5093281993695007,
-   "i_subcap_mAcm2": 6.8595745855940145,
+   "i_subcap_mAcm2": 11.47058062203031,
    "path": "direct-ramp"
   },
   {
@@ -2778,7 +3157,7 @@
    "k_M": 1.0,
    "delta_um": 106.9,
    "i_ec_mAcm2": 0.558157013494558,
-   "i_subcap_mAcm2": 6.8595745855940145,
+   "i_subcap_mAcm2": 11.47058062203031,
    "path": "direct-ramp"
   },
   {
@@ -2786,26 +3165,26 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.911647935970408,
-   "i_subcap_mAcm2": 6.8595745855940145,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 0.9181498798393476,
+   "i_subcap_mAcm2": 11.47058062203031,
+   "path": "c-control"
   },
   {
    "reaction": "Cu-catalyzed benzylic cyanation",
    "reactor": "Recirculating flow cell",
    "k_M": 100.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 2.3640533824044714,
-   "i_subcap_mAcm2": 6.8595745855940145,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 2.5029736330696633,
+   "i_subcap_mAcm2": 11.47058062203031,
+   "path": "c-control"
   },
   {
    "reaction": "Cu-catalyzed benzylic cyanation",
    "reactor": "Recirculating flow cell",
    "k_M": 1000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 5.0781441618039835,
-   "i_subcap_mAcm2": 6.8595745855940145,
+   "i_ec_mAcm2": 6.1987163537631425,
+   "i_subcap_mAcm2": 11.47058062203031,
    "path": "direct-ramp"
   },
   {
@@ -2813,8 +3192,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 6.974459925282296,
-   "i_subcap_mAcm2": 6.8595745855940145,
+   "i_ec_mAcm2": 10.387372313160803,
+   "i_subcap_mAcm2": 11.47058062203031,
    "path": "c-control"
   },
   {
@@ -2823,7 +3202,7 @@
    "k_M": 0.0,
    "delta_um": 36.2,
    "i_ec_mAcm2": 1.5040658705138017,
-   "i_subcap_mAcm2": 20.256589038674036,
+   "i_subcap_mAcm2": 33.87306819047072,
    "path": "direct-ramp"
   },
   {
@@ -2832,7 +3211,7 @@
    "k_M": 1.0,
    "delta_um": 36.2,
    "i_ec_mAcm2": 1.52165042862581,
-   "i_subcap_mAcm2": 20.256589038674036,
+   "i_subcap_mAcm2": 33.87306819047072,
    "path": "direct-ramp"
   },
   {
@@ -2841,7 +3220,7 @@
    "k_M": 10.0,
    "delta_um": 36.2,
    "i_ec_mAcm2": 1.669360716766682,
-   "i_subcap_mAcm2": 20.256589038674036,
+   "i_subcap_mAcm2": 33.87306819047072,
    "path": "direct-ramp"
   },
   {
@@ -2849,26 +3228,26 @@
    "reactor": "ANEC flow cell",
    "k_M": 100.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 2.8290913520993715,
-   "i_subcap_mAcm2": 20.256589038674036,
-   "path": "c-control"
+   "i_ec_mAcm2": 2.8582113230466235,
+   "i_subcap_mAcm2": 33.87306819047072,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cu-catalyzed benzylic cyanation",
    "reactor": "ANEC flow cell",
    "k_M": 1000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 7.373830250665989,
-   "i_subcap_mAcm2": 20.256589038674036,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 7.85019330483563,
+   "i_subcap_mAcm2": 33.87306819047072,
+   "path": "c-control"
   },
   {
    "reaction": "Cu-catalyzed benzylic cyanation",
    "reactor": "ANEC flow cell",
    "k_M": 10000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 15.489604986245356,
-   "i_subcap_mAcm2": 20.256589038674036,
+   "i_ec_mAcm2": 19.135777919188538,
+   "i_subcap_mAcm2": 33.87306819047072,
    "path": "direct-ramp"
   },
   {
@@ -2877,7 +3256,7 @@
    "k_M": 0.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 4.355774761007971,
-   "i_subcap_mAcm2": 58.663081856,
+   "i_subcap_mAcm2": 98.0964054796032,
    "path": "direct-ramp"
   },
   {
@@ -2886,7 +3265,7 @@
    "k_M": 1.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 4.365959737066446,
-   "i_subcap_mAcm2": 58.663081856,
+   "i_subcap_mAcm2": 98.0964054796032,
    "path": "direct-ramp"
   },
   {
@@ -2895,7 +3274,7 @@
    "k_M": 10.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 4.416884617358822,
-   "i_subcap_mAcm2": 58.663081856,
+   "i_subcap_mAcm2": 98.0964054796032,
    "path": "direct-ramp"
   },
   {
@@ -2903,17 +3282,17 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 100.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 4.9159484442241155,
-   "i_subcap_mAcm2": 58.663081856,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 4.917242124311333,
+   "i_subcap_mAcm2": 98.0964054796032,
+   "path": "c-control"
   },
   {
    "reaction": "Cu-catalyzed benzylic cyanation",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 8.781504497484201,
-   "i_subcap_mAcm2": 58.663081856,
+   "i_ec_mAcm2": 8.88393262148285,
+   "i_subcap_mAcm2": 98.0964054796032,
    "path": "direct-ramp"
   },
   {
@@ -2921,8 +3300,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 22.870916245402935,
-   "i_subcap_mAcm2": 58.663081856,
+   "i_ec_mAcm2": 24.55780426681801,
+   "i_subcap_mAcm2": 98.0964054796032,
    "path": "direct-ramp"
   },
   {
@@ -2931,7 +3310,7 @@
    "k_M": 0.0,
    "delta_um": 12.521638106453118,
    "i_ec_mAcm2": 4.3482477332210925,
-   "i_subcap_mAcm2": 58.56170869705094,
+   "i_subcap_mAcm2": 97.9268892832086,
    "path": "direct-ramp"
   },
   {
@@ -2940,7 +3319,7 @@
    "k_M": 1.0,
    "delta_um": 12.521638106453118,
    "i_ec_mAcm2": 4.35841510905871,
-   "i_subcap_mAcm2": 58.56170869705094,
+   "i_subcap_mAcm2": 97.9268892832086,
    "path": "direct-ramp"
   },
   {
@@ -2949,7 +3328,7 @@
    "k_M": 10.0,
    "delta_um": 12.521638106453118,
    "i_ec_mAcm2": 4.409251988246797,
-   "i_subcap_mAcm2": 58.56170869705094,
+   "i_subcap_mAcm2": 97.9268892832086,
    "path": "direct-ramp"
   },
   {
@@ -2957,17 +3336,17 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 100.0,
    "delta_um": 12.521638106453118,
-   "i_ec_mAcm2": 4.908778581825926,
-   "i_subcap_mAcm2": 58.56170869705094,
-   "path": "c-control"
+   "i_ec_mAcm2": 4.917620780127674,
+   "i_subcap_mAcm2": 97.9268892832086,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cu-catalyzed benzylic cyanation",
    "reactor": "RDE 1600 rpm",
    "k_M": 1000.0,
    "delta_um": 12.521638106453118,
-   "i_ec_mAcm2": 8.767564731474337,
-   "i_subcap_mAcm2": 58.56170869705094,
+   "i_ec_mAcm2": 8.870101212140678,
+   "i_subcap_mAcm2": 97.9268892832086,
    "path": "c-control"
   },
   {
@@ -2975,8 +3354,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 10000.0,
    "delta_um": 12.521638106453118,
-   "i_ec_mAcm2": 22.878696606571975,
-   "i_subcap_mAcm2": 58.56170869705094,
+   "i_ec_mAcm2": 24.56976498083445,
+   "i_subcap_mAcm2": 97.9268892832086,
    "path": "direct-ramp"
   },
   {
@@ -2985,7 +3364,7 @@
    "k_M": 0.0,
    "delta_um": 10.33676269222064,
    "i_ec_mAcm2": 5.267334283834929,
-   "i_subcap_mAcm2": 70.93986241474487,
+   "i_subcap_mAcm2": 118.62563792993636,
    "path": "direct-ramp"
   },
   {
@@ -2993,8 +3372,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1.0,
    "delta_um": 10.33676269222064,
-   "i_ec_mAcm2": 5.269995650143667,
-   "i_subcap_mAcm2": 70.93986241474487,
+   "i_ec_mAcm2": 5.269995720312535,
+   "i_subcap_mAcm2": 118.62563792993636,
    "path": "c-control"
   },
   {
@@ -3003,7 +3382,7 @@
    "k_M": 10.0,
    "delta_um": 10.33676269222064,
    "i_ec_mAcm2": 5.316600076045388,
-   "i_subcap_mAcm2": 70.93986241474487,
+   "i_subcap_mAcm2": 118.62563792993636,
    "path": "direct-ramp"
   },
   {
@@ -3011,8 +3390,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 100.0,
    "delta_um": 10.33676269222064,
-   "i_ec_mAcm2": 5.735435696160554,
-   "i_subcap_mAcm2": 70.93986241474487,
+   "i_ec_mAcm2": 5.736489855602078,
+   "i_subcap_mAcm2": 118.62563792993636,
    "path": "c-control"
   },
   {
@@ -3020,8 +3399,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1000.0,
    "delta_um": 10.33676269222064,
-   "i_ec_mAcm2": 9.197877764934686,
-   "i_subcap_mAcm2": 70.93986241474487,
+   "i_ec_mAcm2": 9.2604597327053,
+   "i_subcap_mAcm2": 118.62563792993636,
    "path": "c-control"
   },
   {
@@ -3029,9 +3408,9 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10000.0,
    "delta_um": 10.33676269222064,
-   "i_ec_mAcm2": 23.761544603105296,
-   "i_subcap_mAcm2": 70.93986241474487,
-   "path": "c-control"
+   "i_ec_mAcm2": 25.13601100875765,
+   "i_subcap_mAcm2": 118.62563792993636,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic Ni aryl-aryl homocoupling",
@@ -3039,7 +3418,7 @@
    "k_M": 0.0,
    "delta_um": 228.0,
    "i_ec_mAcm2": 1.720053468567918,
-   "i_subcap_mAcm2": 13.030922885586705,
+   "i_subcap_mAcm2": 17.721562491947363,
    "path": "direct-ramp"
   },
   {
@@ -3047,17 +3426,17 @@
    "reactor": "Unstirred batch",
    "k_M": 1.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 5.729205760357759,
-   "i_subcap_mAcm2": 13.030922885586705,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 5.975919436007442,
+   "i_subcap_mAcm2": 17.721562491947363,
+   "path": "c-control"
   },
   {
    "reaction": "Cathodic Ni aryl-aryl homocoupling",
    "reactor": "Unstirred batch",
    "k_M": 10.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 11.721448762739278,
-   "i_subcap_mAcm2": 13.030922885586705,
+   "i_ec_mAcm2": 13.7357892186583,
+   "i_subcap_mAcm2": 17.721562491947363,
    "path": "direct-ramp"
   },
   {
@@ -3065,8 +3444,8 @@
    "reactor": "Unstirred batch",
    "k_M": 100.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 14.42002296609595,
-   "i_subcap_mAcm2": 13.030922885586705,
+   "i_ec_mAcm2": 18.58997465878629,
+   "i_subcap_mAcm2": 17.721562491947363,
    "path": "c-control"
   },
   {
@@ -3074,8 +3453,8 @@
    "reactor": "Unstirred batch",
    "k_M": 1000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 14.71499681702182,
-   "i_subcap_mAcm2": 13.030922885586705,
+   "i_ec_mAcm2": 19.37677905631767,
+   "i_subcap_mAcm2": 17.721562491947363,
    "path": "c-control"
   },
   {
@@ -3083,8 +3462,8 @@
    "reactor": "Unstirred batch",
    "k_M": 10000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 14.723974452033042,
-   "i_subcap_mAcm2": 13.030922885586705,
+   "i_ec_mAcm2": 19.40292575837494,
+   "i_subcap_mAcm2": 17.721562491947363,
    "path": "c-control"
   },
   {
@@ -3093,7 +3472,7 @@
    "k_M": 0.0,
    "delta_um": 200.0,
    "i_ec_mAcm2": 1.9608609541674271,
-   "i_subcap_mAcm2": 14.855252089568843,
+   "i_subcap_mAcm2": 20.202581240819995,
    "path": "direct-ramp"
   },
   {
@@ -3101,8 +3480,8 @@
    "reactor": "Stirred batch",
    "k_M": 1.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 5.864412679113406,
-   "i_subcap_mAcm2": 14.855252089568843,
+   "i_ec_mAcm2": 6.072653243382485,
+   "i_subcap_mAcm2": 20.202581240819995,
    "path": "c-control"
   },
   {
@@ -3110,8 +3489,8 @@
    "reactor": "Stirred batch",
    "k_M": 10.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 12.685395632840413,
-   "i_subcap_mAcm2": 14.855252089568843,
+   "i_ec_mAcm2": 14.620647242357505,
+   "i_subcap_mAcm2": 20.202581240819995,
    "path": "direct-ramp"
   },
   {
@@ -3119,8 +3498,8 @@
    "reactor": "Stirred batch",
    "k_M": 100.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 16.30620092927211,
-   "i_subcap_mAcm2": 14.855252089568843,
+   "i_ec_mAcm2": 20.893371579751108,
+   "i_subcap_mAcm2": 20.202581240819995,
    "path": "c-control"
   },
   {
@@ -3128,8 +3507,8 @@
    "reactor": "Stirred batch",
    "k_M": 1000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 16.770758272077835,
-   "i_subcap_mAcm2": 14.855252089568843,
+   "i_ec_mAcm2": 22.069021063685625,
+   "i_subcap_mAcm2": 20.202581240819995,
    "path": "c-control"
   },
   {
@@ -3137,8 +3516,8 @@
    "reactor": "Stirred batch",
    "k_M": 10000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 16.785447273701234,
-   "i_subcap_mAcm2": 14.855252089568843,
+   "i_ec_mAcm2": 22.119671938495156,
+   "i_subcap_mAcm2": 20.202581240819995,
    "path": "c-control"
   },
   {
@@ -3147,7 +3526,7 @@
    "k_M": 0.0,
    "delta_um": 106.9,
    "i_ec_mAcm2": 3.668589250079377,
-   "i_subcap_mAcm2": 27.792800915937978,
+   "i_subcap_mAcm2": 37.79715854222638,
    "path": "direct-ramp"
   },
   {
@@ -3155,17 +3534,17 @@
    "reactor": "Recirculating flow cell",
    "k_M": 1.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 6.76336751516394,
-   "i_subcap_mAcm2": 27.792800915937978,
-   "path": "c-control"
+   "i_ec_mAcm2": 6.836476239678049,
+   "i_subcap_mAcm2": 37.79715854222638,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic Ni aryl-aryl homocoupling",
    "reactor": "Recirculating flow cell",
    "k_M": 10.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 16.541956474126813,
-   "i_subcap_mAcm2": 27.792800915937978,
+   "i_ec_mAcm2": 17.82598246617442,
+   "i_subcap_mAcm2": 37.79715854222638,
    "path": "direct-ramp"
   },
   {
@@ -3173,8 +3552,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 100.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 28.045754961644704,
-   "i_subcap_mAcm2": 27.792800915937978,
+   "i_ec_mAcm2": 34.285848121951375,
+   "i_subcap_mAcm2": 37.79715854222638,
    "path": "c-control"
   },
   {
@@ -3182,8 +3561,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 1000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 31.194387314931177,
-   "i_subcap_mAcm2": 27.792800915937978,
+   "i_ec_mAcm2": 40.6982196318441,
+   "i_subcap_mAcm2": 37.79715854222638,
    "path": "c-control"
   },
   {
@@ -3191,8 +3570,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 31.405181719794022,
-   "i_subcap_mAcm2": 27.792800915937978,
+   "i_ec_mAcm2": 41.378538882710366,
+   "i_subcap_mAcm2": 37.79715854222638,
    "path": "c-control"
   },
   {
@@ -3201,7 +3580,7 @@
    "k_M": 0.0,
    "delta_um": 36.2,
    "i_ec_mAcm2": 10.833485934626667,
-   "i_subcap_mAcm2": 82.07321596446877,
+   "i_subcap_mAcm2": 111.6164709437569,
    "path": "direct-ramp"
   },
   {
@@ -3210,7 +3589,7 @@
    "k_M": 1.0,
    "delta_um": 36.2,
    "i_ec_mAcm2": 12.277387801205904,
-   "i_subcap_mAcm2": 82.07321596446877,
+   "i_subcap_mAcm2": 111.6164709437569,
    "path": "direct-ramp"
   },
   {
@@ -3218,17 +3597,17 @@
    "reactor": "ANEC flow cell",
    "k_M": 10.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 20.94828131396517,
-   "i_subcap_mAcm2": 82.07321596446877,
-   "path": "c-control"
+   "i_ec_mAcm2": 21.207397114926692,
+   "i_subcap_mAcm2": 111.6164709437569,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic Ni aryl-aryl homocoupling",
    "reactor": "ANEC flow cell",
    "k_M": 100.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 51.226584757705815,
-   "i_subcap_mAcm2": 82.07321596446877,
+   "i_ec_mAcm2": 55.58712993263323,
+   "i_subcap_mAcm2": 111.6164709437569,
    "path": "direct-ramp"
   },
   {
@@ -3236,18 +3615,18 @@
    "reactor": "ANEC flow cell",
    "k_M": 1000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 84.00335914362455,
-   "i_subcap_mAcm2": 82.07321596446877,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 103.3202499183117,
+   "i_subcap_mAcm2": 111.6164709437569,
+   "path": "c-control"
   },
   {
    "reaction": "Cathodic Ni aryl-aryl homocoupling",
    "reactor": "ANEC flow cell",
    "k_M": 10000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 92.25094915563302,
-   "i_subcap_mAcm2": 82.07321596446877,
-   "path": "c-control"
+   "i_ec_mAcm2": 120.67100464884751,
+   "i_subcap_mAcm2": 111.6164709437569,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic Ni aryl-aryl homocoupling",
@@ -3255,7 +3634,7 @@
    "k_M": 0.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 31.37377526667883,
-   "i_subcap_mAcm2": 237.68403343310152,
+   "i_subcap_mAcm2": 323.2412998531199,
    "path": "direct-ramp"
   },
   {
@@ -3263,8 +3642,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 31.895316891083684,
-   "i_subcap_mAcm2": 237.68403343310152,
+   "i_ec_mAcm2": 31.89556165727136,
+   "i_subcap_mAcm2": 323.2412998531199,
    "path": "c-control"
   },
   {
@@ -3272,35 +3651,35 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 36.248570355854525,
-   "i_subcap_mAcm2": 237.68403343310152,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 36.2649331763306,
+   "i_subcap_mAcm2": 323.2412998531199,
+   "path": "c-control"
   },
   {
    "reaction": "Cathodic Ni aryl-aryl homocoupling",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 100.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 64.72696086534972,
-   "i_subcap_mAcm2": 237.68403343310152,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 65.61328237194117,
+   "i_subcap_mAcm2": 323.2412998531199,
+   "path": "c-control"
   },
   {
    "reaction": "Cathodic Ni aryl-aryl homocoupling",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 157.23645651001937,
-   "i_subcap_mAcm2": 237.68403343310152,
-   "path": "c-control"
+   "i_ec_mAcm2": 172.175002704153,
+   "i_subcap_mAcm2": 323.2412998531199,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic Ni aryl-aryl homocoupling",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 247.4566151784427,
-   "i_subcap_mAcm2": 237.68403343310152,
+   "i_ec_mAcm2": 306.95007807095124,
+   "i_subcap_mAcm2": 323.2412998531199,
    "path": "c-control"
   },
   {
@@ -3309,7 +3688,7 @@
    "k_M": 0.0,
    "delta_um": 10.749677834092756,
    "i_ec_mAcm2": 36.48222736403372,
-   "i_subcap_mAcm2": 276.3850660241222,
+   "i_subcap_mAcm2": 375.8732410890906,
    "path": "direct-ramp"
   },
   {
@@ -3317,8 +3696,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1.0,
    "delta_um": 10.749677834092756,
-   "i_ec_mAcm2": 36.93073207894326,
-   "i_subcap_mAcm2": 276.3850660241222,
+   "i_ec_mAcm2": 36.93088542496819,
+   "i_subcap_mAcm2": 375.8732410890906,
    "path": "c-control"
   },
   {
@@ -3326,8 +3705,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 10.0,
    "delta_um": 10.749677834092756,
-   "i_ec_mAcm2": 40.75785566836761,
-   "i_subcap_mAcm2": 276.3850660241222,
+   "i_ec_mAcm2": 40.772308649634674,
+   "i_subcap_mAcm2": 375.8732410890906,
    "path": "c-control"
   },
   {
@@ -3335,8 +3714,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 100.0,
    "delta_um": 10.749677834092756,
-   "i_ec_mAcm2": 67.53763063816875,
-   "i_subcap_mAcm2": 276.3850660241222,
+   "i_ec_mAcm2": 68.2836280310793,
+   "i_subcap_mAcm2": 375.8732410890906,
    "path": "direct-ramp"
   },
   {
@@ -3344,8 +3723,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1000.0,
    "delta_um": 10.749677834092756,
-   "i_ec_mAcm2": 165.1914375965807,
-   "i_subcap_mAcm2": 276.3850660241222,
+   "i_ec_mAcm2": 178.06394586054822,
+   "i_subcap_mAcm2": 375.8732410890906,
    "path": "direct-ramp"
   },
   {
@@ -3353,9 +3732,9 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 10000.0,
    "delta_um": 10.749677834092756,
-   "i_ec_mAcm2": 279.5609595557437,
-   "i_subcap_mAcm2": 276.3850660241222,
-   "path": "c-control"
+   "i_ec_mAcm2": 342.18510682081325,
+   "i_subcap_mAcm2": 375.8732410890906,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic Ni aryl-aryl homocoupling",
@@ -3363,7 +3742,7 @@
    "k_M": 0.0,
    "delta_um": 9.789933686425927,
    "i_ec_mAcm2": 40.0587178008412,
-   "i_subcap_mAcm2": 303.4801371569278,
+   "i_subcap_mAcm2": 412.7215135038464,
    "path": "direct-ramp"
   },
   {
@@ -3371,8 +3750,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1.0,
    "delta_um": 9.789933686425927,
-   "i_ec_mAcm2": 40.46078989650658,
-   "i_subcap_mAcm2": 303.4801371569278,
+   "i_ec_mAcm2": 40.46090292122321,
+   "i_subcap_mAcm2": 412.7215135038464,
    "path": "c-control"
   },
   {
@@ -3380,26 +3759,26 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10.0,
    "delta_um": 9.789933686425927,
-   "i_ec_mAcm2": 43.99277738221765,
-   "i_subcap_mAcm2": 303.4801371569278,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 43.99512361987418,
+   "i_subcap_mAcm2": 412.7215135038464,
+   "path": "c-control"
   },
   {
    "reaction": "Cathodic Ni aryl-aryl homocoupling",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 100.0,
    "delta_um": 9.789933686425927,
-   "i_ec_mAcm2": 69.6168900055096,
-   "i_subcap_mAcm2": 303.4801371569278,
-   "path": "c-control"
+   "i_ec_mAcm2": 70.22677386722177,
+   "i_subcap_mAcm2": 412.7215135038464,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic Ni aryl-aryl homocoupling",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1000.0,
    "delta_um": 9.789933686425927,
-   "i_ec_mAcm2": 169.29432633274098,
-   "i_subcap_mAcm2": 303.4801371569278,
+   "i_ec_mAcm2": 181.1075460209483,
+   "i_subcap_mAcm2": 412.7215135038464,
    "path": "c-control"
   },
   {
@@ -3407,8 +3786,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10000.0,
    "delta_um": 9.789933686425927,
-   "i_ec_mAcm2": 300.67566354484205,
-   "i_subcap_mAcm2": 303.4801371569278,
+   "i_ec_mAcm2": 364.0694046574007,
+   "i_subcap_mAcm2": 412.7215135038464,
    "path": "direct-ramp"
   },
   {
@@ -3416,8 +3795,8 @@
    "reactor": "Unstirred batch",
    "k_M": 0.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.0581968072937534,
-   "i_subcap_mAcm2": 0.8164909415892675,
+   "i_ec_mAcm2": 0.1939893576458448,
+   "i_subcap_mAcm2": 20.252779004336844,
    "path": "direct-ramp"
   },
   {
@@ -3425,17 +3804,17 @@
    "reactor": "Unstirred batch",
    "k_M": 1.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.1044046288915476,
-   "i_subcap_mAcm2": 0.8164909415892675,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 0.3527983916302601,
+   "i_subcap_mAcm2": 20.252779004336844,
+   "path": "c-control"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "Unstirred batch",
    "k_M": 10.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.2726536154225731,
-   "i_subcap_mAcm2": 0.8164909415892675,
+   "i_ec_mAcm2": 1.024913100285575,
+   "i_subcap_mAcm2": 20.252779004336844,
    "path": "direct-ramp"
   },
   {
@@ -3443,8 +3822,8 @@
    "reactor": "Unstirred batch",
    "k_M": 100.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.5929722300944583,
-   "i_subcap_mAcm2": 0.8164909415892675,
+   "i_ec_mAcm2": 3.0642218467992124,
+   "i_subcap_mAcm2": 20.252779004336844,
    "path": "direct-ramp"
   },
   {
@@ -3452,26 +3831,26 @@
    "reactor": "Unstirred batch",
    "k_M": 1000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.8243262223304806,
-   "i_subcap_mAcm2": 0.8164909415892675,
-   "path": "c-control"
+   "i_ec_mAcm2": 8.150891030652572,
+   "i_subcap_mAcm2": 20.252779004336844,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "Unstirred batch",
    "k_M": 10000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.8701917992938779,
-   "i_subcap_mAcm2": 0.8164909415892675,
-   "path": "c-control"
+   "i_ec_mAcm2": 15.807195944277652,
+   "i_subcap_mAcm2": 20.252779004336844,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "Stirred batch",
    "k_M": 0.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.0663443603148789,
-   "i_subcap_mAcm2": 0.9307996734117648,
+   "i_ec_mAcm2": 0.2211478677162632,
+   "i_subcap_mAcm2": 23.088168064944,
    "path": "direct-ramp"
   },
   {
@@ -3479,8 +3858,8 @@
    "reactor": "Stirred batch",
    "k_M": 1.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.1086873296722977,
-   "i_subcap_mAcm2": 0.9307996734117648,
+   "i_ec_mAcm2": 0.3654368971615608,
+   "i_subcap_mAcm2": 23.088168064944,
    "path": "direct-ramp"
   },
   {
@@ -3488,44 +3867,44 @@
    "reactor": "Stirred batch",
    "k_M": 10.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.2790689946089865,
-   "i_subcap_mAcm2": 0.9307996734117648,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 1.0275746613344834,
+   "i_subcap_mAcm2": 23.088168064944,
+   "path": "c-control"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "Stirred batch",
    "k_M": 100.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.6313512149846974,
-   "i_subcap_mAcm2": 0.9307996734117648,
-   "path": "c-control"
+   "i_ec_mAcm2": 3.0951709365317868,
+   "i_subcap_mAcm2": 23.088168064944,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "Stirred batch",
    "k_M": 1000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.9233950063978236,
-   "i_subcap_mAcm2": 0.9307996734117648,
-   "path": "c-control"
+   "i_ec_mAcm2": 8.411101358077763,
+   "i_subcap_mAcm2": 23.088168064944,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "Stirred batch",
    "k_M": 10000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.9904926323416832,
-   "i_subcap_mAcm2": 0.9307996734117648,
-   "path": "c-control"
+   "i_ec_mAcm2": 17.114599565131396,
+   "i_subcap_mAcm2": 23.088168064944,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "Recirculating flow cell",
    "k_M": 0.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.1241241540035153,
-   "i_subcap_mAcm2": 1.7414399876740223,
+   "i_ec_mAcm2": 0.4137471800117178,
+   "i_subcap_mAcm2": 43.19582425620955,
    "path": "direct-ramp"
   },
   {
@@ -3533,17 +3912,17 @@
    "reactor": "Recirculating flow cell",
    "k_M": 1.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.1494181992601163,
-   "i_subcap_mAcm2": 1.7414399876740223,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 0.498162159050136,
+   "i_subcap_mAcm2": 43.19582425620955,
+   "path": "c-control"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "Recirculating flow cell",
    "k_M": 10.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.3052326994417674,
-   "i_subcap_mAcm2": 1.7414399876740223,
+   "i_ec_mAcm2": 1.0532467536944663,
+   "i_subcap_mAcm2": 43.19582425620955,
    "path": "direct-ramp"
   },
   {
@@ -3551,8 +3930,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 100.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.790495941827475,
-   "i_subcap_mAcm2": 1.7414399876740223,
+   "i_ec_mAcm2": 3.201369672042016,
+   "i_subcap_mAcm2": 43.19582425620955,
    "path": "direct-ramp"
   },
   {
@@ -3560,8 +3939,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 1000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 1.4896114372987537,
-   "i_subcap_mAcm2": 1.7414399876740223,
+   "i_ec_mAcm2": 9.316206084534931,
+   "i_subcap_mAcm2": 43.19582425620955,
    "path": "c-control"
   },
   {
@@ -3569,17 +3948,17 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 1.8171725650463604,
-   "i_subcap_mAcm2": 1.7414399876740223,
-   "path": "c-control"
+   "i_ec_mAcm2": 22.89413034710486,
+   "i_subcap_mAcm2": 43.19582425620955,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "ANEC flow cell",
    "k_M": 0.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 0.3665434271540272,
-   "i_subcap_mAcm2": 5.142539632109198,
+   "i_ec_mAcm2": 1.2218114238467577,
+   "i_subcap_mAcm2": 127.55893958532596,
    "path": "direct-ramp"
   },
   {
@@ -3587,17 +3966,17 @@
    "reactor": "ANEC flow cell",
    "k_M": 1.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 0.3759712783590802,
-   "i_subcap_mAcm2": 5.142539632109198,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 1.251321423918524,
+   "i_subcap_mAcm2": 127.55893958532596,
+   "path": "c-control"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "ANEC flow cell",
    "k_M": 10.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 0.4520797499053255,
-   "i_subcap_mAcm2": 5.142539632109198,
+   "i_ec_mAcm2": 1.5069324996844184,
+   "i_subcap_mAcm2": 127.55893958532596,
    "path": "direct-ramp"
   },
   {
@@ -3605,17 +3984,17 @@
    "reactor": "ANEC flow cell",
    "k_M": 100.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 0.9548907118144462,
-   "i_subcap_mAcm2": 5.142539632109198,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 3.3129286034390044,
+   "i_subcap_mAcm2": 127.55893958532596,
+   "path": "c-control"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "ANEC flow cell",
    "k_M": 1000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 2.450380220262509,
-   "i_subcap_mAcm2": 5.142539632109198,
+   "i_ec_mAcm2": 10.081436684666702,
+   "i_subcap_mAcm2": 127.55893958532596,
    "path": "direct-ramp"
   },
   {
@@ -3623,17 +4002,17 @@
    "reactor": "ANEC flow cell",
    "k_M": 10000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 4.4983783745167925,
-   "i_subcap_mAcm2": 5.142539632109198,
-   "path": "c-control"
+   "i_ec_mAcm2": 29.22848086314275,
+   "i_subcap_mAcm2": 127.55893958532596,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 0.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 1.0615097650380627,
-   "i_subcap_mAcm2": 14.892794774588236,
+   "i_ec_mAcm2": 3.538365883460212,
+   "i_subcap_mAcm2": 369.410689039104,
    "path": "direct-ramp"
   },
   {
@@ -3641,8 +4020,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 1.064399197781505,
-   "i_subcap_mAcm2": 14.892794774588236,
+   "i_ec_mAcm2": 3.5479541786989595,
+   "i_subcap_mAcm2": 369.410689039104,
    "path": "c-control"
   },
   {
@@ -3650,17 +4029,17 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 1.0937770143260472,
-   "i_subcap_mAcm2": 14.892794774588236,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 3.64077527168623,
+   "i_subcap_mAcm2": 369.410689039104,
+   "path": "c-control"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 100.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 1.352039113434879,
-   "i_subcap_mAcm2": 14.892794774588236,
+   "i_ec_mAcm2": 4.516311746496057,
+   "i_subcap_mAcm2": 369.410689039104,
    "path": "direct-ramp"
   },
   {
@@ -3668,17 +4047,17 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 2.9825998193197467,
-   "i_subcap_mAcm2": 14.892794774588236,
-   "path": "c-control"
+   "i_ec_mAcm2": 10.424495422922096,
+   "i_subcap_mAcm2": 369.410689039104,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 7.547773075185718,
-   "i_subcap_mAcm2": 14.892794774588236,
+   "i_ec_mAcm2": 31.76040004153444,
+   "i_subcap_mAcm2": 369.410689039104,
    "path": "c-control"
   },
   {
@@ -3686,8 +4065,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 0.0,
    "delta_um": 11.971767594247522,
-   "i_ec_mAcm2": 1.108346946974775,
-   "i_subcap_mAcm2": 15.549912176026831,
+   "i_ec_mAcm2": 3.694489823249251,
+   "i_subcap_mAcm2": 385.7102618002366,
    "path": "direct-ramp"
   },
   {
@@ -3695,8 +4074,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1.0,
    "delta_um": 11.971767594247522,
-   "i_ec_mAcm2": 1.1111587567723256,
-   "i_subcap_mAcm2": 15.549912176026831,
+   "i_ec_mAcm2": 3.7038211043191014,
+   "i_subcap_mAcm2": 385.7102618002366,
    "path": "c-control"
   },
   {
@@ -3704,8 +4083,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 10.0,
    "delta_um": 11.971767594247522,
-   "i_ec_mAcm2": 1.1376112778480851,
-   "i_subcap_mAcm2": 15.549912176026831,
+   "i_ec_mAcm2": 3.7916399497262065,
+   "i_subcap_mAcm2": 385.7102618002366,
    "path": "c-control"
   },
   {
@@ -3713,8 +4092,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 100.0,
    "delta_um": 11.971767594247522,
-   "i_ec_mAcm2": 1.3878525235092167,
-   "i_subcap_mAcm2": 15.549912176026831,
+   "i_ec_mAcm2": 4.636109598933198,
+   "i_subcap_mAcm2": 385.7102618002366,
    "path": "direct-ramp"
   },
   {
@@ -3722,8 +4101,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1000.0,
    "delta_um": 11.971767594247522,
-   "i_ec_mAcm2": 3.003374872818812,
-   "i_subcap_mAcm2": 15.549912176026831,
+   "i_ec_mAcm2": 10.447853421384492,
+   "i_subcap_mAcm2": 385.7102618002366,
    "path": "direct-ramp"
   },
   {
@@ -3731,17 +4110,17 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 10000.0,
    "delta_um": 11.971767594247522,
-   "i_ec_mAcm2": 7.648597223123256,
-   "i_subcap_mAcm2": 15.549912176026831,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 31.820642372846876,
+   "i_subcap_mAcm2": 385.7102618002366,
+   "path": "c-control"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 0.0,
    "delta_um": 9.534973011661975,
-   "i_ec_mAcm2": 1.3916003796494214,
-   "i_subcap_mAcm2": 19.52390787626411,
+   "i_ec_mAcm2": 4.638667932164738,
+   "i_subcap_mAcm2": 484.2838681704808,
    "path": "direct-ramp"
   },
   {
@@ -3749,8 +4128,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1.0,
    "delta_um": 9.534973011661975,
-   "i_ec_mAcm2": 1.3948543166244394,
-   "i_subcap_mAcm2": 19.52390787626411,
+   "i_ec_mAcm2": 4.649514388748131,
+   "i_subcap_mAcm2": 484.2838681704808,
    "path": "direct-ramp"
   },
   {
@@ -3758,8 +4137,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10.0,
    "delta_um": 9.534973011661975,
-   "i_ec_mAcm2": 1.415111211514648,
-   "i_subcap_mAcm2": 19.52390787626411,
+   "i_ec_mAcm2": 4.716689538914048,
+   "i_subcap_mAcm2": 484.2838681704808,
    "path": "c-control"
   },
   {
@@ -3767,8 +4146,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 100.0,
    "delta_um": 9.534973011661975,
-   "i_ec_mAcm2": 1.6192233280204076,
-   "i_subcap_mAcm2": 19.52390787626411,
+   "i_ec_mAcm2": 5.399108009863285,
+   "i_subcap_mAcm2": 484.2838681704808,
    "path": "c-control"
   },
   {
@@ -3776,18 +4155,18 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1000.0,
    "delta_um": 9.534973011661975,
-   "i_ec_mAcm2": 3.106669856947595,
-   "i_subcap_mAcm2": 19.52390787626411,
-   "path": "c-control"
+   "i_ec_mAcm2": 10.660800088668164,
+   "i_subcap_mAcm2": 484.2838681704808,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Co-H alkene isomerization (catalytic)",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10000.0,
    "delta_um": 9.534973011661975,
-   "i_ec_mAcm2": 8.128247502587454,
-   "i_subcap_mAcm2": 19.52390787626411,
-   "path": "c-control"
+   "i_ec_mAcm2": 32.14447959758584,
+   "i_subcap_mAcm2": 484.2838681704808,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
@@ -3795,7 +4174,7 @@
    "k_M": 0.0,
    "delta_um": 228.0,
    "i_ec_mAcm2": 0.2705208586987901,
-   "i_subcap_mAcm2": 0.9833368550311546,
+   "i_subcap_mAcm2": 4.2373141636666665,
    "path": "direct-ramp"
   },
   {
@@ -3803,35 +4182,35 @@
    "reactor": "Unstirred batch",
    "k_M": 1.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 0.5347397705035449,
-   "i_subcap_mAcm2": 0.9833368550311546,
-   "path": "c-control"
+   "i_ec_mAcm2": 0.5856246460616779,
+   "i_subcap_mAcm2": 4.2373141636666665,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
    "reactor": "Unstirred batch",
    "k_M": 10.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 1.035050514638529,
-   "i_subcap_mAcm2": 0.9833368550311546,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.7391525615657526,
+   "i_subcap_mAcm2": 4.2373141636666665,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
    "reactor": "Unstirred batch",
    "k_M": 100.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 1.2658574093114654,
-   "i_subcap_mAcm2": 0.9833368550311546,
-   "path": "c-control"
+   "i_ec_mAcm2": 3.8067974692163298,
+   "i_subcap_mAcm2": 4.2373141636666665,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
    "reactor": "Unstirred batch",
    "k_M": 1000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 1.2867565799467564,
-   "i_subcap_mAcm2": 0.9833368550311546,
+   "i_ec_mAcm2": 4.591815404554875,
+   "i_subcap_mAcm2": 4.2373141636666665,
    "path": "c-control"
   },
   {
@@ -3839,8 +4218,8 @@
    "reactor": "Unstirred batch",
    "k_M": 10000.0,
    "delta_um": 228.0,
-   "i_ec_mAcm2": 1.2876575528560923,
-   "i_subcap_mAcm2": 0.9833368550311546,
+   "i_ec_mAcm2": 4.667780583912656,
+   "i_subcap_mAcm2": 4.2373141636666665,
    "path": "c-control"
   },
   {
@@ -3849,7 +4228,7 @@
    "k_M": 0.0,
    "delta_um": 200.0,
    "i_ec_mAcm2": 0.3083937789166208,
-   "i_subcap_mAcm2": 1.1210040147355165,
+   "i_subcap_mAcm2": 4.83053814658,
    "path": "direct-ramp"
   },
   {
@@ -3857,8 +4236,8 @@
    "reactor": "Stirred batch",
    "k_M": 1.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 0.5587471696327663,
-   "i_subcap_mAcm2": 1.1210040147355165,
+   "i_ec_mAcm2": 0.5980208425307806,
+   "i_subcap_mAcm2": 4.83053814658,
    "path": "direct-ramp"
   },
   {
@@ -3866,26 +4245,26 @@
    "reactor": "Stirred batch",
    "k_M": 10.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 1.120095682205111,
-   "i_subcap_mAcm2": 1.1210040147355165,
-   "path": "c-control"
+   "i_ec_mAcm2": 1.757350037249623,
+   "i_subcap_mAcm2": 4.83053814658,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
    "reactor": "Stirred batch",
    "k_M": 100.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 1.4328788492025908,
-   "i_subcap_mAcm2": 1.1210040147355165,
-   "path": "c-control"
+   "i_ec_mAcm2": 4.11623904735601,
+   "i_subcap_mAcm2": 4.83053814658,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
    "reactor": "Stirred batch",
    "k_M": 1000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 1.4666476192947535,
-   "i_subcap_mAcm2": 1.1210040147355165,
+   "i_ec_mAcm2": 5.200873293723685,
+   "i_subcap_mAcm2": 4.83053814658,
    "path": "c-control"
   },
   {
@@ -3893,8 +4272,8 @@
    "reactor": "Stirred batch",
    "k_M": 10000.0,
    "delta_um": 200.0,
-   "i_ec_mAcm2": 1.4679132216155757,
-   "i_subcap_mAcm2": 1.1210040147355165,
+   "i_ec_mAcm2": 5.319723309718075,
+   "i_subcap_mAcm2": 4.83053814658,
    "path": "c-control"
   },
   {
@@ -3903,7 +4282,7 @@
    "k_M": 0.0,
    "delta_um": 106.9,
    "i_ec_mAcm2": 0.5769762000310962,
-   "i_subcap_mAcm2": 2.097294695482725,
+   "i_subcap_mAcm2": 9.037489516520116,
    "path": "direct-ramp"
   },
   {
@@ -3911,8 +4290,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 1.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 0.7443397563670768,
-   "i_subcap_mAcm2": 2.097294695482725,
+   "i_ec_mAcm2": 0.7532505221708813,
+   "i_subcap_mAcm2": 9.037489516520116,
    "path": "c-control"
   },
   {
@@ -3920,8 +4299,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 1.4865555502010752,
-   "i_subcap_mAcm2": 2.097294695482725,
+   "i_ec_mAcm2": 1.7966659609244886,
+   "i_subcap_mAcm2": 9.037489516520116,
    "path": "direct-ramp"
   },
   {
@@ -3929,17 +4308,17 @@
    "reactor": "Recirculating flow cell",
    "k_M": 100.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 2.472808673663876,
-   "i_subcap_mAcm2": 2.097294695482725,
-   "path": "c-control"
+   "i_ec_mAcm2": 5.205289097207117,
+   "i_subcap_mAcm2": 9.037489516520116,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
    "reactor": "Recirculating flow cell",
    "k_M": 1000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 2.7322107736182875,
-   "i_subcap_mAcm2": 2.097294695482725,
+   "i_ec_mAcm2": 9.054687696773252,
+   "i_subcap_mAcm2": 9.037489516520116,
    "path": "c-control"
   },
   {
@@ -3947,8 +4326,8 @@
    "reactor": "Recirculating flow cell",
    "k_M": 10000.0,
    "delta_um": 106.9,
-   "i_ec_mAcm2": 2.746049031472956,
-   "i_subcap_mAcm2": 2.097294695482725,
+   "i_ec_mAcm2": 9.902123224683612,
+   "i_subcap_mAcm2": 9.037489516520116,
    "path": "c-control"
   },
   {
@@ -3957,7 +4336,7 @@
    "k_M": 0.0,
    "delta_um": 36.2,
    "i_ec_mAcm2": 1.703833032688512,
-   "i_subcap_mAcm2": 6.193392346605062,
+   "i_subcap_mAcm2": 26.688056058453043,
    "path": "direct-ramp"
   },
   {
@@ -3966,7 +4345,7 @@
    "k_M": 1.0,
    "delta_um": 36.2,
    "i_ec_mAcm2": 1.7688259157603998,
-   "i_subcap_mAcm2": 6.193392346605062,
+   "i_subcap_mAcm2": 26.688056058453043,
    "path": "direct-ramp"
   },
   {
@@ -3974,17 +4353,17 @@
    "reactor": "ANEC flow cell",
    "k_M": 10.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 2.2634313137143884,
-   "i_subcap_mAcm2": 6.193392346605062,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 2.2948611634136813,
+   "i_subcap_mAcm2": 26.688056058453043,
+   "path": "c-control"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
    "reactor": "ANEC flow cell",
    "k_M": 100.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 4.583621023461072,
-   "i_subcap_mAcm2": 6.193392346605062,
+   "i_ec_mAcm2": 5.659107057253732,
+   "i_subcap_mAcm2": 26.688056058453043,
    "path": "c-control"
   },
   {
@@ -3992,17 +4371,17 @@
    "reactor": "ANEC flow cell",
    "k_M": 1000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 7.40335321215681,
-   "i_subcap_mAcm2": 6.193392346605062,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 16.201160961596642,
+   "i_subcap_mAcm2": 26.688056058453043,
+   "path": "c-control"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
    "reactor": "ANEC flow cell",
    "k_M": 10000.0,
    "delta_um": 36.2,
-   "i_ec_mAcm2": 8.076434290970758,
-   "i_subcap_mAcm2": 6.193392346605062,
+   "i_ec_mAcm2": 27.071789282991308,
+   "i_subcap_mAcm2": 26.688056058453043,
    "path": "c-control"
   },
   {
@@ -4011,7 +4390,7 @@
    "k_M": 0.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 4.934300462665933,
-   "i_subcap_mAcm2": 17.93606423576826,
+   "i_subcap_mAcm2": 77.28861034528,
    "path": "direct-ramp"
   },
   {
@@ -4020,7 +4399,7 @@
    "k_M": 1.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 4.956443920239602,
-   "i_subcap_mAcm2": 17.93606423576826,
+   "i_subcap_mAcm2": 77.28861034528,
    "path": "direct-ramp"
   },
   {
@@ -4029,7 +4408,7 @@
    "k_M": 10.0,
    "delta_um": 12.5,
    "i_ec_mAcm2": 5.155735038402623,
-   "i_subcap_mAcm2": 17.93606423576826,
+   "i_subcap_mAcm2": 77.28861034528,
    "path": "direct-ramp"
   },
   {
@@ -4037,8 +4416,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 100.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 6.8184595882874675,
-   "i_subcap_mAcm2": 17.93606423576826,
+   "i_ec_mAcm2": 6.950240840172765,
+   "i_subcap_mAcm2": 77.28861034528,
    "path": "direct-ramp"
   },
   {
@@ -4046,8 +4425,8 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 1000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 14.038318906105804,
-   "i_subcap_mAcm2": 17.93606423576826,
+   "i_ec_mAcm2": 17.864595253549016,
+   "i_subcap_mAcm2": 77.28861034528,
    "path": "direct-ramp"
   },
   {
@@ -4055,9 +4434,9 @@
    "reactor": "Microfluidic cell (25 um gap)",
    "k_M": 10000.0,
    "delta_um": 12.5,
-   "i_ec_mAcm2": 21.781767528858808,
-   "i_subcap_mAcm2": 17.93606423576826,
-   "path": "c-control"
+   "i_ec_mAcm2": 50.11030454101353,
+   "i_subcap_mAcm2": 77.28861034528,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
@@ -4065,7 +4444,7 @@
    "k_M": 0.0,
    "delta_um": 10.255432088558708,
    "i_ec_mAcm2": 6.014252276326312,
-   "i_subcap_mAcm2": 21.861663264020727,
+   "i_subcap_mAcm2": 94.2044782680411,
    "path": "direct-ramp"
   },
   {
@@ -4073,8 +4452,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 1.0,
    "delta_um": 10.255432088558708,
-   "i_ec_mAcm2": 6.031609243423336,
-   "i_subcap_mAcm2": 21.861663264020727,
+   "i_ec_mAcm2": 6.031618625167437,
+   "i_subcap_mAcm2": 94.2044782680411,
    "path": "c-control"
   },
   {
@@ -4082,8 +4461,8 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 10.0,
    "delta_um": 10.255432088558708,
-   "i_ec_mAcm2": 6.192346256796552,
-   "i_subcap_mAcm2": 21.861663264020727,
+   "i_ec_mAcm2": 6.193278900334251,
+   "i_subcap_mAcm2": 94.2044782680411,
    "path": "c-control"
   },
   {
@@ -4091,26 +4470,26 @@
    "reactor": "RDE 1600 rpm",
    "k_M": 100.0,
    "delta_um": 10.255432088558708,
-   "i_ec_mAcm2": 7.633111063678507,
-   "i_subcap_mAcm2": 21.861663264020727,
-   "path": "c-control"
+   "i_ec_mAcm2": 7.721836595963445,
+   "i_subcap_mAcm2": 94.2044782680411,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
    "reactor": "RDE 1600 rpm",
    "k_M": 1000.0,
    "delta_um": 10.255432088558708,
-   "i_ec_mAcm2": 15.068643105576596,
-   "i_subcap_mAcm2": 21.861663264020727,
-   "path": "c-control"
+   "i_ec_mAcm2": 17.984921409998673,
+   "i_subcap_mAcm2": 94.2044782680411,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
    "reactor": "RDE 1600 rpm",
    "k_M": 10000.0,
    "delta_um": 10.255432088558708,
-   "i_ec_mAcm2": 25.533934096153654,
-   "i_subcap_mAcm2": 21.861663264020727,
+   "i_ec_mAcm2": 52.45709842083046,
+   "i_subcap_mAcm2": 94.2044782680411,
    "path": "c-control"
   },
   {
@@ -4119,7 +4498,7 @@
    "k_M": 0.0,
    "delta_um": 9.181126281621856,
    "i_ec_mAcm2": 6.717994491241058,
-   "i_subcap_mAcm2": 24.419749393480505,
+   "i_subcap_mAcm2": 105.22757226963402,
    "path": "direct-ramp"
   },
   {
@@ -4127,8 +4506,8 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1.0,
    "delta_um": 9.181126281621856,
-   "i_ec_mAcm2": 6.733525479067183,
-   "i_subcap_mAcm2": 24.419749393480505,
+   "i_ec_mAcm2": 6.733532213459106,
+   "i_subcap_mAcm2": 105.22757226963402,
    "path": "c-control"
   },
   {
@@ -4137,7 +4516,7 @@
    "k_M": 10.0,
    "delta_um": 9.181126281621856,
    "i_ec_mAcm2": 6.883808865370419,
-   "i_subcap_mAcm2": 24.419749393480505,
+   "i_subcap_mAcm2": 105.22757226963402,
    "path": "direct-ramp"
   },
   {
@@ -4145,31 +4524,31 @@
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 100.0,
    "delta_um": 9.181126281621856,
-   "i_ec_mAcm2": 8.195116857725518,
-   "i_subcap_mAcm2": 24.419749393480505,
-   "path": "c-control"
+   "i_ec_mAcm2": 8.263082977446462,
+   "i_subcap_mAcm2": 105.22757226963402,
+   "path": "direct-ramp"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 1000.0,
    "delta_um": 9.181126281621856,
-   "i_ec_mAcm2": 15.643730951331465,
-   "i_subcap_mAcm2": 24.419749393480505,
-   "path": "direct-ramp"
+   "i_ec_mAcm2": 18.077222515555416,
+   "i_subcap_mAcm2": 105.22757226963402,
+   "path": "c-control"
   },
   {
    "reaction": "Cathodic aryl-halide radical 5-exo cyclization",
    "reactor": "Rotating cylinder 3000 rpm",
    "k_M": 10000.0,
    "delta_um": 9.181126281621856,
-   "i_ec_mAcm2": 27.75148545255699,
-   "i_subcap_mAcm2": 24.419749393480505,
+   "i_ec_mAcm2": 53.46693656121089,
+   "i_subcap_mAcm2": 105.22757226963402,
    "path": "c-control"
   }
  ],
  "control": {
-  "cells": 77,
+  "cells": 84,
   "worst_rel": 0.0,
   "worst_cell": "Ni-catalyzed aryl amination (ArBr + amine) / Unstirred batch",
   "tolerance": 0.01,
@@ -4177,14 +4556,14 @@
  },
  "unresolved_cells": 0,
  "walls": {
-  "finite_k_cells": 385,
-  "wall_cells": 198,
+  "finite_k_cells": 420,
+  "wall_cells": 240,
   "without_plateau": 0,
-  "exhausted_fraction_max_walls": 0.0163,
-  "exhausted_fraction_median_walls": 0.00172,
-  "exhausted_fraction_max_all": 0.0171,
+  "exhausted_fraction_max_walls": 0.0111,
+  "exhausted_fraction_median_walls": 0.00171,
+  "exhausted_fraction_max_all": 0.0206,
   "undecidable_cells": 0,
-  "published_k0_cells_that_are_walls": 77
+  "published_k0_cells_that_are_walls": 84
  },
  "per_k": {
   "0": {
@@ -4195,7 +4574,7 @@
    ],
    "max_amplification": 1.0,
    "cells_at_substrate_cap": 0,
-   "cells": 77
+   "cells": 84
   },
   "1": {
    "clear25": 1,
@@ -4203,9 +4582,9 @@
    "rows_clearing25": [
     "Cathodic Ni aryl-aryl homocoupling"
    ],
-   "max_amplification": 6.3254301422352235,
+   "max_amplification": 7.489328470908829,
    "cells_at_substrate_cap": 0,
-   "cells": 77
+   "cells": 84
   },
   "10": {
    "clear25": 1,
@@ -4213,9 +4592,9 @@
    "rows_clearing25": [
     "Cathodic Ni aryl-aryl homocoupling"
    ],
-   "max_amplification": 14.497993407150728,
-   "cells_at_substrate_cap": 2,
-   "cells": 77
+   "max_amplification": 20.88997789141739,
+   "cells_at_substrate_cap": 0,
+   "cells": 84
   },
   "100": {
    "clear25": 1,
@@ -4223,154 +4602,167 @@
    "rows_clearing25": [
     "Cathodic Ni aryl-aryl homocoupling"
    ],
-   "max_amplification": 26.06489713005085,
-   "cells_at_substrate_cap": 11,
-   "cells": 77
+   "max_amplification": 45.38197661027984,
+   "cells_at_substrate_cap": 2,
+   "cells": 84
   },
   "1000": {
    "clear25": 2,
-   "clear50": 2,
+   "clear50": 1,
    "rows_clearing25": [
     "Cathodic Ni aryl-aryl homocoupling",
     "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)"
    ],
-   "max_amplification": 30.83701907172115,
-   "cells_at_substrate_cap": 24,
-   "cells": 77
+   "max_amplification": 63.25116544456821,
+   "cells_at_substrate_cap": 14,
+   "cells": 84
   },
   "10000": {
-   "clear25": 5,
+   "clear25": 7,
    "clear50": 3,
    "rows_clearing25": [
     "Cathodic Ni aryl-aryl homocoupling",
     "Cathodic aryl-halide radical 5-exo cyclization",
+    "Co-H alkene isomerization (catalytic)",
     "Co-H alkene reduction (e-HAT)",
-    "Electrochemical amination of ArX with NH3",
-    "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)"
+    "Cu-catalyzed benzylic cyanation",
+    "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
+    "Rh-catalyzed electrooxidative C-H alkenylation"
    ],
-   "max_amplification": 31.462780629472284,
-   "cells_at_substrate_cap": 45,
-   "cells": 77
+   "max_amplification": 81.48486152078478,
+   "cells_at_substrate_cap": 31,
+   "cells": 84
   }
  },
  "per_row": {
   "Ni-catalyzed aryl amination (ArBr + amine)": {
-   "i_k0_best_mAcm2": 2.7533035877402323,
-   "i_ec_best_mAcm2_at_kmax": 18.089223973710787,
-   "max_amplification": 8.560300120458068,
+   "i_k0_best_mAcm2": 1.3766517938701162,
+   "i_ec_best_mAcm2_at_kmax": 20.054185471986116,
+   "max_amplification": 41.4645020929363,
    "k_min_clearing25": null,
    "k_min_clearing50": null,
    "substrate_capped_at_kmax": false,
    "C_cat_M": 0.005,
-   "C_S_M": 0.05,
-   "wall_cells": 22
+   "C_S_M": 0.1,
+   "wall_cells": 31
   },
   "Electrochemical amination of ArX with NH3": {
-   "i_k0_best_mAcm2": 3.602899570468843,
-   "i_ec_best_mAcm2_at_kmax": 36.47374956938055,
-   "max_amplification": 16.122754114963133,
-   "k_min_clearing25": {
-    "k_M": 10000.0,
-    "reactor": "Rotating cylinder 3000 rpm",
-    "i_ec_mAcm2": 36.47374956938055,
-    "at_substrate_cap": false
-   },
+   "i_k0_best_mAcm2": 1.8014497852344216,
+   "i_ec_best_mAcm2_at_kmax": 24.170395721706964,
+   "max_amplification": 41.376614610904504,
+   "k_min_clearing25": null,
    "k_min_clearing50": null,
    "substrate_capped_at_kmax": false,
    "C_cat_M": 0.0052,
    "C_S_M": 0.104,
-   "wall_cells": 29
+   "wall_cells": 28
   },
   "Mn-catalyzed alkene diazidation": {
    "i_k0_best_mAcm2": 3.6039655626238982,
-   "i_ec_best_mAcm2_at_kmax": 19.958418979502113,
-   "max_amplification": 26.46020445067943,
+   "i_ec_best_mAcm2_at_kmax": 20.55782379214751,
+   "max_amplification": 37.52922678411256,
    "k_min_clearing25": null,
    "k_min_clearing50": null,
    "substrate_capped_at_kmax": false,
    "C_cat_M": 0.0026,
    "C_S_M": 0.051,
-   "wall_cells": 27
+   "wall_cells": 26
   },
-  "Co-catalyzed aza-Wacker cyclization": {
+  "Co-catalyzed allylic C-H amination": {
    "i_k0_best_mAcm2": 3.9617974905326743,
-   "i_ec_best_mAcm2_at_kmax": 17.71414725480754,
-   "max_amplification": 17.552888115895414,
+   "i_ec_best_mAcm2_at_kmax": 18.16851266524943,
+   "max_amplification": 22.506466825599272,
    "k_min_clearing25": null,
    "k_min_clearing50": null,
    "substrate_capped_at_kmax": false,
    "C_cat_M": 0.0033,
    "C_S_M": 0.033,
-   "wall_cells": 30
+   "wall_cells": 27
   },
   "Co-H alkene reduction (e-HAT)": {
    "i_k0_best_mAcm2": 8.145995628808334,
-   "i_ec_best_mAcm2_at_kmax": 55.18660795200552,
-   "max_amplification": 17.745145533099826,
+   "i_ec_best_mAcm2_at_kmax": 40.4895175259107,
+   "max_amplification": 14.360446421207174,
    "k_min_clearing25": {
     "k_M": 10000.0,
     "reactor": "Rotating cylinder 3000 rpm",
-    "i_ec_mAcm2": 55.18660795200552,
+    "i_ec_mAcm2": 40.4895175259107,
     "at_substrate_cap": false
    },
-   "k_min_clearing50": {
-    "k_M": 10000.0,
-    "reactor": "Rotating cylinder 3000 rpm",
-    "i_ec_mAcm2": 55.18660795200552,
-    "at_substrate_cap": false
-   },
+   "k_min_clearing50": null,
    "substrate_capped_at_kmax": false,
    "C_cat_M": 0.008,
-   "C_S_M": 0.08,
-   "wall_cells": 26
+   "C_S_M": 0.04,
+   "wall_cells": 29
   },
   "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)": {
-   "i_k0_best_mAcm2": 8.259910763220702,
-   "i_ec_best_mAcm2_at_kmax": 110.58578152615812,
-   "max_amplification": 16.124582944864684,
+   "i_k0_best_mAcm2": 4.129955381610351,
+   "i_ec_best_mAcm2_at_kmax": 103.08165250004866,
+   "max_amplification": 67.07359014373984,
    "k_min_clearing25": {
     "k_M": 1000.0,
     "reactor": "RDE 1600 rpm",
-    "i_ec_mAcm2": 60.76790911986075,
+    "i_ec_mAcm2": 37.53466110722433,
     "at_substrate_cap": false
    },
    "k_min_clearing50": {
-    "k_M": 1000.0,
+    "k_M": 10000.0,
     "reactor": "RDE 1600 rpm",
-    "i_ec_mAcm2": 60.76790911986075,
+    "i_ec_mAcm2": 103.08165250004866,
     "at_substrate_cap": false
    },
    "substrate_capped_at_kmax": false,
    "C_cat_M": 0.015,
    "C_S_M": 0.3,
-   "wall_cells": 23
+   "wall_cells": 26
   },
-  "Rh-catalyzed electrooxidative C-H alkenylation": {
-   "i_k0_best_mAcm2": 1.2301666395575257,
-   "i_ec_best_mAcm2_at_kmax": 20.045553452389132,
-   "max_amplification": 31.462780629472284,
+  "Doubly decarboxylative Csp3-Csp3": {
+   "i_k0_best_mAcm2": 3.7390638898370385,
+   "i_ec_best_mAcm2_at_kmax": 18.737882729936928,
+   "max_amplification": 11.31301475257927,
    "k_min_clearing25": null,
    "k_min_clearing50": null,
    "substrate_capped_at_kmax": false,
-   "C_cat_M": 0.0031,
+   "C_cat_M": 0.0058,
+   "C_S_M": 0.029,
+   "wall_cells": 26
+  },
+  "Rh-catalyzed electrooxidative C-H alkenylation": {
+   "i_k0_best_mAcm2": 2.4801746765272696,
+   "i_ec_best_mAcm2_at_kmax": 41.35118952520572,
+   "max_amplification": 34.099007374289926,
+   "k_min_clearing25": {
+    "k_M": 10000.0,
+    "reactor": "RDE 1600 rpm",
+    "i_ec_mAcm2": 41.35118952520572,
+    "at_substrate_cap": false
+   },
+   "k_min_clearing50": null,
+   "substrate_capped_at_kmax": false,
+   "C_cat_M": 0.00625,
    "C_S_M": 0.125,
    "wall_cells": 28
   },
   "Cu-catalyzed benzylic cyanation": {
    "i_k0_best_mAcm2": 5.267334283834929,
-   "i_ec_best_mAcm2_at_kmax": 23.761544603105296,
-   "max_amplification": 14.311571555608923,
-   "k_min_clearing25": null,
+   "i_ec_best_mAcm2_at_kmax": 25.13601100875765,
+   "max_amplification": 22.719315347389745,
+   "k_min_clearing25": {
+    "k_M": 10000.0,
+    "reactor": "Rotating cylinder 3000 rpm",
+    "i_ec_mAcm2": 25.13601100875765,
+    "at_substrate_cap": false
+   },
    "k_min_clearing50": null,
    "substrate_capped_at_kmax": false,
    "C_cat_M": 0.0038,
    "C_S_M": 0.038,
-   "wall_cells": 27
+   "wall_cells": 29
   },
   "Cathodic Ni aryl-aryl homocoupling": {
    "i_k0_best_mAcm2": 40.0587178008412,
-   "i_ec_best_mAcm2_at_kmax": 300.67566354484205,
-   "max_amplification": 8.560560907469952,
+   "i_ec_best_mAcm2_at_kmax": 364.0694046574007,
+   "max_amplification": 11.280591768367929,
    "k_min_clearing25": {
     "k_M": 0.0,
     "reactor": "Rotating cylinder 3000 rpm",
@@ -4380,40 +4772,50 @@
    "k_min_clearing50": {
     "k_M": 100.0,
     "reactor": "Rotating cylinder 3000 rpm",
-    "i_ec_mAcm2": 69.6168900055096,
+    "i_ec_mAcm2": 70.22677386722177,
     "at_substrate_cap": false
    },
-   "substrate_capped_at_kmax": true,
+   "substrate_capped_at_kmax": false,
    "C_cat_M": 0.03,
    "C_S_M": 0.3,
-   "wall_cells": 20
+   "wall_cells": 21
   },
   "Co-H alkene isomerization (catalytic)": {
-   "i_k0_best_mAcm2": 1.3916003796494214,
-   "i_ec_best_mAcm2_at_kmax": 8.128247502587454,
-   "max_amplification": 14.952569389270945,
-   "k_min_clearing25": null,
-   "k_min_clearing50": null,
-   "substrate_capped_at_kmax": false,
-   "C_cat_M": 0.0048,
-   "C_S_M": 0.08,
-   "wall_cells": 25
-  },
-  "Cathodic aryl-halide radical 5-exo cyclization": {
-   "i_k0_best_mAcm2": 6.717994491241058,
-   "i_ec_best_mAcm2_at_kmax": 27.75148545255699,
-   "max_amplification": 4.759919656656964,
+   "i_k0_best_mAcm2": 4.638667932164738,
+   "i_ec_best_mAcm2_at_kmax": 32.14447959758584,
+   "max_amplification": 81.48486152078478,
    "k_min_clearing25": {
     "k_M": 10000.0,
     "reactor": "Rotating cylinder 3000 rpm",
-    "i_ec_mAcm2": 27.75148545255699,
-    "at_substrate_cap": true
+    "i_ec_mAcm2": 32.14447959758584,
+    "at_substrate_cap": false
    },
    "k_min_clearing50": null,
-   "substrate_capped_at_kmax": true,
+   "substrate_capped_at_kmax": false,
+   "C_cat_M": 0.0032,
+   "C_S_M": 0.08,
+   "wall_cells": 28
+  },
+  "Cathodic aryl-halide radical 5-exo cyclization": {
+   "i_k0_best_mAcm2": 6.717994491241058,
+   "i_ec_best_mAcm2_at_kmax": 53.46693656121089,
+   "max_amplification": 17.254789912928555,
+   "k_min_clearing25": {
+    "k_M": 10000.0,
+    "reactor": "Rotating cylinder 3000 rpm",
+    "i_ec_mAcm2": 53.46693656121089,
+    "at_substrate_cap": false
+   },
+   "k_min_clearing50": {
+    "k_M": 10000.0,
+    "reactor": "Rotating cylinder 3000 rpm",
+    "i_ec_mAcm2": 53.46693656121089,
+    "at_substrate_cap": false
+   },
+   "substrate_capped_at_kmax": false,
    "C_cat_M": 0.01,
    "C_S_M": 0.05,
-   "wall_cells": 18
+   "wall_cells": 25
   }
  },
  "ten_of_eleven_survives_at_k": {
@@ -4426,21 +4828,25 @@
  },
  "sourced": {
   "file": "julia/catalyst_ec_sourced.csv",
-  "n_sourced": 7,
-  "n_floor": 4,
+  "n_sourced": 4,
+  "n_floor": 8,
   "rows_floor": [
+   "Ni-catalyzed aryl amination (ArBr + amine)",
+   "Electrochemical amination of ArX with NH3",
    "Mn-catalyzed alkene diazidation",
+   "Co-catalyzed allylic C-H amination",
+   "Doubly decarboxylative Csp3-Csp3",
    "Rh-catalyzed electrooxidative C-H alkenylation",
    "Cu-catalyzed benzylic cyanation",
    "Cathodic aryl-halide radical 5-exo cyclization"
   ],
   "control": {
-   "cells": 77,
+   "cells": 84,
    "worst_rel": 0.0,
    "tolerance": 0.01
   },
   "grid_check": {
-   "cells_on_grid": 35,
+   "cells_on_grid": 14,
    "max_rel_drift": 0.0
   },
   "per_row": {
@@ -4453,13 +4859,13 @@
     ],
     "xk_um": 4.743275942496564,
     "i_mAcm2": {
-     "natural": 14.42002296609595,
-     "stirred": 16.30620092927211,
-     "flow": 28.045754961644704,
-     "anec": 51.226584757705815,
-     "micro": 64.72696086534972,
-     "rde": 67.53763063816875,
-     "rce": 69.6168900055096
+     "natural": 18.58997465878629,
+     "stirred": 20.893371579751108,
+     "flow": 34.285848121951375,
+     "anec": 55.58712993263323,
+     "micro": 65.61328237194117,
+     "rde": 68.2836280310793,
+     "rce": 70.22677386722177
     },
     "i_k0_mAcm2": {
      "natural": 1.720053468567918,
@@ -4471,26 +4877,26 @@
      "rce": 40.0587178008412
     },
     "i_at_band_lo": {
-     "natural": 11.721448762739278,
-     "stirred": 12.685395632840413,
-     "flow": 16.541956474126813,
-     "anec": 20.94828131396517,
-     "micro": 36.248570355854525,
-     "rde": 40.75785566836761,
-     "rce": 43.99277738221765
+     "natural": 13.7357892186583,
+     "stirred": 14.620647242357505,
+     "flow": 17.82598246617442,
+     "anec": 21.207397114926692,
+     "micro": 36.2649331763306,
+     "rde": 40.772308649634674,
+     "rce": 43.99512361987418
     },
     "i_at_band_hi": {
-     "natural": 14.723974452033042,
-     "stirred": 16.785447273701234,
-     "flow": 31.405181719794022,
-     "anec": 92.25094915563302,
-     "micro": 247.4566151784427,
-     "rde": 279.5609595557437,
-     "rce": 300.67566354484205
+     "natural": 19.40292575837494,
+     "stirred": 22.119671938495156,
+     "flow": 41.378538882710366,
+     "anec": 120.67100464884751,
+     "micro": 306.95007807095124,
+     "rde": 342.18510682081325,
+     "rce": 364.0694046574007
     },
-    "gain_unstirred_to_rce": 4.827793282243125,
+    "gain_unstirred_to_rce": 3.7776691553492823,
     "gain_at_k0": 23.2892282320696,
-    "best_mAcm2": 69.6168900055096,
+    "best_mAcm2": 70.22677386722177,
     "best_k0_mAcm2": 40.0587178008412,
     "clear25_anywhere": true,
     "clear25_anywhere_at_band": [
@@ -4498,24 +4904,80 @@
      true
     ],
     "wall_cells": 3,
-    "cells_at_substrate_cap": 3
+    "cells_at_substrate_cap": 2
+   },
+   "Co-H alkene isomerization (catalytic)": {
+    "k_M": 700.0,
+    "basis": "Co-H+alkene: Boucher23 kMHAT",
+    "band_M": [
+     10.0,
+     10000.0
+    ],
+    "xk_um": 5.048514633038118,
+    "i_mAcm2": {
+     "natural": 7.102663349255751,
+     "stirred": 7.296978680128177,
+     "flow": 7.95123031631756,
+     "anec": 8.501917024392396,
+     "micro": 8.83512906449659,
+     "rde": 8.865289368776464,
+     "rce": 9.156437824539712
+    },
+    "i_k0_mAcm2": {
+     "natural": 0.1939893576458448,
+     "stirred": 0.2211478677162632,
+     "flow": 0.4137471800117178,
+     "anec": 1.2218114238467577,
+     "micro": 3.538365883460212,
+     "rde": 3.694489823249251,
+     "rce": 4.638667932164738
+    },
+    "i_at_band_lo": {
+     "natural": 1.024913100285575,
+     "stirred": 1.0275746613344834,
+     "flow": 1.0532467536944663,
+     "anec": 1.5069324996844184,
+     "micro": 3.64077527168623,
+     "rde": 3.7916399497262065,
+     "rce": 4.716689538914048
+    },
+    "i_at_band_hi": {
+     "natural": 15.807195944277652,
+     "stirred": 17.114599565131396,
+     "flow": 22.89413034710486,
+     "anec": 29.22848086314275,
+     "micro": 31.76040004153444,
+     "rde": 31.820642372846876,
+     "rce": 32.14447959758584
+    },
+    "gain_unstirred_to_rce": 1.2891555426879642,
+    "gain_at_k0": 23.911971195003836,
+    "best_mAcm2": 9.156437824539712,
+    "best_k0_mAcm2": 4.638667932164738,
+    "clear25_anywhere": false,
+    "clear25_anywhere_at_band": [
+     false,
+     true
+    ],
+    "wall_cells": 7,
+    "cells_at_substrate_cap": 0
    },
    "Co-H alkene reduction (e-HAT)": {
     "k_M": 700.0,
     "basis": "Co-H+alkene: Boucher23 kMHAT",
     "band_M": [
-     100.0,
+     10.0,
      10000.0
     ],
-    "xk_um": 4.135689612559019,
+    "xk_um": 5.8487483398464954,
     "i_mAcm2": {
-     "natural": 5.347857126945057,
-     "stirred": 5.961963809718114,
-     "flow": 9.299946215824535,
-     "anec": 14.440422149305778,
-     "micro": 17.084861532187883,
-     "rde": 17.383038947757182,
-     "rce": 17.87865128627132
+     "natural": 4.2431226595233325,
+     "stirred": 4.709575457833347,
+     "flow": 7.14000375476072,
+     "anec": 10.60684899752251,
+     "micro": 12.612967047042352,
+     "rde": 12.978277098511889,
+     "rce": 13.663673545813625
     },
     "i_k0_mAcm2": {
      "natural": 0.3254517034616813,
@@ -4527,201 +4989,33 @@
      "rce": 8.145995628808334
     },
     "i_at_band_lo": {
-     "natural": 3.962271174569536,
-     "stirred": 4.225983528305593,
-     "flow": 5.30196153683583,
-     "anec": 6.389821117432545,
-     "micro": 8.27288712703168,
-     "rde": 8.860471938283023,
-     "rce": 9.93741625754432
+     "natural": 1.3381841684540074,
+     "stirred": 1.3662221429624262,
+     "flow": 1.5011396211143997,
+     "anec": 2.406884804873447,
+     "micro": 6.0642723252360495,
+     "rde": 6.869100608681153,
+     "rce": 8.241233301787387
     },
     "i_at_band_hi": {
-     "natural": 5.775187841922785,
-     "stirred": 6.57325484237629,
-     "flow": 12.062429581153488,
-     "anec": 29.990929877976612,
-     "micro": 50.67542408667772,
-     "rde": 52.61616002030397,
-     "rce": 55.18660795200552
+     "natural": 4.67363175025208,
+     "stirred": 5.316404607522273,
+     "flow": 9.702309715693149,
+     "anec": 23.30576051027563,
+     "micro": 37.54926555211011,
+     "rde": 38.855547999592574,
+     "rce": 40.4895175259107
     },
-    "gain_unstirred_to_rce": 3.343143031288203,
+    "gain_unstirred_to_rce": 3.2201929197466534,
     "gain_at_k0": 25.029814077367227,
-    "best_mAcm2": 17.87865128627132,
+    "best_mAcm2": 13.663673545813625,
     "best_k0_mAcm2": 8.145995628808334,
     "clear25_anywhere": false,
     "clear25_anywhere_at_band": [
      false,
      true
     ],
-    "wall_cells": 3,
-    "cells_at_substrate_cap": 2
-   },
-   "Co-H alkene isomerization (catalytic)": {
-    "k_M": 700.0,
-    "basis": "Co-H+alkene: Boucher23 kMHAT",
-    "band_M": [
-     100.0,
-     10000.0
-    ],
-    "xk_um": 5.048514633038118,
-    "i_mAcm2": {
-     "natural": 0.8042345936819205,
-     "stirred": 0.8962613417184978,
-     "flow": 1.393045847680985,
-     "anec": 2.149107722343639,
-     "micro": 2.5602908513875153,
-     "rde": 2.5816575201636036,
-     "rce": 2.695710942404199
-    },
-    "i_k0_mAcm2": {
-     "natural": 0.0581968072937534,
-     "stirred": 0.0663443603148789,
-     "flow": 0.1241241540035153,
-     "anec": 0.3665434271540272,
-     "micro": 1.0615097650380627,
-     "rde": 1.108346946974775,
-     "rce": 1.3916003796494214
-    },
-    "i_at_band_lo": {
-     "natural": 0.5929722300944583,
-     "stirred": 0.6313512149846974,
-     "flow": 0.790495941827475,
-     "anec": 0.9548907118144462,
-     "micro": 1.352039113434879,
-     "rde": 1.3878525235092167,
-     "rce": 1.6192233280204076
-    },
-    "i_at_band_hi": {
-     "natural": 0.8701917992938779,
-     "stirred": 0.9904926323416832,
-     "flow": 1.8171725650463604,
-     "anec": 4.4983783745167925,
-     "micro": 7.547773075185718,
-     "rde": 7.648597223123256,
-     "rce": 8.128247502587454
-    },
-    "gain_unstirred_to_rce": 3.351896279495742,
-    "gain_at_k0": 23.911971195003854,
-    "best_mAcm2": 2.695710942404199,
-    "best_k0_mAcm2": 1.3916003796494214,
-    "clear25_anywhere": false,
-    "clear25_anywhere_at_band": [
-     false,
-     false
-    ],
-    "wall_cells": 3,
-    "cells_at_substrate_cap": 2
-   },
-   "Co-catalyzed aza-Wacker cyclization": {
-    "k_M": 10.0,
-    "basis": "own CV: Cai/Xu21 SI Fig S2, <=4e1 at rt",
-    "band_M": [
-     1.0,
-     100.0
-    ],
-    "xk_um": 59.88878581726855,
-    "i_mAcm2": {
-     "natural": 0.5810445332229909,
-     "stirred": 0.590695647321453,
-     "flow": 0.6535708881255778,
-     "anec": 1.1670174977425922,
-     "micro": 3.0683650789775108,
-     "rde": 3.2939353655074175,
-     "rce": 3.9988524943412416
-    },
-    "i_k0_mAcm2": {
-     "natural": 0.1658943355114886,
-     "stirred": 0.1891195424830969,
-     "flow": 0.3538251496409674,
-     "anec": 1.0448593507353423,
-     "micro": 3.0259126797295512,
-     "rde": 3.254006217270002,
-     "rce": 3.9617974905326743
-    },
-    "i_at_band_lo": {
-     "natural": 0.2368374382843429,
-     "stirred": 0.2530347250383449,
-     "flow": 0.3902280489025478,
-     "anec": 1.0573278120112255,
-     "micro": 3.0329880796042112,
-     "rde": 3.261614961347796,
-     "rce": 3.963615869108738
-    },
-    "i_at_band_hi": {
-     "natural": 1.4603668710806303,
-     "stirred": 1.519634234762251,
-     "flow": 1.742360658785025,
-     "anec": 2.0325746829069895,
-     "micro": 3.443509258937843,
-     "rde": 3.649660909315301,
-     "rce": 4.28602877385764
-    },
-    "gain_unstirred_to_rce": 6.882179016744279,
-    "gain_at_k0": 23.88145127630539,
-    "best_mAcm2": 3.9988524943412416,
-    "best_k0_mAcm2": 3.9617974905326743,
-    "clear25_anywhere": false,
-    "clear25_anywhere_at_band": [
-     false,
-     false
-    ],
-    "wall_cells": 6,
-    "cells_at_substrate_cap": 0
-   },
-   "Electrochemical amination of ArX with NH3": {
-    "k_M": 100.0,
-    "basis": "Ni(I)bpy+ArBr: Ting22/Kawamata19/Till21",
-    "band_M": [
-     10.0,
-     10000.0
-    ],
-    "xk_um": 5.4867848228546094,
-    "i_mAcm2": {
-     "natural": 1.9910072943389097,
-     "stirred": 2.20441165193955,
-     "flow": 3.2955113092671127,
-     "anec": 4.801980103208075,
-     "micro": 5.631502397467713,
-     "rde": 6.064882290196774,
-     "rce": 6.120194321209145
-    },
-    "i_k0_mAcm2": {
-     "natural": 0.1382977761874497,
-     "stirred": 0.1576594648536927,
-     "flow": 0.2949662579114923,
-     "anec": 0.8710467671474733,
-     "micro": 2.522551437659084,
-     "rde": 3.5043111125073154,
-     "rce": 3.602899570468843
-    },
-    "i_at_band_lo": {
-     "natural": 1.2463792886258829,
-     "stirred": 1.306882626647989,
-     "flow": 1.5391562847609803,
-     "anec": 1.8134354180802348,
-     "micro": 2.9352638401627407,
-     "rde": 3.8074900162394374,
-     "rce": 3.8977588494238145
-    },
-    "i_at_band_hi": {
-     "natural": 2.229741040116456,
-     "stirred": 2.541643686070026,
-     "flow": 4.742931534952269,
-     "anec": 13.418933013208653,
-     "micro": 30.319556949009776,
-     "rde": 36.01243092174189,
-     "rce": 36.47374956938055
-    },
-    "gain_unstirred_to_rce": 3.0739185831266798,
-    "gain_at_k0": 26.051753468439358,
-    "best_mAcm2": 6.120194321209145,
-    "best_k0_mAcm2": 3.602899570468843,
-    "clear25_anywhere": false,
-    "clear25_anywhere_at_band": [
-     false,
-     true
-    ],
-    "wall_cells": 3,
+    "wall_cells": 4,
     "cells_at_substrate_cap": 1
    },
    "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)": {
@@ -4733,108 +5027,52 @@
     ],
     "xk_um": 2.897355115733428,
     "i_mAcm2": {
-     "natural": 5.0136805340898825,
-     "stirred": 5.657019484305406,
-     "flow": 9.597364713394256,
-     "anec": 17.64174639106143,
-     "micro": 22.66570782058393,
-     "rde": 23.71828891260704,
-     "rce": 23.622144366066976
+     "natural": 7.281352196462868,
+     "stirred": 7.754580842339121,
+     "flow": 9.695296487133492,
+     "anec": 11.61213573944417,
+     "micro": 12.36545240312283,
+     "rde": 12.527024071893177,
+     "rce": 12.517110565527252
     },
     "i_k0_mAcm2": {
-     "natural": 0.3208918050878158,
-     "stirred": 0.3658166578001102,
-     "flow": 0.6844090884941259,
-     "anec": 2.02108650718293,
-     "micro": 5.853066524801763,
-     "rde": 8.259910763220702,
-     "rce": 8.033456198141105
+     "natural": 0.1604459025439079,
+     "stirred": 0.1829083289000551,
+     "flow": 0.3422045442470629,
+     "anec": 1.010543253591465,
+     "micro": 2.9265332624008815,
+     "rde": 4.129955381610351,
+     "rce": 4.016728099070552
     },
     "i_at_band_lo": {
-     "natural": 3.983106150312569,
-     "stirred": 4.304847570922145,
-     "flow": 5.715865026161339,
-     "anec": 7.259556759840113,
-     "micro": 8.964226855629759,
-     "rde": 10.609762680493455,
-     "rce": 10.44818915434774
+     "natural": 3.351711356910746,
+     "stirred": 3.4275628608720994,
+     "flow": 3.692968681706292,
+     "anec": 3.920714814951817,
+     "micro": 4.5445577325367585,
+     "rde": 5.338563253150014,
+     "rce": 5.256497644847588
     },
     "i_at_band_hi": {
-     "natural": 5.174246527465838,
-     "stirred": 5.89832214889893,
-     "flow": 11.03390044375992,
-     "anec": 32.26089812202886,
-     "micro": 85.07345694065835,
-     "rde": 110.58578152615812,
-     "rce": 108.48381158058442
+     "natural": 10.761682707472506,
+     "stirred": 12.240292713285752,
+     "flow": 22.406852993785325,
+     "anec": 55.562115598104256,
+     "micro": 93.95843417920054,
+     "rde": 103.08165250004866,
+     "rce": 102.55385625050197
     },
-    "gain_unstirred_to_rce": 4.711537603054525,
+    "gain_unstirred_to_rce": 1.719064018302508,
     "gain_at_k0": 25.034781414697253,
-    "best_mAcm2": 23.71828891260704,
-    "best_k0_mAcm2": 8.259910763220702,
+    "best_mAcm2": 12.527024071893177,
+    "best_k0_mAcm2": 4.129955381610351,
     "clear25_anywhere": false,
     "clear25_anywhere_at_band": [
      false,
      true
     ],
-    "wall_cells": 1,
-    "cells_at_substrate_cap": 2
-   },
-   "Ni-catalyzed aryl amination (ArBr + amine)": {
-    "k_M": 100.0,
-    "basis": "Ni(I)bpy+ArBr: Ting22/Kawamata19/Till21",
-    "band_M": [
-     10.0,
-     10000.0
-    ],
-    "xk_um": 7.0970416371894,
-    "i_mAcm2": {
-     "natural": 0.873793579540342,
-     "stirred": 0.980854562561652,
-     "flow": 1.6010748230155796,
-     "anec": 2.691392925976347,
-     "micro": 3.4924062362639603,
-     "rde": 3.9818124120696794,
-     "rce": 3.9306121201837514
-    },
-    "i_k0_mAcm2": {
-     "natural": 0.1069639350292719,
-     "stirred": 0.1219388859333699,
-     "flow": 0.2281363628313752,
-     "anec": 0.6736955023943096,
-     "micro": 1.9510221749339216,
-     "rde": 2.7533035877402323,
-     "rce": 2.677818732713703
-    },
-    "i_at_band_lo": {
-     "natural": 0.642071494710768,
-     "stirred": 0.6861110789109603,
-     "flow": 0.8682361940417131,
-     "anec": 1.1372095601078864,
-     "micro": 2.143504275057367,
-     "rde": 2.894938846345731,
-     "rce": 2.821832366819116
-    },
-    "i_at_band_hi": {
-     "natural": 0.9156361292514928,
-     "stirred": 1.0438334599439496,
-     "flow": 1.9518281846322576,
-     "anec": 5.679957894719118,
-     "micro": 14.339410960806966,
-     "rde": 18.089223973710787,
-     "rce": 17.78591518451773
-    },
-    "gain_unstirred_to_rce": 4.498330283282059,
-    "gain_at_k0": 25.034781414697274,
-    "best_mAcm2": 3.9818124120696794,
-    "best_k0_mAcm2": 2.7533035877402323,
-    "clear25_anywhere": false,
-    "clear25_anywhere_at_band": [
-     false,
-     false
-    ],
-    "wall_cells": 3,
-    "cells_at_substrate_cap": 2
+    "wall_cells": 4,
+    "cells_at_substrate_cap": 0
    }
   },
   "counts_over_eleven": {
@@ -4913,19 +5151,19 @@
     },
     "anec": {
      "25": 3,
-     "50": 1
+     "50": 2
     },
     "micro": {
      "25": 4,
-     "50": 3
+     "50": 2
     },
     "rde": {
      "25": 4,
-     "50": 3
+     "50": 2
     },
     "rce": {
      "25": 4,
-     "50": 3
+     "50": 2
     }
    },
    "k0": {
@@ -4997,7 +5235,7 @@
     ],
     "50": [
      -1,
-     0
+     1
     ]
    },
    "micro": {
@@ -5007,7 +5245,7 @@
     ],
     "50": [
      -1,
-     2
+     1
     ]
    },
    "rde": {
@@ -5017,7 +5255,7 @@
     ],
     "50": [
      -1,
-     2
+     1
     ]
    },
    "rce": {
@@ -5027,7 +5265,7 @@
     ],
     "50": [
      -1,
-     2
+     1
     ]
    }
   },
@@ -5042,11 +5280,11 @@
    true,
    false
   ],
-  "gain_sourced_min": 3.0739185831266798,
-  "gain_sourced_max": 6.882179016744279,
-  "gain_sourced_median": 4.498330283282059,
-  "gain_floor_median": 24.83355451241255,
-  "wall_cells": 22
+  "gain_sourced_min": 1.2891555426879642,
+  "gain_sourced_max": 3.7776691553492823,
+  "gain_sourced_median": 2.4696284690245807,
+  "gain_floor_median": 24.83355451241256,
+  "wall_cells": 18
  },
  "verdict": "PASS",
  "fails": []

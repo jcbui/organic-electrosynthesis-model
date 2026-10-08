@@ -27,8 +27,8 @@ JL = os.path.join(SEC4, "julia")
 SRC = os.path.join(JL, "run_mediated.jl")
 
 
-REGISTRY_ROW = "8 mediated-spec substrate D values"
-MAX_DECLARED_MOVE = 1          # entries of eight; a larger movement is a finding, not a disclosure
+REGISTRY_SUFFIX = "mediated-spec substrate D values"     # the row is named with its own count
+MAX_DECLARED_MOVE = 1          # entries; a larger movement is a finding, not a disclosure
 
 
 def movements(d):
@@ -42,12 +42,11 @@ def movements(d):
     return out
 
 
-def registry_sensitivity(name=REGISTRY_ROW):
+def registry_sensitivity():
     path = os.path.join(SEC4, "data", "parameters_provenance.csv")
-    for r in csv.DictReader(io.open(path, encoding="utf-8")):
-        if (r.get("parameter") or "").strip() == name:
-            return r.get("sensitivity") or ""
-    return None
+    hits = [r for r in csv.DictReader(io.open(path, encoding="utf-8"))
+            if (r.get("parameter") or "").strip().endswith(REGISTRY_SUFFIX)]
+    return (hits[0].get("sensitivity") or "") if len(hits) == 1 else None
 
 
 def verdict(d, quiet=False):
@@ -63,23 +62,23 @@ def verdict(d, quiet=False):
     fails = []
     if not moves:
         if not quiet:
-            print("G-DSUBSENS: PASS -- no >=25 or >=50 count moves across x%.2f-%.2f on all eight "
+            print("G-DSUBSENS: PASS -- no >=25 or >=50 count moves across x%.2f-%.2f on all the mediated "
                   "substrate diffusivities" % (min(d["scales"]), max(d["scales"])))
         return 0
     worst = max(abs(a - b) for _, _, _, b, a in moves)
     sens = registry_sensitivity()
     if sens is None:
-        fails.append("no registry row named %r, so the movement is published nowhere" % REGISTRY_ROW)
+        fails.append("no single registry row ends in %r, so the movement is published nowhere" % REGISTRY_SUFFIX)
         sens = ""
     if worst > MAX_DECLARED_MOVE:
-        fails.append("a count moves by %d entries of eight, beyond the declared bound of %d -- that is "
+        fails.append("a count moves by %d entries, beyond the declared bound of %d -- that is "
                      "a finding to report, not a sensitivity to restate" % (worst, MAX_DECLARED_MOVE))
     for _, arch, thr, b, a in moves:
         if arch not in sens or (">=%d" % thr) not in sens.replace("\u2265", ">="):
             fails.append("the registry row does not declare that the >=%d count of the %s moves "
                          "%d -> %d" % (thr, arch, b, a))
     if not quiet:
-        print("substrate-D sweep moved %d count(s), worst %d entr%s of eight:"
+        print("substrate-D sweep moved %d count(s), worst %d entr%s:"
               % (len(moves), worst, "y" if worst == 1 else "ies"))
         for sc, arch, thr, b, a in moves:
             print("    x%.2f  %-32s >=%d  %d -> %d" % (sc, arch, thr, b, a))
@@ -90,7 +89,7 @@ def verdict(d, quiet=False):
             print("G-DSUBSENS: FAIL -- the sweep and the published row disagree")
         return 1
     if not quiet:
-        print("G-DSUBSENS: PASS -- every count movement is within +/-%d of eight and is declared "
+        print("G-DSUBSENS: PASS -- every count movement is within +/-%d and is declared "
               "verbatim in the registry row that publishes this sweep" % MAX_DECLARED_MOVE)
     return 0
 
@@ -113,6 +112,10 @@ def patch(scale, tag):
     s = s.replace('open(joinpath(@__DIR__, "mediated_ec_matrix.csv"), "w")',
                   'open(joinpath(@__DIR__, "%s"), "w")' % out)
     p = os.path.join(JL, "_dsub_%s.jl" % tag)
+    nspec = len(re.findall(r'MedSpec\("', s))
+    if n != 2 * nspec:
+        raise SystemExit("patched %d substrate-D literals for %d MedSpecs; expected two each (the MedSpec "
+                         "field and the Sub species) -- the regex has drifted from the solver" % (n, nspec))
     io.open(p, "w", encoding="utf-8").write(s)
     return p, out, n
 
@@ -127,16 +130,40 @@ def counts(path):
 def main(scales):
     base = counts(os.path.join(JL, "mediated_ec_matrix.csv"))
     results = {}
-    for sc in scales:
+    ## the scales write to different files, so they are solved side by side
+    from concurrent.futures import ThreadPoolExecutor
+    def one(sc):
         tag = ("%g" % sc).replace(".", "p")
         p, out, n = patch(sc, tag)
         print("scale %.2f: patched %d substrate-D literals -> %s" % (sc, n, os.path.basename(p)))
         sys.stdout.flush()
         r = subprocess.run(["julia", os.path.basename(p)], cwd=JL, capture_output=True, text=True)
-        if r.returncode != 0:
-            print("   solver failed:", r.stderr[-400:]); continue
-        results[sc] = counts(os.path.join(JL, out))
         os.remove(p)
+        if r.returncode != 0:
+            print("   solver failed:", r.stderr[-400:]); return sc, None
+        return sc, counts(os.path.join(JL, out))
+    if "--from-files" in sys.argv:
+        ## Re-derive the summary from the scaled matrices already on disk, without solving: used when single rows of
+        ## them were re-solved in isolation (2026-10-05, two rows whose rate constant changed) and spliced in. Each
+        ## file must hold seven cells for every MedSpec of the live solver, or it is not this sweep's matrix.
+        want = set(re.findall(r'MedSpec\("([^"]+)"', io.open(SRC, encoding="utf-8").read()))
+        for sc in scales:
+            f = os.path.join(JL, "mediated_ec_matrix_%s.csv" % ("%g" % sc).replace(".", "p"))
+            rows = list(csv.DictReader(io.open(f, encoding="utf-8")))
+            have = {}
+            for r in rows:
+                have[r["reaction"]] = have.get(r["reaction"], 0) + 1
+            if set(have) != want or any(v != 7 for v in have.values()):
+                raise SystemExit("--from-files: %s does not hold seven cells for every MedSpec" % os.path.basename(f))
+            results[sc] = counts(f)
+        print("re-deriving the summary from the scaled matrices on disk (no solve)")
+    else:
+      with ThreadPoolExecutor(max_workers=len(scales)) as ex:
+        for sc, c in ex.map(one, scales):
+            if c is not None:
+                results[sc] = c
+    if len(results) != len(scales):
+        raise SystemExit("a scaled solve failed; no artifact written")
     print("\n%-28s %-16s %s" % ("reactor", "baseline (25/50)", "  ".join("x%.2f" % s for s in scales)))
     moved = False
     for k in sorted(base):
@@ -160,8 +187,8 @@ def main(scales):
                       for r in base_rows), key=lambda t: t[0])
     closest = {"reaction": margins[0][1], "reactor": margins[0][2], "i_mAcm2": margins[0][3],
                "margin_pct_to_25": 100.0 * margins[0][0]}
-    out = {"note": "G-DSUBSENS: all eight mediated substrate diffusivities scaled together, mediated matrix "
-                   "re-solved per scale; counts over the eight mediated rows per architecture. Written by "
+    out = {"note": "G-DSUBSENS: all mediated substrate diffusivities scaled together, mediated matrix "
+                   "re-solved per scale; counts over the mediated rows per architecture. Written by "
                    "data/sensitivity_substrate_D.py",
            "scales": scales, "base_counts": {k: list(v[:2]) for k, v in base.items()},
            "counts": {("%g" % sc): {k: list(v[:2]) for k, v in results[sc].items()} for sc in scales if sc in results},

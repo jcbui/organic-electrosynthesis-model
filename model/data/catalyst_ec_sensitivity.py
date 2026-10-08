@@ -33,7 +33,8 @@ SOURCED = os.path.join(ROOT, "julia", "catalyst_ec_sourced.csv")   # 2026-09-11:
 # (docs/CATALYST_RATE_CONSTANTS_20260911.md). Both edges are grid points of the declared-band sweep, so
 # the sensitivity of the published counts to the adoption is read off the sweep, never re-solved here.
 BANDS = {"Ni(I)bpy+ArBr": (10.0, 1e4),      # Ting 2022 (3.4-56, deactivated ligand, THF) .. Till 2021 (< 1e4, dtbbpy, DMF)
-         "Co-H+alkene": (100.0, 1e4),       # Boucher 2023 fit 7e2 for styrenes; alkene class and hydride source undeclared
+         "Co-H+alkene": (10.0, 1e4),        # Boucher 2023 7e2 for a styrene (simulation, qualitative agreement); the rows solve
+                                            # unactivated alkenes, expected slower, so the bracket runs a decade lower (audit 2026-10-05)
          "own CV": (1.0, 100.0)}            # Cai/Xu 2021 SI Fig. S2: <= 4e1 at room temperature with the reaction's base
 RMAP = {"Unstirred batch": "natural", "Stirred batch": "stirred", "Recirculating flow cell": "flow",
         "ANEC flow cell": "anec", "Microfluidic cell (25 um gap)": "micro", "RDE 1600 rpm": "rde",
@@ -55,8 +56,9 @@ def sourced_block(sw, pub, fails):
     for _, b in k0[k0.rel.abs() > CTRL_TOL].iterrows():
         fails.append("sourced control: %s / %s: k=0 solve %.4f vs published %.4f (%+.2f %%)" % (b.reaction, b.reactor, b.i_ec_mAcm2, b.i_np_mAcm2, 100 * b.rel))
     csk = cs[cs.k_M > 0].copy()
-    if len(csk) != 49 or csk.reaction.nunique() != 7:
-        fails.append("sourced: expected 49 cells over 7 rows, found %d over %d" % (len(csk), csk.reaction.nunique()))
+    # every sourced row is solved in all seven architectures (four rows since the chemistry audit of 2026-10-05, seven before)
+    if len(csk) != 7 * csk.reaction.nunique() or csk.reaction.nunique() < 1:
+        fails.append("sourced: expected 7 cells per row, found %d over %d rows" % (len(csk), csk.reaction.nunique()))
     g = csk.merge(sw[["reaction", "reactor", "k_M", "i_ec_mAcm2"]], on=["reaction", "reactor", "k_M"], how="left", suffixes=("", "_sw"))
     on_grid = g[g.i_ec_mAcm2_sw.notna()]
     drift = ((on_grid.i_ec_mAcm2 - on_grid.i_ec_mAcm2_sw) / on_grid.i_ec_mAcm2_sw).abs()
@@ -215,7 +217,7 @@ def main(negative_control=False):
     cells = [{"reaction": r.reaction, "reactor": r.reactor, "k_M": float(r.k_M), "delta_um": float(r.delta_um),
               "i_ec_mAcm2": float(r.i_ec_mAcm2), "i_subcap_mAcm2": float(r.i_subcap_mAcm2), "path": r.path}
              for r in sw.itertuples()]
-    res = {"k_band_M": ks, "D_S_rule": "1.0e-9 m2/s x (0.369 mPa s / mu_solvent), declared", "cells": cells,
+    res = {"k_band_M": ks, "n_rows": len(rows), "D_S_rule": "per-row Wilke-Chang on the exemplar's own substrate (data/catalyst_substrates.csv)", "cells": cells,
            "control": {"cells": int(len(k0)), "worst_rel": float(worst.rel) if worst is not None else None,
                        "worst_cell": (f"{worst.reaction} / {worst.reactor}" if worst is not None else None),
                        "tolerance": CTRL_TOL, "pass": len(bad) == 0},
@@ -231,12 +233,12 @@ def main(negative_control=False):
     print(f"G-CATK: control {len(k0)} cells, worst {100*res['control']['worst_rel']:+.3f} % ({res['control']['worst_cell']}); "
           f"unresolved {len(unres)}; walls {walls['wall_cells']}/{walls['finite_k_cells']} finite-k cells, exhausted species at plateau <= {100*walls['exhausted_fraction_max_walls']:.2f} % (all cells <= {100*walls['exhausted_fraction_max_all']:.2f} %), undecidable {walls['undecidable_cells']}")
     for k, v in per_k.items():
-        print(f"  k = {k:>6} M-1 s-1: {v['clear25']:2d} of 11 clear 25 in some architecture, {v['clear50']:2d} clear 50; "
-              f"max amplification x{v['max_amplification']:.1f}; 10-of-11 {'HOLDS' if survives[k] else 'FAILS'}"
+        print(f"  k = {k:>6} M-1 s-1: {v['clear25']:2d} of {len(rows)} clear 25 in some architecture, {v['clear50']:2d} clear 50; "
+              f"max amplification x{v['max_amplification']:.1f}; all-but-one-below-25 {'HOLDS' if survives[k] else 'FAILS'}"
               + (f"  [{', '.join(v['rows_clearing25'])}]" if v['rows_clearing25'] else ""))
     if srcd:
-        print(f"  sourced k (7 rows, 4 at the floor): control worst {100*srcd['control']['worst_rel']:+.3f} %, grid drift {srcd['grid_check']['max_rel_drift']:.1e} over {srcd['grid_check']['cells_on_grid']} cells; "
-              f"{srcd['rows_clearing25_anywhere']} of 11 clear 25 somewhere (band edges: {srcd['rows_clearing25_anywhere_at_band']}); gains x{srcd['gain_sourced_min']:.1f}-{srcd['gain_sourced_max']:.1f} (floor median x{srcd['gain_floor_median']:.1f}); "
+        print(f"  sourced k ({srcd['n_sourced']} rows, {srcd['n_floor']} at the floor): control worst {100*srcd['control']['worst_rel']:+.3f} %, grid drift {srcd['grid_check']['max_rel_drift']:.1e} over {srcd['grid_check']['cells_on_grid']} cells; "
+              f"{srcd['rows_clearing25_anywhere']} of {len(rows)} clear 25 somewhere (band edges: {srcd['rows_clearing25_anywhere_at_band']}); gains x{srcd['gain_sourced_min']:.1f}-{srcd['gain_sourced_max']:.1f} (floor median x{srcd['gain_floor_median']:.1f}); "
               f"largest count movement at a band edge: {srcd['max_abs_count_delta']}")
         for arch, d in srcd["count_delta_at_band_edges"].items():
             if any(x != 0 for t in d.values() for x in t): print(f"    {arch}: >=25 {d['25']}  >=50 {d['50']}  (lo, hi edge minus adopted)")

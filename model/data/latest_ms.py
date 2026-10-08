@@ -37,6 +37,14 @@ LINEAGES = [
     # reached it, and every manuscript gate was reading a file a day behind him.  Trap 35, one
     # directory lower: a resolver can be stale in a way no assertion inside the gates will ever see.
     (r"^(0?1)_Manuscript_tracked(?:_[A-Z]{2,4})?\.docx$", "pkg"),   # _JCB etc: his own save-as
+    # 2026-10-05: the resend package names each build `01_Manuscript_<what>_<date>_tracked.docx` with a
+    # `_clean` twin that reads identically (asserted by every build that writes the pair), and its base is
+    # the bare `01_Manuscript.docx`. None of the three matched, so every gate had gone back to a file a
+    # day older -- the warning below said so on the first run, which is what it is for.
+    (r"^(0?1)_Manuscript(?:_[A-Za-z0-9]+)+_(?:tracked|clean)\.docx$", "pkg"),
+    (r"^(0?1)_Manuscript\.docx$", "pkg"),
+    (r"^(0?1)_Manuscript_clean\.docx$", "pkg"),          # 2026-10-05 evening: the consolidated package pair
+    (r"^(0?1)_Manuscript_JCB\.docx$", "pkg"),           # 2026-10-07: his own save-as of that copy; a co-author's (_CWC) is not the draft
 ]
 # working copies, frozen bases and deliverables are not the draft under test
 EXCLUDE = re.compile(r"authorbase|_base|base_|snapshot|prerefresh|superseded|_accepted_|~\$", re.I)
@@ -48,7 +56,7 @@ def _walk():
     """every .docx under MS Drafts except the archive -- the author's live copy has twice now been
     one directory down from where a flat listdir looks."""
     for root, dirs, files in os.walk(MS_DIR):
-        dirs[:] = [d for d in dirs if not d.startswith("_archive") and d != "scripts"]
+        dirs[:] = [d for d in dirs if not d.startswith(("_archive", "_superseded")) and d != "scripts"]   # a retired build is not a candidate
         for f in files:
             if f.endswith(".docx"):
                 yield root, f

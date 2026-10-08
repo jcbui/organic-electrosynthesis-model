@@ -94,8 +94,8 @@ def main(neg=False):
     print("\n  MEASURED anchor (Williams/Manthiram, Sustain. Energy Fuels 2019, 3, 1225, p. 1227):")
     print("    planar electrode in a gas-bubbled cell, delta = %.0f +/- %.0f um for dissolved O2"
           % (MEASURED, MEASURED_SD))
-    print("    (D_O2 = 2.10e-5 cm2/s -- about twice these organics', so a thinner layer than they")
-    print("     would give, and still twice the declared value)")
+    print("    (D_O2 = 2.10e-5 cm2/s -- about twice these organics'; a convective film thickens with D,")
+    print("     so theirs is if anything thinner by ~20-30 pct, and the adopted 200 um is conservative)")
 
     print("\n  IDEALISED lower bound, Levich delta = 1.61 D^(1/3) nu^(1/6) omega^(-1/2) -- a")
     print("  ROTATING DISC, i.e. the thinnest layer a given rotation rate could ever produce:")

@@ -210,8 +210,20 @@ def main(neg=False):
         L = tbl[-1]
         blk = letters.get(L, "")
         # the block's ROWS, not just its caption: slice the SI from the block caption backwards
-        idx = si.find("Table S7" + L + ".")
-        seg = si[max(0, idx - 30000):idx] if idx > 0 else ""
+        # The CAPTION, not the first "Table S7d." in the text: prose cites a block with the same string, and a citation
+        # ending a sentence in Table S2 came first and was taken for the caption (chemistry audit, pass 4). A caption is
+        # the occurrence followed by its block's own title.
+        def _cap(letter):
+            t = letters.get(letter, "").strip()[:20]
+            c = [m.start() for m in re.finditer(re.escape("Table S7" + letter + "."), si)]
+            hit = [x for x in c if t and si[x + len("Table S7" + letter + "."):].lstrip().startswith(t)]
+            return hit[-1] if hit else (c[-1] if c else -1)
+        idx = _cap(L)
+        # The block runs from the previous block's caption to its own (captions follow their rows). A fixed 30,000-
+        # character window was used until pass 4, when longer generated sensitivities pushed two Table S7d rows
+        # outside it while they were still in the block.
+        prev = _cap(chr(ord(L) - 1)) if L > "a" else -1
+        seg = (si[prev:idx] if 0 <= prev < idx else si[max(0, idx - 30000):idx]) if idx > 0 else ""
         if neg:
             seg = ""
         miss = [w for w in words if w.lower() not in seg.lower()]

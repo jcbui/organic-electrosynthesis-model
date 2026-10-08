@@ -177,7 +177,10 @@ def tier_of(row):
     if RE_UNANCHORED.search(s):
         pass
     elif row.category in ("7. Reactors", "11. Numerics") or row.parameter == "Temperature T":
-        return "T1"
+        # A declared scenario is still a row a referee must read first when its own text records that a published
+        # number is conditional on it (chemistry audit, pass 4: the free-convection operating point governs the
+        # unstirred counts), so the conditionality test outranks the declared-choice blanket.
+        return "T3" if flags_conditionality(s) else "T1"
     # COUNT ONLY NUMERALS THAT COULD BE A PERTURBATION OR AN EFFECT.
     #
     # This used to be `len(RE_NUM.findall(s)) >= 2` over the raw text, so ANY two digits

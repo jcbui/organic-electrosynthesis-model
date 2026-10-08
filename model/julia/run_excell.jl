@@ -215,6 +215,50 @@ kLa = 0.05; V = 1e-4
 I_GL = 2 * F_const * kLa * C_P * V                 # A (2 e- per propylene)
 @printf("bulk G-L capacity (kLa=%.2f /s, 100 mL): %.1f A  vs cell current at 10 cm2: %.2f A\n",
         kLa, I_GL, i_op * 1e-3)
+## (3) THE PARTITION IS k-DEPENDENT (chemistry audit, pass 2, 2026-10-06). The split above is solved at the declared
+## HOCl constant. The SI had called it k-independent up to the fastest Cl2 constant measured with an olefin; it is
+## not: a faster oxidant meets the propylene nearer the film's outer edge, so the in-film share rises with k. The
+## reaction zone (x_k) is far thinner than the production mesh's outer cells, so this is solved on a mesh refined at
+## BOTH walls, and checked against one twice as fine; k is walked up from the HOCl value, each step seeded by the last.
+function twosided(d, dx1, Nf)
+    h = geometric_faces(d / 2, dx1, Nf ÷ 2)
+    vcat(h, reverse(d .- h[1:end-1]))
+end
+function infilm_at(ks, xf)
+    pk = make_problem(ks[1]; d = delta); pk = ECProblem(pk.sp, 2, 3, ks[1] / 1000.0, xf)
+    uk = zeros(nvars(pk))
+    for ix in 1:nnode(pk), j in 1:length(pk.sp)
+        uk[lidx(pk, ix, j)] = log(max(pk.sp[j].c_bulk, 1e-6))
+    end
+    okk = true
+    for frac in 0.05:0.05:1.0
+        okk &= newton_ec!(uk, pk, frac * i_op; max_iter = 120)
+    end
+    out = Tuple{Float64, Float64}[]
+    kprev = ks[1]
+    for k in ks
+        if k != ks[1]
+            for kk in exp.(range(log(kprev), log(k), length = 12))[2:end]
+                pk = ECProblem(pk.sp, 2, 3, kk / 1000.0, xf)
+                okk &= newton_ec!(uk, pk, i_op; max_iter = 200)
+            end
+        end
+        okk || error("k-sweep did not converge at k = $k; refusing to publish an unsolved partition")
+        r = sum(pk.k * exp(uk[lidx(pk, ix, 2)]) * exp(uk[lidx(pk, ix, 3)]) * pk.dxc[ix] for ix in 1:nnode(pk))
+        push!(out, (k, 100 * F_const * r / i_op)); kprev = k
+    end
+    out
+end
+KSW = [10.0, 1e2, 1e3, 1e4, 1e5, 1e6]
+KSW_A = infilm_at(KSW, twosided(delta, 0.01e-6, 400))
+KSW_B = infilm_at(KSW, twosided(delta, 0.005e-6, 800))
+mesh_dev = maximum(abs(a[2] - b[2]) for (a, b) in zip(KSW_A, KSW_B))
+mesh_dev < 0.05 || error("k-sweep partition is not mesh-converged (max change $(mesh_dev) points)")
+abs(KSW_A[1][2] - 100 * i_infilm / i_op) < 0.1 || error("k-sweep at the declared k does not reproduce the production split")
+for (k, f) in KSW_A
+    @printf("k = %8.3g M-1 s-1: in-film %.1f%%\n", k, f)
+end
+
 ## Emit the verdict numbers so the SI can be gated against them rather than against a
 ## transcript. Written by hand (no JSON dependency; this tree is Julia-stdlib only).
 ## The propylene-free zone is measured the same way the SI states it: the last cell whose
@@ -261,7 +305,9 @@ open(joinpath(@__DIR__, "..", "results", "excell.json"), "w") do io
     @printf(io, "  \"infilm_pct_half_delta\": %.6g,\n", 100*i_infilm_h/i_op)
     @printf(io, "  \"exported_pct_half_delta\": %.6g,\n", 100*(1 - i_infilm_h/i_op))
     @printf(io, "  \"c_OX_at_op_M\": %.6g,\n", exp(u[lidx(p, 1, 2)])/1000)
-    @printf(io, "  \"propylene_free_zone_um\": %.6g\n", zone_um)
+    @printf(io, "  \"propylene_free_zone_um\": %.6g,\n", zone_um)
+    @printf(io, "  \"k_sweep_mesh_dev_pct\": %.6g,\n", mesh_dev)
+    println(io, "  \"k_sweep\": [", join([@sprintf("{\"k_M\": %.6g, \"infilm_pct\": %.6g}", k, f) for (k, f) in KSW_A], ", "), "]")
     println(io, "}")
 end
 println("wrote results/excell.json")

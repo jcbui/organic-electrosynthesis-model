@@ -10,6 +10,7 @@
   "S4",
   "S4.1",
   "S4.2",
+  "S4.3",
   "S5",
   "S5.1",
   "S5.2",
@@ -32,6 +33,10 @@
  ],
  "tables": [
   "S1",
+  "S10",
+  "S11",
+  "S12",
+  "S14",
   "S2",
   "S3",
   "S4",
@@ -42,10 +47,10 @@
  ],
  "s7_letters": {
   "g": "Reactors ",
-  "a": "Physical constants ",
-  "b": "Solvents ",
-  "c": "Estimation methods ",
   "d": "Solver species diffusivities ",
+  "b": "Solvents ",
+  "a": "Physical constants ",
+  "c": "Estimation methods ",
   "e": "Concentrations ",
   "f": "Electrolyte conductivities ",
   "h": "Voltage stack ",
@@ -55,7 +60,7 @@
  },
  "figures": [],
  "n_equations": 33,
- "checked": 111,
+ "checked": 125,
  "failures": [
   "SI cites section S6.1, which has no heading in the SI",
   "SI cites Table S7, which has no caption in the SI",
@@ -66,10 +71,8 @@
   "a document cites Table S7k (Numerics) for 'Table S7k gives the size of that' but that block never mentions Residual scale c_ref"
  ],
  "orphan_subsections": [
+  "S1.1",
   "S3.2",
-  "S4.2",
-  "S6.4",
-  "S8.1",
-  "S9.0"
+  "S4.3"
  ]
 }

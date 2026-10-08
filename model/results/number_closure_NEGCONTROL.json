@@ -1,11 +1,11 @@
 {
  "tally": {
   "COSMETIC": 0,
-  "STRUCTURAL": 383,
-  "REGISTRY": 174,
-  "DATA": 24,
-  "GATED": 34,
-  "NAMED-GATE": 21
+  "STRUCTURAL": 475,
+  "REGISTRY": 225,
+  "DATA": 43,
+  "GATED": 46,
+  "NAMED-GATE": 26
  },
  "unaccounted": [
   {

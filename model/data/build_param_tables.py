@@ -49,6 +49,7 @@ covers everything else, plus the shared method constants those tables rely on.
 """
 import csv
 import io
+import re
 import json as _json
 import os as _os
 
@@ -66,28 +67,52 @@ _TG_PATH = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__fi
 with io.open(_TG_PATH, encoding="utf8") as _fh:
     _TG = _json.load(_fh)   # G-THERMGEO: what the unsourced gap and sigma are worth
 _TG_COND = _TG["conditional_on_inherited_gap"]
+# G-THERMAXIS: the cooling class of every verdict along the stack gap, the stack current, the inherited sigma and the charge
+with io.open(_os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))), "results", "thermal_axis_sweeps.json"),
+             encoding="utf8") as _fh:
+    _TAX = _json.load(_fh)
+_NICE_S = {"THF": "tetrahydrofuran", "MeCN": "acetonitrile", "DMF": "dimethylformamide", "aq. NaOH": "aqueous NaOH"}
+_ARCH_S = lambda a: ("rotating disc" if a.startswith("RDE") else "rotating cylinder" if "cyl" in a
+                     else "zero-gap stack" if "stack" in a else a)
+
+
+_KT_SIG_SAME = (sorted((f["reactor"], f["solvent"]) for f in _json.load(io.open(_os.path.join(_os.path.dirname(_os.path.dirname(
+    _os.path.abspath(__file__))), "results", "figK_kappaT_sensitivity.json"), encoding="utf-8"))["verdict_flips"])
+                == sorted((c["arch"], c["solvent"]) for c in _TG["conditional_on_sigma"]))
+_TG_ROW = lambda arch, solv: [r for r in _TG["rows"] if r["arch"] == arch and r["solvent"] == solv][0]
+assert sorted((c["arch"], c["solvent"]) for c in _TG_COND) == [("RDE 1600 rpm", "DMF"), ("RDE 1600 rpm", "MeCN")], _TG_COND
+import math as _m_tg
 _TG_CSIG = _TG["conditional_on_sigma"]
 _TG_ROWS = _TG["rows"]
 import sys as _sys_tg
 _sys_tg.path.insert(0, _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))), "figs"))
 import thermal_model as _TM_TG
+_LOB_A = (2 * (2 * 2.2) + 2 * (2 * 0.96) + 2 * (2.2 * 0.96)) * 6.4516   # Lobaccaro 2016 Fig. 1, cell B, end plates excluded (cm2 per cm2)
 _TG_SIGMA_B = _TM_TG.SIGMA_BEAKER
+# the architectures that INHERIT the beaker sigma (every reactor at the beaker value except the two beakers themselves),
+# named as G-THERMGEO's artifact names them
+_TG_INH = [r["arch"] for r in _TG_ROWS if r["solvent"] == "THF"
+           and not r["arch"].endswith("batch")
+           and any(abs(rx[2] - _TG_SIGMA_B) < 1e-12 and rx[0].replace("\n", " ").replace("$\\mu$", "u").split()[0] == r["arch"].split()[0]
+                   for rx in _TM_TG.REACTORS)]
 _TG_SENS_SIGMA = (
     "Swept as a breaking point rather than as a band, because no source states the "
     "heat-rejection area of these cells. sigma is the OTHER unsourced geometric term, and it is "
-    "the tighter of the two: %d verdicts reverse within a factor of 2.5 of the declared value "
-    "(%s). A cell with twice the outer surface per unit of electrode area is an ordinary "
+    "the tighter of the two: %d passive-cooling verdicts reverse within a factor of 2.5 of the declared value "
+    "(%s). "
+    "A cell with twice the outer surface per unit of electrode area is an ordinary "
     "variation, so these are published as conditional on the declared geometry rather than "
-    "as findings. Everything that CLEARS needs sigma to fall by a factor of %.0f to %.0f before it "
-    "would boil, and the tetrahydrofuran failure at the rotating cylinder needs a factor of %.0f, "
-    "so the robust half of the section is robust on this axis too. ONE of the four has external corroboration, and it runs in the safe direction: the parallel H-cell of Table S5 is built from two polycarbonate compartments of 2 x 2 x 0.22 in with a 1 cm2 cathode (Lobaccaro, Singh, Clark, Kwon, Bell & Ager, Phys. Chem. Chem. Phys. 2016, 18, 26777-26785, and its supporting information), which gives 74.3 cm2 of outer surface over 1 cm2 of electrode, i.e. sigma = 74.3 against the %.2f this model carries. The value used here is therefore conservative for that cell by a factor of %.1f, and adopting the sourced one would only widen a margin that already clears. It is NOT adopted, because one exemplar body is not the archetype and because that body is polycarbonate, whose wall conduction the balance omits (see the wall-conduction row). The other two rows on this value have no published body geometry at all, so they keep the beaker value."
+    "as findings. Among the %s architectures this row covers, everything that CLEARS needs sigma to fall by a factor "
+    "of %.1f to %.0f before it would boil, and the tetrahydrofuran failure at the rotating cylinder needs a factor of %.0f, "
+    "so the robust half of the section is robust on this axis too. One of the %s has external corroboration, and it runs in the safe direction: the parallel H-cell of Table S1 is a modification of the cell of Lobaccaro, Singh, Clark, Kwon, Bell & Ager (Watkins et al., ACS Energy Lett. 2023, SI Fig. S1c), whose two polycarbonate compartments are drawn 2 x 2.2 in and 0.48 in thick around a 1 cm2 cathode (Phys. Chem. Chem. Phys. 2016, 18, 26777-26785, Fig. 1, p. 26778); the two compartments alone present %.0f cm2 of outer surface over 1 cm2 of electrode, i.e. sigma ~ %.0f against the %.2f this model carries. The value used here is therefore conservative for that cell by a factor of about %.0f, and adopting the sourced one would only widen a margin that already clears. It is NOT adopted, because one exemplar body is not the archetype, the modified cell's own dimensions are not published, and that body is polycarbonate, whose wall conduction the balance omits (see the wall-conduction row). The other two architectures on this value have no published body geometry at all, so they keep the beaker value."
     % (len(_TG_CSIG),
        "; ".join("%s in %s at %.2fx" % (c["arch"], c["solvent"], c["flips_at_sigma_x"])
                  for c in _TG_CSIG),
-       min(1.0/r["sigma_flip_x"] for r in _TG_ROWS if r["verdict"] == "survives" and r["sigma_flip_x"]),
-       max(1.0/r["sigma_flip_x"] for r in _TG_ROWS if r["verdict"] == "survives" and r["sigma_flip_x"]),
+       {2: "two", 3: "three", 4: "four"}.get(len(_TG_INH), str(len(_TG_INH))),
+       min(1.0/r["sigma_flip_x"] for r in _TG_ROWS if r["verdict"] == "survives" and r["sigma_flip_x"] and r["arch"] in _TG_INH),
+       max(1.0/r["sigma_flip_x"] for r in _TG_ROWS if r["verdict"] == "survives" and r["sigma_flip_x"] and r["arch"] in _TG_INH),
        [r["sigma_flip_x"] for r in _TG_ROWS if r["arch"].startswith("rotating cyl") and r["solvent"] == "THF"][0],
-       _TG_SIGMA_B, 74.3 / _TG_SIGMA_B))
+       {2: "two", 3: "three", 4: "four"}.get(len(_TG_INH), str(len(_TG_INH))), _LOB_A, _LOB_A, _TG_SIGMA_B, _LOB_A / _TG_SIGMA_B))
 # The MeCN row used to state its Fig. 7 margins against two reactors that no longer exist (a 5 mm
 # flow cell and a 250 um microfluidic) and a declared 500 mA cm-2. They are computed here from the
 # same module the figure draws from, together with the conductivity at which each verdict would
@@ -136,8 +161,36 @@ _TH_SOL = [(lab, kap, tb) for lab, _el, kap, tb, _pv in _TM.SOLVENTS]
 _TH_OPEN = [r for r in _TH_RX if not ("microfluidic" in r[0] or "zero-gap" in r[0])]
 
 
+# The beaker cell voltage at 50 mA cm-2 is linear in 1/kappa (thermal_model.E_cell), so the conductivities at which it
+# leaves the 10-20 V band are closed-form: kappa = i L / (V - E_cell(i, kappa -> infinity)).
+_V_FLOOR = _TM.E_cell(50.0, 1e30, _TM.GAP_BEAKER)
+_V_KLO = 50.0 * 10.0 * _TM.GAP_BEAKER / (20.0 - _V_FLOOR)     # S/m at 20 V
+_V_KHI = 50.0 * 10.0 * _TM.GAP_BEAKER / (10.0 - _V_FLOOR)     # S/m at 10 V
+_TH_DMF_TB = [r[3] for r in _TM.SOLVENTS if r[0] == "DMF"][0]
+
+
 def _th_ceiling(kap, tb, r):
     return _TM.i_boil(kap, r[1], tb, _TM.U_passive(r[2], r[3]))
+
+
+def _th_ceiling_h(kap, tb, gap, sig, hint, hext):
+    """Boil-off ceiling with an explicit external film (the emissivity sweep); thermal_model.i_boil with U' rebuilt."""
+    return _TM.i_boil(kap, gap, tb, (1.0 / (1.0 / hint + 1.0 / hext)) * sig * 1e-4)
+
+
+def _vessel_sigma(d_m, v_m3=None):
+    """sigma of a right-cylinder vessel of inside diameter d holding the archetype's charge: wetted wall + base over the
+    declared electrode area (the construction of thermal_model.A_EXT_BEAKER, at another diameter)."""
+    v = _TM.CELL_VOLUME_M3 if v_m3 is None else v_m3
+    r = d_m / 2.0
+    h = v / (_math.pi * r ** 2)
+    return (_math.pi * d_m * h + _math.pi * r ** 2) / _TM.A_ELEC_M2
+
+
+def _h_rad(eps, ts_c=65.0, tsur=298.15):
+    """Linearised radiative coefficient eps sigma_SB (Ts + Tsur)(Ts^2 + Tsur^2), W m-2 K-1."""
+    ts = ts_c + 273.15
+    return eps * 5.670374419e-8 * (ts + tsur) * (ts ** 2 + tsur ** 2)
 
 
 def _th_margin(kap, tb, r):
@@ -160,11 +213,38 @@ _FILL_M = _TM._FILL_M
 _TH_MIC = [r for r in _TH_RX if "microfluidic" in r[0]][0]
 
 
+# chemistry audit pass 7: the DMF conductivity's attenuation, read from Dorn's measured NaI/methanol isotherm (Table SI 97)
+# at the molality that 0.2 M corresponds to. That conversion needs the solution density; with the apparent molar volume of
+# NaI anywhere in 0-35 cm3 mol-1 the molality is 0.254-0.256 mol kg-1. The earlier 0.539 took the solution density as the
+# pure solvent's (molality 0.264), which no physical apparent volume gives.
+def _nai_attenuation():
+    here = _os.path.dirname(_os.path.abspath(__file__))
+    with io.open(_os.path.join(here, "dorn_isotherms.csv"), encoding="utf8") as fh:
+        pts = sorted((float(r["m_mol_kg"]), float(r["kappa_mScm"])) for r in csv.DictReader(fh) if r["system"] == "NaI/MeOH")
+    with io.open(_os.path.join(here, "solvents.csv"), encoding="utf8") as fh:
+        rho0 = float([r for r in csv.DictReader(fh) if r["solvent"] == "MeOH"][0]["rho"])
+    c, L0 = 0.2, 45.23 + 62.63
+    def at(vphi):
+        m = c / (rho0 * (1.0 - c * vphi))
+        lo = max(p for p in pts if p[0] <= m); hi = min(p for p in pts if p[0] >= m)
+        k = lo[1] + (hi[1] - lo[1]) * (m - lo[0]) / (hi[0] - lo[0])
+        return m, k / c / L0
+    (m0, r0), (m1, r1) = at(0.0), at(0.035)
+    r = 0.5 * (r0 + r1)
+    return {"m_lo": m0, "m_hi": m1, "r_lo": r0, "r_hi": r1, "r": r, "k": round(0.2 * 81.35 * r, 2), "rho0": rho0}
+_NAI = _nai_attenuation()
+_NAI_K, _NAI_S = _NAI["k"], _NAI["k"] / 10.0
+with io.open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "electrolytes.csv"), encoding="utf8") as _fh:
+    _nai_carried = float([r for r in csv.DictReader(_fh) if r["electrolyte"] == "0.2 M NaI/DMF"][0]["kappa_mScm"])
+if abs(_nai_carried - _NAI_K) > 0.006:
+    raise SystemExit("0.2 M NaI/DMF: electrolytes.csv carries %.2f, the derivation gives %.2f" % (_nai_carried, _NAI_K))
+
+
 def _dmf_tss():
     """Passive steady state of the DMF beaker worked example at 100 mA cm-2. Typed as 187 C until
     2026-09-13; it moves with sigma, and the derived sigma raised it to 228 C."""
     b = _TH_RX[0]
-    return _TM.T_ss(100.0, 0.877, b[1], _TM.U_passive(b[2], b[3]))
+    return _TM.T_ss(100.0, _NAI_S, b[1], _TM.U_passive(b[2], b[3]))
 
 
 def _dmf_flip():
@@ -217,8 +297,8 @@ def _kappa_multiple(kap, tb, arch):
     return ((lo*hi)**0.5)/kap
 
 
-_DMF_FAILS = sorted([(r[0], _th_margin(0.877, 152.8, r), _kappa_multiple(0.877, 152.8, r[0]))
-                     for r in _TH_RX if r is not _TH_STACK and _th_margin(0.877, 152.8, r) < 1.0],
+_DMF_FAILS = sorted([(r[0], _th_margin(_NAI_S, 152.8, r), _kappa_multiple(_NAI_S, 152.8, r[0]))
+                     for r in _TH_RX if r is not _TH_STACK and _th_margin(_NAI_S, 152.8, r) < 1.0],
                     key=lambda t: t[2])
 _DMF_BIND = _DMF_FAILS[0]
 
@@ -240,17 +320,18 @@ _EVAP_Q = _TM.q_Wcm2(_EVAP_R[4], _EVAP_K, _EVAP_R[1])
 _EVAP_REJ = _TM.U_passive(_EVAP_R[2], _EVAP_R[3]) * (_EVAP_TB - _TM.TAMB)
 
 _TG_SENS = ("Swept as a breaking point rather than as a band, because no source states this cell's "
-            "electrode separation: %d of the %d architecture-solvent cells reverse their verdict "
-            "within a factor of 2.5 of the declared gap, and all %d are acetonitrile or "
-            "dimethylformamide at a rotating electrode (%s). The tetrahydrofuran verdicts at both "
-            "rotating cells need a gap below about 1.6 mm to reverse, which is no longer a "
+            "electrode separation: %s of the %d architecture-solvent cells reverse their verdict "
+            "within a factor of %.1f of a gap they inherit or declare from this one (%s). Those two verdicts are therefore "
+            "conditional on the gap. The tetrahydrofuran boil-off verdicts at the rotating disc and cylinder need gaps below about "
+            "%.1f and %.1f mm to reverse, which is no longer a "
             "beaker-scale cell, and the %d architectures sharing this gap (%s) hold boil-off "
-            "ceilings within %.1f pct of one another while their transport ceilings span %.1fx."
-            % (len(_TG_COND), _TH_NCELL, len(_TG_COND),
+            "ceilings whose lowest sits within %.1f pct of the highest in each electrolyte, while their transport ceilings span %.1fx."
+            % ({1: "one", 2: "two", 3: "three", 4: "four"}.get(len(_TG_COND), str(len(_TG_COND))), _TH_NCELL, 2.5,
                "; ".join("%s in %s at %.2fx" % (c["arch"], c["solvent"], c["flips_at_gap_x"])
                          for c in _TG_COND),
+               _TG_ROW("RDE 1600 rpm", "THF")["gap_flip_m"] * 1e3, _TG_ROW("rotating cyl. 3000 rpm", "THF")["gap_flip_m"] * 1e3,
                len(_TG["shared_gap_rows"]), ", ".join(_TG["shared_gap_rows"]),
-               100 * _TG["ceiling_spread_on_shared_gap"], _TG["transport_span_on_shared_gap"]))
+               _m_tg.ceil(1000 * _TG["ceiling_spread_on_shared_gap"]) / 10, _TG["transport_span_on_shared_gap"]))   # a "within" bound rounds up
 _SX_PATH = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))),
                          "results", "schmidt_extrapolation.json")
 with io.open(_SX_PATH, encoding="utf8") as _fh:
@@ -263,6 +344,9 @@ _FC_PATH = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__fi
                          "results", "free_convection_delta.json")
 with io.open(_FC_PATH, encoding="utf8") as _fh:
     _FC = _json.load(_fh)   # G-FREECONV: the unstirred-film derivation and its declared inputs
+# chemistry audit pass 4: "10 of the 12 clearing 25 mA cm-2 are concentrated rows" was typed; read it from G-DILUTE's artifact
+with io.open(_os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))), "results", "dilute_theory_stratify.json"), encoding="utf8") as _fh2:
+    _DS_STRATA = _json.load(_fh2)["strata"]
 _UD_PATH = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))),
                          "results", "unsourced_D_sensitivity.json")
 with io.open(_UD_PATH, encoding="utf8") as _fh:
@@ -277,7 +361,9 @@ if _UD.get("verdict") != "PASS" or any(v != 0 for v in _UD["max_rel_change"].val
     raise SystemExit("results/unsourced_D_sensitivity.json is not a clean zero (%s, %s); the "
                      "supporting-ion row's prose asserts one" % (_UD.get("verdict"), _UD["max_rel_change"]))
 _relfmt = lambda x: "exactly zero" if x == 0 else "%.1e" % x
-_numword = lambda n: ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"][n] if 0 <= n <= 9 else str(n)
+_NUMW = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve",
+         "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"]
+_numword = lambda n: _NUMW[n] if 0 <= n <= 20 else str(n)
 
 # How many reactor archetypes the model has, read from the published matrix rather than typed.
 # Three sensitivity rows said "the six architectures" after the 2026-09-07 re-anchoring made it
@@ -291,6 +377,24 @@ import csv as _csv
 with io.open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "carrier_charge.csv"), encoding="utf8") as _fh:
     _CC = [r for r in _csv.DictReader(l for l in _fh if not l.startswith("#"))]
 _CC_MED = [r for r in _CC if r["confidence"] != "high"]
+# How many rows each carrier class holds, read from the reaction table rather than typed. "the eight
+# mediated rows" and "the eleven catalyst rows" were literals in a dozen sentences that ship into
+# Table S7; the 2026-10-05 audit re-typed five rows and every one of them would have gone stale.
+_HERE_D = _os.path.dirname(_os.path.abspath(__file__))
+with io.open(_os.path.join(_HERE_D, "reactions_50.csv"), encoding="utf8") as _fh:
+    _RX50 = list(_csv.DictReader(_fh))
+_N_MED = sum(r["carrier_type"] == "mediator" for r in _RX50)
+_N_CAT = sum(r["carrier_type"] == "catalyst" for r in _RX50)
+_N_DIR = sum(r["carrier_type"] == "substrate" for r in _RX50)
+assert _N_MED + _N_CAT + _N_DIR == 50, "carrier types do not partition the fifty rows"
+_ALLBUT1 = "%s-of-%s" % (_numword(_N_CAT - 1), _numword(_N_CAT))
+with io.open(_os.path.join(_HERE_D, "catalyst_substrates.csv"), encoding="utf8") as _fh:
+    _CSUB = list(_csv.DictReader(_fh))
+with io.open(_os.path.join(_HERE_D, "mediated_substrates.csv"), encoding="utf8") as _fh:
+    _MSUB = list(_csv.DictReader(_fh))
+with io.open(_os.path.join(_HERE_D, "reaction_stoichiometry.csv"), encoding="utf8") as _fh:
+    _STOI = list(_csv.DictReader(_fh))
+assert len(_CSUB) == _N_CAT and len(_MSUB) == _N_MED and len(_STOI) == 50
 _KS_PATH = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))),
                          "results", "rate_constant_sensitivity.json")
 with io.open(_KS_PATH, encoding="utf8") as _fh:
@@ -319,16 +423,27 @@ def _cd_sentence():
     if not _CD:
         return "The radius sweep artifact is absent; run figs/analysis_catalyst_D_sensitivity.py."
     if _CD.get("conditional"):
-        return ("At the sourced rate constants (S5.7) the ten-of-eleven count is conditional on this radius: it breaks at "
-                "r_h = %.2f Angstrom on the deciding row (%s, %.1f mA cm-2 at best), inside the assigned band and above the "
+        return ("At the sourced rate constants (S5.7) the " + _ALLBUT1 + " count is conditional on this radius: it breaks at "
+                "r_h = %.2f Angstrom on the deciding row (%s, %.1f mA cm-2 at best), %s the assigned band and above the "
                 "%.2f Angstrom that size-scaling the ferrocene anchor predicts; the 1/r scaling is the k = 0 law and a bound "
-                "for the sourced rows, whose kinetic-regime ceiling goes as sqrt(D) and breaks at %.2f Angstrom. The carrier "
+                "for the sourced rows, whose kinetic-regime ceiling goes as sqrt(D) and breaks at %.2f Angstrom%s. The carrier "
                 "dichotomy -- the central mechanistic result -- is unaffected."
                 % (_CD["r_crit_from_4p5A"], _CD["deciding_row"].split(" (")[0], _CD["second_best_i_lim"],
-                   _CD["r_expected_deciding_A"], _CD["r_crit_sqrt_from_4p5A"]))
-    return ("All 11 catalyst-carried entries sit below 25 mA cm-2 in every architecture across the whole band; the "
-            "count breaks only at r_h = %.2f Angstrom, below the %.2f Angstrom expected for the deciding row. The carrier "
-            "dichotomy -- the central mechanistic result -- is unaffected." % (_CD["r_crit_from_4p5A"], _CD["r_expected_deciding_A"]))
+                   "inside" if _CD.get("in_band") else "below",
+                   _CD["r_expected_deciding_A"], _CD["r_crit_sqrt_from_4p5A"],
+                   "" if _CD.get("conditional_under_sqrt_law") else ", below that prediction"))
+    # chemistry review 2026-10-06: this branch said "All N ... sit below 25" whatever n_clear was, and once the homocoupling
+    # cleared 25 and the Co-H row fell (alprenolol at 0.04 M) the sentence contradicted Section 4. It reads n_clear now.
+    if _CD.get("n_clear", 0) == 0:
+        return ("All " + _numword(_N_CAT) + " catalyst-carried entries sit below 25 mA cm-2 in every architecture across the whole "
+                "band; the count breaks only at r_h = %.2f Angstrom, below the %.2f Angstrom expected for the deciding row. The "
+                "carrier dichotomy -- the central mechanistic result -- is unaffected." % (_CD["r_crit_from_4p5A"], _CD["r_expected_deciding_A"]))
+    if _CD["n_clear"] != 1:
+        raise SystemExit("the radius sentence names the %s count; G-CATD reports %d catalyst rows clearing 25" % (_ALLBUT1, _CD["n_clear"]))
+    return ("The " + _ALLBUT1 + " count holds across the whole band: no further catalyst-carried entry reaches 25 mA cm-2 in any "
+            "architecture until r_h = %.2f Angstrom on the deciding row (%s, %.1f mA cm-2 at best), below the %.2f Angstrom expected "
+            "for it. The carrier dichotomy -- the central mechanistic result -- is unaffected."
+            % (_CD["r_crit_from_4p5A"], _CD["deciding_row"].split(" (")[0], _CD["second_best_i_lim"], _CD["r_expected_deciding_A"]))
 
 
 def _ck_sci(k):
@@ -351,12 +466,13 @@ def _ck_sentence():
     if fail is None:
         core = "no catalyst row clears 25 mA cm-2 at any k up to %s M-1 s-1" % _ck_sci(kmax)
     else:
-        core = ("the ten-of-eleven result holds for k <= %s M-1 s-1 and fails at k = %s, where %d of the "
-                "eleven clear 25 mA cm-2 by k = %s" % (_ck_sci(hold), _ck_sci(fail), top["clear25"], _ck_sci(kmax)))
+        core = ("at most one row clears 25 mA cm-2 in any architecture for k <= %s M-1 s-1 and more than one does "
+                "from k = %s; by k = %s, %d of the %s clear it" % (_ck_sci(hold), _ck_sci(fail), _ck_sci(kmax),
+                                                                top["clear25"], _numword(_N_CAT)))
     ctrl = ("better than 0.01" if abs(_CK["control"]["worst_rel"]) < 1e-4
             else "%.2f" % (100 * abs(_CK["control"]["worst_rel"])))
-    return ("The published matrix runs the eleven catalyst-carried rows at k = 0, the floor of the EC' current. "
-            "Re-solved as EC' problems over the declared band, %s; the largest amplification in the class is "
+    return ("With all " + _numword(_N_CAT) + " catalyst-carried rows held at k = 0, the floor of the EC' current, and then "
+            "re-solved as EC' problems over the declared band, %s; the largest amplification in the class is "
             "%.1fx and %d of the %d cells sit at their substrate cap at the top of the band. %d of the %d finite-k "
             "cells end on a ramp wall; at the concentration-control plateau that follows, the exhausted species is at "
             "most %.2f pct of bulk at the electrode, so each is a lower bound tight to that fraction and no cell sits "
@@ -387,16 +503,15 @@ def _dsb_movement(d):
     worst = max(abs(a - b) for _, _, _, b, a in moves)
     scales_that_move = sorted({sc for sc, _, _, _, _ in moves})
     quiet = [float(sc) for sc in d["counts"] if float(sc) not in scales_that_move]
-    parts = ["the >=%d mA cm-2 count of the %s falls from %d to %d of the eight mediated rows"
-             % (thr, arch, b, a) if a < b else
-             "the >=%d mA cm-2 count of the %s rises from %d to %d of the eight mediated rows"
-             % (thr, arch, b, a)
-             for _, arch, thr, b, a in moves]
+    parts = ["at x%.2f the >=%d mA cm-2 count of the %s falls from %d to %d of the %s mediated rows"
+             % (float(sc), thr, arch, b, a, _numword(_N_MED)) if a < b else
+             "at x%.2f the >=%d mA cm-2 count of the %s rises from %d to %d of the %s mediated rows"
+             % (float(sc), thr, arch, b, a, _numword(_N_MED))
+             for sc, arch, thr, b, a in moves]
     txt = "; ".join(parts)
-    txt += ", in each case only at x%s" % ", x".join("%.2f" % sc for sc in scales_that_move)
     if quiet:
         txt += ", and nothing moves at x%s" % ", x".join("%.2f" % sc for sc in sorted(quiet))
-    txt += ". No count moves by more than %d entr%s of eight" % (worst, "y" if worst == 1 else "ies")
+    txt += ". No count moves by more than %d entr%s of %s" % (worst, "y" if worst == 1 else "ies", _numword(_N_MED))
     return txt, worst
 _SB_PATH = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))),
                          "results", "si_sensitivity_bounds.json")
@@ -406,6 +521,17 @@ if "status" in _SB:
     raise SystemExit("results/si_sensitivity_bounds.json has no transport bounds (%s); the flow-film "
                      "rows interpolate theirs from it -- run the band-edge solves and "
                      "data/si_sensitivity_bounds.py first" % _SB["status"])
+def _rot_band():
+    """The RDE and RCE rpm bands of Table S8, read from julia/emit_deltas.jl rather than typed."""
+    src = io.open(_os.path.join(_os.path.dirname(_HERE_D), "julia", "emit_deltas.jl"), encoding="utf8").read()
+    rde = sorted(float(x) for x in re.findall(r"delta_rde\(D, nu; rpm = ([0-9.]+)\)", src))
+    rce = sorted(float(x) for x in re.findall(r"km_rce\(D, nu; d = [0-9.]+, rpm = ([0-9.]+)\)", src))
+    if len(rde) != 2 or len(rce) != 2:
+        raise SystemExit("could not read the rotating-electrode bands from julia/emit_deltas.jl")
+    return rde, rce
+_RDE_BAND, _RCE_BAND = _rot_band()
+
+
 def _sbrow(key):
     """What a film's band does to its column, in the SI's own display convention (>= 100 mA cm-2 as a
     whole number, below that to one decimal); a band that collapses onto the value is said to."""
@@ -414,12 +540,74 @@ def _sbrow(key):
     if f(m["lower"]) == f(m["upper"]) and a["lower"] == a["upper"] and b["lower"] == b["upper"]:
         return ("a column that does not move: a median of %s mA cm-2, %d of 50 clearing 25 mA cm-2 and %d of 50 "
                 "clearing 50 at both ends" % (f(m["value"]), a["value"], b["value"]))
-    return ("a median of %s-%s mA cm-2 about %s, %d-%d of 50 clearing 25 mA cm-2 about %d and "
-            "%d-%d of 50 clearing 50 about %d" % (f(m["lower"]), f(m["upper"]), f(m["value"]), a["lower"], a["upper"],
-                                                  a["value"], b["lower"], b["upper"], b["value"]))
+    rng = lambda c: ("%d-%d of 50 (about %d)" % (c["lower"], c["upper"], c["value"])) if c["lower"] != c["upper"] else "%d of 50 throughout" % c["value"]
+    return ("a median of %s-%s mA cm-2 about %s, %s clearing 25 mA cm-2 and %s clearing 50"
+            % (f(m["lower"]), f(m["upper"]), f(m["value"]), rng(a), rng(b)))
 _FCS = _FC["sensitivity_um"]
 _FC_ENV_LO = _FCS["h_5mm"] * _FCS["drho_1e-2"] / _FC["delta_centre_um"]
 _FC_ENV_HI = _FCS["h_80mm"] * _FCS["drho_1e-3"] / _FC["delta_centre_um"]
+# chemistry audit, pass 4: these sensitivities read the published matrix and the sweep artifacts rather than quoting
+# numbers from a retired matrix (they had: an eight-row, six-archetype mediated matrix and a 300 um unstirred film).
+import statistics as _st
+_ROOT_P4 = _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+def _pub_col(a):
+    with io.open(_os.path.join(_ROOT_P4, "julia", "tier0_ec_matrix.csv"), encoding="utf8") as fh:
+        return [float(r[a]) for r in csv.DictReader(fh)]
+with io.open(_os.path.join(_ROOT_P4, "julia", "mediated_ec_matrix.csv"), encoding="utf8") as _fh:
+    _NAT_FILM = sorted({float(r["delta_um"]) for r in csv.DictReader(_fh) if r["reactor"] == "Unstirred batch"})
+assert len(_NAT_FILM) == 1, _NAT_FILM
+_NAT_FILM = _NAT_FILM[0]
+def _nat_at(d):
+    """Unstirred median and counts with the column scaled as 1/delta: exact for the direct and k = 0 rows, and a bound on
+    the mediated and catalyst rows, none of which falls faster than 1/delta (Table S6 slopes)."""
+    v = [x * _NAT_FILM / d for x in _pub_col("natural")]
+    return _st.median(v), sum(x >= 25 for x in v), sum(x >= 50 for x in v)
+with io.open(_os.path.join(_ROOT_P4, "results", "solver_species_2xD.json"), encoding="utf8") as _fh:
+    _S2X = _json.load(_fh)
+_S2H = _S2X.get("homogeneous_partners")
+if not _S2H:
+    raise SystemExit("results/solver_species_2xD.json carries no homogeneous_partners key; run "
+                     "data/sensitivity_solver_species_2xD.py --group homog")
+# The analytic-limit checks of julia/run_audit.jl, read from its artifact rather than typed (chemistry audit, pass 5).
+with io.open(_os.path.join(_ROOT_P4, "julia", "audit_gates.csv"), encoding="utf8") as _fh:
+    _AG = list(csv.DictReader(_fh))
+_AG_G2 = abs(float(next(r for r in _AG if r["gate"] == "G2")["err_pct"]))
+_AG_G8A = abs(float(next(r for r in _AG if r["gate"] == "G8a")["err_pct"]))
+_AG_G11 = float(re.search(r"=\s*([0-9.eE+-]+)%", next(r for r in _AG if r["gate"] == "G11")["note"]).group(1)) / 100.0
+_AG_G12 = max(abs(float(r["err_pct"])) for r in _AG if r["gate"] == "G12")
+_AG_BIN = "reproduced to %.2f pct and %.2f pct" % (_AG_G2, _AG_G8A)
+_AG_CC = "%.0e" % _AG_G11
+with io.open(_os.path.join(_ROOT_P4, "results", "medium_transfer_brackets.json"), encoding="utf8") as _fh:
+    _MXF = _json.load(_fh)
+def _mxf(case):
+    c = _MXF["cases"][case]
+    mv = "; ".join("the %s >=%d mA cm-2 count %d -> %d" % (m["arch"], m["threshold"], m["from"], m["to"]) for m in c["count_moves"])
+    return c, (mv or "no threshold count"), ("no architecture median" if not c["median_moves"] else "the median of " + ", ".join(m["arch"] for m in c["median_moves"]))
+with io.open(_os.path.join(_ROOT_P4, "data", "reactions_50.csv"), encoding="utf8") as _fh:
+    _DMED = _st.median(float(r["D_cm2s"]) for r in csv.DictReader(_fh))
+_FC_COUNTS_SENT = (" Across the envelope this point spans (the derived film above), the unstirred threshold counts run "
+                   "from at least %d to at most %d (>=25 mA cm-2) and from at least %d to at most %d (>=50), so those two "
+                   "counts are conditional on the declared point; the three thin-film architectures clear 50 mA cm-2 for "
+                   "%s of 50, several times more at either edge."
+                   % (_nat_at(_FC_ENV_HI)[1], _nat_at(_FC_ENV_LO)[1], _nat_at(_FC_ENV_HI)[2], _nat_at(_FC_ENV_LO)[2],
+                      "-".join(sorted({"%d" % sum(x >= 50 for x in _pub_col(a)) for a in ("micro", "rde", "rce")}))))
+def _trace_sentence():
+    """The trace-seed sweep, read from G-TRACE's artifact (it was typed against the retired 48-cell matrix)."""
+    with io.open(_os.path.join(_ROOT_P4, "results", "trace_init_sensitivity.json"), encoding="utf8") as fh:
+        t = _json.load(fh)
+    hi, lo = t["per_seed"]["1e-4"], t["per_seed"]["1e-6"]
+    assert not t["counts_move"], "the trace seed moves a mediated count; the registry row must say so"
+    scales = lo["max_abs_mAcm2"] > 0 and 5 <= hi["max_abs_mAcm2"] / lo["max_abs_mAcm2"] <= 20
+    return ("tr(C) was moved a full decade in both directions, 1e-5 -> 1e-4 and 1e-5 -> 1e-6, and every mediated row "
+            "re-solved in an isolated copy each time. The seed is not exactly inert: %d of the %d (reaction, reactor) "
+            "entries change at 1e-4 and %d at 1e-6, by at most %.2g mA cm-2 and %.2g mA cm-2 respectively (%.2g pct and "
+            "%.2g pct)%s. The counts clearing 25 and 50 mA cm-2 among the mediated entries stay at %d and %d at both ends, "
+            "so no reported quantity depends on the seed."
+            % (hi["n_differ"], t["n_cells"], lo["n_differ"], hi["max_abs_mAcm2"], lo["max_abs_mAcm2"], hi["max_rel_pct"],
+               lo["max_rel_pct"], ", scaling with the seed as a perturbation should" if scales else "",
+               hi["counts"]["25"][0], hi["counts"]["50"][0]))
+_O2R = 2.10e-5 / _DMED          # O2 in water, Cussler Table 5.2-1 p. 127, against the median carrier diffusivity
+assert _O2R > 1, "O2 no longer diffuses faster than the median carrier; the stirred-row direction claim fails"
 _FCI = _FC["drho_rho_illustration"]
 _KT_FLIPS = _KT["verdict_flips"]
 if not _KT_FLIPS:
@@ -528,9 +716,8 @@ L_WC55  = ("pp. 264-270; correlation and its recommended association parameters 
 # named honestly rather than left as the 5th, because the table number differs between them and a
 # reviewer opening the 5th at "Table 11-1" would not find the Le Bas increments there.
 POLING  = ("Reid, Prausnitz & Poling, The Properties of Gases and Liquids, 4th ed., McGraw-Hill, "
-           "1987 (the edition held and verified; the 5th ed. of Poling, Prausnitz & O'Connell, "
-           "2001, carries the same increments under a different table number)")
-L_PG    = "Eq. 11-9.8 (Perkins-Geankoplis mole-fraction mixing rule for phi*M)"
+           "1987")
+L_PG    = "Eq. 11-12.4, p. 618 (Perkins-Geankoplis mole-fraction mixing rule for phi*M)"
 # CLOSES adversarial-review finding R2. Every increment below was read off the page on
 # 2026-08-22: Table 3-8, p. 53, "Volume Increments for the Calculation of Molar Volumes Vb",
 # Le Bas column -- C 14.8, H 3.7, O 7.4 (in acids 12.0), N 15.6 doubly bonded / 10.5 primary
@@ -604,15 +791,20 @@ add("1. Physical constants", "Temperature T", "298.15", "K", "assumption",
 #      never assigned to a reaction in reactions_50.csv and are display-only.
 USED_SOLVENTS = {"MeCN","MeOH","DMF","DMA","THF","H2O","HFIP","acetone","MeNO2",
                  "MeCN/H2O 9:1 v/v","MeOH/H2O 1:1 v/v","H2O/MeCN 2:1 v/v",
-                 "DMSO/THF 5:1 v/v","tAmOH/H2O 3:1 v/v","AcOH/HCOOH 1:1 v/v"}
+                 "DMSO/THF 5:1 v/v","tAmOH/H2O 3:1 v/v","AcOH/HCOOH 1:1 v/v",
+                 # chemistry review 2026-10-06: three mixtures the solver reads from solvents.csv had no registry row
+                 "EtOH/MeOH 1:1 v/v","THF/MeOH 5:1 v/v","THF/EtOH 1:1 v/v",
+                 # chemistry audit 2026-10-06: the bromination row's H-cell medium
+                 "H2O/MeCN 1:1 v/v"}
 
 S_MU = ("i_lim ~ D ~ 1/mu and Sc = nu/D, so mu enters twice; a +/-25 pct property error displaces "
         "log10 i_lim by +/-0.10 (Eq. S1 is linear in D). That is small against the 1-2 order-of-"
         "magnitude spreads separating the " + _numword(_N_ARCH) + " reactor archetypes, so no architecture ranking or "
         "carrier-class conclusion can move; only per-reaction entries already within ~25 pct of a "
         "threshold can cross it.")
-S_RHO = ("rho enters only through nu = mu/rho and the Schmidt number; Sh ~ Sc^0.356 at the "
-         "rotating cylinder, so a 5 pct rho error moves k_m by 1.8 pct.")
+S_RHO = ("rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ "
+         "nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a "
+         "5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched.")
 
 # DMA needs its own sensitivity: the generic +/-25 pct statement does not cover it. The handbook
 # entry disagrees with the value in common use by roughly a factor of two, so the exposure has to
@@ -629,33 +821,69 @@ except FileNotFoundError:
     _DMA = None
 _ARCHW = {"natural": "unstirred", "stirred": "stirred", "flow": "recirculating flow", "anec": "ANEC",
           "micro": "microfluidic", "rde": "RDE", "rce": "rotating cylinder"}
+import math as _math_dma
+with io.open(_os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))), "julia",
+                           "catalyst_ec_sourced.csv"), encoding="utf8") as _fh:
+    _DMA_K = {r["reaction"]: float(r["k_M"]) for r in csv.DictReader(_fh) if float(r["k_M"]) > 0}
 def _dma_moves_sentence():
+    """G-DMAMU's result, read from its artifact. Every DMA cell is RE-SOLVED at each swept viscosity
+    (data/dma_viscosity_ecprime.jl): a cell carried at a finite rate constant sits on or near the kinetic plateau,
+    which goes as D^(1/2), so the transport exponent mu^p would overstate it (chemistry audit, pass 6)."""
     if not _DMA:
         return "The sweep artifact is absent; run data/sensitivity_dma_viscosity.py."
+    if "dma_cells" not in _DMA["swept"][0]:
+        raise SystemExit("results/dma_viscosity_sensitivity.json predates the re-solved sweep; re-run "
+                         "data/sensitivity_dma_viscosity.py")
+    sw = sorted(_DMA["swept"], key=lambda r: -r["mu"])
+    top, bot = sw[0], sw[-1]
+    rows = _DMA["dma_rows"]
+    ncat = _DMA["n_catalyst_rows"]
+    lr = _math_dma.log(bot["mu"] / top["mu"])
+    parts = []
+    for rxn in sorted(rows, key=lambda x: max(top["dma_cells"][x].values())):
+        c0, c1 = top["dma_cells"][rxn], bot["dma_cells"][rxn]
+        p = {a: _math_dma.log(c1[a] / c0[a]) / lr for a in c0}
+        pmin, pmax = min(p.values()), max(p.values())
+        lo_a = ", ".join(_ARCHW[a] for a in p if abs(p[a] - pmin) < 5e-3)
+        hi_a = ", ".join(_ARCHW[a] for a in p if abs(p[a] - pmax) < 5e-3)
+        kval = _DMA_K.get(rxn, 0.0)
+        parts.append("the %s, carried at %s, runs %.2f-%.2f mA cm-2 at the printed value and %.2f-%.2f at %.3f mPa s, an "
+                     "effective exponent d ln i_lim / d ln mu of %.2f (%s) to %.2f (%s)"
+                     % (rxn.split(" (")[0], "the floor k = 0" if kval == 0 else
+                        "its sourced rate constant k = %g M-1 s-1 (S5.7)" % kval,
+                        min(c0.values()), max(c0.values()), min(c1.values()), max(c1.values()), bot["mu"],
+                        pmin, lo_a, pmax, hi_a))
+    txt = ("Exposure is bounded by direct test: both DMA reactions are re-solved at %s mPa s, with the carrier, product "
+           "and substrate diffusivities scaled as 1/mu, the kinematic viscosity as mu, and the supporting-ion "
+           "diffusivities and rate constant held. Across that interval %s. A cell carried at a finite rate constant "
+           "approaches the kinetic plateau n F C_cat (D k C_S)^(1/2) in the thin films, which is why its exponent "
+           "approaches -1/2 there rather than the -1 of a transport-limited cell. "
+           % (", ".join("%.3f" % r["mu"] for r in sw), "; ".join(parts)))
     mv = _DMA.get("count_moves", [])
-    if not mv:
-        return ("No >=25 or >=50 threshold count moves anywhere in %.3f-%.3f mPa s."
-                % (_DMA["mu_alternative_not_adopted"], _DMA["mu_printed"]))
+    if not mv and not _DMA.get("catalyst_clearing_moves_at"):
+        txt += ("No >=25 or >=50 threshold count moves anywhere in %.3f-%.3f mPa s, and the number of catalyst-carried "
+                "rows clearing 25 mA cm-2 in some architecture stays at %d of %d."
+                % (bot["mu"], top["mu"], top["catalyst_clearing"], ncat))
+        return txt
     by_mu = {}
     for m in mv:
-        by_mu.setdefault(m["mu"], []).append("%s %+d" % (_ARCHW[m["arch"]], m["delta"]))
-    parts = ["at %.3f mPa s the >=25 count of the %s" % (mu, ", ".join(v)) for mu, v in sorted(by_mu.items(), reverse=True)]
-    return ("Inside the interval a published count does move: %s -- the kilogram-scale Ni-XEC row, carried at its "
-            "sourced rate constant (S5.7), sits within 5 pct of 25 mA cm-2 in the thin-film architectures at the "
-            "printed viscosity and clears it at the homolog reading. The unstirred and stirred counts, the "
-            "carrier-class conclusion and the architecture ordering do not move." % "; ".join(parts))
+        by_mu.setdefault(m["mu"], []).append("%s %+d at >=%g" % (_ARCHW[m["arch"]], m["delta"], m["threshold"]))
+    txt += ("Inside the interval a published count moves: %s; the catalyst-carried rows clearing 25 mA cm-2 number %s "
+            "of %d across it." % ("; ".join("at %.3f mPa s the %s" % (mu, ", ".join(v))
+                                           for mu, v in sorted(by_mu.items(), reverse=True)),
+                                 "-".join(str(n) for n in sorted({r["catalyst_clearing"] for r in sw})), ncat))
+    return txt
 S_MU_OVERRIDE = {"DMA": (
     "The handbook entry for this solvent stands apart from its own homolog: N,N-dimethylformamide, "
     "one methylene lighter, is printed as 0.794 mPa s in the same column of the same page, so the "
     "tabulated 1.927 mPa s makes DMA 2.4 times the more viscous of the pair where that substitution "
     "normally costs a few tens of a percent. The column assignment is not in question -- ethanol "
     "1.074, 1,4-dioxane 1.177, dimethyl sulfoxide 1.987 and diethyl ether 0.224 all read correctly "
-    "at the same position -- and the handbook carries no second viscosity for DMA against which to "
-    "adjudicate. The printed value is the one used -- an author ruling of 2026-08-31, on the "
-    "grounds that the handbook is at least a primary source where the alternative is not. "
-    "Exposure is bounded by direct test: the two "
-    "DMA reactions are swept across the whole interval down to 0.927 mPa s, with i_lim rising as mu^p, p "
-    "between -1 and -2/3 by archetype. " + _dma_moves_sentence())}
+    "at the same position. The handbook carries no second viscosity for DMA. A second compilation does: "
+    "Krumgalz, J. Chem. Soc., Faraday Trans. 1 1983, 79, 571-587, Table 3, p. 578, prints 0.00919 P (0.919 mPa s) "
+    "at 25 C beside 0.00793 P for DMF, in line with the homolog. The handbook value is the one carried, and the "
+    "re-solve below runs down to the Krumgalz value. "
+    + _dma_moves_sentence())}
 
 IAPWS_ETA = ("Huber et al., 'New international formulation for the viscosity of H2O' (IAPWS 2008), "
              "J. Phys. Chem. Ref. Data 2009, 38, 101-125")
@@ -717,11 +945,11 @@ PURE = [
   "that 1.927 must be a leading-digit typo, since DMA would otherwise be as viscous as DMSO "
   "(1.987) while its homologue DMF is 0.794. That reasoning is not acted on: it is an inference "
   "with no source, and the standard requires the printed value at the cited locator. "
-  "consequence, and it is a real one: DMA carries the kilogram-scale Ni-xec campaign. At the "
-  "printed 1.927 that row transport ceiling is 8.2 mA cm-2, below the 10 mA cm-2 at which the "
-  "campaign actually ran, so the S7 sentence calling that agreement a direct validation of the "
-  "model no longer holds and has been withdrawn. At 0.927 the ceiling is 16.5 and the agreement "
-  "returns. " + _dma_moves_sentence() + " Anyone resolving the "
+  "consequence: DMA carries the kilogram-scale Ni-xec campaign, which ran at 10 mA cm-2. At its sourced "
+  "rate constant that row's best ceiling is %.1f mA cm-2 at the printed 1.927 and %.1f at 0.927 (G-DMAMU re-solve). "
+  % (max(sorted(_DMA["swept"], key=lambda r: -r["mu"])[0]["dma_cells"]["Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)"].values()),
+     max(sorted(_DMA["swept"], key=lambda r: r["mu"])[0]["dma_cells"]["Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)"].values()))
+  + _dma_moves_sentence() + " Anyone resolving the "
   "CRC row against A primary viscosity measurement should revisit both this row and S7"),
 
  ("DMSO",  78.13, 1.987, 1.096, 1.0, "measured", CRC, L_VISC, "measured", CRC, L_LAB, ""),
@@ -759,7 +987,8 @@ PURE = [
    "mu/rho in Sc, and Sh ~ Sc^0.356, so a +/-5% rho error moves these two rows' i_lim by <2% "
    "(gate G-solv sweeps them at +/-25-50%; the worst single count moves by 2 of 50 and the architecture ordering is preserved throughout)."),
  ("acetone", 58.08, 0.306, 0.784, 1.0, "measured", CRC, L_VISC, "measured", CRC, L_LAB, ""),
- ("MeNO2",  61.04, 0.620, 1.137, 1.0, "measured", CRC, L_VISC, "measured", CRC, L_LAB, ""),
+ ("MeNO2",  61.04, 0.630, 1.137, 1.0, "measured", CRC,
+  "Sect. 6, 'Viscosity of Liquids', p. 6-246, Nitromethane row (25 C column)", "measured", CRC, L_LAB, ""),
 ]
 _check_solvents_against_csv(PURE)
 
@@ -776,11 +1005,49 @@ CRC_AQ_WARN = (" The inherited citation was the CRC 'Concentrative Properties of
                "table (pp. 5-118 to 5-135), whose viscosity and density data are tabulated at 20 C, "
                "not 25 C, and which is indexed by mass per cent rather than by v/v. It cannot "
                "support a 25 C value at a stated volume ratio and has been withdrawn.")
-AS22 = ("Ansari & Singh, Res. J. Chem. Sci. 2022, 12(1), 67-69, Table-1 p. 68 -- measured densities and viscosities of acetonitrile-water at 25 C, 10-70 wt%% AN plus pure AN. Open access (www.isca.in). Its pure-component values, rho = 0.7767 g cm-3 and eta = 0.346 cP, reproduce the CRC 97th ed. MeCN entries carried here (0.776, 0.343) to 0.3%% and 0.9%%, which is the quality check on a low-impact source")
+# Ansari & Singh, Table-1 p. 68 (wt% AN: rho g cm-3, eta cP, as printed) and their pure-AN values (rho 0.7767, eta 0.346).
+_AS_PTS = {10: (0.9802, 0.982), 20: (0.9588, 0.973), 30: (0.9380, 0.910), 40: (0.9134, 0.8841), 50: (0.8920, 0.753),
+           60: (0.8664, 0.656), 70: (0.8443, 0.574), 100: (0.7767, 0.346)}
+_SOLV_CSV = {r["solvent"]: r for r in csv.DictReader(io.open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)),
+                                                                               "solvents.csv"), encoding="utf8"))}
+_RHO_AN, _RHO_W, _MU_AN = float(_SOLV_CSV["MeCN"]["rho"]), float(_SOLV_CSV["H2O"]["rho"]), float(_SOLV_CSV["MeCN"]["mu_mPas"])
+
+
+def _as_wt(v_an, v_w):
+    """mass per cent MeCN of a v/v mixture measured before mixing, at the pure-component densities of solvents.csv"""
+    return 100.0 * v_an * _RHO_AN / (v_an * _RHO_AN + v_w * _RHO_W)
+
+
+def _as_interp(wt):
+    ks = sorted(_AS_PTS)
+    lo = max(k for k in ks if k <= wt); hi = min(k for k in ks if k >= wt)
+    f = 0.0 if hi == lo else (wt - lo) / (hi - lo)
+    return tuple(_AS_PTS[lo][i] + f * (_AS_PTS[hi][i] - _AS_PTS[lo][i]) for i in (0, 1)), lo, hi
+
+
+AS22 = ("Ansari & Singh, Res. J. Chem. Sci. 2022, 12(1), 67-69, Table-1 p. 68 -- measured densities and viscosities of "
+        "acetonitrile-water at 25 C, 10-70 wt pct AN plus pure AN. Open access (www.isca.in). Its pure-component values, "
+        "rho = 0.7767 g cm-3 and eta = 0.346 cP, set against the CRC 97th ed. MeCN entries carried here (%.3f, %.3f): the "
+        "density agrees to %.1f pct and the viscosity is %.1f pct lower than the handbook's printed value"
+        % (_RHO_AN, _MU_AN, 100 * abs(0.7767 / _RHO_AN - 1), 100 * (1 - 0.346 / _MU_AN)))
 # BOUNDS FOR THE MIXTURE PROPERTIES (data/mixture_property_bounds.py, gate G-MIXBOUND).
 # These rows cannot be SOURCED -- no table gives a 25 C value at a stated v/v ratio for most of
 # them -- but most of them can be BOUNDED by something citable, and the assumption behind each
 # bound is stated here rather than left for a reader to reconstruct.
+def _as_note(v_an, v_w, mu_c, rho_c):
+    """What Ansari & Singh's table says about a MeCN/water mixture at v_an:v_w (v/v), computed."""
+    wt = _as_wt(v_an, v_w)
+    (rho_i, mu_i), lo, hi = _as_interp(wt)
+    where = ("inside the 10-70 wt pct range Ansari & Singh measure" if wt <= 70 else
+             "outside the 10-70 wt pct range Ansari & Singh measure, between their 70 wt pct row and pure acetonitrile")
+    lab = lambda k: "pure AN" if k == 100 else "%d wt pct" % k
+    return ("%d:%d v/v (MeCN:water) = %.1f wt pct MeCN, %s. Interpolating their Table-1 p. 68 entries at %s (%.4g cP, "
+            "%.4f g cm-3) and %s (%.4g cP, %.4f g cm-3) gives eta = %.3f cP and rho = %.3f g cm-3; the carried %.3g cP and "
+            "%.3g g cm-3 are %+.1f pct and %+.1f pct against that."
+            % (v_an, v_w, wt, where, lab(lo), _AS_PTS[lo][1], _AS_PTS[lo][0], lab(hi), _AS_PTS[hi][1], _AS_PTS[hi][0],
+               mu_i, rho_i, mu_c, rho_c, 100 * (mu_c / mu_i - 1), 100 * (rho_c / rho_i - 1)))
+
+
 CRC_5118 = ("CRC Handbook of Chemistry and Physics, 97th ed., 2016 (Haynes), 'Concentrative "
             "Properties of Aqueous Solutions: Density, Refractive Index, Freezing Point "
             "Depression, and Viscosity'")
@@ -840,7 +1107,72 @@ MIX_DISCLOSE = {
     "MeOH/H2O 1:1 v/v": _TDISC, "EtOH/H2O 1:1 v/v": _TDISC,
     "DMSO/THF 5:1 v/v": _BDISC, "AcOH/HCOOH 1:1 v/v": _BDISC,
     "DMF/H2O 9:1 v/v": _NDISC, "tAmOH/H2O 3:1 v/v": _NDISC,
+    "EtOH/MeOH 1:1 v/v": _BDISC, "THF/MeOH 5:1 v/v": _BDISC, "THF/EtOH 1:1 v/v": _BDISC,
 }
+
+# The two aqueous-alcohol mixtures read against the 20 C table they cite (chemistry audit, pass 6). Values as printed,
+# verified on the page images: CRC 97th ed., 'Concentrative Properties of Aqueous Solutions', methanol block p. 5-125
+# and ethanol block p. 5-121 -- (mass %, rho g cm-3, eta mPa s) at 20 C. The carried densities (0.87, 0.89) are NOT these
+# entries; the rows say so and state the consequence, and the carried values are left to data/build_reactions50.py.
+_AQ_PAGE = {"MeOH/H2O 1:1 v/v": ("5-125", "Methanol", "MeOH", ((44.0, 0.9273, 1.821), (46.0, 0.9235, 1.805))),
+            "EtOH/H2O 1:1 v/v": ("5-121", "Ethanol", "EtOH", ((44.0, 0.9269, 2.850), (46.0, 0.9227, 2.843)))}
+# Water at 20 C (CRC 97th ed. p. 6-247, the table the Ea row reads) -- a 20 C value, so it is not the 25 C property
+# solvents.csv carries; the 25 C value is read from this registry's own H2O row.
+_WATER_20C_MPAS = 1.002
+_WATER_25C_MPAS = [p for p in PURE if p[0] == "H2O"][0][2]
+_ETA_W20, _ETA_W25 = _WATER_20C_MPAS, _WATER_25C_MPAS
+
+
+def _aq_page_read(n_, mu, rho):
+    """Interpolate the printed 20 C entry at the 1:1 v/v composition and state what the carried values are against it,
+    including what the density difference does to nu, k_m and the published matrix (rho enters only through nu)."""
+    import archetype_bands as _AB
+    page, block, comp, ((w0, r0, e0), (w1, r1, e1)) = _AQ_PAGE[n_]
+    rho_a = [p for p in PURE if p[0] == comp][0][3]
+    rho_w = [p for p in PURE if p[0] == "H2O"][0][3]
+    w = 100.0 * rho_a / (rho_a + rho_w)                       # 1:1 by volume before mixing, pure densities at 25 C
+    if not (w0 <= w <= w1):
+        raise SystemExit("%s: %.2f mass pct lies outside the bracketing page rows" % (n_, w))
+    rho_p = r0 + (r1 - r0) * (w - w0) / (w1 - w0)
+    eta_p = e0 + (e1 - e0) * (w - w0) / (w1 - w0)
+    eta_25 = eta_p * _ETA_W25 / _ETA_W20
+    nu_c, nu_p = mu * 1e-3 / (rho * 1e3), mu * 1e-3 / (rho_p * 1e3)
+    with io.open(_os.path.join(_HERE_D, "reactions_50.csv"), encoding="utf8") as fh:
+        users = [r for r in csv.DictReader(fh) if r["solvent"] + " 1:1 v/v" == n_]
+    with io.open(_os.path.join(_os.path.dirname(_HERE_D), "julia", "tier0_ec_matrix.csv"), encoding="utf8") as fh:
+        mat = {r["reaction"]: r for r in csv.DictReader(fh)}
+    km_drop = {a: 1.0 - _AB.delta_eff(a, 1.0e-9, nu_p) / _AB.delta_eff(a, 1.0e-9, nu_c) for a in ("rde", "rce")}
+    moves, cross = [], 0
+    for u in users:
+        Dm = float(u["D_cm2s"]) * 1e-4
+        for a in ("natural", "stirred", "flow", "anec", "micro", "rde", "rce"):
+            f = _AB.delta_eff(a, Dm, nu_c) / _AB.delta_eff(a, Dm, nu_p)
+            v0 = float(mat[u["reaction"]][a])
+            moves.append((f - 1.0, u["reaction"], a, v0, v0 * f))
+            cross += sum((v0 >= t) != (v0 * f >= t) for t in (25.0, 50.0))
+    big = max(moves, key=lambda x: abs(x[0])) if moves else None
+    loc = ("p. %s, %s block, 20 C: rho = %.4f g cm-3 at %.1f mass %% and %.4f at %.1f mass %%; 1:1 v/v is %.1f mass %% "
+           "(pure-component densities, volumes measured before mixing)" % (page, block, r0, w0, r1, w1, w))
+    sens = ("The page prints rho = %.4f g cm-3 at %.1f mass %% (20 C, interpolated); the carried %.2f is a declared "
+            "assumption %.1f pct below it. rho enters only through nu = mu/rho: the carried value makes nu %.1f pct higher "
+            "than the page density would, which leaves the fixed-film, ANEC and microfluidic archetypes untouched and lowers "
+            "k_m by %.1f pct at the RDE and %.1f pct at the rotating cylinder. "
+            % (rho_p, w, rho, 100 * (1 - rho / rho_p), 100 * (nu_c / nu_p - 1), 100 * km_drop["rde"], 100 * km_drop["rce"]))
+    if users:
+        sens += ("At the page density the %s reaction%s in this solvent move by at most %.1f pct (%s, %s, %.2f -> %.2f "
+                 "mA cm-2), and %s."
+                 % (_numword(len(users)), "s" if len(users) > 1 else "", 100 * abs(big[0]), big[1], _ARCHW[big[2]], big[3], big[4],
+                    "no 25 or 50 mA cm-2 threshold count moves" if cross == 0 else
+                    "%d threshold crossing%s occur%s" % (cross, "s" if cross > 1 else "", "" if cross > 1 else "s")))
+    mu_disc = (" TEMPERATURE BASIS: the source table is measured at 20 C and this model works at 25 C; the handbook has no "
+               "25 C table for an aqueous alcohol mixture. The carried 25 C viscosity, %.2f mPa s, is %.1f pct %s the printed "
+               "20 C entry (%.3f mPa s at %.1f mass %%, p. %s) scaled by the temperature dependence of water's own viscosity "
+               "over the same interval (%.3f to %.3f mPa s), i.e. %.2f; the residual approximation is that the mixture's "
+               "relative temperature dependence matches water's across 20-25 C."
+               % (mu, 100 * abs(mu / eta_25 - 1), "below" if mu < eta_25 else "above", eta_p, w, page, _ETA_W20, _ETA_W25,
+                  eta_25))
+    return {"rho_loc": loc, "rho_sens": sens, "mu_disc": mu_disc, "rho_page": rho_p, "mass_pct": w}
+
 
 MIX_BOUND = {
     "MeOH/H2O 1:1 v/v":   (CRC_5118, "pp. 5-118 ff., Methanol block, 20 C, read at 44.1 mass% "
@@ -854,6 +1186,12 @@ MIX_BOUND = {
                            _ORG_BOUND),
     "DMF/H2O 9:1 v/v":    ("-- (no table located for this pair)", "", _NO_BOUND),
     "tAmOH/H2O 3:1 v/v":  ("-- (no table located for this pair)", "", _NO_BOUND),
+    "EtOH/MeOH 1:1 v/v":  ("Declared bracket: pure-component viscosities of ethanol and methanol, both "
+                           "page-anchored in this registry", "bracket [0.544, 1.074] mPa s", _ORG_BOUND),
+    "THF/MeOH 5:1 v/v":   ("Declared bracket: pure-component viscosities of THF and methanol, both "
+                           "page-anchored in this registry", "bracket [0.456, 0.544] mPa s", _ORG_BOUND),
+    "THF/EtOH 1:1 v/v":   ("Declared bracket: pure-component viscosities of THF and ethanol, both "
+                           "page-anchored in this registry", "bracket [0.456, 1.074] mPa s", _ORG_BOUND),
 }
 
 MIX = [
@@ -865,18 +1203,19 @@ MIX = [
  # +8.9%%/+1.9%% against that, well inside the +/-25%% band over which G-SOLV shows no
  # published count moves.
  ("MeCN/H2O 9:1 v/v", 36.4, 0.48, 0.82, 1.17, AS22 + "; " + CVK67 + "; " + WS94 + "; " + AG95, "",
-  ("bracket", "9:1 v/v = 87.5 wt% MeCN, outside the 10-70 wt% range Ansari & Singh measure. The "
-   "row stays an assumption, but it is now bracketed by two measured points of their Table-1 "
-   "p. 68 rather than by nothing: eta(70 wt%) = 0.574 cP and eta(pure an) = 0.346 cP, so "
-   "0.346 <= eta <= 0.574 and the carried 0.48 sits inside. Linear interpolation between those "
-   "two measured points gives eta = 0.441 cP, rho = 0.805 g cm-3; the carried 0.48/0.82 are "
-   "+8.9%/+1.9% against that.")),
+  ("bracket", _as_note(9, 1, 0.48, 0.82))),
  ("MeOH/H2O 1:1 v/v", 26.4, 1.60, 0.87, 1.94, GCGD07, CRC_AQ_WARN, None),
  ("EtOH/H2O 1:1 v/v", 33.0, 2.40, 0.89, 1.58, GCGD07, CRC_AQ_WARN, None),
  ("DMF/H2O 9:1 v/v",  56.0, 1.00, 0.96, 1.15, AG95, "", None),
  ("DMSO/THF 5:1 v/v", 77.1, 1.55, 1.06, 1.00, "no measured isotherm located for this pair", "", None),
  ("tAmOH/H2O 3:1 v/v",35.0, 2.80, 0.85, 1.73, "no measured isotherm located for this pair", "", None),
  ("AcOH/HCOOH 1:1 v/v",53.0,1.28, 1.13, 1.0,  "no measured isotherm located for this pair", "", None),
+ # chemistry review 2026-10-06: these three are read by the solver (data/solvents.csv) and had no registry row.
+ # mu is a mole-fraction log-mix of the two page-anchored pure components, rho volume-weighted, phi*M the
+ # Perkins-Geankoplis mole-fraction rule; the values equal data/build_reactions50.py's SOLVENTS entries.
+ ("EtOH/MeOH 1:1 v/v", 37.79, 0.719, 0.786, 1.7,   "no measured isotherm located for this pair", "", None),
+ ("THF/MeOH 5:1 v/v",  60.65, 0.48,  0.867, 1.136, "no measured isotherm located for this pair", "", None),
+ ("THF/EtOH 1:1 v/v",  56.96, 0.751, 0.834, 1.235, "no measured isotherm located for this pair", "", None),
  # 2:1 v/v = 28.0 wt%% MeCN, squarely INSIDE Ansari & Singh's measured range. Interpolating
  # their 20 wt%% (0.973 cP, 0.9588) and 30 wt%% (0.910, 0.9380) rows gives eta = 0.922 cP and
  # rho = 0.942 g cm-3. The carried values are -2.4%% and -0.2%% against that. This row is the
@@ -892,18 +1231,106 @@ MIX = [
  # The five other mixtures were re-derived the same way and reproduce their tabled products
  # to <=0.3 pct, so this row was the only one built on the wrong average.
  ("H2O/MeCN 2:1 v/v", 24.0, 0.90, 0.94, 1.916, AS22 + "; " + CVK67 + "; " + WS94 + "; " + AG95, "",
-  ("derived", "2:1 v/v = 28.0 wt% MeCN, inside the range Ansari & Singh measure. Interpolating "
-   "their Table-1 p. 68 rows at 20 wt% (0.973 cP, 0.9588 g cm-3) and 30 wt% (0.910, 0.9380) "
-   "gives eta = 0.922 cP and rho = 0.942 g cm-3. The carried 0.90/0.94 are -2.4%/-0.2% against "
-   "that measured interpolation -- the only mixed solvent in the set whose properties can be "
-   "read off a measured table.")),
+  ("mu-declared", _as_note(1, 2, 0.90, 0.94))),
+ # 1:1 v/v = 43.8 wt% MeCN (0.5 L x 0.776 against 0.5 L x 0.997), inside the same table: the 40 wt% (0.9134 g cm-3,
+ # 0.8841 cP) and 50 wt% (0.8920, 0.753) rows interpolate to rho 0.905, eta 0.835. Eq. S30 at x(H2O) = 0.745:
+ # 0.745 x 2.6 x 18.015 + 0.255 x 1.0 x 41.05 = 45.36 = 1.900 x 23.88. The bromination row's H-cell medium.
+ ("H2O/MeCN 1:1 v/v", 23.88, 0.835, 0.905, 1.900, AS22 + "; " + CVK67 + "; " + WS94 + "; " + AG95, "",
+  ("derived", _as_note(1, 1, 0.835, 0.905) + " phi*M = 45.36 by Eq. S30 at x(H2O) = 0.745.")),
 ]
+
+# Every solvent a reaction runs in must have registry rows, and must be marked used. Three mixtures the solver read from
+# data/solvents.csv had neither until the chemistry review of 2026-10-06, and no gate noticed, because every check here
+# compared rows that EXIST against the solver; none asked whether a solver input has a row at all.
+def _check_solvents_registered():
+    import csv as _csv, os as _os
+    _rx = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "reactions_50.csv")
+    used = {r["solvent"] for r in _csv.DictReader(open(_rx, encoding="utf-8"))}
+    have = {}
+    for r in list(PURE) + list(MIX):                       # full name without " v/v" first, then the leading token
+        have.setdefault(r[0].replace(" v/v", ""), r[0]); have.setdefault(r[0].split(" ")[0], r[0])
+    miss = sorted(u for u in used if u not in have)
+    if miss:
+        raise AssertionError("solvents a reaction runs in have no registry row: %s" % miss)
+    unmarked = sorted(have[u] for u in used if have[u] not in USED_SOLVENTS)
+    if unmarked:
+        raise AssertionError("solvents a reaction runs in are not in USED_SOLVENTS (they would print as display-only): %s"
+                             % unmarked)
+
+
+_check_solvents_registered()
+
 
 def _disp(name):
     return "" if name in USED_SOLVENTS else S_DISPLAY_SOLV
 
+# CRC 97th ed. Sect. 15, 'Laboratory Solvents and Other Liquid Reagents': the density each row prints and its reference
+# temperature (the superscript), read from the page (chemistry audit, pass 5). A carried density is state A at 25 C only
+# where the page prints that value at 25 C; a 20 C entry, or a carried value the page does not print, is declared.
+_CRC15_RHO = {"MeCN": (0.7825, 20, "15-13"), "acetone": (0.7902, 20, "15-13"), "AcOH": (1.0510, 20, "15-13"),
+              "DMA": (0.9372, 25, "15-15"), "DMF": (0.9445, 25, "15-16"), "DMSO": (1.1010, 25, "15-16"),
+              "EtOH": (0.7893, 20, "15-16"), "MeOH": (0.7909, 20, "15-17"), "MeNO2": (1.1371, 20, "15-18"),
+              "THF": (0.8833, 25, "15-19")}
+
+
+def _rho_basis(n_, rho):
+    """(state, locator, sensitivity prefix) for a CRC-cited pure-solvent density."""
+    pr, tref, pg = _CRC15_RHO[n_]
+    loc = "Sect. 15, 'Laboratory Solvents and Other Liquid Reagents', p. %s, density column (%.4f g cm-3 at %d C)" % (pg, pr, tref)
+    same = abs(pr - rho) <= 5.0001e-4                       # the carried value is the printed entry to three decimals
+    if tref == 25 and same:
+        return "measured", loc, ""
+    # declared: the page is still where the reader finds the printed value the sensitivity compares against
+    dk = 100 * (0.356 * abs(_math.log(rho / pr)))
+    if same:
+        what = ("the carried %.3f is that %d C entry carried unchanged as the 25 C density, which is lower by the liquid's "
+                "thermal expansion over 5 K" % (rho, tref))
+    else:
+        what = ("the carried %.3f is %s, %.1f pct %s the printed entry, and the page does not print it"
+                % (rho, "a 25 C value" if tref == 20 else "not the printed 25 C value", 100 * abs(rho / pr - 1),
+                   "below" if rho < pr else "above"))
+    return "assumption", loc, (
+        "CRC 97th ed. p. %s prints %.4f g cm-3 at %d C (the superscript is the reference temperature); %s. rho enters only "
+        "through nu = mu/rho, and Sh ~ Sc^0.356 at the rotating cylinder, so the difference from the printed entry moves "
+        "k_m there by %.2f pct and leaves every fixed-film archetype untouched. " % (pg, pr, tref, what, dk))
+
+
+_PHI_DECLARED = {"HFIP"}       # pure solvents whose phi the correlation's own list does not cover
+
+
+def _phi_sens(n_, phi, alt=1.5):
+    """Re-scale the published matrix for the rows in this solvent at phi = alt (ethanol's value, the associated alcohol
+    nearest in kind): D ~ phi^0.5, and i_lim ~ D on the fixed films, D^(2/3) at the RDE (Levich) and D^0.644 at the
+    rotating cylinder (Eisenberg, Sc^0.356)."""
+    with io.open(_os.path.join(_os.path.dirname(_HERE_D), "julia", "tier0_ec_matrix.csv"), encoding="utf8") as fh:
+        mat = list(csv.DictReader(fh))
+    with io.open(_os.path.join(_HERE_D, "reactions_50.csv"), encoding="utf8") as fh:
+        rows = [r["reaction"] for r in csv.DictReader(fh) if r["solvent"] == n_]
+    pexp = {"natural": 1.0, "stirred": 1.0, "flow": 1.0, "anec": 1.0, "micro": 1.0, "rde": 2.0 / 3.0, "rce": 1.0 - 0.356}
+    f = (alt / phi) ** 0.5
+    moves = []
+    for a, pe in pexp.items():
+        v0 = [float(r[a]) for r in mat]
+        v1 = [float(r[a]) * (f ** pe if r["reaction"] in rows else 1.0) for r in mat]
+        for t in (25, 50):
+            c0, c1 = sum(x >= t for x in v0), sum(x >= t for x in v1)
+            if c0 != c1:
+                moves.append("the %s >=%d mA cm-2 count %d -> %d" % (_ARCHW[a], t, c0, c1))
+    txt = ("D ~ (phi M)^0.5. Raising phi from %.1f to %.1f, ethanol's value and the associated alcohol nearest in kind, "
+           "scales D by %.3f; re-scaling the published matrix for the %s %s row%s (i_lim ~ D on the fixed films, D^(2/3) at "
+           "the RDE, D^0.644 at the rotating cylinder) moves %s. "
+           % (phi, alt, f, _numword(len(rows)), n_, "" if len(rows) == 1 else "s", "; ".join(moves) or "no threshold count"))
+    if moves:
+        txt += "That count is therefore conditional on the declared association parameter. No architecture median moves."
+    return txt
+
+
 for n_, M, mu, rho, phi, mus, muc, mul, rhos, rhoc, rhol, note in PURE:
     d = _disp(n_)
+    if rhos == "measured" and rhoc == CRC:
+        rhos, rhol, _rho_pre = _rho_basis(n_, rho)
+    else:
+        _rho_pre = ""
     tail = ((" " + note) if note else "") + d
     add("2. Solvents", f"{n_}: M", f"{M}", "g mol-1", "derived",
         "sum of the IUPAC 2021 standard atomic weights over the molecular formula", IUPAC, "",
@@ -915,7 +1342,7 @@ for n_, M, mu, rho, phi, mus, muc, mul, rhos, rhoc, rhol, note in PURE:
     # locator -- caught by the add() locator assert, which is why that assert exists.
     for prop, val, unit, st, cite, loc, sens, what in (
             ("mu (25 C)", mu, "mPa s", mus, muc, mul, S_MU_OVERRIDE.get(n_, S_MU), "viscosity"),
-            ("rho", rho, "g mL-1", rhos, rhoc, rhol, S_RHO, "density")):
+            ("rho", rho, "g mL-1", rhos, rhoc, rhol, _rho_pre + S_RHO, "density")):
         if st == "measured":
             add("2. Solvents", f"{n_}: {prop}", f"{val}", unit, "measured",
                 f"pure-solvent tabulated {what} at 25 C." + tail, cite, loc, sens + d)
@@ -926,17 +1353,50 @@ for n_, M, mu, rho, phi, mus, muc, mul, rhos, rhoc, rhol, note in PURE:
             # that is a worse statement than the truth. Where a citation is supplied, print it and
             # say what tier it is; where none is, keep the blunt string.
             add("2. Solvents", f"{n_}: {prop}", f"{val}", unit, "assumption",
+                ("a declared 25 C density: the cited handbook prints this solvent's density at another reference "
+                 "temperature, or a different value, as the sensitivity states." + tail)
+                if (prop == "rho" and _rho_pre) else
                 (f"no page-anchored primary {what}; the source below is secondary." + tail)
                 if cite else (f"no page-anchored {what} located." + tail),
                 cite if cite else "-- (no source supports this value)", loc, sens + d)
-    add("2. Solvents", f"{n_}: phi (assoc.)", f"{phi}", "-", "measured",
-        "Wilke-Chang association parameter as recommended by the correlation's authors", WC55,
-        L_WC55,
-        "D ~ (phi M)^0.5. The frequently quoted revision phi(H2O) = 2.26 in place of 2.6 would "
-        "lower aqueous D by 7 pct; no threshold count in Table S5 moves by more than one entry." + d)
+    if n_ in _PHI_DECLARED:
+        add("2. Solvents", f"{n_}: phi (assoc.)", f"{phi}", "-", "assumption",
+            "a declared modelling choice: Wilke & Chang recommend association parameters for water (2.6), methanol (1.9), "
+            "ethanol (1.5) and unassociated solvents (1.0), and %s, a hydrogen-bond-donor alcohol, is not among them, so "
+            "treating it as unassociated is a choice rather than a reading." % n_ + tail, WC55, L_WC55,
+            _phi_sens(n_, phi) + d)
+    else:
+        add("2. Solvents", f"{n_}: phi (assoc.)", f"{phi}", "-", "measured",
+            "Wilke-Chang association parameter as recommended by the correlation's authors", WC55,
+            L_WC55,
+            "D ~ (phi M)^0.5. The frequently quoted revision phi(H2O) = 2.26 in place of 2.6 would "
+            "lower aqueous D by 7 pct; no threshold count in Table S5 moves by more than one entry." + d)
     add("2. Solvents", f"{n_}: nu = mu/rho", f"{mu*1e-3/(rho*1000):.3e}", "m2 s-1", "derived",
         "kinematic viscosity computed from the mu and rho rows above", "this registry", "",
         "Inherits the exposure of its two inputs." + d)
+
+def _h2omecn21_sens():
+    """H2O/MeCN 2:1: the carried viscosity against Ansari & Singh's interpolation, and what it can move."""
+    (rho_i, mu_i), _lo, _hi = _as_interp(_as_wt(1, 2))
+    mu_c = [m for m in MIX if m[0] == "H2O/MeCN 2:1 v/v"][0][2]
+    assert abs(round(rho_i, 2) - [m for m in MIX if m[0] == "H2O/MeCN 2:1 v/v"][0][3]) < 1e-9, \
+        "the 2:1 density no longer rounds to its interpolation; reconsider its state"
+    rows = [r["reaction"] for r in _RX50 if r["solvent"] == "H2O/MeCN"]
+    assert rows, "no reaction runs in H2O/MeCN 2:1"
+    with io.open(_os.path.join(_HERE_D, "..", "julia", "tier0_ec_matrix.csv"), encoding="utf8") as fh:
+        top = max(float(v) for r in _csv.DictReader(fh) if r["reaction"] in rows
+                  for k, v in r.items() if k not in ("class", "reaction", "carrier"))
+    pct = 100 * (1 - mu_c / mu_i)
+    assert top * (mu_i / mu_c) < 25, "a row in this solvent would approach 25 mA cm-2"
+    return ("A declared value: Ansari & Singh's Table 1 interpolates to %.3f cP at this composition and the carried "
+            "%.2f cP is %.1f pct lower, while the carried density is their %.3f g cm-3 to its printed precision. %s run%s in this "
+            "solvent, with a highest ceiling of %.2f mA cm-2; i_lim varies no faster than 1/mu, so the interpolated "
+            "viscosity would lower %s ceilings by at most %.1f pct, far from either threshold. "
+            % (mu_i, mu_c, pct, rho_i, _numword(len(rows)).capitalize() + (" row" if len(rows) == 1 else " rows"),
+               "s" if len(rows) == 1 else "", top, "its" if len(rows) == 1 else "their", pct))
+
+
+S_MU_OVERRIDE["H2O/MeCN 2:1 v/v"] = _h2omecn21_sens() + S_MU
 
 for n_, M, mu, rho, phi, cite, warn, anchor in MIX:
     d = _disp(n_)
@@ -946,7 +1406,10 @@ for n_, M, mu, rho, phi, cite, warn, anchor in MIX:
     # this project keeps getting bitten by, so the wording is driven by the data, not typed.
     if anchor:
         a_state, a_note = anchor
+        # "mu-declared": the interpolation reproduces the carried density to its last printed digit but not the
+        # carried viscosity, so only the viscosity is a declared value.
         mu_state = "derived" if a_state == "derived" else "assumption"
+        rho_state = "derived" if a_state in ("derived", "mu-declared") else "assumption"
         mu_note = a_note
         mu_cite, mu_loc = cite, "Ansari & Singh Table-1, p. 68"
     else:
@@ -972,10 +1435,20 @@ for n_, M, mu, rho, phi, cite, warn, anchor in MIX:
     # is the internal working record and is not published, while sensitivity ships verbatim into
     # Table S7. A disclosure the reader never sees is not a disclosure.
     _disc = MIX_DISCLOSE.get(n_, "")
-    add("2. Solvents", f"{n_}: mu (25 C)", f"{mu}", "mPa s", mu_state,
-        mu_note + warn, mu_cite, mu_loc, S_MU_OVERRIDE.get(n_, S_MU) + _disc + d)
-    add("2. Solvents", f"{n_}: rho", f"{rho}", "g mL-1", mu_state,
-        mu_note + warn, mu_cite, mu_loc, S_RHO + _disc + d)
+    if anchor:
+        _disc = _disc + " BASIS: " + anchor[1]
+    if n_ in _AQ_PAGE:
+        _aq = _aq_page_read(n_, mu, rho)
+        add("2. Solvents", f"{n_}: mu (25 C)", f"{mu}", "mPa s", mu_state,
+            mu_note + warn, mu_cite, mu_loc, S_MU_OVERRIDE.get(n_, S_MU) + _aq["mu_disc"] + d)
+        add("2. Solvents", f"{n_}: rho", f"{rho}", "g mL-1", "assumption",
+            "a declared 25 C density for the 1:1 v/v mixture; the handbook entry at this composition is stated in the "
+            "sensitivity and is not the carried value." + warn, CRC_5118, _aq["rho_loc"], _aq["rho_sens"] + d)
+    else:
+        add("2. Solvents", f"{n_}: mu (25 C)", f"{mu}", "mPa s", mu_state,
+            mu_note + warn, mu_cite, mu_loc, S_MU_OVERRIDE.get(n_, S_MU) + _disc + d)
+        add("2. Solvents", f"{n_}: rho", f"{rho}", "g mL-1", rho_state if anchor else mu_state,
+            mu_note + warn, mu_cite, mu_loc, S_RHO + _disc + d)
     add("2. Solvents", f"{n_}: phi (assoc.)", f"{phi}", "-", "derived",
         "fitted so that phi*M reproduces the Perkins-Geankoplis mole-fraction rule applied to the "
         "pure-component phi and M; see the M row above", POLING, L_PG,
@@ -1002,42 +1475,140 @@ add("3. Estimation methods", "Transport theory level", "dilute-solution", "-", "
     "Bounded from this project's own measured isotherms rather than argued. Dilute-solution "
     "theory with concentration-independent mobilities predicts kappa proportional to c, i.e. a "
     "constant equivalent conductance; the 21-point isotherms show "
-    "Lambda falling to 0.44 of its dilute value by 0.80 mol/kg and to 0.05 by 4.50 mol/kg for "
-    "Bu4NBF4/MeCN, and to 0.74 by 1.57 mol/kg for NaCl/H2O. The assumption is therefore "
+    "the molal conductivity kappa/m falling to 0.44 of its dilute value by 0.80 mol/kg and to 0.05 by "
+    "4.50 mol/kg for Bu4NBF4/MeCN, and to 0.74 by 1.57 mol/kg for NaCl/H2O. The assumption is therefore "
     "quantitatively wrong above roughly 1 M and the model states so. What protects the reported "
     "results is that the numerics are verified against the analytic limits of the theory it does "
-    "implement -- Newman's binary-electrolyte x2 migration enhancement is reproduced to 0.5 pct "
-    "and 0.26 pct, and discrete charge conservation holds to 3e-12 -- and "
+    "implement -- Newman's binary-electrolyte x2 migration enhancement is %s, and discrete charge "
+    "conservation holds to %s -- and " % (_AG_BIN, _AG_CC) +
     "that the conclusions rest on the architecture ORDERING and on order-of-magnitude contrasts, "
     "neither of which any sweep run here inverts.")
+_MUSJ = _json.load(io.open(_os.path.join(_os.path.dirname(_HERE_D), "results", "solution_viscosity_sensitivity.json"), encoding="utf8"))
+
+
+def _musj_sentence():
+    """The viscosity sweep's result, read from results/solution_viscosity_sensitivity.json and from the exponents
+    data/sensitivity_solution_viscosity.py asserts against the correlations (MU_EXP, parsed, not imported)."""
+    import ast as _ast
+    src = io.open(_os.path.join(_HERE_D, "sensitivity_solution_viscosity.py"), encoding="utf8").read()
+    mu_exp = None
+    for node in _ast.parse(src).body:
+        if isinstance(node, _ast.Assign) and any(getattr(t, "id", "") == "MU_EXP" for t in node.targets):
+            mu_exp = _ast.literal_eval(node.value) if isinstance(node.value, _ast.Dict) and all(
+                isinstance(v, _ast.Constant) for v in node.value.values) else None
+            if mu_exp is None:
+                mu_exp = {k.value: eval(compile(_ast.Expression(v), "<mu_exp>", "eval"))
+                          for k, v in zip(node.value.keys, node.value.values)}
+    arch = ["natural", "stirred", "flow", "anec", "micro", "rde", "rce"]
+    ff = lambda x: (("%.2f" % x).rstrip("0") + "0") if ("%.2f" % x).rstrip("0").endswith(".") else ("%.2f" % x).rstrip("0")
+    andj = lambda xs: xs[0] if len(xs) == 1 else ", ".join(xs[:-1]) + " and " + xs[-1]
+    fixed = [a for a in arch if abs(mu_exp[a] + 1.0) < 1e-9]
+    base = _MUSJ["baseline_n25"]
+    first = {}
+    for sw in _MUSJ["sweep"]:
+        for i, a in enumerate(arch):
+            if a not in first and sw["n25"][i] != base[i]:
+                first[a] = (sw["factor"], base[i], sw["n25"][i])
+    hold = max(sw["factor"] for sw in _MUSJ["sweep"] if all(x["ordering_holds"] for x in _MUSJ["sweep"]
+                                                          if x["factor"] <= sw["factor"]))
+    order = sorted(first.items(), key=lambda kv: kv[1][0])
+    lead = order[0] if order else None
+    never = [_ARCHW[a] for a in arch if a not in first]
+    txt = ("Swept rather than corrected, the %d rows at >= %.1f M total dissolved. The response is NOT 1/mu everywhere: "
+           "mu also enters nu, and delta_eff moves with it wherever delta is computed, so d ln i_lim / d ln mu is -1 for "
+           "the %s fixed-film archetypes (%s), %s at the RDE (Levich) and %s at the rotating cylinder (Eisenberg), "
+           "asserted against the computed delta_eff at run time. "
+           % (_MUSJ["n_flagged"], _MUSJ["cut_M"], _numword(len(fixed)), ", ".join(_ARCHW[a] for a in fixed),
+              "-5/6" if abs(mu_exp["rde"] + 5.0 / 6.0) < 1e-9 else "%.3f" % mu_exp["rde"], "%.3f" % mu_exp["rce"]))
+    if lead:
+        txt += ("Result: the first >=25 count moves at mu_solution/mu_solvent = %s, and it is the %s column (%d -> %d)"
+                % (ff(lead[1][0]), _ARCHW[lead[0]], lead[1][1], lead[1][2]))
+        rest = ["the %s at %s (%d -> %d)" % (_ARCHW[a], ff(f[0]), f[1], f[2]) for a, f in order[1:]]
+        txt += ("; %s move%s next" % (andj(rest), "s" if len(rest) == 1 else "") if rest else "") + ". "
+    else:
+        txt += "Result: no >=25 count moves anywhere in the swept range. "
+    txt += ("The architecture ordering holds to %s, and the %s counts do not move anywhere in the swept range "
+            "(to %s). The reported integers should be read with that breaking point; the ordering does not depend on "
+            "it." % (ff(hold), andj(never), ff(max(sw["factor"] for sw in _MUSJ["sweep"]))))
+    return txt
 add("3. Estimation methods", "Viscosity used in D and in nu", "pure solvent", "-", "assumption",
     "mu is the PURE SOLVENT viscosity of Table S3, page-anchored to CRC, used both in "
     "Wilke-Chang (D ~ 1/mu) and in nu = mu/rho for the mass-transfer correlations. The cells "
-    "contain solute at up to 13.7 M total, and a solution is more viscous than the solvent it is "
+    "contain solute at up to %.2f M total, and a solution is more viscous than the solvent it is " % _MUSJ["c_tot_max_M"] +
     "made from, so every affected ceiling is OVERSTATED. Chosen because no solution-viscosity "
     "measurement exists for these fifty compositions and inventing one would be worse than "
     "declaring the gap", "declared modelling choice", "",
-    "Swept rather than corrected, "
-    "the 14 rows at >= 1.0 M total dissolved. The response is NOT 1/mu: mu also enters nu, and "
-    "delta_eff moves with it wherever delta is computed, so d ln i_lim / d ln mu is -1.000 for "
-    "the two declared-delta archetypes but -0.667 (Leveque), -0.833 (Levich) and -0.988 "
-    "(Eisenberg) for the rest, asserted against the computed delta_eff at run time. "
-    "Result: the first >=25 count moves at mu_solution/mu_solvent = 1.5, and it is the unstirred "
-    "column that moves; the architecture ordering survives to 3.0, and the thin-gap, RDE and RCE "
-    "counts do not move anywhere in that range. The reported integers should be read with that "
-    "breaking point; the ordering does not depend on it.")
+    _musj_sentence())
+# The two increments applied more widely than Table 3-8 prints them (chemistry audit, pass 5). Their exposure is computed
+# by data/lebas_increment_sensitivity.py, which recomputes every Wilke-Chang volume with the table's specific entries.
+_LBI = _json.load(io.open(_os.path.join(_os.path.dirname(_HERE_D), "results", "lebas_increment_sensitivity.json"),
+                          encoding="utf8"))
+
+
+def _lbi_pct(lo_hi):
+    return "%+.1f to %+.1f pct" % (100 * (lo_hi[0] - 1), 100 * (lo_hi[1] - 1))
+
+
+_LBI_CC = _LBI["closest_cell"]
+_LBI_CCMOVE = max(100 * abs(r[k] - 1) for r in _LBI["carriers"] + _LBI["mediated_substrates"]
+                  if r["row"] == _LBI_CC["row"] for k in ("D_ratio", "D_ratio_tertN12"))
+_LBI_REACH = ("No cell of the published matrix lies within its own row's change of 25 or 50 mA cm-2: the closest "
+              "moved-row cell, %s in the %s architecture at %.2f mA cm-2, is %.2f pct from %g and its D moves by at most "
+              "%.2f pct, so no count moves."
+              % (_LBI_CC["row"], _ARCHW[_LBI_CC["arch"]], _LBI_CC["value"], _LBI_CC["margin_pct"], _LBI_CC["threshold"],
+                 _LBI_CCMOVE)
+              if not _LBI["cells_that_could_cross"] else
+              "%d cells of the published matrix lie within that change of a threshold: %s."
+              % (len(_LBI["cells_that_could_cross"]),
+                 "; ".join("%s, %s, %g" % (c["row"], _ARCHW[c["arch"]], c["threshold"]) for c in _LBI["cells_that_could_cross"])))
+import math as _math_wc
 add("3. Estimation methods", "Wilke-Chang: D = 7.4e-8 (phi M)^0.5 T / (mu V^0.6)", "7.4e-8",
     "(cgs mixed)", "measured",
-    "empirical correlation as published; applies to the 43 molecular carriers and the mediated-spec "
-    "substrates. Ferrocene/MeCN anchor: predicted 1.8e-5 vs measured 2.4e-5 cm2 s-1 (-24 pct), "
-    "disclosed in S3", WC55, L_WC55,
-    "Canonical accuracy +/-10-20 pct for typical organics; our worst anchor is -24 pct. I_lim is "
-    "linear in D, so this displaces log10 i_lim by at most 0.10.")
+    "empirical correlation as published; applies to the %d Wilke-Chang carriers of Table S2 and to the mediated-spec "
+    "substrates. Ferrocene/MeCN anchor: V = %.0f cm3 mol-1 (both cyclopentadienyl ring corrections applied; iron takes "
+    "the code's fallback increment, since Table 3-8 has none) and mu = %.3f mPa s give D = %.2e cm2 s-1, disclosed in S3"
+    % (_LBI["n_wc_carriers"], _LBI["ferrocene_V_cm3mol"], _LBI["ferrocene_mu_MeCN_mPas"], _LBI["ferrocene_D_cm2s"]),
+    WC55, L_WC55,
+    "One anchor exists in this work, ferrocene in acetonitrile, and what it says depends on which measurement it is "
+    "held against. Against 2.4e-5 cm2 s-1, the upper end of the textbook range 1.7-2.4e-5 and not page-anchored here, "
+    "the correlation is %+.0f pct; against 1.70e-5 cm2 s-1 (Bard & Faulkner, Electrochemical Methods, 2nd ed., p. 260, "
+    "Problem 6.12, quoting Mirkin, Richards & Bard, J. Phys. Chem. 1993, 97, 7672, measured in 0.5 M TBABF4) it is "
+    "%+.1f pct. i_lim is at most linear in D, so even the larger miss displaces log10 i_lim by %.2f, against the 1-2 "
+    "order-of-magnitude spreads that separate the reactor archetypes."
+    % (_LBI["ferrocene_miss_pct"], _LBI["ferrocene_miss_secondary_pct"],
+       abs(_math_wc.log10(1 + _LBI["ferrocene_miss_pct"] / 100.0))))
+def _se_band_sentence():
+    """The D the declared 4-5 Angstrom band gives in each solvent a Stokes-Einstein row runs in, computed from
+    data/reactions_50.csv; each row's carried D must be reproduced at its own stated radius first."""
+    kT = 1.380649e-23 * 298.15
+    by_solv = {}
+    with io.open(_os.path.join(_HERE_D, "reactions_50.csv"), encoding="utf8") as fh:
+        for r in csv.DictReader(fh):
+            prov = r["D_provenance"]
+            if not prov.startswith("Stokes-Einstein"):
+                continue
+            mu = float(r["mu_mPas"]) * 1e-3
+            rad = float(re.search(r"r=([0-9.]+)\s*A", prov).group(1)) * 1e-10
+            d_se = kT / (6 * _math.pi * mu * rad) * 1e4
+            if abs(d_se / float(r["D_cm2s"]) - 1) > 1e-3:
+                raise SystemExit("Stokes-Einstein row %s: carried D %s is not kT/(6 pi mu r) at its stated radius"
+                                 % (r["reaction"], r["D_cm2s"]))
+            by_solv.setdefault((float(r["mu_mPas"]), r["solvent"]), []).append(r["reaction"])
+    n = sum(len(v) for v in by_solv.values())
+    parts = ["%s (%.3g mPa s) %.2f-%.2fe%d" % (sv, mu, *(lambda a, b: (a / 10 ** _math.floor(_math.log10(b)),
+                                                                      b / 10 ** _math.floor(_math.log10(b)),
+                                                                      _math.floor(_math.log10(b))))(
+                kT / (6 * _math.pi * mu * 1e-3 * 5e-10) * 1e4, kT / (6 * _math.pi * mu * 1e-3 * 4e-10) * 1e4))
+             for mu, sv in sorted(by_solv, reverse=True)]
+    return ("D ~ 1/r, so the declared 4-5 Angstrom band spans 25 pct in D. Evaluated at 25 C in the solvent of each of "
+            "the %s Stokes-Einstein entries, the band gives D (cm2 s-1) of %s; each entry's carried D is the value at "
+            "its own radius inside the band (Table S2). " % (_numword(n), ", ".join(parts)))
+
+
 add("3. Estimation methods", "Stokes-Einstein hydrodynamic radius r", "4-5", "Angstrom", "assumption",
     "hydrodynamic radius assigned to M(bpy)/M(salen) molecular-catalyst cores; the equation "
     "D = kB T / (6 pi mu r) itself is textbook", "declared modelling choice", "",
-    "D ~ 1/r, so the declared 4-5 Angstrom band spans 25 pct in D. The resulting D = 3-7e-6 cm2 s-1 "
-    "brackets the range reported for such complexes in amide solvents. " + _cd_sentence())
+    _se_band_sentence() + _cd_sentence())
 # PAGE-ANCHORED 2026-08-22: Cussler Eq. (5.2-1), p. 127, prints exactly this form,
 # D = kB T / f = kB T / (6 pi mu R0), on the same page as Table 5.2-1.
 add("3. Estimation methods", "Stokes-Einstein: D = kB T / (6 pi mu r)", "--", "-", "derived",
@@ -1059,14 +1630,34 @@ add("3. Estimation methods", "Nernst-Einstein: D = R T lambda0 / (z2 F2)", "--",
     "than 0.1 pct for H+, K+, HCO3- and the divalent CO3^2-, which is the check that the z^2 is "
     "handled correctly", CRC, L_VAN,
     "Exact identity at infinite dilution; the exposure sits in lambda0, not in the method.")
-for k, v in [("C",14.8),("H",3.7),("O (ether/carbonyl)",7.4),("O (acid hydroxyl)",12.0),
-             ("N (tertiary)",15.6),("N (primary amine)",10.5),("N (secondary)",12.0),("S",25.6),
+_LEBAS_SPECIAL = {
+    "O (every oxygen except an acid hydroxyl)": (
+        "Table 3-8 prints 7.4 for 'Oxygen (except as noted below)'. The model applies it to every oxygen other than a "
+        "carboxylic-acid hydroxyl, including the oxygens the table lists separately: 9.1, 9.9 and 11.0 in methyl, ethyl "
+        "and higher esters and ethers, and 8.3 joined to S, P or N. That is a declared simplification of the table, not "
+        "a reading of it. Recomputing every Wilke-Chang volume with the specific entries (an ester or ether oxygen "
+        "takes 9.1 when bonded to a methyl group, 9.9 to an ethyl and 11.0 otherwise; an oxygen bonded to S, P or N "
+        "takes 8.3) moves %d of the %d Wilke-Chang carriers, by %s in D (D ~ V^-0.6), and %d of the %d mediated-spec "
+        "substrates; the largest change anywhere is %.1f pct. %s"
+        % (_LBI["n_carriers_moved"], _LBI["n_wc_carriers"], _lbi_pct(_LBI["carrier_D_ratio_range"]),
+           _LBI["n_substrates_moved"], _LBI["n_mediated_substrates"], _LBI["max_abs_change_pct"], _LBI_REACH)),
+    "N (every nitrogen without hydrogen)": (
+        "Table 3-8 prints 15.6 for a doubly bonded nitrogen, 10.5 in primary and 12.0 in secondary amines, and has no "
+        "entry for a nitrogen with three single bonds. The model applies 15.6 to every nitrogen without a hydrogen, "
+        "which covers the doubly bonded and aromatic nitrogens the entry describes and also the tertiary amine, amide, "
+        "carbamate and N-O nitrogens the table does not. Because no tabulated value exists for those, the exposure is "
+        "bracketed rather than corrected: giving them the secondary-amine 12.0, the nearest tabulated value, together "
+        "with the specific oxygen entries moves %d carriers by %s in D. %s"
+        % (_LBI["n_carriers_moved_tertN12"], _lbi_pct(_LBI["carrier_D_ratio_range_tertN12"]), _LBI_REACH)),
+}
+for k, v in [("C",14.8),("H",3.7),("O (every oxygen except an acid hydroxyl)",7.4),("O (acid hydroxyl)",12.0),
+             ("N (every nitrogen without hydrogen)",15.6),("N (primary amine)",10.5),("N (secondary)",12.0),("S",25.6),
              ("F",8.7),("Cl",24.6),("Br",27.0),("I",37.0),
              ("6-ring correction",-15.0),("5-ring",-11.5),("4-ring",-8.5),("3-ring",-6.0)]:
     add("3. Estimation methods", f"Le Bas increment: {k}", f"{v}", "cm3 mol-1", "measured",
         "additive atomic volumes at the normal boiling point, read from Table 3-8; the benzene "
         "closure check reproduces the textbook 96.0 cm3 mol-1", POLING, L_LEBAS,
-        "D ~ V_A^-0.6; the benzene closure check bounds the increment set to a few per cent.")
+        _LEBAS_SPECIAL.get(k, "D ~ V_A^-0.6; the benzene closure check bounds the increment set to a few per cent."))
 # Phosphorus is carried in the increment dictionary of build_reactions50.py but is NOT in the
 # Le Bas column of Table 3-8, so it cannot claim that locator. It is also unused: no entry of the
 # 50-reaction set has a phosphorus-bearing carrier whose volume is built by Le Bas. Registering it
@@ -1089,26 +1680,63 @@ add("3. Estimation methods", "Le Bas increment: P", "27.0", "cm3 mol-1", "assump
 # Br-(MeCN), whose lambda0 = 102.00 S cm2 mol-1 is page-anchored in Kalugin 2019 Table 3, p. 28
 # and reproduces 2.716e-9 exactly.
 NE = "Nernst-Einstein D = R T lambda0 / (z^2 F^2) with R, T and F from category 1"
+
+
+def _med_specs():
+    """{spec label: [species dicts]} parsed from julia/run_mediated.jl (code only, comments stripped), so the rows that
+    describe the EC' specs read the specs instead of restating them (chemistry audit, pass 5)."""
+    src = io.open(_os.path.join(_os.path.dirname(_HERE_D), "julia", "run_mediated.jl"), encoding="utf8").read()
+    body = src[src.index("SPECS = MedSpec["):src.index("## ONE-ROW MODE")]
+    specs, lab = {}, None
+    pat = re.compile(r'S\("([^"]+)",\s*([-+0-9.]+),\s*([0-9.eE+-]+),\s*([^,]+?),\s*([-+0-9.]+),\s*([-+0-9./]+)\)')
+    for line in body.split("\n"):
+        code = line.split("#")[0]
+        m = re.match(r'\s*MedSpec\("([^"]+)"', code)
+        if m:
+            lab = m.group(1); specs[lab] = []
+        for m in pat.finditer(code):
+            name, z, D, cb, s_, nu = m.groups()
+            specs[lab].append(dict(name=name, z=float(z), D=float(D),
+                                   c=float(eval(cb, {"__builtins__": {}}, {"tr": lambda C: C * 1e-5})),
+                                   s=float(s_), nu=float(eval(nu, {"__builtins__": {}}))))
+    if len(specs) < 10 or any(not v for v in specs.values()):
+        raise SystemExit("could not parse the EC' specs of julia/run_mediated.jl")
+    return specs
+
+
+_SPECS = _med_specs()
+with io.open(_os.path.join(_HERE_D, "electrolyte_ions.csv"), encoding="utf8") as _fh:
+    _EIONS = list(csv.DictReader(_fh))
+
+
+def _spec_users(species, D=None):
+    """Spec labels that carry `species` (at diffusivity D, if given)."""
+    return [lab for lab, sp in _SPECS.items()
+            if any(x["name"] == species and (D is None or abs(x["D"] - D) <= 1e-12 * max(1.0, D) + 1e-15) for x in sp)]
+
+
+def _short(lab):
+    return lab.split(" (")[0]
 S_SOLVER = ("Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. "
             "These set migration and the film potential in the Stage-1 and EC-prime solves, and "
-            "they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier "
-            "D sets i_lim, but that is not true of the eight mediated entries, whose plotted "
+            "the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or "
+            "produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier "
+            "D sets i_lim, but that is not true of the mediated entries, whose plotted "
             "current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- "
-            "and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the "
-            "merged matrix by more than 1 pct and moves two published counts by one entry "
-            "each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, "
-            "each rising by one of fifty. The absolute values that perturbation was measured "
-            "against predate the acetonitrile viscosity correction, which moved both baselines "
-            "down by one independently, so the one-entry movement is quoted here rather than "
-            "a pair of from/to integers that no longer describe the current matrix. The "
-            "unstirred, thin-gap, RDE and rotating-cylinder counts are "
-            "unchanged and the architecture ordering is preserved; the largest median shift is "
-            "+11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far "
-            "wider than the uncertainty on any of these values, so the counts are stable in "
-            "practice, but they are not invariant to them. The discrete charge-conservation check "
-            "(maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to "
-            "0.2 pct) are insensitive to these values, because they test charge bookkeeping rather "
-            "than the reported counts.")
+            "and Br2 together and re-solving the %s mediated rows that carry them moves %d of the %d "
+            "cells of the published matrix by more than 1 pct (the largest by %.0f pct) and raises %s by one "
+            "entry each; the ordering the main text claims %s, and the largest median shift is %+.1f pct "
+            "(%s). The doubling probes how strongly these declared inputs couple into the counts rather than "
+            "estimating their error, and no count it moves moves by more than one entry. "
+            % (_numword(len(_S2X["rows_resolved"])), _S2X["n_moved_gt1pct"], _S2X["n_cells"], _S2X["max_cell_change_pct"],
+               ("%s counts (%s)" % (_numword(len(_S2X["count_moves"])), ", ".join("%s >=%d" % ({"natural": "unstirred",
+                   "stirred": "stirred", "flow": "recirculating flow", "anec": "ANEC", "micro": "microfluidic", "rde": "RDE",
+                   "rce": "rotating cylinder"}[m["arch"]], m["threshold"]) for m in _S2X["count_moves"]))) if _S2X["count_moves"] else "no count",
+               "is preserved" if _S2X["ordering_preserved"] else "is NOT preserved",
+               max(_S2X["median_shift_pct"].values()),
+               max(_S2X["median_shift_pct"], key=_S2X["median_shift_pct"].get)) + "The discrete charge-conservation check "
+            "(maximum deviation %s) and the binary-migration bound (2.00x Fick, %s) are insensitive to "
+            "these values, because they test charge bookkeeping rather than the reported counts." % (_AG_CC, _AG_BIN))
 for n_, v, lam, z in [("H+ (aq)","9.3e-09",349.7,1), ("OH- (aq)","5.27e-09",198.0,1),
                       ("K+ (aq)","1.96e-09",73.5,1), ("Na+ (aq)","1.33e-09",50.1,1),
                       ("Br- (aq)","2.08e-09",78.1,1), ("Cl- (aq)","2.03e-09",76.3,1),
@@ -1129,11 +1757,13 @@ for n_, v, lam, z in [("H+ (aq)","9.3e-09",349.7,1), ("OH- (aq)","5.27e-09",198.
 # 1.18 x 10-5 cm2 s-1 = 1.18e-9 m2 s-1. The registry carries 1.2e-9, i.e. the tabulated value
 # rounded to two significant figures (+1.7 pct); the exact figure is recorded here so the
 # rounding is visible rather than inferred.
-add("4. Solver species diffusivities", "Br2 (aq)", "1.2e-09", "m2 s-1", "measured",
-    "measured aqueous molecular-bromine diffusivity; Cussler Table 5.2-1 p. 127 tabulates "
-    "1.18e-5 cm2 s-1 = 1.18e-9 m2 s-1 and this row carries it rounded to 1.2e-9 (+1.7 pct)",
+add("4. Solver species diffusivities", "Br2 (aq)", "1.2e-09", "m2 s-1", "derived",
+    "the measured aqueous molecular-bromine diffusivity rounded to two significant figures: Cussler Table 5.2-1 p. 127 "
+    "tabulates 1.18e-5 cm2 s-1 = 1.18e-9 m2 s-1, and this row carries 1.2e-9 (+1.7 pct)",
     CUSSLER, "Table 5.2-1, p. 127 ('Diffusion coefficients at infinite dilution in water at "
-    "25 C', Bromine row)", "")
+    "25 C', Bromine row: 1.18e-5 cm2 s-1)",
+    "The carried value is the printed 1.18e-9 rounded up by 1.7 pct; i_lim of the rows that carry it is at most linear "
+    "in it, so the rounding moves those ceilings by at most 1.7 pct.")
 # ETHYLENE, MEASURED (2026-09-05, author instruction). The Cl-/ethylene row is Leow's headline
 # system -- ethylene sparged into 1.0 M KCl -- and carries ethene's measured solubility, yet its
 # substrate diffusivity was propene's Wilke-Chang value under an "ethylene" label. The same Cussler
@@ -1146,6 +1776,16 @@ add("4. Solver species diffusivities", "Ethylene (aq)", "1.87e-09", "m2 s-1", "m
     "Wilke-Chang estimate for ethene, 1.74e-9, sits 7 pct below it and is recorded beside it)",
     CUSSLER, "Table 5.2-1, p. 127 ('Diffusion coefficients at infinite dilution in water at "
     "25 C', Ethylene row: 1.87e-5 cm2 s-1)", "")
+# OXYGEN, MEASURED. The cathodic Giese row is carried by dissolved O2 (2026-10-05): its exemplar
+# shows that oxygen is the only species reduced at the applied potential. Same table and page as
+# Br2 and ethylene; the digits were read from the page raster (Chlorine 1.25 and Ethylene 1.87 on
+# the same rows of the scan as the controls).
+add("4. Solver species diffusivities", "O2 (aq)", "2.1e-09", "m2 s-1", "measured",
+    "measured aqueous dioxygen diffusivity at infinite dilution, 25 C; the carrier D of the "
+    "oxygen-mediated Giese row, whose medium is water/acetonitrile 2:1 at essentially water's "
+    "viscosity (0.90 against 0.89 mPa s), so no scaling is applied",
+    CUSSLER, "Table 5.2-1, p. 127 ('Diffusion coefficients at infinite dilution in water at "
+    "25 C', Oxygen row: 2.10e-5 cm2 s-1)", "")
 # PROPYLENE, DERIVED. The ex-cell illustrative solve (julia/run_excell.jl, S4) is propylene at its
 # aqueous saturation; Cussler's Table 5.2-1 lists propane but no propylene, so the diffusivity is
 # Wilke-Chang from the registered Le Bas increments and water's registered properties -- state B,
@@ -1165,33 +1805,116 @@ add("4. Solver species diffusivities", "Propylene (aq)", "1.3663e-09", "m2 s-1",
 # these rows are not arbitrary -- each was chased to a specific source and each failed for a
 # specific, recorded reason. That reason belongs in the PUBLISHED citation column, not only in the
 # internal method_note. State C means no page-anchored measurement; it never means no basis.
+# chemistry audit, pass 4: rows whose value was re-solved at the end of a bracket carry that result ahead of the shared note
+_c, _mv, _md = _mxf("br2_hi")
+_S_EXTRA = {"Br2 (MeCN)": ("Re-solving the two rows that carry it (the Hofmann rearrangement and the amidyl amination) at "
+                          "the Walden value moves their ceilings by x%.3f-x%.3f, and %s and %s moves. "
+                          % (_c["ratio_lo"], _c["ratio_hi"], _mv, _md)
+                          # 2026-10-07: at the Hofmann constant measured for HOBr (3.3 M-1 s-1) the amidyl row's recirculating
+                          # cell sits at 25.8 mA cm-2, and this bracket carries it under 25; the same rule as the other rows
+                          + ("The published count that moves is therefore conditional on where this declared value sits in "
+                             "its bracket. " if _c["count_moves"] else ""))}
+# The homogeneous partners (chemistry audit, pass 5): electrode spectators that the homogeneous step consumes or releases, so
+# their D does not cancel. data/sensitivity_solver_species_2xD.py --group homog doubles each in its own spec and re-solves.
+def _s2h_row(spec):
+    r = _S2H["per_row"][spec]
+    return "%+.2f to %+.2f pct" % (r["min_pct"], r["max_pct"])
+def _s2h_counts():
+    return ("no threshold count moves" if not _S2H["count_moves"] else
+            "; ".join("the %s >=%d count %d -> %d" % (_ARCHW[m["arch"]], m["threshold"], m["from"], m["to"])
+                      for m in _S2H["count_moves"]))
+_S2H_HMF = [k for k in _S2H["per_row"] if k.startswith("HMF")][0]
+_S2H_SCN = [k for k in _S2H["per_row"] if "thiocyanation" in k][0]
+_S2H_SENT = {
+    "borate": ("Doubling B(OH)4- and B(OH)3 together and re-solving the %s row in a scratch copy (an unperturbed control "
+               "reproduces the published cells exactly) moves its seven ceilings by %s; %s, and the architecture ordering %s. "
+               % (_S2H_HMF, _s2h_row(_S2H_HMF), _s2h_counts(), "holds" if _S2H["ordering_preserved"] else "does NOT hold")),
+    "h_acid": ("Doubling it and re-solving the %s row in a scratch copy (an unperturbed control reproduces the published "
+               "cells exactly) moves its seven ceilings by %s; %s, and the architecture ordering %s. "
+               % (_S2H_SCN, _s2h_row(_S2H_SCN), _s2h_counts(), "holds" if _S2H["ordering_preserved"] else "does NOT hold")),
+}
+_S_EXTRA["B(OH)4- (aq)"] = _S2H_SENT["borate"]
+_S_EXTRA["B(OH)3 (aq)"] = _S2H_SENT["borate"]
+_S_EXTRA["H+ (AcOH/HCOOH)"] = _S2H_SENT["h_acid"]
+with io.open(_os.path.join(_HERE_D, "reactions_50.csv"), encoding="utf8") as _fh:
+    _RX_SOLV = {r["reaction"]: r["solvent"] for r in csv.DictReader(_fh)}
+_LI_DECL = [lab for lab in _spec_users("Li+", 1.0e-9)]
+_LI_NP = {r["electrolyte"]: float(r["D_cat"]) for r in _EIONS if r["cation"] == "Li+"}
+_LI_NP_DECL = sorted(e for e, r in ((r["electrolyte"], r) for r in _EIONS)
+                     if r["cation"] == "Li+" and r["D_cat_basis"].upper().startswith("DECLARED"))
+_LI_MECN = [v for e, v in _LI_NP.items() if e.endswith("/MeCN")][0]
+_LI_ACET = [v for e, v in _LI_NP.items() if e.endswith("/acetone")][0]
+# the NHPI row's spectators re-solved at Krumgalz's acetone values (data/pyridinium_bracket.py writes the verdict)
+_lc = lambda nm: nm[0].lower() + nm[1:] if nm[1:2].islower() else nm   # sentence-case a row name mid-sentence
+_CLO4_NP = {r["electrolyte"]: float(r["D_an"]) for r in _EIONS if r["anion"] == "ClO4-"}
+_CLO4_MECN = {v for e, v in _CLO4_NP.items() if e.endswith("/MeCN") or e.endswith("/MeCN-H2O")}
+assert len(_CLO4_MECN) == 1, _CLO4_MECN
+_CLO4_MECN = _CLO4_MECN.pop()
+_CLO4_ACET = [v for e, v in _CLO4_NP.items() if e.endswith("/acetone")][0]
+_CLO4_ONE = lambda solv: [v for e, v in _CLO4_NP.items() if e.endswith("/" + solv)][0]
+assert abs(_CLO4_ACET - 115.8e-4 * 8.314462618 * 298.15 / 96485.33212 ** 2) < 2e-12, _CLO4_ACET
+_PYH_SPECT = _json.load(io.open(_os.path.join(_os.path.dirname(_HERE_D), "results", "pyridinium_bracket.json"),
+                                encoding="utf-8"))["spectators_krumgalz_bitidentical"]
 SOLVER_BASIS = {
  "Li+ (generic organic)": (
-   "Declared: the aqueous value reused for organic media. The table that would carry it is "
-   "Krumgalz, J. Chem. Soc. Faraday Trans. 1 1983, 79, 571-587, Table 4, p. 579, whose "
-   "acetonitrile CATION row cannot be read unambiguously -- seven tokens for nine columns with no "
-   "right-hand anchor, so Li+ and H+ cannot be separated without deciding which value looks right"),
- "NH4+ (MeCN, used aq-like)": (
-   "Declared TRANSFER of a page-anchored aqueous value: CRC 97th ed., Sect. 5, p. 5-75 gives "
-   "NH4+ lambda0 = 73.5 S cm2 mol-1 and D = 1.957e-5 cm2 s-1. The aqueous number is measured; what "
-   "is assumed is its reuse in MeCN, and that is the weak step -- the Walden route was tested for "
-   "DMF in this pass and fails by about 70 per cent"),
+   "Declared at 1.0e-9 in the EC' specs of the %s rows and in the %s slot%s of the Nernst-Planck ion table. Krumgalz, "
+   "J. Chem. Soc. Faraday Trans. 1 1983, 79, 571-587, Table 4, p. 580 tabulates lambda0(Li+) in neither THF nor acetic "
+   "acid; for formic acid it prints 19.5 S cm2 mol-1, i.e. %.2e m2 s-1 by Nernst-Einstein, %.1f times below the "
+   "declared value, and the 1:1 acetic/formic mixture has no entry. For acetonitrile the same table prints a dash for "
+   "H+ and Li+, and Gong et al., Energy Environ. "
+   "Sci. 2015, 8, 3515-3530, Table 2, p. 3518 gives lambda0(Li+, AN) = 69.97 S cm2 mol-1, which the Nernst-Planck layer "
+   "and the oxazole spec use (%.3e m2 s-1). For acetone Krumgalz prints 69.2 S cm2 mol-1 (p. 580), which the "
+   "Nernst-Planck layer uses (%.3e m2 s-1) while the NHPI EC' spec keeps the declared value. Li+ is a spectator "
+   "(s = 0, nu = 0) wherever it appears, so its D does not enter i_lim"
+   % (" and ".join("%s (%s)" % (_short(l), _RX_SOLV.get(l, "?")) for l in _LI_DECL), " and ".join(_LI_NP_DECL),
+      "s" if len(_LI_NP_DECL) > 1 else "", 19.5 * 8.314462618 * 298.15e-4 / 96485.33212 ** 2,
+      1.0e-9 / (19.5 * 8.314462618 * 298.15e-4 / 96485.33212 ** 2), _LI_MECN, _LI_ACET)),
+ "NH4+ (AcOH/HCOOH, thiocyanation spec)": (
+   "Declared TRANSFER of a page-anchored aqueous value: CRC 97th ed., Sect. 5, p. 5-75 gives NH4+ lambda0 = 73.5 "
+   "S cm2 mol-1 and D = 1.957e-5 cm2 s-1, carried at 2e-9 into the acetic/formic acid medium of the aryl-thiocyanation "
+   "spec, the only spec that uses it (%s). No value for the mixture is tabulated: Krumgalz 1983, Table 4, p. 580 "
+   "prints NH4+ 27.1 S cm2 mol-1 in formic acid, i.e. %.2e m2 s-1 by Nernst-Einstein, %.1f times below the carried "
+   "value, and has no acetic-acid entry. NH4+ is a spectator there (s = 0, nu = 0), so its D does not enter i_lim"
+   % ("; ".join(_short(l) for l in _spec_users("NH4+")), 27.1 * 8.314462618 * 298.15e-4 / 96485.33212 ** 2,
+      2e-9 / (27.1 * 8.314462618 * 298.15e-4 / 96485.33212 ** 2))),
  "ClO4- (MeCN, aq-like)": (
-   "Declared: the aqueous value reused in MeCN. Krumgalz 1983, Table 4, p. 579 prints a DASH for "
-   "ClO4- in the acetonitrile column, so no lambda0 for this ion in this solvent can be "
-   "page-anchored from it"),
+   "Declared at 1.7e-9, 5 pct below the aqueous value (CRC 97th ed., p. 5-75, 1.792e-9). It is carried as a supporting "
+   "ion in the EC' specs of three rows, %s, and in the Stage-1 slot of the %s row. Elsewhere the Stage-1 layer uses anchored "
+   "values: %.3e in MeCN (the ClO4- (MeCN) row, Gong 2015, Table 2, p. 3518), also carried into MeCN/H2O as its "
+   "major component, and %.3e in acetone "
+   "(115.8 S cm2 mol-1 by Nernst-Einstein), %.3e in MeNO2 and %.3e in DMF from Krumgalz 1983, Table 4, p. 581, which "
+   "prints a dash for ClO4- in the acetonitrile row. Re-solving the NHPI row's EC' spec with ClO4- and its Li+ counter-ion at "
+   "Krumgalz's acetone values leaves its seven ceilings bit-identical. That holds for every spec carrying the "
+   "declared value: an ion that neither the electrode reaction nor a solution reaction consumes or produces carries no "
+   "flux at steady state, so its profile follows the potential alone and its diffusivity cannot enter a ceiling, "
+   "although its concentration does, through electroneutrality"
+   % (" and ".join(", ".join("%s (%s)" % (_lc(_short(l)), _RX_SOLV[l]) for l in _spec_users("ClO4-", 1.7e-9)).rsplit(", ", 1)),
+      ", ".join(sorted({_lc(_short(r["reaction"])) for r in _EIONS if r["anion"] == "ClO4-" and abs(float(r["D_an"]) - 1.7e-9) < 1e-15})),
+      _CLO4_MECN, _CLO4_ACET, _CLO4_ONE("MeNO2"), _CLO4_ONE("DMF")) + ("" if _PYH_SPECT and set(_CLO4_NP.values()) == {_CLO4_MECN, _CLO4_ACET, _CLO4_ONE("MeNO2"), _CLO4_ONE("DMF"), 1.7e-9} and len(_spec_users("ClO4-", 1.7e-9)) == 3 else 1 / 0)),
  "SCN- (AcOH/HCOOH)": (
-   "Declared: Walden scaling of the MeCN row by mu(MeCN)/mu(AcOH-HCOOH) = 0.34/1.28. Both the "
-   "input lambda0 and the Walden transfer into a carboxylic-acid medium are unverified"),
+   "Declared: Walden scaling of the MeCN row (Nernst-Einstein from Krumgalz's lambda0 = 113.3) by "
+   "mu(MeCN)/mu(AcOH-HCOOH) = 0.369/1.28. The Walden transfer into a carboxylic-acid medium is unverified"),
  "Br2 (MeCN)": (
-   "Declared: Walden-scaled from the measured aqueous value. It agrees with the ~2.4e-9 quoted for "
-   "MeCN voltammetry, but that figure was not itself page-anchored here, so it corroborates rather "
-   "than sources"),
+   "Declared at 2.2e-9: no measurement in MeCN was located. Walden scaling of the measured aqueous "
+   "value (Cussler, Diffusion 3rd ed., Table 5.2-1, p. 127, 1.18e-9) by 0.890/0.369 gives 2.85e-9, 29 pct "
+   "above the carried value; the ~2.4e-9 quoted for MeCN voltammetry lies between the two but was not "
+   "page-anchored here, so it corroborates rather than sources"),
  "Cl2/HOCl lumped OX (aq)": (
-   "Declared LUMP, placed deliberately between Cl2(aq) 1.38e-9 and HOCl 1.4e-9. No single "
-   "measurement can cover a lumped species, so none is claimed; the lump is the modelling choice"),
+   "Declared LUMP at 1.4e-9, 12 pct above the one member with a measured value, Cl2(aq) 1.25e-9 "
+   "(Cussler, Diffusion 3rd ed., Table 5.2-1, p. 127); HOCl, the other member, has no value in that table. "
+   "No single measurement can cover a lumped species, so none is claimed; the lump is the modelling choice"),
+ "Cl2/HOCl lumped OX (MeCN/H2O)": (
+   "Declared: the aqueous lump scaled by viscosity (Walden) to the acetonitrile/0.1 M aqueous HCl "
+   "medium of the thioether row, 1.4e-9 x 0.890/0.48. No measurement of an oxidized-chlorine "
+   "diffusivity in that mixture was located"),
+ "O2- / HO2 (aq)": (
+   "Declared equal to the measured diffusivity of dioxygen (Cussler Table 5.2-1): the reduced "
+   "oxygen species of the Giese row, carried as the neutral hydroperoxyl radical at the medium's "
+   "pH 2 (pKa 4.88), is taken to diffuse as its parent does. No measurement in the row's medium "
+   "was located"),
  "(SCN)2 (AcOH/HCOOH)": (
-   "Declared: Walden-scaled from a 2.0e-9 MeCN estimate that is itself unverified. No measurement "
+   "Declared at 5.5e-10, 5 pct below the Walden transfer (x 0.369/1.28 = 5.8e-10) of a 2.0e-9 MeCN estimate "
+   "that is itself unverified. No measurement "
    "of this species' diffusivity was located in either medium"),
  "H+ (MeCN/organic)": (
    "Declared BY ARGUMENT, not measurement: an aprotic medium supports no Grotthuss shuttle, so the "
@@ -1200,15 +1923,18 @@ SOLVER_BASIS = {
    "Declared: interpolated between the aprotic 3.0e-9 assumption and the page-anchored aqueous "
    "9.3e-9, on partial Grotthuss transport in a water-rich mixture"),
  "B(OH)4- (aq)": (
-   "Declared: borate mobility taken as comparable to HCO3- for the pH-10 borate buffer spec; no "
-   "lambda0(B(OH)4-) was page-anchored. It is a SPECTATOR in that spec (s = 0), so its D cancels "
-   "and no reported quantity depends on it"),
+   "Declared: borate mobility taken as comparable to HCO3- for the pH-10 borate buffer of the HMF -> FDCA spec; no "
+   "lambda0(B(OH)4-) was page-anchored. It takes no electrons at the electrode (s = 0), but the homogeneous step "
+   "consumes it -- the buffer base takes up the protons the oxidation releases -- so its D does not cancel; its "
+   "measured effect is in the sensitivity column"),
  "H+ (AcOH/HCOOH)": (
-   "Declared BY ARGUMENT: set between the aprotic 3.0e-9 and a slower carboxylic-acid medium. It "
-   "is a SPECTATOR in this spec (s = 0), so its D cancels and nothing reported depends on it"),
+   "Declared BY ARGUMENT: set between the aprotic 3.0e-9 and a slower carboxylic-acid medium. It takes no electrons "
+   "at the electrode (s = 0), but the homogeneous step of the aryl-thiocyanation spec releases it "
+   "(ArH + (SCN)2 -> ArSCN + SCN- + H+), so its D does not cancel; its measured effect is in the sensitivity column"),
  "B(OH)3 (aq)": (
-   "Declared: the neutral borate partner given the same mobility as B(OH)4-, which the buffer spec "
-   "pairs it with. Both borate species are SPECTATORS (s = 0), so their D cancels"),
+   "Declared: the neutral borate partner given the same mobility as B(OH)4-, which the buffer spec pairs it with. "
+   "It takes no electrons at the electrode (s = 0), but the homogeneous step releases it as the buffer base is "
+   "consumed, so its D does not cancel; its measured effect is in the sensitivity column"),
  "Generic supporting K+/A- (Stage-1 verification cases)": (
    "Declared: aqueous values reused inside the verification cases, which exercise physics rather "
    "than chemistry. Enters no reported result"),
@@ -1228,7 +1954,16 @@ add("4. Solver species diffusivities", "Br- (MeCN)", "2.7e-09", "m2 s-1", "deriv
     "Replaces the inherited Izutsu citation, which could not be opened", KALUGIN,
     "Table 3, p. 28 (limiting ionic conductivities in MeCN at 25 C: Bu4N+ 61.90, BF4- 109.20, "
     "Br- 102.00, Et4N+ 86.34, BPh4- 58.13 S cm2 mol-1)", S_SOLVER)
-# RETRIEVED 2026-08-22. Krumgalz Table 4, p. 579 is a 25 C ion-by-solvent table of limiting
+# chemistry audit, 2026-10-05: the triarylamine-mediated oxazole row became an EC' spec, which carries its 0.3 M LiClO4
+# supporting anion explicitly; the value is the one the NP layer's ion table already uses (state A there).
+add("4. Solver species diffusivities", "ClO4- (MeCN)", "2.759e-09", "m2 s-1", "derived",
+    NE + "; lambda0(ClO4-, MeCN) = 103.6 S cm2 mol-1 gives 2.759e-9 m2 s-1, the value data/ion_diffusivities.csv "
+    "carries for the k = 0 layer", "Gong, Fang, Gu, Li & Yan, Energy Environ. Sci. 2015, 8, 3515-3530",
+    "Table 2, p. 3518, column AN (limiting molar conductivity, 25 C)",
+    "Supporting anion of the oxazole row's EC' spec (zero electrode and homogeneous stoichiometry, 300 mM against a 5 mM "
+    "mediator), so it carries no net flux at the limit and its diffusivity does not enter i_lim; the Kohlrausch route from "
+    "Minc & Werblan's perchlorate salts gives 113.3 S cm2 mol-1 (+9 pct), which moves nothing for the same reason.")
+# RETRIEVED 2026-08-22. Krumgalz Table 4, pp. 580-581 is a 25 C ion-by-solvent table of limiting
 # equivalent conductances, and it carries two of the four ions the registry had been listing as
 # page-anchoring against this very paper. Both reproduce the inherited values, which is the check
 # that the inherited numbers were sound and that the OCR columns were read correctly:
@@ -1243,115 +1978,298 @@ add("4. Solver species diffusivities", "Br- (MeCN)", "2.7e-09", "m2 s-1", "deriv
 # right-hand anchor, so Li+ and H+ cannot be separated. Resolving that by recognising which
 # values "look right" is precisely what this project forbids, so `Li+ (generic organic)` and
 # `ClO4- (MeCN, aq-like)` stay assumptions.
-for n_, v, lam, sol in [("SCN- (MeCN)", "2.9e-09", 113.3, "acetonitrile"),
+for n_, v, lam, sol in [("SCN- (MeCN)", "3.02e-09", 113.3, "acetonitrile"),
                         ("Br- (MeOH)", "1.5e-09", 56.53, "methanol")]:
     add("4. Solver species diffusivities", n_, v, "m2 s-1", "derived",
         NE + f"; lambda0({n_.split(' ')[0]}, {sol}) = {lam} S cm2 mol-1, z = 1. Replaces the "
         "inherited Izutsu citation, which could not be opened",
-        "Krumgalz, J. Chem. Soc. Faraday Trans. 1 1983, 79, 571-587", "Table 4, p. 579 (limiting equivalent conductances of anions in organic "
+        "Krumgalz, J. Chem. Soc. Faraday Trans. 1 1983, 79, 571-587", "Table 4, pp. 580-581 (limiting equivalent conductances of anions in organic "
         f"solvents at 25 C; {sol} row)", S_SOLVER)
 
 for n_, v, meth in [
  ("Li+ (generic organic)", "1e-09",
-  "order of the aqueous value reused for organic media; no lambda0 in an organic solvent could be "
-  "page-anchored. page-anchoring would require Krumgalz, J. Chem. Soc. Faraday Trans. 1 1983, 79, 571-587 "
-  "(limiting ionic conductances in 50 organic solvents at 25 C)"),
- ("NH4+ (MeCN, used aq-like)", "2e-09",
-  "aqueous lambda0 = 73.5 -> 1.957e-9 reused in MeCN (corrected 2026-08-22 from a recalled 73.6 "
-  "on retrieval of the CRC 97th ed.: Sect. 5 p. 5-75 gives NH4+ 73.5, D 1.957e-5 cm2 s-1; the "
-  "carried 2e-9 is that value rounded and is unchanged). Cross-solvent transfer of lambda0 is not "
-  "defensible: the Walden route was tested for DMF in this pass and fails by ~70 pct"),
+  "order of the aqueous value, declared for the media in which no limiting conductance of Li+ is tabulated; where one "
+  "is (acetonitrile, Gong Table 2; acetone and the other Krumgalz Table 4 solvents) the Nernst-Planck ion table "
+  "uses it"),
+ ("NH4+ (AcOH/HCOOH, thiocyanation spec)", "2e-09",
+  "aqueous lambda0 = 73.5 -> 1.957e-9 (CRC 97th ed. p. 5-75), carried rounded into the AcOH/HCOOH medium of the "
+  "thiocyanation spec; a cross-solvent transfer, declared"),
  ("ClO4- (MeCN, aq-like)", "1.7e-09",
   "aqueous 1.79e-9 reused in MeCN; same cross-solvent objection. Page-anchoring would require Krumgalz 1983"),
- ("SCN- (AcOH/HCOOH)", "7.8e-10",
-  "Walden scaling of the MeCN row by mu(MeCN)/mu(AcOH-HCOOH) = 0.34/1.28; both the input lambda0 "
-  "and the Walden transfer are unverified"),
+ ("SCN- (AcOH/HCOOH)", "8.7e-10",
+  "Walden scaling of the MeCN row (3.02e-9) by mu(MeCN)/mu(AcOH-HCOOH) = 0.369/1.28; the Walden transfer "
+  "into a carboxylic-acid medium is unverified"),
  ("Br2 (MeCN)", "2.2e-09",
-  "Walden-scaled from the measured aqueous value; consistent with the ~2.4e-9 quoted for MeCN "
-  "voltammetry but not page-anchored"),
+  "declared; the Walden transfer of the measured aqueous value would give 2.85e-9, and ~2.4e-9 is quoted "
+  "for MeCN voltammetry but not page-anchored"),
  ("Cl2/HOCl lumped OX (aq)", "1.4e-09",
-  "a lumped oxidant between Cl2(aq) 1.38e-9 and HOCl 1.4e-9; no single measurement covers the lump"),
+  "a lumped oxidant at 1.4e-9, 12 pct above the measured Cl2(aq) 1.25e-9 (Cussler p. 127); no single "
+  "measurement covers the lump"),
+ ("Cl2/HOCl lumped OX (MeCN/H2O)", "2.6e-09",
+  "the aqueous lump Walden-scaled to the MeCN / aqueous HCl medium of the thioether row (mu 0.48 mPa s)"),
+ ("O2- / HO2 (aq)", "2.1e-09",
+  "taken equal to the measured O2 value; the reduced oxygen species of the Giese row"),
  ("(SCN)2 (AcOH/HCOOH)", "5.5e-10",
-  "no measurement located; Walden-scaled from a 2.0e-9 MeCN estimate that is itself unverified"),
+  "no measurement located; 5 pct below the Walden transfer (5.8e-10) of a 2.0e-9 MeCN estimate that is "
+  "itself unverified"),
  ("H+ (MeCN/organic)", "3e-09",
   "no Grotthuss shuttle in aprotic media, so set to ~1/3 of the aqueous value by argument rather "
   "than by measurement"),
  ("H+ (1:1 aq/MeCN)", "5e-09",
   "partial Grotthuss in a water-rich mixture; interpolated between the aprotic 3.0e-9 assumption "
   "and the aqueous 9.3e-9 derived value"),
- ("B(OH)4- (aq)", "9.6e-10",
-  "borate mobility taken as comparable to HCO3- for the pH-10 borate buffer spec; no "
-  "lambda0(B(OH)4-) was page-anchored"),
  ("H+ (AcOH/HCOOH)", "2e-09",
   "the aryl-thiocyanation spec runs in an AcOH/HCOOH mixture; H+ there is set between the aprotic "
   "3.0e-9 assumption and a slower carboxylic-acid medium, by argument rather than measurement. "
   "added 2026-08-24: run_mediated.jl had used 2.0e-9 for this species with no registry row, and a "
   "value-only audit bound it by coincidence to the unrelated NH4+ row, which also reads 2e-9 -- "
-  "exactly the wrong-row binding of claude.md trap 11. H+ is a spectator in this spec "
-  "(s = 0), so its D cancels and nothing reported depends on it"),
- ("B(OH)3 (aq)", "9.6e-10",
-  "the neutral borate partner is given the same mobility as B(OH)4-, which the buffer spec pairs "
-  "it with. Added 2026-08-24: previously used by run_mediated.jl with no row of its own. Both "
-  "borate species are spectators (s = 0) in that spec, so their D cancels"),
+  "exactly the wrong-row binding of claude.md trap 11. An electrode spectator (s = 0) that the homogeneous "
+  "step releases (nu = +1), so its D does not cancel; G-SPEC2X (homogeneous partners) measures the effect"),
  ("Generic supporting K+/A- (Stage-1 verification cases)", "1.9e-09",
   "aqueous values reused in the verification cases, which test physics rather than chemistry"),
 ]:
     add("4. Solver species diffusivities", n_, v, "m2 s-1", "assumption", meth,
-        SOLVER_BASIS[n_], "", S_SOLVER)
+        SOLVER_BASIS[n_], "", _S_EXTRA.get(n_, "") + S_SOLVER)
+# 2026-10-07: the HMF row's borate pair, sourced (previously declared by analogy to bicarbonate)
+_HMFB = _json.load(io.open(_os.path.join(_os.path.dirname(_HERE_D), "results", "hmf_buffer_speciation.json"), encoding="utf-8"))
+assert _HMFB["carried_matches"], "run_mediated.jl does not carry the computed borate speciation"
+add("4. Solver species diffusivities", "B(OH)4- (aq)", "9.39e-10", "m2 s-1", "derived",
+    "Nernst-Einstein D = R T lambda0 / F^2 from the measured limiting conductance, 35.27 S cm2 mol-1 -> 9.39e-10 m2 s-1. "
+    "An electrode spectator (s = 0) that the homogeneous step consumes (nu = -1), so its D does not cancel",
+    "Corti, Crovetto & Fernandez-Prini, J. Solution Chem. 1980, 9, 617-625",
+    "Table III, p. 621: lambda0(B(OH)4-) = 35.27 +/- 0.23 S cm2 mol-1, 25 C",
+    _S_EXTRA.get("B(OH)4- (aq)", "") + S_SOLVER)
+add("4. Solver species diffusivities", "B(OH)3 (aq)", "1.64e-09", "m2 s-1", "measured",
+    "Stokes diaphragm-cell diffusion coefficient of aqueous boric acid, unbuffered, 25 C, at infinite dilution (the "
+    "intercept of the authors' fit), as every solver diffusivity is carried. At its 48 mM in the buffer the same fit gives "
+    "1.49e-9. An electrode spectator (s = 0) that the homogeneous step releases (nu = +1), so its D does not cancel",
+    "Park & Lee, J. Chem. Eng. Data 1994, 39, 891-894",
+    "Eq. 8, p. 894: 1e5 D/(cm2 s-1) = 1.640516 - 0.678597 c^(1/2)",
+    _S_EXTRA.get("B(OH)3 (aq)", "") + S_SOLVER)
+# 2026-10-07: the NHPI row's pyridinium, bracketed by measured acetone cations (data/pyridinium_bracket.py, G-PYH)
+_PYH = _json.load(io.open(_os.path.join(_os.path.dirname(_HERE_D), "results", "pyridinium_bracket.json"), encoding="utf-8"))
+assert (_PYH["carried_inside_brookes"] and not _PYH["counts_move_inside_brookes"] and _PYH["spectators_krumgalz_bitidentical"]
+        and _PYH["unstirred_clears_25_at_krumgalz_edge"] and not _PYH["other_cells_at_krumgalz_edge_cross"]), \
+    "the pyridinium row's claims no longer hold"
+with io.open(_os.path.join(_os.path.dirname(_HERE_D), "julia", "tier0_ec_matrix.csv"), encoding="utf8") as _fh:
+    _N25_UNST = sum(float(r["natural"]) >= 25 for r in _csv.DictReader(_fh))
+add("4. Solver species diffusivities", "Pyridinium pyH+ (acetone, NHPI row)", "3e-09", "m2 s-1", "assumption",
+    "the proton released by the NHPI row's homogeneous step, carried as pyridinium (pyridine, 2 equiv, takes it) at 33 mM in "
+    "the bulk as the N-oxide anion's counter-cation; no limiting conductance of pyridinium in acetone or acetonitrile was "
+    "located",
+    "Declared: no measurement located. Two assignments of single-ion conductances in anhydrous acetone at 25 C bound it "
+    "differently: Brookes, Hotz & Spong, J. Chem. Soc. A 1971, 2415-2420, Table 2, p. 2418, split by measured KSCN "
+    "transference numbers, give NH4+ 116.0 (smaller than pyH+, an upper bound; %.2e by Nernst-Einstein) and Me4N+ 93 (of "
+    "similar size; %.2e); Krumgalz, J. Chem. Soc. Faraday Trans. 1 1983, 79, 571-587, Table 4, p. 580, the assignment the "
+    "acetone ion table carries, gives NH4+ 89.5 (%.2e)"
+    % (_PYH["brookes_bracket_m2s"][1], _PYH["brookes_bracket_m2s"][0], _PYH["krumgalz_nh4_D_m2s"]), "",
+    "Inside Brookes's bracket, re-solving the NHPI row moves its seven ceilings by %+.1f to %+.1f pct and no count moves. "
+    "On Krumgalz's assignment pyridinium would sit at or below %.2e; there the unstirred cell reaches %.2f mA cm-2, "
+    "crossing 25 mA cm-2 at D = %.2e, and no other cell crosses a threshold. The unstirred >=25 count is therefore "
+    "conditional on this diffusivity: %d of 50 at the carried value, %d at the Krumgalz edge. Homoconjugation to "
+    "(py)2H+ (K_f = 4 in MeCN; Coetzee & Padmanabhan, J. Am. Chem. Soc. 1965, 87, 5005, Table I, p. 5007) would lower "
+    "the effective D further, toward the second count."
+    % (_PYH["change_inside_brookes_pct"][0], _PYH["change_inside_brookes_pct"][1], _PYH["krumgalz_nh4_D_m2s"],
+       _PYH["unstirred_at_krumgalz_edge_mAcm2"], _PYH["unstirred_crosses_25_at_D"], _N25_UNST, _N25_UNST + 1))
+_SCH = _HMFB["schemes"]
+assert not _SCH["I"]["counts_move"] and not _SCH["II"]["counts_move"] and not _SCH["I"]["printed_medians_move"] \
+    and not _SCH["II"]["printed_medians_move"], "a polyborate scheme now moves a count or a printed median"
+_BIG = sorted(_SCH["II"]["resolve_by_reactor_pct"], key=lambda a: _SCH["II"]["resolve_by_reactor_pct"][a])[:2]
+assert set(_BIG) == {"Unstirred batch", "Stirred batch"}, "the largest polyborate shifts are no longer the batch films"
+_HMF_C = [float(r["C_carrier_M"]) for r in _RX50 if r["reaction"] == "HMF -> FDCA (biomass)"][0] * 1000
+add("5. Concentrations", "Borate buffer speciation (HMF row)",
+    "%.0f / %.0f / %.0f" % (_HMFB["monomers_mM"]["B(OH)4-"], _HMFB["monomers_mM"]["B(OH)3"], _HMFB["monomers_mM"]["Na+"]),
+    "mM", "derived",
+    "B(OH)4- / B(OH)3 / Na+ of 0.500 M boric acid adjusted to pH 10.00 with NaOH (the exemplar's recipe), from B(OH)3 + "
+    "OH- = B(OH)4- at the solution's own ionic strength (%.3f m; log Q11 = %.3f), a_OH from pH and pKw = %.3f with a "
+    "Davies activity coefficient, Na+ by charge balance" % (_HMFB["ionic_strength"], _HMFB["log_Q11_at_I"], _HMFB["pKw_declared"]),
+    "Mesmer, Baes & Sweeton, Inorg. Chem. 1972, 11, 537-543, DOI 10.1021/ic50109a023; Cardiel, Taitt & Choi, ACS "
+    "Sustainable Chem. Eng. 2019, 7, 11138-11149, DOI 10.1021/acssuschemeng.9b00203 (the buffer recipe)",
+    "abstract p. 537 and Table III, p. 541 (log Q11 against T and I); Table VI, p. 542 (polyborates); Cardiel et al., "
+    "Experimental",
+    "Polyborates are not carried. Mesmer's Table VI quotients, fitted in 1 m KCl at 50-200 C and so extrapolated here to "
+    "25 C, evaluated at this solution's pH and ionic strength, put %.0f pct of the boron in polyborates on scheme I (its Q4,2 "
+    "with the Q2,1 and Q3,1 expressions the table gives, which are fitted on scheme II) and %.0f pct on scheme II. Re-solving the HMF row at each composition, the polyborate charge lumped as an inert anion, "
+    "moves its seven ceilings by %+.2f to %+.2f pct (scheme I) and %+.1f to %+.2f pct (scheme II). The large shifts are "
+    "the two batch films, where lumping removes the base capacity the polyborates actually carry, so these runs bound the "
+    "omission from the pessimistic side; no count and no printed median moves in either. Sodium, the buffer's cation, is "
+    "%.0f times the %.0f mM ACT carrier as carried and about %.0f times with polyborates."
+    % (_SCH["I"]["fraction_of_boron_pct"], _SCH["II"]["fraction_of_boron_pct"], _SCH["I"]["resolve_pct"][0],
+       _SCH["I"]["resolve_pct"][1], _SCH["II"]["resolve_pct"][0], _SCH["II"]["resolve_pct"][1],
+       _HMFB["Na_over_carrier_monomer"] * 40.0 / _HMF_C, _HMF_C,
+       min(_SCH[k]["carried_mM"]["Na+"] for k in _SCH) / _HMF_C))
+for _nm, _val, _case, _meth, _basis, _cond in [
+ ("Cl- (6:1 MeCN/aq HCl, thioether row)", "2.3e-09", "cl34",
+  "the chloride mediator of the thioether row in its own medium, 6:1 MeCN / 0.1 M aqueous HCl (0.48 mPa s), for which "
+  "no limiting conductance is tabulated",
+  "Declared: no measurement in this medium. The pure-solvent values bracket it when carried to the medium's viscosity by "
+  "Walden's rule: Krumgalz 1983, Table 4, pp. 580-581, lambda0(Cl-, MeCN) = 100.4 S cm2 mol-1 (2.67e-9 by "
+  "Nernst-Einstein) gives 2.06e-9, and the aqueous 2.03e-9 (CRC 97th ed., p. 5-75) gives 3.77e-9", False),
+ ("Br- (1:1 H2O/MeCN, bromination row)", "2.08e-09", "br46",
+  "the bromide mediator of the arene-bromination row in its own medium, 0.5 M aqueous NaBr diluted 1:1 with MeCN "
+  "(0.835 mPa s), carried at the aqueous value; no limiting conductance is tabulated for the mixture",
+  "Declared: the aqueous value (CRC 97th ed., p. 5-75) carried into the mixture. The pure-solvent values bracket it when "
+  "carried to the medium's viscosity by Walden's rule: Kalugin 2019, Table 3, p. 28, lambda0(Br-, MeCN) = 102.00 S cm2 "
+  "mol-1 (2.72e-9) gives 1.20e-9, and the aqueous 2.08e-9 gives 2.22e-9 (with Br2, Cussler p. 127, carried likewise to "
+  "1.26e-9)", True)]:
+    _lo, _mvl, _mdl = _mxf(_case + "_lo"); _hi, _mvh, _mdh = _mxf(_case + "_hi")
+    _ends = ("no threshold count or architecture median moves at either end" if not (_lo["count_moves"] or _hi["count_moves"]
+             or _lo["median_moves"] or _hi["median_moves"]) else "at the lower end %s and %s moves; at the upper end %s and %s "
+             "moves" % (_mvl, _mdl, _mvh, _mdh))
+    _sens = ("Re-solved at both ends of the bracket: at the lower end the row's ceilings move x%.3f-x%.3f, at the upper "
+             "end x%.3f-x%.3f, and its lowest cell is %.1f and %.1f mA cm-2; %s. Walden's rule is itself approximate for ions (see the NH4+ row), so the ends are a "
+             "bracket rather than a derivation."
+             % (_lo["ratio_lo"], _lo["ratio_hi"], _hi["ratio_lo"], _hi["ratio_hi"], _lo["lowest_cell_mAcm2"],
+                _hi["lowest_cell_mAcm2"], _ends))
+    if _cond:
+        assert _lo["count_moves"], "the bromination bracket no longer moves a count; reword its row"
+        _sens += (" The published count that moves is therefore conditional on where this declared value sits in its "
+                  "bracket; the carried value is the aqueous one, near the upper end.")
+    else:
+        assert not _lo["count_moves"] and not _hi["count_moves"], "the thioether bracket now moves a count; reword its row"
+    add("4. Solver species diffusivities", _nm, _val, "m2 s-1", "assumption", _meth, _basis, "", _sens)
+_NP_BU4NBF4 = [r for r in _EIONS if r["cation"] == "Bu4N+" and r["anion"] == "BF4-" and r["electrolyte"].endswith("/MeCN")][0]
+_QA_SENT = {
+    "Q+": ("The generic supporting cation Q+ of the EC' specs of the %s rows, and the class default for a declared "
+           "supporting cation of the Nernst-Planck ion table (see the next-but-one row). Where Bu4N+ itself appears in "
+           "acetonitrile, the Nernst-Planck layer does not use this value: it carries %.3e m2 s-1 (%s), and Kalugin's "
+           "lambda0 = 61.90 S cm2 mol-1 gives 1.648e-9 by Nernst-Einstein. Q+ is a spectator wherever it appears "
+           "(s = 0, nu = 0): with zero flux at the limit its diffusivity cancels from its own conservation equation, so "
+           "it does not enter i_lim (the supporting-ion row measures that zero). "
+           % (" and ".join(_short(l) for l in _spec_users("Q+")), float(_NP_BU4NBF4["D_cat"]),
+              _NP_BU4NBF4["D_cat_basis"].split(";")[1].strip() if ";" in _NP_BU4NBF4["D_cat_basis"] else _NP_BU4NBF4["D_cat_basis"])),
+    "A-": ("The generic supporting anion A- of the EC' spec%s of the %s row%s, and the class default for a declared "
+           "supporting anion of the Nernst-Planck ion table (see the next row). Where BF4- itself appears in "
+           "acetonitrile, the Nernst-Planck layer does not use this value: it carries %.3e m2 s-1 (Gong et al., Energy "
+           "Environ. Sci. 2015, 8, 3515-3530, Table 2, p. 3518, lambda0 = 108.5), and Kalugin's lambda0 = 109.20 S cm2 "
+           "mol-1 gives 2.908e-9 by Nernst-Einstein. A- is a spectator wherever it appears (s = 0, nu = 0), so its "
+           "diffusivity does not enter i_lim. "
+           % ("s" if len(_spec_users("A-")) > 1 else "", " and ".join(_short(l) for l in _spec_users("A-")),
+              "s" if len(_spec_users("A-")) > 1 else "", float(_NP_BU4NBF4["D_an"]))),
+}
 add("4. Solver species diffusivities", "Bu4N+/Q+ (organic)", "1e-09", "m2 s-1", "assumption",
-    "deliberately conservative: the page-anchored lambda0(Bu4N+, MeCN) = 61.90 gives 1.648e-9 m2 "
-    "s-1 by Nernst-Einstein, and 1.0e-9 was adopted instead", KALUGIN, "",
-    "Tested 1.0e-9 to 1.65e-9 (the derived value). " + S_SOLVER)
+    "a round value below the page-anchored lambda0(Bu4N+, MeCN) = 61.90 (1.648e-9 m2 s-1 by Nernst-Einstein), used "
+    "for the generic supporting cation of the EC' specs and as the class default of the declared supporting-cation slots",
+    "Declared class default, set below the page-anchored lambda0(Bu4N+, MeCN) = 61.90 S cm2 mol-1 of " + KALUGIN,
+    "", _QA_SENT["Q+"] + S_SOLVER)
 add("4. Solver species diffusivities", "BF4-/generic A- (organic)", "1.5e-09", "m2 s-1", "assumption",
-    "deliberately conservative: the page-anchored lambda0(BF4-, MeCN) = 109.20 gives 2.908e-9 m2 "
-    "s-1 by Nernst-Einstein, and 1.5e-9 was adopted instead", KALUGIN, "",
-    "Tested 1.5e-9 to 2.91e-9 (the derived value). " + S_SOLVER)
+    "a round value below the page-anchored lambda0(BF4-, MeCN) = 109.20 (2.908e-9 m2 s-1 by Nernst-Einstein), used "
+    "for the generic supporting anion of the EC' specs and as the class default of the declared supporting-anion slots",
+    "Declared class default, set below the page-anchored lambda0(BF4-, MeCN) = 109.20 S cm2 mol-1 of " + KALUGIN,
+    "", _QA_SENT["A-"] + S_SOLVER)
+def _decl_census():
+    """The declared supporting-ion slots of data/electrolyte_ions.csv, counted at build time: a slot is declared when its
+    basis begins 'DECLARED'; it sits at the class default when its D is 1.0e-9 (cation) or 1.5e-9 (anion)."""
+    dflt, other = [], []
+    for r in _EIONS:
+        for side, ion, D, b, cls in (("cat", r["cation"], r["D_cat"], r["D_cat_basis"], 1.0e-9),
+                                     ("an", r["anion"], r["D_an"], r["D_an_basis"], 1.5e-9)):
+            if not b.upper().startswith("DECLARED"):
+                continue
+            med = r["electrolyte"].split("/", 1)[1] if "/" in r["electrolyte"] else r["electrolyte"]
+            at_default = abs(float(D) - cls) <= 1e-15
+            if b.upper().startswith("DECLARED CLASS DEFAULT") != at_default:
+                raise SystemExit("electrolyte_ions.csv labels %s in %s as %r at D = %s, which is %s the class default"
+                                 % (ion, med, b.split(" (")[0], D, "not" if not at_default else ""))
+            (dflt if at_default else other).append((ion, med, float(D)))
+    return dflt, other
+_DC_DEF, _DC_OTH = _decl_census()
+# ion/solvent pairs counted exactly as data/sensitivity_unsourced_D.py counts them (the medium named in each basis string)
+_DC_PAIRS = set()
+for _r in _EIONS:
+    for _b in ("D_cat_basis", "D_an_basis"):
+        _m = re.search(r"no lambda0 for (\S+?)(?: \([^)]*\))? in (\S+) in", _r[_b])   # a basis may qualify the ion
+        if _m and _r[_b].upper().startswith("DECLARED"):
+            _DC_PAIRS.add((_m.group(1), _m.group(2)))
+_DC_N = len(_DC_DEF) + len(_DC_OTH)
+if _UD["n_slots"] != _DC_N or _UD["n_pairs"] != len(_DC_PAIRS):
+    raise SystemExit("ERROR: results/unsourced_D_sensitivity.json perturbed %d slots / %d pairs but data/electrolyte_ions.csv now "
+          "declares %d / %d; re-run data/sensitivity_unsourced_D.py (G-DSENS) and rebuild, or the supporting-ion row's "
+          "sensitivity describes a different slot set from its value column" % (_UD["n_slots"], _UD["n_pairs"], _DC_N,
+                                                                                 len(_DC_PAIRS)))
 add("4. Solver species diffusivities", "Supporting-ion diffusivities without conductance data",
-    "%d slots, %d ion/solvent pairs" % (_UD["n_slots"], _UD["n_pairs"]), "m2 s-1", "assumption",
+    "%d slots, %d ion/solvent pairs" % (_DC_N, len(_DC_PAIRS)), "m2 s-1", "assumption",
     "the supporting-electrolyte cation and anion slots of the 50-row table for which no limiting "
-    "conductance is tabulated; each takes the class default of the two rows above (1.0e-9 for a "
-    "cation, 1.5e-9 for an anion) and records that basis beside the value",
-    "Declared class default: no lambda0 for these ion/solvent pairs (tosylate, BF4-, PF6-, HSO4-, "
-    "carboxylates, Li+ and Br- in THF, and the like, in methanol, THF, acetone, HFIP, acetic acid "
-    "and acetonitrile; tosylate and borate in water) in Krumgalz 1983 Table 4 or CRC 97th ed. "
-    "pp. 5-75/5-76, so the acetonitrile values of the two rows above are reused. A supporting ion "
+    "conductance is tabulated in the row's medium, counted from data/electrolyte_ions.csv at build time: %d declared "
+    "slots, %d at the class default of the two rows above (1.0e-9 for a cation, 1.5e-9 for an anion) and %d at another "
+    "declared value, each recording its basis beside the value" % (len(_DC_DEF) + len(_DC_OTH), len(_DC_DEF), len(_DC_OTH)),
+    "Declared: no lambda0 for these ion/solvent pairs (tosylate, BF4-, PF6-, HSO4-, carboxylates, Li+ and Br- in THF, "
+    "and the like, in methanol, THF, acetone, HFIP, acetic acid and acetonitrile; tosylate in water) in "
+    "Krumgalz 1983 Table 4 or CRC 97th ed. pp. 5-75/5-76. Of the %d declared slots, %d take the class default of the two "
+    "rows above; the other %d carry a declared value of another origin, recorded slot by slot with its basis in the ion "
+    "table (%s). A supporting ion "
+    % (len(_DC_DEF) + len(_DC_OTH), len(_DC_DEF), len(_DC_OTH),
+       "; ".join("%s in %s, %.3g" % o for o in sorted(set(_DC_OTH)))) +
     "carries no flux, so under local electroneutrality its diffusivity shapes the potential profile "
     "but does not enter the limiting current; the default is therefore a choice that costs nothing "
     "reported, and the sensitivity beside it states the measured size of that nothing.",
     "",
     "All %d slots divided by 3 together, then all multiplied by 3 together, re-solving the full "
-    "300-cell Nernst-Planck layer each time: the largest relative change in any cell is %s "
+    "%d-cell Nernst-Planck layer each time: the largest relative change in any cell is %s "
     "(divided) and %s (multiplied), and no threshold count in any of the %s architectures "
     "moves. The zero is the physics, not a coincidence -- a species with zero flux drops out of "
     "its own conservation equation -- and the sweep exists as a regression test: a non-zero here "
     "would mean a supporting-ion diffusivity had started feeding a reacting species."
-    % (_UD["n_slots"], _relfmt(_UD["max_rel_change"]["div3"]), _relfmt(_UD["max_rel_change"]["mul3"]),
+    % (_UD["n_slots"], 50 * _N_ARCH, _relfmt(_UD["max_rel_change"]["div3"]), _relfmt(_UD["max_rel_change"]["mul3"]),
        _numword(_N_ARCH)))
+# chemistry audit 2026-10-06: the medium rows split in two. Four are carried at k = 0 and G-ZSENS re-solves them; the Ni
+# homocoupling is carried at a finite rate constant and G-HOMOZ re-solves it at the alternatives at that constant.
+_HZ = _json.load(io.open(_os.path.join(_os.path.dirname(_HERE_D), "results", "homocoupling_charge_sensitivity.json"), encoding="utf8"))
+# chemistry audit, pass 4: the cross-electrophile coupling is medium-confidence and published at its sourced k, so G-ZSENS's
+# k = 0 re-solve is not its published layer; G-XECZ re-solves it at that k
+_XZ = _json.load(io.open(_os.path.join(_os.path.dirname(_HERE_D), "results", "xec_charge_sensitivity.json"), encoding="utf8"))
+_ARCHNM = {"natural": "unstirred", "stirred": "stirred", "flow": "recirculating-flow", "anec": "ANEC", "micro": "microfluidic",
+           "rde": "RDE", "rce": "rotating-cylinder"}
+
+
+def _zs_sens():
+    zs_rows = {r["reaction"] for r in _ZS["rows"]}
+    swept = [r for r in _CC_MED if r["reaction"] in zs_rows]
+    rest = [r["reaction"] for r in _CC_MED if r["reaction"] not in zs_rows]
+    if rest != [_HZ["reaction"]]:
+        raise SystemExit("medium-confidence charges outside both sweeps: %s" % rest)
+    mv = lambda z: "; ".join("the %s >=%d mA cm-2 count %d -> %d" % (_ARCHNM[m["arch"]], m["threshold"], m["from"], m["to"])
+                             for m in _HZ["count_moves"][z]) or "no threshold count"
+    xmv = lambda z: "; ".join("the %s >=%d mA cm-2 count %d -> %d" % (_ARCHNM[m["arch"]], m["threshold"], m["from"], m["to"])
+                              for m in _XZ["count_moves"][z]) or "no threshold count moves"
+    xz = ("%s of them are published in that layer; the cross-electrophile coupling is published at its sourced rate "
+          "constant (%g M-1 s-1), and re-solved there its ceilings move x%.3f-x%.3f at z = -1 (%s), x%.3f-x%.3f at z = +1 (%s) "
+          "and x%.3f-x%.3f at z = +2 (%s). "
+          % (_numword(len(swept) - 1).capitalize(), _XZ["k_adopted"], _XZ["ratio"]["-1"][0], _XZ["ratio"]["-1"][1], xmv("-1"), _XZ["ratio"]["1"][0], _XZ["ratio"]["1"][1],
+             xmv("1"), _XZ["ratio"]["2"][0], _XZ["ratio"]["2"][1], xmv("2")))
+    assert _XZ["reaction"] in [r["reaction"] for r in swept], "the cross-coupling is no longer among the k = 0-swept medium rows"
+    return ("The %s medium-confidence rows other than the homocoupling were each re-solved at every alternative charge in %s "
+            "in the k = 0 layer, the whole %d-cell layer each time: the largest change in any of their ceilings there is %.1f "
+            "pct, and no threshold count in any of the %s architectures moves at any alternative. %sThe cathodic Ni homocoupling is carried at the neutral charge of its "
+            "precursor, NiBr2bpy, but its exemplar writes the complex it reduces as Nibpy2+; re-solved at its adopted rate "
+            "constant (%g M-1 s-1) at z = +1 its ceilings rise %.1f-%.1f-fold, moving %s, and at z = +2 %.1f-%.1f-fold, moving %s. "
+            "It is the one carrier charge in the model on which a published count depends."
+            % (_numword(len(swept)), "{" + ", ".join(str(a) for a in _ZS["alternatives"]) + "}", 50 * _N_ARCH,
+               _ZS["worst_ceiling_change_pct"], _numword(_N_ARCH), xz, _HZ["k_adopted"], _HZ["ratio"]["1"][0], _HZ["ratio"]["1"][1],
+               mv("1"), _HZ["ratio"]["2"][0], _HZ["ratio"]["2"][1], mv("2")))
+
+
 add("4. Solver species diffusivities", "Carrier charge z (all 50 rows)",
     "z = 0 on %d rows, -1 on %d, -2 on %d, +2 on %d" % tuple(sum(1 for r in _CC if r["z_carrier"] == z) for z in ("0", "-1", "-2", "2")),
     "-", "assumption",
     "the charge of the carrier as it reaches the electrode, read from each exemplar paper; it "
     "decides whether the migration term acts on the carrier (a charged carrier in its own salt is "
     "lifted above its Fick bound, a neutral one is not). %d of 50 are read directly from the "
-    "exemplar's written species (high confidence); %d are metal complexes whose electroactive "
-    "species is written neutral and were declared neutral (medium confidence): %s"
+    "exemplar's written species (high confidence); %d are metal complexes carried neutral at medium "
+    "confidence: %s"
     % (len(_CC) - len(_CC_MED), len(_CC_MED), "; ".join("%s -- %s" % (r["reaction"], r["basis"][:140]) for r in _CC_MED)),
     "Declared per row from the exemplar's own written species (each row's source is the exemplar "
     "cited beside it in Table S2); the value is printed in Table S2, column z, with medium-confidence "
     "rows marked *",
     "",
-    "The %s medium-confidence rows were each re-solved at every alternative charge in %s, the whole "
-    "300-cell layer each time: the largest change in any of their ceilings is %.1f pct, and no "
-    "threshold count in any of the %s architectures moves at any alternative. The residual "
-    "uncertainty in those %s charges is real and is provably immaterial to every published "
-    "number." % (_numword(len(_CC_MED)), "{" + ", ".join(str(a) for a in _ZS["alternatives"]) + "}", _ZS["worst_ceiling_change_pct"], _numword(_N_ARCH), _numword(len(_CC_MED))))
+    _zs_sens())
 add("4. Solver species diffusivities", "All 50 carrier D values", "(Table S2)", "m2 s-1", "derived",
     "Wilke-Chang / Nernst-Einstein / Stokes-Einstein per row by the category-3 methods; the route "
     "and citation for each row are given in Table S2", "Table S2", "",
     "See the Wilke-Chang row: +/-25 pct displaces log10 i_lim by +/-0.10.")
-add("4. Solver species diffusivities", "8 mediated-spec substrate D values", "(S5.5)", "m2 s-1",
+add("4. Solver species diffusivities", "%d mediated-spec substrate D values" % _N_MED, "(S5.5)", "m2 s-1",
     "derived",
-    "Seven by Wilke-Chang on named structures and one (ethylene/H2O) measured, all generated by "
+    "All but one by Wilke-Chang on named structures and one (ethylene/H2O) measured, all generated by "
     "data/build_mediated_substrates.py into "
     "data/mediated_substrates.csv and asserted against julia/run_mediated.jl by gate G-dsub in "
     "both places the solver uses them (the MedSpec D_S field and the S(\"Sub\") species entry). "
@@ -1364,22 +2282,24 @@ add("4. Solver species diffusivities", "8 mediated-spec substrate D values", "(S
     "H2O/MeCN gives 9.148e-10, so that value ran 46 pct low. Substrates now: 2-phenylacetamide/"
     "MeCN, 2-(2-oxopyrrolidin-1-yl)butan-1-ol/H2O, ethylene/H2O (MEASURED, Cussler Table 5.2-1 -- "
     "its own row above; the seven others are Wilke-Chang), valencene/acetone, hmf/H2O, "
-    "1-decene/MeCN-H2O, anisole/H2O-MeCN, anisole/AcOH-HCOOH. Five were confirmed by exact "
+    "1-decene/MeCN-H2O, anisole/H2O-MeCN, anisole/AcOH-HCOOH, and for the three rows carried as "
+    "mediated since 2026-10-05, N-(pivaloyloxy)biphenyl-2-carboxamide/MeCN, phenyl vinyl sulfone/"
+    "H2O-MeCN and thioanisole/MeCN-H2O (a declared surrogate: the exemplar draws its thioether "
+    "without naming it). Five were confirmed by exact "
     "reproduction of the carried value (ratios 1.000, 0.997, 1.000, 1.002, 0.999); the three "
     "corrected ones were read out of the exemplar PDFs, because a 3-significant-figure D does not "
     "identify a structure uniquely -- 4-fluorobenzamide and cyclopentanecarboxamide both reproduce "
     "2.00e-9 to 3 s.f.",
     WC55 + " -- applied to the named surrogate structures; the ethylene row carries the measured "
     "Cussler value instead (its own row above)",
-    "structures from the exemplar PDFs: op3c00332.pdf (2-phenylacetamide 1a, 0.4 M), "
-    "nature17431.pdf (valencene 4 -> nootkatone 5), s41467-025-57329-0.pdf (anisole; 4 mmol in "
-    "33 mL = 0.121 M = C_sub, and 0.5 M NaBr x 10/33 = 152 mol/m3 = C_carrier)",
-    "Swept together over x%.2f to x%.2f (the +/-25-30 pct usually quoted for Wilke-Chang, and wider "
-    "than the +/-25 pct this registry carries as its working property error), re-solving the full "
+"each structure is the model substrate its exemplar names: " + "; ".join(
+        "%s (%s)" % (r["substrate"], r["reaction"].split(" (")[0]) for r in _MSUB),
+    "Swept together over x%.2f to x%.2f (wider than the +/-25 pct this registry "
+    "carries as its working property error), re-solving the full "
     "%d-cell mediated matrix at each scale: %s. The mediated cell closest to the 25 mA cm-2 "
     "threshold is %s in the %s, at %.2f mA cm-2 (%.1f pct away)%s"
     % (min(_DSB["scales"]), max(_DSB["scales"]),
-       8 * len(_DSB["base_counts"]),
+       _N_MED * len(_DSB["base_counts"]),
        _dsb_movement(_DSB)[0],
        _DSB["closest_cell_to_25"]["reaction"], _DSB["closest_cell_to_25"]["reactor"],
        _DSB["closest_cell_to_25"]["i_mAcm2"], _DSB["closest_cell_to_25"]["margin_pct_to_25"],
@@ -1440,61 +2360,129 @@ add("5. Concentrations", "All 50 C_carrier / C_substrate", "(Table S2)", "M", "m
     "i_lim is linear in C (Eq. S1), so residual error in any row rescales exactly that row. The "
     "architecture ranking and the carrier dichotomy rest on 1-2 order-of-magnitude contrasts and "
     "cannot move under factor-of-two revisions.")
-add("5. Concentrations", "Supporting-electrolyte concentrations in EC' specs", "0.033-1.0 M", "M",
+def _ec_support():
+    """Spectator ions of the EC' specs (no electrode and no homogeneous stoichiometry): supporting salts and the
+    counter-ions of the carrier salts. A spec that carries a buffer (a charged species the homogeneous step consumes
+    or releases at >= 0.1 M) has its spectator counter-ion reported separately as the buffer's."""
+    sup, buf = [], []
+    for lab, sp in _SPECS.items():
+        buffered = any(x["s"] == 0 and x["nu"] != 0 and x["z"] != 0 and x["c"] >= 100.0 and x["name"] != "Sub" for x in sp)
+        for x in sp:
+            if x["s"] == 0 and x["nu"] == 0 and x["name"] != "Sub":
+                (buf if buffered else sup).append((x["c"], x["name"], lab))
+    return sorted(sup), sorted(buf)
+_ECS_SUP, _ECS_BUF = _ec_support()
+add("5. Concentrations", "Supporting-electrolyte concentrations in EC' specs",
+    "%.4g-%.1f" % (_ECS_SUP[0][0] / 1000.0, _ECS_SUP[-1][0] / 1000.0), "M",
     "measured",
     "matched to each verified exemplar's electrolyte; buffer compositions (carbonate pH 8.5, borate "
-    "pH 10, HClO4 0.15 M) taken from the cited experimental sections",
-    "Table S2 per-row citations", "Table S2, final column", "")
+    "pH 10, HClO4) taken from the cited experimental sections. Read from the specs of julia/run_mediated.jl at build time",
+    "Table S2 per-row citations", "Table S2, final column",
+    "The spectator ions of the %d EC' specs (no electrode and no homogeneous stoichiometry: the supporting salts and the "
+    "counter-ions of the carrier salts) run from %.1f mM (%s, %s) to %.1f M (%s, %s). The two buffered specs add the "
+    "buffer's counter-ion, up to %.1f M (%s, %s). A spectator carries no flux at the limit, so these concentrations set the "
+    "film potential, not i_lim. One acid concentration is a choice inside a reported range rather than a reading: the "
+    "Wacker-Tsuji spec carries 150 mM HClO4, mid-range of the 0.015-0.36 M perchloric acid its exemplar's experimental "
+    "section uses (Miller & Wayner, Can. J. Chem. 1992, 70, 2485)."
+    % (len(_SPECS), _ECS_SUP[0][0], _ECS_SUP[0][1], _short(_ECS_SUP[0][2]), _ECS_SUP[-1][0] / 1000.0, _ECS_SUP[-1][1],
+       _short(_ECS_SUP[-1][2]), _ECS_BUF[-1][0] / 1000.0, _ECS_BUF[-1][1], _short(_ECS_BUF[-1][2])))
 add("5. Concentrations", "Propylene C_sat (aq, 1 atm)", "5.67e-3", "M", "derived",
     "Henry's law: C_sat = H_cp * p = 5.6e-5 mol m-3 Pa-1 * 101325 Pa = 5.67 mol m-3 = 5.67 mM. "
     "corrected 2026-08-22 on retrieval of the source. This row previously used H_cp = 4.9e-5, "
     "giving 5.0 mM, and cited the 2015 edition of Sander's compilation -- which was never "
-    "retrieved. the edition now held carries exactly one propene entry, 5.6e-5 mol m-3 Pa-1, "
-    "attributed to Plyasunov and Shock (2000). Where 4.9e-5 came from could not be established, "
+    "retrieved. the edition now held lists more than twenty propene entries; the value used is the "
+    "first-listed literature-review (type L) entry, 5.6e-5 mol m-3 Pa-1, Plyasunov and Shock (2000). "
+    "Where 4.9e-5 came from could not be established, "
     "so it is withdrawn rather than defended. the +14 pct move is safe and moves no reported "
     "current: this row bounds the gas-liquid delivery duty, not the electrode current, because "
     "%.1f pct of the generated oxidant is exported from the film (see the sensitivity)" % _EX["exported_pct"],
     "Sander, 'Compilation of Henry's law constants (version 5) for water as solvent', "
     "Atmos. Chem. Phys. 2023, 23, 10901-12440, DOI 10.5194/acp-23-10901-2023",
-    "propene entry, H_cp = 5.6e-5 mol m-3 Pa-1 at 298 K, attributed to Plyasunov and Shock (2000); "
-    "the sole propene entry in the compilation",
-    "The ex-cell propylene epoxidation entry is bulk-reaction-limited: at %.0f mA cm-2 the solver "
-    "shows %.1f pct of the generated oxidant exported from the film (%.1f pct on a %.0f um film), so "
+    "propene, H_cp = 5.6e-5 mol m-3 Pa-1 at 298 K, Plyasunov and Shock (2000), the first-listed "
+    "literature-review (type L) value; the measured (type M) entries are 5.4e-5 (Maassen 1995; Reichl "
+    "1995) and 4.8e-5 (McAuliffe 1966)",
+    "At the declared rate constant of the HOCl pathway (k = %g M-1 s-1) the ex-cell propylene epoxidation "
+    "entry is bulk-reaction-limited: at %.0f mA cm-2 the solver shows %.1f pct of the generated oxidant "
+    "exported from the film (%.1f pct on a %.0f um film), so "
     "this row bounds the gas-liquid delivery duty, not the electrode current. It enters the solve "
     "through the reaction layer x_k = (D/kC)^(1/2) = %.0f um and the planar propylene cap "
-    "%.2f mA cm-2; a 14 pct change in C_sat moves x_k by 7 pct and the in-film share by half a "
-    "percentage point." % (_EX["i_op_mAcm2"], _EX["exported_pct"], _EX["exported_pct_half_delta"],
-                            _EX["half_delta_um"], _EX["x_k_um"], _EX["i_cap_P_mAcm2"]))
+    "%.2f mA cm-2. The measured entries of the same compilation lie 4-14 pct below the carried "
+    "value; a 14 pct change in C_sat moves x_k by %.0f pct (x_k ~ C^-1/2) and the in-film share by half a "
+    "percentage point. Faster Cl2 constants raise the in-film share (\u00a7S4.2)." % (_EX["k_M"], _EX["i_op_mAcm2"], _EX["exported_pct"], _EX["exported_pct_half_delta"],
+                            _EX["half_delta_um"], _EX["x_k_um"], _EX["i_cap_P_mAcm2"], 100 * ((1 / 0.86) ** 0.5 - 1)))
+add("5. Concentrations", "O2 C_sat (air-saturated water, 25 C)", "2.66e-4", "M", "derived",
+    "mole-fraction solubility of O2 at 298.15 K and 101.325 kPa partial pressure, X1 = 2.293e-5, times the "
+    "molar concentration of water (997.05 g/L / 18.015 g/mol = 55.345 mol/L) and the mole fraction of O2 in "
+    "dry air (0.2095): 2.293e-5 x 55.345 x 0.2095 = 2.66e-4 M. The carrier concentration of the "
+    "oxygen-mediated Giese row, whose medium is water/acetonitrile 2:1; the aqueous value is a declared "
+    "stand-in for that mixture",
+    CRC, "Sect. 5, 'Solubility of Selected Gases in Water' (Gevantman), p. 5-134, Oxygen at 298.15 K: X1 = 2.293e-5",
+    "Oxygen is more soluble in acetonitrile than in water, so the aqueous value is a lower estimate for the "
+    "mixed medium. The row's rate constant is fixed by its exemplar's own current at this concentration, "
+    "so what the row carries is the product C k^(1/2): a higher solubility lowers the inferred rate constant "
+    "in proportion and leaves the ceiling where it is wherever the film is thicker than the reaction layer. The "
+    "dry-air basis omits water vapour (3.17 kPa at 25 C), which lowers air-saturated water's O2 by 3 pct, to 2.58e-4 M; "
+    "the inferred rate constant absorbs that in the same way.")
+# n: the electrons each row carries. Since 2026-10-05 every row's overall reaction is balanced in
+# data/reaction_stoichiometry.csv (atoms and charge asserted by build_reaction_stoichiometry.py) and
+# printed as Table S10, so this row is computed from that table and from the published matrix.
+# The sentence this replaces said the two chain rows stay "below 25 mA cm-2 in every architecture"
+# at n = 1; on the seven-archetype matrix that is false for the Diels-Alder row, and nothing had
+# been checking it.
+def _n_row_sens():
+    kinds = {}
+    for r in _STOI:
+        kinds.setdefault(r["kind"], []).append(r["reaction"])
+    with io.open(_os.path.join(_os.path.dirname(_HERE_D), "julia", "tier0_ec_matrix.csv"), encoding="utf8") as fh:
+        M = {r["reaction"]: r for r in _csv.DictReader(fh)}
+    arch = [k for k in next(iter(M.values())).keys() if k not in ("class", "reaction", "carrier")]
+    names = {"natural": "unstirred", "stirred": "stirred", "flow": "recirculating-flow", "anec": "ANEC",
+             "micro": "microfluidic", "rde": "rotating-disk", "rce": "rotating-cylinder"}
+    da = next(r for r in _STOI if r["kind"] == "chain" and r["ceiling_set_by"] == "substrate")
+    iso = next(r for r in _STOI if r["kind"] == "chain" and r["ceiling_set_by"] == "catalyst")
+    n_da = float(da["n_substrate"]); hi = 0.5 / n_da                     # the paper's own top charge, 0.5 F/mol
+    v = {a: float(M[da["reaction"]][a]) for a in arch}
+    cross25 = [a for a in arch if v[a] < 25 <= v[a] * hi]; cross50 = [a for a in arch if v[a] < 50 <= v[a] * hi]
+    with io.open(_os.path.join(_os.path.dirname(_HERE_D), "julia", "catalyst_ec_sourced.csv"), encoding="utf8") as fh:
+        plateau = max(float(r["i_saveant_mAcm2"]) for r in _csv.DictReader(fh)
+                      if r["reaction"] == iso["reaction"] and float(r["k_M"]) > 0)
+    if plateau >= 25:
+        raise SystemExit("the isomerization row's kinetic plateau (%.1f mA cm-2) no longer keeps it below 25; "
+                         "rewrite the n_carrier sensitivity rather than the number" % plateau)
+    neutral = kinds.get("paired", []) + kinds.get("charge-consuming", [])
+    txt = ("The overall reaction of every row is balanced in Table S10, atoms and charge, with its electrode step: %d of the "
+           "fifty take n from that stoichiometry and are not in doubt. %s are redox-neutral couplings (%s), whose electrode "
+           "count is the cycle's own: one electron at each electrode per turnover. Two are chain processes, redox-neutral overall, for which n "
+           "is the charge the exemplar passes per substrate: %g F mol-1 for the radical-cation Diels-Alder reaction and "
+           "%g F mol-1 for the cobalt-hydride isomerization, the charge passed for the compound that row carries. i_lim is "
+           "linear in n. "
+           % (len(kinds.get("stoichiometric", [])) + len(kinds.get("ex-cell", [])), _numword(len(neutral)).capitalize(),
+              "; ".join(n.split(" (")[0] for n in neutral), n_da, float(iso["n_substrate"])))
+    if cross25:
+        txt += ("Across the Diels-Alder paper's own range, 0.05-0.5 F mol-1, that row reaches %.0f-%.0f mA cm-2 in the %s "
+                "cells at the top of the range, so the >=25 mA cm-2 count of %s is conditional on the charge carried "
+                "(one entry higher at 0.5 F mol-1)%s. "
+                % (min(v[a] * hi for a in cross25), max(v[a] * hi for a in cross25),
+                   ", ".join(names[a] for a in cross25),
+                   "each of those architectures" if len(cross25) > 1 else "that architecture",
+                   "; no >=50 mA cm-2 count moves" if not cross50 else
+                   ", and the >=50 mA cm-2 count of the %s likewise" % ", ".join(names[a] for a in cross50)))
+    else:
+        txt += "Across the Diels-Alder paper's own range, 0.05-0.5 F mol-1, that row crosses no threshold in any architecture. "
+    txt += ("The isomerization row is held below 25 mA cm-2 at any substrate count by its kinetic plateau, %.1f mA cm-2." % plateau)
+    return txt
 add("5. Concentrations", "n_carrier (electrons per carrier turnover)",
-    "0.1 - 6.0 (per reaction; see Table S2)", "-", "assumption",
-    "new row 2026-08-23. N is one of the four factors of i_lim = n F D C / delta and was the only "
-    "one with no registry row at all -- D, C and delta each had one. It is exactly as linear in "
-    "i_lim as C is. Assigned per reaction from the balanced half-reaction of the carrier as "
-    "written in the source, which is a reading of the mechanism, not a measurement",
-    "the balanced half-reaction of each exemplar, as reported", "",
-    "sensitivity. 48 of the 50 rows take integer n from an unambiguous half-reaction and are not "
-    "in doubt. The exposure is the two fractional rows, where n < 1 encodes a chain-carrying "
-    "regime -- catalytic in electrons -- rather than a stoichiometry: the radical-cation "
-    "Diels-Alder at n = 0.1 and the Co-H alkene isomerization at n = 0.2. Those are declared "
-    "mechanistic choices with no measurement behind them, and i_lim scales linearly with them. "
-    "Both sit far below every threshold in every architecture, and raising each to n = 1 -- i.e. "
-    "abandoning the chain entirely, the most generous possible revision -- multiplies them by 10x "
-    "and 5x and leaves both still below 25 mA cm-2 in every architecture. No published count "
-    "moves anywhere in the range, so the fractional-n choice cannot flip a reported verdict."),
+    "0.1 - 6.0 (per reaction; see Tables S2 and S10)", "-", "assumption",
+    "N is one of the four factors of i_lim = n F D C / delta and is exactly as linear in i_lim as C is. "
+    "Assigned per reaction from the balanced reaction of Table S10 as written in the source, which is a "
+    "reading of the mechanism, not a measurement",
+    "the balanced reaction of each exemplar, as reported (Table S10)", "",
+    _n_row_sens())
 add("5. Concentrations", "Trace initializations (Med_ox, H+ in aprotic)",
     "1e-5 x C_med; 1e-3 mol m-3", "mol m-3", "assumption",
     "nonzero Dirichlet and initial values for the log-concentration degrees of freedom; a solver "
     "necessity, not a physical claim", "declared solver setting", "",
-    "tr(C) was moved a full decade in both directions, 1e-5 -> 1e-4 and 1e-5 -> 1e-6, and the "
-    "mediated matrix re-solved in an isolated copy each time. The seed is not exactly inert: 45 "
-    "of the 48 (reaction, reactor) entries change at 1e-4 and 42 of 48 at 1e-6. The changes are "
-    "negligible in size, and they scale with the seed as a perturbation should -- the largest "
-    "absolute movement is 0.0059 mA cm-2 at 1e-4 and 0.00059 mA cm-2 at 1e-6, a factor of ten "
-    "for a factor of ten in the seed, and in relative terms at most 0.008 pct. The largest "
-    "movers are the two fastest systems at the rotating cylinder and the RDE, where the current "
-    "is largest in absolute terms. The counts clearing 25 and 50 mA cm-2 among the mediated "
-    "entries are unchanged at 31 and 24 at both ends, so no reported quantity depends on the "
-    "seed.")
+    _trace_sentence())
 
 # -- 6. Electrolyte conductivities (Table S4; the i2L/kappa stack) -----------
 # HEADLINE RESULT OF THE 2026-08-02 SOURCING PASS (docs/KAPPA_SOURCING_DOSSIER.md), which SUPERSEDES
@@ -1514,18 +2502,193 @@ add("5. Concentrations", "Trace initializations (Med_ox, H+ in aprotic)",
 #       The inherited blanket claim "conclusions robust to 2x" is provably FALSE: the DMF margin is
 #       1.18x. Those four rows carry their own sensitivity strings below. Of the four, one is now
 #       derived (1 M NaOH aq) and one is derived (0.25 M Bu4NBF4/MeCN); THF and DMF stay C.
+# The Onsager slope for MeCN is READ from results/kappa_derivation.json (data/derive_kappa.py), whose
+# eta comes from data/solvents.csv. It used to be typed (S = 358.7, negative above 0.228 M) on the
+# retired eta = 0.343. Lambda0(Bu4NBF4, MeCN) = lambda0(Bu4N+) + lambda0(BF4-) = 61.90 + 109.20, both
+# Kalugin et al. Table 3, p. 28.
+with io.open(_os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))), "results",
+                           "kappa_derivation.json"), encoding="utf8") as _fh:
+    _KD = _json.load(_fh)
+_KD_MECN = [r for r in _KD["rows"] if r["solvent"] == "MeCN"][0]
+_KD_L0 = 61.90 + 109.20
+_KD_S = _KD_MECN["B1"] * _KD_L0 + _KD_MECN["B2"]
+_KD_CNEG = (_KD_L0 / _KD_S) ** 2
 QAM_METH = ("no measured conductivity for this exact salt / solvent / concentration was located. "
             "The inherited citation was a limiting-conductivity table (Izutsu, 2nd ed.), which "
             "cannot supply kappa at 0.03-1 M at any concentration in this registry: for "
-            "Bu4NBF4/MeCN the Onsager limiting law Lambda = Lambda0 - S sqrt(c), with the verified "
-            "Lambda0 = 171.1 and S = 358.7 computed from the verified eps and eta, goes negative "
-            "above 0.228 M, and the Lee-Wheaton / Fuoss-Justice extension reaches only ~0.02 M. "
-            "The citation did not support the value and has been withdrawn")
+            "Bu4NBF4/MeCN the Onsager limiting law Lambda = Lambda0 - S sqrt(c), with "
+            "Lambda0 = %.1f (Kalugin Table 3, p. 28) and S = %.1f computed from eta = %.3f mPa s and a "
+            "recalled, unretrieved eps = %.2f, goes negative above %.3f M, and the Lee-Wheaton / "
+            "Fuoss-Justice extension reaches only ~0.02 M. The citation did not support the value and "
+            "has been withdrawn" % (_KD_L0, _KD_S, _KD_MECN["eta_mPas"], _KD_MECN["eps"], _KD_CNEG))
 # B12. The earlier promise -- that the Dorn SI "may convert 8-10 of these rows to state A in a
 # single pass" -- is NOT supported by what was retrieved and has been corrected. Dorn's Table 3
 # (p. 1499) contains exactly FOUR Casteel-Amis fits: ACN/(C2H5)4NBF4, ACN/(C4H9)4NBF4, MeOH/NaI and
 # MeOH/KSCN. Only one matches a registry salt (Bu4NBF4/MeCN), and it has already been adopted here
 # on five rows. NaI and KSCN in MeOH appear in no registry row.
+# The 3.0 M LiBr/THF row, computed (chemistry audit, pass 5). Das's LiBr columns are carried as printed (Table 1, p. 949:
+# 10^4 c / mol dm-3 and Lambda / S cm2 mol-1); every number the row derives from them, from the band and from the thermal
+# model is computed here, so the row cannot state two values for one quantity.
+_DAS_C = [115.5, 133.2, 154.0, 177.8, 205.3, 237.1, 273.8, 316.2, 365.2, 421.7, 486.9, 562.3, 649.4, 749.9, 1000.0,
+          1333.5, 1778.3, 2053.5, 2440.6, 3162.3]
+_DAS_L = [0.1999, 0.1900, 0.1826, 0.1805, 0.1795, 0.1796, 0.1809, 0.1833, 0.1871, 0.1924, 0.1933, 0.2080, 0.2188, 0.2320,
+          0.2679, 0.3219, 0.4083, 0.4602, 0.5612, 0.8100]
+_DAS_LOC = "Das, J. Solution Chem. 2008, 37, 947-955, Table 1, p. 949, LiBr columns"
+_LB_FLOOR, _LB_TOP, _LB_VAL = 0.0206, 0.66, 0.30
+_LB_TOP_RAW = 0.658   # what the ohmic differencing returns; the band's upper end is that value to its printed precision, 6.6
+_NAOH_BAND = (174.0, 182.0)          # mS/cm, the CRC p. 5-71 route as Table S4 constructs it (20 C table, 25 C correction)          # S/m: Lee's state-B floor, the rounding-limit top, the carried value
+
+
+def _das_fit(c0):
+    xs = [_math.log(c * 1e-4) for c in _DAS_C if c * 1e-4 >= c0 - 1e-12]
+    ys = [_math.log(l * c * 1e-4) for c, l in zip(_DAS_C, _DAS_L) if c * 1e-4 >= c0 - 1e-12]
+    n_ = len(xs); mx = sum(xs) / n_; my = sum(ys) / n_
+    slope = sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sum((x - mx) ** 2 for x in xs)
+    return slope, _math.exp(my + slope * (_math.log(3.0) - mx)), n_
+
+
+def _libr_thf_sens():
+    c_top, k_top = _DAS_C[-1] * 1e-4, _DAS_L[-1] * _DAS_C[-1] * 1e-4          # mol/L, mS/cm
+    k_01 = [l * c * 1e-4 for c, l in zip(_DAS_C, _DAS_L) if abs(c - 1000.0) < 1e-9][0]
+    fits = [(c0,) + _das_fit(c0) for c0 in (0.05, 0.10, 0.15)]
+    n_branch = fits[0][1]
+    k_cont_top = k_top * (3.0 / c_top) ** n_branch
+    n_need = _math.log(3.0 / k_top) / _math.log(3.0 / c_top)
+    n_carried = _math.log(3.0 / k_01) / _math.log(3.0 / 0.1)
+    thf = [r for r in _TM.SOLVENTS if r[0] == "THF"][0]
+    rho_thf = float(next(r for r in csv.DictReader(io.open(_os.path.join(_HERE_D, "solvents.csv"), encoding="utf8"))
+                         if r["solvent"] == "THF")["rho"])
+    # Peters/Baran Science 2019 SI p. S15 (and S17): 'LiBr (83.4 g, 1.0 mol)' ... 'THF (320 mL) was added'. The printed
+    # mass is the quantity; 1.0 mol is its rounding. M(LiBr) from the IUPAC standard atomic weights, Li 6.94 + Br 79.904.
+    n_libr = 83.4 / (6.94 + 79.904)
+    thf_per_li = 320.0 * rho_thf / 72.106 / n_libr
+    thf_per_li_das = 1000.0 * rho_thf / 72.106 / c_top
+    rde_flip = 10 * _thf_flip("RDE 1600 rpm") * _LB_VAL
+    rce_flip = 10 * _thf_flip("rotating cyl. 3000 rpm") * _LB_VAL
+    stk = _TH_STACK
+    # Liquid-cooling breakpoints: for each architecture whose THF duty needs liquid cooling at the carried value, the
+    # conductivity below which U'_req exceeds the best cooler that architecture's own construction gives (U_liquid hi).
+    # _TH_RX[i] and _TM.REACTORS[i] are the same reactor (the labels differ only by the relabel above).
+    _liq = []
+    for _r, _R in zip(_TH_RX, _TM.REACTORS):
+        _top = _TM.U_liquid(_R)[1]
+        _ureq = _TM.U_required(_r[4], _LB_VAL, _r[1], thf[3])
+        if not (_TM.U_passive(_r[2], _r[3]) < _ureq <= _top):
+            continue
+        lo, hi = 1e-4, _LB_VAL
+        for _ in range(200):
+            m = (lo * hi) ** 0.5
+            if _TM.U_required(_r[4], m, _r[1], thf[3]) > _top:
+                lo = m
+            else:
+                hi = m
+        _liq.append((_r[0], (lo * hi) ** 0.5, _top))
+    _liq.sort(key=lambda t: -t[1])
+    # the boil-off multiples of the three centimetre-gap cells that pass at the carried value (unstirred, stirred, flow)
+    _cmg = [_kappa_multiple(_LB_VAL, thf[3], r[0]) for r in _TH_OPEN
+            if not ("RDE" in r[0] or "rotating" in r[0]) and _th_margin(_LB_VAL, thf[3], r) >= 1.0]
+    assert len(_cmg) == 3 and all(_LB_FLOOR / _LB_VAL < m < 1 for m in _cmg), _cmg
+    # the row says the microfluidic, rotating-cell and stack boil-off verdicts do not turn across the band: swept, not typed
+    _grid = [_LB_FLOOR * (_LB_TOP / _LB_FLOOR) ** (j / 59.0) for j in range(60)]
+    for _r in _TH_RX:
+        if "micro" in _r[0] or "RDE" in _r[0] or "rotating" in _r[0] or "zero-gap" in _r[0]:
+            _v = {_th_margin(kk, thf[3], _r) >= 1.0 for kk in _grid}
+            assert _v == {"micro" in _r[0]}, ("the LiBr row says the microfluidic cell clears and the rotating cells and "
+                                               "the stack fail throughout the band; %s does not" % _r[0])
+    assert len(_liq) == 3 and all(_LB_FLOOR < k < _LB_VAL for _, k, _ in _liq), _liq
+    _liq_short = {"RDE 1600 rpm": "rotating disc", "rotating cyl. 3000 rpm": "rotating cylinder",
+                  "zero-gap PEM stack": "zero-gap stack"}
+    act = 2 * _TM.B_TAFEL * _math.asinh(stk[4] / (2 * _TM.I0)) * stk[4] * 10 * 1e-4
+    rej = _TM.U_passive(stk[2], stk[3]) * (thf[3] - _TM.TAMB)
+    clr = [r for r in _TH_RX if r is not _TH_STACK and _th_margin(_LB_VAL, thf[3], r) >= 1.0]
+    txt = ("Carries a conclusion, and its support is weaker than the value alone suggests. Das (%s) measures LiBr in THF "
+           "at 298.15 K over c = %.4f to %.4f mol dm-3 -- ten times closer to the working 3.0 M than any other measurement "
+           "available -- and the picture it gives is not reassuring. (1) A measured reference: kappa(%.4f M) = %.3f mS "
+           "cm-1. It would bound kappa(3.0 M) from below only if 3.0 M sat below the conductivity maximum, which (3) argues "
+           "it does not, so it corroborates the order of magnitude rather than bounding the row; the hard floor is the "
+           "%.3f mS cm-1 derived below from Lee's cell resistance, and the two routes agree within %.0f pct. (2) The carried "
+           "3.0 implies a flattening that is not measured. Over the measured triple-ion branch (%.2f-%.2f M) the data scale "
+           "as kappa ~ c^%.2f (least squares); getting from the highest measured point to 3.0 mS cm-1 at 3.0 M requires "
+           "kappa ~ c^%.2f over the remaining %.1f-fold rise in concentration. Such flattening is physically expected -- it "
+           "is the approach to the conductivity maximum as viscosity takes over -- but where that turnover sits has never "
+           "been measured for LiBr in THF, and the carried value assumes it happens early. (3) The measured scaling cannot "
+           "simply continue, and a stoichiometric calculation shows why. Continuing kappa ~ c^%.2f from the top measured "
+           "point to 3.0 M would give %.1f mS cm-1, %.0f times the carried value, so the extrapolation had to be tested. It "
+           "fails on solvent availability. Peters' own recipe is 83.4 g LiBr (%.3f mol) in 320 mL THF (SI p. S15); at "
+           "rho = %.3f g cm-3 and M = 72.106 that is %.2f mol THF per mole of LiBr. Li+ in an ether is four-coordinate, so "
+           "the solvation shell of the cation alone takes %.0f pct of the THF, leaving %.0f pct for Br- and for bulk. The "
+           "conclusion holds for any nearby coordination number: at n = 3 only %.0f pct of the THF is free, at n = 5 "
+           "there is a %.0f pct shortfall. By contrast Das's highest measured point has %.0f mol THF per mole of LiBr, ten times the "
+           "solvation requirement, with abundant bulk solvent for triple ions to move through. The two concentrations are "
+           "not the same kind of liquid: at 3.0 M almost no unbound solvent remains, the system is a solvate rather than a "
+           "solution, and kappa must have passed its maximum before that point. Independent support for the regime, same solvent and "
+           "nearly the same concentration: Cai et al., J. Am. Chem. Soc. 2023, 145, 25716-25725 run 2 M LiBF4 in THF and "
+           "report from MD that in cyclic ethers Li+ is only partially solvated and the ions form contact ion pairs and "
+           "aggregates. Neither Cai et al. nor Fu et al. reports an extractable conductivity value (Cai's conductivity "
+           "figure plots MD-derived quantities and its measured EIS is untabulated; Fu's values are in an untexted figure), "
+           "so both corroborate the regime and neither supplies a number; reading a value off a plotted axis was rejected. "
+           % (_DAS_LOC, _DAS_C[0] * 1e-4, c_top, c_top, k_top, _LB_FLOOR * 10, 100 * (k_top / (_LB_FLOOR * 10) - 1),
+              fits[0][0], c_top, n_branch, n_need, 3.0 / c_top, n_branch, k_cont_top, k_cont_top / 3.0, n_libr, rho_thf,
+              thf_per_li, 100 * min(4.0, thf_per_li) / thf_per_li, 100 * max(0.0, thf_per_li - 4.0) / thf_per_li,
+              100 * (thf_per_li - 3.0) / thf_per_li, 100 * (5.0 - thf_per_li) / thf_per_li, thf_per_li_das))
+    txt += ("Band %.1f-%.1f mS cm-1 at a value of 3.0. The lower end is a state-B hard floor: total cell resistance "
+            "<= V/I = 3.2 V / 0.520 A = 6.154 ohm in a coaxial annulus with R_i 9.5 mm, R_o 11.0 mm and L = 18.43 cm "
+            "derived from the stated 17.8 mL annulus volume, giving kappa >= 1.266e-3 / 6.154 = %.3f mS cm-1 [Lee et al., "
+            "Org. Process Res. Dev. 2022, 26, 2674-2684, main text Results & Discussion, SI Fig. S3 p. S6 and CFD block "
+            "p. S22]. The upper end, %.1f, is an edge rather than a bound: ohmic differencing of Lee's voltages returns %.2f "
+            "at the rounding limit of two two-significant-figure voltages (dV = 0.10 V), and that construction assumes equal "
+            "non-ohmic overpotential across LiBr concentrations, which is refuted for Al anodes in THF by Zhang, Guan, Wang, "
+            "Lin & See, Chem. Sci. 2023, 14, 13108-13118 (Br- relieves Al2O3 passivation, so Lee's voltage differences are "
+            "partly anodic). Nothing located excludes values above it, so the verdicts are also tested beyond it, below. "
+            "What the band buys, judged against each architecture's OWN transport ceiling: %s. Across the band the "
+            "microfluidic, rotating-cell and stack boil-off verdicts do not turn -- the microfluidic cell clears throughout and both "
+            "rotating cells and the stack fail throughout -- and what it decides is the unstirred, stirred and recirculating cells, which pass at the "
+            "carried value and above and fail only below %s the carried conductivity. Three cooling-class verdicts are tighter than "
+            "any boil-off verdict: the %s each hold their THF duty with liquid cooling at the carried value, and each "
+            "passes beyond what its own cooler rejects below %s the carried conductivity (%s mS cm-1, against the top of "
+            "each cooler's declared range, %s W cm-2 K-1 respectively). All three breakpoints lie inside the band, so those three verdicts are conditional "
+            "on where in it the conductivity sits and are stated that way where they appear. "
+            % (_LB_FLOOR * 10, _LB_TOP * 10, _LB_FLOOR * 10, _LB_TOP * 10, _LB_TOP_RAW * 10,
+               "; ".join("at %.3f mS cm-1 the ceilings are %s mA cm-2 against transport ceilings of %s, so %d of the %d "
+                         "architectures clear"
+                         % (kk * 10.0, "/".join("%.1f" % _th_ceiling(kk, thf[3], r) for r in _TH_RX),
+                            "/".join("%.1f" % r[4] for r in _TH_RX),
+                            sum(_th_margin(kk, thf[3], r) >= 1.0 for r in _TH_RX), len(_TH_RX))
+                         for kk in (_LB_FLOOR, _LB_VAL, _LB_TOP)),
+               "%.2f-%.2fx" % (min(_cmg), max(_cmg)),
+               ", ".join(_liq_short[a] for a, _, _ in _liq[:-1]) + " and " + _liq_short[_liq[-1][0]],
+               ", ".join("%.2fx" % (k / _LB_VAL) for _, k, _ in _liq[:-1]) + " and %.2fx" % (_liq[-1][1] / _LB_VAL),
+               "/".join("%.2f" % (k * 10) for _, k, _ in _liq), "/".join("%.3f" % t for _, _, t in _liq)))
+    txt += ("At kappa = 3.0 mS cm-1 and T_b = %.1f C, THF does NOT boil in either batch cell, in the recirculating cell or "
+            "in the microfluidic cell: those verdicts would reverse only at %.2f-%.2fx the carried conductivity, because "
+            "transport binds before heat in cells whose transport ceilings are %.1f-%.1f mA cm-2 (the microfluidic cell "
+            "aside). Where THF does fall short the multipliers are %.1fx (rotating disc) and %.1fx (rotating cylinder), with "
+            "the zero-gap stack unreachable on kappa at all (at %.0f mA cm-2 its activation term alone puts out %.2f W cm-2 "
+            "against %.3f W cm-2 of passive rejection). The binding verdict is the rotating disc at %.1fx, against a band "
+            "whose top is %.2fx the carried value, so the failing THF verdicts are band-proof. A second and tighter "
+            "test uses the measured data directly: least-squares fits kappa ~ c^n over Das's top decade give n = %s, and "
+            "the fitted lines continued to 3.0 M give %s mS cm-1. The rotating-disc verdict reverses at %.1f mS cm-1 and the "
+            "rotating-cylinder verdict at %.1f, so both survive every one of those continuations, the disc clearing the "
+            "steepest of them by %.0f pct. None of those continuations is itself sound: each crosses a conductivity maximum "
+            "the measured range never reaches, and at 3.0 M there are %.2f THF per Li+, so four-coordinate lithium binds "
+            "%.0f pct of the solvent. The carried 3.0 mS cm-1 corresponds to n = %.2f from Das's 0.1 M point (%.1f uS cm-1), "
+            "i.e. it already assumes the roll-off rather than extrapolating through it. A second same-solvent value, "
+            "Zhang, Gu, Wang, Ware, Lu, Lin, Qi and See, JACS Au 2023, 3, 2280-2290, Table 1 measures 0.1 M LiClO4 in THF "
+            "at 62.6 uS cm-1 (22.0 +/- 1.0 C), against Das's LiBr at the same 0.1 M of %.1f uS cm-1 -- same solvent, same "
+            "cation, different anion, a factor of %.1f apart."
+            % (thf[3],
+               min(_kappa_multiple(_LB_VAL, thf[3], r[0]) for r in clr if "micro" not in r[0] or True),
+               max(_kappa_multiple(_LB_VAL, thf[3], r[0]) for r in clr),
+               min(r[4] for r in clr if "micro" not in r[0]), max(r[4] for r in clr if "micro" not in r[0]),
+               _thf_flip("RDE 1600 rpm"), _thf_flip("rotating cyl. 3000 rpm"), stk[4], act, rej,
+               _thf_flip("RDE 1600 rpm"), _LB_TOP / _LB_VAL,
+               ", ".join("%.2f from %.2f M" % (f[1], f[0]) for f in fits),
+               ", ".join("%.1f" % f[2] for f in fits), rde_flip, rce_flip, 100 * (rde_flip / fits[-1][2] - 1),
+               thf_per_li, 100 * min(4.0, thf_per_li) / thf_per_li, n_carried, k_01 * 1000, k_01 * 1000,
+               62.6 / (k_01 * 1000)))
+    return txt
+
+
 KAPPA_PULL = (" dorn'S supporting information has now been retrieved (2026-08-22), which closes "
               "the item that used to head this list and narrows what remains. Je3c00691_si_001.pdf "
               "carries the raw isotherms for 41 salts x 4 solvents, 21 measured points each: "
@@ -1574,9 +2737,58 @@ KAPPA_PULL = (" dorn'S supporting information has now been retrieved (2026-08-22
 # produced with the wrong sign before that file existed.
 # with the MEASURED fit parameters of Dorn et al. Table 3, p. 1499 for ACN / (C4H9)4NBF4:
 #     kappa_max = 33.40 mS cm-1, m_max = 1.48127 mol kg-1, a = 0.78646, b = -0.02156
-# Molalities used (from the registered molarity via the solution density; see CA_CONV below):
-#     0.043 M -> 0.056 -> 5.18 | 0.077 M -> 0.101 -> 8.07 | 0.100 M -> 0.133 -> 9.87
-#     0.250 M -> 0.347 -> 18.95 | 0.300 M -> 0.423 -> 21.34   (all mS cm-1, 25 C)
+# Every Casteel-Amis number below is evaluated by data/casteel_amis.py (Dorn's -b convention, gated by G-CA) and the
+# measured isotherm is read from data/dorn_isotherms.csv (Table SI 85), never typed (chemistry audit, pass 6: the
+# fit values this block carried, 5.18 / 8.07 / 9.87 / 18.95 / 21.34, were the +b convention).
+import sys as _sys_ca
+_sys_ca.path.insert(0, _HERE_D)
+import casteel_amis as _CA
+_CA_FIT = _CA.FITS["Bu4NBF4/MeCN"]
+with io.open(_os.path.join(_HERE_D, "dorn_isotherms.csv"), encoding="utf8") as _fh:
+    _CA_ISO = [(float(r["m_mol_kg"]), float(r["kappa_mScm"]), float(r["u_kappa"]))
+               for r in csv.DictReader(_fh) if r["system"] == "Bu4NBF4/MeCN"]
+
+
+def _ca_fit(m):
+    return float(_CA.kappa(m, *_CA_FIT))
+
+
+def _ca_meas(m):
+    """Linear interpolation between the two measured points of Table SI 85 that bracket m."""
+    for (m0, k0, _u0), (m1, k1, _u1) in zip(_CA_ISO, _CA_ISO[1:]):
+        if m0 <= m <= m1:
+            return k0 + (k1 - k0) * (m - m0) / (m1 - m0)
+    raise ValueError("m = %g outside the measured Bu4NBF4/MeCN isotherm" % m)
+
+
+def _ca_molal(c, rule):
+    """molarity -> molality for Bu4NBF4/MeCN: 'soln' through the solution density (V_phi = 287 cm3 mol-1), 'pure'
+    m = c/rho0, 'disp' m = c/(rho0 - cM/1000); M = 329.27 g mol-1, rho0 = 0.7768 g cm-3."""
+    M, rho0, vphi = 329.27, 0.7768, 287.0
+    if rule == "pure":
+        return c / rho0
+    if rule == "disp":
+        return c / (rho0 - c * M / 1000.0)
+    rs = (rho0 + c * M / 1000.0) / (1.0 + c * vphi / 1000.0)
+    return c / (rs - c * M / 1000.0)
+
+
+with io.open(_os.path.join(_HERE_D, "electrolytes.csv"), encoding="utf8") as _fh:
+    _CA_DERIVED = [r["electrolyte"] for r in csv.DictReader(_fh)
+                   if r["electrolyte"].endswith("Bu4NBF4/MeCN") and r["state"] == "derived"]
+assert _CA_DERIVED, "no derived Bu4NBF4/MeCN row: reword the 0.1 M cross-check sentence"
+_CA_M = {k: _ca_molal(0.25, k) for k in ("soln", "pure", "disp")}
+_CA_KM = {k: _ca_meas(v) for k, v in _CA_M.items()}
+# the molality at which the carried kappa (thermal_model / electrolytes.csv) sits on the measured isotherm: 0.347, which is
+# the solution-density conversion (0.3476) to within its third decimal, i.e. 0.1 pct in kappa
+_CA_KC = _MECN[2] * 10.0
+_CA_MC = [m0 + (_CA_KC - k0) * (m1 - m0) / (k1 - k0) for (m0, k0, _a), (m1, k1, _b) in zip(_CA_ISO, _CA_ISO[1:])
+          if k0 <= _CA_KC <= k1][0]
+assert abs(_CA_MC - _CA_M["soln"]) < 1.0e-3, (_CA_MC, _CA_M["soln"])
+_CA_MA = round(_CA_MC, 3)
+_CA_KM["soln"] = _ca_meas(_CA_MA)
+_CA_MIC_I = {k: _TM.i_boil(v / 10.0, _TH_MIC[1], _MECN[3], _TM.U_passive(_TH_MIC[2], _TH_MIC[3])) for k, v in _CA_KM.items()}
+_CA_BR = [(m0, k0, u0) for m0, k0, u0 in _CA_ISO if m0 <= _CA_MA][-1], [(m0, k0, u0) for m0, k0, u0 in _CA_ISO if m0 > _CA_MA][0]
 CA_CONV = ("molarity -> molality, stated explicitly because state B requires the arithmetic to be "
            "reproducible and because the convention matters at the 4 pct level. The route is the "
            "solution density, not the pure-solvent density: rho_soln = (rho0 + c M/1000) / "
@@ -1585,13 +2797,16 @@ CA_CONV = ("molarity -> molality, stated explicitly because state B requires the
            "(an ordinary value for Bu4NBF4, and the value the adopted molalities imply). This "
            "reproduces every adopted molality to three decimals: 0.043 M -> 0.056, 0.077 -> 0.101, "
            "0.100 -> 0.133, 0.250 -> 0.348, 0.300 -> 0.424 mol kg-1. V_phi is itself a declared "
-           "assumption, so the convention spread is bounded rather than ignored: the pure-solvent "
-           "shortcut m = c/rho0 gives m = 0.322 and kappa = 18.1, and the salt-displacement "
-           "shortcut m = c/(rho0 - cM/1000) gives m = 0.360 and kappa = 19.4, against the adopted "
-           "18.9 at m = 0.347. That 18.1-19.4 spread sits well inside the declared 15-23 band and "
-           "moves the microfluidic MeCN ceiling only over 674-680 mA cm-2 against that cell's own "
-           "transport ceiling of 111 mA cm-2, a margin of 6.09x to 6.14x, so no verdict "
-           "anywhere in §S6 turns on the choice.")
+           "assumption, so the convention spread is bounded rather than ignored: on the measured 0.25 M "
+           "isotherm the pure-solvent shortcut m = c/rho0 gives m = %.3f and kappa = %.2f, and the "
+           "salt-displacement shortcut m = c/(rho0 - cM/1000) gives m = %.3f and kappa = %.2f, against "
+           "%.2f at the adopted m = %.3f. That %.2f-%.2f spread sits inside the declared 15-23 band and "
+           "moves the microfluidic MeCN ceiling only over %.0f-%.0f mA cm-2 against that cell's own "
+           "transport ceiling of %.1f mA cm-2, a margin of %.2fx to %.2fx, so no verdict "
+           "anywhere in §S6 turns on the choice."
+           % (_CA_M["pure"], _CA_KM["pure"], _CA_M["disp"], _CA_KM["disp"], _CA_KM["soln"], _CA_MA,
+              _CA_KM["pure"], _CA_KM["disp"], _CA_MIC_I["pure"], _CA_MIC_I["disp"], _TH_MIC[4],
+              _CA_MIC_I["pure"] / _TH_MIC[4], _CA_MIC_I["disp"] / _TH_MIC[4]))
 ECOND_PROV = {
  # -- the four rows that carry a §S6 conclusion -----------------------------------------
  "0.25 M Bu4NBF4/MeCN": (
@@ -1600,9 +2815,9 @@ ECOND_PROV = {
    "Data 1972, 17, 55) is retained below as the superseded route, applied to the measured fit "
    "of Dorn et al., Table 3, p. 1499 for ACN / (C4H9)4NBF4: kappa_max = 33.40 mS cm-1, "
    "m_max = 1.48127 mol kg-1, a = 0.78646, b = -0.02156, validity range 9.10, MAPE 1.65 pct. At "
-   "m = 0.347 mol kg-1 (0.25 M; conversion below) that fit returns kappa = 18.95 mS cm-1, which "
-   "was the adopted 18.9 before the raw isotherm was read; the measurement gives 19.95, so the "
-   "fit-and-invert route was 5.6 pct low. " + CA_CONV + " Independently validated at 1 M against Gong et al. Table 3, p. 3519 "
+   "m = %.3f mol kg-1 (0.25 M; conversion below) that fit, in Dorn's eq. 5 sign convention (-b, p. 1499), "
+   "returns kappa = %.2f mS cm-1, %+.1f pct from the %.2f the measured isotherm gives at the same molality. "
+   % (_CA_MA, _ca_fit(_CA_MA), 100 * (_ca_fit(_CA_MA) / _CA_KM["soln"] - 1), _CA_KM["soln"]) + CA_CONV + " Independently validated at 1 M against Gong et al. Table 3, p. 3519 "
    "(32.75 derived vs 32.3 tabulated, +1.4 pct). Supersedes the earlier mass-action treatment: the "
    "bound of 24-36 mS cm-1 built on Lambda0 = 171.1 and K_A = 5.6 was a Lee-Wheaton extrapolation "
    "25x above its own fitted range (2e-4 to 1e-2 mol dm-3) and has been withdrawn, as has the "
@@ -1610,48 +2825,58 @@ ECOND_PROV = {
    "Dorn, Kareth, Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502; Gong, Fang, Gu, Li & "
    "Yan, Energy Environ. Sci. 2015, 8, 3515-3530; method: Casteel & Amis, J. Chem. Eng. Data 1972, "
    "17, 55",
-   "Dorn supporting information, Table SI 85, p. 171 (ACN / (C4H9)4NBF4, 298.15 K, 101 kPa): "
-   "0.25 M is m = 0.347 mol kg-1, read between the measured points (0.2960, 18.16) and "
-   "(0.4094, 22.13) mS cm-1, which interpolate to 19.95. The alternative locator is the "
-   "article-body Casteel-Amis fit -- Table 3, p. 1499 (m_max 1.48127, kappa_max 33.40, "
-   "a 0.78646, b -0.02156, MAPE 1.65 pct), the fit-and-invert route, which returns 18.9; "
-   "a reader opening p. 1499 would not have found 19.95 there. Cross-check: Gong Table 3, "
-   "p. 3519 (Bu4NBF4/AN, 1 M, 32.3 mS cm-1, tabulated after Izutsu 2009)",
-   "Carries a conclusion. Band 15-23 mS cm-1, wider than +/-10 pct because Dorn's own "
-   "dissertation, p. 74, applies his own Casteel-Amis equation at m = 0.075 and prints "
-   "kappa_ref = 7.04 where the published Table 3 parameters give 6.465, a +8.9 pct unexplained "
-   "self-inconsistency. " +
+   "Dorn supporting information, Table SI 85, p. 170 (ACN / (C4H9)4NBF4, 298.15 K, 101 kPa): "
+   "0.25 M is m = %.3f mol kg-1 by the solution-density conversion; the carried value lies on the isotherm at "
+   "m = %.3f, between the measured points (%.4f, %.2f) and "
+   "(%.4f, %.2f) mS cm-1, which interpolate to %.2f there. The article-body Casteel-Amis fit -- "
+   "Table 3 and eq. 5, p. 1499 (m_max 1.48127, kappa_max 33.40, a 0.78646, b -0.02156, MAPE 1.65 pct) -- "
+   "returns %.2f at the same molality. Cross-check: Gong Table 3, "
+   "p. 3519 (Bu4NBF4/AN, 1 M, 32.3 mS cm-1, tabulated after Izutsu 2009)"
+   % (_CA_M["soln"], _CA_MA, _CA_BR[0][0], _CA_BR[0][1], _CA_BR[1][0], _CA_BR[1][1], _CA_KM["soln"], _ca_fit(_CA_MA)),
+   "Carries a conclusion. Band 15-23 mS cm-1, a declared test range rather than an uncertainty "
+   "estimate: it is wider than the measurement's own expanded uncertainty at the two bracketing points "
+   "(%.2f and %.2f mS cm-1, Table SI 85), than the spread the molality convention produces on the measured "
+   "isotherm (%.2f-%.2f), and than the gap between the isotherm and Dorn's Casteel-Amis fit at this molality "
+   "(%.2f, %+.1f pct). The fit is self-consistent with Dorn's own use of it: at m = 0.075 the published "
+   "Table 3 parameters give %.3f mS cm-1, the kappa_ref = 7.04 his dissertation prints (p. 74). "
+   % (_CA_BR[0][2], _CA_BR[1][2], _CA_KM["pure"], _CA_KM["disp"], _ca_fit(_CA_MA),
+      100 * (_ca_fit(_CA_MA) / _CA_KM["soln"] - 1), _ca_fit(0.075)) +
    "Fig. 7 margins recomputed at the adopted 19.95 mS cm-1, and judged against each "
    "architecture's OWN transport ceiling rather than a declared design current: " +
    ", ".join("%s %.2fx" % (_n, _m) for _n, _m in _MECN_M[:-1]) +
    ". The two shortfalls would reverse only at " +
    " and ".join("%.1f mS cm-1 (%.2fx carried, %s)" % (_k, _f, _n) for _n, _k, _f in _MECN_X) +
    ", both far outside the 15-23 band, so no MeCN verdict turns on where inside its own "
-   "measurement band the value sits. Those same two ARE bound-dependent on the kappa(T) axis of "
-   "S6.3 and on the beaker gap these cells share, and are flagged on both."),
+   "measurement band the value sits. Those same two are bound-dependent on the kappa(T) axis of S6.3 and on "
+   "the area ratio sigma, reversing at %.2fx of it at the rotating disc and %.2fx at the cylinder, and the disc one "
+   "also on its inherited beaker gap, at %.2fx; each is stated conditionally where it is reported."
+   % (_TG_ROW("RDE 1600 rpm", "MeCN")["sigma_flip_x"], _TG_ROW("rotating cyl. 3000 rpm", "MeCN")["sigma_flip_x"],
+      _TG_ROW("RDE 1600 rpm", "MeCN")["gap_flip_x"])),
  "0.2 M NaI/DMF": (
    "derived 2026-08-22, replacing an unsourced 8.0 that had no derivation of any kind. The "
    "reason for the change is provenance, not preference: 8.0 was a number with no chain behind "
    "it, and this one has a two-step chain a reader can redo. "
    "step 1, Lambda0, now directly measured rather than summed: Lambda0(NaI, DMF) = "
-   "81.35 +/- 0.04 S cm2 mol-1 at 25 C [Krumgalz & Barthel, Z. Phys. Chem. 1984, 142, 167-178, "
-   "Table 2, NaI block, 25 C column; PDF retrieved and read off the page]. That replaces the "
+   "81.35 +/- 0.03 S cm2 mol-1 at 25 C [Krumgalz & Barthel, Z. Phys. Chem. 1984, 142, 167-178, "
+   "Table 2, p. 170, NaI block, 25 C column; PDF retrieved and read off the page]. That replaces the "
    "Kohlrausch sum this row used to carry -- lambda0(Na+) 29.81 + lambda0(I-) 52.11 = 81.92 from "
    "Gopal & Jha Table 2 p. 81 -- which agrees with it to -0.70 pct and is retained as the "
    "cross-check. The same table's literature column quotes 81.9 from both Singh and Ames. "
    "The hard Kohlrausch ceiling therefore becomes kappa <= c Lambda0 = 16.27 mS cm-1. "
    "step 2, the attenuation at 0.2 M: taken from a measurement of the same salt. Dorn's "
-   "Supporting Information measures NaI in methanol across the full range (Table SI 97, p. 197); "
-   "with Lambda0(NaI, MeOH) = 45.23 + 62.63 = 107.86 from the CRC/Vanysek table verified in this "
-   "pass, the measured Lambda/Lambda0 at 0.2 M is 0.539. Transferring it gives "
-   "kappa = 0.2 x 81.35 x 0.539 = 8.77 mS cm-1. "
+   "Supporting Information measures NaI in methanol across the full range (Table SI 97, p. 196); "
+   "with Lambda0(NaI, MeOH) = 45.23 + 62.63 = 107.86 from Krumgalz 1983 Table 4, pp. 580-581 "
+   "(methanol row), " + ("the measured Lambda/Lambda0 at 0.2 M (molality %.3f-%.3f mol kg-1 for an apparent molar volume "
+   "of NaI of 0-35 cm3 mol-1) is %.3f-%.3f. Transferring the mean gives kappa = 0.2 x 81.35 x %.3f = %.2f mS cm-1. "
+   % (_NAI["m_lo"], _NAI["m_hi"], _NAI["r_lo"], _NAI["r_hi"], _NAI["r"], _NAI_K)) +
    "third route, independent of both and using only same-system measurements: Krumgalz & Barthel "
    "also report the association constant, K_A = 7.50 +/- 0.57 dm3 mol-1 for NaI in DMF at 25 C "
    "(same table). Solving the association equilibrium with Debye-Huckel activity coefficients at "
    "their own distance parameter R2 = 1.131 nm gives a free-ion fraction alpha = 0.702 at 0.2 M, "
-   "and with Onsager relaxation Lambda = alpha(Lambda0 - S sqrt(alpha c)) = 41.5, i.e. "
-   "Lambda/Lambda0 = 0.510 and kappa = 8.30 mS cm-1 -- within 5 pct of the adopted value, from "
-   "entirely different inputs. it is not adopted as primary, and the reason is consistency: it "
+   "but converting alpha to kappa depends on the conductance form: the Onsager limiting law gives "
+   "about 3.1 mS cm-1 and the same law with its Debye-Huckel ion-size factor 8.5-8.8 "
+   "(data/derive_kappa.py, nai_dmf_ka_route; the 8.30 once typed here reproduced under neither), so "
+   "the route bounds nothing. it is not adopted as primary, and the reason is consistency: it "
    "extrapolates a dilute conductance treatment some 20-200x beyond the range Krumgalz & Barthel "
    "fitted, and this registry has already withdrawn a value (the Lee-Wheaton bound on "
    "Bu4NBF4/MeCN) for being a 25x extrapolation beyond its own fitted range. The methanol route "
@@ -1681,191 +2906,66 @@ ECOND_PROV = {
    "before: DMF eps = 36.81, eta = 0.8455 mPa s, rho = 0.943802 g mL-1 at 298.15 K. Cheapest route "
    "to state A: measure it -- 0.2 M NaI in dry DMF, calibrated probe, 25 C, ten minutes; the result "
    "must land in (0, 16.4) mS cm-1, so the row is now checkable, which it was not before",
-   "Gopal & Jha, Indian J. Chem. 1977, 15A, 80-83 (lambda0, state A); Bhat, Mohan & Susha, Indian "
-   "J. Chem. 1996, 35A, 825-831 (cross-validation); Kinart, Molecules 2024, 29, 1371 (solvent "
-   "properties only; not the conductivity)",
-   "Gopal & Jha Table 2, p. 81, DMF column, 25 C (Na+ 29.81, I- 52.11 S cm2 mol-1); Bhat Table I, "
-   "p. 827; Kinart Table 1 (DMF properties at 298.15 K) -- supports the solvent constants, not "
-   "kappa",
-   "Carries a conclusion, and is the most exposed number in the category. Band 4-16 mS "
-   "cm-1, with a hard physical ceiling at state B: kappa <= c Lambda0 = 2.000e-4 mol cm-3 x 81.92 S "
-   "cm2 mol-1 = 16.38 mS cm-1, since Lambda(c) <= Lambda0 for all c > 0. The tabled 8.0 implies "
-   "Lambda/Lambda0 = 0.488 and the microfluidic flip requires 0.453. Which side of 0.453 the "
-   "truth falls on is bounded by measurement. "
-   "Two routes, both anchored on measured data rather than on a correlation read outside its "
-   "range. (A) same-salt transfer: Dorn's Supporting Information measures NaI in methanol across "
-   "the full range (Table SI 97, p. 197); with Lambda0(NaI, MeOH) = 45.23 + 62.63 = 107.86 from "
-   "the CRC/Vanysek table, the measured attenuation at 0.2 M is "
-   "Lambda/Lambda0 = 0.539, which transferred unchanged to DMF gives 8.77 mS cm-1. That is a "
-   "lower bound rather than an estimate, because DMF has the higher permittivity (36.7 against "
-   "32.7) and so must pair less and attenuate less than methanol. (B) onsager calibrated on that "
-   "same measurement: the 1:1 limiting law overshoots the measured methanol attenuation by a "
-   "factor 1.136 here; applying that correction to the DMF limiting law (0.674) gives 0.593, "
-   "i.e. 9.72 mS cm-1. Physical support, direction only: Prue & Sherrington, Trans. Faraday Soc. "
-   "1961, 57, 1795-1808 measured twelve salts in DMF and report the iodides in excellent accord "
-   "with Fuoss-Onsager assuming complete dissociation, so no ion-pairing term should drive DMF "
-   "below methanol; not retrieved in full text -- taken from the abstract and used for direction, never as a "
-   "number. so the carried 8.0 is conservative, and 0.453 lies below the measured attenuation of "
-   "the same salt in a lower-permittivity solvent, which is backwards. The value is kept at 8.0: "
-   "a higher kappa only makes every thermal conclusion safer, so holding the low end costs "
-   "nothing and cascades into no figure. The adopted value is the "
-   "derived 8.77 of step 2 above, and what follows uses it. "
+   "Krumgalz & Barthel, Z. Phys. Chem. (N. F.) 1984, 142, 167-178 (Lambda0 of NaI in DMF, state A); Dorn, Kareth, "
+   "Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502, Supporting Information (NaI in methanol: the "
+   "attenuation); Krumgalz, J. Chem. Soc. Faraday Trans. 1 1983, 79, 571-587 (lambda0 of Na+ and I- in methanol); "
+   "Gopal & Jha, Indian J. Chem. 1977, 15A, 80-83 (Kohlrausch cross-check); Kinart, Molecules 2024, 29, 1371 "
+   "(DMF permittivity)",
+   "Krumgalz & Barthel Table 2, p. 170, NaI, 25 C (Lambda0 = 81.35 +/- 0.03 S cm2 mol-1); Dorn SI Table SI 97, p. 196 "
+   "(NaI in methanol, 298.15 K, 101 kPa); Krumgalz 1983 Table 4, pp. 580-581, methanol row (Na+ 45.23, I- 62.63); "
+   "Gopal & Jha Table 2, p. 81, DMF column, 25 C (Na+ 29.81, I- 52.11); Kinart Table 1 (eps_r = 36.81 at 298.15 K)",
+   "Carries a conclusion, and is the most exposed number in the category. Band 4-16 mS cm-1, with a hard physical "
+   "ceiling: kappa <= c Lambda0 = 0.2 M x 81.35 S cm2 mol-1 = %.2f mS cm-1, since Lambda(c) <= Lambda0 for all "
+   "c > 0; the Kohlrausch sum of Gopal & Jha, 29.81 + 52.11 = 81.92, corroborates that Lambda0 to %.1f pct. The "
+   "carried value is c Lambda0 times the attenuation measured for the same salt in methanol at the same molarity: "
+   "Dorn's isotherm (Table SI 97), read at the molality 0.2 M corresponds to (%.3f-%.3f mol kg-1 for an apparent molar volume "
+   "of NaI of 0-35 cm3 mol-1, with methanol's density %.3f g cm-3), gives Lambda/Lambda0 = %.3f-%.3f against Lambda0(NaI, MeOH) = "
+   "45.23 + 62.63 = 107.86 S cm2 mol-1 (Krumgalz 1983, Table 4, methanol row), so kappa = 0.2 x 81.35 x %.3f = %.2f mS cm-1. The "
+   "transfer is expected to err low, a direction rather than a bound: DMF has the higher permittivity (36.81, Kinart Table 1, against "
+   "a recalled, unretrieved 32.7 for methanol), so it pairs less and attenuates less than methanol. Physical support, "
+   "direction only: Prue & Sherrington, Trans. Faraday Soc. 1961, 57, 1795-1808 measured twelve salts in DMF and report "
+   "the iodides in excellent accord with Fuoss-Onsager assuming complete dissociation, so no ion-pairing term should "
+   "drive DMF below methanol; not retrieved in full text -- taken from the abstract and used for direction, never as a "
+   "number. What is still missing is a direct measurement of Lambda(0.2 M) for this salt in this solvent. "
+   % (0.2 * 81.35, 100 * (81.92 / 81.35 - 1), _NAI["m_lo"], _NAI["m_hi"], _NAI["rho0"], _NAI["r_lo"], _NAI["r_hi"], _NAI["r"], _NAI_K) +
    "(a) Judged against each architecture's own transport ceiling, DMF clears every modelled "
    "archetype except %s and the stack, and its microfluidic margin is %.1fx. The binding "
    "kappa-axis verdict is the %s, which reverses if kappa rises to %.2f mS cm-1, i.e. %.2fx the "
-   "carried 8.77, %s. What is still missing is a direct measurement of Lambda(0.2 M) for this "
-   "salt in this solvent. The cheapest route to settling it: 0.2 M NaI in dry DMF, calibrated "
+   "carried %.2f, %s. The cheapest route to settling it: 0.2 M NaI in dry DMF, calibrated "
    "probe, 25 C, ten minutes. "
    % (" and ".join("the %s (margin %.2fx)" % (a.replace("RDE 1600 rpm", "rotating disc")
                                                .replace("rotating cyl. 3000 rpm", "rotating cylinder"), m)
                    for a, m, _ in _DMF_FAILS),
-      _th_margin(0.877, 152.8, _TH_MIC),
+      _th_margin(_NAI_S, 152.8, _TH_MIC),
       _DMF_BIND[0].replace("RDE 1600 rpm", "rotating disc").replace("rotating cyl. 3000 rpm", "rotating cylinder"),
-      _DMF_BIND[2]*8.77, _DMF_BIND[2],
+      _DMF_BIND[2]*_NAI_K, _DMF_BIND[2], _NAI_K,
       ("inside this row's own 4-16 band, so that failure is conditional on where in the band the "
-       "value sits" if _DMF_BIND[2]*8.77 < 16.0 else
+       "value sits" if _DMF_BIND[2]*_NAI_K < 16.0 else
        "above the top of this row's own 4-16 band, so that failure is band-proof"))
-   +    "(b) two further sentences rest on this row, at the adopted 8.77: 'the full lumped balance places its passive steady state at "
-   "T_ss ~ %.0f C, far above DMF's 153 C boiling point' flips at kappa_crit = %.2f mS cm-1, "
-   "a margin of %.2fx, which is inside the honest 4-16 band; and 'the same cell at 50 mA cm-2 "
-   % (_dmf_tss(), _dmf_flip()*10, _dmf_flip()/0.877)
-   + "draws 13.8 V, which is the 10-20 V range common in academic non-aqueous reports' holds only "
-   "over kappa = 5.68-13.16 mS cm-1 (x0.648 down, x1.501 up). Both are stated as conditional on "
+   +    "(b) two further sentences rest on this row, at the adopted %.2f: 'the full lumped balance of \u00a7S6.1 places its passive steady state at "
+   "T_ss \u2248 %.0f \u00b0C, above DMF's %.0f \u00b0C boiling point' flips at kappa_crit = %.2f mS cm-1, "
+   "a margin of %.2fx, which is inside the honest 4-16 band; and the same cell at 50 mA cm-2 "
+   % (_NAI_K, _dmf_tss(), _TH_DMF_TB, _dmf_flip()*10, _dmf_flip()/_NAI_S)
+   + "draws %.1f V, a cell voltage that lies between 10 and 20 V for kappa = %.2f-%.2f mS cm-1 "
+   "(x%.3f down, x%.3f up). Both are stated as conditional on "
    "the adopted kappa in S6. The binding kappa-axis margin for this row is %.2fx, at the %s; "
    "it and the two statements above are labelled as conditional where they appear."
-   % (_DMF_BIND[2], _DMF_BIND[0].replace("RDE 1600 rpm", "rotating disc")
+   % (_TM.E_cell(50.0, _NAI_S, _TM.GAP_BEAKER), _V_KLO * 10, _V_KHI * 10, _V_KLO / _NAI_S, _V_KHI / _NAI_S,
+      _DMF_BIND[2], _DMF_BIND[0].replace("RDE 1600 rpm", "rotating disc")
       .replace("rotating cyl. 3000 rpm", "rotating cylinder"))),
  "3.0 M LiBr/THF": (
    "reclassified. this row was labelled measured-lit, but the cited source supports the "
-   "concentration, not the conductivity: Peters et al. Give LiBr 1.0 mol / 320 mL THF = 3.0 M "
+   "concentration, not the conductivity: Peters et al. give LiBr 83.4 g (1.0 mol) / 320 mL THF = 3.0 M "
    "stock. The value 3.0 mS cm-1 came from the row's own note -- 'heavily ion-paired ether medium, "
    "kappa order-of-mS/cm' -- which is an assumption. It cannot be derived either: THF has "
    "eps = 7.6, so the Bjerrum critical distance q = e^2/(8 pi eps0 eps kB T) = 3.7 nm at 25 C, an "
    "order of magnitude beyond contact distance, and ionic association is essentially complete",
    "Peters et al., Science 2019 (Supplementary Materials)",
    "SM pp. S15 and S21 -- supports the 3.0 M concentration only",
-   "Carries a conclusion, and its support is weaker than the value alone suggests. "
-   "Das, J. Solution Chem. 2008, 37, 947-955 (retrieved) measures LiBr in THF at 298.15 K over "
-   "c = 0.0116 to 0.3162 mol dm-3 -- ten times closer to the working 3.0 M than anything this "
-   "is available -- and the picture it gives is not reassuring. "
-   "(1) A hard measured floor: kappa(0.3162 M) = "
-   "0.256 mS cm-1 (Table 1). Since kappa rises with c up to the conductivity maximum, "
-   "kappa(3.0 M) >= 0.256, which independently corroborates the 0.206 floor "
-   "derived from Lee's cell resistance -- two unrelated routes, 24 pct apart, in the right order. "
-   "(2) the carried 3.0 implies A flattening that is not measured. over the measured "
-   "triple-ion branch (0.05-0.32 M) the data scale as kappa ~ c^1.75. Getting from the highest "
-   "measured point to 3.0 mS cm-1 at 3.0 M requires kappa ~ c^1.09 over the remaining 9.5-fold "
-   "rise in concentration. Such flattening is physically expected -- it is the approach to the "
-   "conductivity maximum as viscosity takes over -- but where that turnover sits has never been "
-   "measured for LiBr in THF, and the carried value assumes it happens early. "
-   "(3) the measured scaling cannot simply continue, and A stoichiometric calculation shows why. "
-   "Continuing kappa ~ c^1.75 to 3.0 M would give 13.1 mS cm-1, four times the carried value, "
-   "so the extrapolation had to be tested, not waved away. It fails on solvent availability. Peters' own recipe is 1.0 mol LiBr in 320 mL "
-   "THF; at rho = 0.8833 g cm-3 and M = 72.106 that is 3.92 mol THF per mole of LiBr. Li+ in an "
-   "ether is four-coordinate, so the solvation shell of the cation alone requires 4.0 -- there is "
-   "a 2 pct deficit, and nothing at all is left for Br- or for bulk. The conclusion is not "
-   "sensitive to the exact coordination number: at n = 3 only 23 pct of the THF is free, at "
-   "n = 4 none is, at n = 5 there is a 28 pct shortfall. "
-   "By contrast Das's highest measured point, 0.3162 M, has 39 mol THF per mole of LiBr -- ten "
-   "times the solvation requirement, with abundant bulk solvent for triple ions to move through. "
-   "the two concentrations are not the same kind of liquid. The c^1.75 branch is the behaviour "
-   "of ions migrating through bulk THF; at 3.0 M that bulk does not exist, the system is a "
-   "solvate rather than a solution, and kappa must have passed its maximum before that point. "
-   "independent support, same solvent and nearly the same concentration: Cai et al., J. Am. "
-   "Chem. Soc. 2023, 145, 25716-25725 run 2 M LiBF4 in THF and report from MD that in cyclic "
-   "ethers Li+ is only partially solvated and the ions form contact ion pairs and aggregates, "
-   "whereas linear ethers keep Li+ fully solvated and the ions dispersed -- exactly the "
-   "solvation-starved picture the stoichiometry predicts. BOTH PAPERS AND BOTH SUPPORTING "
-   "INFORMATIONS WERE RETRIEVED AND READ ON 2026-08-31, and the earlier note that their numeric "
-   "conductivities were merely unretrieved is now settled the other way: neither reports an "
-   "extractable number. Cai's conductivity figure (Fig. 2) turns out to plot MD-derived Li+ "
-   "migration rates, radial distribution functions and coordination numbers, not measured "
-   "conductivities; its only measured electrochemistry is the EIS profiles of SI Figs. S2-S3, "
-   "which are Nyquist plots with no tabulated resistance or cell constant, and the whole SI "
-   "text layer contains the word conductivity exactly once, in the methods. Fu reports the "
-   "ranking LiTFSI > LiPF6 > LiBOB > LiClO4 > LiBF4 in the body and puts the values in Fig. S4, "
-   "whose caption carries no text layer at all. So both remain corroboration of the REGIME and "
-   "neither can be promoted to a value -- which is now a checked statement rather than an open "
-   "action. Reading either figure by eye off the raster was rejected: a plotted axis is not a "
-   "source. "
-   "what this settles and what it does not. It excludes the 13.1 extrapolation, which is why "
-   "that number is not carried, and it places 3.0 M on the far side of the conductivity maximum "
-   "where the carried value's implied flattening is the physically correct behaviour. It does "
-   "not locate the maximum, so it does not put a number on kappa(3.0 M) and does not restore an "
-   "upper bound. "
-   "what this does to the band: the old 0.2-6.6 was built before any of this data existed -- its "
-   "floor from Lee's cell resistance and its top from an ohmic-differencing argument. The floor "
-   "is 0.256, measured. the top cannot be defended at 6.6: nothing located excludes "
-   "values above it, and the only extrapolation anchored in measurement points higher. The band "
-   "is therefore reported as 0.26 mS cm-1 to not established above; the two rotating-electrode THF verdicts reverse only "
-   "above %.1f mS cm-1 (the rotating disc), which every measured-data continuation below stays "
-   "under. The arithmetic behind the floor: " % (10*_thf_flip("RDE 1600 rpm")*0.30)
-   + "Carries a conclusion. Band 0.2-6.6 mS cm-1 at a value of "
-   "3.0. The lower end is a state-B hard floor: total cell resistance <= V/I = 3.2 V / 0.520 A = "
-   "6.154 ohm in a coaxial annulus with R_i 9.5 mm, R_o 11.0 mm and L = 18.43 cm derived from the "
-   "stated 17.8 mL annulus volume, giving kappa >= 1.266e-3 / 6.154 = 0.206 mS cm-1 [Lee et al., "
-   "Org. Process Res. Dev. 2022, 26, 2674-2684, main text Results & Discussion, SI Fig. S3 p. S6 "
-   "and CFD block p. S22]. The upper end is not 8.8 and not the 3.29 that ohmic differencing first "
-   "returned: that construction assumes equal non-ohmic overpotential across LiBr concentrations, "
-   "which is refuted for Al anodes in THF by Zhang, Guan, Wang, Lin & See, Chem. Sci. 2023, 14, "
-   "13108-13118 (Br- concentration is precisely what relieves Al2O3 passivation, so Lee's voltage "
-   "differences are partly anodic, not ohmic), and it rests on dV = 0.2 V between two "
-   "two-significant-figure voltages, so dV = 0.10 V -- admitted by rounding alone -- raises it to "
-   "6.58. do not adopt 1.5 mS cm-1 as a derived point value: it fails state B (its point value is "
-   "set by an assumed kappa(1.5 M) with no source, its own bracket spans 1.24-2.48), and it would "
-   "state a ceiling ~30 pct below the model's own best estimate in the manuscript'S favour. "
-   "what the band buys, judged against each architecture's OWN transport ceiling rather than a "
-   "declared design current: %s. So the band does not decide the verdicts this section reports -- "
-   "the thin-gap chip clears throughout and both rotating cells and the stack fail throughout, "
-   "and what the band alone decides is the three centimetre-gap cells, which pass at the carried "
-   "value and above and fail only at the state-B floor, where the ceiling has fallen to the "
-   "transport ceiling itself. One live sentence is tighter than any architecture verdict: the zero-gap 'beyond passive and forced-air rejection' "
-   "claim flips at only 1.297x (U'_req crosses the 0.08 W cm-2 K-1 forced-air ceiling at "
-   "kappa = 3.89 mS cm-1; U' = 0.0986 at 3.0, 0.0544 at 6.58, 1.2013 at the floor), so it does "
-   "not survive the top of the band and is quoted with that margin where it appears. Recomputed "
-   "from "
-   % "; ".join(
-       "at %.3f mS cm-1 the ceilings are %s mA cm-2 against transport ceilings of %s, so %d of "
-       "the %d architectures clear"
-       % (kk * 10.0,
-          "/".join("%.1f" % _th_ceiling(kk, 66.0, r) for r in _TH_RX),
-          "/".join("%.1f" % r[4] for r in _TH_RX),
-          sum(_th_margin(kk, 66.0, r) >= 1.0 for r in _TH_RX), len(_TH_RX))
-       for kk in (0.0206, 0.30, 0.658))
-   + "the thermal model at kappa = 3.0 mS cm-1 and T_b = 66 C, and judged against each architecture's "
-   "OWN median transport ceiling rather than a declared design current, THF does NOT boil in either "
-   "batch cell, in the recirculating cell or in the microfluidic chip: those four verdicts would "
-   "reverse only at %.2f-%.2fx the carried conductivity, far below it, because transport binds "
-   % (min(_kappa_multiple(0.30, 66.0, r[0]) for r in _TH_RX if r is not _TH_STACK and _th_margin(0.30, 66.0, r) >= 1.0),
-      max(_kappa_multiple(0.30, 66.0, r[0]) for r in _TH_RX if r is not _TH_STACK and _th_margin(0.30, 66.0, r) >= 1.0))
-   + "before heat does in a cell that reaches only 8-17 mA cm-2. Where THF does fall short the "
-   "multipliers are %.1fx (rotating disc) and %.1fx (rotating cylinder), with the zero-gap "
-   % (_thf_flip("RDE 1600 rpm"), _thf_flip("rotating cyl. 3000 rpm"))
-   + "stack unreachable on kappa at all (at 1000 mA cm-2 its activation term alone puts out "
-   "0.71 W cm-2 against 0.043 W cm-2 of passive rejection, so no conductivity saves it). "
-   "The binding verdict is the rotating disc at %.1fx, against a band whose top is 2.19x "
-   % _thf_flip("RDE 1600 rpm")
-   + "the carried value, so every THF verdict in this section is band-proof. "
-   "A SECOND AND TIGHTER TEST, because the band is not the only thing a reader can do with the "
-   "measured data. Das's twenty points rise as kappa ~ c^n over the top decade, with n = 1.75 "
-   "fitting from 0.05 M, 1.94 from 0.10 M and 2.20 from 0.15 M; continued to 3.0 M those give "
-   "10.9, 18.3 and 35.6 mS cm-1. The rotating-disc verdict reverses at %.1f mS cm-1 and the "
-   "rotating-cylinder verdict at %.1f, so both survive every one of those continuations, the "
-   "disc clearing the steepest of them by %.0f pct."
-   % (10*_thf_flip("RDE 1600 rpm")*0.30, 10*_thf_flip("rotating cyl. 3000 rpm")*0.30,
-      100*(10*_thf_flip("RDE 1600 rpm")*0.30/35.6 - 1)) + " None of those continuations is itself sound: each "
-   "crosses a conductivity maximum the measured range never reaches, and at 3.0 M there are 4.08 "
-   "THF per Li+, so on four-coordinate lithium essentially the whole solvent is bound and the "
-   "dilute triple-ion law has no free solvent left to work with. The carried 3.0 mS cm-1 "
-   "corresponds to n = 1.39 from Das's 0.1 M point, i.e. it already assumes the roll-off rather "
-   "than extrapolating through it. "
-   "A SECOND SAME-SOLVENT ANCHOR, state A: Zhang, Gu, Wang, Ware, Lu, Lin, Qi and See, JACS Au "
-   "2023, 3, 2280-2290, Table 1 measures 0.1 M LiClO4 in THF at 62.6 uS cm-1 (22.0 +/- 1.0 C), "
-   "against Das's LiBr at the same 0.1 M and 25 C of 26.8 uS cm-1 -- same solvent, same cation, "
-   "different anion, a factor of 2.3 apart, which is the agreement this pair should show."),
+   _libr_thf_sens()),
  "1 M NaOH aq": (
    "derived, not measured -- reclassified 2026-08-23. Dorn's supporting information, Table SI "
-   "16, p. 61 (sodium hydroxide in water at 298.15 K, 101 kPa, 21 measured points) is the "
+   "16, p. 60 (sodium hydroxide in water at 298.15 K, 101 kPa, 21 measured points) is the "
    "source, but 1 M is not one of its measured points: at m = 0.9984 mol kg-1 -- the molality "
    "CRC's 'Concentrative Properties' assigns to 1.000 M, 3.840 mass pct -- the value is linearly "
    "interpolated between (0.6111, 112.49) and (1.2560, 215.78) mol kg-1 / mS cm-1, giving 174.5. "
@@ -1888,19 +2988,20 @@ ECOND_PROV = {
    "This row also matters because it is the aqueous reference of §S6: the figure's aqueous "
    "entry is now measured rather than derived.",
    "Dorn, Kareth, Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502, Supporting "
-   "Information (je3c00691_si_001.pdf); cross-checked against CRC Handbook of Chemistry and "
+   "Information; cross-checked against CRC Handbook of Chemistry and "
    "Physics, 97th ed., 'Electrical Conductivity of Aqueous Solutions', p. 5-71",
-   "Table SI 16, p. 61 (298.15 K, 101 kPa); CRC p. 5-71 NaOH row (20 C) with 'Concentrative "
+   "Table SI 16, p. 60 (298.15 K, 101 kPa); CRC p. 5-71 NaOH row (20 C) with 'Concentrative "
    "Properties of Aqueous Solutions' (1.000 M = 3.840 mass pct)",
-   "carries A FIG. K verdict -- this row is the figure's aqueous reference and enters a "
-   "reported result. "
-   "The -2.0 pct move from the derived 178.0 to the measured 174.5 lowers the unstirred-beaker "
-   "boil-off ceiling from 285.05 to 282.50 mA cm-2, i.e. the margin against that cell's own "
-   "transport ceiling of %.1f mA cm-2 goes from %.1fx to %.1fx. The aqueous reference clears "
-   "every preparative architecture either way, so no verdict moves. "
-   % (_TH_RX[0][4], 285.05 / _TH_RX[0][4], 282.50 / _TH_RX[0][4])
-   + "Recomputed from the thermal model, which asserts this value against the electrolyte table "
-     "before rendering."),
+   "the aqueous reference of the thermal analysis (§S6), so it enters a reported result. Band %.0f-%.0f mS cm-1, the "
+   "CRC p. 5-71 route of Table S4 (the 20 C table corrected to 25 C); the measured value sits at its lower edge. Across "
+   "the band the unstirred-beaker boil-off ceiling runs %.1f-%.1f mA cm-2 against that cell's own transport ceiling of "
+   "%.1f mA cm-2, a margin of %.1f-%.1fx, and the aqueous reference clears every preparative architecture throughout, so "
+   "no verdict moves. Recomputed from the thermal model, which asserts this value against the electrolyte table before "
+   "rendering."
+   % (_NAOH_BAND[0], _NAOH_BAND[1], _th_ceiling(_NAOH_BAND[0] / 10, 99.974, _TH_RX[0]),
+      _th_ceiling(_NAOH_BAND[1] / 10, 99.974, _TH_RX[0]), _TH_RX[0][4],
+      _th_ceiling(_NAOH_BAND[0] / 10, 99.974, _TH_RX[0]) / _TH_RX[0][4],
+      _th_ceiling(_NAOH_BAND[1] / 10, 99.974, _TH_RX[0]) / _TH_RX[0][4])),
  "2 M NaCl aq": (
    "derived by the CRC p. 5-71 route (see the 1 M NaOH aq row for the method and its ASTM "
    "validation). CRC 'Concentrative Properties', NaCl block: 10.0 pct = 1.832 M and 12.0 pct = "
@@ -1980,7 +3081,7 @@ ECOND_PROV = {
    "amine-HF fluorination media are highly conducting, but the inherited citation -- 'Fuchigami "
    "electrochemical fluorination reports' -- names no paper and is not a citation",
    KAPPA_NOSRC, "", S_KAPPA_DISPLAY),
- "0.5 M NaBr aq/MeCN 1:1": (
+ "0.25 M NaBr/H2O-MeCN 1:1": (
    "aqueous NaBr halved for 1:1 MeCN dilution. Mixed-solvent transfer is not defensible: "
    "preferential solvation invalidates any lambda0 or kappa transfer, and no isotherm exists for "
    "this composition", KAPPA_NOSRC, "", S_KAPPA_DISPLAY),
@@ -1995,23 +3096,32 @@ ECOND_PROV = {
    KAPPA_NOSRC, "", S_KAPPA_DISPLAY),
  "0.1 M Bu4NBF4/MeCN": (
    "measured, retrieved 2026-08-22: Shinkle et al. Table 1 gives 9.93 mS cm-1 for 0.1 M TBABF4 in "
-   "ACN at room temperature. This row was previously derived at 9.9 by evaluating Dorn's "
-   "Casteel-Amis fit (Table 3, p. 1499; kappa_max 33.40, m_max 1.48127, a 0.78646, b -0.02156) at "
-   "m = 0.133 mol kg-1, which returned 9.87. The agreement is 0.3 pct, and that is the load-bearing "
-   "fact on this row: it is the only point where a Casteel-Amis evaluation of Dorn's fit can be "
-   "checked against a direct measurement of the same composition, and it is what licenses the four "
-   "remaining Bu4NBF4/MeCN rows (0.043, 0.077, 0.25, 0.3 M) that have no measurement of their own. "
-   "The molarity-to-molality conversion used there is therefore also validated at this point. "
+   "ACN at room temperature. At the same composition (m = %.3f mol kg-1) Dorn's measured isotherm "
+   "(Table SI 85) gives %.2f and Dorn's Casteel-Amis fit (Table 3, eq. 5, p. 1499; -b convention) gives %.2f, "
+   "so the two measurements agree to %.1f pct and the fit sits %.1f pct above Shinkle's value and %.1f pct above "
+   "Dorn's. (An evaluation of the fit "
+   "with the opposite sign of b, %.2f, is what an earlier note on this row compared against.) "
+   % (_ca_molal(0.1, "soln"), _ca_meas(_ca_molal(0.1, "soln")), _ca_fit(_ca_molal(0.1, "soln")),
+      100 * abs(9.93 / _ca_meas(_ca_molal(0.1, "soln")) - 1), 100 * (_ca_fit(_ca_molal(0.1, "soln")) / 9.93 - 1),
+      100 * (_ca_fit(_ca_molal(0.1, "soln")) / _ca_meas(_ca_molal(0.1, "soln")) - 1),
+      float(_CA_FIT[1] * (_ca_molal(0.1, "soln") / _CA_FIT[0]) ** _CA_FIT[2]
+            * _math.exp(_CA_FIT[3] * (_ca_molal(0.1, "soln") - _CA_FIT[0]) ** 2
+                        - _CA_FIT[2] * (_ca_molal(0.1, "soln") / _CA_FIT[0] - 1))))
+   + "The molarity-to-molality conversion is checked at this point too. "
    "caveat: Shinkle states 'room temperature', not 25.0 C; at 2-3 pct per K a +/-2 K ambiguity is "
-   "+/-5 pct, which is larger than the 0.3 pct agreement and means the agreement should not be "
+   "+/-5 pct, which is larger than the agreement with Dorn's measurement and means that agreement should not be "
    "read as better than about +/-5 pct.",
    "Shinkle, Pomaville, Sleightholme, Thompson & Monroe, J. Power Sources 2014, 248, 1299-1305, "
    "DOI 10.1016/j.jpowsour.2013.10.034; cross-check against Dorn, Kareth, Weidner & Petermann, "
    "J. Chem. Eng. Data 2024, 69, 1493-1502",
    "Shinkle Table 1 (0.1 M supporting-electrolyte/solvent conductivities at room temperature, "
    "mS cm-1: TBABF4 = 9.93 ACN, 4.76 DMF, 0.30 THF, 0.06 dmc); Dorn Table 3, p. 1499",
-   S_KAPPA_DISPLAY + " Display-only: it enters no figure and no sentence. Its value is that it "
-   "validates the Casteel-Amis route used by four other rows."),
+   S_KAPPA_DISPLAY + " Display-only: it enters no figure and no sentence. Its value is as a cross-check: at the "
+   "same composition Dorn's measured isotherm gives %.2f mS cm-1 (%.1f pct from this measurement), while Dorn's "
+   "Casteel-Amis fit gives %.2f (%+.1f pct), which bounds the fit route used by the %s." %
+   (_ca_meas(_ca_molal(0.1, "soln")), 100 * abs(9.93 / _ca_meas(_ca_molal(0.1, "soln")) - 1),
+    _ca_fit(_ca_molal(0.1, "soln")), 100 * (_ca_fit(_ca_molal(0.1, "soln")) / 9.93 - 1),
+    " and ".join("%s row" % e for e in _CA_DERIVED))),
  "0.1 M Bu4NBF4/DMF": (
    "measured, retrieved 2026-08-22. This is the one number a reader meets in the manuscript body "
    "-- the TRL-E 6 passage quotes it and builds a worked example on it -- and until now it was an "
@@ -2037,12 +3147,14 @@ ECOND_PROV = {
    "carries the worked example of the main text, which is an ILLUSTRATION of a tight batch cell "
    "rather than one of the modelled thermal archetypes: 100 mA cm-2 across a declared 5 mm gap. "
    "At the measured 4.76 mS cm-1 the model gives E_cell = %.2f V, of which %.2f V is ohmic, "
-   "q = %.3f W cm-2, and a passive steady state of %.1f C. The claim the passage makes -- that "
-   "the model reproduces the 10-20 V cells common in academic non-aqueous reports -- holds for "
-   "kappa in [2.85, 6.64] mS cm-1, and the measured 4.76 sits inside it."
+   "q = %.3f W cm-2, and a passive steady state of %.1f C. A +/-5 pct change in kappa moves the cell voltage over "
+   "%.2f-%.2f V; it reaches 20 V at kappa = %.2f mS cm-1 and 10 V at %.2f."
    % (_TM.E_cell(100., 0.476, 5.0e-3), 100. * 10. * 5.0e-3 / 0.476,
       _TM.q_Wcm2(100., 0.476, 5.0e-3),
-      _TM.T_ss(100., 0.476, 5.0e-3, _TM.U_passive(_TH_RX[0][2], _TH_RX[0][3])))),
+      _TM.T_ss(100., 0.476, 5.0e-3, _TM.U_passive(_TH_RX[0][2], _TH_RX[0][3])),
+      _TM.E_cell(100., 0.476 * 1.05, 5.0e-3), _TM.E_cell(100., 0.476 * 0.95, 5.0e-3),
+      100. * 10. * 5.0e-3 / (20.0 - _TM.E_cell(100., 1e30, 5.0e-3)) * 10,
+      100. * 10. * 5.0e-3 / (10.0 - _TM.E_cell(100., 1e30, 5.0e-3)) * 10)),
  "0.077 M Et4NBF4/MeCN": (
    "derived 2026-08-22 by same-family transfer at equal Lambda/Lambda0 from the derived "
    "0.077 M Bu4NBF4/MeCN row (8.1 mS cm-1): same solvent, same anion, same concentration, "
@@ -2091,11 +3203,11 @@ ECOND_PROV = {
    "Dorn, Kareth, Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502; method: Casteel & "
    "Amis, J. Chem. Eng. Data 1972, 17, 55",
    "Dorn Table 3, p. 1499 (ACN / (C4H9)4NBF4)",
-   S_KAPPA_DISPLAY + " Derived display-only: the row now has a method and a locator, but it still "
+   S_KAPPA_DISPLAY + " Derived display-only: the row has a method and a locator, but it "
    "enters no figure and no sentence. Declared band %s mS cm-1." % (band,))
    for name, mm, kk, band, moved, extra in [
      ("0.043 M Bu4NBF4/MeCN", "0.056", "5.66", "5.0-6.0", "5.2 -> 5.66",
-      "the only row still using the fit. Dorn's supporting information (Table SI 85, p. 171) "
+      "the only row still using the fit. Dorn's supporting information (Table SI 85, p. 170) "
       "measures this isotherm at 21 concentrations, and every other Bu4NBF4/MeCN row in this "
       "registry is now read between two of those measurements. This one cannot be: m = 0.056 "
       "falls between measured points at m = 0 (0.17 mS cm-1) and m = 0.0905 (7.66), and kappa(m) "
@@ -2109,19 +3221,19 @@ ECOND_PROV = {
  "0.077 M Bu4NBF4/MeCN": (
    "measured. read between two measured points of Dorn's isotherm in the supporting "
    "information, which carries the raw data the article body's Table 3 only summarises: "
-   "Table SI 85, p. 171, at m = 0.101 mol kg-1, between the measured points (0.0905, 7.66) and (0.1896, 13.36) "
+   "Table SI 85, p. 170, at m = 0.101 mol kg-1, between the measured points (0.0905, 7.66) and (0.1896, 13.36) "
    "mol kg-1 / mS cm-1, giving 8.26 mS cm-1. Supersedes a typed 8.07 produced from the Casteel-Amis fit with the wrong sign on b.",
-   "Dorn, Kareth, Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502, Supporting Information (je3c00691_si_001.pdf)",
-   "Table SI 85, p. 171 (298.15 K, 101 kPa; 21 measured points with combined "
+   "Dorn, Kareth, Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502, Supporting Information",
+   "Table SI 85, p. 170 (298.15 K, 101 kPa; 21 measured points with combined "
    "uncertainties)",
    S_KAPPA_DISPLAY),
  "0.3 M Bu4NBF4/MeCN": (
    "measured. read between two measured points of Dorn's isotherm in the supporting "
    "information, which carries the raw data the article body's Table 3 only summarises: "
-   "Table SI 85, p. 171, at m = 0.423 mol kg-1, between the measured points (0.4094, 22.13) and (0.5312, 25.48) "
+   "Table SI 85, p. 170, at m = 0.423 mol kg-1, between the measured points (0.4094, 22.13) and (0.5312, 25.48) "
    "mol kg-1 / mS cm-1, giving 22.50 mS cm-1. Supersedes a typed 21.34 produced the same way.",
-   "Dorn, Kareth, Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502, Supporting Information (je3c00691_si_001.pdf)",
-   "Table SI 85, p. 171 (298.15 K, 101 kPa; 21 measured points with combined "
+   "Dorn, Kareth, Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502, Supporting Information",
+   "Table SI 85, p. 170 (298.15 K, 101 kPa; 21 measured points with combined "
    "uncertainties)",
    S_KAPPA_DISPLAY),
  "2 M NaCl aq": (
@@ -2129,7 +3241,7 @@ ECOND_PROV = {
    "information, which carries the raw data the article body's Table 3 only summarises: "
    "Table SI 13, p. 54, at m = 2.0816 mol kg-1, between the measured points (2.0714, 148.36) and (2.3325, 161.37) "
    "mol kg-1 / mS cm-1, giving 148.9 mS cm-1. The target molality is 0.5 pct above a measured point, so this is effectively a direct reading. The CRC p. 5-71 derivation it replaces gave 148.0, i.e. -0.6 pct -- an independent confirmation of that route, which is retained in the registry.",
-   "Dorn, Kareth, Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502, Supporting Information (je3c00691_si_001.pdf)",
+   "Dorn, Kareth, Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502, Supporting Information",
    "Table SI 13, p. 54 (298.15 K, 101 kPa; 21 measured points with combined "
    "uncertainties)",
    S_KAPPA_DISPLAY),
@@ -2138,7 +3250,7 @@ ECOND_PROV = {
    "information, which carries the raw data the article body's Table 3 only summarises: "
    "Table SI 31, p. 94, at m = 1.0405 mol kg-1, between the measured points (0.9676, 71.84) and (1.1207, 80.55) "
    "mol kg-1 / mS cm-1, giving 76.0 mS cm-1. The CRC p. 5-71 derivation it replaces gave 75.5, i.e. -0.6 pct.",
-   "Dorn, Kareth, Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502, Supporting Information (je3c00691_si_001.pdf)",
+   "Dorn, Kareth, Weidner & Petermann, J. Chem. Eng. Data 2024, 69, 1493-1502, Supporting Information",
    "Table SI 31, p. 94 (298.15 K, 101 kPa; 21 measured points with combined "
    "uncertainties)",
    S_KAPPA_DISPLAY),
@@ -2303,24 +3415,29 @@ for e_ in sorted(_registered):
 ## The code carries rounded values; both the printed value and the rounding are recorded here, and
 ## the rounding's effect on the ceiling is bounded per solvent.
 CRCB = ("CRC Handbook of Chemistry and Physics, 97th ed. (W. M. Haynes, ed.), CRC Press, 2016")
-LOCB = ("Sect. 15, 'Laboratory Solvents and Other Liquid Reagents', pp. 15-13 ff., normal boiling "
-        "point column (from the PDF in Model Papers for Params/, layout-"
-        "preserving extraction; M cross-checked: 41.052 / 73.094 / 72.106)")
-for nm_, used_, printed_, shift_ in [
-    ("THF",      "66.0",   "66.0",   "+0.000"),
-    ("MeCN",     "81.6",   "81.6",   "-0.702"),
-    ("DMF",      "152.8",  "152.8",  "-0.156"),
-    ("H2O (used for 1 M NaOH aq)", "99.974", "99.974", "-0.035")]:
+# chemistry audit pass 7: per-solvent page, and the sensitivity is computed (it quoted shifts against a retired rounding)
+def _tb_1K(sl):
+    k, tb = _th_by_solvent(sl)
+    v = [_TM.i_boil(k, r[1], tb + 1.0, _TM.U_passive(r[2], r[3])) / _TM.i_boil(k, r[1], tb, _TM.U_passive(r[2], r[3])) - 1
+         for r in _TH_RX]
+    return 100 * min(v), 100 * max(v)
+for nm_, used_, printed_, sl_, page_ in [
+    ("THF",      "66.0",   "66.0",   "THF",      "15-19"),
+    ("MeCN",     "81.6",   "81.6",   "MeCN",     "15-13"),
+    ("DMF",      "152.8",  "152.8",  "DMF",      "15-16"),
+    ("H2O (used for 1 M NaOH aq)", "99.974", "99.974", "aq. NaOH", "15-20")]:
+    _lo, _hi = _tb_1K(sl_)
     add("9. Thermal model", "T_boil: %s" % nm_, used_, "deg C", "measured",
         "normal boiling point as printed by the source: %s deg C, and figs/thermal_model.py now "
         "uses exactly that. It previously used a rounding (66/82/153/100); the printed values were "
         "adopted on 2026-08-24 at the author's direction" % printed_,
-        CRCB, LOCB,
-        "T_boil enters only as (T_boil - T_amb), so the rounding shifts that solvent's boil-off "
-        "ceiling by %s%% relative to a 3-significant-figure rounding of it. For 1 M NaOH the pure-water "
-        "boiling point is used; the real solution boils slightly higher (boiling-point elevation, "
-        "~0.5 K at 1 M), so 100 deg C is the conservative choice for a boil-off ceiling."
-        % shift_)
+        CRCB, "Sect. 15, 'Laboratory Solvents and Other Liquid Reagents', p. %s, normal boiling point column" % page_,
+        "T_boil enters only as (T_boil - T_amb); a 1 K error in it moves this solvent's boil-off ceilings by %+.2f to %+.2f%% "
+        "across the seven cells. For 1 M NaOH the pure-water "
+        "boiling point is used; the real solution boils higher by about %.1f K (ideal van't Hoff: two ions x "
+        "E_b(water) = 0.513 K kg mol-1, CRC 97th ed. p. 15-25, x 0.998 mol kg-1), so the pure-water value is the "
+        "conservative choice for a boil-off ceiling."
+        % (_lo, _hi, 2 * 0.513 * 0.9984))
 
 add("7. Reactors", "delta (unstirred batch)", "228", "um", "derived",
     "DERIVED 2026-09-04 from the source's OWN diffusion-layer equation, replacing a declared "
@@ -2340,8 +3457,8 @@ add("7. Reactors", "delta (unstirred batch)", "228", "um", "derived",
     "The ferrocyanide measurement has now been retrieved and is cited directly, below.",
     "Wilke, Eisenberg & Tobias, 'Correlation of limiting currents under free convection "
     "conditions', J. Electrochem. Soc. 1953, 100, 513-523 (plane vertical cathodes in quiescent "
-    "solution, cathode heights 0.25-3.0 in., i_lim 0.4-108 mA cm-2 -- the archetype and the "
-    "current range match this work exactly). Derivation, reproducible from this table: the paper's "
+    "solution, cathode heights 0.25-3.0 in., i_lim 0.4-108 mA cm-2 -- the same archetype as this "
+    "work's unstirred cell). Derivation, reproducible from this table: the paper's "
     "Eq. XVII, delta' = 1.48 x (Sc Gr)^(-1/4) with Sc Gr = g x^3 (drho/rho)/(nu D), evaluated at "
     "x = %.0f mm and drho/rho = %.2e -- the geometric centres of the declared ranges on the "
     "operating-point row that follows -- over each of the fifty rows' own nu and D, gives a median "
@@ -2357,16 +3474,20 @@ add("7. Reactors", "delta (unstirred batch)", "228", "um", "derived",
     "density driving force (their own row follows), and delta goes as the fourth root of each: "
     "across x = 5-80 mm it runs %.0f-%.0f um and across drho/rho = 1e-2 to 1e-3 it runs %.0f-%.0f "
     "um, an envelope of %.0f-%.0f um over both declarations together, widening to %.0f-%.0f um once "
-    "the per-reaction spread in nu and D is included. The unstirred median is 8.01 mA cm-2 at "
-    "%.0f um and 6.11 at 300 um, the top of the typed band, while 12 of 50 clear 25 mA cm-2 and 9 "
-    "of 50 clear 50 mA cm-2 at either film, so no headline integer depends on where in the "
-    "envelope the value sits. The contrast with the stirred archetype is 1.14x at the central "
-    "value and 1.49x at 300 um; it is the softest comparison in the model and is bounded rather "
+    "the per-reaction spread in nu and D is included. The unstirred median is %.2f mA cm-2 at the "
+    "carried %.0f um, with %d of 50 clearing 25 mA cm-2 and %d of 50 clearing 50. Scaling the unstirred "
+    "column as 1/delta across the envelope -- exact for the direct and k = 0 rows, and a bound on the "
+    "mediated and catalyst rows, none of which falls faster than 1/delta (Table S6) -- gives a median "
+    "of %.1f mA cm-2 with at most %d and %d of 50 at the thin edge, and %.1f mA cm-2 with at least %d "
+    "and %d at the thick edge, so the unstirred counts are conditional on the declared operating point "
+    "(its own row states this). The contrast with the stirred archetype is %.2fx at the central value and %.2f-%.2fx "
+    "across the envelope; it is the softest comparison in the model and is bounded rather "
     "than asserted: the unstirred film exceeds the stirred one only for electrode heights above "
     "about 12 mm at the central driving force, so the ordering of the two batch archetypes is a "
     "property of the declared geometry and not a measured separation."
-    % (_FCS["h_5mm"], _FCS["h_80mm"], _FCS["drho_1e-2"], _FCS["drho_1e-3"], _FC_ENV_LO, _FC_ENV_HI,
-       _FC["delta_band_lo_um"], _FC["delta_band_hi_um"], _FC["delta_centre_um"]))
+    % ((_FCS["h_5mm"], _FCS["h_80mm"], _FCS["drho_1e-2"], _FCS["drho_1e-3"], _FC_ENV_LO, _FC_ENV_HI,
+       _FC["delta_band_lo_um"], _FC["delta_band_hi_um"]) + (_nat_at(_NAT_FILM)[0], _NAT_FILM) + _nat_at(_NAT_FILM)[1:]
+       + _nat_at(_FC_ENV_LO) + _nat_at(_FC_ENV_HI) + (_NAT_FILM / 200.0, _FC_ENV_LO / 200.0, _FC_ENV_HI / 200.0)))
 add("7. Reactors", "Free-convection operating point (unstirred batch)",
     "x %.0f mm; drho/rho %.2e" % (_FC["h_centre_m"] * 1e3, _FC["drho_rho_centre"]), "-", "assumption",
     "the declared operating point of the free-convection correlation: the geometric centres of "
@@ -2378,9 +3499,9 @@ add("7. Reactors", "Free-convection operating point (unstirred batch)",
     "through a specific densification coefficient, rho_0 - rho_i = alpha rho_i (C_0 - C_i), so at "
     "the limiting current it is fixed by the bulk concentration of whichever species the surface "
     "depletes, and their own experiments span 0.01-0.74 M CuSO4 on cathodes 6-76 mm high. The "
-    "fifty rows deplete 3.5 mM to 13.7 M and the densification coefficients of these organic "
+    "fifty rows deplete %.2f mM to %.2f M of carrier and the densification coefficients of these organic "
     "solutions are not available, so one value is declared for all fifty and what it costs is "
-    "stated here rather than hidden inside the derived film.",
+    "stated here rather than hidden inside the derived film." % (1000 * _FC["set_depleted_concentration_M"][0], _FC["set_depleted_concentration_M"][1]),
     "declared; Wilke, Eisenberg & Tobias p. 513 (abstract: '0.01 to 0.7 molal CuSO4 ... cathode "
     "heights varied from 0.25 to 3.0 in.') and p. 515 for the source's own range",
     "delta goes as (drho/rho)^(-1/4). The one case that can be page-anchored is the most "
@@ -2391,13 +3512,25 @@ add("7. Reactors", "Free-convection operating point (unstirred batch)",
     "than %.0f. A millimolar organic in an organic solvent sits below the declared decade and its "
     "film is correspondingly thicker. The lumped film is therefore an upper estimate for the "
     "concentrated aqueous rows and a lower one for the dilute organic rows; a per-row driving "
-    "force would thin the film for exactly the rows that carry the unstirred counts (10 of the 12 "
+    "force would thin the film for exactly the rows that carry the unstirred counts (%d of the %d "
     "clearing 25 mA cm-2 are concentrated rows, S1.1). The direction is established by the fourth "
-    "root; the magnitude per row is not computed here because the coefficients are unavailable, "
-    "and the ordering of the archetypes, which every sweep reported here preserves, does not rest "
-    "on it." % (_FCI["source"], _FCI["rho_2M_gcm3"], _FCI["rho_ref_gcm3"], _FCI["drho_rho"],
+    "root; the magnitude per row is not computed here because the coefficients are unavailable. "
+    "The ordering from the stirred cell upward does not rest on it; the order of the two batch "
+    "archetypes does (the derived film's row)." % (_FCI["source"], _FCI["rho_2M_gcm3"], _FCI["rho_ref_gcm3"], _FCI["drho_rho"],
                 _FCI["ratio_to_declared_centre"], _FCI["delta_um_at_central_height"],
-                _FC["delta_centre_um"]))
+                _FC["delta_centre_um"], _DS_STRATA["concentrated"]["n25"][0], _DS_STRATA["all"]["n25"][0]) + _FC_COUNTS_SENT)
+# chemistry audit pass 3: the stirred row's sensitivity typed the unstirred film (233 um, retired), the batch contrast
+# (1.16x), the crossover height (11 mm) and the unstirred-to-RCE span (15.2x); all four are computed now
+def _med_col(col):
+    with io.open(_os.path.join(_os.path.dirname(_HERE_D), "julia", "tier0_ec_matrix.csv"), encoding="utf8") as fh:
+        v = sorted(float(r[col]) for r in csv.DictReader(fh))
+    return 0.5 * (v[len(v) // 2 - 1] + v[len(v) // 2]) if len(v) % 2 == 0 else v[len(v) // 2]
+_SPAN_NAT_RCE = _med_col("rce") / _med_col("natural")
+with io.open(_os.path.join(_os.path.dirname(_HERE_D), "julia", "mediated_ec_matrix.csv"), encoding="utf8") as fh:
+    _UNSTIRRED_UM = sorted({float(r["delta_um"]) for r in csv.DictReader(fh) if r["reactor"] == "Unstirred batch"})
+assert len(_UNSTIRRED_UM) == 1, _UNSTIRRED_UM
+_UNSTIRRED_UM = _UNSTIRRED_UM[0]
+_H_CROSS_MM = 1000 * _FC["h_centre_m"] * (200.0 / _FC["delta_centre_um"]) ** 4
 add("7. Reactors", "delta (stirred batch)", "200", "um", "measured",
     "ADOPTED 200 um on 2026-09-01 (author decision), replacing a declared 100 um whose "
     "inherited citation had been withdrawn -- no passage in Pletcher & Walsh, Industrial "
@@ -2410,23 +3543,24 @@ add("7. Reactors", "delta (stirred batch)", "200", "um", "measured",
     "i_lim = nFDc/delta, then converted for the diffusivity of the dissolved gas.",
     "Williams, Corbin, Zeng, Lazouski, Yang & Manthiram, Sustainable Energy Fuels 2019, 3, "
     "1225-1232, DOI 10.1039/C9SE00024K",
-    "p. 1227: 'For the transport of dissolved O2 gas, the calculated boundary layer thickness "
+    "p. 1228: 'For the transport of dissolved O2 gas, the calculated boundary layer thickness "
     "was 200 +/- 7 um' (D_O2 = 2.10e-5 cm2 s-1, bubbling at 10 sccm)",
     "IT IS A PROXY, NOT THIS SYSTEM, and that is stated rather than glossed: the measurement is "
     "dissolved O2 in a gas-bubbled aqueous cell, not an organic electrolyte under magnetic "
     "stirring. It is the same GEOMETRY CLASS -- a planar electrode in a convecting cell -- and "
-    "O2 diffuses about twice as fast as the bulky organics modelled here, so the real layer for "
-    "these systems should be THICKER and the adopted value stays conservative in that direction. "
-    "The unstirred archetype is now DERIVED at the centre of the same free-convection "
-    "correlation, 233 um, so the two batch films are compared centre against centre and the "
-    "contrast is 1.16x rather than the 1.49x an edge-against-centre pairing gave. The two "
-    "archetypes remain close, and that is a property of the systems rather than of the "
+    "O2 diffuses about " + "%.1f" % _O2R + " times as fast as the median carrier modelled here, and a convective film "
+    "thickens with the diffusivity (delta ~ D^(1/3) for a laminar boundary layer, D^(1/2) under "
+    "penetration theory), so the real layer for these systems should if anything be THINNER, by "
+    "roughly " + "%.0f-%.0f" % (100 * (1 - _O2R ** (-1 / 3)), 100 * (1 - _O2R ** (-1 / 2))) + " pct, and the adopted value stays conservative (it lowers the ceilings). "
+    "The unstirred archetype is derived at the centre of the same free-convection correlation, "
+    "%.0f um, so the two batch films are compared centre against centre, a contrast of %.2fx. The "
+    "two archetypes remain close, and that is a property of the systems rather than of the "
     "choice: the unstirred film exceeds this one only for electrode heights above about "
-    "11 mm at the central driving force, so the separation is bounded by declared geometry "
+    "%.0f mm at the central driving force, so the separation is bounded by declared geometry "
     "and is not a measured result. The measurement's own uncertainty, +/-7 um, "
-    "carries through to " + _sbrow("stirred") + "; the architecture ordering and the "
-    "unstirred-to-RCE span of 15.2x hold across the whole interval, so no conclusion depends on "
-    "where within it the value sits.")
+    "carries through to " % (_UNSTIRRED_UM, _UNSTIRRED_UM / 200.0, _H_CROSS_MM) + _sbrow("stirred") + "; the architecture ordering and the "
+    "unstirred-to-RCE span of %.1fx hold across the whole interval, so no conclusion depends on "
+    "where within it the value sits." % _SPAN_NAT_RCE)
 add("7. Reactors", "delta (recirculating flow cell)", "106.9", "um", "measured",
     "ADOPTED 2026-09-07 (author decision) in place of the declared Leveque operating point "
     "'gap 1 mm, L 5 cm, u 5 cm/s', which had no source for any of its three numbers and computed "
@@ -2494,8 +3628,8 @@ add("7. Reactors", "delta (microfluidic cell)", "12.5", "um", "derived",
     "derivation reproducible from this table: delta = D / max(1.85 (4 h^2/(D tau))^(1/3) D/(2h), "
     "D/(h/2)) = h/2 for all fifty rows",
     "The film is the half-gap for every row and at both printed residence times, because the "
-    "entrance solution would overtake the fully-developed film only for D below 1.0e-12 m2/s, three "
-    "decades under any row; over Table S1's tau = 4-12 min the band therefore collapses onto the "
+    "entrance solution would overtake the fully-developed film only for D below 1.0e-12 m2/s, more than "
+    "two decades under any row; over Table S1's tau = 4-12 min the band therefore collapses onto the "
     "value itself, and the microfluidic column gives " + _sbrow("micro") + ". What the column is "
     "exposed to is the half-gap rule, the same fully-developed bound that limits every channel "
     "cell in this model; the exact fully-developed Sherwood number for one active wall is somewhat "
@@ -2515,18 +3649,30 @@ add("7. Reactors", "Levich: delta = 1.61 D^(1/3) nu^(1/6) omega^(-1/2)", "1.61",
     "p. 30, footnote 11 (cross-referring Sect. 9.3.2); coefficient confirmed in Sect. 12.4",
     "The exact coefficient is 1.6117; the printed 1.61 is 0.11% below it, and 1.613 -- the value "
     "obtained by inverting the 2-significant-figure 0.62 -- is "
-    "0.08% above, a 0.186% spread end to end. Bounded by direct recomputation of the RDE column at "
-    "all three values: median 108.49 / 108.37 / 108.29 mA cm-2, and the counts are identical in "
-    "every case (36/50 clearing 25, 32/50 clearing 50). No reported number or count depends on the "
+    "0.08% above, a 0.186% spread end to end. The film scales linearly with the coefficient, so every "
+    "RDE ceiling moves by at most that 0.19%, and the RDE cell nearest a threshold sits "
+    + "%.1f%%" % min(100 * abs(x - t) / t for x in _pub_col("rde") for t in (25, 50)) + " from 25 "
+    "or 50 mA cm-2, so no count can move. No reported number or count depends on the "
     "choice. The rotating-disc film carries no laminar-regime assertion, unlike the Leveque "
     "coefficient, which is asserted only below Re = 2300.")
+_ROT_M = lambda k: _SB["median, " + k]
+_ROT_C = lambda k, t: _SB["count >=%d, %s" % (t, k)]
+_ANEC_HI = _ROT_M("anec")["upper"]
+assert _ROT_M("rde")["lower"] > _ANEC_HI and _ROT_M("rce")["lower"] > _ANEC_HI, \
+    "a rotating archetype's band now reaches below ANEC's; reword the RDE and RCE operating-point rows"
 add("7. Reactors", "RDE operating point", "1600", "rpm", "assumption",
     "a declared convention, not a measured quantity: 1600 rpm is the customary RDE reference speed. "
     "It is not the measured quantity of the Levich row, though it is sometimes tabulated there as though it were the "
     "quantity", "declared operating point", "",
-    "delta ~ omega^(-1/2), so 400-3600 rpm spans 2x in delta and 2x in i_lim. The RDE is a "
-    "reference rung rather than a preparative architecture, and it brackets the rotating cylinder "
-    "from below in every solvent across that range, so the architecture ordering is unchanged.")
+    "Swept over %.0f-%.0f rpm (Table S8). delta ~ omega^(-1/2), so that band spans a factor of %.1f in delta and in "
+    "i_lim, and the RDE column gives a median of %.1f-%.1f mA cm-2 about %.1f, %d-%d of 50 clearing 25 mA cm-2 and "
+    "%d-%d clearing 50. Its upper edge passes the rotating-cylinder median (%.1f), so the order of the RDE and the "
+    "rotating cylinder is a property of the two declared operating points, not of the architectures, and is not "
+    "claimed. The RDE's two threshold counts are conditional on the declared rotation rate. What holds across the whole band is that the RDE stays above ANEC, whose own band tops out at %.1f mA "
+    "cm-2, so the four-step ordering below it is unaffected."
+    % (_RDE_BAND[0], _RDE_BAND[1], (_RDE_BAND[1] / _RDE_BAND[0]) ** 0.5, _ROT_M("rde")["lower"], _ROT_M("rde")["upper"],
+       _ROT_M("rde")["value"], _ROT_C("rde", 25)["lower"], _ROT_C("rde", 25)["upper"], _ROT_C("rde", 50)["lower"],
+       _ROT_C("rde", 50)["upper"], _ROT_M("rce")["value"], _ANEC_HI))
 # DEMOTED measured -> assumption on 2026-08-22. This row was state A while its OWN sensitivity
 # field said "The coefficient 1.85 could not be page-anchored inside either source in this pass".
 # By the standard's definition of measured -- a locator a reader can open to SEE the number -- a
@@ -2542,7 +3688,7 @@ add("7. Reactors", "Leveque: Sh = 1.85 (Re Sc dh/L)^(1/3)", "1.85", "-", "assump
     "the S8.1 illustration of what intensification costs.",
     "Pickett & Ong, 'The influence of hydrodynamic and mass transfer entrance effects on the "
     "operation of a parallel plate electrolytic cell', Electrochim. Acta 1974, 19, 875-882, DOI "
-    "10.1016/0013-4686(74)85036-X; restated in Walsh & Ponce de Leon, Electrochim. Acta 2018, 280, "
+    "10.1016/0013-4686(74)85036-X; Walsh & Ponce de Leon, Electrochim. Acta 2018, 280, "
     "121-148", "Electrochim. Acta 1974, 19, 875-882 (experimental validation in this exact geometry)",
     "Not page-anchored, which is why this row is state C rather than state A: the coefficient "
     "1.85 is not located to an equation within either source, and a whole-article page range is "
@@ -2557,41 +3703,66 @@ add("7. Reactors", "Leveque: Sh = 1.85 (Re Sc dh/L)^(1/3)", "1.85", "-", "assump
 ## operating point" (assumption: L 2.5 cm, u 10 cm/s). The two flow archetypes were declared
 ## operating points with no source for their velocities; they are replaced by measured films and
 ## the Mo 2020 cell above. Verbatim text of the retired rows: docs/ARCHETYPE_REANCHOR_20260907.md.
+def _channel_pair_sentence():
+    """The S8.1 ratios decomposed into the pair's three changes, read from results/reactor_engineering.json (chemistry
+    audit, pass 6: the typed version gave delta ~ h^(2/3) and credited the whole 2.5x film step to the gap). In the
+    Leveque entrance regime Sh = 1.85 (Re Sc d_h/L)^(1/3) with d_h = 2h, so delta = d_h/Sh = (2 h D L/u)^(1/3)/1.85."""
+    with io.open(_os.path.join(_os.path.dirname(_HERE_D), "results", "reactor_engineering.json"), encoding="utf8") as fh:
+        re_ = _json.load(fh)
+    a, b = re_["channels"]
+    fh_, fl_, fu_ = a["gap_m"] / b["gap_m"], a["length_m"] / b["length_m"], b["velocity_m_s"] / a["velocity_m_s"]
+    d_pred = (fh_ * fl_ * fu_) ** (1.0 / 3.0)
+    if abs(d_pred / re_["ratios"]["delta"] - 1) > 1e-6:
+        raise SystemExit("the channel films are not in the Leveque entrance regime (half-gap floor binding?): "
+                         "(h L / u)^(1/3) predicts %.4f, reactor_engineering.json gives %.4f" % (d_pred, re_["ratios"]["delta"]))
+    dp_pred = fh_ ** 2 * (b["velocity_m_s"] / a["velocity_m_s"]) * (b["length_m"] / a["length_m"])
+    if abs(fu_ / fl_ - 1) > 1e-9:
+        raise SystemExit("the channel pair no longer holds u L fixed; reword the pressure-drop clause")
+    if abs(dp_pred / re_["ratios"]["dP"] - 1) > 1e-6:
+        raise SystemExit("pressure-drop ratio %.4f is not 12 mu u L / h^2 (%.4f)" % (re_["ratios"]["dP"], dp_pred))
+    return ("A declared geometry that reaches no reported ceiling, count or median. The S8.1 quantities it feeds are "
+            "reported as ratios between the two channels. In the Leveque entrance regime delta = d_h/Sh scales as "
+            "(h L / u)^(1/3) at fixed D, so the film falls %.2fx between the channels: %.2fx from the %.0fx gap step, "
+            "%.2fx from the %.0fx shorter channel and %.2fx from the %.0fx faster flow. The pressure drop of laminar slot "
+            "flow, 12 mu u L / h^2, rises %.0fx: the gap step alone gives %.0fx, and the %.0fx faster flow and the "
+            "%.0fx shorter channel cancel. Changing the pair changes the absolute per-pass conversions, which S8.1 reports only as "
+            "being under 5 %%."
+            % (re_["ratios"]["delta"], fh_ ** (1 / 3.0), fh_, fl_ ** (1 / 3.0), fl_, fu_ ** (1 / 3.0), fu_,
+               re_["ratios"]["dP"], fh_ ** 2, fu_, fl_))
+
+
 add("7. Reactors", "Illustrative channel pair (S8.1)",
     "1 mm / 5 cm / 5 cm/s; 250 um / 2.5 cm / 10 cm/s", "-", "assumption",
     "the declared pair of generic laminar parallel-plate channels behind the S8.1 illustration of "
     "what thinning a gap costs (residence time, conversion per pass, pressure drop). These were the "
     "model's two flow archetypes until 2026-09-07 and are kept for that illustration alone; no "
     "archetype column is computed from them", "declared illustration", "",
-    "A declared geometry that reaches no reported ceiling, count or median. The S8.1 quantities it "
-    "feeds are reported as ratios between the two channels, and those ratios are set by the gap "
-    "ratio alone: delta scales as h^(2/3) L^(1/3) u^(-1/3) in the entrance regime, so the 4x gap "
-    "step gives a 2.5x film step at any common length and velocity, and the pressure-drop ratio "
-    "1/h^2 is 16x whatever the velocity. Changing the pair changes the absolute per-pass "
-    "conversions, which S8.1 reports only as being under 5 %.")
+    _channel_pair_sentence())
 add("7. Reactors", "Eisenberg RCE: Sh = 0.0791 Re^0.70 Sc^0.356", "0.0791", "-", "measured",
-    "turbulent rotating-cylinder correlation, fitted by the limiting-current technique to the "
-    "ferri/ferrocyanide couple at nickel cylinders in alkaline aqueous solution",
+    "turbulent rotating-cylinder correlation, Eq. IX of the source, fitted to the mass-transfer data of five systems "
+    "-- three for benzoic acid dissolution and the electrolytic reduction of ferricyanide and oxidation of "
+    "ferrocyanide -- at rotating cylinders",
     "Eisenberg, Tobias & Wilke, J. Electrochem. Soc. 1954, 101, 306-320, DOI 10.1149/1.2781252",
-    "J. Electrochem. Soc. 1954, 101, 306-320",
-    "Extrapolation flagged, and its DIRECTION matters. Eisenberg, Tobias & Wilke 1954 state "
-    "their own calibration on p. 313, retrieved verbatim: 'a Schmidt number variation of "
-    "%d to %d and a Reynolds number range of 112.0-162,000'. Computed over the fifty rows "
-    ": Sc runs %.0f (min) / %.0f (median) / "
-    "%.0f (max), so %d of %d sit BELOW the fitted floor and only %d above the ceiling. The "
-    "extrapolation is therefore predominantly to LOW Sc -- aprotic organics are low-Sc "
-    "relative to aqueous ferricyanide, because their low viscosity raises D and lowers nu "
+    _SX["cal_locator"],
+    "Extrapolation flagged, and its DIRECTION matters. The source fits Eq. IX to five systems over Schmidt numbers "
+    "%d-%d (Fig. 10, p. 314) and gives the straight line for Reynolds numbers %d-%d (p. 312). Computed over the fifty "
+    "rows: Sc runs %.0f (min) / %.0f (median) / %.0f (max), so %d of %d sit BELOW the fitted floor, %d inside and only "
+    "%d above the ceiling. The extrapolation is therefore predominantly to LOW Sc -- aprotic organics are low-Sc "
+    "relative to the aqueous systems of the fit, because their low viscosity raises D and lowers nu "
     "together -- and Re runs %.0f-%.0f, inside the fitted range throughout. A sensitivity on "
     "a fitted correlation must preserve the fit where it was made: swapping the exponent "
     "alone leaves the coefficient 0.0791 attached to a curve that no longer reproduces the "
-    "calibration data, so it is not a bound. Re-anchored at the calibration centre, the "
-    "Sc^(1/3) asymptote moves per-row values by %.3f-%.3fx and the RCE median %.1f -> %.1f "
-    "mA cm-2, so on this axis the tabulated column is if anything an under-estimate rather "
-    "than an upper one, and no threshold count moves."
-    % (_SX["cal_window"][0], _SX["cal_window"][1], _SX["sc_min"], _SX["sc_median"],
-       _SX["sc_max"], _SX["n_below"], _SX["n_total"], _SX["n_above"], _SX["re_lo"],
+    "calibration data, so it is not a bound. The bound used instead is a second fitted "
+    "correlation validated in the direction this set extrapolates, that of Jang et al. (Sh = "
+    "0.204 Re^0.59 Sc^0.33, Sc > 100): it moves per-row values by %.3f-%.3fx, the RCE median "
+    "%.1f -> %.1f mA cm-2 and the RCE counts %d -> %d (>=25) and %d -> %d (>=50), and inverts the "
+    "RDE/RCE pair; the four-step ordering and both rotating archetypes above ANEC survive (S3.3)."
+    % (_SX["cal_window"][0], _SX["cal_window"][1], _SX["cal_re"][0], _SX["cal_re"][1], _SX["sc_min"], _SX["sc_median"],
+       _SX["sc_max"], _SX["n_below"], _SX["n_total"], _SX["n_inside"], _SX["n_above"], _SX["re_lo"],
        _SX["re_hi"], _SX["factor_lo"], _SX["factor_hi"], _SX["medians"]["rce"],
-       _SX["medians_alt"]["rce"]))
+       _SX["medians_alt"]["rce"], _SX["n25_rce"], _SX["n25_rce_alt"], _SX["n50_rce"], _SX["n50_rce_alt"]))
+assert _SX["medians_alt"]["rce"] > _SX["medians_alt"]["anec"] and _SX["medians_alt"]["rde"] > _SX["medians_alt"]["anec"], \
+    "the Eisenberg row says both rotating archetypes stay above ANEC under the Jang bound; they no longer do"
 ## RETIRED 2026-09-01: "delta (stirred batch): measured comparison". That row existed to
 ## keep a DECLARED 100 um honest by standing the measurement beside it. The measurement is
 ## now the adopted value of the row above, so keeping a second row for the same number left
@@ -2600,8 +3771,16 @@ add("7. Reactors", "Eisenberg RCE: Sh = 0.0791 Re^0.70 Sc^0.356", "0.0791", "-",
 ## caveat and the direction it errs in -- is carried in the adopted row.
 add("7. Reactors", "RCE operating point", "d 1.2 cm, 3000 rpm", "-", "assumption",
     "a declared laboratory operating point", "declared operating point", "",
-    "Sh ~ Re^0.70 with Re ~ omega d^2, so 1000-5000 rpm spans about 3x in k_m. The rotating "
-    "cylinder remains the highest rung across that range.")
+    "Swept over %.0f-%.0f rpm (Table S8). Sh ~ Re^0.70 with Re ~ omega d^2, so k_m runs x%.2f to x%.2f about the "
+    "3000 rpm point (%.1fx end to end), and the rotating-cylinder column gives a median of %.1f-%.1f mA cm-2 about %.1f, "
+    "%d-%d of 50 clearing 25 mA cm-2 and %d-%d clearing 50. At the low end that median falls below the microfluidic "
+    "(%.1f) and RDE (%.1f) medians, so the rotating cylinder is the highest rung only at the declared operating point. "
+    "Its two threshold counts are therefore conditional on the declared rotation rate, at which the main text quotes them. "
+    "Across the whole band it stays above ANEC (upper edge %.1f mA cm-2), which is what the four-step ordering needs."
+    % (_RCE_BAND[0], _RCE_BAND[1], (_RCE_BAND[0] / 3000.0) ** 0.70, (_RCE_BAND[1] / 3000.0) ** 0.70,
+       (_RCE_BAND[1] / _RCE_BAND[0]) ** 0.70, _ROT_M("rce")["lower"], _ROT_M("rce")["upper"], _ROT_M("rce")["value"],
+       _ROT_C("rce", 25)["lower"], _ROT_C("rce", 25)["upper"], _ROT_C("rce", 50)["lower"], _ROT_C("rce", 50)["upper"],
+       _ROT_M("micro")["value"], _ROT_M("rde")["value"], _ANEC_HI))
 add("7. Reactors", "Thresholds 25 / 50 mA cm-2", "25; 50", "mA cm-2", "measured",
     "industry-survey bins, n = 14 companies reporting scale-up current density: 10 below 25, three "
     "between 25 and 50, one above 50 mA cm-2. Already at state A before this pass and preserved "
@@ -2619,33 +3798,101 @@ add("8. Voltage stack", "E0 (thermodynamic + kinetic floor)", "2.0", "V", "assum
     "so it moves no boil-off ceiling and no §S6 margin. Tested 1.5-3.0 V: E_cell shifts by the "
     "same amount, and the ohmic term dominates E_cell above ~10 mA cm-2 in every solvent in the "
     "set.")
+# chemistry audit pass 11: the alpha sensitivity is computed at each architecture's own current (it had claimed
+# "under 60 mV against ohmic terms of 1-50 V", false at the thin-cell and stack currents).
+import numpy as _np_t
+_ash = lambda i: _np_t.arcsinh(i / (2 * _TM.I0))
+_dA = lambda i: 1000 * 2 * (_TM.RT_F / 0.3 - 2 * _TM.RT_F) * _ash(i)          # alpha = 0.3 on both electrodes, mV
+_dI = lambda i: 1000 * 2 * (2 * _TM.RT_F) * (_np_t.arcsinh(i / 0.02) - _ash(i))  # i0 = 0.01 against 1 mA cm-2, mV
+_cmI = [r[4] for r in _TM.REACTORS if r[1] >= 0.01]; _thI = [r[4] for r in _TM.REACTORS if r[1] < 0.01]
+assert all(_dA(i) <= _dI(i) * (1 + 1e-6) for i in _cmI + _thI)
+_TAFEL_SENS = ("The only free choice is alpha = 1/2. Taking alpha = 0.3 on both electrodes, the end of [0.3, 0.7] "
+               "that raises the term, adds %.0f-%.0f mV at the centimetre-gap cells' operating currents and %.0f-%.0f mV "
+               "at the microfluidic chip and the stack; at every one of those currents that is no more than the i0 "
+               "sweep of the next row adds, and that row states the consequence."
+               % (min(map(_dA, _cmI)), max(map(_dA, _cmI)), min(map(_dA, _thI)), max(map(_dA, _thI))))
 add("8. Voltage stack", "Tafel slope b = 2RT/F per electrode", "0.0514", "V", "derived",
     "2RT/F at 298.15 K with R and F from category 1; symmetric Butler-Volmer with alpha = 1/2, "
     "inverted through asinh and applied to both electrodes", BF,
     "ch. 3 (Butler-Volmer and Tafel forms)",
-    "The only free choice is alpha = 1/2; alpha in [0.3, 0.7] moves the activation term by under "
-    "60 mV against ohmic terms of 1-50 V in these cells.")
+    _TAFEL_SENS)
+def _nice(arch):
+    return (arch.replace("RDE 1600 rpm", "rotating disc").replace("rotating cyl. 3000 rpm", "rotating cylinder")
+            .replace("microfluidic 25 um", "25 um microfluidic cell").replace("zero-gap PEM stack", "zero-gap stack"))
+
+
+def _tm_sweep(attr, values, fn):
+    """Evaluate fn() with thermal_model.<attr> set to each value in turn, restoring it afterwards."""
+    keep = getattr(_TM, attr)
+    out = []
+    try:
+        for v in values:
+            setattr(_TM, attr, v)
+            out.append(fn())
+    finally:
+        setattr(_TM, attr, keep)
+    return out
+
+
+def _all_ceilings():
+    return {(r[0], sl): _th_ceiling(k, tb, r) for r in _TH_RX for sl, k, tb in _TH_SOL}
+
+
+def _i0_sentence():
+    """The i0 sweep of the thermal model over 0.01-10 mA cm-2, every architecture x electrolyte, generated (chemistry
+    audit, pass 6: the typed version quoted MeCN's thin-gap ranges as the whole set's and centimetre-gap moves of
+    'at most 3 pct' where aqueous NaOH moves -7.1/+3.8)."""
+    grid = [10 ** (-2 + 3 * j / 30.0) for j in range(31)]
+    base = _all_ceilings()
+    sw = _tm_sweep("I0", grid, _all_ceilings)
+    chg = {key: (min(s[key] for s in sw) / base[key] - 1, max(s[key] for s in sw) / base[key] - 1) for key in base}
+    mrg = {key: (min(s[key] for s in sw) / r[4], max(s[key] for s in sw) / r[4])
+           for r in _TH_RX for key in base if key[0] == r[0]}
+    flips = [key for key in base if (mrg[key][0] < 1.0) != (mrg[key][1] < 1.0)]
+    cm = [r[0] for r in _TH_OPEN]
+    ohm = []
+    for r in _TH_OPEN:
+        for sl, k, tb in _TH_SOL:
+            i = base[(r[0], sl)]
+            ohm.append((i * 10.0 * r[1] / k) * i * 10.0 * 1e-4 / _TM.q_Wcm2(i, k, r[1]))
+    mic, stk = _TH_MIC[0], _TH_STACK[0]
+    def rng(arch, sl):
+        return "%+.0f/%+.0f" % (100 * chg[(arch, sl)][0], 100 * chg[(arch, sl)][1])
+    cm_sol = ", ".join("%s %+.1f/%+.1f" % (sl, 100 * min(chg[(a, sl)][0] for a in cm), 100 * max(chg[(a, sl)][1] for a in cm))
+                       for sl, _k, _tb in _TH_SOL)
+    txt = ("Treating i0 as negligible is safe only where ohmic heat dominates. That holds in the centimetre-gap cells and "
+           "fails in the thin ones, and the split is sharp: the activation term is gap-independent, so it matters exactly "
+           "where the ohmic term has been removed. "
+           "Swept %.2g-%.0f mA cm-2 across all %s §S6 electrolytes, every boil-off ceiling of the %s centimetre-gap "
+           "architectures (%s) moves by at most %s pct (%s), because %.0f-%.0f pct of their heat at the ceiling is ohmic. "
+           "The %s moves by %s pct and the %s by %s pct (%s respectively), because in a thin gap the activation term is "
+           "most of q. "
+           % (grid[0], grid[-1], _numword(len(_TH_SOL)), _numword(len(cm)), ", ".join(_nice(a) for a in cm),
+              "%.1f" % (100 * max(max(abs(chg[(a, sl)][0]), abs(chg[(a, sl)][1])) for a in cm for sl, _k, _tb in _TH_SOL)),
+              cm_sol, 100 * min(ohm), 100 * max(ohm),
+              _nice(mic), ", ".join(rng(mic, sl) for sl, _k, _tb in _TH_SOL), _nice(stk),
+              ", ".join(rng(stk, sl) for sl, _k, _tb in _TH_SOL), ", ".join(sl for sl, _k, _tb in _TH_SOL)))
+    if flips:
+        txt += ("Across that range %d verdicts reverse: %s." % (len(flips), "; ".join("%s / %s" % f for f in flips)))
+        return txt
+    txt += ("Every verdict holds across the range. At the stack all %s electrolytes fail (margins %.2f-%.2fx); at the "
+            "microfluidic cell all %s clear (%s), judged against its median transport ceiling of %.1f mA cm-2."
+            % (_numword(len(_TH_SOL)), min(mrg[(stk, sl)][0] for sl, _k, _tb in _TH_SOL), max(mrg[(stk, sl)][1] for sl, _k, _tb in _TH_SOL),
+               _numword(len(_TH_SOL)), ", ".join("%s %.2f-%.2fx" % (sl, *mrg[(mic, sl)]) for sl, _k, _tb in _TH_SOL),
+               _TH_MIC[4]))
+    return txt
+
+
 add("8. Voltage stack", "i0 (exchange current density)", "1.0", "mA cm-2", "assumption",
     "an illustrative symmetric value for both electrodes; no measured i0 exists for these couples "
     "on these electrodes in these media", "declared modelling choice", "",
-    "Treating i0 as negligible holds only where ohmic heat dominates, which is not "
-    "everywhere, and the split is sharp: the activation term is gap-INDEPENDENT, so it matters "
-    "exactly where the ohmic "
-    "term has been removed. Swept 0.01-10 mA cm-2 across all four §S6 solvents: every "
-    "centimetre-gap architecture -- both batch cells, both flow cells and both rotating "
-    "electrodes -- moves by at most 3 pct, because 85-98 pct of its heat is ohmic; the 25 um "
-    "microfluidic moves by -35/+32 pct and the zero-gap stack by -42/+47 pct, because in a "
-    "thin gap the activation term is most of q. No stated conclusion flips inside "
-    "0.01-10 mA cm-2: at the stack all four solvents still fail (margins 0.04-0.23x); at the "
-    "microfluidic all four still clear (THF 2.60-4.26x, MeCN 4.02-8.09x, DMF 7.49-11.93x, "
-    "aqueous NaOH 5.40-11.83x). i0 can matter only where activation heat is comparable to ohmic "
-    "heat, and no verdict reported in this section sits in that regime.")
+    _i0_sentence())
 
 # -- 9. Thermal model + the §S6 architecture constants ---------------------
 # STRUCTURAL RESULT OF THE THERMAL SOURCING PASS, stated once and reused: because
 # U' = [(1/h_int + 1/h_ext)^-1] * sigma with h_ext ~ 13 W m-2 K-1, the EXTERNAL film is 87-99.7 pct
 # of the series resistance. Sweeping h_int from 50 to infinity -- a range above 2e4, spanning the
-# entire Incropera Table 1.1 liquid band -- moves every boil-off ceiling by -5/+6 pct. The genuinely
+# entire Incropera Table 1.1 liquid band -- moves the beaker ceilings by about -6/+7 pct and the thin cells' by up to -19 pct. The genuinely
 # load-bearing thermal parameters are, in order: sigma > i_design > h_ext > everything else.
 _HINT_SWEEP = (50., 100., 800., 2000., 1.0e12)
 
@@ -2656,13 +3903,64 @@ def _hint_series(reactor, sl="DMF"):
                                           _TM.U_passive(reactor[2], h)) for h in _HINT_SWEEP)
 
 
-S_HINT = ("h_int is not load-bearing anywhere. Swept 50 -> infinity (a range above 2e4, spanning "
-          "the whole Incropera Table 1.1 liquid band), every boil-off ceiling moves by -5/+6 pct: "
+# chemistry audit pass 7: the sweep's effect differs by cell (beaker -6/+7 pct, thin cells -15 to -19 pct), so it is
+# computed per architecture group rather than stated once
+# 2026-10-06 (liquid-cooling audit J1): h_int and the coolant temperature sit inside the liquid-cooling verdicts too,
+# so the h_int and T_amb rows must report those verdicts, not only the boil-off ones
+_LQ_THF = [r for r in _TM.SOLVENTS if r[0] == "THF"][0]
+_LQ_CELLS = [(lab, [r for r in _TM.REACTORS if key in r[0]][0]) for lab, key in
+             (("rotating disc", "RDE"), ("rotating cylinder", "cyl"), ("stack", "stack"))]
+def _lq_ok(r, h=None, tc=None):
+    """True when THF's duty is within the declared construction range of the cell's own cooler (<= U_liquid hi)."""
+    rr = r if h is None else (r[0], r[1], r[2], h, r[4])
+    tc = _TM.TAMB if tc is None else tc
+    return _TM.q_Wcm2(r[4], _LQ_THF[2], r[1]) / (_LQ_THF[3] - tc) <= _TM.U_liquid(rr)[1]
+def _lq_bisect(f, lo, hi):
+    assert f(lo) != f(hi)
+    flo = f(lo)
+    for _ in range(100):
+        mid = 0.5 * (lo + hi)
+        lo, hi = (mid, hi) if f(mid) == flo else (lo, mid)
+    return 0.5 * (lo + hi)
+_LQ_HMIN = [(lab, r, _lq_bisect(lambda h: _lq_ok(r, h), 10.0, 1.0e5)) for lab, r in _LQ_CELLS]
+_LQ_TMAX = [(lab, r, _lq_bisect(lambda t: _lq_ok(r, tc=t), -20.0, _LQ_THF[3] - 1.0)) for lab, r in _LQ_CELLS]
+assert all(_lq_ok(r) for lab, r in _LQ_CELLS)
+_HINT_OF = {r[0].replace("\n", " ").replace("$\\mu$m", "um"): r[3] for r in _TM.REACTORS}
+def _lq_hint_txt(hv):
+    """The liquid-cooling clause for the h_int row whose declared value is hv, from Table S12's h_int axis."""
+    ax = [a for a in _TAX["axes"] if a["key"] == "h_int"][0]
+    use = [(c["arch"], c["solvent"], x) for c in ax["cells"] if abs(_HINT_OF[c["arch"]] - hv) < 1e-9
+           for x, a, b in c["changes"] if {a, b} == {"liquid cooling", "beyond liquid cooling"}]
+    if not use:
+        return ""
+    cells = sorted({_ARCH_S(a) for a, _s, _x in use})
+    return (" The S6.2 liquid-cooling verdicts of the %s run through this film and depend on it, because it sits in series "
+            "inside the cooler: each can be met within the declared construction range only for h_int above %s, against the "
+            "declared %.0f W m-2 K-1, so those verdicts are conditional on this film as well."
+            % (" and the ".join(cells), "; ".join("%.0f W m-2 K-1 (%s, %s)" % (x, _ARCH_S(a), sl) for a, sl, x in use), hv))
+def _hint_group(names):
+    v = []
+    for r in _TH_RX:
+        if r[0].replace("\n", " ") not in names:
+            continue
+        for sl, k, tb in _TH_SOL:
+            ref = _TM.i_boil(k, r[1], tb, _TM.U_passive(r[2], r[3]))
+            v += [100 * (_TM.i_boil(k, r[1], tb, _TM.U_passive(r[2], h)) / ref - 1) for h in (50., 1.0e12)]
+    assert v, names
+    return "%+.0f/%+.1f pct" % (min(v), max(v))
+_HINT_FLIPS = [(r[0].replace("\n", " "), sl) for r in _TH_RX for sl, k, tb in _TH_SOL for h in (50., 1.0e12)
+               if (_TM.i_boil(k, r[1], tb, _TM.U_passive(r[2], h)) >= r[4]) != (_TM.i_boil(k, r[1], tb, _TM.U_passive(r[2], r[3])) >= r[4])]
+S_HINT = ("h_int decides no boil-off verdict. Swept 50 -> infinity (a range above 2e4, spanning "
+          "the whole Incropera Table 1.1 liquid band), the boil-off ceilings move by %s in the unstirred beaker, %s in the "
+          "stirred, recirculating and rotating cells and %s in the microfluidic chip and the stack: "
           "the dimethylformamide ceiling runs %s mA cm-2 at h_int = 50 / 100 / 800 / 2000 / "
           "infinity in the %s, and %s mA cm-2 in the %s, which is the thinnest-gap architecture "
-          "and the one where a developing-flow correction to h_int would be largest. No conclusion "
-          "in S6.1 or S6.2 is sensitive to any of the four h_int values."
-          % (_hint_series(_TH_RX[0]), _TH_RX[0][0], _hint_series(_TH_MIC), _TH_MIC[0]))
+          "and the one where a developing-flow correction to h_int would be largest. %s"
+          % (_hint_group(["unstirred batch"]), _hint_group(["stirred batch", "recirculating flow", "RDE 1600 rpm", "rotating cyl. 3000 rpm"]),
+             _hint_group(["microfluidic 25 um", "zero-gap PEM stack"]),
+             _hint_series(_TH_RX[0]), _TH_RX[0][0], _hint_series(_TH_MIC), _TH_MIC[0],
+             "No boil-off verdict of S6.1 reverses anywhere in the sweep." if not _HINT_FLIPS else
+             "The sweep reverses " + "; ".join("%s in the %s" % (b, a) for a, b in _HINT_FLIPS) + "."))
 # The four `<solvent>: Tb` rows predate the `T_boil: <solvent>` rows the thermal model actually
 # reads, and Table S7i was printing two boiling points for the same solvent. Nothing is deleted --
 # they are marked display-only, which is this registry's own mechanism for a row that feeds no
@@ -2720,73 +4018,142 @@ add("9. Thermal model", "Cell volume / electrode area", "100 mL / 10 cm2", "-", 
     "Swept 50 / 100 / 500 / 1000 mL: A_ext scales as V^(2/3) and so does sigma, so the "
     "dimethylformamide passive ceiling runs %s mA cm-2, a %.2fx span. The batch verdict does not "
     "turn on the vessel: tetrahydrofuran's ceiling runs %s mA cm-2 over the same sweep against an "
-    "unstirred transport ceiling of %.1f mA cm-2, so transport binds before heat at every volume. "
-    "No conclusion flips."
+    "unstirred transport ceiling of %.1f mA cm-2, so transport binds before heat at every volume, and no batch or "
+    "recirculating verdict turns on the vessel. Both rotating cells inherit the beaker's sigma, though, which a 50, 500 "
+    "and 1000 mL charge sets at %.2fx, %.2fx and %.2fx of its 100 mL value, and their verdicts do move; every change of "
+    "class, with the charge at which it occurs, is listed in Table S12. "
     % (" / ".join("%.0f" % _th_vol("DMF", V) for V in (50, 100, 500, 1000)),
        _th_vol("DMF", 1000) / _th_vol("DMF", 50),
-       " / ".join("%.0f" % _th_vol("THF", V) for V in (50, 100, 500, 1000)), _TH_RX[0][4]))
+       " / ".join("%.0f" % _th_vol("THF", V) for V in (50, 100, 500, 1000)), _TH_RX[0][4],
+       *[_TAX["volume"]["sigma"][v] / _TAX["volume"]["sigma"]["100"] for v in ("50", "500", "1000")])
+    + "Those verdicts are therefore conditional on the declared 100 mL charge as well as on sigma.")
+_VS = {d: _vessel_sigma(d) for d in (0.04, 0.06)}
+_VS_BEAK = _TH_RX[0]
+_VS_CEIL = {sl: {d: _th_ceiling(k, tb, (_VS_BEAK[0], _VS_BEAK[1], _VS[d], _VS_BEAK[3], _VS_BEAK[4])) / _th_ceiling(k, tb, _VS_BEAK) - 1
+                 for d in _VS} for sl, k, tb in _TH_SOL}
+_VS_DMF = [r for r in _TH_SOL if r[0] == "DMF"][0]
 add("9. Thermal model", "Vessel external area", "%.5f" % _TM.A_EXT_BEAKER, "m2", "derived",
-    "DERIVED from the declared archetype, 2026-09-13. The tabled 0.0125 m2 was the external area "
-    "of a 5 cm diameter by 8 cm cylinder -- which encloses 157 mL, not the 100 mL this archetype "
-    "declares -- so it credited about 3 cm of dry headspace wall as rejecting surface. The area "
-    "that rejects heat from a 100 mL charge in a 5 cm vessel is the wetted wall plus the base, and "
-    "it is a consequence of the declared charge and diameter rather than a free parameter: fill "
-    "height = 0.1 L / (pi x 0.025^2) = %.2f cm, A = pi x 0.05 x %.4f + pi x 0.025^2 = %.5f + "
-    "%.5f = %.5f m2. Computed in figs/thermal_model.py from the declared archetype so the "
-    "construction cannot drift from it"
+    "DERIVED from the declared archetype: the area that rejects heat from a 100 mL charge in a 5 cm vessel is the "
+    "wetted wall plus the base, a consequence of the declared charge and diameter rather than a free parameter: fill "
+    "height = 0.1 L / (pi x 0.025^2) = %.2f cm, A = pi x 0.05 x %.4f + pi x 0.025^2 = %.5f + %.5f = %.5f m2. Computed in "
+    "figs/thermal_model.py from the declared archetype so the construction cannot drift from it"
     % (100*_FILL_M, _FILL_M, _math.pi*0.05*_FILL_M, _math.pi*0.025**2, _TM.A_EXT_BEAKER),
     "elementary geometry of the declared vessel (wetted wall + base of a right cylinder)", "",
-    "The alternative is 0.0125 m2, the external area of the full 5 x 8 cm cylinder including its "
-    "dry headspace wall. Working from the wetted area instead lowers every ceiling computed on "
-    "this row by 10.8-11.4 pct "
-    "(THF 29.5 -> 26.3, MeCN 87.8 -> 78.2, DMF 88.8 -> 79.2, aqueous NaOH 282.4 -> 250.2 "
-    "mA cm-2) and changes none of the 20 architecture-solvent verdicts that rest on it. The move "
-    "is conservative in the sense that matters here: less rejecting surface, lower ceilings, the "
-    "boiling problem stated as slightly worse. The residual exposure is the declared 5 cm "
-    "diameter, which sets how the same 100 mL is distributed between wall and base; a 4 cm vessel "
-    "gives 0.01115 m2 and a 6 cm vessel 0.00920 m2, a span of 1.21x.")
+    "The residual exposure is the declared 5 cm diameter, which sets how the same 100 mL is distributed between wall "
+    "and base. The same construction gives %.5f m2 for a 4 cm vessel and %.5f m2 for a 6 cm one (sigma %.2f and %.2f, a "
+    "span of %.2fx), and the unstirred-beaker ceilings move by %+.1f to %+.1f pct at 4 cm and %+.1f to %+.1f pct at 6 cm "
+    "across the four electrolytes (DMF %.1f and %.1f against %.1f mA cm-2). No verdict changes class."
+    % (_VS[0.04] * _TM.A_ELEC_M2, _VS[0.06] * _TM.A_ELEC_M2, _VS[0.04], _VS[0.06], _VS[0.04] / _VS[0.06],
+       100 * min(v[0.04] for v in _VS_CEIL.values()), 100 * max(v[0.04] for v in _VS_CEIL.values()),
+       100 * min(v[0.06] for v in _VS_CEIL.values()), 100 * max(v[0.06] for v in _VS_CEIL.values()),
+       _th_ceiling(_VS_DMF[1], _VS_DMF[2], _VS_BEAK) * (1 + _VS_CEIL["DMF"][0.04]),
+       _th_ceiling(_VS_DMF[1], _VS_DMF[2], _VS_BEAK) * (1 + _VS_CEIL["DMF"][0.06]),
+       _th_ceiling(_VS_DMF[1], _VS_DMF[2], _VS_BEAK)))
+# Air at 1 atm, Incropera 6th ed. Table A.4, p. 941 (verified on the page): T K -> (nu 1e-6 m2/s, k 1e-3 W/m K,
+# alpha 1e-6 m2/s, Pr). The plate height is the wetted height of the declared 100 mL / 5 cm vessel
+# (thermal_model._FILL_M), the same surface A_EXT_BEAKER credits (chemistry audit, pass 6: the row used an 8 cm plate).
+_AIR_A4 = {300.0: (15.89, 26.3, 22.5, 0.707), 350.0: (20.92, 30.0, 29.9, 0.700), 400.0: (26.41, 33.8, 38.3, 0.690)}
+
+
+def _h_nat(ts_c, L=None):
+    """Churchill-Chu laminar vertical plate, film properties interpolated linearly in Table A.4."""
+    L = _TM._FILL_M if L is None else L
+    ts, tinf = ts_c + 273.15, 298.15
+    tf = 0.5 * (ts + tinf)
+    lo = max(t for t in _AIR_A4 if t <= tf)
+    hi = min(t for t in _AIR_A4 if t >= tf) if tf < max(_AIR_A4) else lo
+    f = 0.0 if hi == lo else (tf - lo) / (hi - lo)
+    nu, k, al, pr = (a + f * (b - a) for a, b in zip(_AIR_A4[lo], _AIR_A4[hi]))
+    ra = 9.81 * (1.0 / tf) * (ts - tinf) * L ** 3 / (nu * 1e-6 * al * 1e-6)
+    nul = 0.68 + 0.670 * ra ** 0.25 / (1.0 + (0.492 / pr) ** (9.0 / 16.0)) ** (4.0 / 9.0)
+    return {"Ra": ra, "Nu": nul, "h": nul * k * 1e-3 / L, "Gr": ra / pr}
+
+
+_HN = {t: _h_nat(t) for t in (65.0, 100.0, 152.8)}
+assert _TM.VESSEL_ID_M / _TM._FILL_M < 35.0 / _HN[65.0]["Gr"] ** 0.25, "the vertical-cylinder criterion now holds; reword"
+assert round(_HN[65.0]["h"]) == 7, "the derived h at 65 C no longer rounds to the carried 7; reword the h_nat row"
 add("9. Thermal model", "h natural convection (air)", "7", "W m-2 K-1", "derived",
     "RE-derived. the inherited citation (Incropera Table 1.1) contains only the range 2-25 W m-2 "
     "K-1 for free convection in gases and cannot support the value 7. Computed instead from the "
     "laminar vertical-plate correlation Nu_L = 0.68 + 0.670 Ra_L^(1/4) / "
-    "[1 + (0.492/Pr)^(9/16)]^(4/9), valid for Ra_L below about 1e9, with L = 0.08 m and "
-    "T_inf = 298.15 K: Ra_L = 1.42e6, Nu = 18.4, h = 6.4 W m-2 K-1 at Ts = 65 C, 7.3 at 100 C and "
-    "8.2 at 153 C",
+    "[1 + (0.492/Pr)^(9/16)]^(4/9), valid for Ra_L below about 1e9, with L = %.4f m (the wetted height of the "
+    "declared 100 mL charge in the 5 cm vessel) and T_inf = 298.15 K: Ra_L = %.3g, Nu = %.1f, h = %.1f W m-2 K-1 "
+    "at Ts = 65 C, %.1f at 100 C and %.1f at 152.8 C"
+    % (_TM._FILL_M, _HN[65.0]["Ra"], _HN[65.0]["Nu"], _HN[65.0]["h"], _HN[100.0]["h"], _HN[152.8]["h"]),
     "Churchill & Chu, Int. J. Heat Mass Transfer 1975, 18, 1323-1329; restated as " + INCROP +
     ", Eq. 9.26-9.27, with air properties from " + INCROP + ", Table A.4",
     "Int. J. Heat Mass Transfer 1975, 18, 1323-1329; Incropera 6th ed., Eq. 9.26-9.27 and Table A.4",
-    "The vertical-cylinder criterion D/L >= 35/Gr_L^(1/4) gives 0.625 < 0.93 and is not satisfied, "
-    "so curvature raises Nu and the flat-plate value is a conservative underestimate.")
+    "Evaluated over the wetted height of the declared vessel (L = %.2f cm), the correlation gives h = %.1f W m-2 K-1 at "
+    "Ts = 65 C, %.1f at 100 C and %.1f at 152.8 C; the carried 7 is the 65 C value. The vertical-cylinder criterion "
+    "D/L >= 35/Gr_L^(1/4) gives %.2f against %.2f at 65 C. The criterion fails, so curvature raises Nu and the "
+    "flat-plate value is a conservative underestimate."
+    % (100 * _TM._FILL_M, _HN[65.0]["h"], _HN[100.0]["h"], _HN[152.8]["h"], _TM.VESSEL_ID_M / _TM._FILL_M,
+       35.0 / _HN[65.0]["Gr"] ** 0.25))
 add("9. Thermal model", "h radiation (linearized)", "6-8", "W m-2 K-1", "derived",
     "h_r = eps sigma_SB (Ts + Tsur)(Ts^2 + Tsur^2) with eps = 0.9 and Tsur = 298.15 K gives 6.6 at "
     "65 C, 7.2 at 82 C, 7.8 at 100 C and 10.0 at 153 C. Radiation is comparable to convection over "
     "this range, so omitting it would overstate the boiling problem", INCROP, "Eq. 1.9",
     "See the emissivity row for the residual exposure.")
+_EMIS_H = {e: _TM.H_EXT - _h_rad(0.9) + _h_rad(e) for e in (0.7, 0.95)}
+_EMIS_C = {sl: {e: _th_ceiling_h(k, tb, _VS_BEAK[1], _VS_BEAK[2], _VS_BEAK[3], _EMIS_H[e]) / _th_ceiling(k, tb, _VS_BEAK) - 1
+                for e in _EMIS_H} for sl, k, tb in _TH_SOL}
+_EMIS_DMF = {e: _th_ceiling(_VS_DMF[1], _VS_DMF[2], _VS_BEAK) * (1 + _EMIS_C["DMF"][e]) for e in _EMIS_H}
+# "Nothing flips" is checked, not asserted: every architecture-solvent verdict at both emissivity edges, and every verdict of
+# the architectures that inherit the beaker sigma at both vessel diameters.
+for _e in _EMIS_H:
+    for _r in _TH_RX:
+        for _sl, _k, _tb in _TH_SOL:
+            assert (_th_ceiling_h(_k, _tb, _r[1], _r[2], _r[3], _EMIS_H[_e]) >= _r[4]) == (_th_ceiling(_k, _tb, _r) >= _r[4]), \
+                "an emissivity edge now reverses %s / %s; reword the emissivity row" % (_r[0], _sl)
+for _d in _VS:
+    for _r in _TH_RX:
+        if abs(_r[2] - _TM.SIGMA_BEAKER) < 1e-12:
+            _r2 = (_r[0], _r[1], _VS[_d], _r[3], _r[4])
+            for _sl, _k, _tb in _TH_SOL:
+                assert (_th_ceiling(_k, _tb, _r2) >= _r[4]) == (_th_ceiling(_k, _tb, _r) >= _r[4]), \
+                    "a vessel diameter edge now reverses %s / %s; reword the vessel-area row" % (_r[0], _sl)
 add("9. Thermal model", "Surface emissivity eps (borosilicate)", "0.9", "-", "assumption",
     "used in the radiation row. New row: previously unregistered and never stated. the Incropera "
     "Table A.11 glass entry was not located for it, and it is deliberately not cited",
     "-- (not page-verified)", "",
-    "Tested eps in [0.7, 0.95]: h_ext moves over 11.5-13.3 W m-2 K-1 and every beaker ceiling by "
-    "about +/-6 pct (DMF 80.3-85.8 mA cm-2). Nothing flips.")
-add("9. Thermal model", "H_EXT (external film: convection + radiation)", "13.0", "W m-2 K-1",
+    "Tested eps in [0.7, 0.95], re-solving the unstirred-beaker ceilings with the radiative part of the external film "
+    "coefficient scaled accordingly (h_r = eps sigma (Ts + Tsur)(Ts² + Tsur²), sigma the Stefan-Boltzmann constant, at Ts = 65 C): h_ext moves over %.2f-%.2f W m-2 K-1 and "
+    "the four ceilings by %+.1f to %+.1f pct (DMF %.1f-%.1f mA cm-2 against %.1f). Nothing flips."
+    % (_EMIS_H[0.7], _EMIS_H[0.95], 100 * min(v[0.7] for v in _EMIS_C.values()), 100 * max(v[0.95] for v in _EMIS_C.values()),
+       _EMIS_DMF[0.7], _EMIS_DMF[0.95], _th_ceiling(_VS_DMF[1], _VS_DMF[2], _VS_BEAK)))
+# chemistry audit pass 7: the sum is evaluated at the declared vessel's wetted height, as the two addend rows are (it had been
+# summed over a retired 8 cm plate, 6.36 + 6.60 = 12.96); the temperature series and the ceiling shifts are computed
+_HX_T = [(t, _TM.h_ext_at(t)) for t in (66.0, 81.6, 100.0, 152.8)]
+_HX = {sl: _th_ceiling_h(k, tb, _VS_BEAK[1], _VS_BEAK[2], _VS_BEAK[3], _TM.h_ext_at(tb)) / _th_ceiling(k, tb, _VS_BEAK) - 1
+       for sl, k, tb in _TH_SOL}
+_HX_FLIPS = [(r[0].replace("\n", " "), sl) for r in _TH_RX for sl, k, tb in _TH_SOL
+             if (_th_ceiling_h(k, tb, r[1], r[2], r[3], _TM.h_ext_at(tb)) >= r[4]) != (_th_ceiling(k, tb, r) >= r[4])]
+add("9. Thermal model", "H_EXT (external film: convection + radiation)", "%.1f" % _TM.H_EXT, "W m-2 K-1",
     "derived",
-    "the sum of the two rows above evaluated at Ts = 65 C, eps = 0.9, L = 0.08 m and T_amb = 25 C: "
-    "6.36 + 6.60 = 12.96, i.e. 13.0. New row: this sum is the constant make_figK.py actually uses "
-    "(H_EXT) and it had no registry row -- only its two addends did",
+    "the sum of the two rows above evaluated at Ts = 65 C, eps = 0.9, L = %.4f m (the wetted height of the declared vessel) "
+    "and T_amb = 25 C: %.2f + %.2f = %.2f" % (_TM._FILL_M, _TM.h_nat(65.0), _TM.h_rad(65.0), _TM.H_EXT),
     "rows 'h natural convection (air)' and 'h radiation (linearized)' of this registry", "",
-    "Held temperature-independent in the code while the real h_ext runs 13.0 (66 C) -> 14.0 (82 C) "
-    "-> 15.1 (100 C) -> 18.2 (153 C), so rejection at the DMF boiling point is understated by about "
-    "40 pct. Resolving h_ext(T_b) moves ceilings by THF -0.1 pct, MeCN +3.5 pct, DMF +15.7 pct and "
-    "aq. NaOH +7.3 pct; nothing flips. Note that this correction and the vessel-area correction "
-    "nearly cancel for DMF (88.8 -> 91.8, i.e. +3 pct).")
-add("9. Thermal model", "UA still air (incl. radiation)", "0.1625", "W K-1", "derived",
-    "corrected value. UA = H_EXT x A_ext = 13.0 W m-2 K-1 x 0.0125 m2 = 0.1625 W K-1. The inherited "
-    "0.20 W K-1 was not reproducible from its own stated inputs (it implies h ~ 16 W m-2 K-1) and "
-    "was the row through which the reverse-fitted 0.02 W cm-2 K-1 still-air coefficient entered the "
-    "analysis", "rows 'H_EXT' and 'Vessel external area' of this registry", "",
-    "With the wetted-area sensitivity (0.00996 m2) UA falls further to 0.129 W K-1. UA sets the "
-    "transient tau = m cp / UA (22 min for a 100 mL DMF beaker) and, through U' = UA/A_elec, the "
-    "steady state.")
+    "Held temperature-independent in the code while the real h_ext runs %s, so rejection near the higher boiling points is "
+    "understated. Resolving h_ext at each solvent's boiling point moves the unstirred-beaker ceilings by %s; %s."
+    % (" -> ".join("%.1f (%.0f C)" % (h, t) for t, h in _HX_T),
+       ", ".join("%s %+.1f pct" % (sl, 100 * v) for sl, v in _HX.items()),
+       "no architecture-solvent verdict reverses" if not _HX_FLIPS else
+       "the verdict reverses for " + "; ".join("%s in %s" % (b, a) for a, b in _HX_FLIPS)))
+_UA = _TM.H_EXT * _TM.A_EXT_BEAKER
+_UA_SER = _TM.U_passive(_TM.SIGMA_BEAKER, 100.) * _TM.A_ELEC_M2 * 1e4          # W K-1, internal + external film
+_RHO_DMF = float(next(r for r in csv.DictReader(io.open(_os.path.join(_HERE_D, "solvents.csv"), encoding="utf8"))
+                      if r["solvent"] == "DMF")["rho"])
+_CP_DMF = float(next(r for r in R if r["parameter"] == "DMF: cp")["value"])
+_MCP_DMF = 100.0 * _RHO_DMF * _CP_DMF
+add("9. Thermal model", "UA still air (incl. radiation)", "%.4f" % _UA, "W K-1", "derived",
+    "UA = H_EXT x A_ext = %.1f W m-2 K-1 x %.5f m2 = %.4f W K-1: the external film (convection plus radiation) over "
+    "the derived wetted area of the 100 mL beaker" % (_TM.H_EXT, _TM.A_EXT_BEAKER, _UA),
+    "rows 'H_EXT' and 'Vessel external area' of this registry", "",
+    "UA is the external film alone. The passive coefficient the model uses puts the stagnant internal film "
+    "(h_int = 100 W m-2 K-1) in series with it, U' A_elec = %.4f W K-1, and that sets both the steady state and the "
+    "transient: tau = m cp / (U' A_elec) = %.0f min for a 100 mL DMF beaker (m cp = 100 mL x %.3f g mL-1 x %.2f J g-1 "
+    "K-1 = %.0f J K-1). Every input is a registry row, and the series film is the one Table S7i lists under h_int."
+    % (_UA_SER, _MCP_DMF / _UA_SER / 60.0, _RHO_DMF, _CP_DMF, _MCP_DMF))
 add("9. Thermal model", "sigma (unstirred 100 mL beaker)", "%.2f" % _TM.SIGMA_BEAKER, "-",
     "derived",
     "sigma = A_ext / A_elec = %.5f m2 / 1.0e-3 m2 = %.2f, computed in figs/thermal_model.py "
@@ -2799,8 +4166,10 @@ add("9. Thermal model", "sigma (unstirred 100 mL beaker)", "%.2f" % _TM.SIGMA_BE
     "sigma consistent with the declared vessel recovers 0.02"
     % (_TM.A_EXT_BEAKER, _TM.SIGMA_BEAKER, _TM.U_passive(_TM.SIGMA_BEAKER, 100.)),
     "elementary geometry of the declared vessel; see row 'Vessel external area'", "",
-    "Inherits the vessel-geometry exposure of that row: across the 4-6 cm diameter span sigma "
-    "runs 11.15-9.20 and the beaker ceilings move by about -8/+8 pct. Nothing flips.")
+    "Inherits the vessel-geometry exposure of that row: across the 4-6 cm diameter span sigma runs %.2f-%.2f and the "
+    "unstirred-beaker ceilings move by %+.1f to %+.1f pct. No verdict changes class."
+    % (_VS[0.04], _VS[0.06], 100 * min(min(v.values()) for v in _VS_CEIL.values()),
+       100 * max(max(v.values()) for v in _VS_CEIL.values())))
 add("9. Thermal model", "sigma (stirred 100 mL beaker)", "%.2f" % _TM.SIGMA_BEAKER, "-",
     "derived",
     "the same vessel as the unstirred beaker; stirring changes h_int, not the external area. "
@@ -2818,19 +4187,19 @@ add("9. Thermal model", "sigma (recirculating flow, RDE, rotating cylinder)",
     "thermal archetype needs the ohmic path, the heat-rejection area ratio and the internal film, "
     "and an exemplar that measures a boundary layer need state none of them. Watkins' supporting "
     "information gives the copper foil size and the flow rates but no electrode separation and no "
-    "electrode areas, and a rotating disc turns in a beaker, so these four take the registered "
+    "electrode areas, and a rotating disc turns in a beaker, so these three take the registered "
     "beaker geometry rather than a housing invented for them",
     "declared basis: the value of row 'sigma (unstirred 100 mL beaker)'", "", _TG_SENS_SIGMA)
 add("9. Thermal model", "sigma (microfluidic 25 um)", "7.0", "-", "assumption",
     "the single load-bearing sigma. No source exists. The declared chip that reproduces it is a "
     "5 x 3.5 cm footprint, 2.05 cm thick, with 1 cm plates: A_ext = 69.8 cm2 over 10 cm2 gives "
     "6.98; a thinner 1.1 cm chip gives 5.4. New row: previously unregistered",
-    "declared chip geometry, now bracketed by the exemplar's own drawings: Mo et al., Science "
+    "declared chip geometry, bracketed by the exemplar's own drawings: Mo et al., Science "
     "2020, 368, 1352-1357, Supplementary Materials Appendix A, Fig. S20A p. 58 (the aluminium "
     "holder for the small-scale cell, 3.00 x 3.00 inch, 'Unit: inch'), with the glassy carbon "
     "plates given as 50 x 50 x 3 mm on p. 3",
     "SM Appendix A, Fig. S20A p. 58; electrode plates p. 3",
-    "Corroborated by the exemplar, which is what this row lacked until 2026-09-13. The two outer "
+    "Corroborated by the exemplar's own drawings. The two outer "
     "aluminium faces alone give 2 x (3.00 in)^2 = 116 cm2, a lower bound on the rejecting area, "
     "and the channel area follows from V = Q tau at the 25 um gap with tau = 4 min (Table S1 "
     "entries 9-12) and the 5-15 uL min-1 the procedures use, i.e. 8-24 cm2. Together they bracket "
@@ -2840,8 +4209,9 @@ add("9. Thermal model", "sigma (microfluidic 25 um)", "7.0", "-", "assumption",
     "Tested sigma in [3.5, 21], half to three times the declared value. Judged against this "
     "cell's own median transport ceiling of %.1f mA cm-2, every electrolyte clears at every point "
     "in that range (%s), and the breaking points lie far below it -- the tightest is %.2fx the "
-    "declared 7.0. This row carries no verdict that turns inside its own band. It remains the one "
-    "surface-area ratio in the model with no source of any kind, which is why the band is stated."
+    "declared 7.0. This row carries no verdict that turns inside its own band. It is the one "
+    "surface-area ratio in the model that rests on a declared chip geometry, bracketed by the exemplar's drawings "
+    "rather than computed from them, which is why the band is stated."
     % (_TH_MIC[4],
        ", ".join("%s %.2f-%.2fx"
                  % (sl,
@@ -2850,16 +4220,46 @@ add("9. Thermal model", "sigma (microfluidic 25 um)", "7.0", "-", "assumption",
                  for sl, k, tb in _TH_SOL),
        max(r["sigma_flip_x"] for r in _TG["rows"]
            if r["arch"].startswith("micro") and r["sigma_flip_x"] is not None)))
+def _zg_gap_sentence(gaps=(50e-6, 200e-6)):
+    """The zero-gap stack's boil-off ceiling at gaps of 50 and 200 um against the declared 100 um, every electrolyte,
+    computed from thermal_model (chemistry audit, pass 6: the typed version said q ~ L, i.e. a 1.4x ceiling span either
+    way, which holds only where ohmic heat dominates; at this gap activation heat is most of q)."""
+    stk = _TH_STACK
+    out, act, fails = [], [], True
+    for sl, k, tb in _TH_SOL:
+        c0 = _th_ceiling(k, tb, stk)
+        cs = [_th_ceiling(k, tb, (stk[0], g, stk[2], stk[3], stk[4])) for g in gaps]
+        out.append("%s x%.3g / x%.3g" % (sl, cs[0] / c0, cs[1] / c0))
+        q = _TM.q_Wcm2(c0, k, stk[1])
+        act.append(1.0 - (c0 * 10.0 * stk[1] / k) * c0 * 10.0 * 1e-4 / q)
+        fails = fails and all(c / stk[4] < 1.0 for c in cs + [c0])
+    if not fails:
+        raise SystemExit("a stack electrolyte clears %.0f mA cm-2 inside the 50-200 um gap band; reword the gap row" % stk[4])
+    return ("Tested %.0f-%.0f um: the ceiling moves by %s (%.0f um / %.0f um against the declared %.0f um), far less "
+            "than q ~ L would give, because at this gap %.0f-%.0f pct of the heat at the ceiling is activation heat, "
+            "which the gap does not touch. All four still need active cooling at %.0f mA cm-2 across the range."
+            % (gaps[0] * 1e6, gaps[1] * 1e6, ", ".join(out), gaps[0] * 1e6, gaps[1] * 1e6, stk[1] * 1e6,
+               100 * min(act), 100 * max(act), stk[4]))
+
+
+# sigma of an interior stack cell = (perimeter x pitch) / A_elec, square 10 cm2 cell, pitch 4-12 mm
+_ZG_S = tuple(4.0 * _math.sqrt(_TM.A_ELEC_M2) * pitch / _TM.A_ELEC_M2 for pitch in (4e-3, 12e-3))
+def _ZG_M(sig):
+    r = (_TH_STACK[0], _TH_STACK[1], sig, _TH_STACK[3], _TH_STACK[4])
+    m = [_th_margin(k, tb, r) for _sl, k, tb in _TH_SOL]
+    return min(m), max(m)
+assert _ZG_M(_ZG_S[1])[1] < 1.0, "a stack electrolyte now clears inside the pitch band; reword the zero-gap sigma row"
 add("9. Thermal model", "sigma (zero-gap PEM stack)", "0.8", "-", "assumption",
     "no source exists. An interior cell of a stack rejects heat only through the plate edge, so "
     "sigma = (perimeter x cell pitch) / A_elec: a square 10 cm2 cell of perimeter 12.65 cm at 8.7 mm "
     "pitch gives 1.10 and a circular one 0.98. The 8.7 mm pitch itself came from a stack design "
     "that could not be opened (403) and is deliberately not cited. new row: previously unregistered",
     "declared stack geometry", "",
-    "Tested pitch 4-12 mm, i.e. sigma in [0.51, 1.52]: the zero-gap margin runs 0.11x-0.23x against "
-    "i_design = 1000 mA cm-2, so all four solvents fail at every point in the range and the "
-    "zero-gap conclusion is unconditional. Adopting sigma = 1.0 instead of 0.8 would move the "
-    "margins from 0.07-0.18x to 0.08-0.21x.")
+    "Tested pitch 4-12 mm, i.e. sigma in [%.2f, %.2f] for the square 10 cm2 cell: across that range the zero-gap margin "
+    "runs %.3fx-%.2fx against i_design = %.0f mA cm-2 over the four electrolytes (%.3fx-%.2fx at the declared %.1f, "
+    "%.3fx-%.2fx at 1.0), so all four fail at every point in the range and the zero-gap conclusion is unconditional."
+    % (_ZG_S[0], _ZG_S[1], _ZG_M(_ZG_S[0])[0], _ZG_M(_ZG_S[1])[1], _TH_STACK[4], _ZG_M(_TH_STACK[2])[0],
+       _ZG_M(_TH_STACK[2])[1], _TH_STACK[2], _ZG_M(1.0)[0], _ZG_M(1.0)[1]))
 for lab, hv in [("stagnant electrolyte", 100.), ("stirred electrolyte", 800.),
                 ("forced flow, centimetre gap", 2000.), ("forced flow, thin gap", 5000.)]:
     extra = ""
@@ -2879,7 +4279,7 @@ for lab, hv in [("stagnant electrolyte", 100.), ("stirred electrolyte", 800.),
         "a declared internal film coefficient, bounded but not fixed by the tabulated ranges (free "
         "convection in liquids 50-1000; forced convection in liquids 100-20 000 W m-2 K-1). New "
         "row: previously unregistered." + extra, cite,
-        "Table 1.1 (ranges only; the table does not license any single value)", S_HINT)
+        "Table 1.1 (ranges only; the table does not license any single value)", S_HINT + _lq_hint_txt(hv))
 # 2026-09-12: the four DECLARED archetype design currents are RETIRED. Each architecture is now
 # run at the median limiting current the published 50-reaction matrix computes for it, which is a
 # number Figure 5b already prints, so the transport figure and the thermal figure became one
@@ -2892,6 +4292,11 @@ _IDES_ROW = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__f
                           "julia", "tier0_ec_matrix.csv")
 with io.open(_IDES_ROW, encoding="utf8") as _fh:
     _IR = list(_csv.DictReader(_fh))
+with io.open(_os.path.join(_HERE_D, "reactions_50.csv"), encoding="utf8") as _fh:
+    _N_CT = {}
+    for _r in csv.DictReader(_fh):
+        _N_CT[_r["carrier_type"]] = _N_CT.get(_r["carrier_type"], 0) + 1
+assert set(_N_CT) == {"substrate", "catalyst", "mediator"} and sum(_N_CT.values()) == 50, _N_CT
 _IDES = {}
 for _k in ("natural", "stirred", "flow", "anec", "micro", "rde", "rce"):
     _v = sorted(float(_r[_k]) for _r in _IR)
@@ -2903,9 +4308,10 @@ add("9. Thermal model", "Transport ceiling, used as the thermal operating point 
     "published matrix rather than declared: unstirred, stirred, recirculating flow, "
     "microfluidic, rotating disc, rotating cylinder. This replaces four declared design currents "
     "(50, 50, 100 and 500 mA cm-2) whose only basis was practice quoted for a reactor class",
-    "the median over the solved 50-reaction transport matrix, per architecture (Stage 0 for the "
-    "direct and catalyst-carried entries, the EC-prime solver for the mediated ones; Tables S2 "
-    "and S5)", "",
+    "the median over the solved 50-reaction transport matrix, per architecture: the Stage-1 Nernst-Planck "
+    "solve with migration for the %d direct and %d k = 0 catalyst entries, and the EC' solver for the %d "
+    "mediated entries and the %d catalyst rows carried at a sourced rate constant (Tables S2 and S5)"
+    % (_N_CT["substrate"], _N_CT["catalyst"] - len(_DMA_K), _N_CT["mediator"], len(_DMA_K)), "",
     "Not an assumption: it moves only when the transport model moves, and the transport model's own "
     "sensitivities bound it. IT IS NOT A DESIGN CURRENT, and the distinction matters for how the "
     "figure is read. The thermal margin is the ratio of two CEILINGS -- how much current the cell can shed "
@@ -2921,8 +4327,9 @@ add("9. Thermal model", "i_design (zero-gap PEM stack)", "1000", "mA cm-2", "ass
     "1.0-2.0 A cm-2 (Carmo, Fritz, Mergel & Stolten, Int. J. Hydrogen Energy 2013, 38, 4901-4934) "
     "and zero-gap CO2 electrolysis sustains A cm-2-class operation (Endrodi, Samu, Kecsenovity, "
     "Halmagyi, Sebok & Janaky, Nature Energy 2021, 6, 439-448: 420 +/- 50 mA cm-2 partial current "
-    "over 200 h). Tested 500-2000 mA cm-2: the stack fails in all four electrolytes at every point, "
-    "and it fails at a gap of zero as well, so its verdict rests on no geometry at all.")
+    "over 200 h). Tested 500-2000 mA cm-2: the stack cannot reject its heat passively in any of the four "
+    "electrolytes at any point, and that holds at a gap of zero as well, so the passive verdict rests on no geometry at all. "
+    "")
 for lab, gv, meth, cit, loc, sens in [
  ("beaker", "2.0e-2 m",
   "the canonical 'beaker, 2 cm' archetype of julia/cellvoltage.jl. A 5 mm gap "
@@ -2942,22 +4349,27 @@ for lab, gv, meth, cit, loc, sens in [
   "Eisenberg, Tobias & Wilke, J. Electrochem. Soc. 1954, 101, 306-320",
   "p. 308 (rotor and outer-cylinder dimensions; gap ratios 0.104-4.88)",
   "The same paper's widest annulus at this rotor is 6.25 cm, and that is the row's band. Across it "
-  "the rotating-cylinder ceilings fall about 1.6x, and the tetrahydrofuran verdict holds throughout "
-  "while the acetonitrile and dimethylformamide verdicts are the conditional pair reported on the "
-  "beaker-gap row."),
+  "the rotating-cylinder ceilings fall about 1.6x and every boil-off verdict at this cell holds: tetrahydrofuran, "
+  "acetonitrile and dimethylformamide boil throughout it, reversing only at gaps of about "
+  + "%.1f mm, %.2f cm and %.2f cm, all below the band, and aqueous NaOH clears throughout it, reversing only above %.1f cm. "
+  ""
+  % (_TG_ROW("rotating cyl. 3000 rpm", "THF")["gap_flip_m"] * 1e3, _TG_ROW("rotating cyl. 3000 rpm", "MeCN")["gap_flip_m"] * 1e2,
+     _TG_ROW("rotating cyl. 3000 rpm", "DMF")["gap_flip_m"] * 1e2, _TG_ROW("rotating cyl. 3000 rpm", "aq. NaOH")["gap_flip_m"] * 1e2)
+  + ("" if all(_TG_ROW("rotating cyl. 3000 rpm", x)["verdict"] == "boils" and _TG_ROW("rotating cyl. 3000 rpm", x)["gap_flip_m"] < 0.02435
+               for x in ("THF", "MeCN", "DMF")) and _TG_ROW("rotating cyl. 3000 rpm", "aq. NaOH")["gap_flip_m"] > 0.0625 else 1 / 0)),
  ("microfluidic 25 um", "2.5e-5 m",
   "MEASURED, and the same number the transport archetype derives its 12.5 um half-gap film from: "
   "the thinnest FEP spacer of the cell the exemplar was run in",
-  "Mo, Rughoobur, Nambiar, Zhang, Jensen et al., Science 2020, 368, 1352-1357",
-  "supplementary material p. 13 (\"the inter-electrode distance is controlled by the thickness of "
-  "FEP spacer ... the thinnest FEP spacer (0.001\", 25 um)\")", ""),
+  "Mo, Lu, Rughoobur, Patil, Gershenfeld, Akinwande, Buchwald & Jensen, Science 2020, 368, 1352-1357, "
+  "Supplementary Materials",
+  "Supplementary Materials p. 3 (\"The inter-electrode distance is controlled by the thickness of FEP spacer\") and "
+  "p. 13 (\"the thinnest FEP spacer (0.001\", 25 um)\")", ""),
  ("zero-gap PEM stack", "1.0e-4 m",
   "intended as a membrane thickness, but no named membrane with a page-anchored thickness is "
   "attached to it. Thin-gap preparative cells at 100 um do exist (a 4-methylanisole thin-gap cell, "
   "J. Appl. Electrochem. 2008, DOI 10.1007/s10800-007-9444-8), but that paper could not be opened "
   "and its contents are not asserted here", "-- (no page-anchored source)", "",
-  "Tested 50-200 um: q ~ L, so ceilings span 1.4x either way and all four solvents still fail at "
-  "1 A cm-2 across the range. Page-anchoring would require a named separator (Nafion 115, 117 or 212) with a "
+  _zg_gap_sentence() + " Page-anchoring would require a named separator (Nafion 115, 117 or 212) with a "
   "page-anchored thickness before 100 um is published as a membrane figure.")]:
     add("9. Thermal model", f"Inter-electrode gap ({lab})", gv, "m",
         "measured" if cit.startswith("Mo,") else
@@ -2974,72 +4386,310 @@ add("9. Thermal model", "kappa (0.1 M KHCO3 aq, exemplar cell-resistance check)"
     "of this table needed", CRC,
     "'Electrical Conductivity of Aqueous Solutions', p. 5-71, potassium hydrogen carbonate "
     "(KHCO3) row, 1 mass pct column, 20 C", "")
+def _wall_sentence():
+    """Vessel-wall conduction put in series for the glass-bodied cells (the beaker's sigma), at the declared 2-3 mm
+    borosilicate wall, and every boil-off ceiling re-solved. thermal_conditional_flips.py computes the same thing for
+    the SI's S6.4 sentence; this is the registry's own evaluation."""
+    du, di, flips, n = [], [], 0, 0
+    for _s in _TM.SOLVENTS:
+        for r in _TM.REACTORS:
+            if abs(r[2] - _TM.SIGMA_BEAKER) > 1e-9:
+                continue
+            n += 1
+            u0 = _TM.U_passive(r[2], r[3]); i0 = _TM.i_boil(_s[2], r[1], _s[3], u0)
+            for L in _TM.T_VESSEL_WALL:
+                uw = r[2] * 1e-4 / (1.0 / r[3] + 1.0 / _TM.H_EXT + L / _TM.K_PYREX)
+                iw = _TM.i_boil(_s[2], r[1], _s[3], uw)
+                du.append(100 * (1 - uw / u0)); di.append(100 * (1 - iw / i0)); flips += (i0 >= r[4]) != (iw >= r[4])
+    assert flips == 0, "the wall row says no verdict changes"
+    return ("Through the %.0f-%.0f mm borosilicate wall declared for the jacketed cell (k = %.1f W m-1 K-1, the Pyrex row), "
+            "the omitted term lowers U' of the cells computed on the beaker body by %.1f-%.1f pct and their boil-off ceilings by %.1f-%.1f "
+            "pct, and changes none of the %d verdicts those cells carry. No archetype in \u00a7S6 is computed on a plastic "
+            "body, whose conductivity this registry does not carry; the bound is registered because such a body would need "
+            "the term restored." % (1e3 * _TM.T_VESSEL_WALL[0], 1e3 * _TM.T_VESSEL_WALL[1], _TM.K_PYREX,
+                                    min(du), max(du), min(di), max(di), n))
+
 add("9. Thermal model", "Vessel wall conduction (omitted from U')", "0", "m2 K W-1", "assumption",
     "the heat balance puts the internal and external films in series and carries NO conduction "
     "resistance through the vessel wall between them. That is why it is declared rather than "
     "silent: the omission is invisible for glass and is not for a machined plastic body",
     "declared model simplification", "",
-    "A 1.5 mm borosilicate beaker wall adds L/k = 0.0014 m2 K W-1 against the external film's "
-    "1/h_ext = 0.0769, i.e. 2 pct of the series, which is below the reporting precision of every "
-    "ceiling in this section. A 5.6 mm polycarbonate block -- the body of the cell the two flow "
-    "archetypes are anchored to -- adds 0.0294, i.e. 28 pct, and would lower that cell's ceilings "
-    "by about 15 pct. No archetype in §S6 is computed on a plastic body, so no published number "
-    "moves; the bound is registered because any future architecture with a thick low-conductivity "
-    "wall would need the term restored.")
+    _wall_sentence())
 # DEMOTED derived -> assumption 2026-08-22. PROVENANCE_STANDARD.md rule B: "A bound is not a
 # derivation. If a method yields a range that CONTAINS the tabled value but does not PRODUCE
 # it, the row is state C." All three cooling bands are in exactly that position, and each
 # said so in its own sensitivity field while carrying the derived label:
 #   natural convection -- plotted edges "rounded outward by about 25 pct" from the derived
 #                         1.04e-3..1.63e-2 interval;
-#   forced air         -- plotted band is a SUBSET of the derivable 2.0e-3..3.1e-1, drawn
+#   forced air         -- (retired 2026-10-06: the author ruled forced air is not how such cells are cooled)
 #                         for a sigma window of about 3-8 that is registered nowhere;
 #   liquid cold plate  -- "the plotted band sits inside the derived interval".
-# The forced-air row is the one that matters: S6.2's zero-gap verdict is drawn from its
+# (historical) The forced-air row was the one that mattered: S6.2's zero-gap verdict was drawn from its
 # UPPER EDGE while the row calls itself "shading only".
-add("9. Thermal model", "Cooling band: natural convection", "8e-4 - 2e-2", "W cm-2 K-1", "assumption",
-    "the shaded availability band of §S6.2, reproduced from this registry's own inputs: "
-    "H_EXT = 13 W m-2 K-1 times sigma in [0.8, 12.5], the figure's full sigma range, gives 1.04e-3 "
-    "to 1.63e-2 W cm-2 K-1. New row: previously unregistered",
+_SIG_LO = min(r[2] for r in _TM.REACTORS); _SIG_HI = max(r[2] for r in _TM.REACTORS)
+_NB = [b for b in _TM.COOLING_BANDS if b[0].startswith("natural")][0]
+_NAT_LO, _NAT_HI = _TM.H_EXT * _SIG_LO * 1e-4, _TM.H_EXT * _SIG_HI * 1e-4
+_E1 = lambda x: ("%.0e" % x).replace("e-0", "e-").replace("e+0", "e+")
+add("9. Thermal model", "Cooling band: natural convection", "%s - %s" % (_E1(_NB[1]), _E1(_NB[2])), "W cm-2 K-1", "assumption",
+    "the shaded availability band of §S6.2, reproduced from this registry's own inputs: H_EXT = %.0f W m-2 K-1 times "
+    "sigma in [%.2f, %.2f], the model's full sigma range (thermal_model.REACTORS), gives %.2e to %.2e W cm-2 K-1"
+    % (_TM.H_EXT, _SIG_LO, _SIG_HI, _NAT_LO, _NAT_HI),
     "rows 'H_EXT' and the four sigma rows of this registry", "",
-    "The plotted edges are rounded outward by about 25 pct relative to the derived interval, which "
-    "visually credits passive cooling the model does not have. The tightened edges, 1.0e-3 to "
-    "1.6e-2 W cm-2 K-1, are registered on this row as its sensitivity rather than applied, so that "
-    "the band this section reports is unchanged. No numeric conclusion depends on it.")
-add("9. Thermal model", "Cooling band: forced air", "2e-2 - 8e-2", "W cm-2 K-1", "assumption",
-    "forced convection in gases, 25-250 W m-2 K-1, times sigma. New row: previously unregistered",
-    INCROP, "Table 1.1 (forced convection, gases: 25-250 W m-2 K-1)",
-    "Over the full sigma range [0.8, 12.5] the derivable interval is 2.0e-3 to 3.1e-1 W cm-2 K-1, "
-    "so the plotted band is a subset of the derivable range, drawn for sigma of about 3-8. That "
-    "must be stated rather than left implicit; the band is shading only.")
-add("9. Thermal model", "Cooling band: liquid cold plate", "2e-1 - 1.0", "W cm-2 K-1", "assumption",
-    "laminar-to-transitional water channels: k = 0.60 W m-1 K-1 with D_h = 1-3 mm and Nu = 4.36 "
-    "(circular, uniform heat flux) to 8.23 (parallel plates) gives h = 872-4938 W m-2 K-1, i.e. "
-    "0.09-0.49 W cm-2 K-1, and times sigma of about 1-2 gives 0.13-2.6. New row: previously "
-    "unregistered. relabelled from 'PEM-class': the PEM attribution is what fails -- see the "
-    "U' liquid cold plate row", INCROP,
-    "Table 8.1 and Eq. 8.53 (laminar internal flow); Eq. 8.60 (Dittus-Boelter)",
-    "sensitivity (this row is state C: the derivation yields a range that contains the plotted "
-    "band but does not produce it). The derivable interval is 0.13-2.6 W cm-2 K-1 for sigma of "
-    "about 1-2, against the plotted 0.2-1.0, so the plotted band is a subset drawn near the "
-    "middle. One statement rests on it: S6.2 places the zero-gap cooling duty of 0.099 W cm-2 "
-    "K-1 inside liquid-loop territory, i.e. it asserts a water-channel cold plate delivers it. "
-    "That claim survives the whole derivable interval and does not depend on where the band was "
-    "drawn: 0.099 sits below even the bottom edge, 0.13, so the cheapest cold plate in the "
-    "construction still clears the duty by 1.3x, and the margin runs to 26x at the top. The "
-    "conclusion is therefore insensitive to this row, unlike the forced-air band immediately "
-    "above it, whose upper edge does carry a verdict.")
+    "The plotted edges lie outside the derived interval -- the lower edge %.2fx below it and the upper edge %.2fx above "
+    "it -- which visually credits passive cooling the model does not have. The derived edges, %.1e to %.1e W cm-2 K-1, "
+    "are registered on this row as its sensitivity rather than applied, so that the band this section reports is "
+    "unchanged. No numeric conclusion depends on it; the band is shading only."
+    % (_NAT_LO / _NB[1], _NB[2] / _NAT_HI, _NAT_LO, _NAT_HI))
+# LIQUID COOLING, BUILT AS EACH ARCHITECTURE WOULD BE COOLED (2026-10-06, author: "do whatever is more rigorous and
+# correct and consistent with actual devices"). Replaces the declared 0.2-1.0 "PEM-class cold plate" band and the
+# U' = 0.30 row: thermal_model.U_liquid puts the cell's own electrolyte-side film, the wall and a laminar coolant
+# channel heated from one wall in series, and every verdict uses the architecture's own cooler.
+import math as _m_lq
+_jk = [r for r in _TM.REACTORS if _TM.cooler_type(r) == "jacket"]
+_pl = [r for r in _TM.REACTORS if _TM.cooler_type(r) == "plate"]
+_thf_lq = [r for r in _TM.SOLVENTS if r[0] == "THF"][0]
+_ROT = [(lab, [r for r in _TM.REACTORS if key in r[0]][0]) for lab, key in (("rotating disc", "RDE"), ("rotating cylinder", "cyl"))]
+_STK = [r for r in _TM.REACTORS if "stack" in r[0]][0]
+def _lq_mult(r, U):                                                  # THF conductivity multiple where U_required = U
+    f = lambda m: _TM.U_required(r[4], m * _thf_lq[2], r[1], _thf_lq[3]) - U
+    lo, hi = 1e-4, 10.0
+    assert f(lo) > 0 and f(hi) < 0
+    for _ in range(200):
+        mid = _m_lq.sqrt(lo * hi); lo, hi = (mid, hi) if f(mid) > 0 else (lo, mid)
+    return _m_lq.sqrt(lo * hi)
+_duty = lambda r: _TM.U_required(r[4], _thf_lq[2], r[1], _thf_lq[3])
+_byh = {}
+for r in _jk:
+    _byh.setdefault(r[3], _TM.U_liquid(r))
+_JK_FF = _TM.U_liquid(_ROT[0][1])                                    # the forced-flow vessel cells (h_int 2000)
+_PL = _TM.U_liquid(_STK)
+for _lab, _r in _ROT:
+    assert _JK_FF[0] < _duty(_r) <= _JK_FF[1], "rotating-cell THF duty no longer inside the jacket range"
+assert _PL[0] < _duty(_STK) <= _PL[1], "stack THF duty no longer inside the cooled-plate range"
+def _one(r, attr, vals):                                             # sweep one construction input, the others favourable
+    keep = getattr(_TM, attr); out = []
+    for v in vals:
+        setattr(_TM, attr, (v, v) if isinstance(keep, tuple) else v)
+        out.append(_TM.U_liquid(r)[1]); setattr(_TM, attr, keep)
+    return min(out), max(out)
+def _met(duty, lo, hi, every="met within the declared construction range"):   # 2026-10-07: one liquid class (author)
+    return every if duty <= hi else "beyond what the declared construction range can meet"
+def _rot_txt(lo, hi):
+    return "; ".join("the %s's THF duty, %.3f, is %s" % (lab, _duty(r), _met(_duty(r), lo, hi)) for lab, r in _ROT)
+def _dim_break(r, attr, duty):
+    """The value of one jacket dimension, the other at its favourable end, above which the duty exceeds U_liquid hi."""
+    keep = getattr(_TM, attr)
+    def ok(v):
+        setattr(_TM, attr, (v, v))
+        try:
+            return _TM.U_liquid(r)[1] >= duty
+        finally:
+            setattr(_TM, attr, keep)
+    return _lq_bisect(ok, keep[0], keep[1])
+def _dim_txt(lo, hi, end, attr=None, noun=None):
+    """A one-at-a-time construction-dimension sweep: which THF duties are met across it, and which only toward one end."""
+    parts, part = [], []
+    for lab, r in _ROT:
+        d = _duty(r)
+        m = ("met across that range" if d <= lo else "not met anywhere in it" if d > hi else
+             "met only for %s of at most %.2f mm" % (noun, 1e3 * _dim_break(r, attr, d)) if attr
+             else "met only toward the %s end of that range" % end)
+        parts.append("the %s's THF duty, %.3f, is %s" % (lab, d, m))
+        if lo < d <= hi:
+            part.append(lab)
+    t = "; ".join(parts)
+    if part:
+        t += (". The %s THF liquid-cooling verdict %s therefore conditional on the declared %s end of this dimension"
+              % (" and the ".join("%s's" % c for c in part), "is" if len(part) == 1 else "are", end))
+    return t
+_PL_COND = ""   # 2026-10-07: no verdict is classed by where it sits inside the declared construction range
+add("9. Thermal model", "Water (coolant): k", "0.613", "W m-1 K-1", "measured",
+    "saturated water at 300 K, the coolant of both liquid-cooling constructions", INCROP,
+    "Table A.6, p. 949 (saturated water, 300 K)", "")
+add("9. Thermal model", "Coolant channel Nu (one wall heated)", "5.39", "-", "measured",
+    "laminar, fully developed flow between parallel plates with one side insulated and uniform heat flux on the "
+    "other: the geometry of a jacket heated from the vessel side and of a cooled-plate channel heated from the "
+    "electrode side", INCROP, "Table 8.1, p. 519", "")
+add("9. Thermal model", "Pyrex: k", "1.4", "W m-1 K-1", "measured",
+    "borosilicate wall of a jacketed glass cell", INCROP, "Table A.3, p. 939 (Pyrex, 300 K)", "")
+add("9. Thermal model", "Pyrolytic graphite: k through the layers", "5.70", "W m-1 K-1", "measured",
+    "through-plane conduction of a graphite cooled plate; the value perpendicular to the layers is the low end of "
+    "graphite, so the plate is not credited with conduction it may lack", INCROP,
+    "Table A.2, p. 933 (pyrolytic graphite, k perpendicular to layers, 300 K)", "")
+add("9. Thermal model", "Vessel wall thickness (jacketed cell)", "2e-3 - 3e-3", "m", "assumption",
+    "declared device dimension of a jacketed glass electrochemical cell", "Declared device dimension", "",
+    "Across 2-3 mm, with the jacket at its narrow end, the forced-flow vessel cells' liquid U' runs %.3f-%.3f W cm-2 "
+    "K-1; %s." % (_one(_ROT[0][1], "T_VESSEL_WALL", _TM.T_VESSEL_WALL)
+                  + (_dim_txt(*_one(_ROT[0][1], "T_VESSEL_WALL", _TM.T_VESSEL_WALL), "thin", "T_VESSEL_WALL", "a wall"),)))
+add("9. Thermal model", "Cooling-jacket gap", "2e-3 - 5e-3", "m", "assumption",
+    "declared annular gap of the water jacket (hydraulic diameter twice the gap)", "Declared device dimension", "",
+    "Across 2-5 mm, with the wall at its thin end, the forced-flow vessel cells' liquid U' runs %.3f-%.3f W cm-2 K-1; "
+    "%s." % (_one(_ROT[0][1], "JACKET_GAP", _TM.JACKET_GAP) + (_dim_txt(*_one(_ROT[0][1], "JACKET_GAP", _TM.JACKET_GAP), "narrow", "JACKET_GAP", "a jacket gap"),)))
+add("9. Thermal model", "Cooled-plate thickness", "2e-3 - 3e-3", "m", "assumption",
+    "declared thickness of the graphite plate between the stack electrode and its coolant channels",
+    "Declared device dimension", "",
+    "Across 2-3 mm, with the channels at their favourable end, the stack's liquid U' runs %.3f-%.3f W cm-2 K-1 "
+    "against its THF duty of %.3f." % (_one(_STK, "T_COOLED_PLATE", _TM.T_COOLED_PLATE) + (_duty(_STK),)) + _PL_COND)
+add("9. Thermal model", "Cooled-plate channel D_h", "1e-3 - 3e-3", "m", "assumption",
+    "declared hydraulic diameter of the coolant channels in the cooled plate", "Declared device dimension", "",
+    "Across 1-3 mm, with the plate at its favourable end, the stack's liquid U' runs %.3f-%.3f W cm-2 K-1 against "
+    "its THF duty of %.3f." % (_one(_STK, "D_H_PLATE", _TM.D_H_PLATE) + (_duty(_STK),)) + _PL_COND)
+add("9. Thermal model", "Cooled-plate rib area factor", "1 - 2", "-", "assumption",
+    "declared coolant-side wetted area per unit cooled face (channel walls and ribs)", "Declared device dimension", "",
+    "Across 1-2, with the plate and channels at their favourable end, the stack's liquid U' runs %.3f-%.3f W cm-2 K-1 "
+    "against its THF duty of %.3f." % (_one(_STK, "RIB_AREA", _TM.RIB_AREA) + (_duty(_STK),)) + _PL_COND)
+def _jk_with(wall, gap):
+    kw, kg = _TM.T_VESSEL_WALL, _TM.JACKET_GAP
+    _TM.T_VESSEL_WALL, _TM.JACKET_GAP = (wall, wall), (gap, gap)
+    try:
+        return _TM.U_liquid(_ROT[1][1])[1]
+    finally:
+        _TM.T_VESSEL_WALL, _TM.JACKET_GAP = kw, kg
+_rcd = _duty(_ROT[1][1])
+_wmax = _lq_bisect(lambda w: _jk_with(w, _TM.JACKET_GAP[0]) >= _rcd, _TM.T_VESSEL_WALL[0], _TM.T_VESSEL_WALL[1])
+_gmax = _lq_bisect(lambda g: _jk_with(_TM.T_VESSEL_WALL[0], g) >= _rcd, _TM.JACKET_GAP[0], _TM.JACKET_GAP[1])
+_JK_CORNER = ("The rotating cylinder's duty is met only in a corner of the declared construction: a wall of at most "
+              "%.2f mm with a %.0f mm jacket, or a jacket of at most %.2f mm with a %.0f mm wall."
+              % (1e3 * _wmax, 1e3 * _TM.JACKET_GAP[0], 1e3 * _gmax, 1e3 * _TM.T_VESSEL_WALL[0]))
+_TC_CHILL = 10.0
+def _chill(r):
+    q = _TM.q_Wcm2(r[4], _thf_lq[2], r[1]); d = q / (_thf_lq[3] - _TM.TAMB); dc = q / (_thf_lq[3] - _TC_CHILL)
+    lo, hi = _TM.U_liquid(r)
+    return "%s %.3f -> %.3f, %s" % (lab_of(r), d, dc, _met(dc, lo, hi))
+lab_of = lambda r: {"RDE": "rotating disc", "cyl": "rotating cylinder", "stack": "stack"}[[k for k in ("RDE", "cyl", "stack") if k in r[0]][0]]
+add("9. Thermal model", "Coolant inlet temperature (liquid cooling)", "25.0", "C", "assumption",
+    "the coolant of both liquid-cooling constructions is taken at T_amb, i.e. tap or loop water at room temperature",
+    "Declared modelling convention", "",
+    "A chilled coolant widens the driving force T_b - T_coolant and lowers each duty in inverse proportion to it. At %.0f C THF's "
+    "duties fall as follows (W cm-2 K-1): %s. Warmer coolant works the other way, and the T_amb row gives the "
+    "coolant temperatures above which THF's duties leave the declared construction range (%s). %s"
+    % (_TC_CHILL, "; ".join(_chill(r) for lab, r in _ROT + [("stack", _STK)]),
+       ", ".join("%.1f C for the %s" % (t, lab) for lab, r, t in _LQ_TMAX),
+       " ".join("The %s's verdict reverses inside the 20-30 C range that row tests, so it is conditional on the "
+                "coolant temperature as well." % lab for lab, r, t in _LQ_TMAX if 20.0 <= t <= 30.0)))
+def _others_txt(cells, rng):
+    """The other electrolytes at these cells, classed by their own duties against passive rejection and the construction."""
+    need, pas = [], []
+    for nm, _e, k, tb, _s in _TM.SOLVENTS:
+        if nm == "THF":
+            continue
+        d = [_TM.U_required(r[4], k, r[1], tb) for r in cells]
+        if all(v <= _TM.U_passive(r[2], r[3]) for v, r in zip(d, cells)):
+            pas.append(nm)
+        else:
+            assert all(v > _TM.U_passive(r[2], r[3]) for v, r in zip(d, cells)), (nm, "mixed passive/active across cells")
+            need.append((nm, d))
+    nice = lambda n: "the aqueous reference" if n == "aq. NaOH" else n
+    lst = lambda a: a[0] if len(a) == 1 else ", ".join(a[:-1]) + " and " + a[-1]
+    cap = lambda t: t[0].upper() + t[1:]
+    out = []
+    if need:
+        dd = [v for nm, d in need for v in d]
+        out.append(cap("%s need liquid cooling there too, at duties of %.3f-%.3f W cm-2 K-1, %s."
+                   % (lst([nice(nm) for nm, d in need]), min(dd), max(dd),
+                      "all met within the declared construction range" if max(dd) <= rng[1] else "not all met within the declared construction range")))
+    if pas:
+        out.append(cap("%s %s its heat passively there." % (lst([nice(n) for n in pas]), "rejects" if len(pas) == 1 else "reject")))
+    return " ".join(out)
+add("9. Thermal model", "Liquid cooling: water jacket (forced-flow vessel cells)", "%.3f - %.3f" % _JK_FF, "W cm-2 K-1", "derived",
+    "series construction over the vessel's own sigma: the cell's electrolyte-side film (h_int), a Pyrex wall and a "
+    "laminar water jacket heated from one wall; value shown for the forced-flow vessel cells (h_int 2000)", INCROP,
+    "Table 8.1, p. 519; Table A.3, p. 939; Table A.6, p. 949",
+    "The range spans the declared wall thickness and jacket gap. By electrolyte-side film (h_int in W m-2 K-1) it is "
+    "%s, in W cm-2 K-1. "
+    "Against the forced-flow range, %s; below %.2fx and %.2fx the carried THF conductivity those two duties exceed "
+    "the top of that range. Each one-at-a-time sweep in the dimension rows above holds the other dimension at "
+    "its favourable end. %s" %
+    ("; ".join("%.3f-%.3f at h_int %.0f" % (v[0], v[1], h) for h, v in sorted(_byh.items())), _rot_txt(*_JK_FF),
+     _lq_mult(_ROT[0][1], _JK_FF[1]), _lq_mult(_ROT[1][1], _JK_FF[1]), _others_txt([r for lab, r in _ROT], _JK_FF)))
+add("9. Thermal model", "Liquid cooling: cooled plate (stack and chip)", "%.3f - %.3f" % _PL, "W cm-2 K-1", "derived",
+    "series construction behind the electrode, cooled face equal to the electrode area: the cell's electrolyte-side "
+    "film (h_int 5000), a graphite plate and laminar water channels heated from one wall", INCROP,
+    "Table 8.1, p. 519; Table A.2, p. 933; Table A.6, p. 949",
+    "The range spans the declared plate thickness, channel size and rib factor. The stack's THF duty, %.3f W cm-2 "
+    "K-1, is %s (%.3f-%.3f). Below %.2fx "
+    "the carried THF conductivity it exceeds the top of that range. %s Nu = 5.39 is the wide-channel (parallel-plate) limit and the "
+    "ribs are credited at full fin efficiency, so the range is an upper estimate in those two respects; it is also "
+    "one-sided (one cooled face per cell), credits no cooling by the process fluid, omits contact and porous-layer "
+    "resistances and takes graphite at its low through-plane conductivity, so its other errors run both ways. "
+    "The electrolyte-side film and the thinnest plate cap it: even a "
+    "perfect coolant would give at most %.3f." % (_duty(_STK), _met(_duty(_STK), *_PL), _PL[0], _PL[1], _lq_mult(_STK, _PL[1]), _others_txt([_STK], _PL),
+                                                   1e-4 / (1.0 / _STK[3] + _TM.T_COOLED_PLATE[0] / _TM.K_GRAPHITE_THROUGH)))
 add("9. Thermal model", "§S6 reference lines", "none drawn", "mA cm-2", "assumption",
     "the figure drew horizontal rules at declared design currents of 50, 500 and 1000 mA cm-2 "
     "while the thermal operating point was declared. Each architecture is now judged against its "
     "own median transport ceiling, which is a different number per row, so no reference line is "
     "drawn and the row records only that the constant has left the figure", "display element", "",
     "display-only: no quantity is computed from this row, and no figure draws it.")
+def _tamb_sentence(lo=20.0, hi=30.0):
+    """Every boil-off ceiling at T_amb = 20 and 30 C against 25 C, computed from thermal_model (chemistry audit,
+    pass 6: the typed version said 2 pct, which is DMF's; THF, with the smallest T_b - T_amb, moves about 6 pct)."""
+    base = _all_ceilings()
+    s_lo, s_hi = _tm_sweep("TAMB", (lo, hi), _all_ceilings)
+    per = []
+    cmn = {r[0] for r in _TH_OPEN}
+    for sl, _k, tb in _TH_SOL:
+        grp = []
+        for inside in (True, False):
+            ks = [key for key in base if key[1] == sl and ((key[0] in cmn) == inside)]
+            grp.append((100 * max(s_lo[key] / base[key] - 1 for key in ks), 100 * min(s_hi[key] / base[key] - 1 for key in ks)))
+        per.append("%s %+.1f/%+.1f pct in the centimetre-gap cells and %+.1f/%+.1f in the thin-gap ones (T_b - T_amb = %.0f K)"
+                   % (sl, grp[0][0], grp[0][1], grp[1][0], grp[1][1], tb - _TM.TAMB))
+    rev = [key for r in _TH_RX for key in base if key[0] == r[0]
+           and len({(s[key] / r[4] >= 1.0) for s in (base, s_lo, s_hi)}) > 1]
+    txt = ("Tested %.0f-%.0f C. The rejection driving force T_b - T_amb moves by 5 K either way, so the ceilings move "
+           "most for the lowest-boiling electrolyte: %s, at %.0f / %.0f C. "
+           % (lo, hi, ", ".join(per), lo, hi))
+    if rev:
+        return txt + "Across that range %d verdicts reverse: %s." % (len(rev), "; ".join("%s / %s" % (_nice(k[0]), k[1]) for k in rev))
+    inside = [(lab, t) for lab, r, t in _LQ_TMAX if lo <= t <= hi]
+    outside = [(lab, t) for lab, r, t in _LQ_TMAX if not lo <= t <= hi]
+    lq = ("The coolant of the liquid-cooling constructions is taken at T_amb, so those verdicts move with it as well: "
+          "THF's duty can be met within the declared construction range up to a coolant at %s." % ", ".join("%.1f C (%s)" % (t, lab) for lab, r, t in _LQ_TMAX))
+    if inside:
+        lq += (" The %s verdict therefore reverses inside this range and is conditional on the coolant temperature."
+               % " and ".join(lab for lab, t in inside))
+    return txt + "Every boil-off verdict holds across the range. " + lq
+
+
 add("9. Thermal model", "T_amb (§S6)", "25.0", "C", "assumption",
     "standard laboratory ambient, the same 298.15 K as category 1. New row: previously "
     "unregistered as a §S6 constant", "declared modelling convention", "",
-    "Tested 20-30 C: (T_b - T_amb) changes by 5/128, i.e. 4 pct for DMF, so ceilings move by about "
-    "2 pct. Nothing flips.")
+    _tamb_sentence())
+# Ea(eta) per solvent from the CRC 'Viscosity of Liquids' table: the three organic rows from G-EAVISC's artifact, water
+# from data/ea_viscosity_water.py (G-EAVISC's page range starts on the gas table, p. 6-242, so its first 'Water' hit
+# is a gas; the liquid row on p. 6-247 prints 0.890 mPa s at 25 C, the registry value).
+with io.open(_os.path.join(_os.path.dirname(_HERE_D), "results", "ea_viscosity_crc.json"), encoding="utf8") as _fh:
+    _EAC = _json.load(_fh)
+with io.open(_os.path.join(_os.path.dirname(_HERE_D), "results", "ea_viscosity_water.json"), encoding="utf8") as _fh:
+    _EAW = _json.load(_fh)
+_EA_DECL = 15000.0
+_EA_ARR100 = _math.exp(_EA_DECL / 8.314 * (1 / 298.15 - 1 / 373.15))
+
+
+def _ea_measured_sentence():
+    org = []
+    for sl in ("MeCN", "DMF", "THF"):
+        e = _EAC["solvents"][sl]["Ea_J_per_mol"]
+        org.append("%s %s" % (sl, " and ".join("%.1f" % (x / 1000) for x in e)))
+    ew = [x["Ea"] for x in _EAW["Ea_intervals_J_per_mol"]]
+    eo = [x for sl in ("MeCN", "DMF", "THF") for x in _EAC["solvents"][sl]["Ea_J_per_mol"]]
+    return ("MEASURED COMPARISON: the same CRC table that page-anchors mu(25 C) for these solvents (p. 6-243 ff.) also "
+            "prints eta at 50 and 75 C, and at 100 C for water, and each row used here reproduces the registry viscosity "
+            "at 25 C. The viscous activation energy it implies, in kJ mol-1 over successive 25 K intervals from 25 C, is "
+            "%s, and water %s (p. 6-247; %.1f over 25-100 C). By Walden (Lambda eta ~ const) that is the quantity to "
+            "judge an Ea(kappa) bound against. The declared 15 kJ mol-1 is %.1f-%.1fx the organic values, an upper bound "
+            "by roughly a factor of two for the three organic electrolytes. For the aqueous electrolyte it is %.2f-%.2fx "
+            "water's interval values and %.2fx its 25-100 C value, so at the %.0f C boiling point its Arrhenius factor, "
+            "%.2f, exceeds the Walden factor %.2f by %.1f pct: an upper bound there by a few per cent, and %s water's "
+            "own 25-50 C value."
+            % ("; ".join(org), " / ".join("%.1f" % (x / 1000) for x in ew), _EAW["Ea_25_100_J_per_mol"] / 1000,
+               _EA_DECL / max(eo), _EA_DECL / min(eo), _EA_DECL / max(ew), _EA_DECL / min(ew),
+               _EA_DECL / _EAW["Ea_25_100_J_per_mol"], 100.0, _EA_ARR100, _EAW["walden_factor_25_100"],
+               100 * (_EA_ARR100 / _EAW["walden_factor_25_100"] - 1),
+               "below" if _EA_DECL < ew[0] else "above"))
+
+
 add("9. Thermal model", "Ea (kappa(T) Arrhenius upper bound, S6.3)", "15", "kJ mol-1", "assumption",
     "new row: previously unregistered, and it set every number in S6.3 while appearing in no table. "
     "The thermal model evaluates kappa at 25 C while predicting cells that run at 60-153 C, so its "
@@ -3055,30 +4705,38 @@ add("9. Thermal model", "Ea (kappa(T) Arrhenius upper bound, S6.3)", "15", "kJ m
     "and it is declared here as an assumption on that basis. It enters no 25 C quantity: setting "
     "Ea = 0 recovers the whole of S6.1 and S6.2 exactly",
     "-- (declared upper-bound coefficient; no page-anchored source for Ea itself). The water anchor "
-    "that licenses it is measured: " + CRC, L_WATER +
-    " (eta = 0.890 mPa s at 25 C and 0.282 mPa s at 100 C)",
-    "anchor. Walden (kappa ~ 1/eta) on water gives eta(25 C)/eta(100 C) = 0.890/0.282 = 3.16 at "
-    "100 C, against 3.37 from Arrhenius at Ea = 15 kJ mol-1 at the same point -- 6.9 pct apart. That "
+    "that licenses it is measured: " + CRC,
+    "Sect. 6, 'Viscosity of Liquids', p. %s, Water row (eta = %.3f mPa s at 25 C and %.3f mPa s at 100 C); MeCN, DMF "
+    "and THF rows of the same table, p. 6-243 ff."
+    % (_EAW["source"].split("p. ")[1].split(" ")[0], _EAW["eta_mPas"]["25"], _EAW["eta_mPas"]["100"]),
+    "anchor. Walden (kappa ~ 1/eta) on water gives eta(25 C)/eta(100 C) = %.3f/%.3f = %.2f at "
+    "100 C, against %.2f from Arrhenius at Ea = 15 kJ mol-1 at the same point -- %.1f pct apart. That "
+    % (_EAW["eta_mPas"]["25"], _EAW["eta_mPas"]["100"], _EAW["walden_factor_25_100"], _EA_ARR100,
+       100 * (_EA_ARR100 / _EAW["walden_factor_25_100"] - 1)) +
     "agreement is what licenses 15 kJ mol-1 as the upper-bound coefficient rather than a fitted "
-    "value; the anchor depends on temperature only, so the conductivity promotions do not touch "
+    "value; the anchor depends on temperature only, so no conductivity value enters "
     "it. Bracket. The lower bound of the bracket is kappa fixed at 25 C, i.e. the model as it stands "
     "everywhere else in S6, so this row cannot make any ceiling smaller. At the upper bound the "
-    "multipliers kappa(T_b)/kappa(25 C) are a function of T_b alone -- THF 2.08x, MeCN 2.63x, "
-    "aq. NaOH 3.37x, DMF 6.14x -- and the unstirred-beaker ceilings run 29 -> 42, 88 -> 140, "
-    "89 -> 215 and 282 -> 478 mA cm-2. Across all %d (architecture, solvent) pairs the bracket "
+    "multipliers kappa(T_b)/kappa(25 C) are a function of T_b alone -- %s -- and the unstirred-beaker "
+    "ceilings run %s mA cm-2. Across all %d (architecture, solvent) pairs the bracket "
     "factor spans %.2fx-%.2fx. What depends on it: %d of the %d pass/fail verdicts are unchanged "
-    "between the two bounds. " % (_KT_NPAIRS, _KT["factor_range"]["min"],
+    "between the two bounds. " % (", ".join("%s %.2fx" % (sl, v["kappa_factor_at_Tboil"])
+                                            for sl, v in sorted(_KT["solvents"].items(),
+                                                                key=lambda kv: kv[1]["kappa_factor_at_Tboil"])),
+                                  ", ".join("%.1f -> %.1f (%s)" % (v["i_boil_25C"], v["i_boil_kappaT"], sl)
+                                            for sl, v in _KT["brackets"]["unstirred batch"].items()),
+                                  _KT_NPAIRS, _KT["factor_range"]["min"],
                                   _KT["factor_range"]["max"],
                                   _KT_NPAIRS - len(_KT_FLIPS), _KT_NPAIRS) +
     "The %s bound-dependent verdict%s: %s. " % (_KT_WORD, "" if len(_KT_FLIPS) == 1 else "s are",
                                                 _KT_FLIP_PROSE) +
-    "Every one of them is reported as bound-dependent rather than as a finding. They are also very "
-    "nearly the same cells the gap sweep finds conditional, which is the honest summary: "
-    "the marginal cells are marginal on every axis at once, and no cell that clears comfortably at "
-    "25 C is put at risk by the bracket. The "
+    "Every one of them is reported as bound-dependent rather than as a finding. They are exactly the "
+    "four cells the surface-area sweep flags, and the two at the rotating disc are also conditional on the gap, "
+    "so the marginal cells are marginal on more than one axis, and no cell that clears comfortably at "
+    "25 C is put at risk by the bracket." + ("" if _KT_SIG_SAME else 1 / 0) + " The "
     "DMF 6.14x is the least trustworthy entry -- a 128 K extrapolation against a 75 K anchor, in the "
     "solvent and temperature regime where the neglected pairing term is largest -- and no conclusion "
-    "rests on it. MEASURED COMPARISON: the same CRC table that page-anchors mu(25 C) for these solvents also prints eta at 25/50/75 C, and the viscous activation energy it implies is 8.4 and 7.2 kJ mol-1 for MeCN (25-50 and 50-75 C), 7.7 for DMF and 7.7 for THF. Every row is accepted only if its eta(25 C) reproduces the registry viscosity, which water fails and is dropped. By Walden (Lambda eta ~ const) that is the right quantity to judge an Ea(kappa) bound against, so the declared 15 kJ mol-1 is 1.8-2.1x the measured range -- an upper bound by roughly a factor of two, rather than an unanchored guess.")
+    "rests on it. " + _ea_measured_sentence())
 add("9. Thermal model", "U' stirred bath", "0.18", "W cm-2 K-1", "assumption",
     "RE-scoped. this row is inconsistent with the figure's own physics by elevenfold: make_figK.py "
     "computes the stirred beaker at U' = 0.0160 W cm-2 K-1, not 0.18. The two are not the same "
@@ -3086,24 +4744,11 @@ add("9. Thermal model", "U' stirred bath", "0.18", "W cm-2 K-1", "assumption",
     "(h_ext 100-300 rather than 13 W m-2 K-1), whereas §S6 assumes still air. The row is "
     "retained only as the jacketed-glass reference case and is not the §S6 stirred beaker",
     "declared architecture (bath-jacketed glass)", "",
-    "Enters no figure and no stated conclusion; retained for comparison. The adjacent SI sentence "
-    "quoting stirred-liquid heat rejection near 0.1 W cm-2 K-1 is scoped to this row.")
-add("9. Thermal model", "U' liquid cold plate", "0.30", "W cm-2 K-1", "derived",
-    "RE-derived, and the inherited citation is broken. The registry cited 'Wallnoefer-Ogris et al., "
-    "Front. Chem. Eng. 2024, 6, 1384772' for '2-6 W cm-2 rejected across 10-20 K gradients'. That "
-    "volume and article number is a different paper -- Eichner, Amiri, Burheim & Lamb, '2D "
-    "simulation of temperature distribution within a large-scale PEM electrolysis stack', Front. "
-    "Chem. Eng. 2024, 6, 1384772 -- and it contradicts the claim: it reports heat flux into the "
-    "anodic fluid of 3200-4200 W m-2, i.e. 0.32-0.42 W cm-2 at 2 A cm-2, in-cell gradients of "
-    "13.6-17.1 K, and a coolant heat-transfer coefficient of 45 W m-2 K-1, implying U' of about "
-    "0.026 W cm-2 K-1, an order of magnitude below the tabled 0.30. The citation was a chimera of "
-    "two sources and has been withdrawn. 0.30 survives instead as the mid-laminar value of the "
-    "internal-flow derivation: water with k = 0.60 W m-1 K-1, D_h = 1-3 mm and Nu = 4.36-8.23",
-    INCROP, "Table 8.1 and Eq. 8.53",
-    "Derived interval 0.09-0.49 W cm-2 K-1 laminar; Dittus-Boelter at Re = 3e3-3e4, Pr = 6 and "
-    "D_h = 2 mm gives 0.86-5.4 W cm-2 K-1 turbulent. 0.30 is the mid-laminar value, and the "
-    "conclusion it supports -- that THF's 0.099 W cm-2 K-1 duty in a stack is within cold-plate "
-    "reach -- holds across the laminar interval.")
+    "Enters no figure and no stated conclusion; retained for comparison. It is %.0f times the still-air "
+    "coefficient the \u00a7S6 stirred beaker uses (%.4f W cm-2 K-1), the difference between a thermostat "
+    "bath and room air as the external boundary." % (0.18 / _TM.U_passive(*[r[2:4] for r in _TH_RX if
+                                                     r[0].startswith("stirred")][0]),
+                                                    _TM.U_passive(*[r[2:4] for r in _TH_RX if r[0].startswith("stirred")][0])))
 add("9. Thermal model", "Evaporative loss", "omitted", "-", "assumption",
     "omitted on both sides of the balance. Including it would delay boiling by carrying latent heat "
     "away, but evaporation is the solvent-loss failure mode the analysis is about, so omitting it "
@@ -3133,19 +4778,23 @@ add("9. Thermal model", "Evaporative loss", "omitted", "-", "assumption",
        100 * (_EVAP_Q - _EVAP_REJ) / _EVAP_Q))
 
 # -- 10. Homogeneous kinetics -------------------------------------------------
-add("10. Homogeneous kinetics", "8 mediated rate constants k", "(Table S6)", "M-1 s-1", "assumption",
-    "order-of-magnitude values anchored to the literature of each system, two of the eight "
-    "explicitly analogy-only. Retained as assumptions because none is a measurement in the "
-    "exemplar's own electrolyte",
-    "Table S6 per-row citations (verified against the primary sources)",
-    "Table S6, k-provenance column",
+add("10. Homogeneous kinetics", "%d mediated rate constants k" % _N_MED, "(Table S6)", "M-1 s-1", "assumption",
+    "declared values, each set beside the system it was measured on in data/rate_constant_basis.csv (Table S11): "
+    "one measured for the row's own carrier and substrate (Br2 + anisole, Sivey 2015), the NHPI row on PINO + "
+    "cyclohexene (Ueda/Masui 1987; it carried a benzylic 0.5 until 2026-10-05), the two ACT rows on turnover "
+    "frequencies (Rafiee 2018), the Hofmann and amidyl rows on aqueous HOBr + propionamide (Heeb 2014 Table 6, "
+    "3.3 M-1 s-1; a declared 10^3 until 2026-10-07), two bounds from the exemplar's own operation, the rest with no "
+    "measurement of the step. Retained as assumptions because none is a measurement in the exemplar's own electrolyte",
+    "Table S6 and Table S11",
+    "Table S6, k-provenance column (per-row sources); Table S11 (the system each constant was measured on)",
     "The reaction layer x_k = sqrt(D/kC) decides whether the homogeneous step falls inside or outside "
     "the film, and enters only as sqrt(k). Measured, not argued: each k perturbed by 10x and 1/10 one "
     "row at a time with the mediated matrix re-solved moves a cell across 25 mA cm-2 on %d of the "
-    "eight rows (%s), the >=25 count of any architecture by at most %d and the >=50 count by at most "
-    "%d, and the architecture ordering %s. The two analogy-only rows are flagged in Table S6."
-    % (len(_KS["rows_crossing_25"]), "; ".join(_KS["rows_crossing_25"]), _KS["max_count_delta_25"],
-       _KS["max_count_delta_50"], "is preserved in every case" if _KS["ordering_preserved"] else "CHANGES"))
+    "%s rows (%s), the >=25 count of any architecture by at most %d and the >=50 count by at most "
+    "%d, and the ordering %s. Table S11 marks the rows that have no measurement of the step."
+    % (len(_KS["rows_crossing_25"]), _numword(_KS["n_rows"]) + (" finite-k" if _KS["n_rows"] != _N_MED else ""), "; ".join(_KS["rows_crossing_25"]), _KS["max_count_delta_25"],
+       _KS["max_count_delta_50"], "the main text claims (unstirred below stirred below recirculating flow below the ANEC "
+       "cell, the three thin-film archetypes above it) holds in every case" if _KS["ordering_preserved"] else "CHANGES"))
 
 # -- 10. the catalyst rows' rate constants (2026-09-11: seven rows SOURCED, four at the floor) ----------
 # Each adopted value is a measured rate constant for the step that consumes the substrate, transferred
@@ -3165,16 +4814,21 @@ def _src_sens(tag_prefix):
     d = _SR["count_delta_at_band_edges"]
     moved = [(a, t, x[0], x[1]) for a, tt in d.items() for t, x in tt.items() if x[0] != 0 or x[1] != 0]
     mv = ("no architecture's >=25 or >=50 count moves" if not moved else
-          "; ".join("%s >=%s count %+d at the low edge, %+d at the high edge" % (a, t, x0, x1) for a, t, x0, x1 in moved))
-    return ("Adopted for %d row(s); measured bracket %s-%s M-1 s-1 (Table S7j). Across the seven architectures the "
+          "; ".join("%s >=%s count %+d at the low edge, %+d at the high edge" % ({"natural": "unstirred", "stirred": "stirred",
+                    "flow": "recirculating flow", "anec": "ANEC", "micro": "microfluidic", "rde": "RDE", "rce": "rotating cylinder"}[a], t, x0, x1)
+                    for a, t, x0, x1 in moved))
+    return ("Adopted for %d row(s); swept over the declared band %s-%s M-1 s-1 (Table S7j). Across the seven architectures the "
             "unstirred-to-rotating-cylinder gain is %.1f-%.1fx at the adopted value against %.1f-%.1fx at k = 0. "
-            "With every sourced row moved to the edges of its bracket at once, %s (the eleven-row tally, "
-            "which is the whole of what the fifty-row counts can move by); the ten-of-eleven result holds at both "
-            "edges: %s." % (len(rows), _ck_sci(lo), _ck_sci(hi), gains[0], gains[-1], gains0[0], gains0[-1], mv,
-                            "yes" if all(_SR["ten_of_eleven_holds_at_band"]) else "NO"))
-add("10. Homogeneous kinetics", "k, Ni(I)-bipyridine + aryl bromide (4 catalyst rows)", "1e2", "M-1 s-1", "assumption",
-    "adopted for the Ni-XEC, aryl-amination, amination-with-NH3 and biaryl-homocoupling rows, whose "
-    "substrate-consuming step is oxidative addition of an aryl bromide to Ni(I)-bipyridine; the value sits "
+            "With every sourced row moved to the edges of that band at once, %s (the tally over the %s catalyst rows, "
+            "which is the whole of what the fifty-row counts can move by). %s of the %s clears 25 mA cm-2 in some "
+            "architecture at the adopted values, %s at the low edges and %s at the high edges."
+            % (len(rows), _ck_sci(lo), _ck_sci(hi), gains[0], gains[-1], gains0[0], gains0[-1], mv,
+               _numword(_N_CAT), _numword(_SR["rows_clearing25_anywhere"]).capitalize(), _numword(_N_CAT),
+               _numword(_SR["rows_clearing25_anywhere_at_band"][0]), _numword(_SR["rows_clearing25_anywhere_at_band"][1])))
+add("10. Homogeneous kinetics", "k, low-valent nickel bipyridine + aryl bromide (2 catalyst rows)", "1e2", "M-1 s-1", "assumption",
+    "adopted for the Ni-XEC and biaryl-homocoupling rows, whose substrate-consuming step is oxidative addition "
+    "of an aryl bromide to a low-valent nickel bipyridine (Ni(0)(bpy) in the homocoupling, by its exemplar's own "
+    "account, so the Ni(I) values are an analogue in oxidation state as well as ligand there); the value sits "
     "inside a measured bracket -- the isolated complex [(CO2Et-bpy)NiCl]4 + PhBr gives 7.1 +/- 0.3 in THF at "
     "26 C (3.4-56 across para substituents, Hammett rho +1.1), the amination exemplar's own voltammetry in DMF "
     "loses the Ni(II/I) return wave at 100 mV/s with 4-bromoanisole (k >~ 1e2), and pulse radiolysis of "
@@ -3183,62 +4837,143 @@ add("10. Homogeneous kinetics", "k, Ni(I)-bipyridine + aryl bromide (4 catalyst 
     "Ting, S. I.; Williams, W. L.; Doyle, A. G. J. Am. Chem. Soc. 2022, 144, 5575-5582, Fig. 6 p. 5579 "
     "(DOI 10.1021/jacs.2c00462); Kawamata, Y. et al. J. Am. Chem. Soc. 2019, 141, 6392-6402, Fig. 2B p. 6394 "
     "(DOI 10.1021/jacs.9b01886); Till, N. A.; Oh, S.; MacMillan, D. W. C.; Bird, M. J. J. Am. Chem. Soc. 2021, "
-    "143, 9332-9337, p. 9334 (DOI 10.1021/jacs.1c04652)",
+    "143, 9332-9337, p. 9334 (DOI 10.1021/jacs.1c04652); Courtois, V.; Barhdadi, R.; Troupel, M.; Perichon, J. "
+    "Tetrahedron 1997, 53, 11569-11576, eq. 3 (the zerovalent complex)",
     "S5.7",
     _src_sens("Ni(I)bpy+ArBr"))
 add("10. Homogeneous kinetics", "k, cobalt hydride + alkene (2 catalyst rows)", "7e2", "M-1 s-1", "assumption",
-    "adopted for the two cobalt-electrocatalytic HAT rows (hydroamination, isomerization), whose "
-    "substrate-consuming step is hydrogen-atom transfer from Co(III)-H to the alkene; the value is the "
-    "finite-element fit to Co(salen) voltammetry with 4-tert-butylstyrene in DMF, and is transferred to the "
-    "rows' unactivated alkenes and cathodically generated hydride as a declared choice (the hydride-formation "
-    "step, rate-limiting in both cited studies, is not the model's k)",
+    "adopted for the two cobalt-electrocatalytic rows (alkene reduction, isomerization), whose substrate-consuming "
+    "step is the reaction of Co(III)-H with the alkene; the value is k_MHAT from the voltammetric simulations of the "
+    "Co(salen) hydride with styrene, in which it 'was found to give the observed current decrease and E1/2 shift' "
+    "(measured in 0.1 M TBAPF6 in DMF); the authors 'emphasize the qualitative agreement of our simulations and "
+    "experiments, as a full parametric fit for every styrene derivative at every concentration was not undertaken', "
+    "so it is a value that reproduces the voltammograms rather than a fitted constant, for a step they find proceeds by "
+    "insertion of Co-H into the styrene before Co-alkyl homolysis. It is transferred to the rows' unactivated alkenes "
+    "and cathodically generated hydride as a declared choice; the authors restrict that picture to styrenes ('non-aryl "
+    "and non-activated alkenes ... could adopt distinct mechanisms'), so the bracket reaches a decade below the value. "
+    "The exemplar's own kinetics, measured on its Co(salen) cycloisomerization, are first order in the alkene, "
+    "consistent with a turnover-limiting step at the alkene; no kinetics are reported for the conditions of the "
+    "reduction",
     "Boucher, D. G.; Pendergast, A. D.; Wu, X.; Nguyen, Z. A.; Jadhav, R. G.; Lin, S.; White, H. S.; Minteer, S. D. "
     "J. Am. Chem. Soc. 2023, 145, 17665-17677, p. 17674 (DOI 10.1021/jacs.3c03815); Wilson, C. V.; Holland, P. L. "
-    "J. Am. Chem. Soc. 2024, 146, 2685-2700 (DOI 10.1021/jacs.3c12329)",
+    "J. Am. Chem. Soc. 2024, 146, 2685-2700 (DOI 10.1021/jacs.3c12329); Gnaim, S. et al. Nature 2022, 605, 687-695 "
+    "(kinetics of conditions B)",
     "S5.7",
     _src_sens("Co-H+alkene"))
-add("10. Homogeneous kinetics", "k, Co(salen) aza-Wacker step (1 catalyst row)", "1e1", "M-1 s-1", "assumption",
-    "adopted for the Co(salen) aza-Wacker cyclization row from the exemplar's own voltammetry: with the "
-    "reaction's base (Na2CO3) and 10 mM substrate the Co(II)/Co(III) wave is unchanged at 100 mV/s at room "
-    "temperature, which bounds the step below ~4e1 M-1 s-1 there; the synthesis runs at reflux, for which "
-    "nothing is printed, so the adopted decade is a declared choice inside the room-temperature bound",
-    "Cai, C.-Y.; Wu, Z.-J.; Liu, J.-Y. et al. Nat. Commun. 2021, 12, 3745, Supplementary Fig. 2 (DOI "
-    "10.1038/s41467-021-24125-5)",
-    "S5.7",
-    _src_sens("own CV"))
-add("10. Homogeneous kinetics", "k, four catalyst rows with no measured constant", "0 (floor); 1-%s swept" % _ck_sci(max(float(k) for k in _CK["k_band_M"])),
+_N_FLOOR = _N_CAT - int(_SR.get("n_sourced", 0))
+add("10. Homogeneous kinetics", "k, %s catalyst rows with no measured constant" % _numword(_N_FLOOR), "0 (floor); 1-%s swept" % _ck_sci(max(float(k) for k in _CK["k_band_M"])),
     "M-1 s-1", "assumption",
+    "the two nickel aminations (their cycles are split between the electrodes: Ni(I) made at the cathode adds the "
+    "aryl bromide, and the amine leaves after an anodic oxidation to Ni(III), so no single electrode regenerates the "
+    "carrier inside its own film), the Co(salen) allylic C-H amination (no catalyst is regenerated at room "
+    "temperature; it turns over by a heat-driven homolysis, a first-order step), "
     "the Ni(tet a) macrocycle aryl-halide cyclization, the Mn-catalyzed diazidation (an azidyl-radical step), "
     "the Cu/anthraquinone photoelectrochemical cyanation (the substrate is consumed by the photoexcited "
-    "quinone) and the Rh(III) C-H alkenylation carry no measured bimolecular constant for the step the model "
-    "needs, so the published matrix keeps them at k = 0 -- turned over at the electrode, no regeneration inside "
-    "the film, the floor of the EC' current -- and the declared band is swept instead of a value being invented",
-    "Declared modelling choice; no literature k is claimed for these four rows",
+    "quinone), the Rh(III) C-H alkenylation and the nickel-electrocatalytic doubly decarboxylative coupling "
+    "(low-valent nickel reducing a redox-active ester) carry no measured bimolecular constant "
+    "for the step the model needs, so the published matrix keeps them at k = 0 -- turned over at the electrode, "
+    "no regeneration inside the film, the floor of the EC' current -- and the declared band is swept instead of "
+    "a value being invented",
+    "Declared modelling choice; no literature k is claimed for these %s rows" % _numword(_N_FLOOR),
     "S5.7",
     _ck_sentence())
-add("4. Solver species diffusivities", "D_S, substrate (catalyst-carried rows, S5.7)", "1.0e-9 x (0.369 / mu)", "m2 s-1", "assumption",
-    "a typical small-organic diffusivity in acetonitrile, scaled as 1/mu to each row's solvent "
-    "(Stokes-Einstein / Wilke-Chang scaling); the eleven substrates are the papers' model substrates "
-    "and are not individually structure-resolved here",
-    "Declared rule; the mediated rows' eight page-anchored substrate diffusivities span 6.9e-10 to 1.9e-9 m2 s-1",
-    "S5.7",
+_CSUB_D = sorted(float(r["D_sub_m2s"]) for r in _CSUB)
+add("4. Solver species diffusivities", "D_S, substrate (%d catalyst-carried rows, S5.7)" % _N_CAT,
+    "%.1e - %.1e" % (_CSUB_D[0], _CSUB_D[-1]), "m2 s-1", "derived",
+    "Wilke-Chang on the molecule each exemplar runs, in the row's own solvent, generated by "
+    "data/build_catalyst_substrates.py into data/catalyst_substrates.csv, which the catalyst solvers read; "
+    "until 2026-10-05 every catalyst row used one declared value, 1.0e-9 m2 s-1 scaled as 1/mu",
+    WC55 + " -- applied to each exemplar's own substrate",
+    "each structure is the substrate its exemplar names: " + "; ".join(
+        "%s (%s)" % (r["substrate"], r["reaction"].split(" (")[0]) for r in _CSUB),
     "Enters only through the substrate cap n_S F D_S C_S/delta and the reaction layer. %d of the %d cells sit "
-    "at that cap at the top of the k band, where the ceiling scales linearly with D_S: a x0.5-2 band moves "
-    "those cells' ceilings by the same factor and the others not at all. The k = 0 ceilings do not depend on it; "
-    "of the %d published cells carried at a sourced k, %d sit at their substrate cap."
+    "at that cap at the top of the k band, where the ceiling scales linearly with D_S: the +/-25 pct carried "
+    "for Wilke-Chang moves those cells' ceilings by the same factor and the others not at all. The k = 0 "
+    "ceilings do not depend on it; of the %d published cells carried at a sourced k, %d sit at their substrate cap."
     % (_CK["per_k"]["%g" % max(float(k) for k in _CK["k_band_M"])]["cells_at_substrate_cap"],
        _CK["per_k"]["%g" % max(float(k) for k in _CK["k_band_M"])]["cells"],
-       (_CK.get("sourced") or {}).get("n_sourced", 0) * 7,
+       (_CK.get("sourced") or {}).get("n_sourced", 0) * _N_ARCH,
        sum(v["cells_at_substrate_cap"] for v in (_CK.get("sourced") or {}).get("per_row", {}).values())))
 
 # -- 11. Numerical settings (declared solver choices; audited in S5.6) --------
+def _solvset_current(d, name):
+    """The two solver-setting sweeps were measured against one mediated matrix; once it moves they must be re-run."""
+    import hashlib as _hl
+    m = _hl.md5(open(_os.path.join(_os.path.dirname(_HERE_D), "julia", "mediated_ec_matrix.csv"), "rb").read()).hexdigest()
+    if d.get("matrix_md5") != m:
+        raise SystemExit("%s was measured against a different mediated matrix; re-run data/solver_setting_sweeps.py" % name)
+
+
+def _xc():
+    """The residual-scale argument (pass 17): under c_ref = max(c_bulk, 0.01 c_max,bulk) the ex-cell oxidant is referenced to
+    1 pct of the largest bulk (the chloride, seeded at C_Cl + 1e-3 mol m-3 in run_excell.jl), and the first-cell terms carry
+    delta/dx1 as well; dx1 is read from run_excell.jl's make_problem signature, never typed."""
+    src = io.open(_os.path.join(_os.path.dirname(_HERE_D), "julia", "run_excell.jl"), encoding="utf-8").read()
+    m = re.search(r"function make_problem\(k_M; N = \d+, dx1 = ([0-9.e-]+), d = delta\)", src)
+    assert m, "run_excell.jl's make_problem signature no longer carries dx1"
+    dx1 = float(m.group(1)); cref = 0.01 * (_EX["inputs"]["C_Cl_M"] * 1000 + 1e-3); cmax = _EX["c_OX_at_limit_M"] * 1000
+    return {"cref": cref, "ratio": cmax / cref, "dx1_um": dx1 * 1e6, "terms": (cmax / cref) * (_EX["delta_um"] * 1e-6 / dx1)}
+
+
+_XC = _xc()
+# the ex-cell delta-continuation walk under the alternative scale (run_excell.jl, isolated copy; data/solver_setting_sweeps.py)
+_WALK = _json.load(io.open(_os.path.join(_os.path.dirname(_HERE_D), "results", "cref_scale_sweep.json"),
+                           encoding="utf-8"))["excell_walk_alt_scale"]
+assert any(w["converged"] for w in _WALK) and any(not w["converged"] for w in _WALK), _WALK
+
+def _cref_sentence():
+    """The mediated matrix re-solved without the in-film maximum (results/cref_scale_sweep.json, run_mediated.jl in an
+    isolated copy)."""
+    d = _json.load(io.open(_os.path.join(_os.path.dirname(_HERE_D), "results", "cref_scale_sweep.json"), encoding="utf-8"))
+    _solvset_current(d, "results/cref_scale_sweep.json")
+    mv = d["moved"]
+    assert d["n_cells"] == d["bit_identical"] + d["within_1e-9"] + len(mv)
+    assert all(m["rel_change"] < 0 and "ceases" in m["alternative_limiter"] and "plateau" in m["published_limiter"] for m in mv), mv
+    rx = sorted({m["reaction"] for m in mv})
+    assert rx == ["Br- oxidation / electrophilic bromination"], rx
+    return ("Re-solving all %d mediated cells without the in-film maximum leaves %d of them unchanged (%d bit-identical, "
+            "the rest within 1e-9), while the bromination in its %s stops short of the plateau the adopted rule reaches, "
+            "%s low: the bromine that accumulates behind its detached front lies far above the 1 pct floor, and these are the "
+            "two thickest films, where the scale's 1/delta factor bites hardest -- the mechanism described above for the "
+            "chloride oxidant."
+            % (d["n_cells"], d["n_cells"] - len(mv), d["bit_identical"],
+               " and ".join(m["reactor"].lower() for m in mv) + (" films" if len(mv) > 1 else " film"),
+               " and ".join("%.1f pct" % (-100 * m["rel_change"]) for m in mv)))
+
+def _negc_sentence():
+    """NEGLIGIBLE_C swept on the production path (results/negligible_c_sweep.json, from run_mediated.jl in isolated copies)."""
+    d = _json.load(io.open(_os.path.join(_os.path.dirname(_HERE_D), "results", "negligible_c_sweep.json"), encoding="utf-8"))
+    _solvset_current(d, "results/negligible_c_sweep.json")
+    below = [c for c in d["cells_with_a_species_below_1e-10_of_bulk"]]
+    assert d["max_rel_change_vs_published"] == 0.0 and below, d["max_rel_change_vs_published"]
+    rx = sorted({c["reaction"] for c in below})
+    assert rx == ["Br- oxidation / electrophilic bromination"], rx
+    assert d.get("rule_off") and all(c["rel_change"] < 0 for c in d["rule_off"]), "the rule-off control must stall cells LOW"
+    _lim = {(r["reaction"], r["reactor"]): r["limiter"] for r in csv.DictReader(io.open(_os.path.join(
+        _os.path.dirname(_HERE_D), "julia", "mediated_ec_matrix.csv"), encoding="utf-8"))}
+    assert all("ceases" in c["limiter"] or "wall" in c["flag"] + c["limiter"] for c in d["rule_off"]), \
+        "the sentence says the rule-off solves STALL; one ended on something else: %r" % [c["limiter"][:40] for c in d["rule_off"]]
+    assert all(_lim[(c["reaction"], c["reactor"])].startswith("plateau") for c in d["rule_off"]), \
+        "the sentence says the rule-off cells stall short of their PLATEAU; a published limiter is not a plateau"
+    return ("Swept over ten decades, %s to %s, re-solving every architecture of three mediated rows by the production "
+            "path: the electrophilic bromination, whose anisole falls below 1e-10 of bulk at the electrode in %s "
+            "(down to %.0e) so that the rule excludes it from the step norm there, the Hofmann rearrangement "
+            "and the ACT alcohol oxidation. All %d cells return the published value at every threshold, to every printed "
+            "digit. Switching the rule off (threshold 0, the whole step rescaled by its largest component) stalls %s of the "
+            "bromination's cells short of their plateau, by up to %.0f pct, which is why the rule exists; the dead zone "
+            "that triggers it is described in \u00a7S5.5."
+            % (("%.0e" % max(d["thresholds"])).replace("e-0", "e-"), ("%.0e" % min(d["thresholds"])).replace("e-0", "e-"),
+               "every one of its seven cells" if len(below) == 7 else "%d of its seven cells" % len(below), min(c["c_sub_over_bulk"] for c in below),
+               d["n_cells"], _numword(len(d["rule_off"])), -100 * min(c["rel_change"] for c in d["rule_off"])))
+
 for n_, v, meth, sens in [
  ("Film nodes N (Stage-1 / EC')", "80 / 90", "finite-volume mesh resolution",
   "Mesh independence verified: at most 1 pct drift over N = 40-160 (\u00a7S5.6)."),
  ("First cell dx1", "max(0.02 um, min(x_k/50, 0.9 delta/N))",
   "first-cell size matched to the reaction layer x_k",
-  "Introduced to remove a hyper-stretched-mesh stall; the affected binary comparison now converges to "
-  "within 0.2 pct of the analytic ceiling (\u00a7S5.6)."),
+  "Matched to the reaction layer so that the mesh does not hyper-stretch; on the production stretch the binary "
+  "migration comparison sits within %.2f pct of the analytic ceiling (\u00a7S5.6)."
+  % abs(float(next(r for r in _AG if r["gate"] == "G8b")["err_pct"]))),
  ("Residual scale c_ref (per species)", "max(c_bulk, 0.01 c_max,bulk, max_x c)",
   "reference concentration in the flux D c_ref/delta that each conservation residual is divided by "
   "before the ||F||_inf test, in both solvers (the verification solver of \u00a7S5.3 and \u00a7S5.6, and "
@@ -3246,26 +4981,27 @@ for n_, v, meth, sens in [
   "species' largest concentration in the current "
   "iterate, so an electrogenerated species that is a trace in the bulk but molar at the electrode "
   "is held to the same relative tolerance as the rest",
-  "Perturbation: c_ref = max(c_bulk, 0.01 c_max,bulk) alone. The chloride ex-cell system's oxidant "
-  "(%.2g mol m-3 in the bulk, %.1f M at its carrier limit) is then normalised by a reference flux "
-  "%.1e times smaller than its in-film concentration implies, so the 1e-9 tolerance asks for a "
-  "relative accuracy of %.1e on that row, and the concentration-control walk stops on an existing branch at "
-  "52 pct of the analytic carrier limit on a 200 um film and 86 pct on 100 um, reaching it only on "
-  "films of 50 um or less; the stop moves with nothing else (reaction off, substrate removed, mesh "
-  "refined at either edge, proton mobility halved). With the in-film maximum included every film "
-  "reaches 2.00x Fick, and the 48 production cells move by less than 1e-4 pct (33 bit-identical), "
-  "because their oxidized mediators never exceed a few hundred mol m-3, and the 300 cells of the "
-  "Stage-1 layer, re-solved in an isolated copy under the alternative scale, are bit-identical at "
-  "the published precision. The verification solver of \u00a7S5.3 and \u00a7S5.6 uses the same rule; "
+  ("Perturbation: c_ref = max(c_bulk, 0.01 c_max,bulk) alone. The chloride ex-cell system's oxidant "
+  "(%.2g mol m-3 in the bulk, %.1f M of oxidizing equivalents at its carrier limit, %.1f M as Cl2 or HOCl) is then "
+  "referenced to the 1 pct floor, %.0f mol m-3, about %.0f times below the concentration it reaches; on the %.0f um "
+  "film, whose first cell is %g um, its first-cell flux terms are then of order %s in scaled units, so the 1e-9 "
+  "tolerance asks for a relative accuracy of %s on them, the double-precision floor, and the concentration-control "
+  "walk stops on an existing branch at "
+  "%s, reaching it only on the %s film. With the in-film maximum included every film reaches 2.00x Fick. "
+  % (_EX["inputs"]["c_OX_bulk_molm3"], _EX["c_OX_at_limit_M"], _EX["c_OX_at_limit_M"] / 2,
+     _XC["cref"], _XC["ratio"], _EX["delta_um"], _XC["dx1_um"], ("%.1e" % _XC["terms"]).replace("e+0", "e"),
+     "%.1e" % (1e-9 / _XC["terms"]),
+     " and ".join(("%d pct of the analytic carrier limit on a %d um film" if j == 0 else "%d pct on a %d um film")
+                  % (w["pct_of_limit"], w["delta_um"])
+                  for j, w in enumerate(sorted([w for w in _WALK if not w["converged"]], key=lambda w: -w["delta_um"]))),
+     " and ".join("%d um" % w["delta_um"] for w in _WALK if w["converged"])))
+  + _cref_sentence() + " The verification solver of \u00a7S5.3 and \u00a7S5.6 uses the same rule; "
   "under its own alternative, max(c_bulk, 1 mol m-3), every closed-form agreement of \u00a7S5.6 is "
   "identical, the \u00a7S5.3 support-ratio sweep is byte-identical, and the illustrative "
-  "concentration profiles move by at most 4e-6 relative."
-  % (_EX["inputs"]["c_OX_bulk_molm3"], _EX["c_OX_at_limit_M"],
-     _EX["c_OX_at_limit_M"] * 1000 / _EX["inputs"]["c_OX_bulk_molm3"],
-     1e-9 / (_EX["c_OX_at_limit_M"] * 1000 / _EX["inputs"]["c_OX_bulk_molm3"]))),
+  "concentration profiles move by at most 4e-6 relative."),
  ("Newton tolerance ||F||_inf", "1e-9", "row-scaled residual convergence criterion",
   "Tightening below 1e-9 changes no reported digit; the discrete charge-conservation check passes "
-  "at 3e-12."),
+  "at %s." % _AG_CC),
  ("Log-step clamp", "2.0-3.0", "positivity-preserving damped-Newton step limit",
   "Affects iteration count, not the converged solution."),
  ("Collapse threshold c_surf/c_bulk", "1e-3",
@@ -3277,7 +5013,7 @@ for n_, v, meth, sens in [
   "The ramp only supplies a warm start: the reported value comes from concentration control, "
   "which reaches the collapse criterion rather than stalling at the ramp's fold, so the growth "
   "factor sets how quickly that start is found and not the answer. Doubling the mesh while "
-  "refining the continuation 7.5-fold moves it by at most 0.01 pct (\u00a7S5.6)."),
+  "refining the continuation 7.5-fold moves it by at most %.2f pct (\u00a7S5.6)." % _AG_G12),
  ("FD Jacobian step", "1e-7 x max(|u|,1)", "dense forward-difference Jacobian on log DOFs",
   "The step enters the JACOBIAN, which chooses the Newton direction; it does not enter the "
   "RESIDUAL, which defines the solution. Convergence is declared on ||F||_inf < 1e-9 evaluated "
@@ -3294,14 +5030,23 @@ for n_, v, meth, sens in [
   "zone where it reacts with nothing, return Newton components of 1e9-1e12 and throttle the entire "
   "step by ~1e-12, so the boundary constraint could not move at all. Where no species is below the "
   "threshold the rule is identical to the old one",
-  "Swept over ten decades, 1e-6 to 1e-16, re-solving four cells (the two the change moved and two "
-  "it must not): every value identical to 6 decimal places at every threshold. RDE and RCE, which "
-  "never drive a species below 1e-3 of bulk, additionally return their pre-change values exactly. "
-  "See \u00a7S5.5."),
+  _negc_sentence()),
 ]:
     add("11. Numerics", n_, v, "-", "assumption",
         meth + ". A declared solver setting with no physical content",
         "Declared numerical setting; verified against the analytic limits of \u00a7S5.6", "", sens)
+
+# -- Table S12 pointers (G-THERMAXIS) ------------------------------------------
+# Every registry row whose input changes a cooling class inside its tested range points to SI Table S12, which lists each
+# change, and states the dependence as conditional in its own sentence (so the assumption ledger tiers it T3). A row named
+# by the sweep must exist; a row that already carries the pointer is left alone.
+_S12_ROWS = sorted({rn for t in _TAX["table"] for rn in t["rows"]})
+_S12_NAMES = {r["parameter"] for r in R}
+assert set(_S12_ROWS) <= _S12_NAMES, sorted(set(_S12_ROWS) - _S12_NAMES)
+for _r in R:
+    if _r["parameter"] in _S12_ROWS and "Table S12" not in _r["sensitivity"]:
+        _r["sensitivity"] = (_r["sensitivity"].rstrip().rstrip(".") + ". Every change of cooling class this input causes "
+                             "over the range Table S12 sweeps for it is listed there. Those verdicts are conditional on it.")
 
 # -- emit ---------------------------------------------------------------------
 FIELDS = ["category","parameter","value","units","provenance_class","method_note","citation",

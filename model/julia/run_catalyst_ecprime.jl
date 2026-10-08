@@ -64,6 +64,7 @@ num(x) = (y = tryparse(Float64, strip(x)); y === nothing ? NaN : y)
 
 const CARRIER_IS_SUPPORTING_ANION = Set([
     "Br- oxidation / electrophilic bromination", "Br-mediated Hofmann rearrangement",
+    "Amidyl-radical C-H amination (phenanthridinone)",
     "Cl-mediated ethylene epoxidation", "Alkaline lignin -> vanillin (pilot)"])
 carrier_is_electrolyte_anion(rxn) = rxn in CARRIER_IS_SUPPORTING_ANION
 const REACTORS_L = [(:natural,"Unstirred batch"), (:stirred,"Stirred batch"),
@@ -72,10 +73,27 @@ const REACTORS_L = [(:natural,"Unstirred batch"), (:stirred,"Stirred batch"),
                     (:rde,"RDE 1600 rpm"), (:rce,"Rotating cylinder 3000 rpm")]
 
 const K_BAND_M = [0.0, 1.0, 10.0, 100.0, 1e3, 1e4]        # M^-1 s^-1, DECLARED
-const D_S_REF, MU_REF = 1.0e-9, 0.369                      # m^2/s at the MeCN viscosity, DECLARED
+## SUBSTRATE DIFFUSIVITIES: each row's own molecule, read from its exemplar and computed by
+## Wilke-Chang in the row's solvent (data/build_catalyst_substrates.py -> catalyst_substrates.csv).
+## Until 2026-10-05 every row used one declared value, 1.0e-9 m^2/s x (0.369 mPa s / mu).
+const D_SUB = let t = csvrows("catalyst_substrates.csv"), h = t[1]
+    Dict(getf(r, h, "reaction") => num(getf(r, h, "D_sub_m2s")) for r in t[2:end])
+end
 
 catrows = [r for r in rxd if occursin("catalyst", lowercase(getf(r, rxh, "carrier_type")))]
-length(catrows) == 11 || error("expected 11 catalyst rows, found $(length(catrows))")
+sort([getf(r, rxh, "reaction") for r in catrows]) == sort(collect(keys(D_SUB))) ||
+    error("catalyst rows of reactions_50.csv and data/catalyst_substrates.csv disagree; found $(length(catrows)) rows and $(length(D_SUB)) substrates")
+
+## SEGMENT MODE (2026-10-05). CAT_ROWS="a:b" restricts this run to catalyst rows a..b in table order, so the
+## sweep can be solved as independent segments in scratch copies of julia/ and the segments concatenated in
+## order. The rows are independent -- no state passes from one to the next -- so the concatenation is the
+## file a single run writes; data/catalyst_ec_sensitivity.py --sweep is the single-run check of that.
+if !isempty(get(ENV, "CAT_ROWS", ""))
+    let ab = parse.(Int, split(ENV["CAT_ROWS"], ":"))
+        global catrows = catrows[ab[1]:ab[2]]
+        println("SEGMENT MODE: catalyst rows $(ab[1]) to $(ab[2]) of the table")
+    end
+end
 
 ## the species set, copied from run_all50_np.jl (k = 0 layer); returns (sp, Cc, nc, Dc, nu_s,
 ## Csub, nsub, dirn, zc, zprod, D_an_like, D_cat_like)
@@ -124,7 +142,7 @@ open(joinpath(@__DIR__, "catalyst_ec_sweep.csv"), "w") do io
     for r in catrows
         sp0, Cc, nc, Dc, nu_s, Csub, nsub, dirn, zc, zprod, Dan_like, Dcat_like, rxn = np_species(r)
         mu = num(getf(r, rxh, "mu_mPas"))
-        D_S = D_S_REF * MU_REF / mu
+        D_S = D_SUB[getf(r, rxh, "reaction")]
         ## the two appended species, and the homogeneous stoichiometry on the carrier pair
         sp = ECSpecies[]
         for (j, s) in enumerate(sp0)

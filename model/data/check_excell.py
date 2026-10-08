@@ -150,14 +150,26 @@ def main():
             return "%.1f × 10%s" % (m, str(e).replace("-", "⁻").translate(str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹"))), round(m, 1)
         want("oxidant bulk seed as printed", "is seeded at %.2g mol m⁻³ in the bulk" % inp["c_OX_bulk_molm3"],
              inp["c_OX_bulk_molm3"], 0.0005)
-        ratio = j["c_OX_at_limit_M"] * 1000.0 / inp["c_OX_bulk_molm3"]
-        s_r, m_r = sci(ratio)
-        want("residual-scale ratio as printed", "reference flux %s times smaller than its in-film concentration" % s_r, m_r, 0.05)
-        s_a, m_a = sci(1e-9 / ratio)
-        want("relative accuracy the unscaled row would need", "asks for a relative accuracy of %s on the terms" % s_a, m_a, 0.05)
+        # pass 17: without the in-film term the oxidant is referenced to the 1 % FLOOR of the largest bulk (the chloride,
+        # seeded at C_Cl + 1e-3 mol m-3), not to its own trace bulk; the first-cell terms carry delta/dx1 on top, dx1 read
+        # from run_excell.jl's make_problem signature
+        import re as _re
+        _src = open(os.path.join(SEC4, "julia", "run_excell.jl"), encoding="utf-8").read()
+        _m = _re.search(r"function make_problem\(k_M; N = \d+, dx1 = ([0-9.e-]+), d = delta\)", _src)
+        if not _m:
+            fails.append("first-cell size: run_excell.jl's make_problem no longer carries dx1")
+        else:
+            cref = 0.01 * (inp["C_Cl_M"] * 1000.0 + 1e-3)
+            ratio = j["c_OX_at_limit_M"] * 1000.0 / cref
+            terms = ratio * j["delta_um"] * 1e-6 / float(_m.group(1))
+            want("floor-referenced ratio as printed", "about %.0f times below the concentration it reaches" % ratio, ratio, 0.5)
+            s_t, m_t = sci(terms)
+            want("scaled first-cell terms as printed", "first-cell flux terms are then of order %s in scaled units" % s_t, m_t, 0.05)
+            s_a, m_a = sci(1e-9 / terms)
+            want("relative accuracy those terms demand", "asks for a relative accuracy of %s on them" % s_a, m_a, 0.05)
     want("propylene-free zone", "extending ≈%.0f μm from the electrode" % (round(j["propylene_free_zone_um"], -1)),
          round(j["propylene_free_zone_um"], -1), 5.0)
-    want("oxidant at the operating point", "carrying %.1f M of lumped Cl₂/HOCl" % j["c_OX_at_op_M"],
+    want("oxidant at the operating point", "carrying %.1f M of oxidizing equivalents" % j["c_OX_at_op_M"],
          j["c_OX_at_op_M"], 0.05)
     want("analytic carrier limit", "2 × %.0f = %.0f mA cm−2 at δ = %.0f μm"
          % (j["i_fick_Cl_mAcm2"], j["i_analytic_mAcm2"], j["delta_um"]), j["i_analytic_mAcm2"], 1.0)
@@ -182,7 +194,7 @@ def main():
                  dc[-1]["ratio_fick"], 0.002)
             if "ends before the carrier is depleted" in si or "We have not established why" in si:
                 fails.append("every continuation converges, but the SI still describes a branch that ends first")
-            want("oxidant at the limit, delta-independent", "holds %.1f M of lumped Cl₂/HOCl (2 D_Cl C_Cl/D_OX" % j["c_OX_at_limit_M"],
+            want("oxidant at the limit, delta-independent", "holds %.1f M of oxidizing equivalents" % j["c_OX_at_limit_M"],
                  j["c_OX_at_limit_M"], 0.05)
         else:
             if dc[0]["converged"]:
@@ -197,7 +209,7 @@ def main():
             want("delta-continuation, 200 um share", want_pair, dc[2]["pct_of_analytic"], 0.5)
             if any(d["converged"] for d in dc[1:]) and "ends before the carrier is depleted on thicker films" in si:
                 fails.append("a thick-film continuation now CONVERGES, but the SI still says the branch ends first")
-            want("oxidant at the limit, delta-independent", "holds %.1f M of lumped Cl₂/HOCl on every film" % j["c_OX_at_limit_M"],
+            want("oxidant at the limit, delta-independent", "holds %.1f M of oxidizing equivalents" % j["c_OX_at_limit_M"],
                  j["c_OX_at_limit_M"], 0.05)
     ## The DIRECTION words, which no numeric check can see: the SI must say the 200 um solve is
     ## a lower bound, and it may only say that while the solver agrees it did not converge.

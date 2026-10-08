@@ -94,17 +94,21 @@ def main(negative_control=False):
     want("S6.1 transport binds first in the beaker",
          "the unstirred beaker reaches only %.1f mA cm−2 on transport grounds, where even THF has "
          "a margin of %.2f×" % (DES[BEAKER], b["THF"] / DES[BEAKER]),
-         DES[BEAKER], b["THF"] / DES[BEAKER], tol=0.02)
+         DES[BEAKER], b["THF"] / DES[BEAKER], tol=0.055)       # the sentence prints one decimal
     want("S6.1 rotating transport ceilings",
-         "the highest in the model at 108 and 122 mA cm−2",
+         # GENERATED (2026-10-05): the typed "108 and 122" read as a vanished phrase the moment the matrix
+         # moved, although make_si.js interpolates both -- a pin that types its expectation fails on every
+         # legitimate model change.
+         "the highest in the model at %.0f and %.0f mA cm−2"
+         % (DES["RDE 1600 rpm"], DES["rotating cyl. 3000 rpm"]),
          DES["RDE 1600 rpm"], DES["rotating cyl. 3000 rpm"], tol=1.0)
-    _rd = (ceiling("THF", "RDE 1600 rpm")[0] / DES["RDE 1600 rpm"],
-           ceiling("DMF", "RDE 1600 rpm")[0] / DES["RDE 1600 rpm"])
+    _rd = (min(ceiling(x, "RDE 1600 rpm")[0] for x in ("THF", "MeCN", "DMF")) / DES["RDE 1600 rpm"],    # pass 8: over all three organics
+           max(ceiling(x, "RDE 1600 rpm")[0] for x in ("THF", "MeCN", "DMF")) / DES["RDE 1600 rpm"])
     want("S6.1 rotating disc margins", "margins %.2f–%.2f× at the disc" % _rd, *_rd, tol=0.02)
-    _rc = (ceiling("THF", "rotating cyl. 3000 rpm")[0] / DES["rotating cyl. 3000 rpm"],
-           ceiling("DMF", "rotating cyl. 3000 rpm")[0] / DES["rotating cyl. 3000 rpm"])
+    _rc = (min(ceiling(x, "rotating cyl. 3000 rpm")[0] for x in ("THF", "MeCN", "DMF")) / DES["rotating cyl. 3000 rpm"],    # pass 8: over all three organics
+           max(ceiling(x, "rotating cyl. 3000 rpm")[0] for x in ("THF", "MeCN", "DMF")) / DES["rotating cyl. 3000 rpm"])
     want("S6.1 rotating cylinder margins", "and %.2f–%.2f× at the cylinder" % _rc, *_rc, tol=0.02)
-    want("S6.1 microfluidic clears THF", "by 3.57× in THF",
+    want("S6.1 microfluidic clears THF", "by %.2f× in THF" % (ceiling("THF", MICRO)[0] / DES[MICRO]),
          ceiling("THF", MICRO)[0] / DES[MICRO], tol=0.02)
     want("S6.1 DMF across architectures",
          "for DMF it runs " + ", ".join("%.0f" % ceiling("DMF", r)[0] for r in RX),
@@ -115,10 +119,11 @@ def main(negative_control=False):
     want("S7f MeCN margin series",
          ", ".join("%s %.2fx" % (a.replace("$\\mu$m", "um"), ceiling("MeCN", a)[0] / DES[a]) for a in _MEC),
          *[ceiling("MeCN", a)[0] / DES[a] for a in _MEC], tol=0.02)
+    # pass 7: generated from the re-solve (it was typed, and the derived H_EXT moved every factor)
+    _zg = [DES[STACK] / ceiling(s_, STACK)[0] for s_ in ("THF", "MeCN", "DMF", "aq. NaOH")]
     want("S6.1 zero-gap shortfall",
-         "by factors of 15.2× (THF), 9.1× (MeCN), 5.6× (DMF), 6.7× (aqueous NaOH)",
-         *[DES[STACK] / ceiling(s_, STACK)[0] for s_ in ("THF", "MeCN", "DMF", "aq. NaOH")],
-         tol=0.3)
+         "by factors of %.1f× (THF), %.1f× (MeCN), %.1f× (DMF), %.1f× (aqueous NaOH)" % tuple(_zg),
+         *_zg, tol=0.3)
     # ---- holes found by G-COVER (data/audit_number_coverage.py) on 2026-08-30 -----------
     # Each of these was a PARTIAL PAIR: the SI prints two numbers in one clause and only one of
     # them was asserted. Trap 9, three more instances.
@@ -184,23 +189,30 @@ def main(negative_control=False):
         _f = float(_med[0]["i_tier0_mAcm2"]); _e = float(_med[0]["i_ec_mAcm2"])
         want("S5.5 Hofmann stirred floor + ceiling",
              "from a %.0f mA cm−2 floor to %.0f mA cm−2" % (_f, _e), _f, _e, tol=1.0)   # the SI computes this sentence (2026-09-07)
-        want("S5.5 Hofmann amplification", "amplifies ×15, the deep-Savéant kinetic regime",
-             _e / _f, tol=0.6)
+        # 2026-10-07: at the measured constant (3.3 M-1 s-1) the stirred Hofmann cell is kinetic with the amide drawn down,
+        # not exhausted; the amplification, the reaction layer and the wall depletion are each read from the matrix
+        import re as _re
+        _xk = float(_med[0]["xk_um"]); _cs = float(_re.search(r"c_sub/cb ([0-9.eE+-]+)", _med[0]["limiter"]).group(1))
+        want("S5.5 Hofmann amplification", "mA cm−2 (×%.0f), with the amide" % (_e / _f), _e / _f, tol=0.6)
+        want("S5.5 Hofmann reaction layer", "turns its mediator over in a %.0f μm reaction layer" % _xk, _xk, tol=0.6)
+        want("S5.5 Hofmann wall depletion", "drawn down to %.1f %% of bulk at the wall" % (100 * _cs), 100 * _cs, tol=0.06)
     # S5.2's Hofmann/unstirred passage is computed in the SI since 2026-09-07 (it had typed the 300 um
     # values -- delta/x_k 128, floor 6.95, ceiling 104.7 -- for two film changes). At the 228 um film the
     # matrix gives delta/x_k 97, a commuting bound of 9.14 mA cm-2, a resolved 137.8 mA cm-2 and an
     # amplification of 15.1; every one is read from the matrix here, and the numerals above are the
     # vintage record, not the expectation.
+    # 2026-10-07: since the Hofmann row took its measured constant, the stiffest cell S5.2 names is the anisole bromination
+    # in the unstirred beaker; its numbers are read from the matrix here, as the Hofmann ones were.
     with open(os.path.join(ROOT, "julia", "mediated_ec_matrix.csv"), encoding="utf-8") as _fh:
         _un = [r for r in _csv.DictReader(_fh)
-               if "Hofmann" in r["reaction"] and r["reactor"] == "Unstirred batch"]
+               if "electrophilic bromination" in r["reaction"] and r["reactor"] == "Unstirred batch"]
     if _un:
         _ut0 = float(_un[0]["i_tier0_mAcm2"]); _uec = float(_un[0]["i_ec_mAcm2"])
         _udx = float(_un[0]["delta_um"]) / float(_un[0]["xk_um"])
-        want("S5.2 Hofmann unstirred delta/x_k", "largest δ/x_k in the set at %.0f" % _udx, _udx, tol=0.6)
-        want("S5.2 Hofmann unstirred floor", "commuting bound of %.2f mA cm−2" % _ut0, _ut0, tol=0.006)
-        want("S5.2 Hofmann unstirred ceiling + amplification",
-             "resolves it at %.1f mA cm−2, an amplification of %.1f" % (_uec, _uec / _ut0), _uec, _uec / _ut0, tol=0.06)
+        want("S5.2 stiffest cell delta/x_k", "at its measured rate constant, with δ/x_k = %.0f" % _udx, _udx, tol=0.6)
+        want("S5.2 stiffest cell floor", "commuting bound of %.2f mA cm−2" % _ut0, _ut0, tol=0.006)
+        want("S5.2 stiffest cell ceiling + ratio",
+             "resolves it at %.1f mA cm−2, %.2f times" % (_uec, _uec / _ut0), _uec, _uec / _ut0, tol=0.06)
     # ---- 2026-09-14: the S6/S3.2/Table S4 thermal numbers that had been TYPED on the retired
     # sigma = 12.5 (U' 0.0144/0.0160, T_ss 187 C, flip 11.15 / 1.27x, 12.9x / 20.0x, 2.05x at the
     # cylinder) are generated from figK_thermal.json now; these pins re-solve them here from
@@ -237,8 +249,8 @@ def main(negative_control=False):
     want("S9 MeCN flip", "reverse only at %.1f mS" % _mf, _mf, tol=0.05)
     want("S9 MeCN flip, rotating cylinder", "and %.1f mS" % _mc, _mc, tol=0.05)
     want("S9 MeCN kappa", "0.25 M Bu4NBF4 (κ = 19.95 mS cm−1)", SOL["MeCN"][0] * 10, tol=0.01)
-    want("S9 DMF kappa", "0.2 M NaI (κ = 8.77 mS cm−1)", SOL["DMF"][0] * 10, tol=0.01)
-    want("S9 aqueous kappa", "1 M NaOH (κ = 174.5 mS cm−1, now measured)", SOL["aq. NaOH"][0] * 10, tol=0.01)
+    want("S9 DMF kappa", "0.2 M NaI (κ = %.2f mS cm−1)" % (SOL["DMF"][0] * 10), SOL["DMF"][0] * 10, tol=0.01)
+    want("S9 aqueous kappa", "1 M NaOH (κ = 174.5 mS cm−1, interpolated between two measured points of the Dorn isotherm)", SOL["aq. NaOH"][0] * 10, tol=0.01)
 
     if negative_control:
         si = si.replace("MeCN (438, 0.88×)", "MeCN falls short")

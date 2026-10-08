@@ -56,7 +56,7 @@ data/parameters_provenance.csv under the three-state standard of
 docs/PROVENANCE_STANDARD.md -- measured (state A, source + locator), derived (state B,
 named method from A/B inputs) or assumption (state C, declared + sensitivity). The 22
 constants below were previously unregistered and are now registered, category 9:
-    H_EXT = 13.0 W/m^2 K        derived  (h_conv 6.36 + h_rad 6.60 at Ts = 65 C)
+    H_EXT = 13.8 W/m^2 K        derived  (h_conv 7.22 + h_rad 6.60 at Ts = 65 C, L = 5.09 cm)
     sigma = 12.5 / 12.5         derived  (A_ext/A_elec from the registered vessel area)
     sigma = 10 / 7 / 0.8        assumption (declared package geometries; the 250 um chip
                                  value is THE load-bearing one -- sigma in [3.5, 21] moves
@@ -105,6 +105,7 @@ from customplot import gengrid, rainbow_2
 # constants, their values and their provenance gaps are unchanged; see that file's
 # docstring for the reconciliation record.
 sys.path.insert(0, HERE)
+import thermal_model as _TM_HX
 from thermal_model import (TAMB, H_EXT, SIGMA_BEAKER, SOLVENTS as _SOLV, REACTORS,
                            COOLING_BANDS, U_passive, q_Wcm2, i_boil, U_required,
                            E_cell, T_ss)
@@ -288,9 +289,9 @@ _B = REACTORS[0]
 _Ub = U_passive(_B[2], _B[3])
 _Uw = U_passive(0.00996/1.0e-3, _B[3])          # wetted wall + base for a 100 mL charge
 _ASSUMED = 0.02                                  # the still-air value earlier treatments assumed
-_HEXT_HOT = 18.2                                 # h_ext at DMF's boiling point (see the H_EXT row)
+_HEXT_HOT = round(_TM_HX.h_ext_at(152.8), 1)    # h_ext at DMF's boiling point (thermal_model.h_ext_at)
 _Uh = (1.0/(1.0/_B[3] + 1.0/_HEXT_HOT))*_B[2]*1e-4
-_Ubh = (1.0/(1.0/_B[3] + 1.0/_HEXT_HOT))*(0.00996/1.0e-3)*1e-4
+_Ubh = (1.0/(1.0/_B[3] + 1.0/_HEXT_HOT))*SIGMA_BEAKER*1e-4
 _si = {"assumed_U": _ASSUMED, "geometric_U": _Ub, "wetted_U": _Uw,
        "h_ext_hot_Wm2K": _HEXT_HOT, "beaker": {}, "worked_example": {}}
 for _lab, _el, _kap, _Tb, _pv, _col in SOLVENTS:

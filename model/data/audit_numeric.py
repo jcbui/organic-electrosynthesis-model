@@ -180,11 +180,16 @@ S6_LABEL = {
     "NHPI-mediated allylic C-H -> enone": "NHPI / allylic C\u2013H (33 mM, acetone)",
     "HMF -> FDCA (biomass)": "ACT / HMF \u2192 FDCA (40 mM, aq. pH 10)",
     "BQ-mediated Wacker-Tsuji oxidation": "BQ / Wacker\u2013Tsuji (22 mM, MeCN/H\u2082O)",
-    "Br- oxidation / electrophilic bromination": "electrophilic bromination (0.152 M",
+    "Br- oxidation / electrophilic bromination": "electrophilic bromination (0.25 M",
     "Aryl thiocyanation (NH4SCN)": "SCN\u207b / thiocyanation (0.1 M, AcOH/HCOOH)",
+    "Oxazole synthesis from ketones and acetonitrile": "Ar\u2083N / oxazole synthesis (5 mM, MeCN)",
 }
-def _fxk(v):  return f"{v:.0f}" if v >= 100 else f"{v:.1f}"
-def _fcur(v): return f"{v:.0f}" if v >= 10  else f"{v:.1f}"
+def _fxk(v):  return "\u221e" if v == float("inf") else (f"{v:.0f}" if v >= 100 else f"{v:.1f}")   # k = 0: no reaction layer
+def _fcur(v):   # matches make_si.js fcur: two significant figures below 0.2 (JS toPrecision(2)), pass 8
+    import math
+    if v >= 10: return f"{v:.0f}"
+    if v >= 0.2 or v <= 0: return f"{v:.1f}"
+    return f"{v:.{max(0, 1 - math.floor(math.log10(v)))}f}"
 for rxn, (xk, st0, stEC, tg0, tgEC) in s6.items():
     want = f"{_fxk(xk)}{_fcur(st0)} \u2192 {_fcur(stEC)}{_fcur(tg0)} \u2192 {_fcur(tgEC)}"
     if want not in si_doc:
@@ -193,6 +198,12 @@ for rxn, (xk, st0, stEC, tg0, tgEC) in s6.items():
              f"is stale against julia/mediated_ec_matrix.csv")
     # and the numbers must sit on the row that NAMES this system, not merely somewhere in the doc
     lab = S6_LABEL.get(rxn)
+    if lab:
+        import unicodedata as _ud
+        lab = _ud.normalize("NFKC", lab)      # the shipped text is read NFKC-normalised (superscript minus -> U+2212)
+    if lab and lab not in si_doc:
+        # a label that stopped matching used to skip the row silently (the Wacker label read 22 mM for weeks)
+        flag("FAIL","TableS6", f"{rxn[:38]}: the row label {lab!r} is not in the shipped SI")
     if lab and lab in si_doc:
         seg = si_doc[si_doc.index(lab): si_doc.index(lab) + 1600]
         if want not in seg:
@@ -246,17 +257,17 @@ def get_row(frag): return rx[rx.reaction.str.contains(frag, regex=False)].iloc[0
 label_checks = [
  ("make_figs.py","BASF methoxylation (0.8 M)", get_row("4-tBu-toluene").C_carrier_M, 0.81),
  ("make_figs.py","ADN (6.9 M)", get_row("Acrylonitrile").C_carrier_M, 6.85),
- ("make_figs.py","sulfone, kilo-scale (0.47 M)", get_row("sulfone").C_carrier_M, 0.47),
- ("make_figs.py","Birch (0.14 M)", get_row("Birch").C_carrier_M, 0.141),
+ ("make_figs.py","sulfone, kilo-scale (med. 14 mM)", get_row("sulfone").C_carrier_M, 0.014),
+ ("make_figs.py","Birch (0.029 M)", get_row("Birch").C_carrier_M, 0.0286),
  ("make_figs.py","Ni-XEC (cat. 15 mM)", get_row("Ni-XEC").C_carrier_M, 0.015),
  ("make_figs.py","ACT-mediated (med. 25 mM)", get_row("ACT-mediated").C_carrier_M, 0.025),
  ("make_figs.py","Kolbe (1 M)", get_row("Kolbe").C_carrier_M, 1.00),
  ("make_fig_main.py","Shono oxidation (1.56 M)", get_row("Shono oxidation").C_carrier_M, 1.56),
- ("make_fig_main.py","decarboxylative C–C (0.03 M)", get_row("Doubly").C_carrier_M, 0.029),
+ ("make_fig_main.py","decarboxylative C–C  [cat. 5.8 mM]", get_row("Doubly").C_carrier_M, 0.0058),
 ]
 # The expected value is READ OUT OF THE LABEL, not typed beside it: the third element is only a
 # convenience for the message. A label and a table that disagree fail; this file cannot go stale.
-_LBL = re.compile(r"\(\s*(?:cat\.\s*|med\.\s*)?([\d.]+)\s*(mM|M)\s*\)")
+_LBL = re.compile(r"[\(\[]\s*(?:cat\.\s*|med\.\s*)?([\d.]+)\s*(mM|M)\s*[\)\]]")
 for fname, lab, actual, printed in label_checks:
     s = open(FIG(fname)).read()
     if lab not in s:

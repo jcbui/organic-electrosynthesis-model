@@ -21,15 +21,14 @@ TWO FAMILIES, BOUNDED DIFFERENTLY BECAUSE THEY SCALE DIFFERENTLY
 
 * THERMAL (Fig. 5 ceilings, zero-gap currents, shortfall ratios). Dominant input is the electrolyte
   conductivity, whose per-electrolyte bands the registry states. Widened by the two model choices
-  the registry quantifies: h_int (-5/+6% on every ceiling, swept 50 -> infinity) and the
-  temperature-resolved external film h_ext(T_b), which raises ceilings by THF -0.1%, MeCN +3.5%,
-  DMF +15.7%, aq. NaOH +7.3% and is held constant in the code.
+  the registry quantifies: h_int, swept 50 W m-2 K-1 to the well-stirred limit in each cell, and the
+  temperature-resolved external film h_ext(T_b), evaluated in each cell for the upper edge of every
+  ceiling (results/si_sensitivity_bounds.json carries the per-cell percentages).
 
 A bound is reported as one-sided where the registry says the range is one-sided. The THF
-conductivity is the clearest case: its floor is MEASURED at 0.256 mS/cm (Das 2008, Table 1) but the
-top "can no longer be defended at 6.6", so the upper bound on kappa -- and hence the LOWER bound on
-the THF ceiling -- is not established, and the beaker verdict is conditional on the conductivity
-maximum lying below about 8 mS/cm.
+conductivity is the clearest case: its band is 0.2-6.6 mS/cm, with a state-B floor (Lee 2022 cell
+resistance) and an upper EDGE rather than a bound, so the registry row also tests the measured-data
+continuations beyond 6.6; the note travels with every THF entry.
 """
 import io, json, os, sys
 
@@ -37,17 +36,39 @@ HERE = os.path.dirname(os.path.abspath(__file__)); SEC4 = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(SEC4, "figs"))
 import thermal_model as T
 
-## kappa in S/m. (lo, hi, one_sided_note, registry row the band comes from)
-KAPPA_BAND = {
- "THF":      (0.026, 0.80, "upper end NOT ESTABLISHED; 8 mS/cm is the conditional ceiling the "
-                           "registry names, not a bound", "3.0 M LiBr/THF"),
- "MeCN":     (1.50, 2.30, None, "0.25 M Bu4NBF4/MeCN"),
- "DMF":      (0.40, 1.60, None, "0.2 M NaI/DMF (hard state-B ceiling 16.38 mS/cm)"),
- "aq. NaOH": (17.10, 17.80, None, "1 M NaOH aq (measured; +/-2%)"),
-}
+## kappa in S/m. (lo, hi, one_sided_note, registry row the band comes from). The bands are READ from the registry rows'
+## own sensitivity text ("Band x-y mS cm-1"), which is what SI Table S4 prints, so the bounds of Table S9 cannot be taken
+## over a different band from the one the reader is shown (chemistry audit, pass 5: THF had been bounded over 0.26-8 and
+## NaOH over 171-178 while Table S4 printed 0.2-6.6 and 174-182).
+_BAND_ROWS = {"THF": "3.0 M LiBr/THF", "MeCN": "0.25 M Bu4NBF4/MeCN", "DMF": "0.2 M NaI/DMF", "aq. NaOH": "1 M NaOH aq"}
+_BAND_NOTE = {"THF": "upper edge 6.6 mS/cm is a declared edge, not a bound; the registry row tests the measured-data "
+                     "continuations beyond it"}
+
+
+def _registry_bands():
+    import csv as _csv, re as _re
+    reg = {r["parameter"]: r for r in _csv.DictReader(io.open(os.path.join(HERE, "parameters_provenance.csv"), encoding="utf-8"))}
+    out = {}
+    for sl, row in _BAND_ROWS.items():
+        m = _re.search(r"\bBand ([0-9.]+)-([0-9.]+) mS cm-1", reg[row]["sensitivity"])
+        if not m:
+            raise SystemExit("registry row %r states no 'Band x-y mS cm-1'; Table S9 cannot be bounded" % row)
+        out[sl] = (float(m.group(1)) / 10.0, float(m.group(2)) / 10.0, _BAND_NOTE.get(sl), row)
+    return out
+
+
+KAPPA_BAND = _registry_bands()
 ## multiplicative widening from the two quantified model choices, per solvent
-H_INT   = (0.95, 1.06)                       # every ceiling, swept h_int 50 -> infinity
-H_EXT_T = {"THF": 0.999, "MeCN": 1.035, "DMF": 1.157, "aq. NaOH": 1.073}   # resolving h_ext(T_b)
+# chemistry audit pass 7: h_int is swept 50 W m-2 K-1 -> the well-stirred limit IN EACH CELL. A flat -5/+6 % factor held
+# only for the beaker (declared 100); the microfluidic chip and the stack (declared 5000) move -14 to -18 % at the low end.
+H_INT_SWEEP = (50.0, 1e12)
+def _hint_ends(kap, gap, tb, sig, hdecl):
+    ref = T.i_boil(kap, gap, tb, T.U_passive(sig, hdecl))
+    return [T.i_boil(kap, gap, tb, T.U_passive(sig, h)) / ref - 1.0 for h in H_INT_SWEEP]
+# resolving h_ext at the boiling point, unstirred beaker (computed from thermal_model.h_ext_at; it was typed against the
+# retired 8 cm vessel)
+H_EXT_T = {nm: T.i_boil(kap, T.GAP_BEAKER, tb, T.U_passive(T.SIGMA_BEAKER, 100., h_ext=T.h_ext_at(tb)))
+               / T.i_boil(kap, T.GAP_BEAKER, tb, T.U_passive(T.SIGMA_BEAKER, 100.)) for nm, el, kap, tb, cls in T.SOLVENTS}
 
 def thermal_bounds():
     out = {}
@@ -68,15 +89,18 @@ def thermal_bounds():
                                        ("microfluidic", mg[1], Um, mg[4]),
                                        ("zero-gap", zg[1], Uz, zg[4])):
             ref = T.i_boil(kap,  gap, tb, U)
-            a   = T.i_boil(lo_k, gap, tb, U)
-            b   = T.i_boil(hi_k, gap, tb, U)
-            lo, hi = min(a, b), max(a, b)
-            lo *= H_INT[0]
-            hi *= H_INT[1] * H_EXT_T[nm]
+            sig, hdecl = {"beaker": (T.SIGMA_BEAKER, 100.), "microfluidic": (mg[2], mg[3]), "zero-gap": (zg[2], zg[3])}[label]
+            vals = [T.i_boil(k, gap, tb, T.U_passive(sig, h)) for k in (lo_k, hi_k) for h in H_INT_SWEEP + (hdecl,)]
+            # audit pass 40: the external film at the boiling point is evaluated IN THIS CELL for the upper edge; applying
+            # the unstirred beaker's factor to every cell understated the microfluidic and zero-gap upper edges by up to 11 pct
+            hot = [T.i_boil(k, gap, tb, T.U_passive(sig, h, h_ext=T.h_ext_at(tb))) for k in (lo_k, hi_k) for h in H_INT_SWEEP + (hdecl,)]
+            ext = T.i_boil(kap, gap, tb, T.U_passive(sig, hdecl, h_ext=T.h_ext_at(tb))) / ref
+            lo, hi = min(vals), max(vals + hot)
+            e0, e1 = _hint_ends(kap, gap, tb, sig, hdecl)
             out["%s %s ceiling" % (nm, label)] = dict(
                 value=round(ref, 2), lower=round(lo, 2), upper=round(hi, 2),
-                driver="kappa band %.3g-%.3g S/m, widened by h_int (-5/+6%%) and h_ext(T_b) (%+.1f%%)"
-                       % (lo_k, hi_k, 100 * (H_EXT_T[nm] - 1)),
+                driver="kappa band %.3g-%.3g S/m, widened by h_int 50 W m-2 K-1 to the well-stirred limit (%+.0f/%+.0f%%) and h_ext(T_b) (%+.1f%%)"
+                       % (lo_k, hi_k, 100 * e0, 100 * e1, 100 * (ext - 1)),
                 registry_row=row, one_sided=note)
 
     ## Fig. 5c is a COOLING-DUTY ratio: U'_required(i_design) / U'_passively_available. It is NOT
@@ -94,18 +118,15 @@ def thermal_bounds():
                 continue
             avail = T.U_passive(sig, hi_int)
             ref = T.U_required(idesign, kap,  gap, tb) / avail
-            a   = T.U_required(idesign, lo_k, gap, tb) / avail
-            b   = T.U_required(idesign, hi_k, gap, tb) / avail
-            lo_r, hi_r = min(a, b), max(a, b)
-            ## h_int moves BOTH the requirement and the availability; the registry's -5/+6% band on
-            ## ceilings is the net effect, applied here to the ratio in the widening direction.
-            lo_r /= H_INT[1]; hi_r /= H_INT[0]
+            ## h_int enters the availability; the ratio is evaluated at both ends of its sweep in this cell
+            vals = [T.U_required(idesign, k, gap, tb) / T.U_passive(sig, h) for k in (lo_k, hi_k) for h in H_INT_SWEEP + (hi_int,)]
+            lo_r, hi_r = min(vals), max(vals)
             _tag = ("zero-gap" if "zero-gap" in rl else "25 um" if "microfluidic" in rl
                     else "RDE" if "RDE" in rl else "rotating-cylinder")
             key = "%s %s cooling shortfall" % (nm, _tag)
             out[key] = dict(value=round(ref, 2), lower=round(lo_r, 2), upper=round(hi_r, 2),
-                driver="U'_required(i_design=%g)/U'_passive over the kappa band %.3g-%.3g S/m"
-                       % (idesign, lo_k, hi_k),
+                driver="U'_required(i_design=%g)/U'_passive over the kappa band %.3g-%.3g S/m and h_int 50 W m-2 K-1 "
+                       "to the well-stirred limit" % (idesign, lo_k, hi_k),
                 registry_row=row, one_sided=note)
     return out
 
@@ -129,7 +150,12 @@ def _matrix(edge):
     out = {}
     for r in csv.DictReader(io.open(os.path.join(JLD, "all50_np_matrix.csv"), encoding="utf-8")):
         k = (r["reaction"], r["reactor"])
-        if k not in dl: continue
+        if k not in dl:
+            ## 2026-10-05: this was a silent `continue`. Six rows had been renamed in the reaction table while
+            ## julia/delta_bounds.csv still carried their old names, so their 42 cells dropped out of the band
+            ## edges and every "bound" was computed over 44 rows against a central value over 50 -- lower edges
+            ## above the central value, and no error. A row without a film band is a stale input, not a skip.
+            raise SystemExit("julia/delta_bounds.csv has no film band for %s / %s -- re-run julia/emit_deltas.jl" % k)
         dref, dlo, dhi = dl[k]
         d = dlo if edge == "lo" else dhi
         out[k] = float(r["i_np_mAcm2"]) * dref / d
@@ -160,7 +186,10 @@ def transport_bounds():
     ## their Nernst-Planck value -- an EC' row scored without its source term. That is the
     ## partially-written-matrix trap this repository has already been bitten by once. Require the
     ## full 48 rows.
-    NCELL = 8 * len(ARCH)          # 56: eight mediated rows x seven archetypes (was a typed 48)
+    ## one cell per mediated row and archetype, counted from the published mediated matrix (a typed 48, then 8 x 7)
+    NCELL = sum(1 for _ in io.open(os.path.join(JLD, "mediated_ec_matrix.csv"), encoding="utf-8")) - 1
+    if NCELL <= 0 or NCELL % len(ARCH):
+        raise SystemExit("mediated_ec_matrix.csv holds %d cells, not a whole number of rows x %d archetypes" % (NCELL, len(ARCH)))
     bad = []
     for e in ("lo", "hi"):
         f = os.path.join(JLD, "mediated_ec_matrix_band_%s.csv" % e)
@@ -169,13 +198,17 @@ def transport_bounds():
         n = sum(1 for _ in io.open(f, encoding="utf-8")) - 1
         if n != NCELL:
             bad.append("%s has %d of %d cells" % (e, n, NCELL))
-    for e, fn in (("lo", "catalyst_ec_band_lo.csv"), ("hi", "catalyst_ec_band_hi.csv")):   # 2026-09-11: the seven sourced rows, 49 cells each edge
+    # one cell per SOURCED catalyst row and archetype; the rows are read from the published sourced solve (seven until the
+    # chemistry audit of 2026-10-05, four since), never typed
+    NSRC = len({r["reaction"] for r in csv.DictReader(io.open(os.path.join(JLD, "catalyst_ec_sourced.csv"), encoding="utf-8"))
+                if float(r["k_M"]) > 0})
+    for e, fn in (("lo", "catalyst_ec_band_lo.csv"), ("hi", "catalyst_ec_band_hi.csv")):
         f = os.path.join(JLD, fn)
         if not os.path.exists(f):
             bad.append("catalyst %s missing" % e); continue
         n = sum(1 for _ in io.open(f, encoding="utf-8")) - 1
-        if n != 7 * len(ARCH):
-            bad.append("catalyst %s has %d of %d cells" % (e, n, 7 * len(ARCH)))
+        if NSRC == 0 or n != NSRC * len(ARCH):
+            bad.append("catalyst %s has %d of %d cells" % (e, n, NSRC * len(ARCH)))
     if bad:
         return {"status": "band-edge mediated/catalyst solve(s) incomplete: " + "; ".join(bad)}
     ref = {}
@@ -211,6 +244,19 @@ def transport_bounds():
 
 def main():
     res = {"thermal": thermal_bounds()}
+    # the h_int sweep's effect on every boil-off ceiling, per architecture, over the four solvents (SI S10 prints it)
+    eff = {}
+    for rl, gap, sig, hi_int, idesign in T.REACTORS:
+        e = [_hint_ends(kap, gap, tb, sig, hi_int) for nm, el, kap, tb, cls in T.SOLVENTS]
+        eff[rl.replace("\n", " ")] = {"h_int": hi_int, "low_pct": [100 * min(x[0] for x in e), 100 * max(x[0] for x in e)],
+                                       "high_pct": [100 * min(x[1] for x in e), 100 * max(x[1] for x in e)]}
+    res["h_int_effect"] = eff
+    res["h_ext_T_pct"] = {nm: 100 * (v - 1) for nm, v in H_EXT_T.items()}
+    # does any verdict (ceiling against the cell's own transport ceiling) reverse anywhere in the sweep?
+    res["h_int_flips"] = [[rl.replace("\n", " "), nm] for rl, gap, sig, hi_int, idesign in T.REACTORS
+                          for nm, el, kap, tb, cls in T.SOLVENTS for h in H_INT_SWEEP
+                          if (T.i_boil(kap, gap, tb, T.U_passive(sig, h)) >= idesign)
+                          != (T.i_boil(kap, gap, tb, T.U_passive(sig, hi_int)) >= idesign)]
     res["transport"] = transport_bounds()
     print("%-34s %10s %10s %10s   %s" % ("reported quantity", "lower", "value", "upper", "dominant driver"))
     for k, v in res["thermal"].items():

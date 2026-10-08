@@ -62,5 +62,41 @@
   "kind": "aqueous-unsourced",
   "source": "NONE LOCATED -- aqueous-organic, so a pure-component bracket is not valid upward; carried as a declared estimate",
   "mu_within_bound": null
+ },
+ {
+  "mixture": "EtOH/MeOH",
+  "carried_mu": 2.157,
+  "carried_rho": 0.786,
+  "kind": "organic-bracket",
+  "bracket": [
+   0.544,
+   1.074
+  ],
+  "source": "pure-component viscosities, both page-anchored; monotone mixing ASSUMED (valid for organic-organic pairs without strong hetero-association, not for aqueous-organic)",
+  "mu_within_bound": false
+ },
+ {
+  "mixture": "THF/MeOH",
+  "carried_mu": 1.44,
+  "carried_rho": 0.867,
+  "kind": "organic-bracket",
+  "bracket": [
+   0.456,
+   0.544
+  ],
+  "source": "pure-component viscosities, both page-anchored; monotone mixing ASSUMED (valid for organic-organic pairs without strong hetero-association, not for aqueous-organic)",
+  "mu_within_bound": false
+ },
+ {
+  "mixture": "THF/EtOH",
+  "carried_mu": 2.253,
+  "carried_rho": 0.834,
+  "kind": "organic-bracket",
+  "bracket": [
+   0.456,
+   1.074
+  ],
+  "source": "pure-component viscosities, both page-anchored; monotone mixing ASSUMED (valid for organic-organic pairs without strong hetero-association, not for aqueous-organic)",
+  "mu_within_bound": false
  }
 ]

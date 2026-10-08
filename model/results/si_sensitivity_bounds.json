@@ -1,235 +1,321 @@
 {
   "thermal": {
     "THF beaker ceiling": {
-      "value": 26.3,
-      "lower": 7.41,
-      "upper": 45.1,
-      "driver": "kappa band 0.026-0.8 S/m, widened by h_int (-5/+6%) and h_ext(T_b) (-0.1%)",
+      "value": 27.01,
+      "lower": 6.64,
+      "upper": 42.65,
+      "driver": "kappa band 0.02-0.66 S/m, widened by h_int 50 W m-2 K-1 to the well-stirred limit (-6/+7%) and h_ext(T_b) (+0.3%)",
       "registry_row": "3.0 M LiBr/THF",
-      "one_sided": "upper end NOT ESTABLISHED; 8 mS/cm is the conditional ceiling the registry names, not a bound"
+      "one_sided": "upper edge 6.6 mS/cm is a declared edge, not a bound; the registry row tests the measured-data continuations beyond it"
     },
     "THF microfluidic ceiling": {
-      "value": 394.56,
-      "lower": 162.6,
-      "upper": 503.77,
-      "driver": "kappa band 0.026-0.8 S/m, widened by h_int (-5/+6%) and h_ext(T_b) (-0.1%)",
+      "value": 410.99,
+      "lower": 138.6,
+      "upper": 486.32,
+      "driver": "kappa band 0.02-0.66 S/m, widened by h_int 50 W m-2 K-1 to the well-stirred limit (-15/+0%) and h_ext(T_b) (+0.5%)",
       "registry_row": "3.0 M LiBr/THF",
-      "one_sided": "upper end NOT ESTABLISHED; 8 mS/cm is the conditional ceiling the registry names, not a bound"
+      "one_sided": "upper edge 6.6 mS/cm is a declared edge, not a bound; the registry row tests the measured-data continuations beyond it"
     },
     "THF zero-gap ceiling": {
-      "value": 65.58,
-      "lower": 27.6,
-      "upper": 82.6,
-      "driver": "kappa band 0.026-0.8 S/m, widened by h_int (-5/+6%) and h_ext(T_b) (-0.1%)",
+      "value": 68.24,
+      "lower": 23.58,
+      "upper": 79.81,
+      "driver": "kappa band 0.02-0.66 S/m, widened by h_int 50 W m-2 K-1 to the well-stirred limit (-15/+0%) and h_ext(T_b) (+0.5%)",
       "registry_row": "3.0 M LiBr/THF",
-      "one_sided": "upper end NOT ESTABLISHED; 8 mS/cm is the conditional ceiling the registry names, not a bound"
+      "one_sided": "upper edge 6.6 mS/cm is a declared edge, not a bound; the registry row tests the measured-data continuations beyond it"
     },
     "MeCN beaker ceiling": {
-      "value": 78.24,
-      "lower": 64.74,
-      "upper": 91.94,
-      "driver": "kappa band 1.5-2.3 S/m, widened by h_int (-5/+6%) and h_ext(T_b) (+3.5%)",
+      "value": 80.37,
+      "lower": 66.04,
+      "upper": 95.8,
+      "driver": "kappa band 1.5-2.3 S/m, widened by h_int 50 W m-2 K-1 to the well-stirred limit (-6/+7%) and h_ext(T_b) (+3.6%)",
       "registry_row": "0.25 M Bu4NBF4/MeCN",
       "one_sided": null
     },
     "MeCN microfluidic ceiling": {
-      "value": 679.98,
-      "lower": 627.73,
-      "upper": 755.15,
-      "driver": "kappa band 1.5-2.3 S/m, widened by h_int (-5/+6%) and h_ext(T_b) (+3.5%)",
+      "value": 713.16,
+      "lower": 572.76,
+      "upper": 771.97,
+      "driver": "kappa band 1.5-2.3 S/m, widened by h_int 50 W m-2 K-1 to the well-stirred limit (-18/+0%) and h_ext(T_b) (+6.6%)",
       "registry_row": "0.25 M Bu4NBF4/MeCN",
       "one_sided": null
     },
     "MeCN zero-gap ceiling": {
-      "value": 109.29,
-      "lower": 101.25,
-      "upper": 121.18,
-      "driver": "kappa band 1.5-2.3 S/m, widened by h_int (-5/+6%) and h_ext(T_b) (+3.5%)",
+      "value": 114.44,
+      "lower": 92.83,
+      "upper": 123.4,
+      "driver": "kappa band 1.5-2.3 S/m, widened by h_int 50 W m-2 K-1 to the well-stirred limit (-17/+0%) and h_ext(T_b) (+6.4%)",
       "registry_row": "0.25 M Bu4NBF4/MeCN",
       "one_sided": null
     },
     "DMF beaker ceiling": {
-      "value": 79.17,
-      "lower": 51.03,
-      "upper": 130.43,
-      "driver": "kappa band 0.4-1.6 S/m, widened by h_int (-5/+6%) and h_ext(T_b) (+15.7%)",
-      "registry_row": "0.2 M NaI/DMF (hard state-B ceiling 16.38 mS/cm)",
+      "value": 80.1,
+      "lower": 52.08,
+      "upper": 137.94,
+      "driver": "kappa band 0.4-1.6 S/m, widened by h_int 50 W m-2 K-1 to the well-stirred limit (-6/+7%) and h_ext(T_b) (+15.5%)",
+      "registry_row": "0.2 M NaI/DMF",
       "one_sided": null
     },
     "DMF microfluidic ceiling": {
-      "value": 1116.05,
-      "lower": 867.04,
-      "upper": 1532.78,
-      "driver": "kappa band 0.4-1.6 S/m, widened by h_int (-5/+6%) and h_ext(T_b) (+15.7%)",
-      "registry_row": "0.2 M NaI/DMF (hard state-B ceiling 16.38 mS/cm)",
+      "value": 1156.45,
+      "lower": 809.97,
+      "upper": 1677.79,
+      "driver": "kappa band 0.4-1.6 S/m, widened by h_int 50 W m-2 K-1 to the well-stirred limit (-16/+0%) and h_ext(T_b) (+26.0%)",
+      "registry_row": "0.2 M NaI/DMF",
       "one_sided": null
     },
     "DMF zero-gap ceiling": {
-      "value": 179.58,
-      "lower": 141.86,
-      "upper": 243.45,
-      "driver": "kappa band 0.4-1.6 S/m, widened by h_int (-5/+6%) and h_ext(T_b) (+15.7%)",
-      "registry_row": "0.2 M NaI/DMF (hard state-B ceiling 16.38 mS/cm)",
+      "value": 186.14,
+      "lower": 132.61,
+      "upper": 265.73,
+      "driver": "kappa band 0.4-1.6 S/m, widened by h_int 50 W m-2 K-1 to the well-stirred limit (-16/+0%) and h_ext(T_b) (+25.8%)",
+      "registry_row": "0.2 M NaI/DMF",
       "one_sided": null
     },
     "aq. NaOH beaker ceiling": {
-      "value": 250.19,
-      "lower": 235.53,
-      "upper": 287.1,
-      "driver": "kappa band 17.1-17.8 S/m, widened by h_int (-5/+6%) and h_ext(T_b) (+7.3%)",
-      "registry_row": "1 M NaOH aq (measured; +/-2%)",
+      "value": 257.35,
+      "lower": 241.71,
+      "upper": 305.09,
+      "driver": "kappa band 17.4-18.2 S/m, widened by h_int 50 W m-2 K-1 to the well-stirred limit (-6/+7%) and h_ext(T_b) (+7.4%)",
+      "registry_row": "1 M NaOH aq",
       "one_sided": null
     },
     "aq. NaOH microfluidic ceiling": {
-      "value": 947.78,
-      "lower": 900.09,
-      "upper": 1078.33,
-      "driver": "kappa band 17.1-17.8 S/m, widened by h_int (-5/+6%) and h_ext(T_b) (+7.3%)",
-      "registry_row": "1 M NaOH aq (measured; +/-2%)",
+      "value": 997.63,
+      "lower": 810.82,
+      "upper": 1142.46,
+      "driver": "kappa band 17.4-18.2 S/m, widened by h_int 50 W m-2 K-1 to the well-stirred limit (-19/+0%) and h_ext(T_b) (+14.1%)",
+      "registry_row": "1 M NaOH aq",
       "one_sided": null
     },
     "aq. NaOH zero-gap ceiling": {
-      "value": 148.8,
-      "lower": 141.32,
-      "upper": 169.29,
-      "driver": "kappa band 17.1-17.8 S/m, widened by h_int (-5/+6%) and h_ext(T_b) (+7.3%)",
-      "registry_row": "1 M NaOH aq (measured; +/-2%)",
+      "value": 156.29,
+      "lower": 128.16,
+      "upper": 177.99,
+      "driver": "kappa band 17.4-18.2 S/m, widened by h_int 50 W m-2 K-1 to the well-stirred limit (-18/+0%) and h_ext(T_b) (+13.5%)",
+      "registry_row": "1 M NaOH aq",
       "one_sided": null
     },
     "THF 25 um cooling shortfall": {
-      "value": 0.17,
-      "lower": 0.15,
-      "upper": 0.48,
-      "driver": "U'_required(i_design=110.658)/U'_passive over the kappa band 0.026-0.8 S/m",
+      "value": 0.16,
+      "lower": 0.14,
+      "upper": 0.64,
+      "driver": "U'_required(i_design=108.575)/U'_passive over the kappa band 0.02-0.66 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
       "registry_row": "3.0 M LiBr/THF",
-      "one_sided": "upper end NOT ESTABLISHED; 8 mS/cm is the conditional ceiling the registry names, not a bound"
+      "one_sided": "upper edge 6.6 mS/cm is a declared edge, not a bound; the registry row tests the measured-data continuations beyond it"
     },
     "THF RDE cooling shortfall": {
-      "value": 14.97,
-      "lower": 5.35,
-      "upper": 180.67,
-      "driver": "U'_required(i_design=108.471)/U'_passive over the kappa band 0.026-0.8 S/m",
+      "value": 13.04,
+      "lower": 5.93,
+      "upper": 246.3,
+      "driver": "U'_required(i_design=104.29)/U'_passive over the kappa band 0.02-0.66 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
       "registry_row": "3.0 M LiBr/THF",
-      "one_sided": "upper end NOT ESTABLISHED; 8 mS/cm is the conditional ceiling the registry names, not a bound"
+      "one_sided": "upper edge 6.6 mS/cm is a declared edge, not a bound; the registry row tests the measured-data continuations beyond it"
     },
     "THF rotating-cylinder cooling shortfall": {
-      "value": 22.89,
-      "lower": 8.16,
-      "upper": 276.71,
-      "driver": "U'_required(i_design=121.669)/U'_passive over the kappa band 0.026-0.8 S/m",
+      "value": 21.71,
+      "lower": 9.86,
+      "upper": 410.74,
+      "driver": "U'_required(i_design=122.065)/U'_passive over the kappa band 0.02-0.66 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
       "registry_row": "3.0 M LiBr/THF",
-      "one_sided": "upper end NOT ESTABLISHED; 8 mS/cm is the conditional ceiling the registry names, not a bound"
+      "one_sided": "upper edge 6.6 mS/cm is a declared edge, not a bound; the registry row tests the measured-data continuations beyond it"
     },
     "THF zero-gap cooling shortfall": {
-      "value": 95.07,
-      "lower": 43.48,
-      "upper": 969.52,
-      "driver": "U'_required(i_design=1000)/U'_passive over the kappa band 0.026-0.8 S/m",
+      "value": 89.57,
+      "lower": 49.16,
+      "upper": 1429.52,
+      "driver": "U'_required(i_design=1000)/U'_passive over the kappa band 0.02-0.66 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
       "registry_row": "3.0 M LiBr/THF",
-      "one_sided": "upper end NOT ESTABLISHED; 8 mS/cm is the conditional ceiling the registry names, not a bound"
+      "one_sided": "upper edge 6.6 mS/cm is a declared edge, not a bound; the registry row tests the measured-data continuations beyond it"
     },
     "MeCN 25 um cooling shortfall": {
-      "value": 0.11,
+      "value": 0.1,
       "lower": 0.1,
-      "upper": 0.11,
-      "driver": "U'_required(i_design=110.658)/U'_passive over the kappa band 1.5-2.3 S/m",
+      "upper": 0.13,
+      "driver": "U'_required(i_design=108.575)/U'_passive over the kappa band 1.5-2.3 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
       "registry_row": "0.25 M Bu4NBF4/MeCN",
       "one_sided": null
     },
     "MeCN RDE cooling shortfall": {
-      "value": 1.69,
-      "lower": 1.39,
-      "upper": 2.34,
-      "driver": "U'_required(i_design=108.471)/U'_passive over the kappa band 1.5-2.3 S/m",
+      "value": 1.48,
+      "lower": 1.28,
+      "upper": 2.46,
+      "driver": "U'_required(i_design=104.29)/U'_passive over the kappa band 1.5-2.3 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
       "registry_row": "0.25 M Bu4NBF4/MeCN",
       "one_sided": null
     },
     "MeCN rotating-cylinder cooling shortfall": {
-      "value": 2.56,
-      "lower": 2.11,
-      "upper": 3.56,
-      "driver": "U'_required(i_design=121.669)/U'_passive over the kappa band 1.5-2.3 S/m",
+      "value": 2.43,
+      "lower": 2.1,
+      "upper": 4.06,
+      "driver": "U'_required(i_design=122.065)/U'_passive over the kappa band 1.5-2.3 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
       "registry_row": "0.25 M Bu4NBF4/MeCN",
       "one_sided": null
     },
     "MeCN zero-gap cooling shortfall": {
-      "value": 20.63,
-      "lower": 18.39,
-      "upper": 24.68,
-      "driver": "U'_required(i_design=1000)/U'_passive over the kappa band 1.5-2.3 S/m",
+      "value": 19.44,
+      "lower": 18.32,
+      "upper": 28.11,
+      "driver": "U'_required(i_design=1000)/U'_passive over the kappa band 1.5-2.3 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
       "registry_row": "0.25 M Bu4NBF4/MeCN",
       "one_sided": null
     },
     "DMF 25 um cooling shortfall": {
       "value": 0.05,
-      "lower": 0.05,
+      "lower": 0.04,
       "upper": 0.06,
-      "driver": "U'_required(i_design=110.658)/U'_passive over the kappa band 0.4-1.6 S/m",
-      "registry_row": "0.2 M NaI/DMF (hard state-B ceiling 16.38 mS/cm)",
+      "driver": "U'_required(i_design=108.575)/U'_passive over the kappa band 0.4-1.6 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
+      "registry_row": "0.2 M NaI/DMF",
       "one_sided": null
     },
     "DMF RDE cooling shortfall": {
-      "value": 1.66,
-      "lower": 0.87,
-      "upper": 3.8,
-      "driver": "U'_required(i_design=108.471)/U'_passive over the kappa band 0.4-1.6 S/m",
-      "registry_row": "0.2 M NaI/DMF (hard state-B ceiling 16.38 mS/cm)",
+      "value": 1.49,
+      "lower": 0.8,
+      "upper": 3.99,
+      "driver": "U'_required(i_design=104.29)/U'_passive over the kappa band 0.4-1.6 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
+      "registry_row": "0.2 M NaI/DMF",
       "one_sided": null
     },
     "DMF rotating-cylinder cooling shortfall": {
-      "value": 2.54,
-      "lower": 1.33,
-      "upper": 5.81,
-      "driver": "U'_required(i_design=121.669)/U'_passive over the kappa band 0.4-1.6 S/m",
-      "registry_row": "0.2 M NaI/DMF (hard state-B ceiling 16.38 mS/cm)",
+      "value": 2.48,
+      "lower": 1.32,
+      "upper": 6.63,
+      "driver": "U'_required(i_design=122.065)/U'_passive over the kappa band 0.4-1.6 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
+      "registry_row": "0.2 M NaI/DMF",
       "one_sided": null
     },
     "DMF zero-gap cooling shortfall": {
-      "value": 13.96,
-      "lower": 9.5,
-      "upper": 25.49,
-      "driver": "U'_required(i_design=1000)/U'_passive over the kappa band 0.4-1.6 S/m",
-      "registry_row": "0.2 M NaI/DMF (hard state-B ceiling 16.38 mS/cm)",
+      "value": 13.4,
+      "lower": 9.46,
+      "upper": 29.03,
+      "driver": "U'_required(i_design=1000)/U'_passive over the kappa band 0.4-1.6 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
+      "registry_row": "0.2 M NaI/DMF",
       "one_sided": null
     },
     "aq. NaOH 25 um cooling shortfall": {
-      "value": 0.08,
+      "value": 0.07,
       "lower": 0.07,
-      "upper": 0.08,
-      "driver": "U'_required(i_design=110.658)/U'_passive over the kappa band 17.1-17.8 S/m",
-      "registry_row": "1 M NaOH aq (measured; +/-2%)",
+      "upper": 0.09,
+      "driver": "U'_required(i_design=108.575)/U'_passive over the kappa band 17.4-18.2 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
+      "registry_row": "1 M NaOH aq",
       "one_sided": null
     },
     "aq. NaOH RDE cooling shortfall": {
-      "value": 0.19,
-      "lower": 0.18,
-      "upper": 0.21,
-      "driver": "U'_required(i_design=108.471)/U'_passive over the kappa band 17.1-17.8 S/m",
-      "registry_row": "1 M NaOH aq (measured; +/-2%)",
+      "value": 0.17,
+      "lower": 0.16,
+      "upper": 0.22,
+      "driver": "U'_required(i_design=104.29)/U'_passive over the kappa band 17.4-18.2 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
+      "registry_row": "1 M NaOH aq",
       "one_sided": null
     },
     "aq. NaOH rotating-cylinder cooling shortfall": {
-      "value": 0.28,
-      "lower": 0.26,
-      "upper": 0.3,
-      "driver": "U'_required(i_design=121.669)/U'_passive over the kappa band 17.1-17.8 S/m",
-      "registry_row": "1 M NaOH aq (measured; +/-2%)",
+      "value": 0.26,
+      "lower": 0.25,
+      "upper": 0.33,
+      "driver": "U'_required(i_design=122.065)/U'_passive over the kappa band 17.4-18.2 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
+      "registry_row": "1 M NaOH aq",
       "one_sided": null
     },
     "aq. NaOH zero-gap cooling shortfall": {
-      "value": 9.87,
-      "lower": 9.29,
-      "upper": 10.4,
-      "driver": "U'_required(i_design=1000)/U'_passive over the kappa band 17.1-17.8 S/m",
-      "registry_row": "1 M NaOH aq (measured; +/-2%)",
+      "value": 9.29,
+      "lower": 9.24,
+      "upper": 11.83,
+      "driver": "U'_required(i_design=1000)/U'_passive over the kappa band 17.4-18.2 S/m and h_int 50 W m-2 K-1 to the well-stirred limit",
+      "registry_row": "1 M NaOH aq",
       "one_sided": null
     }
   },
+  "h_int_effect": {
+    "unstirred batch": {
+      "h_int": 100.0,
+      "low_pct": [
+        -5.954240797287413,
+        -5.597826387926775
+      ],
+      "high_pct": [
+        6.721000795796295,
+        7.157176575705826
+      ]
+    },
+    "stirred batch": {
+      "h_int": 800.0,
+      "low_pct": [
+        -11.430449530611487,
+        -10.77856019066823
+      ],
+      "high_pct": [
+        0.8642172586164953,
+        0.9175005799241465
+      ]
+    },
+    "recirculating flow": {
+      "h_int": 2000.0,
+      "low_pct": [
+        -11.912861039478262,
+        -11.236459075463777
+      ],
+      "high_pct": [
+        0.3465657535836719,
+        0.36783352767177924
+      ]
+    },
+    "microfluidic 25 $\\mu$m": {
+      "h_int": 5000.0,
+      "low_pct": [
+        -18.721685895249717,
+        -15.293565973837032
+      ],
+      "high_pct": [
+        0.18851325438475897,
+        0.23753935194825715
+      ]
+    },
+    "RDE 1600 rpm": {
+      "h_int": 2000.0,
+      "low_pct": [
+        -11.912861039478262,
+        -11.236459075463777
+      ],
+      "high_pct": [
+        0.3465657535836719,
+        0.36783352767177924
+      ]
+    },
+    "rotating cyl. 3000 rpm": {
+      "h_int": 2000.0,
+      "low_pct": [
+        -11.831711704614879,
+        -11.227506720175196
+      ],
+      "high_pct": [
+        0.346283975609496,
+        0.36527071174421444
+      ]
+    },
+    "zero-gap PEM stack": {
+      "h_int": 5000.0,
+      "low_pct": [
+        -17.99758576677589,
+        -14.915700163134327
+      ],
+      "high_pct": [
+        0.18400788209238517,
+        0.22776101331709597
+      ]
+    }
+  },
+  "h_ext_T_pct": {
+    "THF": 0.3065244721072391,
+    "MeCN": 3.6333385131736673,
+    "DMF": 15.464953778207601,
+    "aq. NaOH": 7.416827303721085
+  },
+  "h_int_flips": [],
   "transport": {
     "median, natural": {
-      "value": 8.2,
-      "lower": 3.63,
-      "upper": 17.38,
+      "value": 8.55,
+      "lower": 4.23,
+      "upper": 17.69,
       "driver": "architecture delta band",
       "registry_row": "delta (natural) / operating point",
       "one_sided": null
@@ -237,61 +323,61 @@
     "count >=25, natural": {
       "value": 12,
       "lower": 9,
-      "upper": 18,
+      "upper": 19,
       "driver": "architecture delta band",
       "registry_row": "delta (natural) / operating point",
       "one_sided": null
     },
     "count >=50, natural": {
       "value": 9,
-      "lower": 8,
-      "upper": 13,
+      "lower": 7,
+      "upper": 12,
       "driver": "architecture delta band",
       "registry_row": "delta (natural) / operating point",
       "one_sided": null
     },
     "median, stirred": {
-      "value": 9.35,
-      "lower": 9.03,
-      "upper": 9.69,
+      "value": 9.73,
+      "lower": 9.41,
+      "upper": 10.08,
       "driver": "architecture delta band",
       "registry_row": "delta (stirred) / operating point",
       "one_sided": null
     },
     "count >=25, stirred": {
       "value": 14,
-      "lower": 13,
-      "upper": 14,
+      "lower": 12,
+      "upper": 15,
       "driver": "architecture delta band",
       "registry_row": "delta (stirred) / operating point",
       "one_sided": null
     },
     "count >=50, stirred": {
-      "value": 11,
-      "lower": 11,
-      "upper": 11,
+      "value": 12,
+      "lower": 12,
+      "upper": 12,
       "driver": "architecture delta band",
       "registry_row": "delta (stirred) / operating point",
       "one_sided": null
     },
     "median, flow": {
-      "value": 16.82,
-      "lower": 15.59,
-      "upper": 18.3,
+      "value": 17.42,
+      "lower": 16.05,
+      "upper": 19.05,
       "driver": "architecture delta band",
       "registry_row": "delta (flow) / operating point",
       "one_sided": null
     },
     "count >=25, flow": {
-      "value": 18,
+      "value": 19,
       "lower": 18,
-      "upper": 20,
+      "upper": 21,
       "driver": "architecture delta band",
       "registry_row": "delta (flow) / operating point",
       "one_sided": null
     },
     "count >=50, flow": {
-      "value": 13,
+      "value": 12,
       "lower": 12,
       "upper": 14,
       "driver": "architecture delta band",
@@ -299,46 +385,38 @@
       "one_sided": null
     },
     "median, anec": {
-      "value": 44.23,
-      "lower": 39.74,
-      "upper": 49.93,
+      "value": 44.48,
+      "lower": 39.66,
+      "upper": 50.62,
       "driver": "architecture delta band",
       "registry_row": "delta (anec) / operating point",
       "one_sided": null
     },
     "count >=25, anec": {
-      "value": 31,
-      "lower": 30,
-      "upper": 33,
+      "value": 28,
+      "lower": 28,
+      "upper": 30,
       "driver": "architecture delta band",
       "registry_row": "delta (anec) / operating point",
       "one_sided": null
     },
     "count >=50, anec": {
-      "value": 24,
-      "lower": 20,
+      "value": 23,
+      "lower": 21,
       "upper": 25,
       "driver": "architecture delta band",
       "registry_row": "delta (anec) / operating point",
       "one_sided": null
     },
     "median, micro": {
-      "value": 110.66,
-      "lower": 110.66,
-      "upper": 110.66,
+      "value": 108.57,
+      "lower": 108.57,
+      "upper": 108.57,
       "driver": "architecture delta band",
       "registry_row": "delta (micro) / operating point",
       "one_sided": null
     },
     "count >=25, micro": {
-      "value": 36,
-      "lower": 36,
-      "upper": 36,
-      "driver": "architecture delta band",
-      "registry_row": "delta (micro) / operating point",
-      "one_sided": null
-    },
-    "count >=50, micro": {
       "value": 34,
       "lower": 34,
       "upper": 34,
@@ -346,50 +424,58 @@
       "registry_row": "delta (micro) / operating point",
       "one_sided": null
     },
+    "count >=50, micro": {
+      "value": 32,
+      "lower": 32,
+      "upper": 32,
+      "driver": "architecture delta band",
+      "registry_row": "delta (micro) / operating point",
+      "one_sided": null
+    },
     "median, rde": {
-      "value": 108.47,
-      "lower": 58.74,
-      "upper": 154.18,
+      "value": 104.29,
+      "lower": 57.15,
+      "upper": 154.71,
       "driver": "architecture delta band",
       "registry_row": "delta (rde) / operating point",
       "one_sided": null
     },
     "count >=25, rde": {
-      "value": 36,
-      "lower": 33,
-      "upper": 40,
+      "value": 34,
+      "lower": 32,
+      "upper": 36,
       "driver": "architecture delta band",
       "registry_row": "delta (rde) / operating point",
       "one_sided": null
     },
     "count >=50, rde": {
-      "value": 33,
-      "lower": 28,
-      "upper": 35,
+      "value": 32,
+      "lower": 27,
+      "upper": 33,
       "driver": "architecture delta band",
       "registry_row": "delta (rde) / operating point",
       "one_sided": null
     },
     "median, rce": {
-      "value": 121.67,
-      "lower": 61.59,
-      "upper": 170.08,
+      "value": 122.06,
+      "lower": 60.37,
+      "upper": 157.76,
       "driver": "architecture delta band",
       "registry_row": "delta (rce) / operating point",
       "one_sided": null
     },
     "count >=25, rce": {
-      "value": 36,
-      "lower": 34,
-      "upper": 39,
+      "value": 34,
+      "lower": 32,
+      "upper": 36,
       "driver": "architecture delta band",
       "registry_row": "delta (rce) / operating point",
       "one_sided": null
     },
     "count >=50, rce": {
-      "value": 34,
-      "lower": 28,
-      "upper": 35,
+      "value": 32,
+      "lower": 27,
+      "upper": 33,
       "driver": "architecture delta band",
       "registry_row": "delta (rce) / operating point",
       "one_sided": null

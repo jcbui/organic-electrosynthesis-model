@@ -113,37 +113,51 @@ def mol_height(build):
     return y1 - y0
 
 
+# 2026-10-07 (author: "that should be propylene or ethylene in Figure 3 and needs to be redrawn"): the panel drew
+# tetramethylethylene, its chlorohydrin and its epoxide. Leow et al., Science 2020, run ethylene (and propylene,
+# Fig. 2E), and the panel's own box -- "up to 1 A/cm2 ... product specificity (~97%)", p. 1228 -- is the ETHYLENE
+# result, so the three species are now ethylene, 2-chloroethanol and ethylene oxide.
 def alkene(x, y):
+    """Ethylene, H2C=CH2: both carbons labelled, so the lone double bond does not read as an equals sign."""
     m = M()
-    a, b = m.at(x - 7.2, y), m.at(x + 7.2, y)
+    a = m.at(x - 7.2, y, 6, "CH2", H=2, just="Right")      # ChemDraw prints "H2C"
+    b = m.at(x + 7.2, y, 6, "CH2", H=2)
     m.bd(a, b, 2)
-    for base, angs in ((a, (120, 240)), (b, (60, -60))):
-        for ang in angs:
-            m.bd(base, m.at(*pol((m.atoms[base]["x"], m.atoms[base]["y"]), ang)))
     return m
 
 
 def chlorohydrin(x, y):
+    """2-Chloroethanol (ethylene chlorohydrin), HO-CH2-CH2-Cl, as a zigzag."""
     m = M()
-    a, b = m.at(x - 7.2, y), m.at(x + 7.2, y)
+    pa, pb = (x - 6.24, y - 3.6), (x + 6.24, y + 3.6)
+    a, b = m.at(*pa), m.at(*pb)
     m.bd(a, b)
-    pa, pb = (x - 7.2, y), (x + 7.2, y)
-    m.bd(a, m.at(*pol(pa, 90))); m.bd(a, m.at(*pol(pa, 180)))
-    m.bd(b, m.at(*pol(pb, 90))); m.bd(b, m.at(*pol(pb, 0)))
-    m.bd(a, m.at(*pol(pa, 240), 8, "OH", H=1, just="Right"))        # ChemDraw prints "HO"
-    m.bd(b, m.at(*pol(pb, 300), 17, "Cl", H=0))
+    m.bd(a, m.at(*pol(pa, 210), 8, "OH", H=1, just="Right"))        # ChemDraw prints "HO"
+    m.bd(b, m.at(*pol(pb, 30), 17, "Cl", H=0))
     return m
 
 
 def epoxide(x, y):
+    """Ethylene oxide."""
     m = M()
     a, b = m.at(x - 7.2, y), m.at(x + 7.2, y)
     o = m.at(x, y + 12.47, 8, "O", H=0)
     m.bd(a, b); m.bd(a, o); m.bd(b, o)
-    for base, angs in ((a, (135, 225)), (b, (45, -45))):
-        for ang in angs:
-            m.bd(base, m.at(*pol((m.atoms[base]["x"], m.atoms[base]["y"]), ang)))
     return m
+
+
+# 2026-10-07 (author: "fix the quinone chemistry in fig 3"): the AO working quinone is 2-ETHYLanthraquinone (EtAQ) --
+# the industrial carrier, and the non-aqueous AQ of Xi, Wu, Li, Yan, Liu & Aziz, Nat. Chem. 2025, 17, 1883, p. 1884:
+# "2,6-bis(3-phosphonopropyl-1-oxy)anthraquinone (DPPEAQ, aqueous AQ) in the neutral pH aqueous phase (aq), and
+# 2-ethylanthraquinone (EtAQ, non-aqueous AQ) in the non-aqueous phase". The cathode reduces DPPEAQ (Eq. 4), and
+# H2DPPEAQ reduces EtAQ across the aqueous/non-aqueous interface (ANIPCET, Eq. 5); O2 then returns EtAQ and H2O2.
+def ethyl(m, base, ang):
+    """An ethyl group on atom `base`, leaving at angle `ang` and zigzagging back by 60 degrees."""
+    p0 = (m.atoms[base]["x"], m.atoms[base]["y"])
+    p1 = pol(p0, ang)
+    c1 = m.at(*p1)
+    m.bd(base, c1)
+    m.bd(c1, m.at(*pol(p1, ang - 60)))
 
 
 def anthracene_core(m, x, y):
@@ -166,6 +180,7 @@ def anthraquinone(x, y):
         m.bd(C_[i], C_[j])
     m.bd(C_[0], m.at(x, y - 2 * L, 8, "O", H=0), 2)
     m.bd(C_[3], m.at(x, y + 2 * L, 8, "O", H=0), 2)
+    ethyl(m, R_[1], 30)        # C2 (R_[0] is C1, peri to the C9 carbonyl)
     return m
 
 
@@ -183,6 +198,7 @@ def anthrahydroquinone(x, y):
         m.bd(R_[i], R_[j], o)                      # right ring o-quinoid: the only Kekule form with C9/C10 aromatic
     m.bd(C_[0], m.at(x, y - 2 * L, 8, "OH", H=1), 1)
     m.bd(C_[3], m.at(x, y + 2 * L, 8, "OH", H=1), 1)
+    ethyl(m, R_[1], 30)        # 2-ethylanthracene-9,10-diol, the hydroquinone O2 autoxidizes
     return m
 
 
@@ -207,17 +223,43 @@ def tempo(x, y, state):
 
 
 def benzyl(x, y, top):
-    """Vanillyl alcohol (top='CH2OH') or vanillin (top='CHO'): 4-substituted 2-methoxyphenol, ring pointy-top."""
+    """Vanillyl alcohol (top='CH2OH'), vanillin ('CHO') or vanillic acid ('COOH'): 4-substituted 2-methoxyphenol."""
     m = M()
     v = hexagon((x, y))
     r = [m.at(*p) for p in v]
     for i, o in zip(range(6), (1, 2, 1, 2, 1, 2)):
         m.bd(r[i], r[(i + 1) % 6], o)
-    inner = CH2OH if top == "CH2OH" else CHO
+    inner = {"CH2OH": CH2OH, "CHO": CHO, "COOH": COOH}[top]
     m.bd(r[0], m.at(x, y - 2 * L, 6, top, just="Left", inner=inner))
     m.bd(r[3], m.at(x, y + 2 * L, 8, "OH", H=1))
     om = pol(v[4], -150)
     m.bd(r[4], m.at(om[0], om[1], 8, "OCH3", just="Right", inner=CH3O))    # displays H3CO
+    return m
+
+
+def beta_o4(x, y, end):
+    """A lignin beta-O-4 unit, Ar-CH(OH)-CH(OAr)-CH2-R, drawn with generic aryls: end='CH2OH' (the primary alcohol)
+    or 'COOH' (the acid). Rafiee, Alherech, Karlen & Stahl, JACS 2019, 141, 15266, Table 1: the guaiacyl beta-O-4
+    model 1a goes to the beta-hydroxy acid 1c in 91% isolated yield under ACT-mediated electrolysis at pH 10, 'No
+    product derived from oxidation of the secondary alcohol group was observed'. Aryls are written 'Ar' because the
+    same paper shows a free phenol is oxidized at the electrode itself (9a/9b -> quinone 9c), not by the mediator."""
+    m = M()
+    c1 = (x - 6.24, y - 3.6)                    # benzylic CH(OH)
+    c2 = (x + 6.24, y + 3.6)                    # CH(OAr)
+    a1, a2 = m.at(*c1), m.at(*c2)
+    m.bd(a1, a2)
+    ar = pol(c1, 210)
+    m.bd(a1, m.at(ar[0], ar[1], 18, "Ar", H=0, just="Right"))
+    oh = pol(c1, 90)
+    m.bd(a1, m.at(oh[0], oh[1], 8, "OH", H=1))
+    o = pol(c2, -90)
+    ao = m.at(o[0], o[1], 8, "O", H=0)
+    m.bd(a2, ao)
+    ar2 = pol(o, -90)
+    m.bd(ao, m.at(ar2[0], ar2[1], 18, "Ar", H=0))
+    inner = {"CH2OH": CH2OH, "COOH": COOH}[end]
+    c3 = pol(c2, 30)
+    m.bd(a2, m.at(c3[0], c3[1], 6, end, just="Left", inner=inner))
     return m
 
 
@@ -282,16 +324,20 @@ def build():
     # the alkene enters, merging into the Cl2 -> chlorohydrin arc; water enters on the arc itself
     bAlk = place(d, alkene, 182, 57)
     d.arrow((bAlk[0] - 5, 66), pol(c, 56, R))      # the head lands ON the arc, so the alkene visibly merges into it
-    d.text(c[0] + 4, c[1] - R - 5, "+ H_2O", "Center")
+    # chemistry review 2026-10-06: Leow Eq. 2 releases HCl on this step, and the ring closure (Eq. 5) and the HCl
+    # neutralization (Eq. 6) are the post-electrolysis mixing step, consuming the two OH- the cathode makes (Eq. 4)
+    d.text(c[0] + 4, c[1] - R - 5, "+ H_2O, – HCl", "Center")
     # the epoxide leaves the chlorohydrin -> 2 Cl- arc; hydroxide enters it
     bEp = place(d, epoxide, 182, 215)
     d.arrow(pol(c, -55, R), (bEp[0] - 5, 211))     # springs from the arc itself
-    d.text(*pol(c, -8, R + 5), "OH^–")
+    _x, _y = pol(c, -8, R + 5)
+    d.text(_x, _y - 6, "+ OH^–\n– H_2O")         # stacked: on one line it ran into the box
+    d.text(c[0], c[1] + 3.6, "HCl + OH^–\n→ Cl^– + H_2O", "Center")
     d.text(14.5 + 6, c[1] + 3.6, "– 2 e^–")
     # box
     bx = 268
     d.box(bx - 66, 124, bx + 66, 155)
-    d.text(bx, 136.5, "j = 1 A cm^{–2}\nProduct specificity ≈ 97%", "Center")
+    d.text(bx, 136.5, "j up to 1 A cm^{–2}\nProduct specificity ≈ 97%", "Center")   # Leow p. 1228: "(up to 1 A/cm2)"
 
     # ============================================================ B. electrochemical H2O2
     xB = XM
@@ -317,7 +363,8 @@ def build():
     bBot = place(d, anthraquinone, c2[0], c2[1] + R2)
     cycle_arc(d, c2, R2, 270, 90, bBot, bTop)
     cycle_arc(d, c2, R2, 90, -90, bTop, bBot)
-    d.text(e2 + 8.3 + 5, c2[1] + 3.6, "+ 2 e^–, + 2 H^+")
+    # the electrons reach EtAQ through the aqueous quinone the cathode reduces (Xi et al., Eqs. 4-5), not directly
+    d.text(e2 + 8.3 + 8, c2[1] + 3.6, "+ 2 e^–, + 2 H^+\nvia aqueous quinone")
     d.text(*pol(c2, 32, R2 + 5), "+ O_2")
     d.text(*pol(c2, -40, R2 + 5), "– H_2O_2")
     d.box(c2[0] - 26 - 3, 230, c2[0] - 26 + 160 + 3, 256)
@@ -352,13 +399,18 @@ def build():
     # as in panel A, the ring is the mediator loop alone: ammonia enters on each N-I step and hydrazine leaves.
     # I2 + NH3 -> I-NH2 + HI, then I-NH2 + NH3 -> N2H4 + HI, so one I2 (2 e-) turns two ammonias into one hydrazine
     bI2 = species(d, *pol(c3, 125, R3), "I_2")
-    bIN = species(d, *pol(c3, 55, R3), "R_2C=N–I")
+    # audit 2026-10-06: I2 + R2C=NH -> R2C=N-I + H+ + I- (Wang/Stahl PDF p. 6, "the reaction of 1 with I2 is expected
+    # to generate an N-iodo imine species, and the resulting iodide by-product ..."), so the node carries that iodide and
+    # the second step (R2C=N-I + I- + R2C=NH -> azine + 2 I- + H+) lands on "2 I-": the ring balances in I and charge
+    bIN = species(d, *pol(c3, 55, R3), "R_2C=N–I + I^–")
     bI = species(d, *pol(c3, 235, R3), "2 I^–")
     cycle_arc(d, c3, R3, 125, 55, bI2, bIN)
     cycle_arc(d, c3, R3, 55, -125, bIN, bI)
     cycle_arc(d, c3, R3, 235, 125, bI, bI2)
-    d.text(*pol(c3, 90, R3 + 9), "+ R_2C=NH", "Center")
-    d.text(c3[0] + R3 + 6, c3[1] + 3.6, "+ R_2C=NH")
+    # chemistry review 2026-10-06: each N-I / N-N step releases a proton (BH+ in Wang/Stahl Fig. 3A), which the
+    # cathode reduces; without them the ring does not balance in charge
+    d.text(*pol(c3, 90, R3 + 9), "+ R_2C=NH, – H^+", "Center")
+    d.text(c3[0] + R3 + 6, c3[1] + 3.6, "+ R_2C=NH\n– H^+")
     bN2 = d.text(c3[0] + 56, c3[1] + 68, "azine")
     d.arrow(pol(c3, -68, R3), (bN2[0] - 5, c3[1] + 64))
     # both routes stop at the azine; one hydrolysis returns the hydrazine and the ketone
@@ -386,11 +438,13 @@ def build():
         nl = lab.count("\n")
         d.text(e4 + 8.3 + 5, (yt + yh) / 2 + 3.6 - 6 * nl, lab)
     rx0 = tx + 26.9 + 5
-    d.text(rx0, ys[0] + 3.6, "+ R–CH_2OH")
-    d.text(rx0, ys[2] + 3.6, "– R–COOH")
+    d.text(rx0, ys[0] + 3.6, "+ R–CH_2OH\n+ H_2O")
+    # TEMPO+ + R-CH2OH -> TEMPOH + R-CHO + H+ on each turn, so the substrate side releases two protons per alcohol
+    # (R-CH2OH + H2O + 2 TEMPO+ -> R-COOH + 2 TEMPOH + 2 H+), as the electrode side's "- H+" already shows for its half
+    d.text(rx0, ys[2] + 3.6, "– R–COOH\n– 2 H^+")
     ax4 = rx0 + 60
     d.arc((ax4, ys[1]), 16, (ys[2] - ys[0]) / 2, 90, -90)
-    d.text(ax4 - 3, ys[1] + 3.6, "(via aldehyde)", "Right")
+    d.text(ax4 - 3, ys[1] + 3.6 - 6, "× 2\nvia aldehyde", "Right")   # alcohol -> acid is 4 e-: two turns of the 2 e- loop
     # examples, each drawn top-to-bottom
     bx0 = ax4 + 22
     # Both example panels stand reactant and product on the same two baselines, so ONE arrow length and one
@@ -398,7 +452,7 @@ def build():
     # each structure's own bounding box they came out 18.4 and 25.3 pt, which reads as two different steps.
     # The shared span is the HMF panel's own clearance, which is the wider of the two, so the taller lignin
     # structures set the tighter margin; the assertion below binds it to that panel rather than to a literal.
-    # The lignin product is an aromatic ALDEHYDE (vanillin), not the generic "monomer" the box claimed.
+    # The lignin product is the aromatic ACID (vanillic acid; chemistry review 2026-10-06, below).
     YT, YB = y0 + 124, y0 + 220
     FTOP = lambda x, y: furan(x, y, "CHO", "CH2OH")
     FBOT = lambda x, y: furan(x, y, "COOH", "COOH")
@@ -406,12 +460,21 @@ def build():
     a_mid = (YT + YB) / 2
     b1 = (bx0, y0 + 54, bx0 + 96, y0 + 260)
     d.box(*b1)
-    d.text((b1[0] + b1[2]) / 2, y0 + 66, "Ex: Lignin fragment\n→ aromatic aldehyde", "Center", bold=2)
+    # chemistry review 2026-10-06: the aminoxyl step takes a primary alcohol to the ACID (Rafiee 2018 Table 1; Rafiee
+    # 2019, where lignin's gamma-CH2OH goes to the carboxylic acid and aldehydes appear only after acidolysis).
+    # Audit pass 2 (2026-10-06): the example had drawn vanillyl alcohol -> vanillic acid, which ref 38 does not
+    # support -- 'Lignin models bearing a free phenol group, 9a and 9b, undergo direct electron transfer at the
+    # electrode surface ... affords 2,6-dimethoxyquinone (9c)', and a benzaldehyde 'does not undergo oxidation under
+    # these reaction conditions due to its lower susceptibility to hydrate formation'. It now draws what the paper
+    # does: the primary alcohol of a beta-O-4 unit to the carboxylic acid, the secondary benzylic alcohol untouched.
+    d.text((b1[0] + b1[2]) / 2, y0 + 66, "Ex: Lignin fragment\n→ carboxylic acid", "Center", bold=2)
     mc = (b1[0] + b1[2]) / 2
-    t1 = place(d, lambda x, y: benzyl(x, y, "CH2OH"), mc, YT)
-    t2 = place(d, lambda x, y: benzyl(x, y, "CHO"), mc, YB)
+    t1 = place(d, lambda x, y: beta_o4(x, y, "CH2OH"), mc, YT)
+    t2 = place(d, lambda x, y: beta_o4(x, y, "COOH"), mc, YB)
+    assert t1[3] < a_mid - a_half and t2[1] > a_mid + a_half, "a lignin structure runs into the shared arrow span"
+    assert b1[0] < min(t1[0], t2[0]) and max(t1[2], t2[2]) < b1[2], "a lignin structure runs out of its box"
     d.arrow((mc - 14, a_mid - a_half), (mc - 14, a_mid + a_half))
-    d.text(mc - 9, a_mid + 3.6, "[TEMPO^+]")
+    d.text(mc - 9, a_mid + 3.6, "[ACT^+]")
     b2 = (b1[2] + 5, y0 + 54, W - 4, y0 + 260)
     d.box(*b2)
     d.text((b2[0] + b2[2]) / 2, y0 + 66, "Ex: HMF\n→ FDCA", "Center", bold=2)
@@ -421,7 +484,7 @@ def build():
     assert abs((f1[3] + 3) - (a_mid - a_half)) < 1e-9 and abs((f2[1] - 3) - (a_mid + a_half)) < 1e-9, \
         "the shared arrow span must reproduce the HMF panel's own clearance"
     d.arrow((b2[0] + 12, a_mid - a_half), (b2[0] + 12, a_mid + a_half))
-    d.text(b2[0] + 16, a_mid + 3.6, "[TEMPO^+]")
+    d.text(b2[0] + 16, a_mid + 3.6, "[ACT^+]")
 
     counter_electrode(d)
     return d

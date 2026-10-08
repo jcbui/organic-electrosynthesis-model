@@ -1,0 +1,36 @@
+{
+ "threshold_c_red_over_bulk": 0.02,
+ "tolerance": 0.01,
+ "cells": [
+  {
+   "reaction": "Thioether -> sulfone (kilo-scale)",
+   "reactor": "Unstirred batch",
+   "c_red_over_bulk_at_plateau": 0.07,
+   "i_published": 118.68561187819007,
+   "i_at_collapse": 118.85224539257766,
+   "rel_change": 0.001403990860818105,
+   "reached_collapse": true
+  },
+  {
+   "reaction": "Thioether -> sulfone (kilo-scale)",
+   "reactor": "Stirred batch",
+   "c_red_over_bulk_at_plateau": 0.07,
+   "i_published": 134.2624070148821,
+   "i_at_collapse": 134.47851126520868,
+   "rel_change": 0.0016095663345483402,
+   "reached_collapse": true
+  },
+  {
+   "reaction": "Thioether -> sulfone (kilo-scale)",
+   "reactor": "Recirculating flow cell",
+   "c_red_over_bulk_at_plateau": 0.0265,
+   "i_published": 230.49561458462804,
+   "i_at_collapse": 230.83319490266422,
+   "rel_change": 0.0014645845589926765,
+   "reached_collapse": true
+  }
+ ],
+ "n_cells": 3,
+ "max_abs_rel_change": 0.0016095663345483402,
+ "max_c_red_over_bulk": 0.07
+}

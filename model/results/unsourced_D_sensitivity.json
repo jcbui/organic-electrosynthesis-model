@@ -1,19 +1,19 @@
 {
   "note": "G-DSENS: every declared-default supporting-ion diffusivity perturbed together; written by data/sensitivity_unsourced_D.py",
-  "n_slots": 24,
-  "n_pairs": 21,
+  "n_slots": 25,
+  "n_pairs": 22,
   "pairs": [
     [
       "AcO-",
       "MeOH"
     ],
     [
-      "B(OH)4-",
-      "aq"
+      "AcO-",
+      "tAmOH"
     ],
     [
       "BF4-",
-      "MeOH"
+      "EtOH"
     ],
     [
       "BF4-",
@@ -52,6 +52,10 @@
       "MeOH"
     ],
     [
+      "K+",
+      "tAmOH"
+    ],
+    [
       "Li+",
       "AcOH"
     ],
@@ -64,7 +68,7 @@
       "HFIP"
     ],
     [
-      "OH-",
+      "MeOSO3-",
       "HFIP"
     ],
     [
@@ -84,7 +88,7 @@
       "MeCN"
     ],
     [
-      "TsO-",
+      "RCO2-",
       "MeOH"
     ]
   ],
@@ -99,92 +103,92 @@
   "counts": {
     "base": {
       "natural": [
-        11,
-        8
+        10,
+        7
       ],
       "stirred": [
-        13,
+        11,
         10
       ],
       "flow": [
-        16,
-        12
+        15,
+        10
       ],
       "anec": [
-        28,
-        22
+        25,
+        21
       ],
       "micro": [
-        35,
-        33
+        33,
+        30
       ],
       "rde": [
-        35,
-        33
+        32,
+        30
       ],
       "rce": [
-        35,
-        33
+        32,
+        30
       ]
     },
     "div3": {
       "natural": [
-        11,
-        8
+        10,
+        7
       ],
       "stirred": [
-        13,
+        11,
         10
       ],
       "flow": [
-        16,
-        12
+        15,
+        10
       ],
       "anec": [
-        28,
-        22
+        25,
+        21
       ],
       "micro": [
-        35,
-        33
+        33,
+        30
       ],
       "rde": [
-        35,
-        33
+        32,
+        30
       ],
       "rce": [
-        35,
-        33
+        32,
+        30
       ]
     },
     "mul3": {
       "natural": [
-        11,
-        8
+        10,
+        7
       ],
       "stirred": [
-        13,
+        11,
         10
       ],
       "flow": [
-        16,
-        12
+        15,
+        10
       ],
       "anec": [
-        28,
-        22
+        25,
+        21
       ],
       "micro": [
-        35,
-        33
+        33,
+        30
       ],
       "rde": [
-        35,
-        33
+        32,
+        30
       ],
       "rce": [
-        35,
-        33
+        32,
+        30
       ]
     }
   },

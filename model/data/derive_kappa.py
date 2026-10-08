@@ -70,18 +70,31 @@ T_K = 298.15
 # concentration in this work and adopts nothing from it. No number that survives into the model
 # depends on any eps below. If that ever changes, these rows must be retrieved first.
 #
-# eta is different: those values ARE the registry's own CRC-anchored viscosities
-# (Sect. 6 pp. 6-243..6-247), converted mPa s -> poise (1 mPa s = 0.01 P).
-SOLV = {   # name: (eps [RECALLED, unretrieved], eta_mPa_s [registry, CRC-anchored], tag)
-    "H2O":     (78.36, 0.890, "eps RECALLED; eta from registry (CRC Sect.6)"),
-    "MeCN":    (35.94, 0.343, "eps RECALLED; eta from registry (CRC Sect.6)"),
-    "MeOH":    (32.66, 0.544, "eps RECALLED; eta from registry (CRC Sect.6)"),
-    "DMF":     (36.71, 0.794, "eps RECALLED; eta from registry (CRC Sect.6)"),
-    "DMA":     (37.78, 0.945, "eps RECALLED; eta from registry (CRC Sect.6)"),
-    "DMSO":    (46.83, 1.987, "eps RECALLED; eta from registry (CRC Sect.6)"),
-    "THF":     (7.52,  0.456, "eps RECALLED; eta from registry (CRC Sect.6)"),
-    "acetone": (20.49, 0.306, "eps RECALLED; eta from registry (CRC Sect.6)"),
-    "AcOH":    (6.20,  1.056, "eps RECALLED; eta from registry (CRC Sect.6)"),
+# eta is different: it is READ from data/solvents.csv (column mu_mPas), the table the solver and
+# the registry share, and converted mPa s -> poise inside onsager() (1 mPa s = 0.01 P). It used to
+# be typed here, and two of the typed values had outlived the registry: MeCN 0.343 (the CRC page
+# prints 0.369) and DMA 0.945 (the page prints 1.927). Reading the shared table means a viscosity
+# can no longer be corrected in one place and left behind in this one.
+EPS_RECALLED = {   # static relative permittivity, 25 C -- RECALLED, unretrieved (see above)
+    "H2O": 78.36, "MeCN": 35.94, "MeOH": 32.66, "DMF": 36.71, "DMA": 37.78,
+    "DMSO": 46.83, "THF": 7.52, "acetone": 20.49, "AcOH": 6.20,
+}
+
+
+def _solvent_eta():
+    tab = pd.read_csv(os.path.join(HERE, "solvents.csv")).set_index("solvent")
+    out = {}
+    for name in EPS_RECALLED:
+        if name not in tab.index:
+            raise SystemExit("derive_kappa: %s has no row in data/solvents.csv" % name)
+        out[name] = float(tab.loc[name, "mu_mPas"])
+    return out
+
+
+_ETA = _solvent_eta()
+SOLV = {   # name: (eps [RECALLED, unretrieved], eta_mPa_s [data/solvents.csv], tag)
+    name: (EPS_RECALLED[name], _ETA[name], "eps RECALLED; eta from data/solvents.csv (registry, CRC Sect. 6)")
+    for name in EPS_RECALLED
 }
 
 # --- limiting molar conductivities, per ion, per solvent ---------------------------------
@@ -195,6 +208,34 @@ def onsager(lam0, eps, eta_mPa, c):
     B2 = 82.5 / (eta_P * math.sqrt(eT))
     drop = (B1 * lam0 + B2) * math.sqrt(c)
     return lam0 - drop, drop, B1, B2
+
+
+def nai_dmf_ka_route(K_A=7.50, c=0.2, lam0=81.35, a_nm=1.131):
+    """The same-system third route for 0.2 M NaI/DMF (registry row '0.2 M NaI/DMF'): Krumgalz & Barthel,
+    Z. Phys. Chem. 1984, 142, 167, Table 2, p. 170 -- Lambda0 = 81.35, K_A = 7.50 +/- 0.57 dm3 mol-1 and distance
+    parameter R2 = 1.131 nm. The association equilibrium K_A = (1 - alpha)/(alpha^2 c gamma^2), with Debye-Huckel
+    activity coefficients at R2, fixes the free-ion fraction alpha. Converting alpha to kappa needs a conductance
+    equation at the free-ion concentration alpha*c, 20-200x beyond the range the paper fits, and the FORM decides the
+    answer: the Onsager limiting law (Eq. S29) against the same law divided by the Debye-Huckel ion-size factor
+    1 + B a sqrt(alpha c). Both are reported; the SI states that the route therefore bounds nothing. (2026-10-07: the
+    8.30 mS cm-1 typed for this route reproduced under neither form.)"""
+    eps, eta = SOLV["DMF"][0], SOLV["DMF"][1]
+    eT = eps * T_K
+    A, B = 1.8246e6 / eT ** 1.5, 50.29 / math.sqrt(eT)       # log10 gamma per (mol/L)^1/2; per Angstrom
+    out = {}
+    for tag, ka in (("lo", K_A - 0.57), ("mid", K_A), ("hi", K_A + 0.57)):
+        lo, hi = 1e-12, 1.0
+        for _ in range(200):
+            al = 0.5 * (lo + hi)
+            g = 10 ** (-A * math.sqrt(al * c) / (1 + B * 10 * a_nm * math.sqrt(al * c)))
+            if ka * al * al * c * g * g > 1 - al:
+                hi = al
+            else:
+                lo = al
+        lam_lim, drop, _, _ = onsager(lam0, eps, eta, al * c)
+        lam_size = lam0 - drop / (1 + B * 10 * a_nm * math.sqrt(al * c))
+        out[tag] = dict(K_A=ka, alpha=al, kappa_limiting_mScm=c * al * lam_lim, kappa_sizecorr_mScm=c * al * lam_size)
+    return dict(c=c, lambda0=lam0, a_nm=a_nm, eps=eps, eta_mPas=eta, **out)
 
 
 def kappa_from(name):
@@ -322,26 +363,38 @@ def main():
     # ---- G-CRC: the registry's aqueous kappa re-derived from the archived CRC table --------
     print("\nG-CRC: aqueous rows re-derived from the retrieved CRC p. 5-71 table")
     ecsv2 = pd.read_csv(os.path.join(HERE, "electrolytes.csv")).set_index("electrolyte")
-    crc_fail = []
+    # The band is ASSERTED only for a row whose registry state is `derived`, i.e. a row whose value
+    # comes from this table. A row the registry carries as `measured` (read off a Dorn isotherm) is
+    # reported against the band as a cross-check of the CRC route, with its distance from the band
+    # stated, because a measurement is not required to agree with a 20 C table and a temperature
+    # correction to better than the correction's own uncertainty.
+    crc_fail, crc_xcheck = [], []
     for name, salt, mass_pct in CRC_ROWS:
         if name not in ecsv2.index:
             continue
         carried = float(ecsv2.loc[name, "kappa_mScm"])
+        state = str(ecsv2.loc[name, "state"])
         k20 = crc_interp(salt, mass_pct)
         lo, hi = k20 * (1 + ALPHA_LO * 5), k20 * (1 + ALPHA_HI * 5)
         ok = lo <= carried <= hi
-        print("  %-5s %-16s %.3f mass%% -> %.1f at 20 C -> %.0f-%.0f at 25 C ; registry %.1f"
-              % ("PASS" if ok else "FAIL", name, mass_pct, k20, lo, hi, carried))
-        if not ok:
+        off = 0.0 if ok else 100.0 * ((carried - lo) / lo if carried < lo else (carried - hi) / hi)
+        tag = ("PASS" if ok else "FAIL") if state != "measured" else ("XCHK" if ok else "XCHK%+.2f%%" % off)
+        print("  %-9s %-16s %.3f mass%% -> %.1f at 20 C -> %.1f-%.1f at 25 C ; registry %.1f (%s)"
+              % (tag, name, mass_pct, k20, lo, hi, carried, state))
+        if state == "measured":
+            crc_xcheck.append(dict(electrolyte=name, carried_mScm=carried, band_25C=[lo, hi],
+                                   outside_band_pct=off))
+        elif not ok:
             crc_fail.append(name)
     if crc_fail:
         raise AssertionError("registry kappa outside the CRC-derived band: %s" % ", ".join(crc_fail))
-    print("  -> all three reproduce from the archived table; the CRC route is verified, not asserted")
+    print("  -> every derived row reproduces from the archived table; measured rows are cross-checks")
 
     with open(OUT, "w") as f:
         json.dump(dict(validation_KCl=dict(lambda0=lam0_kcl, lambda_c=lam_c,
                                           table=KCL_0P01, source="Vanysek CRC, retrieved"),
-                       rows=rows, unreachable=unreachable), f, indent=2)
+                       rows=rows, unreachable=unreachable, crc_crosscheck_measured=crc_xcheck,
+                       nai_dmf_ka_route=nai_dmf_ka_route()), f, indent=2)
     print("\nwrote %s" % os.path.relpath(OUT, os.path.dirname(HERE)))
     return rows
 

@@ -67,8 +67,8 @@ picks = ["Anodic methoxylation of 4-tBu-toluene (Lysmeral)", "Kolbe homocoupling
          "Acrylonitrile hydrodimerization (ADN)", "Thioether -> sulfone (kilo-scale)",
          "Birch reduction of naphthalene", "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
          "ACT-mediated alcohol oxidation (flow, hectogram)"]
-labs  = ["BASF methoxylation (0.8 M)","Kolbe (1 M)","ADN (6.9 M)","sulfone, kilo-scale (0.47 M)",
-         "Birch (0.14 M)","Ni-XEC (cat. 15 mM)","ACT-mediated (med. 25 mM)"]
+labs  = ["BASF methoxylation (0.8 M)","Kolbe (1 M)","ADN (6.9 M)","sulfone, kilo-scale (med. 14 mM)",
+         "Birch (0.029 M)","Ni-XEC (cat. 15 mM)","ACT-mediated (med. 25 mM)"]
 cols  = [BLUE, GREEN, LBLUE, RED, (0.98,0.42,0.42), ORANGE, (0.45,0.45,0.5)]
 for name,lab,c in zip(picks,labs,cols):
     r = df[df.reaction==name].iloc[0]

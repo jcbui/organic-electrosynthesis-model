@@ -110,9 +110,10 @@ FS.panel_letter(a, "a)", x=-0.30, y=1.02); FS.panel_letter(b, "b)", x=-0.16, y=1
 # ═════════════════════ provenance gate ═════════════════════════════════════════════════
 # NOT a self-check: the reference is the DOCUMENT -- the values the manuscript caption, the
 # Section 8 body text and SI Table 1 print. If the model moves, this fails at render time.
-PUBLISHED = {           # architecture -> (median printed, N/50 printed) in v88 (2026-09-11: seven catalyst
-    "natural": (8.2, 12), "stirred": (9.3, 14), "flow": (16.8, 18), "anec": (44.2, 31),   # rows at a sourced k);
-    "micro": (111, 36), "rde": (108, 36), "rce": (122, 36),                                # history in the .bak
+PUBLISHED = {           # architecture -> (median printed, N/50 printed) in the 2026-10-06 build (the chemistry review:
+    # the rAP reduction row in its own THF/EtOH medium drops below 25 in the ANEC cell, 29 -> 28; SI Table S5 prints it)
+    "natural": (8.6, 12), "stirred": (9.7, 14), "flow": (17.4, 19), "anec": (44.5, 28),   # chemistry audit pass 1 (2026-10-06):
+    "micro": (109, 34), "rde": (104, 34), "rce": (122, 34),                                # rows 7, 14, 23, 34, 35, 39, 41, 46, 48, 50 re-solved
 }
 stale = []
 for (col, lab), m, c in zip(ARCH, med, cnt):

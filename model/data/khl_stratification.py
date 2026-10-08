@@ -101,6 +101,14 @@ def main():
             "shares": [{"cls": r["class"], "set_pct": round(float(r.set_pct), 1),
                         "corpus_pct": round(float(r.corpus_pct), 1),
                         "diff": round(float(r["diff"]), 1)} for _, r in t.iterrows()]}
+    # The classification record's oxygen-donor convention (a reagent that adds only oxygen -- water or a peroxide -- is not a
+    # reactant, methanol is) follows how the dataset draws its records; the SI states it with these counts.
+    _fe = os.path.join(os.path.dirname(ROOT), "Figure_1b_Kasie", "filtered_echem.parquet")
+    _frag = pd.read_parquet(_fe, columns=["react_smiles"]).react_smiles.fillna("").map(lambda s: set(s.split(".")))
+    _out["drawn_as_reactant"] = {"n_records": int(len(_frag)),
+                                 "water": int(_frag.map(lambda f: bool(f & {"O", "[OH2]"})).sum()),
+                                 "hydrogen_peroxide": int(_frag.map(lambda f: "OO" in f).sum()),
+                                 "methanol": int(_frag.map(lambda f: bool(f & {"CO", "OC"})).sum())}
     _p = os.path.join(ROOT, "results", "khl_stratification.json")
     with open(_p, "w") as _f:
         _json.dump(_out, _f, indent=1)
@@ -126,13 +134,17 @@ def check_si(perturb=False):
     """Assert every set-vs-corpus pair the SI prose quotes matches this computation.
 
     Falsifiable by construction: the pairs are rebuilt from the parquet and the mapping
-    CSV, then required to appear verbatim in make_si.js. --negative-control perturbs the
+    CSV, then required to appear verbatim in the built SI. --negative-control perturbs the
     computed table and confirms the gate fires.
     """
     import re
-    si = os.path.join(ROOT, "make_si.js")
-    src = open(si, encoding="utf8").read()
-    corpus, _ = corpus_shares()
+    # The BUILT SI, not make_si.js: since chemistry audit pass 4 the bound word is computed in the generator, so the
+    # phrase exists only in the document (a check that greps a generator stops passing the moment its text is computed).
+    import sys
+    sys.path.insert(0, HERE)
+    import docx_text
+    src = docx_text.asserted_text(os.path.join(ROOT, "SI_Section4_Transport_Model.docx"))
+    corpus, n_corpus = corpus_shares()
     corpus = corpus[~corpus.index.isin(EXCLUDED)]
     prim, n_basis = set_shares()
     t = table(corpus, prim, 0, 0)
@@ -157,7 +169,7 @@ def check_si(perturb=False):
         ("basis", "across the %d entries the classifier places" % n_basis),
         # the SI names this set the "dataset" since the 2026-09-14 voice pass; the claim it
         # gates is the scored subset the classifier actually places, not the wording.
-        ("scored-n", "21,459 carry the atom-mapped records"),
+        ("scored-n", "%s carry the polarity scores Fig. 1b plots" % format(int(n_corpus), ",")),
         ("representative", "is approximately representative of the dataset"),
     ]
     # Multicomponent coupling had NO exemplar until 2026-08-22; two page-verified

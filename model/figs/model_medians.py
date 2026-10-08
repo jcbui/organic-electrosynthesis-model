@@ -80,7 +80,7 @@ def delta_eff(key, D, nu):
     if key == "natural":
         return 228e-6
     if key == "stirred":
-        # the stirred film. ADOPTED 200 um on 2026-09-01 (author decision). The retired 100 um was an assumption whose inherited citation had been WITHDRAWN -- no passage in Pletcher & Walsh giving ~100 um for a magnetically stirred cell could be located. 200 +/- 7 um is MEASURED: Williams, Corbin, Zeng, Lazouski, Yang & Manthiram, Sustain. Energy Fuels 2019, 3, 1225-1232, p. 1227, a planar electrode in a gas-bubbled cell, back-calculated from the ferricyanide limiting current. It is a proxy, not this system: O2 diffuses about twice as fast as these organics, so the real layer should be THICKER, and the adopted value stays conservative in that direction.
+        # the stirred film. ADOPTED 200 um on 2026-09-01 (author decision). The retired 100 um was an assumption whose inherited citation had been WITHDRAWN -- no passage in Pletcher & Walsh giving ~100 um for a magnetically stirred cell could be located. 200 +/- 7 um is MEASURED: Williams, Corbin, Zeng, Lazouski, Yang & Manthiram, Sustain. Energy Fuels 2019, 3, 1225-1232, p. 1227, a planar electrode in a gas-bubbled cell, back-calculated from the ferricyanide limiting current. It is a proxy, not this system: O2 diffuses about twice as fast as these organics, and a convective film thickens with D (D^(1/3) laminar, D^(1/2) penetration), so the real layer should if anything be THINNER, by ~20-30 pct, and the adopted value is conservative (it lowers the ceilings). Corrected in chemistry audit pass 3; it had the direction reversed.
         return 200e-6
     if key == "flow":
         return DELTA_FLOW
@@ -135,9 +135,32 @@ self_check()
 
 
 # ── population statistics ─────────────────────────────────────────────────────
-def pop(carrier=None):
-    """Rows of the 50-reaction table for one carrier class (or all 50)."""
-    return RXN if carrier is None else RXN[RXN.carrier == carrier]
+# Rows whose electron count is the charge the exemplar passes through a CHAIN (kind "chain" in
+# data/reaction_stoichiometry.csv, the table the SI prints as Table S10). They are solved and
+# tabulated like every other row and counted in every all-fifty statistic. They are left out of
+# CLASS statistics, because a class median of ceilings would mix a current normalised by passed
+# charge with currents that are stoichiometric in the product.
+import csv as _csv
+CHAIN = frozenset(r["reaction"] for r in _csv.DictReader(open(_p("data", "reaction_stoichiometry.csv"), encoding="utf8"))
+                  if r["kind"] == "chain")
+assert CHAIN and CHAIN <= set(RXN.name), "chain rows of reaction_stoichiometry.csv are not rows of the table"
+
+
+def pop(carrier=None, chains=False):
+    """Rows of the 50-reaction table for one carrier class (or all 50).
+
+    A class selection leaves the chain rows out unless chains=True; the all-fifty selection
+    never drops a row."""
+    if carrier is None:
+        return RXN
+    p = RXN[RXN.carrier == carrier]
+    return p if chains else p[~p.name.isin(CHAIN)]
+
+
+def class_matrix(carrier, chains=False):
+    """Published-matrix rows of one carrier class, chain rows left out unless asked for."""
+    t = TIER0_EC[TIER0_EC.carrier == carrier]
+    return t if chains else t[~t.reaction.isin(CHAIN)]
 
 
 def K_stats(carrier=None, lo=10, hi=90):
@@ -167,7 +190,7 @@ def ilim_median(key, carrier=None, production=True):
     """
     if not production:
         return float(np.median(pop(carrier)["i_" + key].values))
-    t = TIER0_EC if carrier is None else TIER0_EC[TIER0_EC.carrier == carrier]
+    t = TIER0_EC if carrier is None else class_matrix(carrier)
     return float(np.median(t[key].values))
 
 

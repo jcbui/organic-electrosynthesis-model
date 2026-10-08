@@ -85,8 +85,15 @@ def main(neg=False):
     r_fc = KB * T_K / (6 * np.pi * MU_MECN * D_FERROCENE) * 1e10
     print("ferrocene anchor: measured D = %.1e cm2/s in MeCN -> r = %.2f A (neutral, MW 186)"
           % (D_FERROCENE * 1e4, r_fc))
-    print("assumed radii in the set: %s A\n"
-          % sorted({float(s.split("r=")[1].split()[0]) for s in cat.D_provenance}))
+    # 2026-10-05: the radius is an input only for the rows whose D is a Stokes-Einstein estimate (the metal
+    # complexes). A catalyst row whose carrier is an organic molecule takes Wilke-Chang and has no radius.
+    cat["r_assumed"] = [float(s.split("r=")[1].split()[0]) if str(s).startswith("Stokes-Einstein") else np.nan
+                        for s in cat.D_provenance]
+    radii = sorted(set(cat.r_assumed.dropna()))
+    if not radii:
+        raise SystemExit("no catalyst row carries a Stokes-Einstein radius; this analysis has nothing to test")
+    print("assumed radii in the set: %s A (%d of %d catalyst rows; the rest take Wilke-Chang)\n"
+          % (radii, int(cat.r_assumed.notna().sum()), len(cat)))
 
     print("%-46s %9s %10s" % ("reaction", "C_cat(M)", "best i_lim"))
     for (_, r), b in zip(cat.iterrows(), best):
@@ -94,14 +101,22 @@ def main(neg=False):
               % (r.reaction[:46], r.C_carrier_M, b, "   <- clears" if b >= THRESH else ""))
 
     srt = sorted(best.values)[::-1]
-    f_crit = THRESH / srt[1]                      # i_lim must rise by this factor
-    r_crit_45 = 4.5 / f_crit                      # ... i.e. r must fall to this, from 4.5 A
+    # the row that decides the count: the best Stokes-Einstein row still under the threshold
+    _below = cat[(best.values < THRESH) & cat.r_assumed.notna().values]
+    _dec = _below.loc[_below[ARCH].max(axis=1).idxmax()]
+    i_dec = float(_dec[ARCH].max())
+    r_dec = float(_dec.r_assumed)
+    if abs(i_dec - srt[1]) > 1e-9 and n_clear == 1:
+        print("note: the second-best catalyst row overall is not a Stokes-Einstein row; the deciding row for the "
+              "radius is the best metal complex below the threshold")
+    f_crit = THRESH / i_dec                       # i_lim must rise by this factor
+    r_crit_45 = r_dec / f_crit                    # ... i.e. r must fall to this, from the row's own assumed radius
     print("\n%d of %d clear %.0f mA cm-2 in at least one architecture" % (n_clear, len(cat), THRESH))
-    print("second-best catalyst row peaks at %.1f mA cm-2" % srt[1])
-    print("for a SECOND row to clear, i_lim must rise %.2fx, i.e. every radius must be"
+    print("the deciding row (%s) peaks at %.1f mA cm-2" % (_dec.reaction, i_dec))
+    print("for a SECOND row to clear, i_lim must rise %.2fx, i.e. its radius must be"
           % f_crit)
-    print("overestimated by %.2fx -- a 4.5 A complex would have to be %.2f A"
-          % (f_crit, r_crit_45))
+    print("overestimated by %.2fx -- its %.1f A complex would have to be %.2f A"
+          % (f_crit, r_dec, r_crit_45))
     # Size-scale the ferrocene anchor. A hydrodynamic radius goes as the cube root of the
     # molecular volume, and volume tracks mass for compounds of similar density, so
     #     r(complex) ~ r(ferrocene) * (M_complex / M_ferrocene)^(1/3).
@@ -115,15 +130,22 @@ def main(neg=False):
            "Fe": 55.845, "Ni": 58.693, "Co": 58.933, "Br": 79.904}
     _mw = lambda f: sum(_AW[e] * n for e, n in f.items())
     M_FC = _mw({"C": 10, "H": 10, "Fe": 1})                        # ferrocene, C10H10Fe
-    M_2ND = _mw({"C": 18, "H": 24, "Br": 2, "N": 2, "Ni": 1})       # NiBr2(dtbbpy), C18H24Br2N2Ni
+    # the complex each candidate deciding row carries, as its exemplar charges it
+    _FORMULA = {"Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)": ("NiBr2(dtbbpy)", {"C": 18, "H": 24, "Br": 2, "N": 2, "Ni": 1}),
+                "Co-H alkene reduction (e-HAT)": ("CoBr2(6,6'-dimethyl-2,2'-bipyridine)", {"C": 12, "H": 12, "Br": 2, "Co": 1, "N": 2}),
+                "Co-H alkene isomerization (catalytic)": ("Co(salen)", {"C": 16, "H": 14, "Co": 1, "N": 2, "O": 2})}
+    if _dec.reaction not in _FORMULA:
+        raise SystemExit("the deciding row is now %r; add its complex's molecular formula to _FORMULA" % _dec.reaction)
+    _dec_name, _dec_formula = _FORMULA[_dec.reaction]
+    M_2ND = _mw(_dec_formula)
     M_MIN = _mw({"C": 16, "H": 14, "Co": 1, "N": 2, "O": 2})        # Co(salen), C16H14CoN2O2
     r_2nd = r_fc * (M_2ND / M_FC) ** (1 / 3.)
     r_min = r_fc * (M_MIN / M_FC) ** (1 / 3.)
     print("\nsize-scaling the anchor, r ~ M^(1/3):")
     print("  Co(salen) C16H14CoN2O2, the LIGHTEST complex here (M = %.2f): r_expected = %.2f A"
           % (M_MIN, r_min))
-    print("  NiBr2(dtbbpy) C18H24Br2N2Ni, the row that decides the count (M = %.2f): "
-          "r_expected = %.2f A" % (M_2ND, r_2nd))
+    print("  %s, the row that decides the count (M = %.2f): "
+          "r_expected = %.2f A" % (_dec_name, M_2ND, r_2nd))
     print("  the conclusion breaks at r = %.2f A -> margin %.2fx on the deciding row"
           % (r_crit_45, r_2nd / r_crit_45))
     print("  and charge and the solvation shell both RAISE the effective radius, which lowers")
@@ -132,12 +154,18 @@ def main(neg=False):
     # 2026-09-11: the deciding row is now carried at a SOURCED rate constant (S5.7) and sits in the
     # kinetic regime, where its ceiling goes as sqrt(D) rather than as D; the 1/r scaling above is
     # therefore a BOUND on its sensitivity, and the sqrt-law break is recorded beside it.
-    r_crit_sqrt = 4.5 / (f_crit ** 2)
-    deciding = str(cat.iloc[int(np.argsort(best.values)[::-1][1])].reaction)
+    r_crit_sqrt = r_dec / (f_crit ** 2)
+    deciding = str(_dec.reaction)
     conditional = bool(r_crit_45 >= r_2nd)
-    report = dict(n_catalyst=len(cat), n_clear=n_clear, threshold=THRESH,
-                  second_best_i_lim=float(srt[1]), f_crit=float(f_crit),
+    report = dict(n_catalyst=len(cat), n_stokes_einstein=int(cat.r_assumed.notna().sum()), n_clear=n_clear, threshold=THRESH,
+                  second_best_i_lim=float(i_dec), f_crit=float(f_crit),
+                  # (the two keys keep their historical names; the radius they start from is the deciding row's own)
                   r_crit_from_4p5A=float(r_crit_45), r_crit_sqrt_from_4p5A=float(r_crit_sqrt),
+                  r_assumed_deciding_A=r_dec, band_A=[float(min(radii)), float(max(radii))],
+                  in_band=bool(min(radii) <= r_crit_45 <= max(radii)),
+                  conditional_under_sqrt_law=bool(r_crit_sqrt >= r_2nd),
+                  i_at_anchor_linear=float(i_dec * r_dec / r_2nd), i_at_anchor_sqrt=float(i_dec * (r_dec / r_2nd) ** 0.5),
+                  deciding_complex=_dec_name,
                   r_expected_deciding_A=float(r_2nd), deciding_row=deciding, conditional=conditional,
                   r_ferrocene_A=float(r_fc),
                   anchor="ferrocene in MeCN, D = 2.4e-5 cm2/s, 25 C")
@@ -149,8 +177,8 @@ def main(neg=False):
     # ---- G-CATD: the published 10/11 and the margin behind it -------------------------
     fails = []
     if n_clear != 1:
-        fails.append("catalyst rows clearing %.0f = %d, SI and manuscript say 1 (10 of 11 clear "
-                     "in none)" % (THRESH, n_clear))
+        fails.append("catalyst rows clearing %.0f = %d, SI and manuscript say 1 (all but one of %d clear "
+                     "in none)" % (THRESH, n_clear, len(cat)))
     if r_crit_45 >= r_2nd and not neg:
         # The physical argument (the break lies below any plausible radius) has lapsed: with the
         # deciding row at its sourced rate constant the count is CONDITIONAL on the assigned radius.
@@ -177,14 +205,14 @@ def main(neg=False):
     if neg:
         print("\nG-CATD control: %s"
               % ("GOOD -- the gate fires (%s)" % fails[0][:80] if fails
-                 else "BAD -- test is inert, 10/11 survived a forced second clearance"))
+                 else "BAD -- test is inert, the all-but-one count survived a forced second clearance"))
         return 0 if fails else 1
     print("\nG-CATD: %s" % ("PASS" if not fails else "FAIL"))
     for f_ in fails:
         print("  " + f_)
     if fails:
         raise AssertionError("; ".join(fails))
-    print("  10/11 holds at the adopted radii; breaking it needs r = %.2f A (1/r bound; %.2f A under the sqrt-D law of the "
+    print("  the all-but-one count holds at the adopted radii; breaking it needs r = %.2f A (1/r bound; %.2f A under the sqrt-D law of the "
           "kinetic regime) against a mass-scaled expectation of %.2f A for the deciding row" % (r_crit_45, r_crit_sqrt, r_2nd))
     return report
 

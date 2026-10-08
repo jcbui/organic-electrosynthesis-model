@@ -261,7 +261,7 @@ def draw_starvation(b):
         b.plot(x,cn,color=col,lw=1.6,label=f"{frac:.1f} $i_{{lim}}$" if frac<0.99 else "$i_{lim}$")
     FS.legend(b, loc="lower right", fontsize=ANN)       # the four lines converge at the film edge: a key, not in-line labels
     print(f"starvation: stirred delta {DELTA_STIR:.0f} um; i/ilim " + ", ".join(f"{i/ILIM_EX:.2f}" for i in ivals)
-          + f"; exemplar ilim {ILIM_EX:.1f}, corpus-median {ILIM_MED:.1f}, median of the 31 substrate rows {ILIM_ROWMED:.1f} mA cm-2;"
+          + f"; exemplar ilim {ILIM_EX:.1f}, corpus-median {ILIM_MED:.1f}, median of the {len(MM.class_matrix('substrate'))} stoichiometric substrate rows {ILIM_ROWMED:.1f} mA cm-2;"
           + f" fractions of the barrier {ILIM_EX/BARRIER:.2f} / {ILIM_MED/BARRIER:.2f}")
     b.set_xlim(0,DELTA_STIR); b.set_ylim(0,1.05)
     b.set_xlabel("distance from electrode ($\\mu$m)",fontsize=AX); b.set_ylabel("$c_S$ / $C_S$",fontsize=AX)

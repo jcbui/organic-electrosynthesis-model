@@ -6,7 +6,7 @@
   "status": "SI-ONLY:substrate",
   "targets": {
    "carrier": 0.005,
-   "substrate": 0.085,
+   "substrate": 0.17,
    "electrolyte": 0.2
   },
   "spread": 32,
@@ -102,8 +102,8 @@
   "pdf": "ja402083e.pdf",
   "status": "SI-ONLY:carrier,substrate",
   "targets": {
-   "carrier": 0.02,
-   "substrate": 0.034,
+   "carrier": 0.019,
+   "substrate": 0.032299999999999995,
    "electrolyte": 0.3
   },
   "spread": 0,
@@ -126,7 +126,7 @@
  },
  {
   "row": "8",
-  "reaction": "Co-catalyzed aza-Wacker cyclization",
+  "reaction": "Co-catalyzed allylic C-H amination",
   "pdf": "s41467-021-24125-5.pdf",
   "status": "SI-ONLY:substrate",
   "targets": {
@@ -163,7 +163,7 @@
   "status": "SI-ONLY:substrate",
   "targets": {
    "carrier": 0.008,
-   "substrate": 0.136,
+   "substrate": 0.068,
    "electrolyte": 0.24
   },
   "spread": 0,
@@ -207,7 +207,7 @@
   "pdf": "s41586-022-04691-4 (1).pdf",
   "status": "SI-ONLY:carrier,substrate,electrolyte",
   "targets": {
-   "carrier": 0.029,
+   "carrier": 0.0058,
    "substrate": 0.049300000000000004,
    "electrolyte": 0.171
   },
@@ -229,7 +229,7 @@
  },
  {
   "row": "15",
-  "reaction": "Decarboxylative Minisci alkylation",
+  "reaction": "Decarboxylative arylation (radical-radical)",
   "pdf": "science.aba3823.pdf",
   "status": "SI-ONLY:carrier,substrate,electrolyte",
   "targets": {
@@ -246,8 +246,8 @@
   "pdf": "d0sc01694b.pdf",
   "status": "SI-ONLY:carrier,substrate",
   "targets": {
-   "carrier": 0.095,
-   "substrate": 0.1343,
+   "carrier": 0.000266,
+   "substrate": 0.1615,
    "electrolyte": null
   },
   "spread": 0,
@@ -259,14 +259,14 @@
   "pdf": "Angew Chem Int Ed - 2018 - Qiu - Electrooxidative Rhodium\u2010Catalyzed C H C H Activation  Electricity as Oxidant for (1).pdf",
   "status": "SI-ONLY:substrate",
   "targets": {
-   "carrier": 0.0031,
+   "carrier": 0.00625,
    "substrate": 0.2125,
    "electrolyte": 0.25
   },
   "spread": 0,
   "quotes": {
-   "carrier": "tant current=4.0 mA, 1a (1.0 mmol), 2a (0.5 mmol), catalyst (2.5 mol%), additive (1.0 equiv), solvent (4.0 mL), under air, 5\u201318 h. [b] Yield of isolated product. [c] At 608C. [d] With [Cp*Rh",
-   "electrolyte": "tant current=4.0 mA, 1a (1.0 mmol), 2a (0.5 mmol), catalyst (2.5 mol%), additive (1.0 equiv), solvent (4.0 mL), under air, 5\u201318 h. [b] Yield of isolated product. [c] At 608C. [d] With [Cp*Rh"
+   "carrier": "t cathode, constant current=4.0 mA, 1a (1.0 mmol), 2a (0.5 mmol), catalyst (2.5 mol%), additive (1.0 equiv), solvent (4.0 mL), under air, 5\u201318 h. [b] Yield of isolated product. [c] At 608C. ",
+   "electrolyte": "t cathode, constant current=4.0 mA, 1a (1.0 mmol), 2a (0.5 mmol), catalyst (2.5 mol%), additive (1.0 equiv), solvent (4.0 mL), under air, 5\u201318 h. [b] Yield of isolated product. [c] At 608C. "
   }
  },
  {
@@ -336,9 +336,9 @@
   "pdf": "science.aav5606 (1).pdf",
   "status": "SI-ONLY:carrier,substrate,electrolyte",
   "targets": {
-   "carrier": 0.141,
-   "substrate": 0.23969999999999997,
-   "electrolyte": 3.0
+   "carrier": 0.0286,
+   "substrate": 0.04862,
+   "electrolyte": 0.214
   },
   "spread": 0,
   "quotes": {}
@@ -361,7 +361,7 @@
  },
  {
   "row": "24",
-  "reaction": "Rapid-alternating-polarity imide reduction",
+  "reaction": "Rapid-alternating-polarity (hetero)arene reduction",
   "pdf": "ja2c02102.pdf",
   "status": "SI-ONLY:carrier,substrate,electrolyte",
   "targets": {
@@ -391,7 +391,7 @@
  },
  {
   "row": "26",
-  "reaction": "Cathodic aryl chloride dehalogenation",
+  "reaction": "Cathodic aryl halide hydrodehalogenation",
   "pdf": "Chemistry A European J - 2019 - Ke - Hydrodehalogenation of Aryl Halides through Direct Electrolysis (1).pdf",
   "status": "ANCHORED",
   "targets": {
@@ -443,8 +443,8 @@
   "pdf": "5507922.pdf",
   "status": "SI-ONLY:carrier,substrate",
   "targets": {
-   "carrier": 0.81,
-   "substrate": 1.377,
+   "carrier": 0.83,
+   "substrate": 1.4109999999999998,
    "electrolyte": null
   },
   "spread": 0,
@@ -456,9 +456,9 @@
   "pdf": "ja00848a020.pdf",
   "status": "SI-ONLY:substrate",
   "targets": {
-   "carrier": 1.56,
-   "substrate": 2.652,
-   "electrolyte": 0.156
+   "carrier": 1.577,
+   "substrate": 2.6809,
+   "electrolyte": 0.158
   },
   "spread": 25,
   "quotes": {
@@ -504,14 +504,14 @@
   "pdf": "op2c00111.pdf",
   "status": "SI-ONLY:substrate",
   "targets": {
-   "carrier": 0.47,
+   "carrier": 0.014,
    "substrate": 0.7989999999999999,
    "electrolyte": 0.085
   },
-  "spread": 22,
+  "spread": 90,
   "quotes": {
    "electrolyte": "ichiometry relative to substrate (i.e., 0.18 equiv instead of 1 equiv) as well as increasing substrate concentration (from 0.1 to 0.47 M). By keeping the solvent composition constant, this i",
-   "carrier": " substrate (i.e., 0.18 equiv instead of 1 equiv) as well as increasing substrate concentration (from 0.1 to 0.47 M). By keeping the solvent composition constant, this increase in substrate c"
+   "carrier": "ng substrate concentration (from 0.1 to 0.47 M). By keeping the solvent composition constant, this increase in substrate concentration results in a net decrease in catalyst loading (i.e., fr"
   }
  },
  {
@@ -533,7 +533,7 @@
  {
   "row": "35",
   "reaction": "Alkenesulfonate from cinnamic acid, SO2 and alcohol",
-  "pdf": "ChemSusChem - 2025 - Chien - Electrochemical Three\u2010Component Synthesis of Vinyl Sulfonamides via Decarboxylative.pdf",
+  "pdf": "cssc.202500186 - Chien - Alkenesulfonates from Cinnamic Acids SO2 and Alcohols (PMC12175053 full-text print).pdf",
   "status": "SI-ONLY:substrate",
   "targets": {
    "carrier": 0.1,
@@ -542,8 +542,8 @@
   },
   "spread": 0,
   "quotes": {
-   "carrier": "e Commons License electrodes, nBu4NPF6 (0.1 M) as supporting electrolyte, 1,8- diazabicyclo [5.4.0]undec-7-ene (DBU) as base, a current density of 15 mA/cm2, and an applied charge of 3.5 F, ",
-   "electrolyte": "e Commons License electrodes, nBu4NPF6 (0.1 M) as supporting electrolyte, 1,8- diazabicyclo [5.4.0]undec-7-ene (DBU) as base, a current density of 15 mA/cm2, and an applied charge of 3.5 F, "
+   "carrier": "xpensive graphite electrodes, nBu4NPF6 (0.1 M) as supporting electrolyte, a current density of 10 mA cm\u22122, and an amount of applied charge of 3.5 F, leading to the alkenesulfonate 8a in 70% ",
+   "electrolyte": "xpensive graphite electrodes, nBu4NPF6 (0.1 M) as supporting electrolyte, a current density of 10 mA cm\u22122, and an amount of applied charge of 3.5 F, leading to the alkenesulfonate 8a in 70% "
   }
  },
  {
@@ -582,17 +582,16 @@
   "row": "38",
   "reaction": "BQ-mediated Wacker-Tsuji oxidation",
   "pdf": "miller-wayner-2011-electrode-mediated-wacker-oxidation-of-cyclic-and-internal-olefins.pdf",
-  "status": "MIXED-EXPERIMENT(spread=17918)",
+  "status": "SI-ONLY:substrate",
   "targets": {
-   "carrier": 0.0235,
-   "substrate": 0.20059999999999997,
+   "carrier": 0.022,
+   "substrate": 0.187,
    "electrolyte": 0.1
   },
-  "spread": 17918,
+  "spread": 3904,
   "quotes": {
-   "substrate": "/v), containing benzoquinone (0.022 M, 20 mol% based on olefin), palladium acetate (0.001 1 M, 1 mol% based on olefin), olefin (0.11 MI), and perchloric acid (0.0 15-0.24 M). I -Decene, s",
-   "electrolyte": "bout the same, reaching a plateau near 0.1 M (Fig. 1). The maximum current (ca. 420 mA) represents an average turnover rate of 0.025 s-' (i.e., moles of ketone per mole of catalyst per se",
-   "carrier": "m(I1) acetate (0.1 mmol), benzoquinone (2 mmol), and perchloric acid (0.015-0.36 M) were dissolved in acetonitrite/water (7 : 1 v/v, 85 mL containing 0.1 M TBAP) in the anode compart- men"
+   "carrier": "ter (7: lv/v), containing benzoquinone (0.022 M, 20 mol% based on olefin), palladium acetate (0.001 1 M, 1 mol% based on olefin), olefin (0.11 MI), and perchloric acid (0.0 15-0.24 M). I ",
+   "electrolyte": " of tr-atzs-2- octene oxidations using 0.1 M tetrabutylammonium per- chlorate (TBAP) as the supporting electrolyte (Table 1, entry 9) with that using 0.1 M sodium perchlorate (Table 1, e"
   }
  },
  {
@@ -617,31 +616,31 @@
   "pdf": "s41586-022-04595-3 (1).pdf",
   "status": "SI-ONLY:substrate",
   "targets": {
-   "carrier": 0.0048,
+   "carrier": 0.0032,
    "substrate": 0.136,
    "electrolyte": 0.1
   },
-  "spread": 271,
+  "spread": 17,
   "quotes": {
-   "electrolyte": "on COOBn CbzHN O O O Co(salen)-1, HFIP (2 equiv), TBABF4 (0.08 M), acetone Zn(+)/Ni(\u2013), 5 mA, 3 F mol\u20131 75% COOBn CbzHN OH BocN Me Co(salen)-2 (2 mol%), HFIP (10 equiv.) TBABF4 (0.08 M), ac",
-   "carrier": "ng-openning isomerization CoBr2(glyme) (10 mol%), 6,6\u2032-Me-bpy (15 mol%) HFIP (14 equiv.), Et3NHBF4 (3 equiv.), THF (0.08 M) CoBr2(glyme) (10 mol%), 6,6\u2032-Me-bpy (15 mol%) HFIP (9 equiv.), E"
+   "electrolyte": "-1 (10 mol%), HFIP (13 equiv.) TBABF4 (0.1 M), acetone (0.08 M) Zn(+)/Ni(\u2013), 5 mA , 1 F mol\u20131 (iii) Regioselective isomerization Me Ph OEt O Me Me Me Ph 89% OEt O 79% (r.r. = 7/1) Co(salen",
+   "carrier": "P (13 equiv.) TBABF4 (0.1 M), acetone (0.08 M) Zn(+)/Ni(\u2013), 5 mA , 1 F mol\u20131 (iii) Regioselective isomerization Me Ph OEt O Me Me Me Ph 89% OEt O 79% (r.r. = 7/1) Co(salen)-1 (4 mol%), HFI"
   }
  },
  {
   "row": "41",
-  "reaction": "Anodic oxazoline/oxazole cyclization",
+  "reaction": "Oxazole synthesis from ketones and acetonitrile",
   "pdf": "ol2c02252.pdf",
   "status": "ANCHORED",
   "targets": {
-   "carrier": 0.05,
+   "carrier": 0.005,
    "substrate": 0.085,
    "electrolyte": 0.3
   },
-  "spread": 186,
+  "spread": 205,
   "quotes": {
    "substrate": " of LiClO4 0 15 5 mol % of cat. 1 42 16 20 mol % of cat. 1 49 17 cat. 2 instead of cat. 1 56 18 cat. 3 instead of cat. 1 57 19 cat. 4 instead of cat. 1 47 20 undivided cell instead of divide",
-   "carrier": "vided cell <5 aReaction conditions: 1a (0.4 mmol), cat. 1 (0.04 mmol), TFAA (0.2 mL), Ac2O (0.1 mL), LiClO4 (0.3 M) as electrolyte in MeCN (8 mL) [anode], and LiClO4 (0.3 M) as electrolyte i",
-   "electrolyte": "vided cell <5 aReaction conditions: 1a (0.4 mmol), cat. 1 (0.04 mmol), TFAA (0.2 mL), Ac2O (0.1 mL), LiClO4 (0.3 M) as electrolyte in MeCN (8 mL) [anode], and LiClO4 (0.3 M) as electrolyte i"
+   "electrolyte": "vided cell <5 aReaction conditions: 1a (0.4 mmol), cat. 1 (0.04 mmol), TFAA (0.2 mL), Ac2O (0.1 mL), LiClO4 (0.3 M) as electrolyte in MeCN (8 mL) [anode], and LiClO4 (0.3 M) as electrolyte i",
+   "carrier": "tion conditions: 1a (0.4 mmol), cat. 1 (0.04 mmol), TFAA (0.2 mL), Ac2O (0.1 mL), LiClO4 (0.3 M) as electrolyte in MeCN (8 mL) [anode], and LiClO4 (0.3 M) as electrolyte in MeCN (8 mL) [cath"
   }
  },
  {
@@ -696,21 +695,18 @@
   "row": "45",
   "reaction": "Br- oxidation / electrophilic bromination",
   "pdf": "s41467-025-57329-0.pdf",
-  "status": "SI-ONLY:substrate",
+  "status": "SI-ONLY:carrier,substrate,electrolyte",
   "targets": {
-   "carrier": 0.152,
-   "substrate": 0.2057,
-   "electrolyte": 0.152
+   "carrier": 0.25,
+   "substrate": 0.05661,
+   "electrolyte": 0.25
   },
   "spread": 0,
-  "quotes": {
-   "carrier": " M in deionized water, 12.5 mL), CH3CN (12.5 mL) in each chamber, 1 (0.5 mmol), constant voltage (1.1-1.3 V vs. SCE) at room temperature for 4-8 h. Isolated yields are shown. bReaction condi",
-   "electrolyte": " M in deionized water, 12.5 mL), CH3CN (12.5 mL) in each chamber, 1 (0.5 mmol), constant voltage (1.1-1.3 V vs. SCE) at room temperature for 4-8 h. Isolated yields are shown. bReaction condi"
-  }
+  "quotes": {}
  },
  {
   "row": "46",
-  "reaction": "Sulfonylation of alkenes with sulfinates",
+  "reaction": "Alkoxysulfonylation of styrenes with sulfinates",
   "pdf": "ao9b02442.pdf",
   "status": "ANCHORED",
   "targets": {
@@ -743,7 +739,7 @@
  },
  {
   "row": "48",
-  "reaction": "Anodic C-H phosphonylation of azoles",
+  "reaction": "Anodic C-H phosphorylation of arenes",
   "pdf": "s41467-021-26960-y.pdf",
   "status": "SI-ONLY:substrate",
   "targets": {
@@ -759,7 +755,7 @@
  },
  {
   "row": "49",
-  "reaction": "N-N azo/pyrazole formation (N-H/N-H)",
+  "reaction": "Anodic N-N coupling to pyrazolidine-3,5-diones",
   "pdf": "Angew Chem Int Ed - 2016 - Gieshoff - Access to Pyrazolidin\u20103 5\u2010diones through Anodic N N Bond Formation.pdf",
   "status": "SI-ONLY:carrier,substrate",
   "targets": {

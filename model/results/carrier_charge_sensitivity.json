@@ -5,42 +5,42 @@
   1,
   2
  ],
- "worst_ceiling_change_pct": 3.04,
+ "worst_ceiling_change_pct": 1.448,
  "rows": [
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "z_alt": -1,
-   "max_ceiling_change_pct": 1.231,
+   "max_ceiling_change_pct": 0.701,
    "counts_unchanged": true
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "z_alt": 1,
-   "max_ceiling_change_pct": 1.047,
+   "max_ceiling_change_pct": 0.633,
    "counts_unchanged": true
   },
   {
    "reaction": "Ni-catalyzed aryl amination (ArBr + amine)",
    "z_alt": 2,
-   "max_ceiling_change_pct": 2.064,
+   "max_ceiling_change_pct": 1.047,
    "counts_unchanged": true
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "z_alt": -1,
-   "max_ceiling_change_pct": 1.047,
+   "max_ceiling_change_pct": 0.627,
    "counts_unchanged": true
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "z_alt": 1,
-   "max_ceiling_change_pct": 1.221,
+   "max_ceiling_change_pct": 0.701,
    "counts_unchanged": true
   },
   {
    "reaction": "Electrochemical amination of ArX with NH3",
    "z_alt": 2,
-   "max_ceiling_change_pct": 2.399,
+   "max_ceiling_change_pct": 1.181,
    "counts_unchanged": true
   },
   {
@@ -64,19 +64,37 @@
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "z_alt": -1,
-   "max_ceiling_change_pct": 1.454,
+   "max_ceiling_change_pct": 0.64,
    "counts_unchanged": true
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "z_alt": 1,
-   "max_ceiling_change_pct": 1.637,
+   "max_ceiling_change_pct": 0.739,
    "counts_unchanged": true
   },
   {
    "reaction": "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)",
    "z_alt": 2,
-   "max_ceiling_change_pct": 3.04,
+   "max_ceiling_change_pct": 1.448,
+   "counts_unchanged": true
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "z_alt": -1,
+   "max_ceiling_change_pct": 0.64,
+   "counts_unchanged": true
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "z_alt": 1,
+   "max_ceiling_change_pct": 0.701,
+   "counts_unchanged": true
+  },
+  {
+   "reaction": "Doubly decarboxylative Csp3-Csp3",
+   "z_alt": 2,
+   "max_ceiling_change_pct": 1.403,
    "counts_unchanged": true
   }
  ]

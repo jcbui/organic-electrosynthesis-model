@@ -123,11 +123,9 @@ b.set_xlabel("distance from electrode ($\\mu$m)",fontsize=7.5)
 b.set_ylabel("c / c$_{bulk}$",fontsize=7.5)
 
 # ─── c) nondimensional architecture payoff map ─────────────────────────────────
-# mu = (n_c C_med D_med)/(n_S C_S D_S). The n_S = 2 stoichiometry (electrons per
-# substrate, run_mediated.jl MedSpec) was previously omitted, overstating the mediated
-# plateau 2x. ACT row (Zhong/Stahl OPRD 2021, page-verified): n_c 1, n_S 2, C_med 25,
-# C_S 500 mol/m3, D_med 5.93e-10, D_S 7.22e-10 m2/s -> 0.02053.
-mu=0.0205; eps=0.060   # eps: Ni-amination 5 mM/50 mM (Kawamata JACS 2019 Tbl 4 fn a p.6399) x D ratio 0.6 [0.6 UNSOURCED]
+# mu = (n_c C_med D_med)/(n_S C_S D_S), with the ACT row's own MedSpec (run_mediated.jl; Zhong/Stahl OPRD 2021):
+# n_c 1, n_S 4 (alcohol -> acid), C_med 25, C_S 500 mol/m3, D_med 5.93e-10, D_S 7.2207e-10 m2/s -> 0.01027.
+mu=(1*25*5.93e-10)/(4*500*7.2207e-10); eps=0.060   # eps: Ni-amination 5 mM/50 mM (Kawamata JACS 2019 Tbl 4 fn a p.6399) x D ratio 0.6 [0.6 UNSOURCED]
 x=np.logspace(0,np.log10(300),400)
 c.plot(x,x,color=BLUE,lw=1.9,zorder=5)
 c.plot(x,eps*x,color=RED,lw=1.6,zorder=4)
@@ -165,7 +163,7 @@ c.set_xlim(1,300); c.set_ylim(0.02,900)
 c.set_xlabel("reactor intensification  $\\hat{x}=\\delta_{batch}/\\delta$",fontsize=7.5)
 c.set_ylabel("$i_{lim}$ / $i_{lim}^{direct}$(unstirred batch)",fontsize=7.5)
 c.legend(fontsize=4.8,frameon=False,loc="lower right",
-         title=f"mediated (EC$'$), $\\mu$={mu:g}",title_fontsize=4.8)
+         title=f"mediated (EC$'$), $\\mu$={mu:.3g}",title_fontsize=4.8)
 
 plabel(a,"a)"); plabel(b,"b)"); plabel(c,"c)")
 fig1.tight_layout(w_pad=1.3)

@@ -36,6 +36,7 @@ num(x) = (y = tryparse(Float64, strip(x)); y === nothing ? NaN : y)
 
 const CARRIER_IS_SUPPORTING_ANION = Set([
     "Br- oxidation / electrophilic bromination", "Br-mediated Hofmann rearrangement",
+    "Amidyl-radical C-H amination (phenanthridinone)",
     "Cl-mediated ethylene epoxidation", "Alkaline lignin -> vanillin (pilot)"])
 carrier_is_electrolyte_anion(rxn) = rxn in CARRIER_IS_SUPPORTING_ANION
 const REACTORS_L = [(:natural,"Unstirred batch"), (:stirred,"Stirred batch"),
@@ -49,19 +50,27 @@ const REACTORS_L = [(:natural,"Unstirred batch"), (:stirred,"Stirred batch"),
 ##   9334 (< 1e4, dtbbpy): declared 1e2, band 1e1-1e4.
 ##   Co-H + alkene: Boucher et al. JACS 2023, 145, 17674, kMHAT = 7e2 (Co(salen) + styrene, DMF).
 ##   Co(salen) aza-Wacker: own CV, Cai/Xu Nat Commun 2021 SI p. 5, <= 4e1 at rt with Na2CO3: 1e1.
+## CHEMISTRY AUDIT, 2026-10-05: the two Ni aminations and the Co(salen) allylic C-H amination left this table. In the
+## aminations the oxidative addition happens at the cathode and the cycle closes only at the ANODE (Kawamata JACS 2019
+## p. 6396, steps B-F; Liu/Qiu Angew 2025 Fig. 4f), so it cannot regenerate the carrier inside one electrode's film; in the
+## allylic amination the catalyst does not regenerate at room temperature at all (Cai/Xu Nat Commun 2021 p. 6) and turns
+## over by heat-induced homolysis at reflux (p. 7), whose rate is not reported. All three are solved at the floor, k = 0.
 const K_SOURCED = Dict(
     "Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)"          => (100.0, "Ni(I)bpy+ArBr: Ting22/Kawamata19/Till21"),
-    "Ni-catalyzed aryl amination (ArBr + amine)" => (100.0, "Ni(I)bpy+ArBr: Ting22/Kawamata19/Till21"),
-    "Electrochemical amination of ArX with NH3"  => (100.0, "Ni(I)bpy+ArBr: Ting22/Kawamata19/Till21"),
     "Cathodic Ni aryl-aryl homocoupling"         => (100.0, "Ni(I)bpy+ArBr: Ting22/Kawamata19/Till21"),
     "Co-H alkene reduction (e-HAT)"    => (700.0, "Co-H+alkene: Boucher23 kMHAT"),
     "Co-H alkene isomerization (catalytic)"      => (700.0, "Co-H+alkene: Boucher23 kMHAT"),
-    "Co-catalyzed aza-Wacker cyclization"        => (10.0,  "own CV: Cai/Xu21 SI Fig S2, <=4e1 at rt"),
 )
-const D_S_REF, MU_REF = 1.0e-9, 0.369                      # m^2/s at the MeCN viscosity, DECLARED
+## SUBSTRATE DIFFUSIVITIES: each row's own molecule, read from its exemplar and computed by
+## Wilke-Chang in the row's solvent (data/build_catalyst_substrates.py -> catalyst_substrates.csv).
+## Until 2026-10-05 every row used one declared value, 1.0e-9 m^2/s x (0.369 mPa s / mu).
+const D_SUB = let t = csvrows("catalyst_substrates.csv"), h = t[1]
+    Dict(getf(r, h, "reaction") => num(getf(r, h, "D_sub_m2s")) for r in t[2:end])
+end
 
 catrows = [r for r in rxd if occursin("catalyst", lowercase(getf(r, rxh, "carrier_type")))]
-length(catrows) == 11 || error("expected 11 catalyst rows, found $(length(catrows))")
+sort([getf(r, rxh, "reaction") for r in catrows]) == sort(collect(keys(D_SUB))) ||
+    error("catalyst rows of reactions_50.csv and data/catalyst_substrates.csv disagree; found $(length(catrows)) rows and $(length(D_SUB)) substrates")
 for k in keys(K_SOURCED)
     any(r -> getf(r, rxh, "reaction") == k, catrows) || error("K_SOURCED names a row not in reactions_50: $k")
 end
@@ -111,7 +120,7 @@ open(joinpath(@__DIR__, "catalyst_ec_sourced.csv"), "w") do io
     for r in catrows
         sp0, Cc, nc, Dc, nu_s, Csub, nsub, dirn, zc, zprod, Dan_like, Dcat_like, rxn = np_species(r)
         mu = num(getf(r, rxh, "mu_mPas"))
-        D_S = D_S_REF * MU_REF / mu
+        D_S = D_SUB[getf(r, rxh, "reaction")]
         sp = ECSpecies[]
         for (j, s) in enumerate(sp0)
             nu = j == 1 ? +1.0 : (j == 2 ? -1.0 : 0.0)

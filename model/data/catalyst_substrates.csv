@@ -1,0 +1,13 @@
+reaction,substrate,smiles,solvent,lebas_V_cm3mol,D_sub_m2s,identified_by
+Ni-catalyzed aryl amination (ArBr + amine),4-bromobenzotrifluoride,FC(F)(F)c1ccc(Br)cc1,DMA,156.50,5.1539e-10,ja9b01886.pdf: the aryl bromide of the paper's optimization and mechanistic study
+Electrochemical amination of ArX with NH3,4-bromotoluene,Cc1ccc(Br)cc1,DMSO/THF,141.50,6.4034e-10,Liu/Qiu Angew 2025: 'Employing Ni(I) complex B and 4-bromotoluene (1a) as substrates'
+Mn-catalyzed alkene diazidation,4-tert-butylstyrene,C=Cc1ccc(cc1)C(C)(C)C,MeCN,221.80,1.4987e-09,Fu/Lin Science 2017: the model alkene of the optimization
+Co-catalyzed allylic C-H amination,cyclohex-2-en-1-yl (4-methoxyphenyl)carbamate,COc1ccc(NC(=O)OC2CCCC=C2)cc1,MeCN,274.30,1.3194e-09,"Cai/Xu Nat Commun 2021, SI gram-scale procedure: 14.5 g, 58.7 mmol, i.e. C14H17NO3"
+Co-H alkene reduction (e-HAT),alprenolol,C=CCc1ccccc1OCC(O)CNC(C)C,THF,318.90,1.2927e-09,"Gnaim/Baran Nature 2022, Fig. 3 product 45 (64%) and its SI entry: the commercially available terminal alkene, reduced to C15H25NO2"
+Ni-XEC C(sp2)-C(sp3) (ArBr + RBr),5-bromo-3-isopropyl-1H-indole,CC(C)c1c[nH]c2ccc(Br)cc12,DMA,219.70,4.2048e-10,"op6c00110_si_001.pdf: '5-bromo-3-isopropyl-1H-indole', species 2 of the campaign (HRMS C11H12BrN)"
+Doubly decarboxylative Csp3-Csp3,N-hydroxyphthalimide ester of 3-(4'-cyanobiphenyl-4-yl)propanoic acid,N#Cc1ccc(cc1)-c1ccc(CCC(=O)ON2C(=O)c3ccccc3C2=O)cc1,DMF,418.70,6.3479e-10,"Zhang/Baran Nature 2022 SI pp. 8-9: the representative limiting acid A is '3-(4'-cyano-[1,1'-biphenyl]-4-yl)propanoic acid 4' (25.1 mg, 0.1 mmol), coupled as its in-situ N-hydroxyphthalimide ester"
+Rh-catalyzed electrooxidative C-H alkenylation,n-butyl acrylate,C=CC(=O)OCCCC,tAmOH/H2O,162.80,2.8878e-10,"Qiu/Ackermann Angew 2018, Table 1: the limiting acrylate"
+Cu-catalyzed benzylic cyanation,n-butylbenzene,CCCCc1ccccc1,MeCN,184.80,1.6722e-09,Cai/Xu Nat Catal 2022: the model alkylarene
+Cathodic Ni aryl-aryl homocoupling,bromobenzene,Brc1ccccc1,EtOH/MeOH,119.30,1.3959e-09,Courtois/Perichon Tetrahedron 1997: 'PhBr 15 mmol' in the footnote this row is read from
+Co-H alkene isomerization (catalytic),5-methyl-1-phenylhex-5-en-3-ol,CC(=C)CC(O)CCc1ccccc1,acetone,251.40,1.9941e-09,"Gnaim/Baran Nature 2022 SI, compound 17 (general procedure B, 0.2 mmol): the product is the trisubstituted alkene 5-methyl-1-phenylhex-4-en-3-ol (C13H18O), so the substrate is its 1,1-disubstituted isomer; the Le Bas volume is the same for both"
+Cathodic aryl-halide radical 5-exo cyclization,allyl 2-iodophenyl ether,C=CCOc1ccccc1I,DMF,195.90,1.0013e-09,"Ozaki/Ohmori Tet Lett 1994, Table 1: aryl iodide 5a, the 5-exo substrate of this row"

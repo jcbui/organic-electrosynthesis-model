@@ -111,10 +111,10 @@ if True:
 picks=[("Anodic methoxylation of 4-tBu-toluene (Lysmeral)","BASF methoxylation (0.8 M)"),
        ("Acrylonitrile hydrodimerization (ADN)","ADN hydrodimerization (6.9 M)"),
        ("Kolbe homocoupling of 10-undecenoate","Kolbe coupling (1 M)"),
-       ("Thioether -> sulfone (kilo-scale)","sulfone oxidation, kg-scale (0.47 M)"),
+       ("Thioether -> sulfone (kilo-scale)","sulfone oxidation, kg-scale  [med. 14 mM]"),
        ("Shono oxidation (N-acyliminium capture)","Shono oxidation (1.56 M)"),
        ("Birch reduction of naphthalene","Birch reduction (0.14 M)"),
-       ("Doubly decarboxylative Csp3-Csp3","decarboxylative C–C (0.03 M)"),
+       ("Doubly decarboxylative Csp3-Csp3","decarboxylative C–C  [cat. 5.8 mM]"),
        ("ACT-mediated alcohol oxidation (flow, hectogram)","ACT-mediated alcohol ox.  [med. 25 mM]"),
        ("Ni-XEC C(sp2)-C(sp3) (ArBr + RBr)","Ni-XEC, kg-scale in flow  [cat. 15 mM]")]
 c.axvspan(0.2,OPER,color="0.93",zorder=0)

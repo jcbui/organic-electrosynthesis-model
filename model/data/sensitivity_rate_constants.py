@@ -5,8 +5,8 @@
 
 WHY
 ---
-The eight mediated rows carry a homogeneous rate constant k each: 1e3, 20, 10, 0.5, 50, 100, 1e3,
-100 M-1 s-1. Table S6 documents a provenance sentence for every one, but they are ORDER-OF-MAGNITUDE
+The mediated rows carry a homogeneous rate constant k each (1e3, 20, 10, 0.5, 50, 100, 1e3, 100
+M-1 s-1 for the original eight). Table S6 documents a provenance sentence for every one, but they are ORDER-OF-MAGNITUDE
 literature passes, not measurements for these systems -- and the SI concedes outright for SCN-:
 "NO direct rate measurement located -- estimate by analogy to halogenation".
 
@@ -19,7 +19,8 @@ counts move.
 The point is to be able to say, with numbers, EITHER "the counts survive an order of magnitude in
 every k" OR "these specific rows need a real rate constant before their ceilings are quoted".
 """
-import csv, io, os, re, shutil, subprocess, sys
+import csv, glob, io, os, re, shutil, subprocess, sys, tempfile
+from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -29,7 +30,6 @@ MATRIX = os.path.join(JULIA, "mediated_ec_matrix.csv")
 FACTORS = [("div10", 0.1), ("mul10", 10.0)]
 SPEC = re.compile(r'(MedSpec\("([^"]+)",\s*)([0-9.eE+-]+)(,)')
 
-_BACKUPS = [MATRIX + ".ksens", SRC + ".ksens"]
 
 
 def specs(txt):
@@ -47,67 +47,93 @@ def perturb(txt, target, factor):
     return out
 
 
-def solve(tag):
-    log = os.path.join("/tmp", "ksens_%s.log" % tag)
-    with open(log, "w") as fh:
-        rc = subprocess.call(["julia", "run_mediated.jl"], cwd=JULIA, stdout=fh, stderr=fh)
-    if rc != 0:
-        return None
-    return {(r["reaction"], r["reactor"]): float(r["i_ec_mAcm2"])
-            for r in csv.DictReader(open(MATRIX))}
+def solve_row(tag, src_txt, only):
+    """Solve ONE mediated row in an isolated copy of julia/ and return its cells.
+
+    Until 2026-10-05 every perturbation rewrote run_mediated.jl in place and re-solved the whole
+    matrix over the published file, restoring both from `.ksens` copies afterwards: sixteen full
+    solves for eight rows, with the tree holding perturbed artifacts for the duration (and, twice,
+    after a killed run). A perturbation of one row changes that row only, so each case now solves
+    that row's cells in a scratch directory. Nothing in the tree is written during the sweep."""
+    d = tempfile.mkdtemp(prefix="ksens_")
+    try:
+        for f in glob.glob(os.path.join(JULIA, "*.jl")):
+            shutil.copy(f, d)
+        io.open(os.path.join(d, "run_mediated.jl"), "w", encoding="utf8").write(src_txt)
+        log = os.path.join(tempfile.gettempdir(), "ksens_%s.log" % tag)
+        with open(log, "w") as fh:
+            rc = subprocess.call(["julia", "run_mediated.jl"], cwd=d, stdout=fh, stderr=fh,
+                                 env=dict(os.environ, MED_ONLY=only))
+        if rc != 0:
+            return None
+        out = {(r["reaction"], r["reactor"]): float(r["i_ec_mAcm2"])
+               for r in csv.DictReader(open(os.path.join(d, "mediated_ec_matrix.csv")))}
+        return out if out and all(k[0] == only for k in out) else None
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
 
 
 def main():
     txt = io.open(SRC, encoding="utf8").read()
-    sp = specs(txt)
+    sp_all = specs(txt)
+    ## a row solved at k = 0 (no measured constant; since 2026-10-05 the oxazole row) has nothing to multiply by ten: it is
+    ## the floor, and its sensitivity is the declared band of S5.7. It stays in the base matrix and out of the sweep.
+    sp = [(n, k) for n, k in sp_all if k > 0]
+    if len(sp) != len(sp_all):
+        print("not swept (k = 0, the floor): %s" % ", ".join(n for n, k in sp_all if k <= 0))
     print("mediated rows and their rate constants:")
     for name, k in sp:
         print("   %-46s k = %g" % (name[:46], k))
 
-    # A SECOND INSTANCE WOULD OVERWRITE THE FIRST'S BACKUP and then the first's finally
+    ## BASE = the published mediated matrix, which must hold every spec at every architecture.
+    base = {(r["reaction"], r["reactor"]): float(r["i_ec_mAcm2"]) for r in csv.DictReader(open(MATRIX))}
+    missing = [n for n, _ in sp_all if sum(1 for k in base if k[0] == n) != 7]
+    if missing or len(base) != 7 * len(sp_all):
+        raise SystemExit("mediated_ec_matrix.csv does not hold seven cells for every MedSpec (%s); "
+                         "re-solve it before sweeping" % missing)
+    ## CONTROL: an UNPERTURBED one-row solve must reproduce the published cells, or the isolated
+    ## solve is not the published problem and every difference below would mean nothing.
+    ctl = solve_row("control", txt, sp[0][0])
+    if ctl is None or any(abs(v - base[k]) > 1e-9 * max(1.0, abs(base[k])) for k, v in ctl.items()):
+        raise SystemExit("control failed: an unperturbed one-row solve of %r does not reproduce the "
+                         "published cells; see the ksens_control log" % sp[0][0])
+    print("control: unperturbed one-row solve of %r reproduces its %d published cells" % (sp[0][0][:40], len(ctl)))
 
-    # would delete it, leaving the second with nothing to restore -- which is how
-
-    # data/carrier_charge.csv was left holding a PERTURBED charge on 2026-08-26 and
-
-    # julia/all50_np_matrix.csv was left interleaved by two writers. Refuse instead.
-
-    for _b in _BACKUPS:
-
-        if os.path.exists(_b):
-
-            sys.exit("REFUSING TO RUN: %s exists, so another sweep owns these artifacts. "
-
-                     "Wait for it, or if it died, restore from that file by hand and "
-
-                     "delete it." % _b)
-
-
-    shutil.copy(SRC, SRC + ".ksens"); shutil.copy(MATRIX, MATRIX + ".ksens")
-    try:
-        print("\nsolving BASE ...")
-        base = solve("base")
-        if base is None:
-            raise SystemExit("base mediated solve failed; see /tmp/ksens_base.log")
-        rows = []
-        for name, k in sp:
-            for tag, f in FACTORS:
-                io.open(SRC, "w", encoding="utf8").write(perturb(txt, name, f))
-                res = solve("%s_%s" % (name[:10].replace(" ", "_"), tag))
-                if res is None:
-                    rows.append((name, tag, None, None, None, None)); continue
-                cells = [(kk, v) for kk, v in res.items() if kk[0] == name]
-                w = max(abs(v - base[kk]) / base[kk] for kk, v in cells) if cells else 0.0
-                n25 = sum(1 for kk, v in cells if (v >= 25) != (base[kk] >= 25))
-                ## which architectures cross, and in which direction, at both thresholds
-                cross = {thr: {kk[1]: (1 if v >= thr else -1) for kk, v in cells if (v >= thr) != (base[kk] >= thr)}
-                         for thr in (25, 50)}
-                rows.append((name, tag, w, n25, cross, {kk[1]: v for kk, v in cells}))
-            io.open(SRC, "w", encoding="utf8").write(txt)
-    finally:
-        shutil.copy(SRC + ".ksens", SRC); shutil.copy(MATRIX + ".ksens", MATRIX)
-        os.remove(SRC + ".ksens"); os.remove(MATRIX + ".ksens")
-        print("\n(restored run_mediated.jl and the mediated matrix)")
+    jobs = [(name, tag, f) for name, k in sp for tag, f in FACTORS]
+    def run(job):
+        name, tag, f = job
+        return job, solve_row("%s_%s" % (re.sub(r"[^A-Za-z0-9]+", "_", name)[:24], tag), perturb(txt, name, f), name)
+    nworkers = int(os.environ.get("KSENS_JOBS", "4"))
+    if "--from-cells" in sys.argv:
+        ## Re-derive the summary from the per-cell values the last sweep wrote, without re-solving: used when
+        ## only the SUMMARY rule changes (2026-10-05, the ordering test below). The cells are the sweep's own.
+        _cells = list(csv.DictReader(open(os.path.join(ROOT, "results", "rate_constant_cells.csv"))))
+        results = {}
+        for name, tag, f in jobs:
+            got = {(c["reaction"], c["reactor"]): float(c["i_ec_mAcm2"]) for c in _cells if c["reaction"] == name and c["factor"] == tag}
+            results[(name, tag, f)] = got if len(got) == 7 else None
+        _b = {(c["reaction"], c["reactor"]): float(c["i_ec_mAcm2"]) for c in _cells if c["factor"] == "base"}
+        if set(_b) != set(base) or any(abs(_b[k] - base[k]) > 2e-5 * max(1.0, abs(base[k])) for k in base):
+            raise SystemExit("--from-cells: the stored sweep was run on a different published matrix; re-run the sweep")
+        print("\nre-deriving the summary from results/rate_constant_cells.csv (%d perturbed rows, no solve)" % len(jobs))
+    else:
+        print("\nsolving %d perturbed rows, %d at a time ..." % (len(jobs), nworkers))
+        with ThreadPoolExecutor(max_workers=nworkers) as ex:
+            results = dict(ex.map(run, jobs))
+    rows = []
+    for name, tag, f in jobs:
+        res = results[(name, tag, f)]
+        if res is None:
+            rows.append((name, tag, None, None, None, None)); continue
+        cells = list(res.items())
+        w = max(abs(v - base[kk]) / base[kk] for kk, v in cells) if cells else 0.0
+        n25 = sum(1 for kk, v in cells if (v >= 25) != (base[kk] >= 25))
+        ## which architectures cross, and in which direction, at both thresholds
+        cross = {thr: {kk[1]: (1 if v >= thr else -1) for kk, v in cells if (v >= thr) != (base[kk] >= thr)}
+                 for thr in (25, 50)}
+        rows.append((name, tag, w, n25, cross, {kk[1]: v for kk, v in cells}))
+    if any(r[2] is None for r in rows):
+        raise SystemExit("a perturbed solve failed: %s" % [(r[0], r[1]) for r in rows if r[2] is None])
 
     ## ---- PER-CELL VALUES, WRITTEN DOWN (2026-09-10) ---------------------------------------------
     ## Until now this sweep kept every perturbed cell in memory and wrote only per-row summaries, so
@@ -166,7 +192,19 @@ def main():
         med = {a: 0.5 * (m[0] + m[1]) for a, m in med.items()}
         return n25, n50, med
     b25, b50, bmed = counts_and_medians()
-    base_order = sorted(ORDER, key=lambda a: bmed[a])
+    ## THE ORDERING THAT IS TESTED IS THE ORDERING THE DOCUMENTS CLAIM (2026-10-05): unstirred < stirred <
+    ## recirculating flow < ANEC, with the three thin-film medians all above ANEC. Those three lie within a
+    ## few percent of one another and are stated NOT to be ordered among themselves, so a strict seven-way
+    ## sort -- what this test used until the microfluidic and rotating-disc medians closed to 1.6 % of each
+    ## other -- reported a swap between two of them as a change in a claim nobody makes. Same shape as
+    ## G-DILUTE, G-SCRANGE, G-SOLV and G-MUSOLN. Swaps inside the thin-film trio are recorded, not failed.
+    CHAIN, THIN = ["natural", "stirred", "flow", "anec"], ["micro", "rde", "rce"]
+    def shape_ok(med):
+        return all(med[CHAIN[i]] < med[CHAIN[i + 1]] for i in range(3)) and min(med[a] for a in THIN) > med["anec"]
+    if not shape_ok(bmed):
+        raise SystemExit("the published matrix does not have the claimed ordering to begin with")
+    base_thin = sorted(THIN, key=lambda a: bmed[a])
+    thin_swaps = []
     out_rows, worst25, worst50, order_changes = [], 0, 0, []
     for name, tag, w, n25, cross, vals in rows:
         if w is None:
@@ -175,8 +213,10 @@ def main():
         d25 = {a: c25[a] - b25[a] for a in ORDER}; d50 = {a: c50[a] - b50[a] for a in ORDER}
         worst25 = max(worst25, max(abs(x) for x in d25.values()))
         worst50 = max(worst50, max(abs(x) for x in d50.values()))
-        if sorted(ORDER, key=lambda a: med[a]) != base_order:
+        if not shape_ok(med):
             order_changes.append((name, tag))
+        if sorted(THIN, key=lambda a: med[a]) != base_thin:
+            thin_swaps.append((name, tag))
         out_rows.append({"reaction": name, "factor": {"div10": 0.1, "mul10": 10.0}[tag],
                          "max_rel_change": w, "cells_crossing_25": n25,
                          "cross_25": {ARCH.get(k, k): v for k, v in cross[25].items()},
@@ -187,6 +227,8 @@ def main():
     summary = {"n_rows": len(sp), "rows_crossing_25": rows25, "rows_crossing_50": rows50,
                "max_count_delta_25": worst25, "max_count_delta_50": worst50,
                "ordering_preserved": not order_changes, "ordering_changes": order_changes,
+               "ordering_tested": "unstirred < stirred < recirculating flow < ANEC, with the microfluidic, RDE and rotating-cylinder medians all above ANEC",
+               "thin_film_swaps": thin_swaps,
                "base_counts_25": b25, "base_counts_50": b50}
     _out = os.path.join(ROOT, "results", "rate_constant_sensitivity.json")
     with open(_out, "w", encoding="utf8") as fh:
@@ -208,10 +250,20 @@ def check_si(summary, label="G-KSENS-SI"):
     from docx_text import asserted_text
     si = _ud.normalize("NFKC", _re.sub(r"\s+", " ", asserted_text(os.path.join(ROOT, "SI_Section4_Transport_Model.docx"))))
     n25 = len(summary["rows_crossing_25"]); w25 = summary["max_count_delta_25"]; w50 = summary["max_count_delta_50"]
-    wants = ["moves at least one cell across the 25 mA cm−2 threshold on %d of the eight rows" % n25,
+    _nw = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve",
+           "thirteen", "fourteen", "fifteen", "sixteen"][summary["n_rows"]]
+    wants = ["moves at least one cell across the 25 mA cm−2 threshold on %d of the %s rows" % (n25, _nw),
              "count of any single architecture moves by at most ±%d and the ≥50 mA cm−2 count by at most ±%d" % (w25, w50),
-             ("and no architecture ordering changes" if summary["ordering_preserved"] else "and the architecture ordering changes")]
+             ("and the ordering the main text claims (unstirred below stirred below recirculating flow below the ANEC cell, "
+              "the three thin-film archetypes above it) holds throughout" if summary["ordering_preserved"]
+              else "and the architecture ordering changes"),   # pass 16: the sweep preserves the claimed SHAPE, not every pair
+             # pass 17: the Table S7 rate-constant row restates the same result; check every restatement (trap 9)
+             ("and the ordering the main text claims (unstirred below stirred below recirculating flow below the ANEC cell, "
+              "the three thin-film archetypes above it) holds in every case" if summary["ordering_preserved"]
+              else "and the ordering CHANGES")]
     missing = [w_ for w_ in wants if _ud.normalize("NFKC", w_) not in si]
+    if _re.search(r"(?i)\b(?:no architecture ordering chang|architecture ordering (?:is preserved|is unchanged) in every case)", si):
+        missing.append("a retired, unqualified ordering claim is back in the SI")
     if missing:
         print("%s: FAIL -- the SI does not state the measured rate-constant exposure:" % label)
         for m_ in missing:

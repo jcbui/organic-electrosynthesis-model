@@ -1,33 +1,36 @@
 {
  "fails": [],
  "notes": {
-  "headings": 32,
+  "headings": 33,
   "equations": "33 of 33",
-  "prose": "269 verbatim sentences, 20 new",
+  "prose": "327 verbatim sentences, 23 new",
   "new_sentences": [
    "Stage 2 adds the homogeneous chemical step for the mediated and catalyst-carried entries (§S5.4 and §S5.7).",
    "Reactor archetypes and the source of δ for each.",
    "Values and locators: Table S7g.",
    "Solvent properties used in Eq. S2 and in ν = μ/ρ for the reactor correlations.",
-   "Only the product φM enters Eq. S2, so for the mixtures the tabulated M and φ are a split of the Perkins–Geankoplis product (ref. 7, Eq. 11-9.8).",
+   "Only the product φM enters Eq. S2, so for the mixtures the tabulated M and φ are a split of the Perkins–Geankoplis product (ref. 7, Eq. 11-12.4, p. 618).",
    "Values, states and locators: Table S7b.",
    "Ionic conductivities (25 °C) used in the ohmic and thermal analysis of §S6.",
    "The derivation of the NaI/DMF value is given with Eq. S27; values, states and locators: Table S7f.",
-   "Every concentration, solvent and electrolyte in Table S2 is taken from the standard or scaled conditions of the named exemplar and converted to molarity from the stated amounts and volumes; the locator for each row is given in Table S2.",
+   "Every concentration, solvent and electrolyte in Table S2 is taken from the standard or scaled conditions of the named exemplar, except where stated below, and converted to molarity from the stated amounts and volumes; the locator for each row is given in Table S2.",
    "The 50-reaction set: carrier assignment, carrier charge z at the electrode, carrier diffusivity and its estimation method (§S3.1), concentration, electrons per carrier turnover n_c, solvent, electrolyte and source.",
    "The source column gives the exemplar reference and the page, table or figure of the conditions used.",
-   "Catalyst-carried entries: catalyst and substrate concentrations, the adopted rate constant (§S5.7, Table S7j) and the ceiling the matrix publishes at it (the largest of the seven architectures).",
-   "The main-text example, 0.1 M Bu4NBF4/DMF (κ = 4.76 mS cm−1, Table S7f) across a 5 mm gap at 100 mA cm−2, gives 12.98 V, of which 10.50 V is ohmic, 1.10 W cm−2 of heat and a passive steady state of 121 °C in the 100 mL beaker of §S6.1.",
+   "Perturbing each finite rate constant by a factor of ten in either direction, one row at a time, and re-solving the mediated matrix moves the ≥25 and ≥50 mA cm−2 counts of any single architecture by at most one reaction and leaves the ordering the main text claims intact: unstirred below stirred below recirculating flow below the ANEC cell, with the three thin-film archetypes above it.",
+   "Catalyst-carried entries: catalyst and substrate concentrations, the substrate each exemplar names with its Wilke–Chang diffusivity, the adopted rate constant (§S5.7, Table S7j) and the ceiling the matrix publishes at it (the largest of the seven architectures).",
+   "The main-text example, 0.1 M Bu4NBF4/DMF (κ = 4.76 mS cm−1, Table S7f) across a 5 mm gap at 100 mA cm−2, gives 12.98 V, of which 10.50 V is ohmic, 1.10 W cm−2 of heat and a passive steady state of 116 °C in the 100 mL beaker of §S6.1.",
+   "Across the 2 cm beaker gap of §S6.1, 0.2 M NaI/DMF (κ = 8.51 mS cm−1, Table S4) draws 14.2 V at 50 mA cm−2, most of it ohmic, and stays inside 10–20 V for κ between 5.68 and 13.16 mS cm−1.",
    "We close a lumped energy balance on a representative 100 mL cell with 10 cm2 electrodes.",
-   "For the compact cells σ is ≈7 for the microfluidic chip and ≈0.8 for an interior cell of a zero-gap stack; the two flow cells and the two rotating electrodes take the beaker value, and each value is given with its package geometry in Table S7i.",
-   "Each architecture is evaluated at its own median limiting current from Table S5.",
-   "Setting T_ss to the boiling point at each architecture's transport ceiling gives the required heat-rejection coefficient, U′_req = q(i_design)/(T_b − T_amb), which is compared with the three cooling classes of Table S7i and with the passive coefficient of each cell.",
+   "For the compact cells σ is ≈7 for the microfluidic chip and ≈0.8 for an interior cell of a zero-gap stack; the recirculating flow cell and the two rotating electrodes take the beaker value, and each value is given in Table S7i.",
+   "Each preparative architecture is evaluated at its own median limiting current from Table S5; the zero-gap stack runs at its declared 1 A cm−2, and the ANEC cell is not evaluated.",
+   "Setting T_ss to the boiling point at each architecture's transport ceiling gives the required heat-rejection coefficient, U′_req = q(i_design)/(T_b − T_amb), which is compared with the liquid cooling of each cell's own construction (Table S7i) and with its passive coefficient.",
    "We bracket the effect: the lower end is κ fixed at 25 °C, the value used throughout §S6; the upper end is Arrhenius scaling of κ from 25 °C to the boiling point with an activation energy of 15 kJ mol−1 (Table S7i).",
    "The resulting bounds on the reported quantities are given in §S10 (Tables S8 and S9), and the extrapolation of the rotating-cylinder correlation in §S3.3.",
-   "Productivity and pumping cost are computed for a pair of laminar parallel-plate channels, 1 mm / 5 cm / 5 cm s−1 and 250 μm / 2.5 cm / 10 cm s−1 (gap / length / mean velocity; Table S7g)."
+   "Productivity and pumping cost are computed for a pair of laminar parallel-plate channels, 1 mm / 5 cm / 5 cm s−1 and 250 μm / 2.5 cm / 10 cm s−1 (gap / length / mean velocity; Table S7g).",
+   "Assumed values are used only when no suitable source is available, and each carries a sensitivity range and the conclusion it affects; this condensed version of Table S7 omits those columns, which the full Supporting Information, available from the authors, prints."
   ],
-  "table_s7_rows": 218,
-  "manuscript_targets": 31,
-  "references": 85
+  "table_s7_rows": 255,
+  "manuscript_targets": 35,
+  "references": 80
  }
 }

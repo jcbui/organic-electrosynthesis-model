@@ -126,7 +126,7 @@ function delta_eff(key::Symbol, D::Float64, nu::Float64)
     if key === :natural
         return 228e-6
     elseif key === :stirred
-        ## the stirred film. ADOPTED 200 um on 2026-09-01 (author decision). The retired 100 um was an assumption whose inherited citation had been WITHDRAWN -- no passage in Pletcher & Walsh giving ~100 um for a magnetically stirred cell could be located. 200 +/- 7 um is MEASURED: Williams, Corbin, Zeng, Lazouski, Yang & Manthiram, Sustain. Energy Fuels 2019, 3, 1225-1232, p. 1227, a planar electrode in a gas-bubbled cell, back-calculated from the ferricyanide limiting current. It is a proxy, not this system: O2 diffuses about twice as fast as these organics, so the real layer should be THICKER, and the adopted value stays conservative in that direction.
+        ## the stirred film. ADOPTED 200 um on 2026-09-01 (author decision). The retired 100 um was an assumption whose inherited citation had been WITHDRAWN -- no passage in Pletcher & Walsh giving ~100 um for a magnetically stirred cell could be located. 200 +/- 7 um is MEASURED: Williams, Corbin, Zeng, Lazouski, Yang & Manthiram, Sustain. Energy Fuels 2019, 3, 1225-1232, p. 1227, a planar electrode in a gas-bubbled cell, back-calculated from the ferricyanide limiting current. It is a proxy, not this system: O2 diffuses about 1.5 times as fast as the median carrier here, and a convective film thickens with D, so the organics' own layer should be THINNER (about 12-18 pct; SI S7), and the adopted value stays conservative (it lowers the ceilings).
         return 200e-6
     elseif key === :flow
         return DELTA_FLOW

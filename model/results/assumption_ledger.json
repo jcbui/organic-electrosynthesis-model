@@ -1,20 +1,20 @@
 {
-  "n_registry": 296,
-  "n_assumption": 128,
+  "n_registry": 335,
+  "n_assumption": 150,
   "counts": {
-    "T0": 49,
-    "T1": 14,
-    "T2": 61,
-    "T3": 4,
+    "T0": 54,
+    "T1": 11,
+    "T2": 64,
+    "T3": 21,
     "T4": 0,
     "T5": 0
   },
-  "n_assumption_live": 79,
+  "n_assumption_live": 96,
   "counts_live": {
     "T0": 0,
-    "T1": 14,
-    "T2": 61,
-    "T3": 4,
+    "T1": 11,
+    "T2": 64,
+    "T3": 21,
     "T4": 0,
     "T5": 0
   },
@@ -38,11 +38,75 @@
     },
     {
       "category": "2. Solvents",
+      "parameter": "MeCN: rho",
+      "value": "0.776",
+      "units": "g mL-1",
+      "tier": "T2",
+      "sensitivity": "CRC 97th ed. p. 15-13 prints 0.7825 g cm-3 at 20 C (the superscript is the reference temperature); the carried 0.776 is a 25 C value, 0.8 pct below the printed entry, and the page does not print it. rho enters only through nu = mu/rho, and Sh ~ Sc^0.356 at the rotating cylinder, so the difference from the printed entry moves k_m there by 0.30 pct and leaves every fixed-film archetype untouched. rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "MeOH: rho",
+      "value": "0.786",
+      "units": "g mL-1",
+      "tier": "T2",
+      "sensitivity": "CRC 97th ed. p. 15-17 prints 0.7909 g cm-3 at 20 C (the superscript is the reference temperature); the carried 0.786 is a 25 C value, 0.6 pct below the printed entry, and the page does not print it. rho enters only through nu = mu/rho, and Sh ~ Sc^0.356 at the rotating cylinder, so the difference from the printed entry moves k_m there by 0.22 pct and leaves every fixed-film archetype untouched. rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "EtOH: rho",
+      "value": "0.785",
+      "units": "g mL-1",
+      "tier": "T0",
+      "sensitivity": "CRC 97th ed. p. 15-16 prints 0.7893 g cm-3 at 20 C (the superscript is the reference temperature); the carried 0.785 is a 25 C value, 0.5 pct below the printed entry, and the page does not print it. rho enters only through nu = mu/rho, and Sh ~ Sc^0.356 at the rotating cylinder, so the difference from the printed entry moves k_m there by 0.19 pct and leaves every fixed-film archetype untouched. rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched. Display-only: this solvent system is registered but is not assigned to any of the 50 reactions in reactions_50.csv, so it enters no reported number."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "DMSO: rho",
+      "value": "1.096",
+      "units": "g mL-1",
+      "tier": "T0",
+      "sensitivity": "CRC 97th ed. p. 15-16 prints 1.1010 g cm-3 at 25 C (the superscript is the reference temperature); the carried 1.096 is not the printed 25 C value, 0.5 pct below the printed entry, and the page does not print it. rho enters only through nu = mu/rho, and Sh ~ Sc^0.356 at the rotating cylinder, so the difference from the printed entry moves k_m there by 0.16 pct and leaves every fixed-film archetype untouched. rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched. Display-only: this solvent system is registered but is not assigned to any of the 50 reactions in reactions_50.csv, so it enters no reported number."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "AcOH: rho",
+      "value": "1.045",
+      "units": "g mL-1",
+      "tier": "T0",
+      "sensitivity": "CRC 97th ed. p. 15-13 prints 1.0510 g cm-3 at 20 C (the superscript is the reference temperature); the carried 1.045 is a 25 C value, 0.6 pct below the printed entry, and the page does not print it. rho enters only through nu = mu/rho, and Sh ~ Sc^0.356 at the rotating cylinder, so the difference from the printed entry moves k_m there by 0.20 pct and leaves every fixed-film archetype untouched. rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched. Display-only: this solvent system is registered but is not assigned to any of the 50 reactions in reactions_50.csv, so it enters no reported number."
+    },
+    {
+      "category": "2. Solvents",
       "parameter": "HFIP: rho",
       "value": "1.596",
       "units": "g mL-1",
       "tier": "T2",
-      "sensitivity": "rho enters only through nu = mu/rho and the Schmidt number; Sh ~ Sc^0.356 at the rotating cylinder, so a 5 pct rho error moves k_m by 1.8 pct."
+      "sensitivity": "rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "HFIP: phi (assoc.)",
+      "value": "1.0",
+      "units": "-",
+      "tier": "T3",
+      "sensitivity": "D ~ (phi M)^0.5. Raising phi from 1.0 to 1.5, ethanol's value and the associated alcohol nearest in kind, scales D by 1.225; re-scaling the published matrix for the two HFIP rows (i_lim ~ D on the fixed films, D^(2/3) at the RDE, D^0.644 at the rotating cylinder) moves the recirculating flow >=25 mA cm-2 count 19 -> 20. That count is therefore conditional on the declared association parameter. No architecture median moves."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "acetone: rho",
+      "value": "0.784",
+      "units": "g mL-1",
+      "tier": "T2",
+      "sensitivity": "CRC 97th ed. p. 15-13 prints 0.7902 g cm-3 at 20 C (the superscript is the reference temperature); the carried 0.784 is a 25 C value, 0.8 pct below the printed entry, and the page does not print it. rho enters only through nu = mu/rho, and Sh ~ Sc^0.356 at the rotating cylinder, so the difference from the printed entry moves k_m there by 0.28 pct and leaves every fixed-film archetype untouched. rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "MeNO2: rho",
+      "value": "1.137",
+      "units": "g mL-1",
+      "tier": "T2",
+      "sensitivity": "CRC 97th ed. p. 15-18 prints 1.1371 g cm-3 at 20 C (the superscript is the reference temperature); the carried 1.137 is that 20 C entry carried unchanged as the 25 C density, which is lower by the liquid's thermal expansion over 5 K. rho enters only through nu = mu/rho, and Sh ~ Sc^0.356 at the rotating cylinder, so the difference from the printed entry moves k_m there by 0.00 pct and leaves every fixed-film archetype untouched. rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched."
     },
     {
       "category": "2. Solvents",
@@ -50,7 +114,7 @@
       "value": "0.48",
       "units": "mPa s",
       "tier": "T2",
-      "sensitivity": "i_lim ~ D ~ 1/mu and Sc = nu/D, so mu enters twice; a +/-25 pct property error displaces log10 i_lim by +/-0.10 (Eq. S1 is linear in D). That is small against the 1-2 order-of-magnitude spreads separating the seven reactor archetypes, so no architecture ranking or carrier-class conclusion can move; only per-reaction entries already within ~25 pct of a threshold can cross it."
+      "sensitivity": "i_lim ~ D ~ 1/mu and Sc = nu/D, so mu enters twice; a +/-25 pct property error displaces log10 i_lim by +/-0.10 (Eq. S1 is linear in D). That is small against the 1-2 order-of-magnitude spreads separating the seven reactor archetypes, so no architecture ranking or carrier-class conclusion can move; only per-reaction entries already within ~25 pct of a threshold can cross it. BASIS: 9:1 v/v (MeCN:water) = 87.5 wt pct MeCN, outside the 10-70 wt pct range Ansari & Singh measure, between their 70 wt pct row and pure acetonitrile. Interpolating their Table-1 p. 68 entries at 70 wt pct (0.574 cP, 0.8443 g cm-3) and pure AN (0.346 cP, 0.7767 g cm-3) gives eta = 0.441 cP and rho = 0.805 g cm-3; the carried 0.48 cP and 0.82 g cm-3 are +8.9 pct and +1.9 pct against that."
     },
     {
       "category": "2. Solvents",
@@ -58,7 +122,7 @@
       "value": "0.82",
       "units": "g mL-1",
       "tier": "T2",
-      "sensitivity": "rho enters only through nu = mu/rho and the Schmidt number; Sh ~ Sc^0.356 at the rotating cylinder, so a 5 pct rho error moves k_m by 1.8 pct."
+      "sensitivity": "rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched. BASIS: 9:1 v/v (MeCN:water) = 87.5 wt pct MeCN, outside the 10-70 wt pct range Ansari & Singh measure, between their 70 wt pct row and pure acetonitrile. Interpolating their Table-1 p. 68 entries at 70 wt pct (0.574 cP, 0.8443 g cm-3) and pure AN (0.346 cP, 0.7767 g cm-3) gives eta = 0.441 cP and rho = 0.805 g cm-3; the carried 0.48 cP and 0.82 g cm-3 are +8.9 pct and +1.9 pct against that."
     },
     {
       "category": "2. Solvents",
@@ -66,7 +130,7 @@
       "value": "1.6",
       "units": "mPa s",
       "tier": "T2",
-      "sensitivity": "i_lim ~ D ~ 1/mu and Sc = nu/D, so mu enters twice; a +/-25 pct property error displaces log10 i_lim by +/-0.10 (Eq. S1 is linear in D). That is small against the 1-2 order-of-magnitude spreads separating the seven reactor archetypes, so no architecture ranking or carrier-class conclusion can move; only per-reaction entries already within ~25 pct of a threshold can cross it. TEMPERATURE BASIS: the source table is measured at 20 C and this model works at 25 C; the handbook has no 25 C table for an aqueous alcohol mixture. The value carried here is the 25 C one, and it reproduces the 20 C entry scaled by the temperature dependence of water's own viscosity over the same interval (1.002 to 0.890 mPa s) to within about 1 per cent. The residual approximation -- that the mixture's relative temperature dependence matches water's across 20-25 C -- is a few per cent at most, well inside the +/-25-50 per cent this property is swept over. On density the 20 C basis matters less still: the 25 C value is lower by roughly half a per cent, and density enters only through nu = mu/rho."
+      "sensitivity": "i_lim ~ D ~ 1/mu and Sc = nu/D, so mu enters twice; a +/-25 pct property error displaces log10 i_lim by +/-0.10 (Eq. S1 is linear in D). That is small against the 1-2 order-of-magnitude spreads separating the seven reactor archetypes, so no architecture ranking or carrier-class conclusion can move; only per-reaction entries already within ~25 pct of a threshold can cross it. TEMPERATURE BASIS: the source table is measured at 20 C and this model works at 25 C; the handbook has no 25 C table for an aqueous alcohol mixture. The carried 25 C viscosity, 1.60 mPa s, is 1.0 pct below the printed 20 C entry (1.820 mPa s at 44.1 mass %, p. 5-125) scaled by the temperature dependence of water's own viscosity over the same interval (1.002 to 0.890 mPa s), i.e. 1.62; the residual approximation is that the mixture's relative temperature dependence matches water's across 20-25 C."
     },
     {
       "category": "2. Solvents",
@@ -74,7 +138,7 @@
       "value": "0.87",
       "units": "g mL-1",
       "tier": "T2",
-      "sensitivity": "rho enters only through nu = mu/rho and the Schmidt number; Sh ~ Sc^0.356 at the rotating cylinder, so a 5 pct rho error moves k_m by 1.8 pct. TEMPERATURE BASIS: the source table is measured at 20 C and this model works at 25 C; the handbook has no 25 C table for an aqueous alcohol mixture. The value carried here is the 25 C one, and it reproduces the 20 C entry scaled by the temperature dependence of water's own viscosity over the same interval (1.002 to 0.890 mPa s) to within about 1 per cent. The residual approximation -- that the mixture's relative temperature dependence matches water's across 20-25 C -- is a few per cent at most, well inside the +/-25-50 per cent this property is swept over. On density the 20 C basis matters less still: the 25 C value is lower by roughly half a per cent, and density enters only through nu = mu/rho."
+      "sensitivity": "The page prints rho = 0.9271 g cm-3 at 44.1 mass % (20 C, interpolated); the carried 0.87 is a declared assumption 6.2 pct below it. rho enters only through nu = mu/rho: the carried value makes nu 6.6 pct higher than the page density would, which leaves the fixed-film, ANEC and microfluidic archetypes untouched and lowers k_m by 1.1 pct at the RDE and 2.2 pct at the rotating cylinder. At the page density the two reactions in this solvent move by at most 2.2 pct (Nitroarene -> aniline, rotating cylinder, 997.92 -> 1020.00 mA cm-2), and no 25 or 50 mA cm-2 threshold count moves."
     },
     {
       "category": "2. Solvents",
@@ -82,7 +146,7 @@
       "value": "2.4",
       "units": "mPa s",
       "tier": "T0",
-      "sensitivity": "i_lim ~ D ~ 1/mu and Sc = nu/D, so mu enters twice; a +/-25 pct property error displaces log10 i_lim by +/-0.10 (Eq. S1 is linear in D). That is small against the 1-2 order-of-magnitude spreads separating the seven reactor archetypes, so no architecture ranking or carrier-class conclusion can move; only per-reaction entries already within ~25 pct of a threshold can cross it. TEMPERATURE BASIS: the source table is measured at 20 C and this model works at 25 C; the handbook has no 25 C table for an aqueous alcohol mixture. The value carried here is the 25 C one, and it reproduces the 20 C entry scaled by the temperature dependence of water's own viscosity over the same interval (1.002 to 0.890 mPa s) to within about 1 per cent. The residual approximation -- that the mixture's relative temperature dependence matches water's across 20-25 C -- is a few per cent at most, well inside the +/-25-50 per cent this property is swept over. On density the 20 C basis matters less still: the 25 C value is lower by roughly half a per cent, and density enters only through nu = mu/rho. Display-only: this solvent system is registered but is not assigned to any of the 50 reactions in reactions_50.csv, so it enters no reported number."
+      "sensitivity": "i_lim ~ D ~ 1/mu and Sc = nu/D, so mu enters twice; a +/-25 pct property error displaces log10 i_lim by +/-0.10 (Eq. S1 is linear in D). That is small against the 1-2 order-of-magnitude spreads separating the seven reactor archetypes, so no architecture ranking or carrier-class conclusion can move; only per-reaction entries already within ~25 pct of a threshold can cross it. TEMPERATURE BASIS: the source table is measured at 20 C and this model works at 25 C; the handbook has no 25 C table for an aqueous alcohol mixture. The carried 25 C viscosity, 2.40 mPa s, is 5.2 pct below the printed 20 C entry (2.850 mPa s at 44.1 mass %, p. 5-121) scaled by the temperature dependence of water's own viscosity over the same interval (1.002 to 0.890 mPa s), i.e. 2.53; the residual approximation is that the mixture's relative temperature dependence matches water's across 20-25 C. Display-only: this solvent system is registered but is not assigned to any of the 50 reactions in reactions_50.csv, so it enters no reported number."
     },
     {
       "category": "2. Solvents",
@@ -90,7 +154,7 @@
       "value": "0.89",
       "units": "g mL-1",
       "tier": "T0",
-      "sensitivity": "rho enters only through nu = mu/rho and the Schmidt number; Sh ~ Sc^0.356 at the rotating cylinder, so a 5 pct rho error moves k_m by 1.8 pct. TEMPERATURE BASIS: the source table is measured at 20 C and this model works at 25 C; the handbook has no 25 C table for an aqueous alcohol mixture. The value carried here is the 25 C one, and it reproduces the 20 C entry scaled by the temperature dependence of water's own viscosity over the same interval (1.002 to 0.890 mPa s) to within about 1 per cent. The residual approximation -- that the mixture's relative temperature dependence matches water's across 20-25 C -- is a few per cent at most, well inside the +/-25-50 per cent this property is swept over. On density the 20 C basis matters less still: the 25 C value is lower by roughly half a per cent, and density enters only through nu = mu/rho. Display-only: this solvent system is registered but is not assigned to any of the 50 reactions in reactions_50.csv, so it enters no reported number."
+      "sensitivity": "The page prints rho = 0.9268 g cm-3 at 44.1 mass % (20 C, interpolated); the carried 0.89 is a declared assumption 4.0 pct below it. rho enters only through nu = mu/rho: the carried value makes nu 4.1 pct higher than the page density would, which leaves the fixed-film, ANEC and microfluidic archetypes untouched and lowers k_m by 0.7 pct at the RDE and 1.4 pct at the rotating cylinder.  Display-only: this solvent system is registered but is not assigned to any of the 50 reactions in reactions_50.csv, so it enters no reported number."
     },
     {
       "category": "2. Solvents",
@@ -106,7 +170,7 @@
       "value": "0.96",
       "units": "g mL-1",
       "tier": "T0",
-      "sensitivity": "rho enters only through nu = mu/rho and the Schmidt number; Sh ~ Sc^0.356 at the rotating cylinder, so a 5 pct rho error moves k_m by 1.8 pct. BASIS: no table for this pair was located, and a pure-component bracket is not valid upward for an aqueous-organic mixture. Carried as a declared estimate with no upper bound; its exposure is measured by sweeping it rather than by a bracket it does not have. Display-only: this solvent system is registered but is not assigned to any of the 50 reactions in reactions_50.csv, so it enters no reported number."
+      "sensitivity": "rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched. BASIS: no table for this pair was located, and a pure-component bracket is not valid upward for an aqueous-organic mixture. Carried as a declared estimate with no upper bound; its exposure is measured by sweeping it rather than by a bracket it does not have. Display-only: this solvent system is registered but is not assigned to any of the 50 reactions in reactions_50.csv, so it enters no reported number."
     },
     {
       "category": "2. Solvents",
@@ -122,7 +186,7 @@
       "value": "1.06",
       "units": "g mL-1",
       "tier": "T2",
-      "sensitivity": "rho enters only through nu = mu/rho and the Schmidt number; Sh ~ Sc^0.356 at the rotating cylinder, so a 5 pct rho error moves k_m by 1.8 pct. BASIS: bracketed between the two pure components, both page-anchored. Monotone mixing is assumed, which holds for two organic liquids without strong hetero-association; it is deliberately not applied to the aqueous mixtures, where the viscosity maximum exceeds both components."
+      "sensitivity": "rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched. BASIS: bracketed between the two pure components, both page-anchored. Monotone mixing is assumed, which holds for two organic liquids without strong hetero-association; it is deliberately not applied to the aqueous mixtures, where the viscosity maximum exceeds both components."
     },
     {
       "category": "2. Solvents",
@@ -138,7 +202,7 @@
       "value": "0.85",
       "units": "g mL-1",
       "tier": "T2",
-      "sensitivity": "rho enters only through nu = mu/rho and the Schmidt number; Sh ~ Sc^0.356 at the rotating cylinder, so a 5 pct rho error moves k_m by 1.8 pct. BASIS: no table for this pair was located, and a pure-component bracket is not valid upward for an aqueous-organic mixture. Carried as a declared estimate with no upper bound; its exposure is measured by sweeping it rather than by a bracket it does not have."
+      "sensitivity": "rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched. BASIS: no table for this pair was located, and a pure-component bracket is not valid upward for an aqueous-organic mixture. Carried as a declared estimate with no upper bound; its exposure is measured by sweeping it rather than by a bracket it does not have."
     },
     {
       "category": "2. Solvents",
@@ -154,7 +218,63 @@
       "value": "1.13",
       "units": "g mL-1",
       "tier": "T2",
-      "sensitivity": "rho enters only through nu = mu/rho and the Schmidt number; Sh ~ Sc^0.356 at the rotating cylinder, so a 5 pct rho error moves k_m by 1.8 pct. BASIS: bracketed between the two pure components, both page-anchored. Monotone mixing is assumed, which holds for two organic liquids without strong hetero-association; it is deliberately not applied to the aqueous mixtures, where the viscosity maximum exceeds both components."
+      "sensitivity": "rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched. BASIS: bracketed between the two pure components, both page-anchored. Monotone mixing is assumed, which holds for two organic liquids without strong hetero-association; it is deliberately not applied to the aqueous mixtures, where the viscosity maximum exceeds both components."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "EtOH/MeOH 1:1 v/v: mu (25 C)",
+      "value": "0.719",
+      "units": "mPa s",
+      "tier": "T2",
+      "sensitivity": "i_lim ~ D ~ 1/mu and Sc = nu/D, so mu enters twice; a +/-25 pct property error displaces log10 i_lim by +/-0.10 (Eq. S1 is linear in D). That is small against the 1-2 order-of-magnitude spreads separating the seven reactor archetypes, so no architecture ranking or carrier-class conclusion can move; only per-reaction entries already within ~25 pct of a threshold can cross it. BASIS: bracketed between the two pure components, both page-anchored. Monotone mixing is assumed, which holds for two organic liquids without strong hetero-association; it is deliberately not applied to the aqueous mixtures, where the viscosity maximum exceeds both components."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "EtOH/MeOH 1:1 v/v: rho",
+      "value": "0.786",
+      "units": "g mL-1",
+      "tier": "T2",
+      "sensitivity": "rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched. BASIS: bracketed between the two pure components, both page-anchored. Monotone mixing is assumed, which holds for two organic liquids without strong hetero-association; it is deliberately not applied to the aqueous mixtures, where the viscosity maximum exceeds both components."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "THF/MeOH 5:1 v/v: mu (25 C)",
+      "value": "0.48",
+      "units": "mPa s",
+      "tier": "T2",
+      "sensitivity": "i_lim ~ D ~ 1/mu and Sc = nu/D, so mu enters twice; a +/-25 pct property error displaces log10 i_lim by +/-0.10 (Eq. S1 is linear in D). That is small against the 1-2 order-of-magnitude spreads separating the seven reactor archetypes, so no architecture ranking or carrier-class conclusion can move; only per-reaction entries already within ~25 pct of a threshold can cross it. BASIS: bracketed between the two pure components, both page-anchored. Monotone mixing is assumed, which holds for two organic liquids without strong hetero-association; it is deliberately not applied to the aqueous mixtures, where the viscosity maximum exceeds both components."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "THF/MeOH 5:1 v/v: rho",
+      "value": "0.867",
+      "units": "g mL-1",
+      "tier": "T2",
+      "sensitivity": "rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched. BASIS: bracketed between the two pure components, both page-anchored. Monotone mixing is assumed, which holds for two organic liquids without strong hetero-association; it is deliberately not applied to the aqueous mixtures, where the viscosity maximum exceeds both components."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "THF/EtOH 1:1 v/v: mu (25 C)",
+      "value": "0.751",
+      "units": "mPa s",
+      "tier": "T2",
+      "sensitivity": "i_lim ~ D ~ 1/mu and Sc = nu/D, so mu enters twice; a +/-25 pct property error displaces log10 i_lim by +/-0.10 (Eq. S1 is linear in D). That is small against the 1-2 order-of-magnitude spreads separating the seven reactor archetypes, so no architecture ranking or carrier-class conclusion can move; only per-reaction entries already within ~25 pct of a threshold can cross it. BASIS: bracketed between the two pure components, both page-anchored. Monotone mixing is assumed, which holds for two organic liquids without strong hetero-association; it is deliberately not applied to the aqueous mixtures, where the viscosity maximum exceeds both components."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "THF/EtOH 1:1 v/v: rho",
+      "value": "0.834",
+      "units": "g mL-1",
+      "tier": "T2",
+      "sensitivity": "rho enters only through nu = mu/rho, and only in the two rotating correlations: k_m ~ nu^-1/6 at the RDE (Levich) and nu^-0.344 at the rotating cylinder (Re^0.70 Sc^0.356), so a 5 pct rho error moves k_m by 0.8 and 1.7 pct and leaves the five fixed films untouched. BASIS: bracketed between the two pure components, both page-anchored. Monotone mixing is assumed, which holds for two organic liquids without strong hetero-association; it is deliberately not applied to the aqueous mixtures, where the viscosity maximum exceeds both components."
+    },
+    {
+      "category": "2. Solvents",
+      "parameter": "H2O/MeCN 2:1 v/v: mu (25 C)",
+      "value": "0.9",
+      "units": "mPa s",
+      "tier": "T2",
+      "sensitivity": "A declared value: Ansari & Singh's Table 1 interpolates to 0.923 cP at this composition and the carried 0.90 cP is 2.4 pct lower, while the carried density is their 0.942 g cm-3 to its printed precision. One row runs in this solvent, with a highest ceiling of 1.17 mA cm-2; i_lim varies no faster than 1/mu, so the interpolated viscosity would lower its ceilings by at most 2.4 pct, far from either threshold. i_lim ~ D ~ 1/mu and Sc = nu/D, so mu enters twice; a +/-25 pct property error displaces log10 i_lim by +/-0.10 (Eq. S1 is linear in D). That is small against the 1-2 order-of-magnitude spreads separating the seven reactor archetypes, so no architecture ranking or carrier-class conclusion can move; only per-reaction entries already within ~25 pct of a threshold can cross it. BASIS: 1:2 v/v (MeCN:water) = 28.0 wt pct MeCN, inside the 10-70 wt pct range Ansari & Singh measure. Interpolating their Table-1 p. 68 entries at 20 wt pct (0.973 cP, 0.9588 g cm-3) and 30 wt pct (0.91 cP, 0.9380 g cm-3) gives eta = 0.923 cP and rho = 0.942 g cm-3; the carried 0.9 cP and 0.94 g cm-3 are -2.4 pct and -0.2 pct against that."
     },
     {
       "category": "3. Estimation methods",
@@ -162,7 +282,7 @@
       "value": "dilute-solution",
       "units": "-",
       "tier": "T2",
-      "sensitivity": "Bounded from this project's own measured isotherms rather than argued. Dilute-solution theory with concentration-independent mobilities predicts kappa proportional to c, i.e. a constant equivalent conductance; the 21-point isotherms show Lambda falling to 0.44 of its dilute value by 0.80 mol/kg and to 0.05 by 4.50 mol/kg for Bu4NBF4/MeCN, and to 0.74 by 1.57 mol/kg for NaCl/H2O. The assumption is therefore quantitatively wrong above roughly 1 M and the model states so. What protects the reported results is that the numerics are verified against the analytic limits of the theory it does implement -- Newman's binary-electrolyte x2 migration enhancement is reproduced to 0.5 pct and 0.26 pct, and discrete charge conservation holds to 3e-12 -- and that the conclusions rest on the architecture ORDERING and on order-of-magnitude contrasts, neither of which any sweep run here inverts."
+      "sensitivity": "Bounded from this project's own measured isotherms rather than argued. Dilute-solution theory with concentration-independent mobilities predicts kappa proportional to c, i.e. a constant equivalent conductance; the 21-point isotherms show the molal conductivity kappa/m falling to 0.44 of its dilute value by 0.80 mol/kg and to 0.05 by 4.50 mol/kg for Bu4NBF4/MeCN, and to 0.74 by 1.57 mol/kg for NaCl/H2O. The assumption is therefore quantitatively wrong above roughly 1 M and the model states so. What protects the reported results is that the numerics are verified against the analytic limits of the theory it does implement -- Newman's binary-electrolyte x2 migration enhancement is reproduced to 0.50 pct and 0.26 pct, and discrete charge conservation holds to 3e-12 -- and that the conclusions rest on the architecture ORDERING and on order-of-magnitude contrasts, neither of which any sweep run here inverts."
     },
     {
       "category": "3. Estimation methods",
@@ -170,15 +290,15 @@
       "value": "pure solvent",
       "units": "-",
       "tier": "T2",
-      "sensitivity": "Swept rather than corrected, the 14 rows at >= 1.0 M total dissolved. The response is NOT 1/mu: mu also enters nu, and delta_eff moves with it wherever delta is computed, so d ln i_lim / d ln mu is -1.000 for the two declared-delta archetypes but -0.667 (Leveque), -0.833 (Levich) and -0.988 (Eisenberg) for the rest, asserted against the computed delta_eff at run time. Result: the first >=25 count moves at mu_solution/mu_solvent = 1.5, and it is the unstirred column that moves; the architecture ordering survives to 3.0, and the thin-gap, RDE and RCE counts do not move anywhere in that range. The reported integers should be read with that breaking point; the ordering does not depend on it."
+      "sensitivity": "Swept rather than corrected, the 11 rows at >= 1.0 M total dissolved. The response is NOT 1/mu everywhere: mu also enters nu, and delta_eff moves with it wherever delta is computed, so d ln i_lim / d ln mu is -1 for the five fixed-film archetypes (unstirred, stirred, recirculating flow, ANEC, microfluidic), -5/6 at the RDE (Levich) and -0.988 at the rotating cylinder (Eisenberg), asserted against the computed delta_eff at run time. Result: the first >=25 count moves at mu_solution/mu_solvent = 1.5, and it is the recirculating flow column (19 -> 18); the unstirred at 2.0 (12 -> 10) and the stirred at 2.5 (14 -> 12) move next. The architecture ordering holds to 3.0, and the ANEC, microfluidic, RDE and rotating cylinder counts do not move anywhere in the swept range (to 3.0). The reported integers should be read with that breaking point; the ordering does not depend on it."
     },
     {
       "category": "3. Estimation methods",
       "parameter": "Stokes-Einstein hydrodynamic radius r",
       "value": "4-5",
       "units": "Angstrom",
-      "tier": "T3",
-      "sensitivity": "D ~ 1/r, so the declared 4-5 Angstrom band spans 25 pct in D. The resulting D = 3-7e-6 cm2 s-1 brackets the range reported for such complexes in amide solvents. At the sourced rate constants (S5.7) the ten-of-eleven count is conditional on this radius: it breaks at r_h = 4.27 Angstrom on the deciding row (Ni-XEC C(sp2)-C(sp3), 23.7 mA cm-2 at best), inside the assigned band and above the 3.40 Angstrom that size-scaling the ferrocene anchor predicts; the 1/r scaling is the k = 0 law and a bound for the sourced rows, whose kinetic-regime ceiling goes as sqrt(D) and breaks at 4.05 Angstrom. The carrier dichotomy -- the central mechanistic result -- is unaffected."
+      "tier": "T2",
+      "sensitivity": "D ~ 1/r, so the declared 4-5 Angstrom band spans 25 pct in D. Evaluated at 25 C in the solvent of each of the twelve Stokes-Einstein entries, the band gives D (cm2 s-1) of tAmOH/H2O (2.8 mPa s) 1.56-1.95e-6, DMA (1.93 mPa s) 2.27-2.83e-6, DMSO/THF (1.55 mPa s) 2.82-3.52e-6, DMF (0.794 mPa s) 5.50-6.88e-6, EtOH/MeOH (0.719 mPa s) 6.07-7.59e-6, THF (0.456 mPa s) 0.96-1.20e-5, MeCN (0.369 mPa s) 1.18-1.48e-5, acetone (0.306 mPa s) 1.43-1.78e-5; each entry's carried D is the value at its own radius inside the band (Table S2). The eleven-of-twelve count holds across the whole band: no further catalyst-carried entry reaches 25 mA cm-2 in any architecture until r_h = 2.73 Angstrom on the deciding row (Co-H alkene reduction, 13.7 mA cm-2 at best), below the 3.19 Angstrom expected for it. The carrier dichotomy -- the central mechanistic result -- is unaffected."
     },
     {
       "category": "3. Estimation methods",
@@ -194,15 +314,15 @@
       "value": "1e-09",
       "units": "m2 s-1",
       "tier": "T2",
-      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
     },
     {
       "category": "4. Solver species diffusivities",
-      "parameter": "NH4+ (MeCN, used aq-like)",
+      "parameter": "NH4+ (AcOH/HCOOH, thiocyanation spec)",
       "value": "2e-09",
       "units": "m2 s-1",
       "tier": "T2",
-      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
     },
     {
       "category": "4. Solver species diffusivities",
@@ -210,23 +330,23 @@
       "value": "1.7e-09",
       "units": "m2 s-1",
       "tier": "T2",
-      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
     },
     {
       "category": "4. Solver species diffusivities",
       "parameter": "SCN- (AcOH/HCOOH)",
-      "value": "7.8e-10",
+      "value": "8.7e-10",
       "units": "m2 s-1",
       "tier": "T2",
-      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
     },
     {
       "category": "4. Solver species diffusivities",
       "parameter": "Br2 (MeCN)",
       "value": "2.2e-09",
       "units": "m2 s-1",
-      "tier": "T2",
-      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+      "tier": "T3",
+      "sensitivity": "Re-solving the two rows that carry it (the Hofmann rearrangement and the amidyl amination) at the Walden value moves their ceilings by x0.892-x0.999, and the flow >=25 mA cm-2 count 19 -> 18 and no architecture median moves. The published count that moves is therefore conditional on where this declared value sits in its bracket. Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
     },
     {
       "category": "4. Solver species diffusivities",
@@ -234,7 +354,23 @@
       "value": "1.4e-09",
       "units": "m2 s-1",
       "tier": "T2",
-      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+    },
+    {
+      "category": "4. Solver species diffusivities",
+      "parameter": "Cl2/HOCl lumped OX (MeCN/H2O)",
+      "value": "2.6e-09",
+      "units": "m2 s-1",
+      "tier": "T2",
+      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+    },
+    {
+      "category": "4. Solver species diffusivities",
+      "parameter": "O2- / HO2 (aq)",
+      "value": "2.1e-09",
+      "units": "m2 s-1",
+      "tier": "T2",
+      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
     },
     {
       "category": "4. Solver species diffusivities",
@@ -242,7 +378,7 @@
       "value": "5.5e-10",
       "units": "m2 s-1",
       "tier": "T2",
-      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
     },
     {
       "category": "4. Solver species diffusivities",
@@ -250,7 +386,7 @@
       "value": "3e-09",
       "units": "m2 s-1",
       "tier": "T2",
-      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
     },
     {
       "category": "4. Solver species diffusivities",
@@ -258,15 +394,7 @@
       "value": "5e-09",
       "units": "m2 s-1",
       "tier": "T2",
-      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
-    },
-    {
-      "category": "4. Solver species diffusivities",
-      "parameter": "B(OH)4- (aq)",
-      "value": "9.6e-10",
-      "units": "m2 s-1",
-      "tier": "T2",
-      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
     },
     {
       "category": "4. Solver species diffusivities",
@@ -274,15 +402,7 @@
       "value": "2e-09",
       "units": "m2 s-1",
       "tier": "T2",
-      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
-    },
-    {
-      "category": "4. Solver species diffusivities",
-      "parameter": "B(OH)3 (aq)",
-      "value": "9.6e-10",
-      "units": "m2 s-1",
-      "tier": "T2",
-      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+      "sensitivity": "Doubling it and re-solving the Aryl thiocyanation (NH4SCN) row in a scratch copy (an unperturbed control reproduces the published cells exactly) moves its seven ceilings by -3.44 to -1.70 pct; no threshold count moves, and the architecture ordering holds. Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
     },
     {
       "category": "4. Solver species diffusivities",
@@ -290,7 +410,31 @@
       "value": "1.9e-09",
       "units": "m2 s-1",
       "tier": "T2",
-      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+      "sensitivity": "Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+    },
+    {
+      "category": "4. Solver species diffusivities",
+      "parameter": "Pyridinium pyH+ (acetone, NHPI row)",
+      "value": "3e-09",
+      "units": "m2 s-1",
+      "tier": "T3",
+      "sensitivity": "Inside Brookes's bracket, re-solving the NHPI row moves its seven ceilings by -0.6 to +4.5 pct and no count moves. On Krumgalz's assignment pyridinium would sit at or below 2.38e-09; there the unstirred cell reaches 25.05 mA cm-2, crossing 25 mA cm-2 at D = 2.40e-09, and no other cell crosses a threshold. The unstirred >=25 count is therefore conditional on this diffusivity: 12 of 50 at the carried value, 13 at the Krumgalz edge. Homoconjugation to (py)2H+ (K_f = 4 in MeCN; Coetzee & Padmanabhan, J. Am. Chem. Soc. 1965, 87, 5005, Table I, p. 5007) would lower the effective D further, toward the second count."
+    },
+    {
+      "category": "4. Solver species diffusivities",
+      "parameter": "Cl- (6:1 MeCN/aq HCl, thioether row)",
+      "value": "2.3e-09",
+      "units": "m2 s-1",
+      "tier": "T2",
+      "sensitivity": "Re-solved at both ends of the bracket: at the lower end the row's ceilings move x0.846-x0.987, at the upper end x1.056-x2.141, and its lowest cell is 117.1 and 125.4 mA cm-2; no threshold count or architecture median moves at either end. Walden's rule is itself approximate for ions (see the NH4+ row), so the ends are a bracket rather than a derivation."
+    },
+    {
+      "category": "4. Solver species diffusivities",
+      "parameter": "Br- (1:1 H2O/MeCN, bromination row)",
+      "value": "2.08e-09",
+      "units": "m2 s-1",
+      "tier": "T3",
+      "sensitivity": "Re-solved at both ends of the bracket: at the lower end the row's ceilings move x0.590-x0.717, at the upper end x1.040-x1.064, and its lowest cell is 27.1 and 48.8 mA cm-2; at the lower end the stirred >=50 mA cm-2 count 12 -> 11 and no architecture median moves; at the upper end no threshold count and no architecture median moves. Walden's rule is itself approximate for ions (see the NH4+ row), so the ends are a bracket rather than a derivation. The published count that moves is therefore conditional on where this declared value sits in its bracket; the carried value is the aqueous one, near the upper end."
     },
     {
       "category": "4. Solver species diffusivities",
@@ -298,7 +442,7 @@
       "value": "1e-09",
       "units": "m2 s-1",
       "tier": "T2",
-      "sensitivity": "Tested 1.0e-9 to 1.65e-9 (the derived value). Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+      "sensitivity": "The generic supporting cation Q+ of the EC' specs of the BQ-mediated Wacker-Tsuji oxidation and Thioether -> sulfone rows, and the class default for a declared supporting cation of the Nernst-Planck ion table (see the next-but-one row). Where Bu4N+ itself appears in acetonitrile, the Nernst-Planck layer does not use this value: it carries 1.643e-09 m2 s-1 (Krumgalz 1983 Table 2 lambda0*eta=0.2122 / Table 3 eta=0.00344 P), and Kalugin's lambda0 = 61.90 S cm2 mol-1 gives 1.648e-9 by Nernst-Einstein. Q+ is a spectator wherever it appears (s = 0, nu = 0): with zero flux at the limit its diffusivity cancels from its own conservation equation, so it does not enter i_lim (the supporting-ion row measures that zero). Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
     },
     {
       "category": "4. Solver species diffusivities",
@@ -306,15 +450,15 @@
       "value": "1.5e-09",
       "units": "m2 s-1",
       "tier": "T2",
-      "sensitivity": "Tested 1.5e-9 to 2.91e-9 (the derived value). Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and they do reach reported quantities. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the eight mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the mediated matrix moves 18 of the 300 cells of the merged matrix by more than 1 pct and moves two published counts by one entry each: the stirred >=25 mA cm-2 count and the parallel-plate >=50 mA cm-2 count, each rising by one of fifty. The absolute values that perturbation was measured against predate the acetonitrile viscosity correction, which moved both baselines down by one independently, so the one-entry movement is quoted here rather than a pair of from/to integers that no longer describe the current matrix. The unstirred, thin-gap, RDE and rotating-cylinder counts are unchanged and the architecture ordering is preserved; the largest median shift is +11 pct at the rotating cylinder (121.7 -> 135.7 mA cm-2). A factor of two is far wider than the uncertainty on any of these values, so the counts are stable in practice, but they are not invariant to them. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.2 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
+      "sensitivity": "The generic supporting anion A- of the EC' spec of the Thioether -> sulfone row, and the class default for a declared supporting anion of the Nernst-Planck ion table (see the next row). Where BF4- itself appears in acetonitrile, the Nernst-Planck layer does not use this value: it carries 2.889e-09 m2 s-1 (Gong et al., Energy Environ. Sci. 2015, 8, 3515-3530, Table 2, p. 3518, lambda0 = 108.5), and Kalugin's lambda0 = 109.20 S cm2 mol-1 gives 2.908e-9 by Nernst-Einstein. A- is a spectator wherever it appears (s = 0, nu = 0), so its diffusivity does not enter i_lim. Solver species: supporting-electrolyte ions, mediators and mediator counter-ions. These set migration and the film potential in the Stage-1 and EC-prime solves, and the mediators and the ions that react do reach reported quantities; an ion that no reaction consumes or produces enters only through its concentration, its diffusivity cancelling at steady state. In the Stage-0 film model only the Table S2 carrier D sets i_lim, but that is not true of the mediated entries, whose plotted current comes from the EC-prime solve these species enter. Doubling ClO4-, SCN-, Br- and Br2 together and re-solving the seven mediated rows that carry them moves 28 of the 350 cells of the published matrix by more than 1 pct (the largest by 100 pct) and raises five counts (unstirred >=25, unstirred >=50, stirred >=25, recirculating flow >=25, ANEC >=50) by one entry each; the ordering the main text claims is preserved, and the largest median shift is +6.1 pct (stirred). The doubling probes how strongly these declared inputs couple into the counts rather than estimating their error, and no count it moves moves by more than one entry. The discrete charge-conservation check (maximum deviation 3e-12) and the binary-migration bound (2.00x Fick, reproduced to 0.50 pct and 0.26 pct) are insensitive to these values, because they test charge bookkeeping rather than the reported counts."
     },
     {
       "category": "4. Solver species diffusivities",
       "parameter": "Supporting-ion diffusivities without conductance data",
-      "value": "24 slots, 21 ion/solvent pairs",
+      "value": "25 slots, 22 ion/solvent pairs",
       "units": "m2 s-1",
       "tier": "T2",
-      "sensitivity": "All 24 slots divided by 3 together, then all multiplied by 3 together, re-solving the full 300-cell Nernst-Planck layer each time: the largest relative change in any cell is exactly zero (divided) and exactly zero (multiplied), and no threshold count in any of the seven architectures moves. The zero is the physics, not a coincidence -- a species with zero flux drops out of its own conservation equation -- and the sweep exists as a regression test: a non-zero here would mean a supporting-ion diffusivity had started feeding a reacting species."
+      "sensitivity": "All 25 slots divided by 3 together, then all multiplied by 3 together, re-solving the full 350-cell Nernst-Planck layer each time: the largest relative change in any cell is exactly zero (divided) and exactly zero (multiplied), and no threshold count in any of the seven architectures moves. The zero is the physics, not a coincidence -- a species with zero flux drops out of its own conservation equation -- and the sweep exists as a regression test: a non-zero here would mean a supporting-ion diffusivity had started feeding a reacting species."
     },
     {
       "category": "4. Solver species diffusivities",
@@ -322,7 +466,7 @@
       "value": "z = 0 on 40 rows, -1 on 8, -2 on 1, +2 on 1",
       "units": "-",
       "tier": "T2",
-      "sensitivity": "The four medium-confidence rows were each re-solved at every alternative charge in {-1, 0, 1, 2}, the whole 300-cell layer each time: the largest change in any of their ceilings is 3.0 pct, and no threshold count in any of the seven architectures moves at any alternative. The residual uncertainty in those four charges is real and is provably immaterial to every published number."
+      "sensitivity": "The five medium-confidence rows other than the homocoupling were each re-solved at every alternative charge in {-1, 0, 1, 2} in the k = 0 layer, the whole 350-cell layer each time: the largest change in any of their ceilings there is 1.4 pct, and no threshold count in any of the seven architectures moves at any alternative. Four of them are published in that layer; the cross-electrophile coupling is published at its sourced rate constant (100 M-1 s-1), and re-solved there its ceilings move x0.930-x0.986 at z = -1 (no threshold count moves), x1.016-x1.082 at z = +1 (no threshold count moves) and x1.032-x1.162 at z = +2 (no threshold count moves). The cathodic Ni homocoupling is carried at the neutral charge of its precursor, NiBr2bpy, but its exemplar writes the complex it reduces as Nibpy2+; re-solved at its adopted rate constant (100 M-1 s-1) at z = +1 its ceilings rise 1.6-2.8-fold, moving the unstirred >=25 mA cm-2 count 12 -> 13; the stirred >=25 mA cm-2 count 14 -> 15; the recirculating-flow >=50 mA cm-2 count 12 -> 13, and at z = +2 2.0-4.7-fold, moving the unstirred >=25 mA cm-2 count 12 -> 13; the stirred >=25 mA cm-2 count 14 -> 15; the recirculating-flow >=50 mA cm-2 count 12 -> 13. It is the one carrier charge in the model on which a published count depends."
     },
     {
       "category": "4. Solver species diffusivities",
@@ -343,10 +487,10 @@
     {
       "category": "5. Concentrations",
       "parameter": "n_carrier (electrons per carrier turnover)",
-      "value": "0.1 - 6.0 (per reaction; see Table S2)",
+      "value": "0.1 - 6.0 (per reaction; see Tables S2 and S10)",
       "units": "-",
-      "tier": "T2",
-      "sensitivity": "sensitivity. 48 of the 50 rows take integer n from an unambiguous half-reaction and are not in doubt. The exposure is the two fractional rows, where n < 1 encodes a chain-carrying regime -- catalytic in electrons -- rather than a stoichiometry: the radical-cation Diels-Alder at n = 0.1 and the Co-H alkene isomerization at n = 0.2. Those are declared mechanistic choices with no measurement behind them, and i_lim scales linearly with them. Both sit far below every threshold in every architecture, and raising each to n = 1 -- i.e. abandoning the chain entirely, the most generous possible revision -- multiplies them by 10x and 5x and leaves both still below 25 mA cm-2 in every architecture. No published count moves anywhere in the range, so the fractional-n choice cannot flip a reported verdict."
+      "tier": "T3",
+      "sensitivity": "The overall reaction of every row is balanced in Table S10, atoms and charge, with its electrode step: 45 of the fifty take n from that stoichiometry and are not in doubt. Three are redox-neutral couplings (Ni-catalyzed aryl amination; Electrochemical amination of ArX with NH3; Decarboxylative arylation), whose electrode count is the cycle's own: one electron at each electrode per turnover. Two are chain processes, redox-neutral overall, for which n is the charge the exemplar passes per substrate: 0.1 F mol-1 for the radical-cation Diels-Alder reaction and 3 F mol-1 for the cobalt-hydride isomerization, the charge passed for the compound that row carries. i_lim is linear in n. Across the Diels-Alder paper's own range, 0.05-0.5 F mol-1, that row reaches 37-46 mA cm-2 in the microfluidic, rotating-disk, rotating-cylinder cells at the top of the range, so the >=25 mA cm-2 count of each of those architectures is conditional on the charge carried (one entry higher at 0.5 F mol-1); no >=50 mA cm-2 count moves. The isomerization row is held below 25 mA cm-2 at any substrate count by its kinetic plateau, 8.7 mA cm-2."
     },
     {
       "category": "5. Concentrations",
@@ -354,7 +498,7 @@
       "value": "1e-5 x C_med; 1e-3 mol m-3",
       "units": "mol m-3",
       "tier": "T2",
-      "sensitivity": "tr(C) was moved a full decade in both directions, 1e-5 -> 1e-4 and 1e-5 -> 1e-6, and the mediated matrix re-solved in an isolated copy each time. The seed is not exactly inert: 45 of the 48 (reaction, reactor) entries change at 1e-4 and 42 of 48 at 1e-6. The changes are negligible in size, and they scale with the seed as a perturbation should -- the largest absolute movement is 0.0059 mA cm-2 at 1e-4 and 0.00059 mA cm-2 at 1e-6, a factor of ten for a factor of ten in the seed, and in relative terms at most 0.008 pct. The largest movers are the two fastest systems at the rotating cylinder and the RDE, where the current is largest in absolute terms. The counts clearing 25 and 50 mA cm-2 among the mediated entries are unchanged at 31 and 24 at both ends, so no reported quantity depends on the seed."
+      "sensitivity": "tr(C) was moved a full decade in both directions, 1e-5 -> 1e-4 and 1e-5 -> 1e-6, and every mediated row re-solved in an isolated copy each time. The seed is not exactly inert: 67 of the 84 (reaction, reactor) entries change at 1e-4 and 68 at 1e-6, by at most 0.029 mA cm-2 and 0.0029 mA cm-2 respectively (0.042 pct and 0.0012 pct), scaling with the seed as a perturbation should. The counts clearing 25 and 50 mA cm-2 among the mediated entries stay at 49 and 40 at both ends, so no reported quantity depends on the seed."
     },
     {
       "category": "6. Electrolyte conductivities",
@@ -414,8 +558,8 @@
     },
     {
       "category": "6. Electrolyte conductivities",
-      "parameter": "0.0833 M Me4NBF4/MeOH",
-      "value": "5.21",
+      "parameter": "0.0833 M Me4NBF4/THF-EtOH 1:1",
+      "value": "1.2",
       "units": "mS cm-1",
       "tier": "T0",
       "sensitivity": "Display-only. Kappa enters no transport quantity: i_lim (Eq. S1) and the NPP / EC-prime solvers use D, C, delta and z only. Kappa appears solely in the voltage/thermal path (cellvoltage.jl; figs make_figK.py, make_fig4B.py, make_figs.py Fig D, make_fig_main.py panel f). This row supports no stated conclusion; it is tabulated for scale. Most of the registered conductivities are in this position."
@@ -510,14 +654,6 @@
     },
     {
       "category": "6. Electrolyte conductivities",
-      "parameter": "0.152 M NaBr/H2O-MeCN-MeOH-DCM 10:10:10:3",
-      "value": "19.0",
-      "units": "mS cm-1",
-      "tier": "T0",
-      "sensitivity": "Display-only. Kappa enters no transport quantity: i_lim (Eq. S1) and the NPP / EC-prime solvers use D, C, delta and z only. Kappa appears solely in the voltage/thermal path (cellvoltage.jl; figs make_figK.py, make_fig4B.py, make_figs.py Fig D, make_fig_main.py panel f). This row supports no stated conclusion; it is tabulated for scale. Most of the registered conductivities are in this position."
-    },
-    {
-      "category": "6. Electrolyte conductivities",
       "parameter": "0.156 M Et4NOTs/MeOH",
       "value": "7.0",
       "units": "mS cm-1",
@@ -526,8 +662,16 @@
     },
     {
       "category": "6. Electrolyte conductivities",
+      "parameter": "0.158 M Et4NOTs/MeOH",
+      "value": "7.0",
+      "units": "mS cm-1",
+      "tier": "T0",
+      "sensitivity": "Display-only. Kappa enters no transport quantity: i_lim (Eq. S1) and the NPP / EC-prime solvers use D, C, delta and z only. Kappa appears solely in the voltage/thermal path (cellvoltage.jl; figs make_figK.py, make_fig4B.py, make_figs.py Fig D, make_fig_main.py panel f). This row supports no stated conclusion; it is tabulated for scale. Most of the registered conductivities are in this position."
+    },
+    {
+      "category": "6. Electrolyte conductivities",
       "parameter": "0.171 M NaI/DMF",
-      "value": "7.5",
+      "value": "7.28",
       "units": "mS cm-1",
       "tier": "T0",
       "sensitivity": "Display-only. Kappa enters no transport quantity: i_lim (Eq. S1) and the NPP / EC-prime solvers use D, C, delta and z only. Kappa appears solely in the voltage/thermal path (cellvoltage.jl; figs make_figK.py, make_fig4B.py, make_figs.py Fig D, make_fig_main.py panel f). This row supports no stated conclusion; it is tabulated for scale. Most of the registered conductivities are in this position."
@@ -558,6 +702,14 @@
     },
     {
       "category": "6. Electrolyte conductivities",
+      "parameter": "0.214 M LiBr/THF",
+      "value": "0.1",
+      "units": "mS cm-1",
+      "tier": "T0",
+      "sensitivity": "Display-only. Kappa enters no transport quantity: i_lim (Eq. S1) and the NPP / EC-prime solvers use D, C, delta and z only. Kappa appears solely in the voltage/thermal path (cellvoltage.jl; figs make_figK.py, make_fig4B.py, make_figs.py Fig D, make_fig_main.py panel f). This row supports no stated conclusion; it is tabulated for scale. Most of the registered conductivities are in this position."
+    },
+    {
+      "category": "6. Electrolyte conductivities",
       "parameter": "0.24 M Et3NHBF4/THF-HFIP",
       "value": "5.0",
       "units": "mS cm-1",
@@ -568,6 +720,14 @@
       "category": "6. Electrolyte conductivities",
       "parameter": "0.25 M KOAc/tAmOH-H2O",
       "value": "8.0",
+      "units": "mS cm-1",
+      "tier": "T0",
+      "sensitivity": "Display-only. Kappa enters no transport quantity: i_lim (Eq. S1) and the NPP / EC-prime solvers use D, C, delta and z only. Kappa appears solely in the voltage/thermal path (cellvoltage.jl; figs make_figK.py, make_fig4B.py, make_figs.py Fig D, make_fig_main.py panel f). This row supports no stated conclusion; it is tabulated for scale. Most of the registered conductivities are in this position."
+    },
+    {
+      "category": "6. Electrolyte conductivities",
+      "parameter": "0.25 M NaBr/H2O-MeCN 1:1",
+      "value": "40.0",
       "units": "mS cm-1",
       "tier": "T0",
       "sensitivity": "Display-only. Kappa enters no transport quantity: i_lim (Eq. S1) and the NPP / EC-prime solvers use D, C, delta and z only. Kappa appears solely in the voltage/thermal path (cellvoltage.jl; figs make_figK.py, make_fig4B.py, make_figs.py Fig D, make_fig_main.py panel f). This row supports no stated conclusion; it is tabulated for scale. Most of the registered conductivities are in this position."
@@ -658,7 +818,7 @@
       "value": "3.0",
       "units": "mS cm-1",
       "tier": "T3",
-      "sensitivity": "Carries a conclusion, and its support is weaker than the value alone suggests. Das, J. Solution Chem. 2008, 37, 947-955 (retrieved) measures LiBr in THF at 298.15 K over c = 0.0116 to 0.3162 mol dm-3 -- ten times closer to the working 3.0 M than anything this is available -- and the picture it gives is not reassuring. (1) A hard measured floor: kappa(0.3162 M) = 0.256 mS cm-1 (Table 1). Since kappa rises with c up to the conductivity maximum, kappa(3.0 M) >= 0.256, which independently corroborates the 0.206 floor derived from Lee's cell resistance -- two unrelated routes, 24 pct apart, in the right order. (2) the carried 3.0 implies A flattening that is not measured. over the measured triple-ion branch (0.05-0.32 M) the data scale as kappa ~ c^1.75. Getting from the highest measured point to 3.0 mS cm-1 at 3.0 M requires kappa ~ c^1.09 over the remaining 9.5-fold rise in concentration. Such flattening is physically expected -- it is the approach to the conductivity maximum as viscosity takes over -- but where that turnover sits has never been measured for LiBr in THF, and the carried value assumes it happens early. (3) the measured scaling cannot simply continue, and A stoichiometric calculation shows why. Continuing kappa ~ c^1.75 to 3.0 M would give 13.1 mS cm-1, four times the carried value, so the extrapolation had to be tested, not waved away. It fails on solvent availability. Peters' own recipe is 1.0 mol LiBr in 320 mL THF; at rho = 0.8833 g cm-3 and M = 72.106 that is 3.92 mol THF per mole of LiBr. Li+ in an ether is four-coordinate, so the solvation shell of the cation alone requires 4.0 -- there is a 2 pct deficit, and nothing at all is left for Br- or for bulk. The conclusion is not sensitive to the exact coordination number: at n = 3 only 23 pct of the THF is free, at n = 4 none is, at n = 5 there is a 28 pct shortfall. By contrast Das's highest measured point, 0.3162 M, has 39 mol THF per mole of LiBr -- ten times the solvation requirement, with abundant bulk solvent for triple ions to move through. the two concentrations are not the same kind of liquid. The c^1.75 branch is the behaviour of ions migrating through bulk THF; at 3.0 M that bulk does not exist, the system is a solvate rather than a solution, and kappa must have passed its maximum before that point. independent support, same solvent and nearly the same concentration: Cai et al., J. Am. Chem. Soc. 2023, 145, 25716-25725 run 2 M LiBF4 in THF and report from MD that in cyclic ethers Li+ is only partially solvated and the ions form contact ion pairs and aggregates, whereas linear ethers keep Li+ fully solvated and the ions dispersed -- exactly the solvation-starved picture the stoichiometry predicts. BOTH PAPERS AND BOTH SUPPORTING INFORMATIONS WERE RETRIEVED AND READ ON 2026-08-31, and the earlier note that their numeric conductivities were merely unretrieved is now settled the other way: neither reports an extractable number. Cai's conductivity figure (Fig. 2) turns out to plot MD-derived Li+ migration rates, radial distribution functions and coordination numbers, not measured conductivities; its only measured electrochemistry is the EIS profiles of SI Figs. S2-S3, which are Nyquist plots with no tabulated resistance or cell constant, and the whole SI text layer contains the word conductivity exactly once, in the methods. Fu reports the ranking LiTFSI > LiPF6 > LiBOB > LiClO4 > LiBF4 in the body and puts the values in Fig. S4, whose caption carries no text layer at all. So both remain corroboration of the REGIME and neither can be promoted to a value -- which is now a checked statement rather than an open action. Reading either figure by eye off the raster was rejected: a plotted axis is not a source. what this settles and what it does not. It excludes the 13.1 extrapolation, which is why that number is not carried, and it places 3.0 M on the far side of the conductivity maximum where the carried value's implied flattening is the physically correct behaviour. It does not locate the maximum, so it does not put a number on kappa(3.0 M) and does not restore an upper bound. what this does to the band: the old 0.2-6.6 was built before any of this data existed -- its floor from Lee's cell resistance and its top from an ohmic-differencing argument. The floor is 0.256, measured. the top cannot be defended at 6.6: nothing located excludes values above it, and the only extrapolation anchored in measurement points higher. The band is therefore reported as 0.26 mS cm-1 to not established above; the two rotating-electrode THF verdicts reverse only above 49.5 mS cm-1 (the rotating disc), which every measured-data continuation below stays under. The arithmetic behind the floor: Carries a conclusion. Band 0.2-6.6 mS cm-1 at a value of 3.0. The lower end is a state-B hard floor: total cell resistance <= V/I = 3.2 V / 0.520 A = 6.154 ohm in a coaxial annulus with R_i 9.5 mm, R_o 11.0 mm and L = 18.43 cm derived from the stated 17.8 mL annulus volume, giving kappa >= 1.266e-3 / 6.154 = 0.206 mS cm-1 [Lee et al., Org. Process Res. Dev. 2022, 26, 2674-2684, main text Results & Discussion, SI Fig. S3 p. S6 and CFD block p. S22]. The upper end is not 8.8 and not the 3.29 that ohmic differencing first returned: that construction assumes equal non-ohmic overpotential across LiBr concentrations, which is refuted for Al anodes in THF by Zhang, Guan, Wang, Lin & See, Chem. Sci. 2023, 14, 13108-13118 (Br- concentration is precisely what relieves Al2O3 passivation, so Lee's voltage differences are partly anodic, not ohmic), and it rests on dV = 0.2 V between two two-significant-figure voltages, so dV = 0.10 V -- admitted by rounding alone -- raises it to 6.58. do not adopt 1.5 mS cm-1 as a derived point value: it fails state B (its point value is set by an assumed kappa(1.5 M) with no source, its own bracket spans 1.24-2.48), and it would state a ceiling ~30 pct below the model's own best estimate in the manuscript'S favour. what the band buys, judged against each architecture's OWN transport ceiling rather than a declared design current: at 0.206 mS cm-1 the ceilings are 6.9/7.3/7.4/155.1/7.4/6.7/26.3 mA cm-2 against transport ceilings of 8.2/9.3/16.8/110.7/108.5/121.7/1000.0, so 1 of the 7 architectures clear; at 3.000 mS cm-1 the ceilings are 26.3/27.7/27.9/394.6/27.9/25.3/65.6 mA cm-2 against transport ceilings of 8.2/9.3/16.8/110.7/108.5/121.7/1000.0, so 4 of the 7 architectures clear; at 6.580 mS cm-1 the ceilings are 38.7/40.8/41.0/461.7/41.0/37.3/75.9 mA cm-2 against transport ceilings of 8.2/9.3/16.8/110.7/108.5/121.7/1000.0, so 4 of the 7 architectures clear. So the band does not decide the verdicts this section reports -- the thin-gap chip clears throughout and both rotating cells and the stack fail throughout, and what the band alone decides is the three centimetre-gap cells, which pass at the carried value and above and fail only at the state-B floor, where the ceiling has fallen to the transport ceiling itself. One live sentence is tighter than any architecture verdict: the zero-gap 'beyond passive and forced-air rejection' claim flips at only 1.297x (U'_req crosses the 0.08 W cm-2 K-1 forced-air ceiling at kappa = 3.89 mS cm-1; U' = 0.0986 at 3.0, 0.0544 at 6.58, 1.2013 at the floor), so it does not survive the top of the band and is quoted with that margin where it appears. Recomputed from the thermal model at kappa = 3.0 mS cm-1 and T_b = 66 C, and judged against each architecture's OWN median transport ceiling rather than a declared design current, THF does NOT boil in either batch cell, in the recirculating cell or in the microfluidic chip: those four verdicts would reverse only at 0.03-0.36x the carried conductivity, far below it, because transport binds before heat does in a cell that reaches only 8-17 mA cm-2. Where THF does fall short the multipliers are 16.5x (rotating disc) and 25.7x (rotating cylinder), with the zero-gap stack unreachable on kappa at all (at 1000 mA cm-2 its activation term alone puts out 0.71 W cm-2 against 0.043 W cm-2 of passive rejection, so no conductivity saves it). The binding verdict is the rotating disc at 16.5x, against a band whose top is 2.19x the carried value, so every THF verdict in this section is band-proof. A SECOND AND TIGHTER TEST, because the band is not the only thing a reader can do with the measured data. Das's twenty points rise as kappa ~ c^n over the top decade, with n = 1.75 fitting from 0.05 M, 1.94 from 0.10 M and 2.20 from 0.15 M; continued to 3.0 M those give 10.9, 18.3 and 35.6 mS cm-1. The rotating-disc verdict reverses at 49.5 mS cm-1 and the rotating-cylinder verdict at 77.1, so both survive every one of those continuations, the disc clearing the steepest of them by 39 pct. None of those continuations is itself sound: each crosses a conductivity maximum the measured range never reaches, and at 3.0 M there are 4.08 THF per Li+, so on four-coordinate lithium essentially the whole solvent is bound and the dilute triple-ion law has no free solvent left to work with. The carried 3.0 mS cm-1 corresponds to n = 1.39 from Das's 0.1 M point, i.e. it already assumes the roll-off rather than extrapolating through it. A SECOND SAME-SOLVENT ANCHOR, state A: Zhang, Gu, Wang, Ware, Lu, Lin, Qi and See, JACS Au 2023, 3, 2280-2290, Table 1 measures 0.1 M LiClO4 in THF at 62.6 uS cm-1 (22.0 +/- 1.0 C), against Das's LiBr at the same 0.1 M and 25 C of 26.8 uS cm-1 -- same solvent, same cation, different anion, a factor of 2.3 apart, which is the agreement this pair should show."
+      "sensitivity": "Carries a conclusion, and its support is weaker than the value alone suggests. Das (Das, J. Solution Chem. 2008, 37, 947-955, Table 1, p. 949, LiBr columns) measures LiBr in THF at 298.15 K over c = 0.0116 to 0.3162 mol dm-3 -- ten times closer to the working 3.0 M than any other measurement available -- and the picture it gives is not reassuring. (1) A measured reference: kappa(0.3162 M) = 0.256 mS cm-1. It would bound kappa(3.0 M) from below only if 3.0 M sat below the conductivity maximum, which (3) argues it does not, so it corroborates the order of magnitude rather than bounding the row; the hard floor is the 0.206 mS cm-1 derived below from Lee's cell resistance, and the two routes agree within 24 pct. (2) The carried 3.0 implies a flattening that is not measured. Over the measured triple-ion branch (0.05-0.32 M) the data scale as kappa ~ c^1.75 (least squares); getting from the highest measured point to 3.0 mS cm-1 at 3.0 M requires kappa ~ c^1.09 over the remaining 9.5-fold rise in concentration. Such flattening is physically expected -- it is the approach to the conductivity maximum as viscosity takes over -- but where that turnover sits has never been measured for LiBr in THF, and the carried value assumes it happens early. (3) The measured scaling cannot simply continue, and a stoichiometric calculation shows why. Continuing kappa ~ c^1.75 from the top measured point to 3.0 M would give 13.0 mS cm-1, 4 times the carried value, so the extrapolation had to be tested. It fails on solvent availability. Peters' own recipe is 83.4 g LiBr (0.960 mol) in 320 mL THF (SI p. S15); at rho = 0.883 g cm-3 and M = 72.106 that is 4.08 mol THF per mole of LiBr. Li+ in an ether is four-coordinate, so the solvation shell of the cation alone takes 98 pct of the THF, leaving 2 pct for Br- and for bulk. The conclusion holds for any nearby coordination number: at n = 3 only 26 pct of the THF is free, at n = 5 there is a 23 pct shortfall. By contrast Das's highest measured point has 39 mol THF per mole of LiBr, ten times the solvation requirement, with abundant bulk solvent for triple ions to move through. The two concentrations are not the same kind of liquid: at 3.0 M almost no unbound solvent remains, the system is a solvate rather than a solution, and kappa must have passed its maximum before that point. Independent support for the regime, same solvent and nearly the same concentration: Cai et al., J. Am. Chem. Soc. 2023, 145, 25716-25725 run 2 M LiBF4 in THF and report from MD that in cyclic ethers Li+ is only partially solvated and the ions form contact ion pairs and aggregates. Neither Cai et al. nor Fu et al. reports an extractable conductivity value (Cai's conductivity figure plots MD-derived quantities and its measured EIS is untabulated; Fu's values are in an untexted figure), so both corroborate the regime and neither supplies a number; reading a value off a plotted axis was rejected. Band 0.2-6.6 mS cm-1 at a value of 3.0. The lower end is a state-B hard floor: total cell resistance <= V/I = 3.2 V / 0.520 A = 6.154 ohm in a coaxial annulus with R_i 9.5 mm, R_o 11.0 mm and L = 18.43 cm derived from the stated 17.8 mL annulus volume, giving kappa >= 1.266e-3 / 6.154 = 0.206 mS cm-1 [Lee et al., Org. Process Res. Dev. 2022, 26, 2674-2684, main text Results & Discussion, SI Fig. S3 p. S6 and CFD block p. S22]. The upper end, 6.6, is an edge rather than a bound: ohmic differencing of Lee's voltages returns 6.58 at the rounding limit of two two-significant-figure voltages (dV = 0.10 V), and that construction assumes equal non-ohmic overpotential across LiBr concentrations, which is refuted for Al anodes in THF by Zhang, Guan, Wang, Lin & See, Chem. Sci. 2023, 14, 13108-13118 (Br- relieves Al2O3 passivation, so Lee's voltage differences are partly anodic). Nothing located excludes values above it, so the verdicts are also tested beyond it, below. What the band buys, judged against each architecture's OWN transport ceiling: at 0.206 mS cm-1 the ceilings are 7.1/7.5/7.6/160.2/7.6/6.9/27.2 mA cm-2 against transport ceilings of 8.6/9.7/17.4/108.6/104.3/122.1/1000.0, so 1 of the 7 architectures clear; at 3.000 mS cm-1 the ceilings are 27.0/28.6/28.7/411.0/28.7/26.1/68.2 mA cm-2 against transport ceilings of 8.6/9.7/17.4/108.6/104.3/122.1/1000.0, so 4 of the 7 architectures clear; at 6.600 mS cm-1 the ceilings are 39.8/42.1/42.4/482.8/42.4/38.5/79.3 mA cm-2 against transport ceilings of 8.6/9.7/17.4/108.6/104.3/122.1/1000.0, so 4 of the 7 architectures clear. Across the band the microfluidic, rotating-cell and stack boil-off verdicts do not turn -- the microfluidic cell clears throughout and both rotating cells and the stack fail throughout -- and what it decides is the unstirred, stirred and recirculating cells, which pass at the carried value and above and fail only below 0.10-0.36x the carried conductivity. Three cooling-class verdicts are tighter than any boil-off verdict: the rotating cylinder, zero-gap stack and rotating disc each hold their THF duty with liquid cooling at the carried value, and each passes beyond what its own cooler rejects below 0.93x, 0.65x and 0.56x the carried conductivity (2.80/1.95/1.68 mS cm-1, against the top of each cooler's declared range, 0.317/0.142/0.317 W cm-2 K-1 respectively). All three breakpoints lie inside the band, so those three verdicts are conditional on where in it the conductivity sits and are stated that way where they appear. At kappa = 3.0 mS cm-1 and T_b = 66.0 C, THF does NOT boil in either batch cell, in the recirculating cell or in the microfluidic cell: those verdicts would reverse only at 0.03-0.36x the carried conductivity, because transport binds before heat in cells whose transport ceilings are 8.6-17.4 mA cm-2 (the microfluidic cell aside). Where THF does fall short the multipliers are 14.2x (rotating disc) and 24.2x (rotating cylinder), with the zero-gap stack unreachable on kappa at all (at 1000 mA cm-2 its activation term alone puts out 0.71 W cm-2 against 0.045 W cm-2 of passive rejection). The binding verdict is the rotating disc at 14.2x, against a band whose top is 2.20x the carried value, so the failing THF verdicts are band-proof. A second and tighter test uses the measured data directly: least-squares fits kappa ~ c^n over Das's top decade give n = 1.75 from 0.05 M, 1.94 from 0.10 M, 2.20 from 0.15 M, and the fitted lines continued to 3.0 M give 10.9, 18.3, 35.6 mS cm-1. The rotating-disc verdict reverses at 42.6 mS cm-1 and the rotating-cylinder verdict at 72.6, so both survive every one of those continuations, the disc clearing the steepest of them by 20 pct. None of those continuations is itself sound: each crosses a conductivity maximum the measured range never reaches, and at 3.0 M there are 4.08 THF per Li+, so four-coordinate lithium binds 98 pct of the solvent. The carried 3.0 mS cm-1 corresponds to n = 1.39 from Das's 0.1 M point (26.8 uS cm-1), i.e. it already assumes the roll-off rather than extrapolating through it. A second same-solvent value, Zhang, Gu, Wang, Ware, Lu, Lin, Qi and See, JACS Au 2023, 3, 2280-2290, Table 1 measures 0.1 M LiClO4 in THF at 62.6 uS cm-1 (22.0 +/- 1.0 C), against Das's LiBr at the same 0.1 M of 26.8 uS cm-1 -- same solvent, same cation, different anion, a factor of 2.3 apart. Every change of cooling class this input causes over the range Table S12 sweeps for it is listed there. Those verdicts are conditional on it."
     },
     {
       "category": "6. Electrolyte conductivities",
@@ -697,16 +857,16 @@
       "parameter": "Free-convection operating point (unstirred batch)",
       "value": "x 20 mm; drho/rho 3.16e-03",
       "units": "-",
-      "tier": "T1",
-      "sensitivity": "delta goes as (drho/rho)^(-1/4). The one case that can be page-anchored is the most concentrated aqueous binary electrolyte modelled, 2 M NaCl: CRC 97th ed. p. 5-129, NaCl block, 20 C gives rho = 1.0707 g cm-3 at 10.0 mass pct (1.832 M) and 1.0781 at 11.0 mass pct (2.029 M), so 2.000 M interpolates to 1.0770 against 0.9989 on the table's 0.1 mass pct row, drho/rho = 0.078, 25x the declared centre, and a film that depletes the whole salt would be 102 um at the central height rather than 228. A millimolar organic in an organic solvent sits below the declared decade and its film is correspondingly thicker. The lumped film is therefore an upper estimate for the concentrated aqueous rows and a lower one for the dilute organic rows; a per-row driving force would thin the film for exactly the rows that carry the unstirred counts (10 of the 12 clearing 25 mA cm-2 are concentrated rows, S1.1). The direction is established by the fourth root; the magnitude per row is not computed here because the coefficients are unavailable, and the ordering of the archetypes, which every sweep reported here preserves, does not rest on it."
+      "tier": "T3",
+      "sensitivity": "delta goes as (drho/rho)^(-1/4). The one case that can be page-anchored is the most concentrated aqueous binary electrolyte modelled, 2 M NaCl: CRC 97th ed. p. 5-129, NaCl block, 20 C gives rho = 1.0707 g cm-3 at 10.0 mass pct (1.832 M) and 1.0781 at 11.0 mass pct (2.029 M), so 2.000 M interpolates to 1.0770 against 0.9989 on the table's 0.1 mass pct row, drho/rho = 0.078, 25x the declared centre, and a film that depletes the whole salt would be 102 um at the central height rather than 227. A millimolar organic in an organic solvent sits below the declared decade and its film is correspondingly thicker. The lumped film is therefore an upper estimate for the concentrated aqueous rows and a lower one for the dilute organic rows; a per-row driving force would thin the film for exactly the rows that carry the unstirred counts (8 of the 12 clearing 25 mA cm-2 are concentrated rows, S1.1). The direction is established by the fourth root; the magnitude per row is not computed here because the coefficients are unavailable. The ordering from the stirred cell upward does not rest on it; the order of the two batch archetypes does (the derived film's row). Across the envelope this point spans (the derived film above), the unstirred threshold counts run from at least 11 to at most 21 (>=25 mA cm-2) and from at least 7 to at most 12 (>=50), so those two counts are conditional on the declared point; the three thin-film architectures clear 50 mA cm-2 for 32 of 50, several times more at either edge."
     },
     {
       "category": "7. Reactors",
       "parameter": "RDE operating point",
       "value": "1600",
       "units": "rpm",
-      "tier": "T1",
-      "sensitivity": "delta ~ omega^(-1/2), so 400-3600 rpm spans 2x in delta and 2x in i_lim. The RDE is a reference rung rather than a preparative architecture, and it brackets the rotating cylinder from below in every solvent across that range, so the architecture ordering is unchanged."
+      "tier": "T3",
+      "sensitivity": "Swept over 400-3600 rpm (Table S8). delta ~ omega^(-1/2), so that band spans a factor of 3.0 in delta and in i_lim, and the RDE column gives a median of 57.1-154.7 mA cm-2 about 104.3, 32-36 of 50 clearing 25 mA cm-2 and 27-33 clearing 50. Its upper edge passes the rotating-cylinder median (122.1), so the order of the RDE and the rotating cylinder is a property of the two declared operating points, not of the architectures, and is not claimed. The RDE's two threshold counts are conditional on the declared rotation rate. What holds across the whole band is that the RDE stays above ANEC, whose own band tops out at 50.6 mA cm-2, so the four-step ordering below it is unaffected. Every change of cooling class this input causes over the range Table S12 sweeps for it is listed there. Those verdicts are conditional on it."
     },
     {
       "category": "7. Reactors",
@@ -722,15 +882,15 @@
       "value": "1 mm / 5 cm / 5 cm/s; 250 um / 2.5 cm / 10 cm/s",
       "units": "-",
       "tier": "T1",
-      "sensitivity": "A declared geometry that reaches no reported ceiling, count or median. The S8.1 quantities it feeds are reported as ratios between the two channels, and those ratios are set by the gap ratio alone: delta scales as h^(2/3) L^(1/3) u^(-1/3) in the entrance regime, so the 4x gap step gives a 2.5x film step at any common length and velocity, and the pressure-drop ratio 1/h^2 is 16x whatever the velocity. Changing the pair changes the absolute per-pass conversions, which S8.1 reports only as being under 5 %."
+      "sensitivity": "A declared geometry that reaches no reported ceiling, count or median. The S8.1 quantities it feeds are reported as ratios between the two channels. In the Leveque entrance regime delta = d_h/Sh scales as (h L / u)^(1/3) at fixed D, so the film falls 2.52x between the channels: 1.59x from the 4x gap step, 1.26x from the 2x shorter channel and 1.26x from the 2x faster flow. The pressure drop of laminar slot flow, 12 mu u L / h^2, rises 16x: the gap step alone gives 16x, and the 2x faster flow and the 2x shorter channel cancel. Changing the pair changes the absolute per-pass conversions, which S8.1 reports only as being under 5 %."
     },
     {
       "category": "7. Reactors",
       "parameter": "RCE operating point",
       "value": "d 1.2 cm, 3000 rpm",
       "units": "-",
-      "tier": "T1",
-      "sensitivity": "Sh ~ Re^0.70 with Re ~ omega d^2, so 1000-5000 rpm spans about 3x in k_m. The rotating cylinder remains the highest rung across that range."
+      "tier": "T3",
+      "sensitivity": "Swept over 1000-5000 rpm (Table S8). Sh ~ Re^0.70 with Re ~ omega d^2, so k_m runs x0.46 to x1.43 about the 3000 rpm point (3.1x end to end), and the rotating-cylinder column gives a median of 60.4-157.8 mA cm-2 about 122.1, 32-36 of 50 clearing 25 mA cm-2 and 27-33 clearing 50. At the low end that median falls below the microfluidic (108.6) and RDE (104.3) medians, so the rotating cylinder is the highest rung only at the declared operating point. Its two threshold counts are therefore conditional on the declared rotation rate, at which the main text quotes them. Across the whole band it stays above ANEC (upper edge 50.6 mA cm-2), which is what the four-step ordering needs. Every change of cooling class this input causes over the range Table S12 sweeps for it is listed there. Those verdicts are conditional on it."
     },
     {
       "category": "8. Voltage stack",
@@ -746,7 +906,7 @@
       "value": "1.0",
       "units": "mA cm-2",
       "tier": "T2",
-      "sensitivity": "Treating i0 as negligible holds only where ohmic heat dominates, which is not everywhere, and the split is sharp: the activation term is gap-INDEPENDENT, so it matters exactly where the ohmic term has been removed. Swept 0.01-10 mA cm-2 across all four \u00a7S6 solvents: every centimetre-gap architecture -- both batch cells, both flow cells and both rotating electrodes -- moves by at most 3 pct, because 85-98 pct of its heat is ohmic; the 25 um microfluidic moves by -35/+32 pct and the zero-gap stack by -42/+47 pct, because in a thin gap the activation term is most of q. No stated conclusion flips inside 0.01-10 mA cm-2: at the stack all four solvents still fail (margins 0.04-0.23x); at the microfluidic all four still clear (THF 2.60-4.26x, MeCN 4.02-8.09x, DMF 7.49-11.93x, aqueous NaOH 5.40-11.83x). i0 can matter only where activation heat is comparable to ohmic heat, and no verdict reported in this section sits in that regime."
+      "sensitivity": "Treating i0 as negligible is safe only where ohmic heat dominates. That holds in the centimetre-gap cells and fails in the thin ones, and the split is sharp: the activation term is gap-independent, so it matters exactly where the ohmic term has been removed. Swept 0.01-10 mA cm-2 across all four \u00a7S6 electrolytes, every boil-off ceiling of the five centimetre-gap architectures (unstirred batch, stirred batch, recirculating flow, rotating disc, rotating cylinder) moves by at most 6.9 pct (THF -1.3/+0.6, MeCN -2.8/+1.4, DMF -1.2/+0.6, aq. NaOH -6.9/+3.7), because 84-98 pct of their heat at the ceiling is ohmic. The 25 um microfluidic cell moves by -27/+19, -34/+31, -25/+18, -37/+38 pct and the zero-gap stack by -35/+28, -42/+46, -32/+26, -44/+55 pct (THF, MeCN, DMF, aq. NaOH respectively), because in a thin gap the activation term is most of q. Every verdict holds across the range. At the stack all four electrolytes fail (margins 0.04-0.24x); at the microfluidic cell all four clear (THF 2.77-4.51x, MeCN 4.31-8.61x, DMF 7.97-12.53x, aq. NaOH 5.81-12.66x), judged against its median transport ceiling of 108.6 mA cm-2."
     },
     {
       "category": "9. Thermal model",
@@ -769,8 +929,8 @@
       "parameter": "Cell volume / electrode area",
       "value": "100 mL / 10 cm2",
       "units": "-",
-      "tier": "T2",
-      "sensitivity": "Swept 50 / 100 / 500 / 1000 mL: A_ext scales as V^(2/3) and so does sigma, so the dimethylformamide passive ceiling runs 63 / 79 / 136 / 172 mA cm-2, a 2.74x span. The batch verdict does not turn on the vessel: tetrahydrofuran's ceiling runs 21 / 26 / 45 / 57 mA cm-2 over the same sweep against an unstirred transport ceiling of 8.2 mA cm-2, so transport binds before heat at every volume. No conclusion flips."
+      "tier": "T3",
+      "sensitivity": "Swept 50 / 100 / 500 / 1000 mL: A_ext scales as V^(2/3) and so does sigma, so the dimethylformamide passive ceiling runs 63 / 80 / 138 / 174 mA cm-2, a 2.74x span. The batch verdict does not turn on the vessel: tetrahydrofuran's ceiling runs 21 / 27 / 46 / 58 mA cm-2 over the same sweep against an unstirred transport ceiling of 8.6 mA cm-2, so transport binds before heat at every volume, and no batch or recirculating verdict turns on the vessel. Both rotating cells inherit the beaker's sigma, though, which a 50, 500 and 1000 mL charge sets at 0.63x, 2.92x and 4.64x of its 100 mL value, and their verdicts do move; every change of class, with the charge at which it occurs, is listed in Table S12. Those verdicts are therefore conditional on the declared 100 mL charge as well as on sigma."
     },
     {
       "category": "9. Thermal model",
@@ -778,7 +938,7 @@
       "value": "0.9",
       "units": "-",
       "tier": "T2",
-      "sensitivity": "Tested eps in [0.7, 0.95]: h_ext moves over 11.5-13.3 W m-2 K-1 and every beaker ceiling by about +/-6 pct (DMF 80.3-85.8 mA cm-2). Nothing flips."
+      "sensitivity": "Tested eps in [0.7, 0.95], re-solving the unstirred-beaker ceilings with the radiative part of the external film coefficient scaled accordingly (h_r = eps sigma (Ts + Tsur)(Ts\u00b2 + Tsur\u00b2), sigma the Stefan-Boltzmann constant, at Ts = 65 C): h_ext moves over 12.33-14.17 W m-2 K-1 and the four ceilings by -5.2 to +1.2 pct (DMF 76.2-81.0 mA cm-2 against 80.1). Nothing flips."
     },
     {
       "category": "9. Thermal model",
@@ -786,7 +946,7 @@
       "value": "9.96",
       "units": "-",
       "tier": "T3",
-      "sensitivity": "Swept as a breaking point rather than as a band, because no source states the heat-rejection area of these cells. sigma is the OTHER unsourced geometric term, and it is the tighter of the two: 2 verdicts reverse within a factor of 2.5 of the declared value (RDE 1600 rpm in MeCN at 1.69x; RDE 1600 rpm in DMF at 1.66x). A cell with twice the outer surface per unit of electrode area is an ordinary variation, so these are published as conditional on the declared geometry rather than as findings. Everything that CLEARS needs sigma to fall by a factor of 3 to 336 before it would boil, and the tetrahydrofuran failure at the rotating cylinder needs a factor of 23, so the robust half of the section is robust on this axis too. ONE of the four has external corroboration, and it runs in the safe direction: the parallel H-cell of Table S5 is built from two polycarbonate compartments of 2 x 2 x 0.22 in with a 1 cm2 cathode (Lobaccaro, Singh, Clark, Kwon, Bell & Ager, Phys. Chem. Chem. Phys. 2016, 18, 26777-26785, and its supporting information), which gives 74.3 cm2 of outer surface over 1 cm2 of electrode, i.e. sigma = 74.3 against the 9.96 this model carries. The value used here is therefore conservative for that cell by a factor of 7.5, and adopting the sourced one would only widen a margin that already clears. It is NOT adopted, because one exemplar body is not the archetype and because that body is polycarbonate, whose wall conduction the balance omits (see the wall-conduction row). The other two rows on this value have no published body geometry at all, so they keep the beaker value."
+      "sensitivity": "Swept as a breaking point rather than as a band, because no source states the heat-rejection area of these cells. sigma is the OTHER unsourced geometric term, and it is the tighter of the two: 4 passive-cooling verdicts reverse within a factor of 2.5 of the declared value (RDE 1600 rpm in MeCN at 1.48x; RDE 1600 rpm in DMF at 1.49x; rotating cyl. 3000 rpm in MeCN at 2.43x; rotating cyl. 3000 rpm in DMF at 2.48x). A cell with twice the outer surface per unit of electrode area is an ordinary variation, so these are published as conditional on the declared geometry rather than as findings. Among the three architectures this row covers, everything that CLEARS needs sigma to fall by a factor of 2.7 to 119 before it would boil, and the tetrahydrofuran failure at the rotating cylinder needs a factor of 22, so the robust half of the section is robust on this axis too. One of the three has external corroboration, and it runs in the safe direction: the parallel H-cell of Table S1 is a modification of the cell of Lobaccaro, Singh, Clark, Kwon, Bell & Ager (Watkins et al., ACS Energy Lett. 2023, SI Fig. S1c), whose two polycarbonate compartments are drawn 2 x 2.2 in and 0.48 in thick around a 1 cm2 cathode (Phys. Chem. Chem. Phys. 2016, 18, 26777-26785, Fig. 1, p. 26778); the two compartments alone present 109 cm2 of outer surface over 1 cm2 of electrode, i.e. sigma ~ 109 against the 9.96 this model carries. The value used here is therefore conservative for that cell by a factor of about 11, and adopting the sourced one would only widen a margin that already clears. It is NOT adopted, because one exemplar body is not the archetype, the modified cell's own dimensions are not published, and that body is polycarbonate, whose wall conduction the balance omits (see the wall-conduction row). The other two architectures on this value have no published body geometry at all, so they keep the beaker value. Every change of cooling class this input causes over the range Table S12 sweeps for it is listed there. Those verdicts are conditional on it."
     },
     {
       "category": "9. Thermal model",
@@ -794,7 +954,7 @@
       "value": "7.0",
       "units": "-",
       "tier": "T2",
-      "sensitivity": "Corroborated by the exemplar, which is what this row lacked until 2026-09-13. The two outer aluminium faces alone give 2 x (3.00 in)^2 = 116 cm2, a lower bound on the rejecting area, and the channel area follows from V = Q tau at the 25 um gap with tau = 4 min (Table S1 entries 9-12) and the 5-15 uL min-1 the procedures use, i.e. 8-24 cm2. Together they bracket sigma at 4.8-14.5 for that cell and the declared 7.0 sits inside, the mid-range flow rate giving 7.3. Neither end is adopted: the bracket is wide, and the archetype's electrode is the declared 10 cm2 rather than Mo's channel. Tested sigma in [3.5, 21], half to three times the declared value. Judged against this cell's own median transport ceiling of 110.7 mA cm-2, every electrolyte clears at every point in that range (THF 2.19-7.37x, MeCN 3.51-14.51x, DMF 6.09-21.36x, aq. NaOH 4.72-22.05x), and the breaking points lie far below it -- the tightest is 0.17x the declared 7.0. This row carries no verdict that turns inside its own band. It remains the one surface-area ratio in the model with no source of any kind, which is why the band is stated."
+      "sensitivity": "Corroborated by the exemplar's own drawings. The two outer aluminium faces alone give 2 x (3.00 in)^2 = 116 cm2, a lower bound on the rejecting area, and the channel area follows from V = Q tau at the 25 um gap with tau = 4 min (Table S1 entries 9-12) and the 5-15 uL min-1 the procedures use, i.e. 8-24 cm2. Together they bracket sigma at 4.8-14.5 for that cell and the declared 7.0 sits inside, the mid-range flow rate giving 7.3. Neither end is adopted: the bracket is wide, and the archetype's electrode is the declared 10 cm2 rather than Mo's channel. Tested sigma in [3.5, 21], half to three times the declared value. Judged against this cell's own median transport ceiling of 108.6 mA cm-2, every electrolyte clears at every point in that range (THF 2.33-7.80x, MeCN 3.75-15.47x, DMF 6.45-22.43x, aq. NaOH 5.07-23.65x), and the breaking points lie far below it -- the tightest is 0.16x the declared 7.0. This row carries no verdict that turns inside its own band. It is the one surface-area ratio in the model that rests on a declared chip geometry, bracketed by the exemplar's drawings rather than computed from them, which is why the band is stated."
     },
     {
       "category": "9. Thermal model",
@@ -802,7 +962,7 @@
       "value": "0.8",
       "units": "-",
       "tier": "T2",
-      "sensitivity": "Tested pitch 4-12 mm, i.e. sigma in [0.51, 1.52]: the zero-gap margin runs 0.11x-0.23x against i_design = 1000 mA cm-2, so all four solvents fail at every point in the range and the zero-gap conclusion is unconditional. Adopting sigma = 1.0 instead of 0.8 would move the margins from 0.07-0.18x to 0.08-0.21x."
+      "sensitivity": "Tested pitch 4-12 mm, i.e. sigma in [0.51, 1.52] for the square 10 cm2 cell: across that range the zero-gap margin runs 0.050x-0.29x against i_design = 1000 mA cm-2 over the four electrolytes (0.068x-0.19x at the declared 0.8, 0.079x-0.22x at 1.0), so all four fail at every point in the range and the zero-gap conclusion is unconditional."
     },
     {
       "category": "9. Thermal model",
@@ -810,7 +970,7 @@
       "value": "100",
       "units": "W m-2 K-1",
       "tier": "T2",
-      "sensitivity": "h_int is not load-bearing anywhere. Swept 50 -> infinity (a range above 2e4, spanning the whole Incropera Table 1.1 liquid band), every boil-off ceiling moves by -5/+6 pct: the dimethylformamide ceiling runs 74.9 / 79.2 / 83.5 / 83.9 / 84.2 mA cm-2 at h_int = 50 / 100 / 800 / 2000 / infinity in the unstirred batch, and 947.3 / 1024.6 / 1105.4 / 1113.0 / 1118.1 mA cm-2 in the microfluidic 25 um, which is the thinnest-gap architecture and the one where a developing-flow correction to h_int would be largest. No conclusion in S6.1 or S6.2 is sensitive to any of the four h_int values."
+      "sensitivity": "h_int decides no boil-off verdict. Swept 50 -> infinity (a range above 2e4, spanning the whole Incropera Table 1.1 liquid band), the boil-off ceilings move by -6/+7.2 pct in the unstirred beaker, -12/+0.9 pct in the stirred, recirculating and rotating cells and -19/+0.2 pct in the microfluidic chip and the stack: the dimethylformamide ceiling runs 75.6 / 80.1 / 84.8 / 85.2 / 85.5 mA cm-2 at h_int = 50 / 100 / 800 / 2000 / infinity in the unstirred batch, and 974.0 / 1057.1 / 1144.8 / 1153.1 / 1158.7 mA cm-2 in the microfluidic 25 um, which is the thinnest-gap architecture and the one where a developing-flow correction to h_int would be largest. No boil-off verdict of S6.1 reverses anywhere in the sweep."
     },
     {
       "category": "9. Thermal model",
@@ -818,47 +978,47 @@
       "value": "800",
       "units": "W m-2 K-1",
       "tier": "T2",
-      "sensitivity": "h_int is not load-bearing anywhere. Swept 50 -> infinity (a range above 2e4, spanning the whole Incropera Table 1.1 liquid band), every boil-off ceiling moves by -5/+6 pct: the dimethylformamide ceiling runs 74.9 / 79.2 / 83.5 / 83.9 / 84.2 mA cm-2 at h_int = 50 / 100 / 800 / 2000 / infinity in the unstirred batch, and 947.3 / 1024.6 / 1105.4 / 1113.0 / 1118.1 mA cm-2 in the microfluidic 25 um, which is the thinnest-gap architecture and the one where a developing-flow correction to h_int would be largest. No conclusion in S6.1 or S6.2 is sensitive to any of the four h_int values."
+      "sensitivity": "h_int decides no boil-off verdict. Swept 50 -> infinity (a range above 2e4, spanning the whole Incropera Table 1.1 liquid band), the boil-off ceilings move by -6/+7.2 pct in the unstirred beaker, -12/+0.9 pct in the stirred, recirculating and rotating cells and -19/+0.2 pct in the microfluidic chip and the stack: the dimethylformamide ceiling runs 75.6 / 80.1 / 84.8 / 85.2 / 85.5 mA cm-2 at h_int = 50 / 100 / 800 / 2000 / infinity in the unstirred batch, and 974.0 / 1057.1 / 1144.8 / 1153.1 / 1158.7 mA cm-2 in the microfluidic 25 um, which is the thinnest-gap architecture and the one where a developing-flow correction to h_int would be largest. No boil-off verdict of S6.1 reverses anywhere in the sweep."
     },
     {
       "category": "9. Thermal model",
       "parameter": "h_int (forced flow, centimetre gap)",
       "value": "2000",
       "units": "W m-2 K-1",
-      "tier": "T2",
-      "sensitivity": "h_int is not load-bearing anywhere. Swept 50 -> infinity (a range above 2e4, spanning the whole Incropera Table 1.1 liquid band), every boil-off ceiling moves by -5/+6 pct: the dimethylformamide ceiling runs 74.9 / 79.2 / 83.5 / 83.9 / 84.2 mA cm-2 at h_int = 50 / 100 / 800 / 2000 / infinity in the unstirred batch, and 947.3 / 1024.6 / 1105.4 / 1113.0 / 1118.1 mA cm-2 in the microfluidic 25 um, which is the thinnest-gap architecture and the one where a developing-flow correction to h_int would be largest. No conclusion in S6.1 or S6.2 is sensitive to any of the four h_int values."
+      "tier": "T3",
+      "sensitivity": "h_int decides no boil-off verdict. Swept 50 -> infinity (a range above 2e4, spanning the whole Incropera Table 1.1 liquid band), the boil-off ceilings move by -6/+7.2 pct in the unstirred beaker, -12/+0.9 pct in the stirred, recirculating and rotating cells and -19/+0.2 pct in the microfluidic chip and the stack: the dimethylformamide ceiling runs 75.6 / 80.1 / 84.8 / 85.2 / 85.5 mA cm-2 at h_int = 50 / 100 / 800 / 2000 / infinity in the unstirred batch, and 974.0 / 1057.1 / 1144.8 / 1153.1 / 1158.7 mA cm-2 in the microfluidic 25 um, which is the thinnest-gap architecture and the one where a developing-flow correction to h_int would be largest. No boil-off verdict of S6.1 reverses anywhere in the sweep. The S6.2 liquid-cooling verdicts of the rotating cylinder and the rotating disc run through this film and depend on it, because it sits in series inside the cooler: each can be met within the declared construction range only for h_int above 338 W m-2 K-1 (rotating disc, THF); 1385 W m-2 K-1 (rotating cylinder, THF), against the declared 2000 W m-2 K-1, so those verdicts are conditional on this film as well. Every change of cooling class this input causes over the range Table S12 sweeps for it is listed there. Those verdicts are conditional on it."
     },
     {
       "category": "9. Thermal model",
       "parameter": "h_int (forced flow, thin gap)",
       "value": "5000",
       "units": "W m-2 K-1",
-      "tier": "T2",
-      "sensitivity": "h_int is not load-bearing anywhere. Swept 50 -> infinity (a range above 2e4, spanning the whole Incropera Table 1.1 liquid band), every boil-off ceiling moves by -5/+6 pct: the dimethylformamide ceiling runs 74.9 / 79.2 / 83.5 / 83.9 / 84.2 mA cm-2 at h_int = 50 / 100 / 800 / 2000 / infinity in the unstirred batch, and 947.3 / 1024.6 / 1105.4 / 1113.0 / 1118.1 mA cm-2 in the microfluidic 25 um, which is the thinnest-gap architecture and the one where a developing-flow correction to h_int would be largest. No conclusion in S6.1 or S6.2 is sensitive to any of the four h_int values."
+      "tier": "T3",
+      "sensitivity": "h_int decides no boil-off verdict. Swept 50 -> infinity (a range above 2e4, spanning the whole Incropera Table 1.1 liquid band), the boil-off ceilings move by -6/+7.2 pct in the unstirred beaker, -12/+0.9 pct in the stirred, recirculating and rotating cells and -19/+0.2 pct in the microfluidic chip and the stack: the dimethylformamide ceiling runs 75.6 / 80.1 / 84.8 / 85.2 / 85.5 mA cm-2 at h_int = 50 / 100 / 800 / 2000 / infinity in the unstirred batch, and 974.0 / 1057.1 / 1144.8 / 1153.1 / 1158.7 mA cm-2 in the microfluidic 25 um, which is the thinnest-gap architecture and the one where a developing-flow correction to h_int would be largest. No boil-off verdict of S6.1 reverses anywhere in the sweep. The S6.2 liquid-cooling verdicts of the zero-gap stack run through this film and depend on it, because it sits in series inside the cooler: each can be met within the declared construction range only for h_int above 1954 W m-2 K-1 (zero-gap stack, THF); 240 W m-2 K-1 (zero-gap stack, MeCN); 159 W m-2 K-1 (zero-gap stack, DMF); 108 W m-2 K-1 (zero-gap stack, aq. NaOH), against the declared 5000 W m-2 K-1, so those verdicts are conditional on this film as well. Every change of cooling class this input causes over the range Table S12 sweeps for it is listed there. Those verdicts are conditional on it."
     },
     {
       "category": "9. Thermal model",
       "parameter": "i_design (zero-gap PEM stack)",
       "value": "1000",
       "units": "mA cm-2",
-      "tier": "T2",
-      "sensitivity": "PEM water electrolysis operates nominally at 1.0-2.0 A cm-2 (Carmo, Fritz, Mergel & Stolten, Int. J. Hydrogen Energy 2013, 38, 4901-4934) and zero-gap CO2 electrolysis sustains A cm-2-class operation (Endrodi, Samu, Kecsenovity, Halmagyi, Sebok & Janaky, Nature Energy 2021, 6, 439-448: 420 +/- 50 mA cm-2 partial current over 200 h). Tested 500-2000 mA cm-2: the stack fails in all four electrolytes at every point, and it fails at a gap of zero as well, so its verdict rests on no geometry at all."
+      "tier": "T3",
+      "sensitivity": "PEM water electrolysis operates nominally at 1.0-2.0 A cm-2 (Carmo, Fritz, Mergel & Stolten, Int. J. Hydrogen Energy 2013, 38, 4901-4934) and zero-gap CO2 electrolysis sustains A cm-2-class operation (Endrodi, Samu, Kecsenovity, Halmagyi, Sebok & Janaky, Nature Energy 2021, 6, 439-448: 420 +/- 50 mA cm-2 partial current over 200 h). Tested 500-2000 mA cm-2: the stack cannot reject its heat passively in any of the four electrolytes at any point, and that holds at a gap of zero as well, so the passive verdict rests on no geometry at all. Every change of cooling class this input causes over the range Table S12 sweeps for it is listed there. Those verdicts are conditional on it."
     },
     {
       "category": "9. Thermal model",
       "parameter": "Inter-electrode gap (beaker)",
       "value": "2.0e-2 m",
       "units": "m",
-      "tier": "T2",
-      "sensitivity": "Tested 1-2 cm (real beaker setups space electrodes 1-2 cm apart): q ~ L, so ceilings scale as L^-1/2 and every ceiling on this gap rises by up to 1.4x at 1 cm. 4 of the 7 archetypes share this gap (unstirred batch, stirred batch, recirculating flow, RDE 1600 rpm), because rotation and recirculation thin the diffusion layer and move no electrode. Swept as a breaking point rather than as a band, because no source states this cell's electrode separation: 4 of the 28 architecture-solvent cells reverse their verdict within a factor of 2.5 of the declared gap, and all 4 are acetonitrile or dimethylformamide at a rotating electrode (RDE 1600 rpm in MeCN at 0.57x; RDE 1600 rpm in DMF at 0.59x; rotating cyl. 3000 rpm in MeCN at 0.37x; rotating cyl. 3000 rpm in DMF at 0.39x). The tetrahydrofuran verdicts at both rotating cells need a gap below about 1.6 mm to reverse, which is no longer a beaker-scale cell, and the 4 architectures sharing this gap (unstirred batch, stirred batch, recirculating flow, RDE 1600 rpm) hold boil-off ceilings within 6.0 pct of one another while their transport ceilings span 13.2x."
+      "tier": "T3",
+      "sensitivity": "Tested 1-2 cm (real beaker setups space electrodes 1-2 cm apart): q ~ L, so ceilings scale as L^-1/2 and every ceiling on this gap rises by up to 1.4x at 1 cm. 4 of the 7 archetypes share this gap (unstirred batch, stirred batch, recirculating flow, RDE 1600 rpm), because rotation and recirculation thin the diffusion layer and move no electrode. Swept as a breaking point rather than as a band, because no source states this cell's electrode separation: two of the 28 architecture-solvent cells reverse their verdict within a factor of 2.5 of a gap they inherit or declare from this one (RDE 1600 rpm in MeCN at 0.66x; RDE 1600 rpm in DMF at 0.66x). Those two verdicts are therefore conditional on the gap. The tetrahydrofuran boil-off verdicts at the rotating disc and cylinder need gaps below about 1.4 and 1.0 mm to reverse, which is no longer a beaker-scale cell, and the 4 architectures sharing this gap (unstirred batch, stirred batch, recirculating flow, RDE 1600 rpm) hold boil-off ceilings whose lowest sits within 6.4 pct of the highest in each electrolyte, while their transport ceilings span 12.2x. Every change of cooling class this input causes over the range Table S12 sweeps for it is listed there. Those verdicts are conditional on it."
     },
     {
       "category": "9. Thermal model",
       "parameter": "Inter-electrode gap (zero-gap PEM stack)",
       "value": "1.0e-4 m",
       "units": "m",
-      "tier": "T2",
-      "sensitivity": "Tested 50-200 um: q ~ L, so ceilings span 1.4x either way and all four solvents still fail at 1 A cm-2 across the range. Page-anchoring would require a named separator (Nafion 115, 117 or 212) with a page-anchored thickness before 100 um is published as a membrane figure."
+      "tier": "T3",
+      "sensitivity": "Tested 50-200 um: the ceiling moves by THF x1.14 / x0.833, MeCN x1.04 / x0.929, DMF x1.12 / x0.848, aq. NaOH x1.01 / x0.986 (50 um / 200 um against the declared 100 um), far less than q ~ L would give, because at this gap 66-98 pct of the heat at the ceiling is activation heat, which the gap does not touch. All four still need active cooling at 1000 mA cm-2 across the range. Page-anchoring would require a named separator (Nafion 115, 117 or 212) with a page-anchored thickness before 100 um is published as a membrane figure. Every change of cooling class this input causes over the range Table S12 sweeps for it is listed there. Those verdicts are conditional on it."
     },
     {
       "category": "9. Thermal model",
@@ -866,7 +1026,7 @@
       "value": "0",
       "units": "m2 K W-1",
       "tier": "T2",
-      "sensitivity": "A 1.5 mm borosilicate beaker wall adds L/k = 0.0014 m2 K W-1 against the external film's 1/h_ext = 0.0769, i.e. 2 pct of the series, which is below the reporting precision of every ceiling in this section. A 5.6 mm polycarbonate block -- the body of the cell the two flow archetypes are anchored to -- adds 0.0294, i.e. 28 pct, and would lower that cell's ceilings by about 15 pct. No archetype in \u00a7S6 is computed on a plastic body, so no published number moves; the bound is registered because any future architecture with a thick low-conductivity wall would need the term restored."
+      "sensitivity": "Through the 2-3 mm borosilicate wall declared for the jacketed cell (k = 1.4 W m-1 K-1, the Pyrex row), the omitted term lowers U' of the cells computed on the beaker body by 1.7-2.9 pct and their boil-off ceilings by 0.9-1.5 pct, and changes none of the 20 verdicts those cells carry. No archetype in \u00a7S6 is computed on a plastic body, whose conductivity this registry does not carry; the bound is registered because such a body would need the term restored."
     },
     {
       "category": "9. Thermal model",
@@ -874,23 +1034,55 @@
       "value": "8e-4 - 2e-2",
       "units": "W cm-2 K-1",
       "tier": "T2",
-      "sensitivity": "The plotted edges are rounded outward by about 25 pct relative to the derived interval, which visually credits passive cooling the model does not have. The tightened edges, 1.0e-3 to 1.6e-2 W cm-2 K-1, are registered on this row as its sensitivity rather than applied, so that the band this section reports is unchanged. No numeric conclusion depends on it."
+      "sensitivity": "The plotted edges lie outside the derived interval -- the lower edge 1.38x below it and the upper edge 1.45x above it -- which visually credits passive cooling the model does not have. The derived edges, 1.1e-03 to 1.4e-02 W cm-2 K-1, are registered on this row as its sensitivity rather than applied, so that the band this section reports is unchanged. No numeric conclusion depends on it; the band is shading only."
     },
     {
       "category": "9. Thermal model",
-      "parameter": "Cooling band: forced air",
-      "value": "2e-2 - 8e-2",
-      "units": "W cm-2 K-1",
-      "tier": "T2",
-      "sensitivity": "Over the full sigma range [0.8, 12.5] the derivable interval is 2.0e-3 to 3.1e-1 W cm-2 K-1, so the plotted band is a subset of the derivable range, drawn for sigma of about 3-8. That must be stated rather than left implicit; the band is shading only."
+      "parameter": "Vessel wall thickness (jacketed cell)",
+      "value": "2e-3 - 3e-3",
+      "units": "m",
+      "tier": "T3",
+      "sensitivity": "Across 2-3 mm, with the jacket at its narrow end, the forced-flow vessel cells' liquid U' runs 0.259-0.317 W cm-2 K-1; the rotating disc's THF duty, 0.178, is met across that range; the rotating cylinder's THF duty, 0.296, is met only for a wall of at most 2.31 mm. The rotating cylinder's THF liquid-cooling verdict is therefore conditional on the declared thin end of this dimension."
     },
     {
       "category": "9. Thermal model",
-      "parameter": "Cooling band: liquid cold plate",
-      "value": "2e-1 - 1.0",
-      "units": "W cm-2 K-1",
+      "parameter": "Cooling-jacket gap",
+      "value": "2e-3 - 5e-3",
+      "units": "m",
+      "tier": "T3",
+      "sensitivity": "Across 2-5 mm, with the wall at its thin end, the forced-flow vessel cells' liquid U' runs 0.201-0.317 W cm-2 K-1; the rotating disc's THF duty, 0.178, is met across that range; the rotating cylinder's THF duty, 0.296, is met only for a jacket gap of at most 2.37 mm. The rotating cylinder's THF liquid-cooling verdict is therefore conditional on the declared narrow end of this dimension."
+    },
+    {
+      "category": "9. Thermal model",
+      "parameter": "Cooled-plate thickness",
+      "value": "2e-3 - 3e-3",
+      "units": "m",
       "tier": "T2",
-      "sensitivity": "sensitivity (this row is state C: the derivation yields a range that contains the plotted band but does not produce it). The derivable interval is 0.13-2.6 W cm-2 K-1 for sigma of about 1-2, against the plotted 0.2-1.0, so the plotted band is a subset drawn near the middle. One statement rests on it: S6.2 places the zero-gap cooling duty of 0.099 W cm-2 K-1 inside liquid-loop territory, i.e. it asserts a water-channel cold plate delivers it. That claim survives the whole derivable interval and does not depend on where the band was drawn: 0.099 sits below even the bottom edge, 0.13, so the cheapest cold plate in the construction still clears the duty by 1.3x, and the margin runs to 26x at the top. The conclusion is therefore insensitive to this row, unlike the forced-air band immediately above it, whose upper edge does carry a verdict."
+      "sensitivity": "Across 2-3 mm, with the channels at their favourable end, the stack's liquid U' runs 0.114-0.142 W cm-2 K-1 against its THF duty of 0.099."
+    },
+    {
+      "category": "9. Thermal model",
+      "parameter": "Cooled-plate channel D_h",
+      "value": "1e-3 - 3e-3",
+      "units": "m",
+      "tier": "T2",
+      "sensitivity": "Across 1-3 mm, with the plate at its favourable end, the stack's liquid U' runs 0.100-0.142 W cm-2 K-1 against its THF duty of 0.099."
+    },
+    {
+      "category": "9. Thermal model",
+      "parameter": "Cooled-plate rib area factor",
+      "value": "1 - 2",
+      "units": "-",
+      "tier": "T2",
+      "sensitivity": "Across 1-2, with the plate and channels at their favourable end, the stack's liquid U' runs 0.117-0.142 W cm-2 K-1 against its THF duty of 0.099."
+    },
+    {
+      "category": "9. Thermal model",
+      "parameter": "Coolant inlet temperature (liquid cooling)",
+      "value": "25.0",
+      "units": "C",
+      "tier": "T3",
+      "sensitivity": "A chilled coolant widens the driving force T_b - T_coolant and lowers each duty in inverse proportion to it. At 10 C THF's duties fall as follows (W cm-2 K-1): rotating disc 0.178 -> 0.130, met within the declared construction range; rotating cylinder 0.296 -> 0.217, met within the declared construction range; stack 0.099 -> 0.072, met within the declared construction range. Warmer coolant works the other way, and the T_amb row gives the coolant temperatures above which THF's duties leave the declared construction range (43.0 C for the rotating disc, 27.7 C for the rotating cylinder, 37.6 C for the stack). The rotating cylinder's verdict reverses inside the 20-30 C range that row tests, so it is conditional on the coolant temperature as well. Every change of cooling class this input causes over the range Table S12 sweeps for it is listed there. Those verdicts are conditional on it."
     },
     {
       "category": "9. Thermal model",
@@ -905,8 +1097,8 @@
       "parameter": "T_amb (\u00a7S6)",
       "value": "25.0",
       "units": "C",
-      "tier": "T2",
-      "sensitivity": "Tested 20-30 C: (T_b - T_amb) changes by 5/128, i.e. 4 pct for DMF, so ceilings move by about 2 pct. Nothing flips."
+      "tier": "T3",
+      "sensitivity": "Tested 20-30 C. The rejection driving force T_b - T_amb moves by 5 K either way, so the ceilings move most for the lowest-boiling electrolyte: THF +6.0/-6.3 pct in the centimetre-gap cells and +8.1/-8.5 in the thin-gap ones (T_b - T_amb = 41 K), MeCN +4.4/-4.6 pct in the centimetre-gap cells and +7.0/-7.1 in the thin-gap ones (T_b - T_amb = 57 K), DMF +2.0/-2.0 pct in the centimetre-gap cells and +2.7/-2.8 in the thin-gap ones (T_b - T_amb = 128 K), aq. NaOH +3.5/-3.6 pct in the centimetre-gap cells and +5.7/-5.8 in the thin-gap ones (T_b - T_amb = 75 K), at 20 / 30 C. Every boil-off verdict holds across the range. The coolant of the liquid-cooling constructions is taken at T_amb, so those verdicts move with it as well: THF's duty can be met within the declared construction range up to a coolant at 43.0 C (rotating disc), 27.7 C (rotating cylinder), 37.6 C (stack). The rotating cylinder verdict therefore reverses inside this range and is conditional on the coolant temperature. Every change of cooling class this input causes over the range Table S12 sweeps for it is listed there. Those verdicts are conditional on it."
     },
     {
       "category": "9. Thermal model",
@@ -914,7 +1106,7 @@
       "value": "15",
       "units": "kJ mol-1",
       "tier": "T3",
-      "sensitivity": "anchor. Walden (kappa ~ 1/eta) on water gives eta(25 C)/eta(100 C) = 0.890/0.282 = 3.16 at 100 C, against 3.37 from Arrhenius at Ea = 15 kJ mol-1 at the same point -- 6.9 pct apart. That agreement is what licenses 15 kJ mol-1 as the upper-bound coefficient rather than a fitted value; the anchor depends on temperature only, so the conductivity promotions do not touch it. Bracket. The lower bound of the bracket is kappa fixed at 25 C, i.e. the model as it stands everywhere else in S6, so this row cannot make any ceiling smaller. At the upper bound the multipliers kappa(T_b)/kappa(25 C) are a function of T_b alone -- THF 2.08x, MeCN 2.63x, aq. NaOH 3.37x, DMF 6.14x -- and the unstirred-beaker ceilings run 29 -> 42, 88 -> 140, 89 -> 215 and 282 -> 478 mA cm-2. Across all 28 (architecture, solvent) pairs the bracket factor spans 1.01x-2.43x. What depends on it: 25 of the 28 pass/fail verdicts are unchanged between the two bounds. The three bound-dependent verdicts are: MeCN in the RDE 1600 rpm (83 -> 132 mA cm-2 against 108, margin 0.77x -> 1.21x); DMF in the RDE 1600 rpm (84 -> 203 mA cm-2 against 108, margin 0.77x -> 1.87x); DMF in the rotating cyl. 3000 rpm (76 -> 185 mA cm-2 against 122, margin 0.63x -> 1.52x). Every one of them is reported as bound-dependent rather than as a finding. They are also very nearly the same cells the gap sweep finds conditional, which is the honest summary: the marginal cells are marginal on every axis at once, and no cell that clears comfortably at 25 C is put at risk by the bracket. The DMF 6.14x is the least trustworthy entry -- a 128 K extrapolation against a 75 K anchor, in the solvent and temperature regime where the neglected pairing term is largest -- and no conclusion rests on it. MEASURED COMPARISON: the same CRC table that page-anchors mu(25 C) for these solvents also prints eta at 25/50/75 C, and the viscous activation energy it implies is 8.4 and 7.2 kJ mol-1 for MeCN (25-50 and 50-75 C), 7.7 for DMF and 7.7 for THF. Every row is accepted only if its eta(25 C) reproduces the registry viscosity, which water fails and is dropped. By Walden (Lambda eta ~ const) that is the right quantity to judge an Ea(kappa) bound against, so the declared 15 kJ mol-1 is 1.8-2.1x the measured range -- an upper bound by roughly a factor of two, rather than an unanchored guess."
+      "sensitivity": "anchor. Walden (kappa ~ 1/eta) on water gives eta(25 C)/eta(100 C) = 0.890/0.282 = 3.16 at 100 C, against 3.37 from Arrhenius at Ea = 15 kJ mol-1 at the same point -- 6.9 pct apart. That agreement is what licenses 15 kJ mol-1 as the upper-bound coefficient rather than a fitted value; the anchor depends on temperature only, so no conductivity value enters it. Bracket. The lower bound of the bracket is kappa fixed at 25 C, i.e. the model as it stands everywhere else in S6, so this row cannot make any ceiling smaller. At the upper bound the multipliers kappa(T_b)/kappa(25 C) are a function of T_b alone -- THF 2.08x, MeCN 2.63x, aq. NaOH 3.37x, DMF 6.14x -- and the unstirred-beaker ceilings run 27.0 -> 38.7 (THF), 80.4 -> 127.5 (MeCN), 80.1 -> 194.0 (DMF), 257.3 -> 432.6 (aq. NaOH) mA cm-2. Across all 28 (architecture, solvent) pairs the bracket factor spans 1.01x-2.43x. What depends on it: 24 of the 28 pass/fail verdicts are unchanged between the two bounds. The four bound-dependent verdicts are: MeCN in the RDE 1600 rpm (86 -> 136 mA cm-2 against 104, margin 0.82x -> 1.30x); DMF in the RDE 1600 rpm (85 -> 207 mA cm-2 against 104, margin 0.82x -> 1.98x); MeCN in the rotating cyl. 3000 rpm (78 -> 124 mA cm-2 against 122, margin 0.64x -> 1.01x); DMF in the rotating cyl. 3000 rpm (77 -> 188 mA cm-2 against 122, margin 0.63x -> 1.54x). Every one of them is reported as bound-dependent rather than as a finding. They are exactly the four cells the surface-area sweep flags, and the two at the rotating disc are also conditional on the gap, so the marginal cells are marginal on more than one axis, and no cell that clears comfortably at 25 C is put at risk by the bracket. The DMF 6.14x is the least trustworthy entry -- a 128 K extrapolation against a 75 K anchor, in the solvent and temperature regime where the neglected pairing term is largest -- and no conclusion rests on it. MEASURED COMPARISON: the same CRC table that page-anchors mu(25 C) for these solvents (p. 6-243 ff.) also prints eta at 50 and 75 C, and at 100 C for water, and each row used here reproduces the registry viscosity at 25 C. The viscous activation energy it implies, in kJ mol-1 over successive 25 K intervals from 25 C, is MeCN 8.4 and 7.2; DMF 7.7; THF 7.7, and water 15.6 / 13.8 / 12.7 (p. 6-247; 14.2 over 25-100 C). By Walden (Lambda eta ~ const) that is the quantity to judge an Ea(kappa) bound against. The declared 15 kJ mol-1 is 1.8-2.1x the organic values, an upper bound by roughly a factor of two for the three organic electrolytes. For the aqueous electrolyte it is 0.96-1.19x water's interval values and 1.06x its 25-100 C value, so at the 100 C boiling point its Arrhenius factor, 3.37, exceeds the Walden factor 3.16 by 6.9 pct: an upper bound there by a few per cent, and below water's own 25-50 C value. Every change of cooling class this input causes over the range Table S12 sweeps for it is listed there. Those verdicts are conditional on it."
     },
     {
       "category": "9. Thermal model",
@@ -922,7 +1114,7 @@
       "value": "0.18",
       "units": "W cm-2 K-1",
       "tier": "T2",
-      "sensitivity": "Enters no figure and no stated conclusion; retained for comparison. The adjacent SI sentence quoting stirred-liquid heat rejection near 0.1 W cm-2 K-1 is scoped to this row."
+      "sensitivity": "Enters no figure and no stated conclusion; retained for comparison. It is 13 times the still-air coefficient the \u00a7S6 stirred beaker uses (0.0135 W cm-2 K-1), the difference between a thermostat bath and room air as the external boundary."
     },
     {
       "category": "9. Thermal model",
@@ -930,23 +1122,23 @@
       "value": "omitted",
       "units": "-",
       "tier": "T2",
-      "sensitivity": "Including evaporation removes latent heat, so the cell runs cooler, so it takes more current to reach Tb: every i_boil reported here is a lower bound on the true ceiling. The sign alone does not make every 'this cell boils' statement conservative. A lower bound protects the passes ('does not boil at i_design' needs i_boil > i_design, and the true ceiling is higher still), and leaves the fails exposed ('boils at i_design' needs i_boil < i_design, which a higher true ceiling can overturn). The sign alone is therefore not sufficient for the fail verdicts, and they are defended separately: (i) the zero-gap PEM stack is a closed cell with no free liquid surface, so evaporative cooling is not available to it at all and its fails -- all four electrolytes, at margins 0.07x, 0.11x, 0.18x, 0.15x -- stand unaffected; (ii) the fails in open vessels are the two rotating cells (RDE 1600 rpm in THF at 0.26x; RDE 1600 rpm in MeCN at 0.77x; RDE 1600 rpm in DMF at 0.77x; rotating cyl. 3000 rpm in THF at 0.21x; rotating cyl. 3000 rpm in MeCN at 0.62x; rotating cyl. 3000 rpm in DMF at 0.63x), and they are quantified rather than left to the sign. Taking the worst, THF at the rotating cyl. 3000 rpm: at that architecture's own transport ceiling of 121.7 mA cm-2 the dissipation is 12.08 W cm-2 while the passive path removes 0.528 W cm-2 at T = Tb, so evaporation would have to carry 11.55 W cm-2, which is 96 pct of the total heat. A latent path asked to remove that share of the dissipation is not a correction to this balance but a different experiment, and it is the experiment the failure mode describes: what is being modelled is loss of solvent, which is reached either way. The omission is therefore neutral for these verdicts rather than conservative for them."
+      "sensitivity": "Including evaporation removes latent heat, so the cell runs cooler, so it takes more current to reach Tb: every i_boil reported here is a lower bound on the true ceiling. The sign alone does not make every 'this cell boils' statement conservative. A lower bound protects the passes ('does not boil at i_design' needs i_boil > i_design, and the true ceiling is higher still), and leaves the fails exposed ('boils at i_design' needs i_boil < i_design, which a higher true ceiling can overturn). The sign alone is therefore not sufficient for the fail verdicts, and they are defended separately: (i) the zero-gap PEM stack is a closed cell with no free liquid surface, so evaporative cooling is not available to it at all and its fails -- all four electrolytes, at margins 0.07x, 0.11x, 0.19x, 0.16x -- stand unaffected; (ii) the fails in open vessels are the two rotating cells (RDE 1600 rpm in THF at 0.28x; RDE 1600 rpm in MeCN at 0.82x; RDE 1600 rpm in DMF at 0.82x; rotating cyl. 3000 rpm in THF at 0.21x; rotating cyl. 3000 rpm in MeCN at 0.64x; rotating cyl. 3000 rpm in DMF at 0.63x), and they are quantified rather than left to the sign. Taking the worst, THF at the rotating cyl. 3000 rpm: at that architecture's own transport ceiling of 122.1 mA cm-2 the dissipation is 12.15 W cm-2 while the passive path removes 0.560 W cm-2 at T = Tb, so evaporation would have to carry 11.59 W cm-2, which is 95 pct of the total heat. A latent path asked to remove that share of the dissipation is not a correction to this balance but a different experiment, and it is the experiment the failure mode describes: what is being modelled is loss of solvent, which is reached either way. The omission is therefore neutral for these verdicts rather than conservative for them."
     },
     {
       "category": "10. Homogeneous kinetics",
-      "parameter": "8 mediated rate constants k",
+      "parameter": "12 mediated rate constants k",
       "value": "(Table S6)",
       "units": "M-1 s-1",
       "tier": "T2",
-      "sensitivity": "The reaction layer x_k = sqrt(D/kC) decides whether the homogeneous step falls inside or outside the film, and enters only as sqrt(k). Measured, not argued: each k perturbed by 10x and 1/10 one row at a time with the mediated matrix re-solved moves a cell across 25 mA cm-2 on 3 of the eight rows (ACT-mediated alcohol oxidation (flow, hectogram); BQ-mediated Wacker-Tsuji oxidation; HMF -> FDCA (biomass)), the >=25 count of any architecture by at most 1 and the >=50 count by at most 1, and the architecture ordering is preserved in every case. The two analogy-only rows are flagged in Table S6."
+      "sensitivity": "The reaction layer x_k = sqrt(D/kC) decides whether the homogeneous step falls inside or outside the film, and enters only as sqrt(k). Measured, not argued: each k perturbed by 10x and 1/10 one row at a time with the mediated matrix re-solved moves a cell across 25 mA cm-2 on 4 of the eleven finite-k rows (ACT-mediated alcohol oxidation (flow, hectogram); Amidyl-radical C-H amination (phenanthridinone); HMF -> FDCA (biomass); NHPI-mediated allylic C-H -> enone), the >=25 count of any architecture by at most 1 and the >=50 count by at most 1, and the ordering the main text claims (unstirred below stirred below recirculating flow below the ANEC cell, the three thin-film archetypes above it) holds in every case. Table S11 marks the rows that have no measurement of the step."
     },
     {
       "category": "10. Homogeneous kinetics",
-      "parameter": "k, Ni(I)-bipyridine + aryl bromide (4 catalyst rows)",
+      "parameter": "k, low-valent nickel bipyridine + aryl bromide (2 catalyst rows)",
       "value": "1e2",
       "units": "M-1 s-1",
       "tier": "T2",
-      "sensitivity": "Adopted for 4 row(s); measured bracket 10-10^4 M-1 s-1 (Table S7j). Across the seven architectures the unstirred-to-rotating-cylinder gain is 3.1-4.8x at the adopted value against 23.3-26.1x at k = 0. With every sourced row moved to the edges of its bracket at once, flow >=25 count -1 at the low edge, +0 at the high edge; anec >=25 count -1 at the low edge, +2 at the high edge; anec >=50 count -1 at the low edge, +0 at the high edge; micro >=25 count +0 at the low edge, +3 at the high edge; micro >=50 count -1 at the low edge, +2 at the high edge; rde >=25 count +0 at the low edge, +3 at the high edge; rde >=50 count -1 at the low edge, +2 at the high edge; rce >=25 count +0 at the low edge, +3 at the high edge; rce >=50 count -1 at the low edge, +2 at the high edge (the eleven-row tally, which is the whole of what the fifty-row counts can move by); the ten-of-eleven result holds at both edges: NO."
+      "sensitivity": "Adopted for 2 row(s); swept over the declared band 10-10^4 M-1 s-1 (Table S7j). Across the seven architectures the unstirred-to-rotating-cylinder gain is 1.7-3.8x at the adopted value against 23.3-25.0x at k = 0. With every sourced row moved to the edges of that band at once, recirculating flow >=25 count -1 at the low edge, +0 at the high edge; ANEC >=25 count -1 at the low edge, +2 at the high edge; ANEC >=50 count -1 at the low edge, +1 at the high edge; microfluidic >=25 count +0 at the low edge, +3 at the high edge; microfluidic >=50 count -1 at the low edge, +1 at the high edge; RDE >=25 count +0 at the low edge, +3 at the high edge; RDE >=50 count -1 at the low edge, +1 at the high edge; rotating cylinder >=25 count +0 at the low edge, +3 at the high edge; rotating cylinder >=50 count -1 at the low edge, +1 at the high edge (the tally over the twelve catalyst rows, which is the whole of what the fifty-row counts can move by). One of the twelve clears 25 mA cm-2 in some architecture at the adopted values, one at the low edges and four at the high edges."
     },
     {
       "category": "10. Homogeneous kinetics",
@@ -954,31 +1146,15 @@
       "value": "7e2",
       "units": "M-1 s-1",
       "tier": "T2",
-      "sensitivity": "Adopted for 2 row(s); measured bracket 100-10^4 M-1 s-1 (Table S7j). Across the seven architectures the unstirred-to-rotating-cylinder gain is 3.3-3.4x at the adopted value against 23.9-25.0x at k = 0. With every sourced row moved to the edges of its bracket at once, flow >=25 count -1 at the low edge, +0 at the high edge; anec >=25 count -1 at the low edge, +2 at the high edge; anec >=50 count -1 at the low edge, +0 at the high edge; micro >=25 count +0 at the low edge, +3 at the high edge; micro >=50 count -1 at the low edge, +2 at the high edge; rde >=25 count +0 at the low edge, +3 at the high edge; rde >=50 count -1 at the low edge, +2 at the high edge; rce >=25 count +0 at the low edge, +3 at the high edge; rce >=50 count -1 at the low edge, +2 at the high edge (the eleven-row tally, which is the whole of what the fifty-row counts can move by); the ten-of-eleven result holds at both edges: NO."
+      "sensitivity": "Adopted for 2 row(s); swept over the declared band 10-10^4 M-1 s-1 (Table S7j). Across the seven architectures the unstirred-to-rotating-cylinder gain is 1.3-3.2x at the adopted value against 23.9-25.0x at k = 0. With every sourced row moved to the edges of that band at once, recirculating flow >=25 count -1 at the low edge, +0 at the high edge; ANEC >=25 count -1 at the low edge, +2 at the high edge; ANEC >=50 count -1 at the low edge, +1 at the high edge; microfluidic >=25 count +0 at the low edge, +3 at the high edge; microfluidic >=50 count -1 at the low edge, +1 at the high edge; RDE >=25 count +0 at the low edge, +3 at the high edge; RDE >=50 count -1 at the low edge, +1 at the high edge; rotating cylinder >=25 count +0 at the low edge, +3 at the high edge; rotating cylinder >=50 count -1 at the low edge, +1 at the high edge (the tally over the twelve catalyst rows, which is the whole of what the fifty-row counts can move by). One of the twelve clears 25 mA cm-2 in some architecture at the adopted values, one at the low edges and four at the high edges."
     },
     {
       "category": "10. Homogeneous kinetics",
-      "parameter": "k, Co(salen) aza-Wacker step (1 catalyst row)",
-      "value": "1e1",
-      "units": "M-1 s-1",
-      "tier": "T2",
-      "sensitivity": "Adopted for 1 row(s); measured bracket 1-100 M-1 s-1 (Table S7j). Across the seven architectures the unstirred-to-rotating-cylinder gain is 6.9-6.9x at the adopted value against 23.9-23.9x at k = 0. With every sourced row moved to the edges of its bracket at once, flow >=25 count -1 at the low edge, +0 at the high edge; anec >=25 count -1 at the low edge, +2 at the high edge; anec >=50 count -1 at the low edge, +0 at the high edge; micro >=25 count +0 at the low edge, +3 at the high edge; micro >=50 count -1 at the low edge, +2 at the high edge; rde >=25 count +0 at the low edge, +3 at the high edge; rde >=50 count -1 at the low edge, +2 at the high edge; rce >=25 count +0 at the low edge, +3 at the high edge; rce >=50 count -1 at the low edge, +2 at the high edge (the eleven-row tally, which is the whole of what the fifty-row counts can move by); the ten-of-eleven result holds at both edges: NO."
-    },
-    {
-      "category": "10. Homogeneous kinetics",
-      "parameter": "k, four catalyst rows with no measured constant",
+      "parameter": "k, eight catalyst rows with no measured constant",
       "value": "0 (floor); 1-10^4 swept",
       "units": "M-1 s-1",
       "tier": "T2",
-      "sensitivity": "The published matrix runs the eleven catalyst-carried rows at k = 0, the floor of the EC' current. Re-solved as EC' problems over the declared band, the ten-of-eleven result holds for k <= 100 M-1 s-1 and fails at k = 10^3, where 5 of the eleven clear 25 mA cm-2 by k = 10^4; the largest amplification in the class is 31.5x and 45 of the 77 cells sit at their substrate cap at the top of the band. 198 of the 385 finite-k cells end on a ramp wall; at the concentration-control plateau that follows, the exhausted species is at most 1.63 pct of bulk at the electrode, so each is a lower bound tight to that fraction and no cell sits within its own tightness of a threshold. The k = 0 member of every sweep reproduces the published cell to better than 0.01 pct (worst of 77 cells)."
-    },
-    {
-      "category": "4. Solver species diffusivities",
-      "parameter": "D_S, substrate (catalyst-carried rows, S5.7)",
-      "value": "1.0e-9 x (0.369 / mu)",
-      "units": "m2 s-1",
-      "tier": "T2",
-      "sensitivity": "Enters only through the substrate cap n_S F D_S C_S/delta and the reaction layer. 45 of the 77 cells sit at that cap at the top of the k band, where the ceiling scales linearly with D_S: a x0.5-2 band moves those cells' ceilings by the same factor and the others not at all. The k = 0 ceilings do not depend on it; of the 49 published cells carried at a sourced k, 12 sit at their substrate cap."
+      "sensitivity": "With all twelve catalyst-carried rows held at k = 0, the floor of the EC' current, and then re-solved as EC' problems over the declared band, at most one row clears 25 mA cm-2 in any architecture for k <= 100 M-1 s-1 and more than one does from k = 10^3; by k = 10^4, 7 of the twelve clear it; the largest amplification in the class is 81.5x and 31 of the 84 cells sit at their substrate cap at the top of the band. 240 of the 420 finite-k cells end on a ramp wall; at the concentration-control plateau that follows, the exhausted species is at most 1.11 pct of bulk at the electrode, so each is a lower bound tight to that fraction and no cell sits within its own tightness of a threshold. The k = 0 member of every sweep reproduces the published cell to better than 0.01 pct (worst of 84 cells)."
     },
     {
       "category": "11. Numerics",
@@ -994,7 +1170,7 @@
       "value": "max(0.02 um, min(x_k/50, 0.9 delta/N))",
       "units": "-",
       "tier": "T1",
-      "sensitivity": "Introduced to remove a hyper-stretched-mesh stall; the affected binary comparison now converges to within 0.2 pct of the analytic ceiling (\u00a7S5.6)."
+      "sensitivity": "Matched to the reaction layer so that the mesh does not hyper-stretch; on the production stretch the binary migration comparison sits within 0.18 pct of the analytic ceiling (\u00a7S5.6)."
     },
     {
       "category": "11. Numerics",
@@ -1002,7 +1178,7 @@
       "value": "max(c_bulk, 0.01 c_max,bulk, max_x c)",
       "units": "-",
       "tier": "T1",
-      "sensitivity": "Perturbation: c_ref = max(c_bulk, 0.01 c_max,bulk) alone. The chloride ex-cell system's oxidant (0.02 mol m-3 in the bulk, 5.8 M at its carrier limit) is then normalised by a reference flux 2.9e+05 times smaller than its in-film concentration implies, so the 1e-9 tolerance asks for a relative accuracy of 3.5e-15 on that row, and the concentration-control walk stops on an existing branch at 52 pct of the analytic carrier limit on a 200 um film and 86 pct on 100 um, reaching it only on films of 50 um or less; the stop moves with nothing else (reaction off, substrate removed, mesh refined at either edge, proton mobility halved). With the in-film maximum included every film reaches 2.00x Fick, and the 48 production cells move by less than 1e-4 pct (33 bit-identical), because their oxidized mediators never exceed a few hundred mol m-3, and the 300 cells of the Stage-1 layer, re-solved in an isolated copy under the alternative scale, are bit-identical at the published precision. The verification solver of \u00a7S5.3 and \u00a7S5.6 uses the same rule; under its own alternative, max(c_bulk, 1 mol m-3), every closed-form agreement of \u00a7S5.6 is identical, the \u00a7S5.3 support-ratio sweep is byte-identical, and the illustrative concentration profiles move by at most 4e-6 relative."
+      "sensitivity": "Perturbation: c_ref = max(c_bulk, 0.01 c_max,bulk) alone. The chloride ex-cell system's oxidant (0.02 mol m-3 in the bulk, 5.8 M of oxidizing equivalents at its carrier limit, 2.9 M as Cl2 or HOCl) is then referenced to the 1 pct floor, 20 mol m-3, about 290 times below the concentration it reaches; on the 200 um film, whose first cell is 0.03 um, its first-cell flux terms are then of order 1.9e6 in scaled units, so the 1e-9 tolerance asks for a relative accuracy of 5.2e-16 on them, the double-precision floor, and the concentration-control walk stops on an existing branch at 52 pct of the analytic carrier limit on a 200 um film and 86 pct on a 100 um film, reaching it only on the 50 um film. With the in-film maximum included every film reaches 2.00x Fick. Re-solving all 84 mediated cells without the in-film maximum leaves 82 of them unchanged (50 bit-identical, the rest within 1e-9), while the bromination in its unstirred batch and stirred batch films stops short of the plateau the adopted rule reaches, 2.2 pct and 0.1 pct low: the bromine that accumulates behind its detached front lies far above the 1 pct floor, and these are the two thickest films, where the scale's 1/delta factor bites hardest -- the mechanism described above for the chloride oxidant. The verification solver of \u00a7S5.3 and \u00a7S5.6 uses the same rule; under its own alternative, max(c_bulk, 1 mol m-3), every closed-form agreement of \u00a7S5.6 is identical, the \u00a7S5.3 support-ratio sweep is byte-identical, and the illustrative concentration profiles move by at most 4e-6 relative."
     },
     {
       "category": "11. Numerics",
@@ -1034,7 +1210,7 @@
       "value": "1.08-1.15",
       "units": "-",
       "tier": "T1",
-      "sensitivity": "The ramp only supplies a warm start: the reported value comes from concentration control, which reaches the collapse criterion rather than stalling at the ramp's fold, so the growth factor sets how quickly that start is found and not the answer. Doubling the mesh while refining the continuation 7.5-fold moves it by at most 0.01 pct (\u00a7S5.6)."
+      "sensitivity": "The ramp only supplies a warm start: the reported value comes from concentration control, which reaches the collapse criterion rather than stalling at the ramp's fold, so the growth factor sets how quickly that start is found and not the answer. Doubling the mesh while refining the continuation 7.5-fold moves it by at most 0.19 pct (\u00a7S5.6)."
     },
     {
       "category": "11. Numerics",
@@ -1050,7 +1226,7 @@
       "value": "1e-10",
       "units": "-",
       "tier": "T1",
-      "sensitivity": "Swept over ten decades, 1e-6 to 1e-16, re-solving four cells (the two the change moved and two it must not): every value identical to 6 decimal places at every threshold. RDE and RCE, which never drive a species below 1e-3 of bulk, additionally return their pre-change values exactly. See \u00a7S5.5."
+      "sensitivity": "Swept over ten decades, 1e-6 to 1e-16, re-solving every architecture of three mediated rows by the production path: the electrophilic bromination, whose anisole falls below 1e-10 of bulk at the electrode in every one of its seven cells (down to 5e-58) so that the rule excludes it from the step norm there, the Hofmann rearrangement and the ACT alcohol oxidation. All 21 cells return the published value at every threshold, to every printed digit. Switching the rule off (threshold 0, the whole step rescaled by its largest component) stalls three of the bromination's cells short of their plateau, by up to 45 pct, which is why the rule exists; the dead zone that triggers it is described in \u00a7S5.5."
     }
   ]
 }

@@ -14,6 +14,11 @@ missing). It is a screen, never a certificate.
 
 ---
 
+> **SUPERSEDED 2026-10-06.** Sections A-E below are the 2026-08-23 list. Every paper they name is on disk, and the
+> class B and C flags were failures of that day's DOI search, not bad citations: all ten exemplars resolve on Crossref
+> to the paper the row cites (the one genuine misattribution, Zhao Angew 2017 for the benzimidazole row, was corrected to
+> Zhao ChemSusChem 2021 in v98). Kept for history; the live list is the 2026-10-06 section at the end.
+
 ## A. UPLOAD THESE FIRST — real papers, conditions never verified, numbers live in the model
 
 | # | DOI | paper | row |
@@ -97,3 +102,55 @@ provenance audit the same morning reported "0 chimera suspects" without touching
 
 `data/verify_exemplars.py` now exists and should be run, but on today's evidence its verdicts must
 be read as leads. The reliable check is opening the paper.
+
+## Pull list from chemistry audit pass 11 (2026-10-06): sources no audit could open
+
+The manuscript DOIs below are read from the manuscript's own bibliography. The SI DOIs were resolved on Crossref by
+first author, volume and first page.
+
+### Manuscript, Section 6 (stability)
+
+| ref | work | DOI |
+|---|---|---|
+| 63 | Kim & See, ACS Appl. Mater. Interfaces (Mg electrolytes; cited for Al anodes, check fit) | 10.1021/acsami.0c19053 |
+| 64 | He, Luo & Liu, J. Mater. Chem. A (MgCl2/AlCl3 electrolytes; cited for Al anodes, check fit) | 10.1039/c7ta01769c |
+| 65 | Fangmeyer et al., Angew. Chem. 2020 (MS imaging of electrode fouling) | 10.1002/anie.202010134 |
+| 66 | Hanssen, Siraj & Wong, Rev. Anal. Chem. 2016 (antifouling strategies) | 10.1515/revac-2015-0008 |
+| 67 | Vidal, Garcia-Ruiz & Castillo, Microchim. Acta 2003 (electropolymerized films) | 10.1007/s00604-003-0067-4 |
+| 68 | Yang et al., Electrochim. Acta 2013 (electrode fouling model) | 10.1016/j.electacta.2013.01.019 |
+| 69 | Ware et al., Chem. Sci. 2024 (sacrificial anodes) | 10.1039/d3sc06885d |
+| 71 | Chaplin et al., J. Appl. Electrochem. 2011 (BDD failure) | 10.1007/s10800-011-0351-7 |
+| 72 | Razmi & Heidari, Anal. Biochem. 2009 | 10.1016/j.ab.2009.01.036 |
+| 73 | Perez et al., Langmuir 2012 | 10.1021/la303022a |
+| 74 | Kaeffer & Leitner, JACS Au 2022 | 10.1021/jacsau.2c00031 |
+| 75 | Brown, Chem. Rec. 2021 (extended-path flow cells) | 10.1002/tcr.202100163 |
+| 77 | Klein & Waldvogel, Angew. Chem. 2022 (counter-electrode reactions) | 10.1002/anie.202204140 |
+| 78 | Francke, ECS Meet. Abstr. 2024 | 10.1149/MA2024-01412342mtgabs |
+| 79 | Broese & Francke, Org. Lett. 2016 (ionically tagged mediator-electrolyte) | 10.1021/acs.orglett.6b02979 |
+| 80 | Blanco et al., React. Chem. Eng. 2020 (membrane-separated electrosynthesis) | 10.1039/c9re00389d |
+| 81 | Jaroszek & Dydo, Open Chem. 2016 (ion-exchange membranes) | 10.1515/chem-2016-0002 |
+| 85 | Abbel et al., MRS Commun. 2017 (lifetime limitations) | 10.1557/mrc.2017.46 |
+
+### Manuscript, earlier pending
+
+| ref | work | DOI |
+|---|---|---|
+| 20 | Go et al., JACS 2022 | 10.1021/jacs.2c03213 |
+| 21 | Sheng et al., Org. Lett. 2020 | 10.1021/acs.orglett.0c02799 |
+| 22 | Li et al., JACS 2021 | 10.1021/jacs.0c13093 |
+
+### SI
+
+| work | used for | DOI |
+|---|---|---|
+| Heeb, Criquet, Zimmermann-Steffens & von Gunten, Water Res. 2014, 48, 15 | HOBr/amine range bracketing the Hofmann and amidyl k | 10.1016/j.watres.2013.08.030 |
+| Grennberg, Gogoll & Bäckvall, Organometallics 1993, 12, 1790 | Pd(0)/BQ -> Pd(II) + hydroquinone (Wacker row) | 10.1021/om00029a040 |
+| Wallis & Lane, Org. React. 1946, 3, 267 | Hofmann rearrangement review | 10.1002/0471264180.or003.07 |
+| Lobaccaro et al., PCCP 2016, 18, 26777 -- **the supporting information** | H-cell compartment dimensions behind S6.4's sigma | 10.1039/c6cp05287h |
+| Zhang et al., JACS Au 2023, 3, 2280 | Table 1 THF conductivities (S6.1, S3.2) | 10.1021/jacsau.3c00305 |
+
+### Status 2026-10-06 (after the Downloads check)
+
+Retrieved without a login and filed in `papers for model/pull_20261006/`: Fangmeyer 2020 (PDF); Ware 2024, Kaeffer &
+Leitner 2022, Klein & Waldvogel 2022, Zhang 2023 (Europe PMC full-text XML). Already in Zotero: Lobaccaro 2016 (the
+article; its ESI is still needed). Everything else on this list is still to pull.

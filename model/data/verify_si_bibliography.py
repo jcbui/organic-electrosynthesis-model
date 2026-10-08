@@ -102,15 +102,11 @@ NONJOURNAL_VERIFIED = {
     "levich":    "WorldCat, HathiTrust and Open Library: V. G. Levich, Physicochemical "
                  "Hydrodynamics, Prentice-Hall, Englewood Cliffs NJ, 1962, ISBN 9780136744405. "
                  "Author, publisher, city and year match.",
-    "poling":    "JACS book review (10.1021/ja0048634): 'The Properties of Gases and Liquids, "
-                 "5th Edition By Bruce E. Poling, John M. Prausnitz, and John P. O'Connell. "
-                 "McGraw-Hill: New York. 2001. ISBN 0-07-011682-2.' Authors, edition, publisher "
-                 "and year match. EDITION NOTE, checked and NOT a defect: the registry's page "
-                 "locators cite the 4th edition (Reid, Prausnitz & Poling, 1987) and say so "
-                 "explicitly -- 'the edition held and verified' -- naming the 5th separately as "
-                 "carrying the same increments under a different table number. The one inline "
-                 "use of this key supports Eq. 11-9.8, a chapter-11 equation present in both, "
-                 "so the reference list and the locators are consistent as written.",
+    "poling":    "Held on disk (Model Papers for Params/2015.148102.The-Properties-Of-Gases-And-Liquids-Fourth-Edition.pdf): "
+                 "R. C. Reid, J. M. Prausnitz and B. E. Poling, The Properties of Gases and Liquids, 4th edn, McGraw-Hill, "
+                 "New York, 1987 -- the edition every registry locator was read from (Table 3-8 p. 53; p. 599; Eq. 11-12.4 "
+                 "p. 618, read off the page 2026-10-06). The reference list carried the 5th edn (2001), which is not on disk "
+                 "and whose equation numbers differ: its 'Eq. 11-9.8' is the 4th edn's Hayduk-Minhas correlation.",
 }
 
 

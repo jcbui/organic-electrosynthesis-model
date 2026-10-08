@@ -1,53 +1,53 @@
 row,reaction,cls_old,cls_khl,cls_khl_alt,confidence,rule,status
 1,Ni-catalyzed aryl amination (ArBr + amine),C-N,C-N formation,,high,2->1; new C-N bond between tracked atoms; no ring formed,current
-2,Electrochemical amination of ArX with NH3,C-N,C-N formation,,high,2 e- reduction of a monosubstituted alkene (Gnaim conditions C); no C-N bond, no ring formed,current
+2,Electrochemical amination of ArX with NH3,C-N,C-N formation,,high,2->1; new C-N bond between the aryl C and the ammonia N; no ring formed,current
 3,Shono oxidation (N-acyliminium capture),C-N,C-O formation,,high,kept_fragments() drops only FULLY untracked fragments; methanol's O is tracked into the product so MeOH is kept -> 2->1 -> new C-O bond,current
 4,Oxidative benzimidazole annulation (C-H/N-H),C-N,Cyclization,,high,1->1; ring count increases with a new bond directly between two tracked atoms; cyclization outranks bond formation,current
 5,Mn-catalyzed alkene diazidation,C-N,C-N formation,,high,"azide N's are tracked; CAS depicts the donor once and map_rxns adds a replica only when >3 atoms are missing (here 3), so the bin is 2->1 -> C-N formation",current
-6,Br-mediated Hofmann rearrangement,C-N,Functional group intraconversion,,medium,1->1; carbon count decreases so the non-H/O element diff is not 0 and neither Oxidation nor Reduction can apply; localized neighbor-multiset change,current
-7,Arene C-H pyridination,C-N,C-N formation,,high,2 e- reduction of a monosubstituted alkene (Gnaim conditions C); no C-N bond, no ring formed,current
+6,Br-mediated Hofmann rearrangement,C-N,C-O formation,,high,"amide + methanol -> methyl carbamate (Malviya/Cantillo): methanol's O is tracked into the product, so the methanol fragment is kept (the convention of rows 3, 30, 31 and 40) -> 2->1 -> the new inter-fragment bond is C-O",current
+7,Arene C-H pyridination,C-N,C-N formation,,high,2->1; new C-N bond between the arene C and the pyridine N (the N-arylpyridinium); no ring formed,current
 8,Amidyl-radical C-H amination (phenanthridinone),C-N,Cyclization,,high,1->1 intramolecular; ring count increases with a new tracked-atom bond,current
-9,Co-catalyzed aza-Wacker cyclization,C-N,Cyclization,,high,intramolecular C-N bond closing a new ring; cyclization outranks C-N formation,current
-10,Ritter-type C(sp3)-H amination,C-N,C-N formation,,high,2->1 with MeCN as tracked reactant; new C-N bond; no ring,current
-11,Co-H alkene reduction (e-HAT),Reduction,Reduction,,high,2 e- reduction of a monosubstituted alkene (Gnaim conditions C); no C-N bond, no ring,current
+9,Co-catalyzed allylic C-H amination,C-N,Cyclization,,high,intramolecular C-N bond closing a new ring; cyclization outranks C-N formation,current
+10,Ritter-type C(sp3)-H amination,C-N,C-N formation,,high,"2->1: MeCN is a tracked reactant; the water whose O becomes the amide carbonyl adds only oxygen (and H), and a reagent that adds only oxygen (water or a peroxide) is not counted as a reactant; new C-N bond; no ring",current
+11,Co-H alkene reduction (e-HAT),Reduction,Reduction,,high,"2 e- reduction of a monosubstituted alkene (Gnaim conditions C); no C-N bond, no ring",current
 12,Kolbe homocoupling of 10-undecenoate,C-C coupling,C-C formation,,high,2A->B after reactant-side stoichiometry repair; new C-C bond; no ring,current
 13,Ni-XEC C(sp2)-C(sp3) (ArBr + RBr),C-C coupling,C-C formation,,high,2->1; new C-C bond; no ring,current
 14,Doubly decarboxylative Csp3-Csp3,C-C coupling,C-C formation,,high,2->1; new C-C bond; no ring,current
 15,BDD phenol-arene cross-coupling,C-C coupling,C-C formation,,high,2->1; new C-C bond; no ring,current
-16,Decarboxylative Minisci alkylation,C-C coupling,C-C formation,,high,2->1; new C-C bond; no ring,current
+16,Decarboxylative arylation (radical-radical),C-C coupling,C-C formation,,high,2->1; new C-C bond; no ring,current
 17,Cathodic Giese (R-I + alkene),C-C coupling,C-C formation,,high,2->1; new C-C bond; no ring,current
-18,Rh-catalyzed electrooxidative C-H alkenylation,C-C coupling,C-C formation,,high,2->1; new C-C bond; no ring,current
+18,Rh-catalyzed electrooxidative C-H alkenylation,C-C coupling,Cyclization,,high,2->1 forming two new tracked-atom bonds (aryl C-C and carboxylate O-C) that close the phthalide ring (Qiu/Ackermann Scheme 1); cyclization outranks C-C formation,current
 19,Cu-catalyzed benzylic cyanation,C-C coupling,C-C formation,,high,2->1; new bond is C-C (nitrile carbon); C-C outranks the other pairs,current
 20,Cathodic Ni aryl-aryl homocoupling,C-C coupling,C-C formation,,high,2A->B after stoichiometry repair; new C-C bond,current
 21,Anodic dehydrogenative 2-naphthol coupling,C-C coupling,C-C formation,,high,2A->B after stoichiometry repair; new C-C bond; BINOL axis is not a ring closure,current
 22,Acrylonitrile hydrodimerization (ADN),C-C coupling,C-C formation,,high,2A->B after stoichiometry repair; new C-C bond,current
 23,Birch reduction of naphthalene,Reduction,Reduction,,high,1->1; H increases; non-H/O element diff 0; O not increasing,current
 24,Nitroarene -> aniline,Reduction,Reduction,,high,1->1; H increases and O decreases; non-H/O element diff 0,current
-25,Rapid-alternating-polarity imide reduction,Reduction,Reduction,,high,1->1; H increases; non-H/O element diff 0,current
+25,Rapid-alternating-polarity (hetero)arene reduction,Reduction,Reduction,,high,1->1; H increases; non-H/O element diff 0,current
 26,Electrocatalytic alkyne semihydrogenation,Reduction,Reduction,,high,1->1; H increases; non-H/O element diff 0,retired
-27,Cathodic aryl chloride dehalogenation,Reduction,Functional group intraconversion,,high,nonHO_diff counts the lost Cl so it is 1 not 0 and the Oxidation/Reduction branch is skipped; halogen_gain is False so Halogenation is skipped; falls through to fgi_criteria,current
+27,Cathodic aryl halide hydrodehalogenation,Reduction,Functional group intraconversion,,high,nonHO_diff counts the lost halogen so it is 1 not 0 and the Oxidation/Reduction branch is skipped; halogen_gain is False so Halogenation is skipped; falls through to fgi_criteria,current
 28,Benzaldehyde -> benzyl alcohol,Reduction,Reduction,,high,1->1; H increases; O unchanged; non-H/O element diff 0,current
-29,"ACT-mediated alcohol oxidation (flow, hectogram)",C-O,Oxidation,,high,1->1; H decreases; non-H/O element diff 0,current
+29,"ACT-mediated alcohol oxidation (flow, hectogram)",C-O,Oxidation,,high,"1->1 (a reagent that adds only oxygen (water or a peroxide) is not counted as a reactant, so water's O is not a fragment); O increases; non-H/O element diff 0",current
 30,Anodic methoxylation of 4-tBu-toluene (Lysmeral),C-O,C-O formation,,high,"same code path as row 3: methanol tracked into the product, kept as a reactant -> 2->1 -> C-O formation",current
 31,Shono alpha-methoxylation of amides,C-O,C-O formation,,high,same code path as row 3,current
-32,Cl-mediated ethylene epoxidation,C-O,Oxidation,,high,1->1 and a ring forms but the epoxide O is external to the tracked reactant atoms so the KHL cyclization test explicitly excludes epoxidation; O increases with non-H/O diff 0 -> Oxidation,current
+32,Cl-mediated ethylene epoxidation,C-O,Oxidation,,high,"1->1 (a reagent that adds only oxygen (water or a peroxide) is not counted as a reactant, so the O of water/HOCl is not a fragment), and a ring forms but the new ring bond is to that untracked O, so the cyclization test does not apply; O increases with non-H/O diff 0 -> Oxidation",current
 33,Alkaline lignin -> vanillin (pilot),C-O,(unclassified),,high,"depolymerization: heavy skeleton not conserved, every composition test non-zero, and fgi_criteria requires only 1-2 changed tracked sites -> classify_1_1 returns label None. Excluded from the comparison basis, as in the pipeline",current
-34,Thioether -> sulfone (kilo-scale),Ox (FGI),Oxidation,,high,1->1; O increases; non-H/O element diff 0,current
-35,NHPI-mediated allylic C-H -> enone,Ox (FGI),Oxidation,,high,1->1; O increases and H decreases; non-H/O element diff 0,current
+34,Thioether -> sulfone (kilo-scale),Ox (FGI),Oxidation,,high,"1->1 (a reagent that adds only oxygen (water or a peroxide) is not counted as a reactant, so water's O is not a fragment); O increases; non-H/O element diff 0",current
+35,NHPI-mediated allylic C-H -> enone,Ox (FGI),Oxidation,,high,"1->1 (a reagent that adds only oxygen (water or a peroxide) is not counted as a reactant, so the enone O from tBuOOH is not a fragment); O increases and H decreases; non-H/O element diff 0",current
 36,Alcohol -> carboxylic acid (Ni(OH)2 anode),Ox (FGI),Oxidation,,high,1->1; O increases; non-H/O element diff 0,retired
-37,HMF -> FDCA (biomass),Ox (FGI),Oxidation,,high,1->1; O increases; non-H/O element diff 0,current
+37,HMF -> FDCA (biomass),Ox (FGI),Oxidation,,high,"1->1 (a reagent that adds only oxygen (water or a peroxide) is not counted as a reactant, so water's O is not a fragment); O increases; non-H/O element diff 0",current
 38,Radical-cation Diels-Alder (catalytic in e-),Other/RN,Cyclization,,high,2->1 forming two new tracked-atom bonds at least one ring-closing,current
-39,BQ-mediated Wacker-Tsuji oxidation,Other/RN,C-O formation,,high,water's O is tracked into the ketone so the fragment is kept (and matched_spectator_maps only strips salt fragments identical on both sides) -> 2->1 -> C-O formation,current
-40,Non-Kolbe decarboxylative alpha-methoxylation,Other/RN,Functional group intraconversion,,medium,1->1; carbon is lost as CO2 so the non-H/O element diff is not 0 and neither redox test applies,current
+39,BQ-mediated Wacker-Tsuji oxidation,Other/RN,Oxidation,,high,"1->1 (a reagent that adds only oxygen (water or a peroxide) is not counted as a reactant, so water's O, which ends up in the ketone, is not a fragment; methanol, whose carbon enters the product, is, which is why rows 3, 6, 30, 31 and 40 are C-O formations); O increases; non-H/O element diff 0 -> Oxidation",current
+40,Non-Kolbe decarboxylative alpha-methoxylation,Other/RN,C-O formation,,high,"N-Piv amino acid + methanol -> alpha-methoxy amide + CO2: methanol's O is tracked into the product (kept, as for rows 3, 6, 30 and 31) -> 2->1 -> new inter-fragment C-O bond; the methoxy carbon replaces the CO2 carbon",current
 41,Co-H alkene isomerization (catalytic),Other/RN,Isomerization,,high,1->1; molecular formula unchanged. NOT PLOTTED in Fig. 1b (KHL excludes Isomerization) so this row is outside the comparison basis,current
-42,Anodic oxazoline/oxazole cyclization,Cyclization,Cyclization,,high,ring count increases with a new bond between tracked atoms,current
+42,Oxazole synthesis from ketones and acetonitrile,Cyclization,Cyclization,,high,2->1: ketone + MeCN with two ring-closing inter-fragment bonds forming the oxazole (classify_2_1) -> Cyclization,current
 43,Cathodic aryl-halide radical 5-exo cyclization,Cyclization,Cyclization,,high,ring count increases with a new bond between tracked atoms,current
 44,Dehydrogenative lactonization (C-H/O-H),Cyclization,Cyclization,,high,intramolecular C-O bond closing a new ring; cyclization outranks C-O formation,current
 45,Anodic benzylic fluorination,Halogenation,Halogenation,,high,fluorine count increases; non-X/H element diff 0,current
 46,Br- oxidation / electrophilic bromination,Halogenation,Halogenation,,high,bromine count increases; 2->1 new bond is C-halogen,current
-47,Sulfonylation of alkenes with sulfinates,C-S,C-S formation,,high,2->1; new C-S bond; no ring,current
+47,Alkoxysulfonylation of styrenes with sulfinates,C-S,Multicomponent coupling,,high,"3->1: styrene + sulfinate + methanol, whose O is tracked into the product so it stays a reactant; no ring closes, so multicomponent coupling outranks the new C-S bond",current
 48,Aryl thiocyanation (NH4SCN),C-S,C-S formation,,high,2->1; new C-S bond; no ring,current
-49,Anodic C-H phosphonylation of azoles,Other bond,Other bond formation,,high,2->1; new bond is C-P which is neither C-C/N/O/S nor a halogen,current
-50,N-N azo/pyrazole formation (N-H/N-H),Other bond,Other bond formation,,high,N-H/N-H azo coupling gives an inter-fragment N-N bond; bond_label() returns 'Other bond formation' when neither atom is carbon,current
-,"Alkenesulfonate from cinnamic acid, SO2 and alcohol",,Multicomponent coupling,,high,"added 2026-08-24: this row replaced a retired one in the 50-reaction set and the audit trail was never updated. Class taken from the cls column of reactions_50.csv, which khl_stratification.py has read as the single source of truth since 2026-08-22 -- so no published number depended on this omission.",current
-,Diazo difunctionalization (thiol + alcohol),,Multicomponent coupling,,high,"added 2026-08-24: this row replaced a retired one in the 50-reaction set and the audit trail was never updated. Class taken from the cls column of reactions_50.csv, which khl_stratification.py has read as the single source of truth since 2026-08-22 -- so no published number depended on this omission.",current
+49,Anodic C-H phosphorylation of arenes,Other bond,Other bond formation,,high,2->1; new bond is C-P which is neither C-C/N/O/S nor a halogen,current
+50,"Anodic N-N coupling to pyrazolidine-3,5-diones",Other bond,Cyclization,,high,"one dianilide (2a, Gieshoff p. 9438) closes its own ring through the new N-N bond: 1->1, ring count increases with a new bond between tracked atoms -> Cyclization",current
+36,"Alkenesulfonate from cinnamic acid, SO2 and alcohol",,Multicomponent coupling,,high,"3->1: cinnamic acid (decarboxylated), SO2 and neopentyl alcohol each leave tracked atoms in the sulfonate; no ring closes, so multicomponent coupling outranks the new C-S and S-O bonds",current
+26,Diazo difunctionalization (thiol + alcohol),,Multicomponent coupling,,high,"3->1: diazo compound, thiol and alcohol each leave tracked atoms in the product; no ring closes, so multicomponent coupling outranks the new C-S and C-O bonds",current

@@ -57,17 +57,54 @@ def ordering_claim(meds):
     return bool(chain and thin)
 
 
+# Electrolyte strings that state no molarity, each read from its row's provenance. Every one of them must be listed:
+# an unlisted string raises rather than counting as 0 M, which is how a 56 wt% salt once entered the dilute axis.
+ELYTE_NONMOLAR = {
+    "56 wt% Et4NOTs aq": 1.02,                # Baizer JES 1964 Table II run 28 p. 218: 141 g of 56.5 wt% stock in 260 mL (row provenance)
+    "0.3 wt% H2SO4/MeOH (BASF)": 0.024,       # 10 g H2SO4 in 2,910 g of electrolyte (US 5,507,922 Ex. 1), ~0.79 g/mL
+    "5 wt% AcOH/MeOH-H2O": 0.0,               # acetic acid buffer, no supporting salt
+    "Et3N 7.5 mM (no salt)/MeOH": 0.0075,     # the amine-carboxylate pair, no added salt
+    "NaCl 7 mol% + pH 2 HCl/H2O-MeCN": 0.012, # ~12 mM ionics (Li/Wilden ESI p. S5)
+}
+
+
 def elyte_M(s):
-    m = re.match(r"\s*([0-9.]+)\s*M\b", str(s))
-    return float(m.group(1)) if m else 0.0
+    """Supporting-electrolyte molarity: the sum of every 'x M' / 'x mM' the string states, or its listed value."""
+    s = str(s)
+    hits = re.findall(r"([0-9.]+)\s*(m?)M\b", s)
+    if hits:
+        return sum(float(v) * (1e-3 if milli else 1.0) for v, milli in hits)
+    if s in ELYTE_NONMOLAR:
+        return ELYTE_NONMOLAR[s]
+    raise ValueError("electrolyte %r states no molarity and is not in ELYTE_NONMOLAR" % s)
+
+
+# rows whose carrier IS an ion of their own supporting salt (bromide in NaBr, chloride in KCl, carbonate); its
+# concentration is already in the electrolyte term, so it is counted once. Asserted: the carrier and the salt must agree.
+CARRIER_IS_ELECTROLYTE = {"Br-mediated Hofmann rearrangement", "Amidyl-radical C-H amination (phenanthridinone)",
+                          "Cl-mediated ethylene epoxidation", "Br- oxidation / electrophilic bromination",
+                          "Alkaline lignin -> vanillin (pilot)"}
+
+
+def c_total(rx):
+    """Total dissolved concentration per row of reactions_50.csv: each species counted once."""
+    rx = rx.copy()
+    rx["c_elyte"] = rx.electrolyte.map(elyte_M)
+    for n in CARRIER_IS_ELECTROLYTE:
+        r = rx[rx.reaction == n]
+        if len(r) != 1:
+            raise SystemExit("CARRIER_IS_ELECTROLYTE names %r, which is not one row" % n)
+    own_car = (rx.carrier_type != "substrate") & ~rx.reaction.isin(CARRIER_IS_ELECTROLYTE)
+    own_sub = ~((rx.carrier_type == "substrate") & rx.reaction.isin(CARRIER_IS_ELECTROLYTE))   # carbonate: substrate AND salt
+    rx["c_tot"] = (rx.C_substrate_M.astype(float).where(own_sub, 0.0)
+                   + rx.C_carrier_M.astype(float).where(own_car, 0.0) + rx.c_elyte)
+    return rx
 
 
 def main(neg=False):
     mat = pd.read_csv(os.path.join(ROOT, "julia", "tier0_ec_matrix.csv"))
     rx = pd.read_csv(os.path.join(HERE, "reactions_50.csv"))
-    m = mat.merge(rx[["reaction", "C_carrier_M", "C_substrate_M", "electrolyte"]], on="reaction")
-    m["c_elyte"] = m.electrolyte.map(elyte_M)
-    m["c_tot"] = (m.C_carrier_M.astype(float) + m.C_substrate_M.astype(float) + m.c_elyte)
+    m = mat.merge(c_total(rx)[["reaction", "c_elyte", "c_tot"]], on="reaction")
     if neg:
         # Perturb the MODEL side into a state where the ordering must break inside a stratum:
         # invert the concentrated rows' ceilings so unstirred outruns RCE there. A control that
@@ -109,9 +146,8 @@ def main(neg=False):
     # SECOND AXIS, AND IT IS THE PHYSICALLY RIGHT ONE.
     # c_tot lumps a 6.85 M neutral organic substrate with 3 M LiBr, and those strain dilute theory
     # differently. What the Dorn isotherms in this repo actually measure departing -- ~2x by
-    # 0.8 mol/kg -- is the constant-mobility assumption for an ELECTROLYTE. Acrylonitrile
-    # hydrodimerization is the most concentrated row in the set at 13.70 M total and carries NO
-    # supporting electrolyte at all, so on the axis that matters most it is not the extreme case.
+    # 0.8 mol/kg -- is the constant-mobility assumption for an ELECTROLYTE, so the second split is on the
+    # supporting-electrolyte molarity alone, where a concentrated neutral substrate does not count.
     esplit = {}
     for label, sub in (("elyte >= 1 M", m[m.c_elyte >= CUT]), ("elyte <  1 M", m[m.c_elyte < CUT])):
         n = sub.reaction.nunique()
@@ -138,7 +174,10 @@ def main(neg=False):
                        "dilute_theory_stratify%s.json" % ("_NEGCONTROL" if neg else ""))
     json.dump({"cut_M": CUT, "architectures": ARCH, "strata": rep,
                "ordering_holds": order_ok, "conc_share_of_25_count": share,
-               "by_electrolyte_molarity": esplit},
+               "by_electrolyte_molarity": esplit,
+               "c_tot_max_M": float(m.c_tot.max()),
+               "c_tot_max_reaction": str(m.loc[m.c_tot.idxmax(), "reaction"]),
+               "c_tot_max_elyte_M": float(m.loc[m.c_tot.idxmax(), "c_elyte"])},
               io.open(out, "w", encoding="utf8"), indent=1)
     print("\n  -> %s" % os.path.relpath(out, ROOT))
 

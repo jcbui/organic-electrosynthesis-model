@@ -1,31 +1,29 @@
 {
- "ms": "01_Manuscript_tracked_JCB_hsa3_20261003_JCB.docx",
- "checked": 11,
+ "ms": "01_Manuscript_JCB.docx",
+ "checked": 12,
  "legal_counts": [
   9,
-  11,
   12,
-  13,
   14,
-  18,
-  24,
-  31,
-  33,
+  19,
+  23,
+  28,
+  32,
   34,
-  36,
   50,
   56
  ],
  "medians": [
-  8,
-  9,
-  17,
-  44,
-  111,
-  108,
-  122
+  8.6,
+  9.7,
+  17.4,
+  44.5,
+  108.6,
+  104.3,
+  122.1
  ],
  "failures": [
-  "SI says 9/50 unstirred and 35/50 rotating-cylinder clear 50 mA cm-2; the matrix gives 9 and 34"
+  "SI says 9/50 unstirred and 33/50 rotating-cylinder clear 50 mA cm-2; the matrix gives 9 and 32",
+  "MS median ladder prints ['8.6', '9.7', '17.9', '44.5', '109', '122']; the matrix gives ['8.6', '9.7', '17.4', '44.5', '109', '122'] (in the order ['natural', 'stirred', 'flow', 'anec', 'micro', 'rce'])"
  ]
 }
